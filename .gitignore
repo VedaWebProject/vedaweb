@@ -1,5 +1,4 @@
 target/
-!frontend/target/dist/*
 !.mvn/wrapper/maven-wrapper.jar
 
 ### STS ###
