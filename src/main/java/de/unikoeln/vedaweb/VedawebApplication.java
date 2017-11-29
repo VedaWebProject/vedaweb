@@ -1,4 +1,4 @@
-package de.unikoeln.vedaweb.vedaweb;
+package de.unikoeln.vedaweb;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
