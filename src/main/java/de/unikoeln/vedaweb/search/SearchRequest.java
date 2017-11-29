@@ -1,5 +1,6 @@
 package de.unikoeln.vedaweb.search;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
@@ -60,6 +61,18 @@ public class SearchRequest {
 	@Override
 	public String toString() {
 		return "book:" + scopeBook + " hymn:" + scopeHymn + " blocks:" + blocks;
+	}
+	
+	public void cleanAndFormatFields(){
+		for (Map<String, Object> block : blocks){
+			block.values().removeAll(Collections.singleton(""));
+			for (String field : block.keySet()){
+				if (block.get(field) instanceof String
+						&& ((String)block.get(field)).matches("\\d+")){
+					block.put(field, Integer.parseInt(((String)block.get(field))));
+				}
+			}
+		}
 	}
 	
 }

@@ -28,6 +28,7 @@ public class SearchController {
     		Model model,
     		HttpServletRequest request) {
 		
+		searchRequest.cleanAndFormatFields();
 		System.err.println(searchRequest);
     	
     	return model;
