@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import de.unikoeln.vedaweb.search.SearchRequest;
 import de.unikoeln.vedaweb.services.SearchService;
 import net.minidev.json.JSONObject;
 
@@ -23,7 +24,7 @@ public class SearchController {
 	
 	@RequestMapping(value = "/search", method = RequestMethod.POST)
     public Model searchView(
-    		@RequestBody String searchRequest,
+    		@RequestBody SearchRequest searchRequest,
     		Model model,
     		HttpServletRequest request) {
 		

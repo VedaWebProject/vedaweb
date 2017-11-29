@@ -3,6 +3,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public class SearchRequest {
 	
 	private int scopeBook;
@@ -10,6 +12,9 @@ public class SearchRequest {
 	
 	private List<Map<String, Object>> blocks;
 
+	
+	public SearchRequest(){}
+	
 	
 	public SearchRequest(int scopeBook, int scopeHymn){
 		blocks = new ArrayList<Map<String, Object>>();
@@ -27,7 +32,7 @@ public class SearchRequest {
 		return scopeBook;
 	}
 
-
+	@JsonProperty("book")
 	public void setScopeBook(int scopeBook) {
 		this.scopeBook = scopeBook;
 	}
@@ -37,12 +42,12 @@ public class SearchRequest {
 		return scopeHymn;
 	}
 
-
+	@JsonProperty("hymn")
 	public void setScopeHymn(int scopeHymn) {
 		this.scopeHymn = scopeHymn;
 	}
 
-
+	@JsonProperty("blocks")
 	public void setBlocks(List<Map<String, Object>> blocks) {
 		this.blocks = blocks;
 	}
@@ -54,7 +59,7 @@ public class SearchRequest {
 	
 	@Override
 	public String toString() {
-		return "book:" + scopeBook + " hymn:" + scopeHymn + " targets:?";
+		return "book:" + scopeBook + " hymn:" + scopeHymn + " blocks:" + blocks;
 	}
 	
 }
