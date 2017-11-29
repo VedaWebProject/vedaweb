@@ -1,24 +1,25 @@
 package de.unikoeln.vedaweb.search;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class SearchRequest {
 	
 	private int scopeBook;
 	private int scopeHymn;
 	
-	private List<TargetToken> targets;
+	private List<Map<String, Object>> blocks;
 
 	
 	public SearchRequest(int scopeBook, int scopeHymn){
-		targets = new ArrayList<TargetToken>();
+		blocks = new ArrayList<Map<String, Object>>();
 		this.scopeBook = scopeBook;
 		this.scopeHymn = scopeHymn;
 	}
 	
 
-	public List<TargetToken> getTargetTokens() {
-		return targets;
+	public List<Map<String, Object>> getBlocks() {
+		return blocks;
 	}
 	
 	
@@ -42,20 +43,13 @@ public class SearchRequest {
 	}
 
 
-	public List<TargetToken> getTargets() {
-		return targets;
+	public void setBlocks(List<Map<String, Object>> blocks) {
+		this.blocks = blocks;
 	}
 
 
-	public void setTargets(List<TargetToken> targets) {
-		this.targets = targets;
-	}
-
-
-	public void addTargetToken(TargetToken targetToken) {
-		if (scopeBook > -1)  targetToken.addAttribute("book", scopeBook);
-		if (scopeHymn > -1)  targetToken.addAttribute("hymn", scopeHymn);
-		this.targets.add(targetToken);
+	public void addBlock(Map<String, Object> block) {
+		this.blocks.add(block);
 	}
 	
 	@Override

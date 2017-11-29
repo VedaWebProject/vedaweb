@@ -1,4 +1,6 @@
 package de.unikoeln.vedaweb.search;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Scanner;
 
 import org.bson.Document;
@@ -60,12 +62,12 @@ public class VWIndexTest {
 		SearchRequest sr = new SearchRequest(-1, -1);
 		
 		for (String query : queryString.split("\\s*\\&\\s*")){
-			TargetToken tt = new TargetToken();
+			Map<String, Object> searchBlock = new HashMap<String, Object>();
 			for (String queryPart : query.split(" ")){
 				String[] queryPartElements = queryPart.split(":");
-				tt.addAttribute(queryPartElements[0], queryPartElements[1].matches("\\d+") ? Integer.parseInt(queryPartElements[1]) : queryPartElements[1]);
+				searchBlock.put(queryPartElements[0], queryPartElements[1].matches("\\d+") ? Integer.parseInt(queryPartElements[1]) : queryPartElements[1]);
 			}
-			sr.addTargetToken(tt);
+			sr.addBlock(searchBlock);
 		}
 		
 		SearchResults results = search.search(sr);

@@ -18,7 +18,6 @@ import org.springframework.stereotype.Service;
 import de.unikoeln.vedaweb.search.SearchRequest;
 import de.unikoeln.vedaweb.search.SearchResult;
 import de.unikoeln.vedaweb.search.SearchResults;
-import de.unikoeln.vedaweb.search.TargetToken;
 
 
 @Service
@@ -39,9 +38,9 @@ public class SearchService {
 	public SearchResults search(SearchRequest sr){
 		SearchResults results = new SearchResults();
 		
-		for (TargetToken targetToken : sr.getTargetTokens()){
+		for (Map<String, Object> block : sr.getBlocks()){
 			try {
-				search(targetToken, results);
+				search(block, results);
 			} catch (ParseException e) {
 				e.printStackTrace();
 			}
@@ -51,11 +50,11 @@ public class SearchService {
 	}
 	
 	
-	private void search(TargetToken targetToken, SearchResults results) throws ParseException{
+	private void search(Map<String, Object> searchBlock, SearchResults results) throws ParseException{
 		BooleanQuery.Builder query = new BooleanQuery.Builder();
 		
-		for (String field : targetToken.getAttributeFields()){
-			Object v = targetToken.getAttribute(field);
+		for (String field : searchBlock.keySet()){
+			Object v = searchBlock.get(field);
 			if (v instanceof String){
 				query.add(new QueryParser(field, indexService.getAnalyzer()).parse((String)v),
 						BooleanClause.Occur.MUST);
@@ -73,7 +72,7 @@ public class SearchService {
 			e1.printStackTrace();
 		}
 		
-        System.out.println("[INFO] Found " + topDocs.totalHits + " documents for '" + targetToken + "'.");
+        System.out.println("[INFO] Found " + topDocs.totalHits + " documents for '" + searchBlock + "'.");
         
         //contruct search results
         SearchResults newResults = new SearchResults();
@@ -83,7 +82,7 @@ public class SearchService {
         		newResults.add(new SearchResult(
         						sd.score,
         						doc.get("location_id"),
-        						targetToken,
+        						searchBlock,
         						doc));
 			} catch (IOException e) {
 				e.printStackTrace();
