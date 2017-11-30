@@ -95,16 +95,20 @@ public class SearchService {
 	
 	private SearchRequest generateSearchRequest(Map<String, String> params) {
 		
-		SearchRequest sr = new SearchRequest(
-			(params.get("book").length() == 0 ? -1 : Integer.parseInt(params.get("book"))),
-			(params.get("hymn").length() == 0 ? -1 : Integer.parseInt(params.get("hymn")))
-		);
+		SearchRequest sr = new SearchRequest();
 		
 		for (String key : params.keySet()){
-			char blockNr = key.charAt(key.length() - 1);
-			if (Character.isDigit(blockNr)){
+			
+			if (params.get(key).length() == 0){
+				continue;
+			} else if (params.get(key).equals("book")){
+				sr.setScopeBook(Integer.parseInt(params.get(key))); //TODO check if only digits
+			} else if (params.get(key).equals("hymn")){
+				sr.setScopeHymn(Integer.parseInt(params.get(key))); //TODO check if only digits
+			} else {
 				
 			}
+			
 		}
 		
 		return sr;

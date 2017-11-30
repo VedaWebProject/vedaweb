@@ -1,5 +1,8 @@
 package de.unikoeln.vedaweb.search;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 
@@ -15,9 +18,14 @@ public class SearchResults {
 		results.add(result);
 	}
 	
-	public Set<SearchResult> getResultsList(){
-		//Collections.sort(results);
+	public Set<SearchResult> getResults(){
 		return results;
+	}
+	
+	public List<SearchResult> getSortedResultsList(){
+		List<SearchResult> resultsList = new ArrayList<SearchResult>(results);
+		Collections.sort(resultsList);
+		return resultsList;
 	}
 	
 	public boolean containsLocationId(String locationId){
@@ -30,9 +38,9 @@ public class SearchResults {
 	
 	public void retainCommon(SearchResults otherSearchResults){
 		if (results.isEmpty()){
-			results = otherSearchResults.getResultsList();
+			results = otherSearchResults.getResults();
 		} else {
-			Set<SearchResult> other = otherSearchResults.getResultsList();
+			Set<SearchResult> other = otherSearchResults.getResults();
 			System.out.println("[DEBUG] Joining:\tnew(" + other.size() + ")\told(" + results.size() + ") ...");
 			other.retainAll(results);
 			results.retainAll(other);
@@ -44,6 +52,11 @@ public class SearchResults {
 	
 	public int size(){
 		return results.size();
+	}
+	
+	@Override
+	public String toString() {
+		return "[SearchResults] # of results: " + results.size();
 	}
 
 }

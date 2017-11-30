@@ -4,21 +4,28 @@
 $( document ).ready(function() {
 	
 	//TEMP DEV
-	$( "form" ).on( "submit", function( event ) {
-	  event.preventDefault();
-	  
-	  var formData = JSON.stringify($(this).serializeJSON());
-	  
-	  $.ajax({
-		  type: "POST",
-		  url: "/search",
-		  data: formData,
-		  success: function(){},
-		  dataType: "json",
-		  contentType : "application/json"
-		});
-	});
-
+	
+//	$( "#form-search" ).on( "submit", function( event ) {
+//	  event.preventDefault();
+//	  var formData = JSON.stringify($(this).serializeJSON());
+//	  var formData64 = $.base64.encode(formData);
+//	  console.log(formData64);
+//	  window.location.href = "/search?req=" + formData64;
+//	});
+	
+//	$( "#form-search" ).on( "submit", function( event ) {
+//	  event.preventDefault();
+//	  
+//	  console.log(JSON.stringify($(this).serializeJSON()));
+//		
+//		$.post("search",
+//				$(this).serializeJSON(),
+//			    function(data, status){
+//			        alert("Data: " + data + "\nStatus: " + status);
+//			    }
+//		);
+//	});
+	
 	//init keyosk OSK
 	keyoskInit();
 
@@ -59,7 +66,7 @@ $( document ).ready(function() {
 		if ($("#form-search .token-class").length > 1){
 			$(".btn-add-token-minus").show();
 		}
-		//renameInputs($("#form-search .token-class").last(), $("#form-search .token-class").last().index());
+//		renameInputs($("#form-search .token-class").last(), $("#form-search .token-class").last().index());
 	});
 	$(".btn-add-token-minus").hide();
 	$(".btn-add-token-minus").click(function(){

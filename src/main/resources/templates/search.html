@@ -6,8 +6,8 @@
 
 
 
-	<div th:each="param : ${params}" th:text="${param.key + ' : ' + param.value}">
-		N/A
+	<div th:each="result : ${results}" >
+		<div th:text="${result}"></div>
 	</div>
 
 

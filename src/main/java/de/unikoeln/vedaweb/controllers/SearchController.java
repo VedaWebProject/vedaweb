@@ -1,17 +1,16 @@
 package de.unikoeln.vedaweb.controllers;
 
+import java.util.Map;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
-import de.unikoeln.vedaweb.search.SearchRequest;
 import de.unikoeln.vedaweb.services.SearchService;
-import net.minidev.json.JSONObject;
 
 
 
@@ -22,26 +21,56 @@ public class SearchController {
 	private SearchService search;
 	
 	
-	@RequestMapping(value = "/search", method = RequestMethod.POST)
+//	@RequestMapping(value = "/search", method = RequestMethod.POST)
+//    public Model searchView(
+//    		@RequestBody SearchRequest searchRequest,
+//    		Model model,
+//    		HttpServletRequest request) {
+//		
+//		searchRequest.cleanAndFormatFields();
+//		System.err.println(searchRequest);
+//		
+//		SearchResults results = search.search(searchRequest);
+//		model.addAttribute("results", results);
+//		
+//		System.err.println(results);
+//    	
+//    	return model;
+//    }
+	
+	
+	@RequestMapping("/search")
     public Model searchView(
-    		@RequestBody SearchRequest searchRequest,
+    		@RequestParam Map<String, String> params,
     		Model model,
     		HttpServletRequest request) {
 		
-		searchRequest.cleanAndFormatFields();
-		System.err.println(searchRequest);
+		System.err.println(params);
+		model.addAttribute("results", search.search(params));
     	
     	return model;
     }
 	
-	
 //	@RequestMapping("/search")
 //    public Model searchView(
-//    		@RequestParam Map<String, String> params,
+//    		@RequestParam String req,
 //    		Model model,
 //    		HttpServletRequest request) {
 //		
-//		search.search(params);
+//		ObjectMapper mapper = new ObjectMapper();
+//		SearchRequest sr = null;
+//		
+//		try {
+//			sr = mapper.readValue(Base64Utils.decodeFromString(req), SearchRequest.class);
+//		} catch (IOException e) {
+//			e.printStackTrace();
+//		}
+//		
+//		System.err.println(sr);
+//		sr.cleanAndFormatFields();
+//		System.err.println(sr);
+//		
+//		model.addAttribute("results", search.search(sr).getSortedResultsList());
 //    	
 //    	return model;
 //    }

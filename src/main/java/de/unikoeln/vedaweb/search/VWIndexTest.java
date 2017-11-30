@@ -59,7 +59,7 @@ public class VWIndexTest {
 	
 	
 	private void search(String queryString){
-		SearchRequest sr = new SearchRequest(-1, -1);
+		SearchRequest sr = new SearchRequest();
 		
 		for (String query : queryString.split("\\s*\\&\\s*")){
 			Map<String, Object> searchBlock = new HashMap<String, Object>();
@@ -73,7 +73,7 @@ public class VWIndexTest {
 		SearchResults results = search.search(sr);
 		System.out.println("[INFO] Final # of results after joining: " + results.size());
 		
-		for (SearchResult result : results.getResultsList()){
+		for (SearchResult result : results.getSortedResultsList()){
 			System.out.println(result);
 		}
 	}

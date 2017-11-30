@@ -14,16 +14,13 @@ public class SearchRequest {
 	private List<Map<String, Object>> blocks;
 
 	
-	public SearchRequest(){}
-	
-	
-	public SearchRequest(int scopeBook, int scopeHymn){
+	public SearchRequest(){
 		blocks = new ArrayList<Map<String, Object>>();
-		this.scopeBook = scopeBook;
-		this.scopeHymn = scopeHymn;
+		this.scopeBook = -1;
+		this.scopeHymn = -1;
 	}
 	
-
+	
 	public List<Map<String, Object>> getBlocks() {
 		return blocks;
 	}
@@ -37,7 +34,6 @@ public class SearchRequest {
 	public void setScopeBook(int scopeBook) {
 		this.scopeBook = scopeBook;
 	}
-
 
 	public int getScopeHymn() {
 		return scopeHymn;
