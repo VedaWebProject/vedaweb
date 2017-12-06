@@ -81,16 +81,20 @@ a {
 
 }
 
+#search-utils {
+	padding: 1rem;
+}
+
+#search-area .form-group {
+	margin-bottom: .5rem;
+}
+
 #form-search {
 	padding: 1rem;
 }
 
-#form-search input, #form-search select, #form-search label, #form-search .form-control {
+#form-search input, #form-search select, #form-search label, #form-search .form-control, #search-utils {
 	font-size: 90%;
-}
-
-#form-search .form-group {
-	margin-bottom: .5rem;
 }
 
 #form-search .form-box {
@@ -123,7 +127,7 @@ input:focus {
 
 #content-area{
 	padding-top: 2em;
-	padding-bottom: 4em;
+	padding-bottom: 2em;
 	background-color: #fff;
 
 	-webkit-box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.1);
@@ -169,11 +173,11 @@ input:focus {
 	margin-bottom: 2rem;
 }
 
-#form-filters .form-check-label {
+.form-check-label {
     padding-left: 0;
 }
 
-#form-filters .bootstrap-switch {
+.bootstrap-switch {
 	font-weight: bold;
 	margin-right: .6rem;
 }
@@ -208,6 +212,14 @@ input:focus, .form-control:focus, select:focus, .custom-select:focus {
 }
 */
 
+.btn-gray {
+	background-color: #ccb;
+}
+
+.btn-gray:hover {
+	background-color: #bba;
+}
+
 
 .pagination-arrow {
 	padding: 0 5px;
@@ -241,8 +253,8 @@ input:focus, .form-control:focus, select:focus, .custom-select:focus {
 	color: #000;
    	text-decoration: none;
 
-   	-webkit-filter: opacity(40%);
-    filter: opacity(40%);
+   	-webkit-filter: opacity(60%);
+    filter: opacity(60%);
 }
 
 #footer a:hover {
@@ -267,6 +279,7 @@ input:focus, .form-control:focus, select:focus, .custom-select:focus {
 #footer .footer-bottom a {
 	padding: 0 1em;
 }
+
 
 
 

@@ -72,12 +72,16 @@
 			<!-- NAVIGATION - MENU -->
 			<div class="collapse navbar-collapse justify-content-start" id="navbarNavDropdown">
 				<ul class="navbar-nav">
+				
 					<li class="nav-item">
 						<a class="nav-link" href="#">Information</a>
 					</li>
+					
 					<li class="nav-item">
 						<a class="nav-link" href="#">Sources</a>
 					</li>
+					
+					<!-- A dropdown menu
 					<li class="nav-item dropdown">
 						<a class="nav-link dropdown-toggle" href="http://example.com" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 							Partners
@@ -88,6 +92,8 @@
 							<a class="dropdown-item" href="#">That</a>
 						</div>
 					</li>
+					-->
+					 
 				</ul>
 			</div>
 
@@ -101,48 +107,118 @@
 				<!-- SEARCH -->
 
 				<div id="search-area" class="col collapse">
-
+				
+					<!-- SEARCH UTILS -->
+					<div id="search-utils">
+					
+						<span class="small-headline">Search utilities</span>
+						
+						<div class="row justify-content-start">
+							<div class="col-md-3">
+							
+		   		 				<div class="form-group form-row">
+			   		 				<label class="col col-form-label">Input method:</label>
+									<select class="col-6 custom-select form-control">
+										<option value="hk" selected>HK - Harvard-Kyoto</option>
+										<option value="iast">IAST - International Alphabet of Sanskrit Transliteration</option>
+										<option value="itrans">ITRANS</option>
+										<option value="slp1">SLP1 - Sanskrit Library Phonetic Basic</option>
+										<option value="devanagari">Devanagari</option>
+									</select>
+								</div>
+							
+								<div class="form-group form-row">
+			   		 				<label class="col">Tools:</label>
+			   		 				
+									<label class="col-6 form-check-label">
+										<input type="checkbox" class="form-check-input" id="search-utils-input-trans">
+										Screen keyboard<br>
+									</label>
+								</div>
+								
+							</div>
+						</div>
+						
+					</div>
+					
+					<!--  SEARCH FORM -->
 					<form id="form-search" action="/search">
 
-						<!-- SEARCH - TOKENS -->
+						<span class="small-headline">Search parameters</span>
 
-						<span class="small-headline">Search</span>
-
+						<!-- SEARCH - BLOCKS -->
 						<div id="search-tokens" class="row justify-content-start">
 
-							<!-- SEARCH - EXAMPLE SEARCH TOKEN -->
+							<!-- SEARCH - FIRST BLOCK -->
 							<div class="token-class col-md-3">
 								<div class="form-box">
+								
 									<div class="form-group form-row justify-content-end">
 										<label class="col col-form-label">Term:</label>
 										<input type="text" name="blocks[][form]" class="col-6 form-control keyosk-toggle" id="input-term" placeholder="optional">
 									</div>
+									
+									<div class="form-group form-row justify-content-end">
+										<label class="col col-form-label">Lemma:</label>
+										<input type="text" name="blocks[][lemma]" class="col-6 form-control keyosk-toggle" id="input-lemma" placeholder="optional">
+									</div>
+									
 									<div class="form-group form-row">
-				   		 				<label class="col col-form-label">Gender:</label>
-										<select name="blocks[][genus]" class="col-6 custom-select">
+				   		 				<label class="col col-form-label">Person:</label>
+										<select name="blocks[][person]" class="col-6 custom-select form-control">
 											<option value="" selected>all</option>
-											<option value="m">M</option>
-											<option value="f">F</option>
-											<option value="n">N</option>
+											<option value="1">1.</option>
+											<option value="2">2.</option>
 										</select>
 									</div>
+									
 									<div class="form-group form-row">
 				   		 				<label class="col col-form-label">Number:</label>
 										<select name="blocks[][numerus]" class="col-6 custom-select form-control">
 											<option value="" selected>all</option>
-											<option value="sg">SG</option>
-											<option value="pl">PL</option>
+											<option value="sg">Singular</option>
+											<option value="pl">Plural</option>
 										</select>
 									</div>
+									
+									<div class="form-group form-row">
+				   		 				<label class="col col-form-label">Gender:</label>
+										<select name="blocks[][genus]" class="col-6 custom-select">
+											<option value="" selected>all</option>
+											<option value="m">Male</option>
+											<option value="f">Female</option>
+											<option value="n">Neutral</option>
+										</select>
+									</div>
+									
 									<div class="form-group form-row">
 				   		 				<label class="col col-form-label">Case:</label>
 										<select name="blocks[][casus]" class="col-6 custom-select form-control">
 											<option value="" selected>all</option>
-											<option value="nom">NOM</option>
-											<option value="gen">GEN</option>
-											<option value="akk">AKK</option>
+											<option value="nom">Nominative</option>
+											<option value="gen">Genitive</option>
+											<option value="akk">Accusative</option>
 										</select>
 									</div>
+									
+									<div class="form-group form-row">
+				   		 				<label class="col col-form-label">Time:</label>
+										<select name="blocks[][tempus]" class="col-6 custom-select form-control">
+											<option value="" selected>all</option>
+											<option value="präs">Present</option>
+										</select>
+									</div>
+									
+									<div class="form-group form-row">
+				   		 				<label class="col col-form-label">Mode:</label>
+										<select name="blocks[][casus]" class="col-6 custom-select form-control">
+											<option value="" selected>all</option>
+											<option value="ind">Indicative</option>
+											<option value="imp">Imperative</option>
+											<option value="konj">Subjunctive</option>
+										</select>
+									</div>
+									
 								</div>
 							</div>
 
@@ -192,7 +268,7 @@
 						<!-- SEARCH - SUBMIT BUTTON -->
 						<div class="form-group form-row justify-content-end">
 							<div class="col">
-								<button type="submit" class="btn btn-success" form="form-search">Search</button>
+								<button type="submit" class="btn btn-gray" form="form-search">Search</button>
 							</div>
 						</div>
 
@@ -325,6 +401,13 @@
 									Translation DE
 								</label>
 							</div>
+							
+							<div class="form-check">
+								<label class="form-check-label">
+									<input type="checkbox" class="form-check-input">
+									Translation FR
+								</label>
+							</div>
 
 							<div class="form-check">
 								<label class="form-check-label">
@@ -336,7 +419,7 @@
 							<div class="form-check">
 								<label class="form-check-label">
 									<input type="checkbox" class="form-check-input">
-									Encyclopedia
+									Dictionary
 								</label>
 							</div>
 						</form>
@@ -353,12 +436,12 @@
 									<option value="tei">TEI-XML</option>
 									<option value="html">HTML</option>
 								</select>
-								<button type="submit" class="btn btn-hallo col-2">&dtrif;</button>
+								<button type="submit" class="btn btn-gray col-2">&dtrif;</button>
 							</div>
 						</form>
 					</div>
 
-					<!-- SIDEBAR - OTHER SEARCH RESULTS -->
+					<!-- SIDEBAR - OTHER SEARCH RESULTS
 					<div class="sidebar-block">
 						<span class="small-headline">Alternative search results</span>
 
@@ -368,6 +451,7 @@
 						other result 4<br>
 						...
 					</div>
+					 -->
 				</div>
 
 			</div>

@@ -39,6 +39,15 @@ $( document ).ready(function() {
 	$.fn.bootstrapSwitch.defaults.labelWidth = '1';
 
 	//init toggle switches
+	$("#search-utils [type='checkbox']").each(function(){
+		var ts = $(this);
+		ts.bootstrapSwitch();
+		$(this).on('switchChange.bootstrapSwitch', function(event, state) {
+			console.log(this); // DOM element
+			console.log(event); // jQuery event
+			console.log(state); // true | false
+		});
+	});
 	$("#form-filters [type='checkbox']").each(function(){
 		var ts = $(this);
 		ts.bootstrapSwitch();
@@ -48,6 +57,7 @@ $( document ).ready(function() {
 			console.log(state); // true | false
 		});
 	});
+	
 
 	//add extra term functionality
 //	function renameInputs(block, index){
