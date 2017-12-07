@@ -27,7 +27,7 @@ $( document ).ready(function() {
 //	});
 	
 	//init keyosk OSK
-	keyoskInit();
+	keyoskInit($("#search-utils-osk"));
 
 	//set toggle switch options
 	$.fn.bootstrapSwitch.defaults.state = 'false';
@@ -39,13 +39,14 @@ $( document ).ready(function() {
 	$.fn.bootstrapSwitch.defaults.labelWidth = '1';
 
 	//init toggle switches
-	$("#search-utils [type='checkbox']").each(function(){
+	$("#search-utils-osk").each(function(){
 		var ts = $(this);
 		ts.bootstrapSwitch();
 		$(this).on('switchChange.bootstrapSwitch', function(event, state) {
-			console.log(this); // DOM element
-			console.log(event); // jQuery event
-			console.log(state); // true | false
+//			console.log(this); // DOM element
+//			console.log(event); // jQuery event
+//			console.log(state); // true | false
+			keyoskDisplay(state);
 		});
 	});
 	$("#form-filters [type='checkbox']").each(function(){
@@ -77,6 +78,9 @@ $( document ).ready(function() {
 			$(".btn-add-token-minus").show();
 		}
 //		renameInputs($("#form-search .token-class").last(), $("#form-search .token-class").last().index());
+
+		//keyosk
+		keyoskUpdate();
 	});
 	$(".btn-add-token-minus").hide();
 	$(".btn-add-token-minus").click(function(){
@@ -91,6 +95,9 @@ $( document ).ready(function() {
 				}
 			});
 		}
+		
+		//keyosk
+		keyoskUpdate();
 	});
 
 });

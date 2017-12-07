@@ -1,7 +1,10 @@
 
 var keyoskToggle;
+var keyoskInput;
 
-function keyoskInit() {
+function keyoskInit(toggle) {
+	
+	keyoskToggle = toggle;
 
 	if (!keyoskMap) return;
 
@@ -17,15 +20,14 @@ function keyoskInit() {
 	});
 
 
-	$(".keyosk-toggle").click(function(){
-		keyoskToggle = $(this);
-		$("#keyosk-view").show("fast");
+	$(".keyosk-input").focus(function(){
+		keyoskInput = $(this);
 	});
 	    
 	$(".keyosk-key").not("#keyosk-close").click(function(){
-		keyoskToggle.focus();
+		keyoskInput.focus();
 		var key = $(this);
-		keyoskToggle.val(keyoskToggle.val() + key.attr("data-out"));
+		keyoskInput.val(keyoskInput.val() + key.attr("data-out"));
 		key.addClass("keyosk-key-clicked");
 		window.setTimeout(function(){
 		  key.removeClass("keyosk-key-clicked");
@@ -33,8 +35,36 @@ function keyoskInit() {
 	});
 
 	$("#keyosk-close").click(function(){
-		ḱeyoskToggle = null;
+		//ḱeyoskToggle = null;
 		$("#keyosk-view").hide("fast");
+		keyoskToggle.bootstrapSwitch('toggleState', false);
 	});
 
+}
+
+
+function keyoskUpdate(){
+	$(".keyosk-input").unbind("focus");
+	$(".keyosk-input").focus(function(){
+		keyoskInput = $(this);
+	});
+}
+
+
+function keyoskDisplay(state){
+	if (state){
+		keyoskShow();
+	} else {
+		keyoskHide();
+	}
+}
+
+
+function keyoskShow(){
+	$("#keyosk-view").show("fast");
+}
+
+
+function keyoskHide(){
+	$("#keyosk-view").hide("fast");
 }
