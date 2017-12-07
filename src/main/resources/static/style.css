@@ -85,6 +85,14 @@ a {
 	padding: 1rem;
 }
 
+#search-utils .form-check-label {
+	margin-bottom: .5rem;
+}
+
+#trans-preview {
+	display: none;
+}
+
 #search-area .form-group {
 	margin-bottom: .5rem;
 }

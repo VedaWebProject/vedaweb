@@ -110,15 +110,15 @@
 				
 					<!-- SEARCH UTILS -->
 					<div id="search-utils">
-					
-						<span class="small-headline">Search utilities</span>
 						
+						<!-- TOOLS -->
 						<div class="row justify-content-start">
-							<div class="col-md-3">
+							<div class="col-lg-5">
+								<span class="small-headline">Search utilities</span>
 							
 		   		 				<div class="form-group form-row">
 			   		 				<label class="col col-form-label">Input method:</label>
-									<select class="col-6 custom-select form-control">
+									<select class="col-9 col-lg-8 custom-select form-control" id="search-utils-trans-input">
 										<option value="hk" selected>HK - Harvard-Kyoto</option>
 										<option value="iast">IAST - International Alphabet of Sanskrit Transliteration</option>
 										<option value="itrans">ITRANS</option>
@@ -126,16 +126,29 @@
 										<option value="devanagari">Devanagari</option>
 									</select>
 								</div>
-							
+								
 								<div class="form-group form-row">
 			   		 				<label class="col">Tools:</label>
 			   		 				
-									<label class="col-6 form-check-label">
-										<input type="checkbox" class="form-check-input" id="search-utils-osk">
-										Screen keyboard<br>
-									</label>
+			   		 				<div class="col-9 col-lg-8">
+										<label class="form-check-label">
+											<input type="checkbox" class="form-check-input" id="search-utils-trans-preview">
+											Transliteration preview<br>
+										</label><br>
+										
+										<label class="form-check-label">
+											<input type="checkbox" class="form-check-input" id="search-utils-osk">
+											Devanagari keyboard<br>
+										</label>
+									</div>
 								</div>
-								
+							
+							</div>
+							
+							<!-- TRANSLITERATION PREVIEW -->
+							<div id="trans-preview" class="col">
+								<span class="small-headline">Transliteration preview</span>
+								TEST
 							</div>
 						</div>
 						

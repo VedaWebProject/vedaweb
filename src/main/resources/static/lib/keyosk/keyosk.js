@@ -4,9 +4,12 @@ var keyoskInput;
 
 function keyoskInit(toggle) {
 	
+	if (!keyoskMap){
+		console.log("keyOSK Error: keyoskMap.js not found.");
+		return;
+	}
+	
 	keyoskToggle = toggle;
-
-	if (!keyoskMap) return;
 
 	//append keyboard
 	$("#keyosk-view").append('<div id="keyosk-keyboard"></div>');

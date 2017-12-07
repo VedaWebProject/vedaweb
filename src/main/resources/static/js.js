@@ -26,9 +26,6 @@ $( document ).ready(function() {
 //		);
 //	});
 	
-	//init keyosk OSK
-	keyoskInit($("#search-utils-osk"));
-
 	//set toggle switch options
 	$.fn.bootstrapSwitch.defaults.state = 'false';
 	$.fn.bootstrapSwitch.defaults.size = 'mini';
@@ -37,25 +34,30 @@ $( document ).ready(function() {
 	$.fn.bootstrapSwitch.defaults.offText = '&Cross;';
 	$.fn.bootstrapSwitch.defaults.labelText = '';
 	$.fn.bootstrapSwitch.defaults.labelWidth = '1';
+	
+	//init keyosk OSK
+	keyoskInit($("#search-utils-osk"));
 
 	//init toggle switches
-	$("#search-utils-osk").each(function(){
-		var ts = $(this);
-		ts.bootstrapSwitch();
-		$(this).on('switchChange.bootstrapSwitch', function(event, state) {
-//			console.log(this); // DOM element
-//			console.log(event); // jQuery event
-//			console.log(state); // true | false
-			keyoskDisplay(state);
-		});
+	$("#search-utils-osk").bootstrapSwitch();
+	$("#search-utils-osk").on('switchChange.bootstrapSwitch', function(event, state) {
+		keyoskDisplay(state);
 	});
+	
+	$("#search-utils-trans-preview").bootstrapSwitch();
+	$("#search-utils-trans-preview").on('switchChange.bootstrapSwitch', function(event, state) {
+		if (state){
+			$("#trans-preview").fadeIn();
+		} else {
+			$("#trans-preview").fadeOut();
+		}
+	});
+	$("#trans-preview").toggle($("#search-utils-trans-preview").bootstrapSwitch('state'));
+	
 	$("#form-filters [type='checkbox']").each(function(){
-		var ts = $(this);
-		ts.bootstrapSwitch();
+		$(this).bootstrapSwitch();
 		$(this).on('switchChange.bootstrapSwitch', function(event, state) {
-			console.log(this); // DOM element
-			console.log(event); // jQuery event
-			console.log(state); // true | false
+			//TODO
 		});
 	});
 	
