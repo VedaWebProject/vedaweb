@@ -89,8 +89,15 @@ a {
 	margin-bottom: .5rem;
 }
 
-#trans-preview {
-	display: none;
+#trans-popup {
+	position: absolute;
+	left: 101%;
+	z-Index: 999;
+	background-color: #fff;
+	border: 1px solid #ccb;
+	border-radius: 3px;
+	padding: 3px;
+	font-size: 110%;
 }
 
 #search-area .form-group {

@@ -46,13 +46,8 @@ $( document ).ready(function() {
 	
 	$("#search-utils-trans-preview").bootstrapSwitch();
 	$("#search-utils-trans-preview").on('switchChange.bootstrapSwitch', function(event, state) {
-		if (state){
-			$("#trans-preview").fadeIn();
-		} else {
-			$("#trans-preview").fadeOut();
-		}
+		//TODO
 	});
-	$("#trans-preview").toggle($("#search-utils-trans-preview").bootstrapSwitch('state'));
 	
 	$("#form-filters [type='checkbox']").each(function(){
 		$(this).bootstrapSwitch();
@@ -81,8 +76,9 @@ $( document ).ready(function() {
 		}
 //		renameInputs($("#form-search .token-class").last(), $("#form-search .token-class").last().index());
 
-		//keyosk
+		//update
 		keyoskUpdate();
+		transliterationInit();
 	});
 	$(".btn-add-token-minus").hide();
 	$(".btn-add-token-minus").click(function(){
@@ -98,8 +94,40 @@ $( document ).ready(function() {
 			});
 		}
 		
-		//keyosk
+		//update
 		keyoskUpdate();
+		transliterationInit();
 	});
+	
+	
+	////TRANSLITERATION PREVIEW
+	var transInput;
+	
+	function transliteration(){
+		$("#trans-popup").text(Sanscript.t(transInput.val(), $("#trans-from").val(), "devanagari"));
+	}
+	
+	function transliterationInit(){
+		$(".trans-input").focus(function(){
+			transInput = $(this);
+			if ($("#search-utils-trans-preview").bootstrapSwitch('state')){
+				transInput.after("<span id='trans-popup'>...</span>");
+				$("#trans-popup").parent().css("position", "relative");
+				transliteration();
+				
+				transInput.on("change keyup paste", function() {
+					transliteration();
+				});
+			}
+		});
+		
+		$(".trans-input").focusout(function(){
+			$("#trans-popup").parent().css("position", "static");
+			$("#trans-popup").remove();
+			$(this).unbind("change keyup paste");
+		});
+	}
+	
+	transliterationInit();
 
 });

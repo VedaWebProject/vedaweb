@@ -46,6 +46,9 @@
 		
 		<!-- jQUERY FROM SERIALIZER -->
 		<script src="lib/jquery.base64.min.js"></script>
+		
+		<!-- Sanscript.js -->
+		<script type="text/javascript" src="lib/sanscript/sanscript.js"></script>
 
 		<!-- JS -->
 		<script type="text/javascript" src="js.js"></script>
@@ -118,7 +121,7 @@
 							
 		   		 				<div class="form-group form-row">
 			   		 				<label class="col col-form-label">Input method:</label>
-									<select class="col-9 col-lg-8 custom-select form-control" id="search-utils-trans-input">
+									<select id="trans-from" class="col-9 col-lg-8 custom-select form-control" id="search-utils-trans-input">
 										<option value="hk" selected>HK - Harvard-Kyoto</option>
 										<option value="iast">IAST - International Alphabet of Sanskrit Transliteration</option>
 										<option value="itrans">ITRANS</option>
@@ -133,7 +136,7 @@
 			   		 				<div class="col-9 col-lg-8">
 										<label class="form-check-label">
 											<input type="checkbox" class="form-check-input" id="search-utils-trans-preview">
-											Transliteration preview<br>
+											Devanagari preview<br>
 										</label><br>
 										
 										<label class="form-check-label">
@@ -143,12 +146,6 @@
 									</div>
 								</div>
 							
-							</div>
-							
-							<!-- TRANSLITERATION PREVIEW -->
-							<div id="trans-preview" class="col">
-								<span class="small-headline">Transliteration preview</span>
-								TEST
 							</div>
 						</div>
 						
@@ -168,12 +165,12 @@
 								
 									<div class="form-group form-row justify-content-end">
 										<label class="col col-form-label">Term:</label>
-										<input type="text" name="blocks[][form]" class="col-6 form-control keyosk-input" id="input-term" placeholder="optional">
+										<input type="text" name="blocks[][form]" class="col-6 form-control keyosk-input trans-input" id="input-term" placeholder="optional">
 									</div>
 									
 									<div class="form-group form-row justify-content-end">
 										<label class="col col-form-label">Lemma:</label>
-										<input type="text" name="blocks[][lemma]" class="col-6 form-control keyosk-input" id="input-lemma" placeholder="optional">
+										<input type="text" name="blocks[][lemma]" class="col-6 form-control keyosk-input trans-input" id="input-lemma" placeholder="optional">
 									</div>
 									
 									<div class="form-group form-row">
