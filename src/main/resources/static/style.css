@@ -96,8 +96,23 @@ a {
 	background-color: #fff;
 	border: 1px solid #ccb;
 	border-radius: 3px;
-	padding: 3px;
+	padding: .28rem;
 	font-size: 110%;
+}
+
+.tooltip-inner {
+	font-size: 120%;
+	background-color: #fff;
+	border: 1px solid #ccb;
+	color: inherit;
+	
+	-webkit-box-shadow: 0px 0px 3px 0px rgba(0,0,0,0.3);
+	-moz-box-shadow: 0px 0px 3px 0px rgba(0,0,0,0.3);
+	box-shadow: 0px 0px 3px 0px rgba(0,0,0,0.3);
+}
+
+.tooltip-arrow::before, .tooltip-arrow, .tooltip-top, .tooltip.bs-tooltip-top .arrow:before, .arrow {
+	border-top-color: #ccb;
 }
 
 #search-area .form-group {

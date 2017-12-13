@@ -104,15 +104,19 @@ $( document ).ready(function() {
 	var transInput;
 	
 	function transliteration(){
-		$("#trans-popup").text(Sanscript.t(transInput.val(), $("#trans-from").val(), "devanagari"));
+//		$("#trans-popup").text(Sanscript.t(transInput.val(), $("#trans-from").val(), "devanagari"));
+		transInput
+			.tooltip('hide')
+			.attr("data-original-title", Sanscript.t(transInput.val(), $("#trans-from").val(), "devanagari"))
+			.tooltip('show');
 	}
 	
 	function transliterationInit(){
 		$(".trans-input").focus(function(){
 			transInput = $(this);
 			if ($("#search-utils-trans-preview").bootstrapSwitch('state')){
-				transInput.after("<span id='trans-popup'>...</span>");
-				$("#trans-popup").parent().css("position", "relative");
+//				transInput.after("<span id='trans-popup'>...</span>");
+//				$("#trans-popup").parent().css("position", "relative");
 				transliteration();
 				
 				transInput.on("change keyup paste", function() {
@@ -122,12 +126,18 @@ $( document ).ready(function() {
 		});
 		
 		$(".trans-input").focusout(function(){
-			$("#trans-popup").parent().css("position", "static");
-			$("#trans-popup").remove();
+//			$("#trans-popup").parent().css("position", "static");
+//			$("#trans-popup").remove();
 			$(this).unbind("change keyup paste");
+			transInput
+				.tooltip('dispose')
+				.attr("data-original-title", "");
 		});
 	}
 	
 	transliterationInit();
+	
+	//DEV
+//	$('[data-toggle="tooltip"]').tooltip();
 
 });
