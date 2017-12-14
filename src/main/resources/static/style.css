@@ -82,7 +82,8 @@ a {
 }
 
 #search-utils {
-	padding: 1rem;
+	padding: 0 1rem;
+	padding-top: 1rem;
 }
 
 #search-utils .form-check-label {
