@@ -39,21 +39,33 @@ $( document ).ready(function() {
 	keyoskInit($("#search-utils-osk"));
 
 	//init toggle switches
+	var previewToggleState;
 	$("#search-utils-osk").bootstrapSwitch();
 	$("#search-utils-osk").on('switchChange.bootstrapSwitch', function(event, state) {
 		keyoskDisplay(state);
+		
+		//force input method and disable preview
+		if (state){
+			previewToggleState = $("#search-utils-trans-preview").bootstrapSwitch('state');
+			$("#trans-from").val("devanagari");
+			$("#trans-from").prop('disabled', 'disabled');
+			$("#search-utils-trans-preview").bootstrapSwitch('state', false);
+		} else {
+			$("#trans-from").prop('disabled', false);
+			$("#search-utils-trans-preview").bootstrapSwitch('state', previewToggleState);
+		}
 	});
 	
 	$("#search-utils-trans-preview").bootstrapSwitch();
-	$("#search-utils-trans-preview").on('switchChange.bootstrapSwitch', function(event, state) {
-		//TODO
-	});
+//	$("#search-utils-trans-preview").on('switchChange.bootstrapSwitch', function(event, state) {
+//		//TODO
+//	});
 	
 	$("#form-filters [type='checkbox']").each(function(){
 		$(this).bootstrapSwitch();
-		$(this).on('switchChange.bootstrapSwitch', function(event, state) {
-			//TODO
-		});
+//		$(this).on('switchChange.bootstrapSwitch', function(event, state) {
+//			//TODO
+//		});
 	});
 	
 
