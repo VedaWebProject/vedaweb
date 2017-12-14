@@ -30,7 +30,9 @@ function keyoskInit(toggle) {
 	$(".keyosk-key").not("#keyosk-close").click(function(){
 		keyoskInput.focus();
 		var key = $(this);
-		keyoskInput.val(keyoskInput.val() + key.attr("data-out"));
+		//TEMP DEV
+		//keyoskInput.val(keyoskInput.val() + key.attr("data-out"));
+		keyoskInput.val(keyoskInput.val() + key.text());
 		key.addClass("keyosk-key-clicked");
 		window.setTimeout(function(){
 		  key.removeClass("keyosk-key-clicked");
@@ -40,7 +42,7 @@ function keyoskInit(toggle) {
 	$("#keyosk-close").click(function(){
 		//ḱeyoskToggle = null;
 		$("#keyosk-view").hide("fast");
-		keyoskToggle.bootstrapSwitch('toggleState', false);
+		keyoskToggle.bootstrapSwitch('state', false);
 	});
 
 }
