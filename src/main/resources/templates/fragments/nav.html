@@ -1,0 +1,44 @@
+<!-- NAVIGATION BAR -->
+<nav class="navbar navbar-expand-lg navbar-dark" th:fragment="nav">
+
+	<a class="navbar-brand" href="#"><img id="logo" src="img/logo_white.png" alt="VedaWeb Logo"/></a>
+	<a class="navbar-brand" href="#"><div id="title-text">VedaWeb<br><small>Rigveda online</small></div></a>
+
+	<a id="search-toggle" class="navbar-brand" data-toggle="collapse" href="#search-area" aria-expanded="false">
+		<img src="img/icon-search.png" alt="Suche"/>
+	</a>
+
+	<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+	<span class="navbar-toggler-icon"></span>
+	</button>
+
+
+	<!-- NAVIGATION - MENU -->
+	<div class="collapse navbar-collapse justify-content-start" id="navbarNavDropdown">
+		<ul class="navbar-nav">
+		
+			<li class="nav-item">
+				<a class="nav-link" href="#">Information</a>
+			</li>
+			
+			<li class="nav-item">
+				<a class="nav-link" href="#">Sources</a>
+			</li>
+			
+			<!-- A dropdown menu
+			<li class="nav-item dropdown">
+				<a class="nav-link dropdown-toggle" href="http://example.com" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+					Partners
+				</a>
+				<div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+					<a class="dropdown-item" href="#">This</a>
+					<a class="dropdown-item" href="#">And</a>
+					<a class="dropdown-item" href="#">That</a>
+				</div>
+			</li>
+			-->
+			 
+		</ul>
+	</div>
+
+</nav>

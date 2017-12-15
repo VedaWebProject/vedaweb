@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+	<head th:replace="fragments/head :: head"></head>
+	
+	<body>
+	
+		<nav th:replace="fragments/nav :: nav"></nav>
+		
+		<div class="container-fluid">
+			<!-- SEARCH AREA -->
+			<div th:replace="fragments/search :: search"></div>
+			
+			<!-- CONTENT AREA -->
+			<div id="content-area" class="row justify-content-center">
+				<!-- CONTENT DATA VIEW -->
+				<div th:replace="fragments/content :: content"></div>
+				<!-- SIDEBAR -->
+				<div th:replace="fragments/sidebar :: sidebar"></div>			
+			</div>
+			
+			<!--  FOOTER -->
+			<div th:replace="fragments/footer :: footer"></div>	
+		</div>
+
+		<!-- ONSCREEN KEYBOARD -->
+		<div id="keyosk-view"></div>
+
+	</body>
+</html>
