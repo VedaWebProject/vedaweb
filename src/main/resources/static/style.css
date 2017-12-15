@@ -1,3 +1,13 @@
+@font-face {
+    font-family: Gentium;
+    src: url(fonts/Gentium-regular.ttf);
+}
+
+.skrit {
+	font-family: 'Gentium', sans-serif;
+	font-size: 120%;
+}
+
 html {
 	height: 101%;
 }
@@ -16,13 +26,10 @@ a {
 	font-size: 1rem;
 	display: block;
 	padding-bottom: .8rem;
-	font-family: 'Dosis', sans-serif;
-	font-weight: bold;
 	color: #931111;
 }
 
 .navbar {
-	font-family: 'Dosis', sans-serif;
 	padding: .01rem .5rem;
 	background-color: #931111;
 	color: #fff;
@@ -42,6 +49,7 @@ a {
 }
 
 .navbar-brand {
+	font-family: 'Dosis', sans-serif;
 	padding-top: .1rem;
 	padding-bottom: .1rem;
 	line-height: 100%;
@@ -163,11 +171,12 @@ input:focus {
 }
 
 .content-block {
-	margin-bottom: 2rem;
+	padding: 1rem 0;
 }
 
 .content-plain {
-	font-size: 150%;
+	font-size: 180%;
+	font-weight: normal;
 }
 
 .index {
@@ -179,7 +188,7 @@ input:focus {
 }
 
 .line {
-	margin-bottom: 1rem;
+	padding-bottom: 1rem;
 }
 
 .token {
@@ -193,7 +202,7 @@ input:focus {
 }
 
 #sidebar {
-
+	border-left: 1px dashed #bba;
 }
 
 .sidebar-block {

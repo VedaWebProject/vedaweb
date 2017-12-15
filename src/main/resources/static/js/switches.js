@@ -41,9 +41,14 @@ function initToggleSwitches(){
 	//sidebar filter toggles
 	$("#form-filters [type='checkbox']").each(function(){
 		$(this).bootstrapSwitch();
-//		$(this).on('switchChange.bootstrapSwitch', function(event, state) {
-//			//TODO
-//		});
+		var toggled = $(this);
+		$(this).on('switchChange.bootstrapSwitch', function(event, state) {
+			if (state){
+				$("." + toggled.attr("data-target")).fadeIn();
+			} else {
+				$("." + toggled.attr("data-target")).fadeOut();
+			}
+		});
 	});
 	
 }

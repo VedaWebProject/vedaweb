@@ -1,50 +1,50 @@
 <!-- SIDEBAR -->
-<div class="col-lg-3" th:fragment="sidebar">
+<div id="sidebar" class="col-lg-3" th:fragment="sidebar">
 
 	<!-- SIDEBAR - DATA LAYER TOGGLES -->
 	<div class="sidebar-block form-box">
-		<span class="small-headline">Toggle data layers</span>
+		<span class="small-headline">Toggle information layers</span>
 
 		<form id="form-filters">
 
 			<div class="form-check">
 				<label class="form-check-label">
-					<input type="checkbox" class="form-check-input" checked="checked">
+					<input type="checkbox" class="form-check-input" checked="checked" data-target="content-grammar">
 					Grammar
 				</label>
 			</div>
 
 			<div class="form-check">
 				<label class="form-check-label">
-					<input type="checkbox" class="form-check-input">
+					<input type="checkbox" class="form-check-input" data-target="content-translation-en">
 					Translation EN
 				</label>
 			</div>
 
 			<div class="form-check">
 				<label class="form-check-label">
-					<input type="checkbox" class="form-check-input" checked="checked">
+					<input type="checkbox" class="form-check-input" checked="checked" data-target="content-translation-de">
 					Translation DE
 				</label>
 			</div>
 			
 			<div class="form-check">
 				<label class="form-check-label">
-					<input type="checkbox" class="form-check-input">
+					<input type="checkbox" class="form-check-input" data-target="content-translation-fr">
 					Translation FR
 				</label>
 			</div>
 
 			<div class="form-check">
 				<label class="form-check-label">
-					<input type="checkbox" class="form-check-input">
+					<input type="checkbox" class="form-check-input" data-target="content-references">
 					References
 				</label>
 			</div>
 
 			<div class="form-check">
 				<label class="form-check-label">
-					<input type="checkbox" class="form-check-input">
+					<input type="checkbox" class="form-check-input" data-target="content-dictionary">
 					Dictionary
 				</label>
 			</div>
@@ -53,7 +53,7 @@
 
 	<!-- SIDEBAR - EXPORT -->
 	<div class="sidebar-block">
-		<span class="small-headline">Export</span>
+		<span class="small-headline">Export options</span>
 		<form id="form-export">
 			<div class="form-group form-row">
 				<select class="col-4 custom-select" required="required">
