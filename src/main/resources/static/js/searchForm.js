@@ -4,12 +4,21 @@ function initSearchForm(){
 	//add extra term functionality
 	
 	$(".btn-add-token-plus").click(function(){
-		if ($("#form-search .token-class").length < 4){
-			$(this).parent().before($("#form-search .token-class").last().clone().hide().fadeIn());
+		var blockCount = $("#form-search .token-class").length;
+		
+		if (blockCount < 4){
+			var newBlock = $("#form-search .token-class").last().clone();
+			$(this).parent().before(newBlock.hide().fadeIn());
+			
+//			$.each(newBlock.find("input, select"), function(){
+//				$(this).attr("name", $(this).attr("name").replace("/\d/", blockCount));
+//			});
 		}
+		
 		if ($("#form-search .token-class").length >= 4){
 			$(this).hide();
 		}
+		
 		if ($("#form-search .token-class").length > 1){
 			$(".btn-add-token-minus").show();
 		}
@@ -37,6 +46,26 @@ function initSearchForm(){
 		//update
 		keyoskUpdate();
 		initTransliteration();
+	});
+	
+	//search form submit
+	$("#form-search").submit(function(event) {
+		// Stop form from submitting normally
+		event.preventDefault();
+
+		// Get some values from elements on the page:
+		var $form = $(this);
+		var params = $form.serializeJSON();
+		console.log(JSON.stringify(params));
+		var url = $form.attr( "action" );
+
+		// Send the data using post
+		var posting = $.post(url, params);
+
+		// Put the results in a div
+		posting.done(function(data) {
+			alert(data);
+		});
 	});
 	
 }

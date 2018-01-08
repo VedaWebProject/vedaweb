@@ -56,7 +56,9 @@ public class SearchResults {
 	
 	@Override
 	public String toString() {
-		return "[SearchResults] # of results: " + results.size();
+		StringBuffer sb = new StringBuffer();
+		for (SearchResult r : results) sb.append(r + "\n");
+		return sb.toString();
 	}
 
 }

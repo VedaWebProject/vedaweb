@@ -36,6 +36,7 @@ public class SearchService {
 	
 	
 	public SearchResults search(SearchRequest sr){
+		sr.cleanAndFormatFields();
 		SearchResults results = new SearchResults();
 		
 		for (Map<String, Object> block : sr.getBlocks()){

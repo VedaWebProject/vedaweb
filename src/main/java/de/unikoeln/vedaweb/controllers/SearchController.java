@@ -1,15 +1,16 @@
 package de.unikoeln.vedaweb.controllers;
 
-import java.util.Map;
-
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RequestMethod;
 
+import de.unikoeln.vedaweb.search.SearchRequest;
+import de.unikoeln.vedaweb.search.SearchResults;
 import de.unikoeln.vedaweb.services.SearchService;
 
 
@@ -21,7 +22,7 @@ public class SearchController {
 	private SearchService search;
 	
 	
-//	@RequestMapping(value = "/search", method = RequestMethod.POST)
+//	@RequestMapping(value = "/search", method = RequestMethod.GET)
 //    public Model searchView(
 //    		@RequestBody SearchRequest searchRequest,
 //    		Model model,
@@ -39,17 +40,34 @@ public class SearchController {
 //    }
 	
 	
-	@RequestMapping("/search")
+	@RequestMapping(value = "/search", method = RequestMethod.POST)
     public Model searchView(
-    		@RequestParam Map<String, String> params,
+    		SearchRequest searchRequest,
     		Model model,
     		HttpServletRequest request) {
 		
-		System.err.println(params);
-		model.addAttribute("results", search.search(params));
+		System.err.println(searchRequest);
+		
+		SearchResults results = search.search(searchRequest);
+		model.addAttribute("results", results);
+		
+		System.err.println(results);
     	
     	return model;
     }
+	
+	
+//	@RequestMapping("/search")
+//    public Model searchView(
+//    		@RequestParam Map<String, String> params,
+//    		Model model,
+//    		HttpServletRequest request) {
+//		
+//		System.err.println(params);
+//		model.addAttribute("results", search.search(params));
+//    	
+//    	return model;
+//    }
 	
 //	@RequestMapping("/search")
 //    public Model searchView(
