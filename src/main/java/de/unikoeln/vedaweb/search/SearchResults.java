@@ -36,11 +36,11 @@ public class SearchResults {
 		return results.isEmpty();
 	}
 	
-	public void retainCommon(SearchResults otherSearchResults){
+	public void retainCommon(SearchResults newSearchResults){
 		if (results.isEmpty()){
-			results = otherSearchResults.getResults();
+			results = newSearchResults.getResults();
 		} else {
-			Set<SearchResult> other = otherSearchResults.getResults();
+			Set<SearchResult> other = newSearchResults.getResults();
 			System.out.println("[DEBUG] Joining:\tnew(" + other.size() + ")\told(" + results.size() + ") ...");
 			other.retainAll(results);
 			results.retainAll(other);
