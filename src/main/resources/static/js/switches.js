@@ -1,8 +1,28 @@
 //variables
 var previewToggleState;
 
+
+function initSidebarToggles(){
+	//sidebar filter toggles
+	$("#form-filters [type='checkbox']").each(function(){
+		$(this).bootstrapSwitch();
+		var toggled = $(this);
+		$(this).on('switchChange.bootstrapSwitch', function(event, state) {
+			if (state){
+				$("." + toggled.attr("data-target")).fadeIn();
+				//scroll
+				$('html, body').animate({
+                    scrollTop: $("." + toggled.attr("data-target")).offset().top
+                }, 1000);
+			} else {
+				$("." + toggled.attr("data-target")).fadeOut();
+			}
+		});
+	});
+}
+
+
 function initToggleSwitches(){
-	
 	//options and defaults
 	$.fn.bootstrapSwitch.defaults.state = 'false';
 	$.fn.bootstrapSwitch.defaults.size = 'mini';
@@ -38,17 +58,5 @@ function initToggleSwitches(){
 //	});
 	
 	
-	//sidebar filter toggles
-	$("#form-filters [type='checkbox']").each(function(){
-		$(this).bootstrapSwitch();
-		var toggled = $(this);
-		$(this).on('switchChange.bootstrapSwitch', function(event, state) {
-			if (state){
-				$("." + toggled.attr("data-target")).fadeIn();
-			} else {
-				$("." + toggled.attr("data-target")).fadeOut();
-			}
-		});
-	});
-	
+	initSidebarToggles();
 }

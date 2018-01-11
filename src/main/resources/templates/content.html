@@ -1,0 +1,72 @@
+<!-- CONTENT VIEW -->
+<div class="col-lg-8">
+
+	<!-- CONTENT DEFAULT -->
+	<div class="index row justify-content-start">
+		<div class="col-auto">
+			Book: 01
+		</div>
+	
+		<div class="col-auto">
+			Hymn: 001
+		</div>
+	
+		<div class="col-auto">
+			Verse:
+			<span class="pagination-arrow">&ltrif;</span>01<span class="pagination-arrow">&rtrif;</span>
+		</div>
+	</div>
+	<br>
+	
+	<!-- PLAIN TEXT -->
+	<div class="content-block content-plain skrit">
+		<div th:each="part : ${verse.parts}" th:text="${part.form}"></div>
+	</div>
+
+
+	<!-- //// META LAYERS //// -->
+
+	<!-- GRAMMAR -->
+	<div class="content-block content-grammar">
+		<span class="small-headline">Grammar</span>
+
+		<div th:each="part : ${verse.parts}" class="line">
+			<div th:each="token : ${part.tokens}" class="token">
+				<div th:text="${token.form}" class="token-form skrit"></div>
+				<div class="token-meta">
+					<span th:text="${token.lemma}" class="skrit"></span>.
+					
+					<!-- TEMP (has to be full grammar info, this is just a placeholder) -->
+					<span th:text="${token.casus}"></span>
+					<span th:text="${token.numerus}"></span>
+					<span th:text="${token.genus}"></span>
+				</div>
+			</div>
+		</div>
+		
+		<!-- GRAMMAR LINE HTML BACKUP
+		<div class="line">
+			<div class="token">
+				<div class="token-form skrit">hótāram</div>
+				<div class="token-meta">hótar-.AKK.SG.M.</div>
+			</div>
+
+			<div class="token">
+				<div class="token-form skrit">ratnadhā́tamam</div>
+				<div class="token-meta"><span class="skrit">ratnadhā́tama-</span>.NOM.SG.N./AKK.SG.M./AKK.SG.N.</div>
+			</div>
+		</div>
+		-->
+		
+	</div>
+
+	<!-- TRANSLATION-DE -->
+	<div class="content-block content-translation-de">
+		<span class="small-headline">Translation DE</span>
+		<div th:text="${verse.translation}"></div>
+	</div>
+
+</div>
+
+<!-- SIDEBAR -->
+<div th:replace="fragments/sidebar :: sidebar"></div>

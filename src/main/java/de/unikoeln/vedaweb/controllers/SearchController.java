@@ -5,10 +5,12 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
+import de.unikoeln.vedaweb.data.VerseDocument;
+import de.unikoeln.vedaweb.data.VerseRepository;
 import de.unikoeln.vedaweb.search.SearchRequest;
 import de.unikoeln.vedaweb.search.SearchResults;
 import de.unikoeln.vedaweb.services.SearchService;
@@ -21,27 +23,12 @@ public class SearchController {
 	@Autowired
 	private SearchService search;
 	
-	
-//	@RequestMapping(value = "/search", method = RequestMethod.GET)
-//    public Model searchView(
-//    		@RequestBody SearchRequest searchRequest,
-//    		Model model,
-//    		HttpServletRequest request) {
-//		
-//		searchRequest.cleanAndFormatFields();
-//		System.err.println(searchRequest);
-//		
-//		SearchResults results = search.search(searchRequest);
-//		model.addAttribute("results", results);
-//		
-//		System.err.println(results);
-//    	
-//    	return model;
-//    }
+	@Autowired
+	private VerseRepository verseRepo;
 	
 	
 	@RequestMapping(value = "/search", method = RequestMethod.POST)
-    public Model searchView(
+    public String searchView(
     		SearchRequest searchRequest,
     		Model model,
     		HttpServletRequest request) {
@@ -53,8 +40,42 @@ public class SearchController {
 		
 		System.err.println(results);
     	
-    	return model;
+    	return "search";
     }
+	
+	
+	@RequestMapping("/verse")
+    public String verse(
+    		@RequestParam String id,
+    		Model model,
+    		HttpServletRequest request) {
+		
+		VerseDocument verse = verseRepo.findById(id);
+		System.out.println(verse);
+		
+		model.addAttribute("verse", verse);
+		
+		System.out.println("[INFO] called '/verse', serving template 'verse'.");
+    	return "content";
+    }
+	
+	
+//	@RequestMapping(value = "/search", method = RequestMethod.GET)
+//  public Model searchView(
+//  		@RequestBody SearchRequest searchRequest,
+//  		Model model,
+//  		HttpServletRequest request) {
+//		
+//		searchRequest.cleanAndFormatFields();
+//		System.err.println(searchRequest);
+//		
+//		SearchResults results = search.search(searchRequest);
+//		model.addAttribute("results", results);
+//		
+//		System.err.println(results);
+//  	
+//  	return model;
+//  }
 	
 	
 //	@RequestMapping("/search")

@@ -22,6 +22,28 @@ a {
 }
 
 
+@keyframes spinner {
+  to {transform: rotate(360deg);}
+}
+ 
+#loader:before {
+  content: '';
+  box-sizing: border-box;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 64px;
+  height: 64px;
+  margin-top: -32px;
+  margin-left: -32px;
+  border-radius: 50%;
+  border: 2px solid #ccc;
+  border-top-color: #333;
+  animation: spinner 1.6s linear infinite;
+  background-color: #fff;
+}
+
+
 .small-headline {
 	font-size: 1rem;
 	display: block;
@@ -161,6 +183,8 @@ input:focus {
 }
 
 #content-area{
+	position: relative;
+	
 	padding-top: 2em;
 	padding-bottom: 2em;
 	background-color: #fff;

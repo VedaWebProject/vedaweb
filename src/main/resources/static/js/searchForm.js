@@ -56,16 +56,13 @@ function initSearchForm(){
 		// Get some values from elements on the page:
 		var $form = $(this);
 		var params = $form.serializeJSON();
-		console.log(JSON.stringify(params));
 		var url = $form.attr( "action" );
+		
+		//DEV
+		console.log(JSON.stringify(params));
 
-		// Send the data using post
-		var posting = $.post(url, params);
-
-		// Put the results in a div
-		posting.done(function(data) {
-			alert(data);
-		});
+		//send request, load response into content area
+		req(url, params);	//request.js
 	});
 	
 }
