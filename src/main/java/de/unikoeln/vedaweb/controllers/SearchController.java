@@ -38,8 +38,7 @@ public class SearchController {
 		SearchResults results = search.search(searchRequest);
 		model.addAttribute("results", results);
 		
-		System.err.println(results);
-    	
+//		System.err.println(results);
     	return "search";
     }
 	

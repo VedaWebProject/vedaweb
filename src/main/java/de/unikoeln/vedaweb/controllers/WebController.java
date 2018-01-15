@@ -20,4 +20,14 @@ public class WebController {
     }
 	
 	
+	@RequestMapping("/start")
+    public String start(
+    		Model model,
+    		HttpServletRequest request) {
+		
+		System.out.println("[INFO] called '/start', serving template 'start'.");
+    	return "start";
+    }
+	
+	
 }

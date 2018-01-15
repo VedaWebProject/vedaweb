@@ -1,5 +1,5 @@
 
-function req(url, params){
+function req(url, params, after){
 	//loader
 	$("body").append("<div id='loader'></div>");
 	
@@ -8,8 +8,18 @@ function req(url, params){
 
 	// Put the results in a div
 	posting.done(function(data) {
-		$("#loader").remove();
-		$("#content-area").html(data);
+		$("#loader").remove();				//remove spinner
+		$("#content-area").html(data);		//load content
+		$("#search-area").collapse("hide");	//collapse search area
 		initSidebarToggles();
+		
+		//scroll to top
+//		$('html, body').animate({
+//            scrollTop: 0
+//        }, 0);
+		
+		if (after instanceof Function){
+			after();
+		}
 	});
 }

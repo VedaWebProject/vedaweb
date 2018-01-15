@@ -5,11 +5,18 @@
 <body>
 
 
-
-	<div th:each="result : ${results}" >
-		<div th:text="${result}"></div>
+	<div class="col-12">
+	
+		<div th:each="result : ${results.getSortedResultsList()}"
+			 th:attr="data-url=${'/verse?id=' + result.getLocationId()}"
+			 class="search-result-link row">
+			
+			<div th:text="${result.getSearchBlock()}" class="col-3"></div>
+			<div th:text="${result.getScore()}" class="col-3"></div>
+			<div th:text="${result.getLocationId()}" class="col-3"></div>
+		</div>
+		
 	</div>
-
 
 
 

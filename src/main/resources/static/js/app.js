@@ -10,7 +10,7 @@ $( document ).ready(function() {
 	initSearchForm();					//init search form block functionality
 	
 	//initially load start page
-	//req("/start", null);
-	req("/verse?id=5a097fa933d6e732ace8e29c", null);
+	req("/start", null);
+//	req("/verse?id=5a097fa933d6e732ace8e29c", null);
 	
 });

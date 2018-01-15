@@ -178,6 +178,15 @@ a {
 	color: #887;
 }
 
+.search-result-link {
+	cursor: pointer;
+	
+}
+
+.search-result-link:hover {
+	background-color: #eed;
+}
+
 input:focus {
 	border: 1px solid rgba(0,0,0,.15);
 }
