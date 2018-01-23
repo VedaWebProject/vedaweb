@@ -1,4 +1,4 @@
-package de.unikoeln.vedaweb.search;
+package de.unikoeln.vedaweb.legacy;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
@@ -29,7 +29,7 @@ public class SearchResults {
 	}
 	
 	public boolean containsLocationId(String locationId){
-		return results.contains(new SearchResult(0, locationId, null));
+		return results.contains(new SearchResult(0, locationId, null, null));
 	}
 	
 	public boolean isEmpty(){

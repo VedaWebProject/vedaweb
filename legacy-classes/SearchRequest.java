@@ -1,4 +1,4 @@
-package de.unikoeln.vedaweb.search;
+package de.unikoeln.vedaweb.legacy;
 
 import java.util.ArrayList;
 import java.util.Collections;

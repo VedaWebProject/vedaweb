@@ -14,7 +14,7 @@ public class Token {
 	private String modus;
 	private String diathesis;
 	
-	private String lexicon;
+	private String dictionary;
 	
 	public Token(){
 		//...
@@ -100,12 +100,12 @@ public class Token {
 		this.diathesis = diathesis;
 	}
 
-	public String getLexicon() {
-		return lexicon;
+	public String getDictionary() {
+		return dictionary;
 	}
 
-	public void setLexicon(String lexicon) {
-		this.lexicon = lexicon;
+	public void setDictionary(String dictionary) {
+		this.dictionary = dictionary;
 	}
 	
 }

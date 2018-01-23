@@ -5,15 +5,16 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import de.unikoeln.vedaweb.data.VerseDocument;
 import de.unikoeln.vedaweb.data.VerseRepository;
-import de.unikoeln.vedaweb.search.SearchRequest;
 import de.unikoeln.vedaweb.search.SearchResults;
-import de.unikoeln.vedaweb.services.SearchService;
+import de.unikoeln.vedaweb.search.VWSearchRequest;
+import de.unikoeln.vedaweb.services.ElasticSearchService;
 
 
 
@@ -21,7 +22,7 @@ import de.unikoeln.vedaweb.services.SearchService;
 public class SearchController {
 	
 	@Autowired
-	private SearchService search;
+	private ElasticSearchService search;
 	
 	@Autowired
 	private VerseRepository verseRepo;
@@ -29,16 +30,13 @@ public class SearchController {
 	
 	@RequestMapping(value = "/search", method = RequestMethod.POST)
     public String searchView(
-    		SearchRequest searchRequest,
+    		@RequestBody VWSearchRequest searchRequest,
     		Model model,
     		HttpServletRequest request) {
-		
-		System.err.println(searchRequest);
 		
 		SearchResults results = search.search(searchRequest);
 		model.addAttribute("results", results);
 		
-//		System.err.println(results);
     	return "search";
     }
 	
@@ -89,28 +87,5 @@ public class SearchController {
 //    	return model;
 //    }
 	
-//	@RequestMapping("/search")
-//    public Model searchView(
-//    		@RequestParam String req,
-//    		Model model,
-//    		HttpServletRequest request) {
-//		
-//		ObjectMapper mapper = new ObjectMapper();
-//		SearchRequest sr = null;
-//		
-//		try {
-//			sr = mapper.readValue(Base64Utils.decodeFromString(req), SearchRequest.class);
-//		} catch (IOException e) {
-//			e.printStackTrace();
-//		}
-//		
-//		System.err.println(sr);
-//		sr.cleanAndFormatFields();
-//		System.err.println(sr);
-//		
-//		model.addAttribute("results", search.search(sr).getSortedResultsList());
-//    	
-//    	return model;
-//    }
 
 }

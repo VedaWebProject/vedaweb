@@ -1,4 +1,4 @@
-package de.unikoeln.vedaweb.services;
+package de.unikoeln.vedaweb.legacy;
 
 import java.io.IOException;
 import java.util.Map;
@@ -21,7 +21,7 @@ import de.unikoeln.vedaweb.search.SearchResult;
 import de.unikoeln.vedaweb.search.SearchResults;
 
 
-@Service
+//@Service
 public class SearchService {
 	
 	private static final int MAX_SEARCH_HITS = 1000000;

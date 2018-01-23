@@ -1,20 +1,21 @@
-package de.unikoeln.vedaweb.search;
+package de.unikoeln.vedaweb.legacy;
 import java.util.Map;
 
-import de.unikoeln.vedaweb.data.VerseDocument;
-
+import org.apache.lucene.document.Document;
 
 public class SearchResult implements Comparable<SearchResult>{
 	
 	private float score;
 	private String locationId;
-	private VerseDocument doc;
+	private Map<String, Object> searchBlock;
+	private Document doc;
 	
 	
-	public SearchResult(float score, String locationId, VerseDocument doc) {
+	public SearchResult(float score, String locationId, Map<String, Object> searchBlock, Document doc) {
 		super();
 		this.score = score;
 		this.locationId = locationId;
+		this.searchBlock = searchBlock;
 		this.doc = doc;
 	}
 
@@ -25,9 +26,9 @@ public class SearchResult implements Comparable<SearchResult>{
 	public String getLocationId() {
 		return locationId;
 	}
-	
-	public VerseDocument getDoc(){
-		return doc;
+
+	public Map<String, Object> getSearchBlock() {
+		return searchBlock;
 	}
 
 	@Override
@@ -49,7 +50,7 @@ public class SearchResult implements Comparable<SearchResult>{
 	
 	@Override
 	public String toString() {
-		return score + "\t" + locationId + "\t" + doc;
+		return score + "\t" + locationId + "\t" + searchBlock + "\t" + doc;
 	}
 	
 }

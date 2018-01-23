@@ -1,12 +1,13 @@
 package de.unikoeln.vedaweb.data;
 
 import java.util.List;
+import java.util.Map;
 
 public class Part {
 	
 	private Integer index;
 	private String form;
-	private List<Token> tokens;
+	private List<Map<String, Object>> tokens;
 	
 	public Part(){
 		//...
@@ -28,11 +29,11 @@ public class Part {
 		this.form = form;
 	}
 
-	public List<Token> getTokens() {
+	public List<Map<String, Object>> getTokens() {
 		return tokens;
 	}
 
-	public void setTokens(List<Token> tokens) {
+	public void setTokens(List<Map<String, Object>> tokens) {
 		this.tokens = tokens;
 	}
 	

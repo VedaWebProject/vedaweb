@@ -1,4 +1,4 @@
-package de.unikoeln.vedaweb.services;
+package de.unikoeln.vedaweb.legacy;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -23,7 +23,7 @@ import org.springframework.stereotype.Service;
 
 import com.mongodb.client.MongoCursor;
 
-@Service
+//@Service
 public class IndexService {
 	
 	private static final String INDEX_DIR_PATH = "index";
