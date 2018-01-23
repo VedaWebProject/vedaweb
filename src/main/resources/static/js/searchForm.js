@@ -55,11 +55,11 @@ function initSearchForm(){
 
 		// Get some values from elements on the page:
 		var $form = $(this);
-		var params = $form.serializeJSON();
+		var params = JSON.stringify($form.serializeJSON());
 		var url = $form.attr( "action" );
 		
 		//DEV
-		console.log(JSON.stringify(params));
+		console.log(params);
 
 		//send request, load response into content area,
 		//add click handlers to search results

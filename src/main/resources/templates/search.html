@@ -11,7 +11,7 @@
 			 th:attr="data-url=${'/verse?id=' + result.getLocationId()}"
 			 class="search-result-link row">
 			
-			<div th:text="${result.getSearchBlock()}" class="col-3"></div>
+			<div th:text="${result.getDoc()}" class="col-3"></div>
 			<div th:text="${result.getScore()}" class="col-3"></div>
 			<div th:text="${result.getLocationId()}" class="col-3"></div>
 		</div>

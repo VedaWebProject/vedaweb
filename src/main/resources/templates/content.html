@@ -4,16 +4,20 @@
 	<!-- CONTENT DEFAULT -->
 	<div class="index row justify-content-start">
 		<div class="col-auto">
-			Book: 01
+			Book:
+			<span th:text="${verse.book}"></span>
 		</div>
 	
 		<div class="col-auto">
-			Hymn: 001
+			Hymn:
+			<span th:text="${verse.hymn}"></span>
 		</div>
 	
 		<div class="col-auto">
 			Verse:
-			<span class="pagination-arrow">&ltrif;</span>01<span class="pagination-arrow">&rtrif;</span>
+			<a th:href="${'/verse?id=' + verse.id}"><span class="pagination-arrow">&ltrif;</span></a>
+			<span th:text="${verse.verse}"></span>
+			<a th:href="${'/verse?id=' + verse.id}"><span class="pagination-arrow">&rtrif;</span></a>
 		</div>
 	</div>
 	<br>
