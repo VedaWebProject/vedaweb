@@ -29,9 +29,9 @@ public class ElasticSearchService {
 	private ElasticService elastic;
 	
 	
-	public SearchResults search(Map<String, String> params){
-		return search(generateSearchRequest(params));
-	}
+//	public SearchResults search(Map<String, String> params){
+//		return search(generateSearchRequest(params));
+//	}
 	
 	
 	public SearchResults search(SeachFormData req){
@@ -85,21 +85,21 @@ public class ElasticSearchService {
 	}
 	
 	
-	private SeachFormData generateSearchRequest(Map<String, String> params) {
-		SeachFormData sr = new SeachFormData();
-		
-		for (String key : params.keySet()){
-			if (params.get(key).length() == 0){
-				continue;
-			} else if (params.get(key).equals("book") && params.get(key).matches("\\d+")){
-				sr.setBook(Integer.parseInt(params.get(key)));
-			} else if (params.get(key).equals("hymn") && params.get(key).matches("\\d+")){
-				sr.setHymn(Integer.parseInt(params.get(key)));
-			}
-		}
-		
-		return sr;
-	}
+//	private SeachFormData generateSearchRequest(Map<String, String> params) {
+//		SeachFormData sr = new SeachFormData();
+//		
+//		for (String key : params.keySet()){
+//			if (params.get(key).length() == 0){
+//				continue;
+//			} else if (params.get(key).equals("book") && params.get(key).matches("\\d+")){
+//				sr.setBook(Integer.parseInt(params.get(key)));
+//			} else if (params.get(key).equals("hymn") && params.get(key).matches("\\d+")){
+//				sr.setHymn(Integer.parseInt(params.get(key)));
+//			}
+//		}
+//		
+//		return sr;
+//	}
 	
 	
 	private SearchResults buildSearchResults(SearchResponse response){

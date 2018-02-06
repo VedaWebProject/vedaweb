@@ -29,11 +29,13 @@ public class SearchController {
 	
 	@RequestMapping(value = "/search", method = RequestMethod.POST)
     public String searchView(
-    		@RequestBody SeachFormData searchRequest,
+    		@RequestBody SeachFormData formData,
     		Model model,
     		HttpServletRequest request) {
 		
-		SearchResults results = search.search(searchRequest);
+		System.out.println(formData);
+		
+		SearchResults results = search.search(formData);
 		model.addAttribute("results", results);
 		
     	return "search";

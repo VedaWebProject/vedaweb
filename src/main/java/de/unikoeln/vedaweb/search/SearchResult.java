@@ -1,6 +1,4 @@
 package de.unikoeln.vedaweb.search;
-import java.util.Map;
-
 import de.unikoeln.vedaweb.data.VerseDocument;
 
 

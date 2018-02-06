@@ -61,15 +61,19 @@ public class SeachFormData {
 	}
 	
 	public void cleanAndFormatFields(){
+		//clean search blocks
 		for (Map<String, Object> block : blocks){
 			block.values().removeAll(Collections.singleton(""));
 			for (String field : block.keySet()){
 				if (block.get(field) instanceof String
-						&& ((String)block.get(field)).matches("\\d+")){
+						&& ((String)block.get(field)).matches("-?\\d+")){
 					block.put(field, Integer.parseInt(((String)block.get(field))));
 				}
 			}
 		}
+		//clean search scope
+		book = book > 0 ? book : -1;
+		hymn = hymn > 0 ? hymn : -1;
 	}
 	
 }
