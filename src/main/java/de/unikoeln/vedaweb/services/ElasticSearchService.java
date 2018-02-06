@@ -7,7 +7,6 @@ import org.apache.lucene.search.join.ScoreMode;
 import org.elasticsearch.action.search.SearchRequest;
 import org.elasticsearch.action.search.SearchResponse;
 import org.elasticsearch.index.query.BoolQueryBuilder;
-import org.elasticsearch.index.query.NestedQueryBuilder;
 import org.elasticsearch.index.query.QueryBuilders;
 import org.elasticsearch.index.query.RangeQueryBuilder;
 import org.elasticsearch.search.SearchHit;
@@ -28,11 +27,6 @@ public class ElasticSearchService {
 	
 	@Autowired
 	private ElasticService elastic;
-	
-	
-//	public SearchResults search(Map<String, String> params){
-//		return search(generateSearchRequest(params));
-//	}
 	
 	
 	public SearchResults search(SeachFormData formData){
@@ -110,23 +104,6 @@ public class ElasticSearchService {
 			rootQuery.must(QueryBuilders.nestedQuery("tokens", bool, ScoreMode.Avg));
 		}
 	}
-	
-	
-//	private SeachFormData generateSearchRequest(Map<String, String> params) {
-//		SeachFormData sr = new SeachFormData();
-//		
-//		for (String key : params.keySet()){
-//			if (params.get(key).length() == 0){
-//				continue;
-//			} else if (params.get(key).equals("book") && params.get(key).matches("\\d+")){
-//				sr.setBook(Integer.parseInt(params.get(key)));
-//			} else if (params.get(key).equals("hymn") && params.get(key).matches("\\d+")){
-//				sr.setHymn(Integer.parseInt(params.get(key)));
-//			}
-//		}
-//		
-//		return sr;
-//	}
 	
 	
 	private SearchResults buildSearchResults(SearchResponse response){

@@ -56,35 +56,4 @@ public class SearchController {
     }
 	
 	
-//	@RequestMapping(value = "/search", method = RequestMethod.GET)
-//  public Model searchView(
-//  		@RequestBody SearchRequest searchRequest,
-//  		Model model,
-//  		HttpServletRequest request) {
-//		
-//		searchRequest.cleanAndFormatFields();
-//		System.err.println(searchRequest);
-//		
-//		SearchResults results = search.search(searchRequest);
-//		model.addAttribute("results", results);
-//		
-//		System.err.println(results);
-//  	
-//  	return model;
-//  }
-	
-	
-//	@RequestMapping("/search")
-//    public Model searchView(
-//    		@RequestParam Map<String, String> params,
-//    		Model model,
-//    		HttpServletRequest request) {
-//		
-//		System.err.println(params);
-//		model.addAttribute("results", search.search(params));
-//    	
-//    	return model;
-//    }
-	
-
 }
