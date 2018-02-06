@@ -15,9 +15,9 @@
 	
 		<div class="col-auto">
 			Verse:
-			<a th:href="${'/verse?id=' + verse.id}"><span class="pagination-arrow">&ltrif;</span></a>
+			<a th:href="${'/verse?index=' + verse.index + '&mod=' + '-1'}"><span class="pagination-arrow">&ltrif;</span></a>
 			<span th:text="${verse.verse}"></span>
-			<a th:href="${'/verse?id=' + verse.id}"><span class="pagination-arrow">&rtrif;</span></a>
+			<a th:href="${'/verse?index=' + verse.index + '&mod=' + '1'}"><span class="pagination-arrow">&rtrif;</span></a>
 		</div>
 	</div>
 	<br>

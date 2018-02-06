@@ -64,7 +64,7 @@ function initSearchForm(){
 		//send request, load response into content area,
 		//add click handlers to search results
 		req(url, params, function(){
-			$(".search-result-link").click(function(){
+			$("[data-url]").click(function(){
 				req($(this).attr("data-url"), null);
 			});
 		});	//request.js

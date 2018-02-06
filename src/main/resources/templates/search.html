@@ -8,12 +8,12 @@
 	<div class="col-12">
 	
 		<div th:each="result : ${results.getSortedResultsList()}"
-			 th:attr="data-url=${'/verse?id=' + result.getLocationId()}"
+			 th:attr="data-url=${'/verse?index=' + result.doc.index}"
 			 class="search-result-link row">
 			
-			<div th:text="${result.getDoc()}" class="col-3"></div>
-			<div th:text="${result.getScore()}" class="col-3"></div>
-			<div th:text="${result.getLocationId()}" class="col-3"></div>
+			<div th:text="${result.doc}" class="col-3"></div>
+			<div th:text="${result.score}" class="col-3"></div>
+			<div th:text="${result.locationId}" class="col-3"></div>
 		</div>
 		
 	</div>

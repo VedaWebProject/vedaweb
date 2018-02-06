@@ -6,5 +6,6 @@ public interface VerseRepository extends MongoRepository<VerseDocument, String> 
 
     public VerseDocument findById(String id);
     public VerseDocument findByIndex(String index);
+    public VerseDocument findByBookAndHymnAndVerse(Integer book, Integer Hymn, Integer verse);
 
 }

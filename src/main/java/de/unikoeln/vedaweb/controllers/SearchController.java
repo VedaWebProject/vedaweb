@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import de.unikoeln.vedaweb.data.VerseDocument;
 import de.unikoeln.vedaweb.data.VerseRepository;
 import de.unikoeln.vedaweb.search.SearchResults;
 import de.unikoeln.vedaweb.search.VWSearchRequest;
@@ -43,16 +42,14 @@ public class SearchController {
 	
 	@RequestMapping("/verse")
     public String verse(
-    		@RequestParam String id,
+    		@RequestParam String index,
+    		@RequestParam(required=false) Integer mod,
     		Model model,
     		HttpServletRequest request) {
 		
-		VerseDocument verse = verseRepo.findById(id);
-		System.out.println(verse);
+		model.addAttribute("verse", verseRepo.findByIndex(index));
 		
-		model.addAttribute("verse", verse);
-		
-		System.out.println("[INFO] called '/verse', serving template 'verse'.");
+		System.out.println("[INFO] called '/verse', serving template 'content'.");
     	return "content";
     }
 	
