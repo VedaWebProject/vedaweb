@@ -17,7 +17,7 @@ import org.springframework.stereotype.Service;
 import de.unikoeln.vedaweb.data.VerseRepository;
 import de.unikoeln.vedaweb.search.SearchResult;
 import de.unikoeln.vedaweb.search.SearchResults;
-import de.unikoeln.vedaweb.search.VWSearchRequest;
+import de.unikoeln.vedaweb.search.SeachFormData;
 
 @Service
 public class ElasticSearchService {
@@ -34,7 +34,7 @@ public class ElasticSearchService {
 	}
 	
 	
-	public SearchResults search(VWSearchRequest req){
+	public SearchResults search(SeachFormData req){
 		req.cleanAndFormatFields();
 		System.out.println(req);
 		
@@ -54,7 +54,7 @@ public class ElasticSearchService {
 	}
 	
 	
-	private SearchRequest buildSearchRequest(VWSearchRequest req){
+	private SearchRequest buildSearchRequest(SeachFormData req){
 		SearchRequest searchRequest = new SearchRequest("vedaweb"); 
 		searchRequest.types("doc");
 		SearchSourceBuilder searchSourceBuilder = new SearchSourceBuilder(); 
@@ -85,8 +85,8 @@ public class ElasticSearchService {
 	}
 	
 	
-	private VWSearchRequest generateSearchRequest(Map<String, String> params) {
-		VWSearchRequest sr = new VWSearchRequest();
+	private SeachFormData generateSearchRequest(Map<String, String> params) {
+		SeachFormData sr = new SeachFormData();
 		
 		for (String key : params.keySet()){
 			if (params.get(key).length() == 0){
