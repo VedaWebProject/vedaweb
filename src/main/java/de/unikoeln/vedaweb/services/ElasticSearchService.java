@@ -18,7 +18,7 @@ import de.unikoeln.vedaweb.data.VerseRepository;
 import de.unikoeln.vedaweb.search.SearchResult;
 import de.unikoeln.vedaweb.search.SearchResults;
 import de.unikoeln.vedaweb.search.QueryBuilder;
-import de.unikoeln.vedaweb.search.SeachFormData;
+import de.unikoeln.vedaweb.search.SearchFormData;
 
 @Service
 public class ElasticSearchService {
@@ -30,7 +30,7 @@ public class ElasticSearchService {
 	private ElasticService elastic;
 	
 	
-	public SearchResults search(SeachFormData formData){
+	public SearchResults search(SearchFormData formData){
 		formData.cleanAndFormatFields();
 		System.out.println(formData);
 		

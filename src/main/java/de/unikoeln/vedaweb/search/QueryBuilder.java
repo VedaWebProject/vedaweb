@@ -12,7 +12,7 @@ import org.elasticsearch.search.builder.SearchSourceBuilder;
 public class QueryBuilder {
 	
 	
-	public static SearchRequest build(SeachFormData formData){
+	public static SearchRequest build(SearchFormData formData){
 		SearchRequest searchRequest = new SearchRequest("vedaweb"); 
 		searchRequest.types("doc");
 		SearchSourceBuilder searchSourceBuilder = new SearchSourceBuilder(); 
@@ -34,7 +34,7 @@ public class QueryBuilder {
 	}
 	
 	
-	private static void addScopeQueries(BoolQueryBuilder rootQuery, SeachFormData formData){
+	private static void addScopeQueries(BoolQueryBuilder rootQuery, SearchFormData formData){
 		//check if book scope is set
 		if (formData.getScopeBook() < 1) return;
 		
@@ -55,7 +55,7 @@ public class QueryBuilder {
 	}
 	
 	
-	private static void addBlockQueries(BoolQueryBuilder rootQuery, SeachFormData formData){
+	private static void addBlockQueries(BoolQueryBuilder rootQuery, SearchFormData formData){
 		//iterate search blocks
 		for (Map<String, Object> block : formData.getBlocks()){
 			//construct bool query for each block

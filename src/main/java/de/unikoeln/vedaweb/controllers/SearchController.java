@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import de.unikoeln.vedaweb.data.VerseRepository;
 import de.unikoeln.vedaweb.search.SearchResults;
-import de.unikoeln.vedaweb.search.SeachFormData;
+import de.unikoeln.vedaweb.search.SearchFormData;
 import de.unikoeln.vedaweb.services.ElasticSearchService;
 
 
@@ -29,7 +29,7 @@ public class SearchController {
 	
 	@RequestMapping(value = "/search", method = RequestMethod.POST)
     public String searchView(
-    		@RequestBody SeachFormData formData,
+    		@RequestBody SearchFormData formData,
     		Model model,
     		HttpServletRequest request) {
 		

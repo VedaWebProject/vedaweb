@@ -8,7 +8,7 @@ import java.util.Map;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 
-public class SeachFormData {
+public class SearchFormData {
 	
 	private int book;
 	private int hymn;
@@ -17,7 +17,7 @@ public class SeachFormData {
 	private List<Map<String, Object>> blocks;
 
 	
-	public SeachFormData(){
+	public SearchFormData(){
 		blocks = new ArrayList<Map<String, Object>>();
 		this.book = -1;
 		this.hymn = -1;
