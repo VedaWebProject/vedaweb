@@ -9,7 +9,7 @@ import org.elasticsearch.index.query.QueryBuilders;
 import org.elasticsearch.index.query.RangeQueryBuilder;
 import org.elasticsearch.search.builder.SearchSourceBuilder;
 
-public class QueryBuilder {
+public class SearchRequestBuilder {
 	
 	
 	public static SearchRequest build(SearchFormData formData){

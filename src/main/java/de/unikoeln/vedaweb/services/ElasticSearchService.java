@@ -17,7 +17,7 @@ import org.springframework.stereotype.Service;
 import de.unikoeln.vedaweb.data.VerseRepository;
 import de.unikoeln.vedaweb.search.SearchResult;
 import de.unikoeln.vedaweb.search.SearchResults;
-import de.unikoeln.vedaweb.search.QueryBuilder;
+import de.unikoeln.vedaweb.search.SearchRequestBuilder;
 import de.unikoeln.vedaweb.search.SearchFormData;
 
 @Service
@@ -34,7 +34,7 @@ public class ElasticSearchService {
 		formData.cleanAndFormatFields();
 		System.out.println(formData);
 		
-		SearchRequest searchRequest = QueryBuilder.build(formData);
+		SearchRequest searchRequest = SearchRequestBuilder.build(formData);
 		SearchResponse searchResponse = null;
 		
 		try {
