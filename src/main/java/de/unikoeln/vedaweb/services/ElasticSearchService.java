@@ -9,6 +9,7 @@ import org.elasticsearch.action.search.SearchResponse;
 import org.elasticsearch.index.query.BoolQueryBuilder;
 import org.elasticsearch.index.query.NestedQueryBuilder;
 import org.elasticsearch.index.query.QueryBuilders;
+import org.elasticsearch.index.query.RangeQueryBuilder;
 import org.elasticsearch.search.SearchHit;
 import org.elasticsearch.search.builder.SearchSourceBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,11 +35,11 @@ public class ElasticSearchService {
 //	}
 	
 	
-	public SearchResults search(SeachFormData req){
-		req.cleanAndFormatFields();
-		System.out.println(req);
+	public SearchResults search(SeachFormData formData){
+		formData.cleanAndFormatFields();
+		System.out.println(formData);
 		
-		SearchRequest searchRequest = buildSearchRequest(req);
+		SearchRequest searchRequest = buildSearchRequest(formData);
 		SearchResponse searchResponse = null;
 		
 		try {
@@ -54,17 +55,19 @@ public class ElasticSearchService {
 	}
 	
 	
-	private SearchRequest buildSearchRequest(SeachFormData req){
+	private SearchRequest buildSearchRequest(SeachFormData formData){
 		SearchRequest searchRequest = new SearchRequest("vedaweb"); 
 		searchRequest.types("doc");
 		SearchSourceBuilder searchSourceBuilder = new SearchSourceBuilder(); 
 		
-		//parent bool query
+		//root bool query
 		BoolQueryBuilder bool = QueryBuilders.boolQuery();
 		
-		for (Map<String, Object> block : req.getBlocks()){
-			bool.must(buildQueryForSearchBlock(block));
-		}
+		//add search block queries
+		addBlockQueries(bool, formData);
+		
+		//add search scope queries
+		addScopeQueries(bool, formData);
 		
 		searchSourceBuilder.query(bool);
 		System.out.println("\n\n" + searchSourceBuilder.toString() + "\n\n");
@@ -74,14 +77,38 @@ public class ElasticSearchService {
 	}
 	
 	
-	private NestedQueryBuilder buildQueryForSearchBlock(Map<String, Object> block){
-		BoolQueryBuilder bool = QueryBuilders.boolQuery();
+	private void addScopeQueries(BoolQueryBuilder rootQuery, SeachFormData formData){
+		//check if book scope is set
+		if (formData.getScopeBook() < 1) return;
 		
-		for (String key : block.keySet()){
-			bool.must(QueryBuilders.matchQuery("tokens." + key, block.get(key)));
+		//construct book scope query
+		RangeQueryBuilder bookRange = QueryBuilders.rangeQuery("book_nr");
+		bookRange.gte(formData.getScopeBook());
+		bookRange.lte(formData.getScopeBook());
+		rootQuery.must(bookRange);
+		
+		//check if hymn scope is set
+		if (formData.getScopeHymn() < 1) return;
+		
+		//construct book scope query
+		RangeQueryBuilder hymnRange = QueryBuilders.rangeQuery("hymn_nr");
+		hymnRange.gte(formData.getScopeHymn());
+		hymnRange.lte(formData.getScopeHymn());
+		rootQuery.must(hymnRange);
+	}
+	
+	
+	private void addBlockQueries(BoolQueryBuilder rootQuery, SeachFormData formData){
+		//iterate search blocks
+		for (Map<String, Object> block : formData.getBlocks()){
+			//construct bool query for each block
+			BoolQueryBuilder bool = QueryBuilders.boolQuery();
+			for (String key : block.keySet()){
+				bool.must(QueryBuilders.matchQuery("tokens." + key, block.get(key)));
+			}
+			//wrap in nested query, add to root query
+			rootQuery.must(QueryBuilders.nestedQuery("tokens", bool, ScoreMode.Avg));
 		}
-		
-		return QueryBuilders.nestedQuery("tokens", bool, ScoreMode.Avg);
 	}
 	
 	
