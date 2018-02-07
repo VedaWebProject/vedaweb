@@ -1,0 +1,18 @@
+.navbar {
+    background-color: #931111;
+    padding: 0px;
+}
+
+span.app-title {
+    padding-right: 20px;
+    font-size: 1.2em;
+    color: #fff;
+}
+
+img.logo {
+    height: 50px;
+}
+
+.icon-search {
+    color: #fff;
+}
