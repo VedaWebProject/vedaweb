@@ -1,0 +1,14 @@
+.footer-box {
+    cursor: pointer;
+    filter: opacity(0.6);
+    transition: .2s;
+}
+
+.footer-box:hover {
+    filter: unset;
+}
+
+.footer-box img {
+    width: 100px;
+}
+
