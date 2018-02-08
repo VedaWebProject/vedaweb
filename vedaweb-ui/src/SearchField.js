@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import { Grid, Dropdown, Icon } from 'semantic-ui-react';
 
+import './SearchBlock.css'
+
 class SearchField extends Component {
 
     /**
@@ -17,6 +19,12 @@ class SearchField extends Component {
             fieldName: null,
             fieldValue: null
         };
+
+        this.onRemove = this.onRemove.bind(this);
+    }
+
+    onRemove(e){
+        this.props.onClick(this);
     }
 
     render() {
@@ -28,7 +36,7 @@ class SearchField extends Component {
 
                 <Grid.Column width="7">
                     <Dropdown
-                        placeholder='Select...'
+                        placeholder='Select attribute...'
                         options={options}
                         onChange={(e,{value})=>this.setState({fieldName: value})}
                         selection
@@ -38,7 +46,7 @@ class SearchField extends Component {
 
                 <Grid.Column width="7">
                     <Dropdown
-                        placeholder='Select...'
+                        placeholder='Select value...'
                         options={options}
                         onChange={(e,{value})=>this.setState({fieldValue: value})}
                         selection
@@ -46,8 +54,15 @@ class SearchField extends Component {
                         search />
                 </Grid.Column>
 
-                <Grid.Column width="2">
-                    <Icon name="minus circle" size="big" onClick={this.props.onClickRemove(this)} link/>
+                <Grid.Column width="2" verticalAlign="middle">
+                    {this.props.removable &&
+                        <Icon
+                            name="remove"
+                            size="large"
+                            onClick={this.onRemove}
+                            color="grey"
+                            link />
+                    }
                 </Grid.Column>
 
             </Grid.Row>

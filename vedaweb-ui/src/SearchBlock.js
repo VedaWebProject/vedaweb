@@ -13,18 +13,24 @@ class SearchBlock extends Component {
             searchFields: []
         };
 
+        this.addField = this.addField.bind(this);
         this.removeField = this.removeField.bind(this);
     }
 
+    componentDidMount(){
+        this.addField();
+    }
+
     addField(){
+        var fid = Date.now();
         this.setState({
-            searchFields : this.state.searchFields.concat(<SearchField onClickRemove={(f) => this.removeField(f)} />)
+            searchFields : this.state.searchFields.concat({'fieldId': fid})
         });
     }
 
-    removeField(toRemove){
+    removeField(f){
         this.setState({
-            searchFields: this.state.searchFields.filter(field => field !== toRemove)
+            searchFields: this.state.searchFields.filter(field => field.fieldId !== f.props.fieldId)
         });
     }
 
@@ -33,11 +39,17 @@ class SearchBlock extends Component {
             
             <Grid>
                 
-                {this.state.searchFields}
+                {this.state.searchFields.map(field => (
+                    <SearchField
+                        fieldId={field.fieldId}
+                        key={field.fieldId}
+                        onClick={this.removeField}
+                        removable={this.state.searchFields.length > 1} />
+                ))}
 
                 <Grid.Row>
-                    <Grid.Column width="8" textAlign="center" verticalAlign="middle">
-                        <Icon name="add circle" size="big" onClick={this.addField.bind(this)} link/>
+                    <Grid.Column width="8" verticalAlign="middle">
+                        <Icon name="plus" size="large" onClick={this.addField} link/>
                     </Grid.Column>
                 </Grid.Row>
 
