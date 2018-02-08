@@ -11,8 +11,10 @@ span.app-title {
 
 img.logo {
     height: 50px;
+    padding-right: 20px;
 }
 
 .icon-search {
     color: #fff;
+    padding-left: 20px;
 }

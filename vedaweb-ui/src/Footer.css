@@ -9,6 +9,9 @@
 }
 
 .footer-box img {
-    width: 100px;
+    width: 80px;
 }
 
+.footer-box a, .footer-box a:link, .footer-box a:visited, .footer-box a:hover {
+    color: #262626;
+}

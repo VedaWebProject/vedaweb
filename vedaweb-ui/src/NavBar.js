@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { Grid, Image, Icon } from 'semantic-ui-react';
 import logo from "./img/logo_white.png";
-import searchIcon from "./img/icon-search.png";
 import "./NavBar.css";
 
 class NavBar extends Component {
@@ -11,7 +10,7 @@ class NavBar extends Component {
             
             <Grid.Row className="navbar">
                 <Grid.Column width="2" verticalAlign="middle">
-                    <Icon name="search" size="big" className="icon-search" />
+                    <Icon name="search" size="big" className="icon-search" link />
                 </Grid.Column>
 
                 <Grid.Column width="14" textAlign="right">

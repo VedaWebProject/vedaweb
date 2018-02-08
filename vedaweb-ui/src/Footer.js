@@ -13,27 +13,33 @@ class Footer extends Component {
     render() {
         return (
             
-            <Grid.Row className="footer" relaxed centered>
-                <Grid.Column width="2" textAlign="center" verticalAlign='middle' className="footer-box">
-                    <a href="http://blaaaa" target="_blank">
-                        <Image src={logoCPDO} centered /><br/>
-                        Dings
+            <Grid.Row className="footer" centered>
+                <Grid.Column width="2" textAlign="center" className="footer-box">
+                    <a href="http://c-salt.uni-koeln.de" target="_blank" rel="noopener noreferrer">
+                        <Image src={logoCSALT} centered /><br/>
+                        CSALT
                     </a>
                 </Grid.Column>
 
-                <Grid.Column width="2" textAlign="center" verticalAlign='middle' className="footer-box">
-                    <Image src={logoCSALT} centered /><br/>
-                    CSALT
+                <Grid.Column width="2" textAlign="center" className="footer-box">
+                    <a href="http://sanskrit-lexicon.uni-koeln.de" target="_blank" rel="noopener noreferrer">
+                        <Image src={logoCSL} centered /><br/>
+                        Cologne Sanskrit Lexicon
+                    </a>
                 </Grid.Column>
 
-                <Grid.Column width="2" textAlign="center" verticalAlign='middle' className="footer-box">
-                    <Image src={logoCSL} centered /><br/>
-                    CSL
+                <Grid.Column width="2" textAlign="center" className="footer-box">
+                    <a href="http://sanskrit-lexicon.uni-koeln.de/csl" target="_blank" rel="noopener noreferrer">
+                        <Image src={logoTCSL} centered /><br/>
+                        TEI Cologne Sanskrit Lexicon
+                    </a>
                 </Grid.Column>
 
-                <Grid.Column width="2" textAlign="center" verticalAlign='middle' className="footer-box">
-                    <Image src={logoTCSL} centered /><br/>
-                    TCSL
+                <Grid.Column width="2" textAlign="center" className="footer-box">
+                    <a href="http://cpd.uni-koeln.de" target="_blank" rel="noopener noreferrer">
+                        <Image src={logoCPDO} centered /><br/>
+                        Critical Pāli Dictionary Online
+                    </a>
                 </Grid.Column>
             </Grid.Row>
             
