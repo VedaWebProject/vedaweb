@@ -5,6 +5,8 @@ import App from './App';
 import registerServiceWorker from './registerServiceWorker';
 import 'semantic-ui-css/semantic.min.css';
 
+document.body.style.backgroundColor = '#eed';
+
 //render app
 ReactDOM.render(<App />, document.getElementById('root'));
 registerServiceWorker();
