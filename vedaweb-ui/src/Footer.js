@@ -13,35 +13,37 @@ class Footer extends Component {
     render() {
         return (
             
-            <Grid.Row className="footer" centered>
-                <Grid.Column width="2" textAlign="center" className="footer-box">
-                    <a href="http://c-salt.uni-koeln.de" target="_blank" rel="noopener noreferrer">
-                        <Image src={logoCSALT} centered /><br/>
-                        CSALT
-                    </a>
-                </Grid.Column>
+            <Grid padded>
+                <Grid.Row className="footer" centered>
+                    <Grid.Column width="2" textAlign="center" className="footer-box">
+                        <a href="http://c-salt.uni-koeln.de" target="_blank" rel="noopener noreferrer">
+                            <Image src={logoCSALT} centered /><br/>
+                            CSALT
+                        </a>
+                    </Grid.Column>
 
-                <Grid.Column width="2" textAlign="center" className="footer-box">
-                    <a href="http://sanskrit-lexicon.uni-koeln.de" target="_blank" rel="noopener noreferrer">
-                        <Image src={logoCSL} centered /><br/>
-                        Cologne Sanskrit Lexicon
-                    </a>
-                </Grid.Column>
+                    <Grid.Column width="2" textAlign="center" className="footer-box">
+                        <a href="http://sanskrit-lexicon.uni-koeln.de" target="_blank" rel="noopener noreferrer">
+                            <Image src={logoCSL} centered /><br/>
+                            Cologne Sanskrit Lexicon
+                        </a>
+                    </Grid.Column>
 
-                <Grid.Column width="2" textAlign="center" className="footer-box">
-                    <a href="http://sanskrit-lexicon.uni-koeln.de/csl" target="_blank" rel="noopener noreferrer">
-                        <Image src={logoTCSL} centered /><br/>
-                        TEI Cologne Sanskrit Lexicon
-                    </a>
-                </Grid.Column>
+                    <Grid.Column width="2" textAlign="center" className="footer-box">
+                        <a href="http://sanskrit-lexicon.uni-koeln.de/csl" target="_blank" rel="noopener noreferrer">
+                            <Image src={logoTCSL} centered /><br/>
+                            TEI Cologne Sanskrit Lexicon
+                        </a>
+                    </Grid.Column>
 
-                <Grid.Column width="2" textAlign="center" className="footer-box">
-                    <a href="http://cpd.uni-koeln.de" target="_blank" rel="noopener noreferrer">
-                        <Image src={logoCPDO} centered /><br/>
-                        Critical Pāli Dictionary Online
-                    </a>
-                </Grid.Column>
-            </Grid.Row>
+                    <Grid.Column width="2" textAlign="center" className="footer-box">
+                        <a href="http://cpd.uni-koeln.de" target="_blank" rel="noopener noreferrer">
+                            <Image src={logoCPDO} centered /><br/>
+                            Critical Pāli Dictionary Online
+                        </a>
+                    </Grid.Column>
+                </Grid.Row>
+            </Grid>
             
         );
     }
