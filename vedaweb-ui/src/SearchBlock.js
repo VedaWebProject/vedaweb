@@ -1,7 +1,9 @@
 import React, { Component } from "react";
-import { Grid, Icon } from 'semantic-ui-react';
+import { Grid, Button, Icon } from 'semantic-ui-react';
 
 import SearchField from "./SearchField";
+
+import './SearchBlock.css'
 
 
 class SearchBlock extends Component {
@@ -36,25 +38,21 @@ class SearchBlock extends Component {
 
     render() {
         return (
-            
-            <Grid>
-                
-                {this.state.searchFields.map(field => (
-                    <SearchField
+
+                <Grid className="search-block">
+                    
+                    {this.state.searchFields.map((field, i) => (
+                        <SearchField
                         fieldId={field.fieldId}
                         key={field.fieldId}
-                        onClick={this.removeField}
-                        removable={this.state.searchFields.length > 1} />
-                ))}
+                        onClickRemove={this.removeField}
+                        onClickAdd={this.addField}
+                        isRemovable={this.state.searchFields.length > 1}
+                        isLastField={this.state.searchFields.length < 4 && this.state.searchFields.length === i + 1} />
+                    ))}
 
-                <Grid.Row>
-                    <Grid.Column width="8" verticalAlign="middle">
-                        <Icon name="plus" size="large" onClick={this.addField} link/>
-                    </Grid.Column>
-                </Grid.Row>
-
-            </Grid>
-
+                </Grid>
+            
         );
     }
 }

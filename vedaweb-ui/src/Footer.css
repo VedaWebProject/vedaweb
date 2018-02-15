@@ -1,3 +1,7 @@
+.footer {
+    margin-top: 20px;
+}
+
 .footer-box {
     cursor: pointer;
     filter: opacity(0.6);

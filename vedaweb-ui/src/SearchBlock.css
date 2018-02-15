@@ -1,0 +1,11 @@
+.search-block .row {
+    padding-top: .3rem !important;
+    padding-bottom: .3rem !important;
+}
+
+.search-block {
+    padding-top: .5rem !important;
+    padding-bottom: .5rem !important;
+    background-color: #eed;
+    border-bottom: 1px solid #ccb;
+}

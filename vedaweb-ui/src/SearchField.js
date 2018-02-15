@@ -1,7 +1,7 @@
 import React, { Component } from "react";
-import { Grid, Dropdown, Icon } from 'semantic-ui-react';
+import { Grid, Dropdown, Button, Icon } from 'semantic-ui-react';
 
-import './SearchBlock.css'
+import './SearchField.css'
 
 class SearchField extends Component {
 
@@ -17,51 +17,96 @@ class SearchField extends Component {
         //TODO: change defaults
         this.state = {
             fieldName: null,
-            fieldValue: null
+            fieldValue: null,
+            fieldNameOptions: [{ text: 'Case', value: 'casus' },{ text: 'Mode', value: 'modus' }],
+            fieldValueOptions: [],
+            isLoaded: true
         };
 
         this.onRemove = this.onRemove.bind(this);
     }
 
+    onChangeFieldName(value){
+
+        this.setState({
+            isLoaded: false,
+            fieldName: value.value
+        });
+        
+        fetch("/data/grammar/" + value.value)
+        .then(res => res.json())
+        .then(
+            (result) => {
+
+            var valueOptions = result.values.map(function(val) {
+                return {
+                    text: val,
+                    value: val
+                };
+            });
+
+            this.setState({
+                isLoaded: true,
+                fieldValueOptions: valueOptions
+            });
+            },
+            // Note: it's important to handle errors here
+            // instead of a catch() block so that we don't swallow
+            // exceptions from actual bugs in components.
+            (error) => {
+            this.setState({
+                isLoaded: true,
+                error
+            });
+            }
+        )
+    }
+
     onRemove(e){
-        this.props.onClick(this);
+        this.props.onClickRemove(this);
     }
 
     render() {
-        var options = [{ text: 'Case', value: 'case' },{ text: 'Mode', value: 'mode' }];
 
         return (
             
             <Grid.Row>
-
-                <Grid.Column width="7">
+                
+                <Grid.Column width="6">
                     <Dropdown
-                        placeholder='Select attribute...'
-                        options={options}
-                        onChange={(e,{value})=>this.setState({fieldName: value})}
+                        placeholder='Attribute...'
+                        options={this.state.fieldNameOptions}
+                        onChange={(e,{value})=>this.onChangeFieldName({value})}
                         selection
                         fluid
                         search />
                 </Grid.Column>
 
-                <Grid.Column width="7">
+                <Grid.Column width="6">
                     <Dropdown
-                        placeholder='Select value...'
-                        options={options}
+                        placeholder='Value...'
+                        options={this.state.fieldValueOptions}
                         onChange={(e,{value})=>this.setState({fieldValue: value})}
                         selection
                         fluid
-                        search />
+                        search
+                        disabled = {this.state.fieldValueOptions.length === 0}
+                        loading = {!this.state.isLoaded} />
                 </Grid.Column>
 
-                <Grid.Column width="2" verticalAlign="middle">
-                    {this.props.removable &&
-                        <Icon
-                            name="remove"
-                            size="large"
-                            onClick={this.onRemove}
-                            color="grey"
-                            link />
+                <Grid.Column width="2">
+                    {this.props.isRemovable &&
+                        <Button onClick={this.onRemove} basic fluid icon>
+                            <Icon name='trash outline'/>
+                        </Button>
+                    }
+                </Grid.Column>
+
+                <Grid.Column width="2">
+                    {this.props.isLastField &&
+                        <Button onClick={this.props.onClickAdd} basic fluid icon>
+                            <Icon name='add' />
+                        </Button>
                     }
                 </Grid.Column>
 
@@ -70,5 +115,7 @@ class SearchField extends Component {
         );
     }
 }
+
+//onChange={(e,{value})=>this.setState({fieldName: value})}
 
 export default SearchField;
