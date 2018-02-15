@@ -3,22 +3,17 @@ package de.unikoeln.vedaweb.services;
 import java.io.IOException;
 import java.util.Map;
 
-import org.apache.lucene.search.join.ScoreMode;
 import org.elasticsearch.action.search.SearchRequest;
 import org.elasticsearch.action.search.SearchResponse;
-import org.elasticsearch.index.query.BoolQueryBuilder;
-import org.elasticsearch.index.query.QueryBuilders;
-import org.elasticsearch.index.query.RangeQueryBuilder;
 import org.elasticsearch.search.SearchHit;
-import org.elasticsearch.search.builder.SearchSourceBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import de.unikoeln.vedaweb.data.VerseRepository;
+import de.unikoeln.vedaweb.search.SearchFormData;
+import de.unikoeln.vedaweb.search.SearchRequestBuilder;
 import de.unikoeln.vedaweb.search.SearchResult;
 import de.unikoeln.vedaweb.search.SearchResults;
-import de.unikoeln.vedaweb.search.SearchRequestBuilder;
-import de.unikoeln.vedaweb.search.SearchFormData;
 
 @Service
 public class ElasticSearchService {
@@ -34,19 +29,19 @@ public class ElasticSearchService {
 		formData.cleanAndFormatFields();
 		System.out.println(formData);
 		
-		SearchRequest searchRequest = SearchRequestBuilder.build(formData);
-		SearchResponse searchResponse = null;
-		
-		try {
-			searchResponse = elastic.client().search(searchRequest);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		
+		SearchRequest searchRequest = SearchRequestBuilder.buildAdvanced(formData);
+		SearchResponse searchResponse = search(searchRequest);
 		System.out.println(searchResponse);
 		SearchResults searchResults = buildSearchResults(searchResponse);
 		
 		return searchResults;
+	}
+	
+	
+	public String aggregateGrammarField(String field){
+		SearchRequest searchRequest = SearchRequestBuilder.buildAggregationFor(field);
+		SearchResponse searchResponse = search(searchRequest);
+		return searchResponse.toString();
 	}
 	
 	
@@ -56,6 +51,17 @@ public class ElasticSearchService {
 			results.add(new SearchResult(hit.getScore(), hit.getId(), verseRepo.findById(hit.getId())));
 		}
 		return results;
+	}
+	
+	
+	private SearchResponse search(SearchRequest searchRequest){
+		try {
+			return elastic.client().search(searchRequest);
+		} catch (IOException e) {
+			System.err.println("[ERROR] Search request error");
+			e.printStackTrace();
+		}
+		return null;
 	}
 	
 	

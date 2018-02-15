@@ -9,3 +9,4 @@ public interface VerseRepository extends MongoRepository<VerseDocument, String> 
     public VerseDocument findByBookAndHymnAndVerse(Integer book, Integer Hymn, Integer verse);
 
 }
+ 

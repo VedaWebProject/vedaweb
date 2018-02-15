@@ -5,14 +5,21 @@ import java.util.Map;
 import org.apache.lucene.search.join.ScoreMode;
 import org.elasticsearch.action.search.SearchRequest;
 import org.elasticsearch.index.query.BoolQueryBuilder;
+import org.elasticsearch.index.query.MatchAllQueryBuilder;
+import org.elasticsearch.index.query.MatchQueryBuilder;
 import org.elasticsearch.index.query.QueryBuilders;
 import org.elasticsearch.index.query.RangeQueryBuilder;
+import org.elasticsearch.search.aggregations.AggregationBuilders;
+import org.elasticsearch.search.aggregations.bucket.nested.NestedAggregationBuilder;
+import org.elasticsearch.search.aggregations.bucket.terms.TermsAggregationBuilder;
 import org.elasticsearch.search.builder.SearchSourceBuilder;
 
 public class SearchRequestBuilder {
 	
+	public static final String AGGREGATE_GRAMMAR_FIELDS = "grammar_fields";
 	
-	public static SearchRequest build(SearchFormData formData){
+	
+	public static SearchRequest buildAdvanced(SearchFormData formData){
 		SearchRequest searchRequest = new SearchRequest("vedaweb"); 
 		searchRequest.types("doc");
 		SearchSourceBuilder searchSourceBuilder = new SearchSourceBuilder(); 
@@ -30,6 +37,32 @@ public class SearchRequestBuilder {
 		System.out.println("\n\n" + searchSourceBuilder.toString() + "\n\n");
 		searchRequest.source(searchSourceBuilder);
 			
+		return searchRequest;
+	}
+	
+	
+	public static SearchRequest buildAggregationFor(String grammarField){
+		SearchRequest searchRequest = new SearchRequest("vedaweb"); 
+		searchRequest.types("doc");
+		SearchSourceBuilder searchSourceBuilder = new SearchSourceBuilder(); 
+		
+		//match all
+		MatchAllQueryBuilder match = QueryBuilders.matchAllQuery();
+		
+		//aggregation request
+		TermsAggregationBuilder terms
+			= AggregationBuilders.terms("agg")
+				.field("tokens." + grammarField)
+				.size(100);
+		NestedAggregationBuilder nestedAgg
+			= AggregationBuilders.nested("tokens", "tokens")
+				.subAggregation(terms);
+		
+		searchSourceBuilder.query(match);
+		searchSourceBuilder.aggregation(nestedAgg);
+		searchSourceBuilder.size(0);
+		System.out.println("\n\n" + searchSourceBuilder.toString() + "\n\n");
+		searchRequest.source(searchSourceBuilder);
 		return searchRequest;
 	}
 	
