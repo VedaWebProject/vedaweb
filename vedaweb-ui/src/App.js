@@ -9,11 +9,29 @@ import Footer from './Footer';
 import "./App.css";
 
 class App extends Component {
+
+    constructor(props){
+        super(props);
+
+        this.state = {
+            searchViewActive: false
+        };
+
+        this.toggleSearchView = this.toggleSearchView.bind(this);
+    }
+
+    toggleSearchView() {
+        this.setState({
+            searchViewActive: !this.state.searchViewActive
+        });
+    }
+
     render() {
+
         return (
             <Grid padded>
-                <NavBar/>
-                <SearchView/>
+                <NavBar onToggleSearchView={this.toggleSearchView} />
+                <SearchView isVisible={this.state.searchViewActive}/>
                 <ContentView/>
                 <Footer/>
             </Grid>

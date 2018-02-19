@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Grid, Button, Icon } from 'semantic-ui-react';
+import { Grid } from 'semantic-ui-react';
 
 import SearchField from "./SearchField";
 

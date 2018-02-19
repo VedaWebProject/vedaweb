@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Grid, Button, Icon } from 'semantic-ui-react';
+import { Grid, Transition } from 'semantic-ui-react';
 
 import SearchBlockList from "./SearchBlockList";
 
@@ -8,32 +8,28 @@ import './SearchView.css'
 
 class SearchView extends Component {
 
-    constructor(props){
-        super(props);
-
-        this.state = {
-            isVisible: false
-        };
-
-        this.hide = this.show.bind(this);
-    }
-
-    show(show){
-        
-    }
-
     render() {
         return (
+
+            <Transition
+                visible={this.props.isVisible}
+                animation='slide down'
+                duration={500}
+                unmountOnHide >
             
-            <Grid.Row id="search-view">
-                <Grid.Column width="8">
+                <Grid.Row id="search-view">
 
-                </Grid.Column>
+                    <Grid.Column width="12">
+                        <SearchBlockList/>
+                    </Grid.Column>
 
-                <Grid.Column width="8">
-                    <SearchBlockList/>
-                </Grid.Column>
-            </Grid.Row>
+                    <Grid.Column width="4">
+                        SEARCH META
+                    </Grid.Column>
+
+                </Grid.Row>
+
+            </Transition>
 
         );
     }

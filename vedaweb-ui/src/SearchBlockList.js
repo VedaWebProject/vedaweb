@@ -41,13 +41,13 @@ class SearchBlockList extends Component {
             
             <Grid className="search-block-list">
 
-                {this.state.searchBlocks.map((block, i) => (
-                    <Grid.Column width="16">
-                        <SearchBlock
-                        blockId={block.blockId}
-                        key={block.blockId} />
-                    </Grid.Column>
-                ))}
+                <Grid.Column width="16">
+                    {this.state.searchBlocks.map((block, i) => (
+                            <SearchBlock
+                            blockId={block.blockId}
+                            key={block.blockId} />
+                    ))}
+                </Grid.Column>
 
                 <Grid.Row className="search-block-controls">
                     <Grid.Column width="8"> 
