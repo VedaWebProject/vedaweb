@@ -41,7 +41,7 @@ class SearchBlockList extends Component {
             
             <Grid className="search-block-list">
 
-                {this.state.searchBlocks.map(block => (
+                {this.state.searchBlocks.map((block, i) => (
                     <Grid.Column width="16">
                         <SearchBlock
                         blockId={block.blockId}
@@ -49,21 +49,23 @@ class SearchBlockList extends Component {
                     </Grid.Column>
                 ))}
 
-                <Grid.Column width="2"> 
-                    {this.state.searchBlocks.length < 4 &&
-                        <Button onClick={this.addBlock} basic icon fluid>
-                            <Icon name='add' />
-                        </Button>
-                    }
-                </Grid.Column>
+                <Grid.Row className="search-block-controls">
+                    <Grid.Column width="8"> 
+                        {this.state.searchBlocks.length < 4 &&
+                            <Button onClick={this.addBlock} basic icon fluid>
+                                <Icon name='add' />
+                            </Button>
+                        }
+                    </Grid.Column>
 
-                <Grid.Column width="2"> 
-                    {this.state.searchBlocks.length > 1 &&
-                        <Button onClick={this.removeBlock} basic icon fluid>
-                            <Icon name='minus' />
-                        </Button>
-                    }
-                </Grid.Column>
+                    <Grid.Column width="8"> 
+                        {this.state.searchBlocks.length > 1 &&
+                            <Button onClick={this.removeBlock} basic icon fluid>
+                                <Icon name='minus' />
+                            </Button>
+                        }
+                    </Grid.Column>
+                </Grid.Row>
 
             </Grid>
 

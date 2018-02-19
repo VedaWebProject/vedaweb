@@ -1,12 +1,10 @@
 import React, { Component } from "react";
 import { Grid } from 'semantic-ui-react';
 
-import SearchBlockList from "./SearchBlockList";
-
-import "./Content.css";
+import "./ContentView.css";
 
 
-class Content extends Component {
+class ContentView extends Component {
 
     render() {
         return (
@@ -14,7 +12,11 @@ class Content extends Component {
             <Grid id="content" padded>
                 <Grid.Row>
                     <Grid.Column width="8">
-                        <SearchBlockList/>
+                        bla
+                    </Grid.Column>
+
+                    <Grid.Column width="8">
+                        bla
                     </Grid.Column>
                 </Grid.Row>
             </Grid>
@@ -23,4 +25,4 @@ class Content extends Component {
     }
 }
 
-export default Content;
+export default ContentView;

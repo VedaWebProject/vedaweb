@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 
 import NavBar from './NavBar';
-import Content from './Content';
+import SearchView from './SearchView';
+import ContentView from './ContentView';
 import Footer from './Footer';
 
 import "./App.css";
@@ -11,7 +12,8 @@ class App extends Component {
         return (
             <div>
                 <NavBar/>
-                <Content/>
+                <SearchView/>
+                <ContentView/>
                 <Footer/>
             </div>
         );

@@ -45,6 +45,7 @@ class SearchBlock extends Component {
                         <SearchField
                         fieldId={field.fieldId}
                         key={field.fieldId}
+                        isFirstField={i === 0}
                         onClickRemove={this.removeField}
                         onClickAdd={this.addField}
                         isRemovable={this.state.searchFields.length > 1}

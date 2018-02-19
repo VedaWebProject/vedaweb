@@ -71,7 +71,13 @@ class SearchField extends Component {
         return (
             
             <Grid.Row>
-                
+
+                <Grid.Column width="1" textAlign="left" verticalAlign="middle" className="block-number">
+                    { this.props.isFirstField &&
+                        <Icon name='list layout' />
+                    }
+                </Grid.Column>
+
                 <Grid.Column width="6">
                     <Dropdown
                         placeholder='Attribute...'
@@ -94,20 +100,28 @@ class SearchField extends Component {
                         loading = {!this.state.isLoaded} />
                 </Grid.Column>
 
-                <Grid.Column width="2">
-                    {this.props.isRemovable &&
-                        <Button onClick={this.onRemove} basic fluid icon>
-                            <Icon name='trash outline'/>
-                        </Button>
-                    }
-                </Grid.Column>
+                <Grid.Column width="3" textAlign="left" verticalAlign="middle">
 
-                <Grid.Column width="2">
-                    {this.props.isLastField &&
-                        <Button onClick={this.props.onClickAdd} basic fluid icon>
-                            <Icon name='add' />
-                        </Button>
-                    }
+                    <Button
+                    disabled={!this.props.isRemovable}
+                    onClick={this.onRemove}
+                    basic
+                    compact
+                    circular
+                    icon >
+                        <Icon name='minus'/>
+                    </Button>
+
+                    <Button
+                    onClick={this.props.onClickAdd}
+                    disabled={!this.props.isLastField}
+                    basic
+                    compact
+                    circular
+                    icon >
+                        <Icon name='plus' />
+                    </Button>
+
                 </Grid.Column>
 
             </Grid.Row>
