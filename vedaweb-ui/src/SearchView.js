@@ -25,17 +25,15 @@ class SearchView extends Component {
     render() {
         return (
             
-            <Grid id="search-widget" padded>
-                <Grid.Row>
-                    <Grid.Column width="8">
+            <Grid.Row id="search-view">
+                <Grid.Column width="8">
 
-                    </Grid.Column>
+                </Grid.Column>
 
-                    <Grid.Column width="8">
-                        <SearchBlockList/>
-                    </Grid.Column>
-                </Grid.Row>
-            </Grid>
+                <Grid.Column width="8">
+                    <SearchBlockList/>
+                </Grid.Column>
+            </Grid.Row>
 
         );
     }

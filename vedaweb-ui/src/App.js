@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Grid } from 'semantic-ui-react';
 
 import NavBar from './NavBar';
 import SearchView from './SearchView';
@@ -10,12 +11,12 @@ import "./App.css";
 class App extends Component {
     render() {
         return (
-            <div>
+            <Grid padded>
                 <NavBar/>
                 <SearchView/>
                 <ContentView/>
                 <Footer/>
-            </div>
+            </Grid>
         );
     }
 }
