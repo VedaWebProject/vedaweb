@@ -1,0 +1,29 @@
+#footer {
+    margin-top: 20px;
+    padding: .8em;
+    padding-left: 1.5em;
+    padding-right: 1.5em;
+}
+
+.footer-box {
+    text-align: center;
+    cursor: pointer;
+    filter: opacity(0.6);
+    transition: .2s;
+}
+
+.footer-box:hover {
+    filter: opacity(1);
+}
+
+.footer-box img {
+    width: 80px;
+}
+
+.footer-box a, .footer-box a:link, .footer-box a:visited, .footer-box a:hover {
+    color: #262626;
+}
+
+#footer a {
+    text-decoration: none;
+}

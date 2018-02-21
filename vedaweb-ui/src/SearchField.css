@@ -1,0 +1,19 @@
+.search-field {
+    padding-top: .2rem;
+    padding-bottom: .2rem;
+}
+
+.block-number {
+    text-align: center;
+    color: #bba;
+    font-size: 1.3em;
+    font-weight: bold;
+}
+
+.hidden-button {
+    display: none;
+}
+
+.col-content-right {
+    text-align: right;
+}
