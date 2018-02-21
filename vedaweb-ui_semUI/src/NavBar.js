@@ -11,7 +11,7 @@ class NavBar extends Component {
             <Grid.Row className="navbar">
                 <Grid.Column width="2" verticalAlign="middle">
                     <Icon
-                    onClick={this.props.onToggleSearchView}
+                    onClick={this.props.onOpenSearchViewClick}
                     name="search"
                     size="big"
                     className="icon-search"

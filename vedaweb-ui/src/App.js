@@ -1,42 +1,21 @@
-import React, { Component } from "react";
-import { Grid } from 'semantic-ui-react';
-
-import NavBar from './NavBar';
-import SearchView from './SearchView';
-import ContentView from './ContentView';
-import Footer from './Footer';
-
-import "./App.css";
+import React, { Component } from 'react';
+import logo from './logo.svg';
+import './App.css';
 
 class App extends Component {
-
-    constructor(props){
-        super(props);
-
-        this.state = {
-            searchViewActive: false
-        };
-
-        this.toggleSearchView = this.toggleSearchView.bind(this);
-    }
-
-    toggleSearchView() {
-        this.setState({
-            searchViewActive: !this.state.searchViewActive
-        });
-    }
-
-    render() {
-
-        return (
-            <Grid padded>
-                <NavBar onToggleSearchView={this.toggleSearchView} />
-                <SearchView isVisible={this.state.searchViewActive}/>
-                <ContentView/>
-                <Footer/>
-            </Grid>
-        );
-    }
+  render() {
+    return (
+      <div className="App">
+        <header className="App-header">
+          <img src={logo} className="App-logo" alt="logo" />
+          <h1 className="App-title">Welcome to React</h1>
+        </header>
+        <p className="App-intro">
+          To get started, edit <code>src/App.js</code> and save to reload.
+        </p>
+      </div>
+    );
+  }
 }
 
 export default App;
