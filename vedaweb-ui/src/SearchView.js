@@ -17,7 +17,11 @@ class SearchView extends Component {
         const searchIcon = <Icon type="search" style={{"fontWeight": "bold"}}/>;
 
         const customPanelStyle = {
-            background: '#eed'
+            background: '#fff'
+        };
+
+        const customBodyStyle = {
+            background: '#665'
         };
         
         return (
@@ -27,13 +31,14 @@ class SearchView extends Component {
                 <Modal
                 width={768}
                 visible={this.props.visible}
-                title={<span>{searchIcon} Search</span>}
+                title={<div>{searchIcon} Search</div>}
                 maskStyle={{"backgroundColor":"rgba(0,0,0,0.4)"}}
+                bodyStyle={customBodyStyle}
                 onCancel={this.props.onClose}
-                style={{ top: 20 }}
+                style={{ top: 20}}
                 footer={null} >
 
-                    <Collapse accordion defaultActiveKey="simple">
+                    <Collapse accordion defaultActiveKey="simple" bordered={false}>
 
                         <Panel header="Simple Search" key="simple" style={customPanelStyle}>
                             <p>Ein Rabe geht im Feld spazieren...</p>

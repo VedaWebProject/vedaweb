@@ -2,6 +2,19 @@
     background-color: #eed;
 }
 
+.ant-collapse-content,
+.ant-collapse-content > .ant-collapse-content-box,
+.ant-collapse > .ant-collapse-item,
+.ant-collapse-item,
+.ant-collapse {
+    background: #eed !important;
+}
+
+.ant-collapse-header {
+    background: #fff;
+    font-weight: bold;
+}
+
 #search-submit-button-wrapper{
     padding-top: 20px;
     text-align: right;
