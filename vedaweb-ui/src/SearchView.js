@@ -1,11 +1,12 @@
 import React, { Component } from "react";
-import { Row, Col, Collapse, Icon, Modal, Button } from 'antd';
+import { Row, Col, Collapse, Icon, Modal, Button, Input } from 'antd';
 
 import SearchBlockList from "./SearchBlockList";
 
 import './SearchView.css'
 
 const Panel = Collapse.Panel;
+const Search = Input.Search;
 
 
 
@@ -17,17 +18,18 @@ class SearchView extends Component {
         const searchIcon = <Icon type="search" style={{"fontWeight": "bold"}}/>;
 
         const customPanelStyle = {
-            background: '#fff'
+            background: '#fff',
+            '-webkit-box-shadow': '0px 0px 5px 0px rgba(0,0,0,0.2)',
+	        '-moz-box-shadow': '0px 0px 5px 0px rgba(0,0,0,0.2)',
+	        'box-shadow': '0px 0px 5px 0px rgba(0,0,0,0.2)'
         };
 
         const customBodyStyle = {
-            background: '#665'
+            background: '#bba'
         };
         
         return (
-
             <div id="search-view">
-
                 <Modal
                 width={768}
                 visible={this.props.visible}
@@ -38,10 +40,14 @@ class SearchView extends Component {
                 style={{ top: 20}}
                 footer={null} >
 
-                    <Collapse accordion defaultActiveKey="simple" bordered={false}>
+                    <Collapse accordion defaultActiveKey="simple">
 
                         <Panel header="Simple Search" key="simple" style={customPanelStyle}>
-                            <p>Ein Rabe geht im Feld spazieren...</p>
+                            <Search
+                            placeholder="search input"
+                            onSearch={value => console.log(value)}
+                            style={{ width: 200, marginTop: '.1em' }}
+                            />
                         </Panel>
 
                         <Panel header="Advanced search" key="advanced" style={customPanelStyle}>
@@ -59,10 +65,9 @@ class SearchView extends Component {
                     </div>
 
                 </Modal>
-
             </div>
-
         );
+
     }
 }
 

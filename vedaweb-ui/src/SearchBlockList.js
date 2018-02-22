@@ -48,19 +48,15 @@ class SearchBlockList extends Component {
                 ))}
 
                 <Row className="search-block-list-controls" align="middle">
-                    <Col span={12}> 
+                    <Col span={2}> 
                         {this.state.searchBlocks.length < 4 &&
-                            <Button onClick={this.addBlock}>
-                                Add search block
-                            </Button>
+                            <Button onClick={this.addBlock} icon="plus" />
                         }
                     </Col>
 
-                    <Col span={12}> 
+                    <Col span={2}> 
                         {this.state.searchBlocks.length > 1 &&
-                            <Button onClick={this.removeBlock}>
-                            Remove search block
-                        </Button>
+                            <Button onClick={this.removeBlock} icon="minus" />
                         }
                     </Col>
                 </Row>

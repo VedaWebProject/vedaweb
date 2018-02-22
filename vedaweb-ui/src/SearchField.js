@@ -21,22 +21,30 @@ class SearchField extends Component {
         this.state = {
             fieldName: null,
             fieldValue: null,
-            fieldNameOptions: [{ text: 'Case', value: 'casus' },{ text: 'Mode', value: 'modus' }],
+            fieldNameOptions: [
+                {text: 'Case', value: 'casus' },
+                {text: 'Person', value: 'person' },
+                {text: 'Number', value: 'numerus' },
+                {text: 'Time', value: 'tempus' },
+                {text: 'Diathesis', value: 'diathesis' },
+                {text: 'Mode', value: 'modus' }
+            ],
             fieldValueOptions: [],
             isLoaded: true
         };
 
         this.onRemove = this.onRemove.bind(this);
+        this.onChangeFieldName = this.onChangeFieldName.bind(this);
     }
 
-    onChangeFieldName(value){
+    onChangeFieldName(value, option){
 
         this.setState({
             isLoaded: false,
-            fieldName: value.value
+            fieldName: value
         });
         
-        fetch("/data/grammar/" + value.value)
+        fetch("/data/grammar/" + value)
         .then(res => res.json())
         .then(
             (result) => {
@@ -89,7 +97,7 @@ class SearchField extends Component {
                     <Select
                     showSearch
                     placeholder="Attribute..."
-                    onChange={(e,{value})=>this.onChangeFieldName({value})}
+                    onSelect={this.onChangeFieldName}
                     style={{ width: '98%' }} >
                         {this.state.fieldNameOptions.map((option, i) => (
                             <Option
@@ -105,7 +113,7 @@ class SearchField extends Component {
                     <Select
                     showSearch
                     placeholder="Value..."
-                    onChange={(e,{value})=>this.setState({fieldValue: value})}
+                    onSelect={value => this.setState({fieldValue: value})}
                     disabled = {this.state.fieldValueOptions.length === 0}
                     style={{ width: '98%' }} >
                         {this.state.fieldValueOptions.map((option, i) => (
