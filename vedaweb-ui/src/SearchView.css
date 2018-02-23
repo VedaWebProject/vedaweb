@@ -15,7 +15,7 @@
     font-weight: bold;
 }
 
-#search-submit-button-wrapper{
-    padding-top: 20px;
-    text-align: right;
+#search-view-buttons {
+    padding-top: 1rem;
+    padding-bottom: 1rem;
 }

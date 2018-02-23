@@ -1,5 +1,8 @@
 .search-block {
     padding-top: .5rem;
     padding-bottom: .5rem;
-    border-bottom: 1px solid #ccb;
+    margin-bottom: .5rem;
+    background-color: #fff;
+    border-radius: 3px;
+    border: 1px solid #ddc;
 }

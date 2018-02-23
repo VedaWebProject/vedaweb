@@ -84,16 +84,16 @@ class SearchField extends Component {
             <Row
             type="flex"
             align="middle"
-            gutter={8}
+            justify="center"
             className="search-field">
 
                 <Col span={2} className="block-number">
                     { this.props.isFirstField &&
-                        <Icon type="search" />
+                        <Icon type="pushpin-o" />
                     }
                 </Col>
 
-                <Col span={9}>
+                <Col span={8}>
                     <Select
                     showSearch
                     placeholder="Attribute..."
@@ -109,7 +109,7 @@ class SearchField extends Component {
                     </Select>
                 </Col>
 
-                <Col span={9}>
+                <Col span={8}>
                     <Select
                     showSearch
                     placeholder="Value..."
@@ -126,21 +126,18 @@ class SearchField extends Component {
                     </Select>
                 </Col>
 
-                <Col span={2} className="col-content-right">
+                <Col span={2} className="content-right">
                     <Button
                     disabled={!this.props.isRemovable}
-                    ghost={!this.props.isRemovable}
                     onClick={this.onRemove}
-                    shape="circle"
                     icon="minus" />
                 </Col>
 
-                <Col span={2} className="col-content-right">
+                <Col span={2} className="content-right">
                     <Button
                     onClick={this.props.onClickAdd}
                     disabled={!this.props.isLastField}
                     className={!this.props.isLastField ? "hidden-button" : ""}
-                    shape="circle"
                     icon="plus" />
                 </Col>
 

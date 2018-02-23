@@ -5,3 +5,11 @@ a {
 .blurred {
     filter: blur(1px);
 }
+
+.content-left {
+    text-align: left;
+}
+
+.content-right {
+    text-align: right;
+}

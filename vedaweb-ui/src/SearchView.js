@@ -12,6 +12,22 @@ const Search = Input.Search;
 
 class SearchView extends Component {
 
+    constructor(props){
+        super(props);
+
+        this.state = {
+            simpleSearch: true
+        };
+
+        this.switchSearchMode = this.switchSearchMode.bind(this);
+    }
+
+    switchSearchMode(e){
+        this.state = {
+            simpleSearch: e.target.activeKey == 'simple'
+        };
+    }
+
 
     render() {
 
@@ -25,16 +41,23 @@ class SearchView extends Component {
         };
 
         const customBodyStyle = {
-            background: '#bba'
+            background: '#bba',
+            paddingBottom: '0px'
         };
+
+        const customMaskStyle = {
+            background: 'rgba(0,0,0,0.4)'
+        };
+
+        const titleHTML = <div>{searchIcon} Search</div>;
         
         return (
             <div id="search-view">
                 <Modal
                 width={768}
                 visible={this.props.visible}
-                title={<div>{searchIcon} Search</div>}
-                maskStyle={{"backgroundColor":"rgba(0,0,0,0.4)"}}
+                title={titleHTML}
+                maskStyle={customMaskStyle}
                 bodyStyle={customBodyStyle}
                 onCancel={this.props.onClose}
                 style={{ top: 20}}
@@ -45,7 +68,6 @@ class SearchView extends Component {
                         <Panel header="Simple Search" key="simple" style={customPanelStyle}>
                             <Search
                             placeholder="search input"
-                            onSearch={value => console.log(value)}
                             style={{ width: 200, marginTop: '.1em' }}
                             />
                         </Panel>
@@ -60,9 +82,17 @@ class SearchView extends Component {
                         {/*Search Meta*/}
                     </Row>
 
-                    <div id="search-submit-button-wrapper">
-                        <Button icon="search" size="large">Search</Button>
-                    </div>
+                    <Row id="search-view-buttons">
+                        <Col span={16} className="content-left">
+                            <Button icon="cross" size="large">Close</Button>
+                        </Col>
+                        <Col span={4} className="content-right">
+                            <Button icon="rollback" size="large">Reset</Button>
+                        </Col>
+                        <Col span={4} className="content-right">
+                            <Button icon="search" size="large">Search</Button>
+                        </Col>
+                    </Row>
 
                 </Modal>
             </div>

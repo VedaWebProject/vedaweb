@@ -47,17 +47,30 @@ class SearchBlockList extends Component {
                         key={block.blockId} />
                 ))}
 
-                <Row className="search-block-list-controls" align="middle">
-                    <Col span={2}> 
-                        {this.state.searchBlocks.length < 4 &&
-                            <Button onClick={this.addBlock} icon="plus" />
-                        }
+                
+
+                <Row
+                type="flex"
+                className="search-block-list-controls"
+                align="middle"
+                justify="center"
+                gutter={32}>
+                    <Col span={12} className="content-right"> 
+                            <Button
+                            onClick={this.addBlock}
+                            disabled={!(this.state.searchBlocks.length < 4)}
+                            icon="plus">
+                                Add another search block
+                            </Button>
                     </Col>
 
-                    <Col span={2}> 
-                        {this.state.searchBlocks.length > 1 &&
-                            <Button onClick={this.removeBlock} icon="minus" />
-                        }
+                    <Col span={12} className="content-left"> 
+                        <Button
+                        onClick={this.removeBlock}
+                        disabled={!(this.state.searchBlocks.length > 1)}
+                        icon="minus">
+                            Remove one search block
+                        </Button>
                     </Col>
                 </Row>
 
