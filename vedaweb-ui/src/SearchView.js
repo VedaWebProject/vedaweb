@@ -16,16 +16,26 @@ class SearchView extends Component {
         super(props);
 
         this.state = {
-            simpleSearch: true
+            simpleSearch: true,
+            simpleSearchData: {},
+            advancedSearchData: {}
         };
 
         this.switchSearchMode = this.switchSearchMode.bind(this);
+        this.updateAdvancedSearchData = this.updateAdvancedSearchData.bind(this);
     }
 
     switchSearchMode(e){
-        this.state = {
-            simpleSearch: e.target.activeKey == 'simple'
-        };
+        this.setState = ({
+            simpleSearch: e.target.activeKey === 'simple'
+        });
+    }
+
+    updateAdvancedSearchData(data){
+        this.setState = ({
+            advancedSearchData: data
+        });
+        console.log(JSON.stringify(data));
     }
 
 
@@ -35,9 +45,9 @@ class SearchView extends Component {
 
         const customPanelStyle = {
             background: '#fff',
-            '-webkit-box-shadow': '0px 0px 5px 0px rgba(0,0,0,0.2)',
-	        '-moz-box-shadow': '0px 0px 5px 0px rgba(0,0,0,0.2)',
-	        'box-shadow': '0px 0px 5px 0px rgba(0,0,0,0.2)'
+            'WebkitBoxShadow': '0px 0px 5px 0px rgba(0,0,0,0.2)',
+	        'MozBoxShadow': '0px 0px 5px 0px rgba(0,0,0,0.2)',
+	        'boxShadow': '0px 0px 5px 0px rgba(0,0,0,0.2)'
         };
 
         const customBodyStyle = {
@@ -52,7 +62,7 @@ class SearchView extends Component {
         const titleHTML = <div>{searchIcon} Search</div>;
         
         return (
-            <div id="search-view">
+            <div id="search-view" key="search-view">
                 <Modal
                 width={768}
                 visible={this.props.visible}
@@ -60,7 +70,7 @@ class SearchView extends Component {
                 maskStyle={customMaskStyle}
                 bodyStyle={customBodyStyle}
                 onCancel={this.props.onClose}
-                style={{ top: 20}}
+                style={{top: 20}}
                 footer={null} >
 
                     <Collapse accordion defaultActiveKey="simple">
@@ -73,7 +83,7 @@ class SearchView extends Component {
                         </Panel>
 
                         <Panel header="Advanced search" key="advanced" style={customPanelStyle}>
-                            <SearchBlockList/>
+                            <SearchBlockList onUpdateSearchData={this.updateAdvancedSearchData} />
                         </Panel>
 
                     </Collapse>
@@ -83,13 +93,10 @@ class SearchView extends Component {
                     </Row>
 
                     <Row id="search-view-buttons">
-                        <Col span={16} className="content-left">
-                            <Button icon="cross" size="large">Close</Button>
+                        <Col span={12} className="content-left">
+                            <Button icon="cross" size="large" onClick={this.props.onClose}>Close</Button>
                         </Col>
-                        <Col span={4} className="content-right">
-                            <Button icon="rollback" size="large">Reset</Button>
-                        </Col>
-                        <Col span={4} className="content-right">
+                        <Col span={12} className="content-right">
                             <Button icon="search" size="large">Search</Button>
                         </Col>
                     </Row>

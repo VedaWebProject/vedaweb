@@ -11,11 +11,13 @@ class SearchBlock extends Component {
         super(props);
 
         this.state = {
-            searchFields: []
+            searchFields: [],
+            blockData: []
         };
 
         this.addField = this.addField.bind(this);
         this.removeField = this.removeField.bind(this);
+        this.updateBlockData = this.updateBlockData.bind(this);
     }
 
     componentDidMount(){
@@ -23,17 +25,36 @@ class SearchBlock extends Component {
     }
 
     addField(){
-        var fid = Date.now();
+        var fieldId = 'field_' + Date.now();
         this.setState({
-            searchFields : this.state.searchFields.concat({'fieldId': fid})
+            searchFields : this.state.searchFields.concat({'fieldId': fieldId})
         });
     }
 
-    removeField(f){
+    removeField(toRemove){
+        var newBlockData = this.state.blockData.filter(field => toRemove.props.fieldId !== field.fieldId);
+
         this.setState({
-            searchFields: this.state.searchFields.filter(field => field.fieldId !== f.props.fieldId)
+            searchFields: this.state.searchFields.filter(field => toRemove.props.fieldId !== field.fieldId),
+            blockData: newBlockData
         });
+
+        this.props.onUpdateBlockData({blockId: this.props.blockId, blockData: newBlockData});
     }
+
+    updateBlockData(updatedField){
+        var newBlockData = this.state.blockData.filter(field => field.fieldId !== updatedField.fieldId);
+        
+        if (updatedField.fieldValue != null)
+            newBlockData = newBlockData.concat(updatedField);
+
+        this.setState({
+            blockData: newBlockData
+        });
+
+        this.props.onUpdateBlockData({blockId: this.props.blockId, blockData: newBlockData});
+    }
+
 
     render() {
         return (
@@ -42,11 +63,12 @@ class SearchBlock extends Component {
                     
                     {this.state.searchFields.map((field, i) => (
                         <SearchField
-                        fieldId={field.fieldId}
                         key={field.fieldId}
+                        fieldId={field.fieldId}
                         isFirstField={i === 0}
                         onClickRemove={this.removeField}
                         onClickAdd={this.addField}
+                        onSetData={this.updateBlockData}
                         isRemovable={this.state.searchFields.length > 1}
                         isLastField={this.state.searchFields.length < 4 && this.state.searchFields.length === i + 1} />
                     ))}

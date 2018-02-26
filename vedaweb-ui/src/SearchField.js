@@ -35,6 +35,7 @@ class SearchField extends Component {
 
         this.onRemove = this.onRemove.bind(this);
         this.onChangeFieldName = this.onChangeFieldName.bind(this);
+        this.onChangeFieldValue = this.onChangeFieldValue.bind(this);
     }
 
     onChangeFieldName(value, option){
@@ -49,33 +50,46 @@ class SearchField extends Component {
         .then(
             (result) => {
 
-            var valueOptions = result.values.map(function(val) {
-                return {
-                    text: val,
-                    value: val
-                };
-            });
+                var valueOptions = result.values.map(function(val) {
+                    return {
+                        text: val,
+                        value: val
+                    };
+                });
 
-            this.setState({
-                isLoaded: true,
-                fieldValueOptions: valueOptions
-            });
+                this.setState({
+                    isLoaded: true,
+                    fieldValueOptions: valueOptions
+                });
+
+                this.props.onSetData({
+                    fieldId: this.props.fieldId,
+                    fieldName: value,
+                    fieldValue: null
+                });
+
             },
-            // Note: it's important to handle errors here
-            // instead of a catch() block so that we don't swallow
-            // exceptions from actual bugs in components.
             (error) => {
-            this.setState({
-                isLoaded: true,
-                error
-            });
+                this.setState({
+                    isLoaded: true,
+                    error
+                });
             }
         )
+    }
+
+    onChangeFieldValue(value, option){
+        this.props.onSetData({
+            fieldId: this.props.fieldId,
+            fieldName: this.state.fieldName,
+            fieldValue: value
+        });
     }
 
     onRemove(e){
         this.props.onClickRemove(this);
     }
+
 
     render() {
 
@@ -113,7 +127,7 @@ class SearchField extends Component {
                     <Select
                     showSearch
                     placeholder="Value..."
-                    onSelect={value => this.setState({fieldValue: value})}
+                    onSelect={this.onChangeFieldValue}
                     disabled = {this.state.fieldValueOptions.length === 0}
                     style={{ width: '98%' }} >
                         {this.state.fieldValueOptions.map((option, i) => (

@@ -12,11 +12,13 @@ class SearchBlockList extends Component {
         super(props);
 
         this.state = {
-            searchBlocks: []
+            searchBlocks: [],
+            searchData: []
         };
 
         this.addBlock = this.addBlock.bind(this);
         this.removeBlock = this.removeBlock.bind(this);
+        this.updateSearchData = this.updateSearchData.bind(this);
     }
 
     componentDidMount(){
@@ -24,16 +26,37 @@ class SearchBlockList extends Component {
     }
 
     addBlock(){
-        var bid = Date.now();
+        var blockId = 'block_' + Date.now();
         this.setState({
-            searchBlocks : this.state.searchBlocks.concat({'blockId': bid})
+            searchBlocks : this.state.searchBlocks.concat({'blockId': blockId})
         });
     }
 
     removeBlock(b){
+        //TODO update data
         this.setState({
             searchBlocks: this.state.searchBlocks.slice(0, -1)
         });
+    }
+
+    updateSearchData(blockData){
+        var newSearchData = this.state.searchData.filter(b => b.blockId !== blockData.blockId).concat(blockData);
+        
+        this.setState({
+            searchData: newSearchData
+        });
+
+        //transform search block data...
+        var transformed = [];
+        for (const block of newSearchData){
+            let b = {};
+            for (const field of block.blockData){
+                b[field.fieldName] = field.fieldValue;
+            }
+            transformed.push(b);
+        }
+        //...and pass it to parent
+        this.props.onUpdateSearchData(transformed);
     }
 
     render() {
@@ -43,11 +66,10 @@ class SearchBlockList extends Component {
 
                 {this.state.searchBlocks.map((block, i) => (
                         <SearchBlock
+                        key={block.blockId}
                         blockId={block.blockId}
-                        key={block.blockId} />
+                        onUpdateBlockData={this.updateSearchData} />
                 ))}
-
-                
 
                 <Row
                 type="flex"
