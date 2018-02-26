@@ -46,17 +46,7 @@ class SearchBlockList extends Component {
             searchData: newSearchData
         });
 
-        //transform search block data...
-        var transformed = [];
-        for (const block of newSearchData){
-            let b = {};
-            for (const field of block.blockData){
-                b[field.fieldName] = field.fieldValue;
-            }
-            transformed.push(b);
-        }
-        //...and pass it to parent
-        this.props.onUpdateSearchData(transformed);
+        this.props.onUpdateSearchData(newSearchData);
     }
 
     render() {

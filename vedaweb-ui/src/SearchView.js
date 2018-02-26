@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Row, Col, Collapse, Icon, Modal, Button, Input } from 'antd';
 
 import SearchBlockList from "./SearchBlockList";
+import SearchScopeChooser from "./SearchScopeChooser";
 
 import './SearchView.css'
 
@@ -35,7 +36,22 @@ class SearchView extends Component {
         this.setState = ({
             advancedSearchData: data
         });
-        console.log(JSON.stringify(data));
+        //console.log(JSON.stringify(data));
+    }
+
+    prepareAdvancedSearchData(){
+        var data = [];
+        //transform search block data
+        for (const block of this.state.advancedSearchData){
+            let b = {};
+            for (const field of block.blockData){
+                b[field.fieldName] = field.fieldValue;
+            }
+            data.push(b);
+        }
+        //add search meta data
+        //TODO
+        return data;
     }
 
 
@@ -88,9 +104,7 @@ class SearchView extends Component {
 
                     </Collapse>
 
-                    <Row>
-                        {/*Search Meta*/}
-                    </Row>
+                    <SearchScopeChooser bookRange={10}/>
 
                     <Row id="search-view-buttons">
                         <Col span={12} className="content-left">
