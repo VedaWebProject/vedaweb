@@ -103,7 +103,7 @@ class SearchField extends Component {
 
                 <Col span={2} className="block-number">
                     { this.props.isFirstField &&
-                        <Icon type="pushpin-o" />
+                        <Icon type="paper-clip" />
                     }
                 </Col>
 

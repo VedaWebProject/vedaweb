@@ -2,9 +2,9 @@ import React, { Component } from "react";
 import { Row, Col, Collapse, Icon, Modal, Button, Input } from 'antd';
 
 import SearchBlockList from "./SearchBlockList";
-import SearchScopeChooser from "./SearchScopeChooser";
+import SearchSettings from "./SearchSettings";
 
-import './SearchView.css'
+import './SearchView.css';
 
 const Panel = Collapse.Panel;
 const Search = Input.Search;
@@ -19,11 +19,13 @@ class SearchView extends Component {
         this.state = {
             simpleSearch: true,
             simpleSearchData: {},
-            advancedSearchData: {}
+            advancedSearchData: {},
+            searchSettings: {}
         };
 
         this.switchSearchMode = this.switchSearchMode.bind(this);
         this.updateAdvancedSearchData = this.updateAdvancedSearchData.bind(this);
+        this.updateSearchSettings = this.updateSearchSettings.bind(this);
     }
 
     switchSearchMode(e){
@@ -36,7 +38,13 @@ class SearchView extends Component {
         this.setState = ({
             advancedSearchData: data
         });
-        //console.log(JSON.stringify(data));
+    }
+
+    updateSearchSettings(data){
+        this.setState = ({
+            searchSettings: data
+        });
+        console.log(JSON.stringify(data));
     }
 
     prepareAdvancedSearchData(){
@@ -49,15 +57,13 @@ class SearchView extends Component {
             }
             data.push(b);
         }
-        //add search meta data
-        //TODO
         return data;
     }
 
 
     render() {
 
-        const searchIcon = <Icon type="search" style={{"fontWeight": "bold"}}/>;
+        const searchIcon = <Icon type="search" className="bold"/>;
 
         const customPanelStyle = {
             background: '#fff',
@@ -104,7 +110,10 @@ class SearchView extends Component {
 
                     </Collapse>
 
-                    <SearchScopeChooser bookRange={10}/>
+                    <SearchSettings
+                    bookRange={this.props.uiData.books.length}
+                    books={this.props.uiData.books}
+                    onSearchSettingsChanged={this.updateSearchSettings}/>
 
                     <Row id="search-view-buttons">
                         <Col span={12} className="content-left">

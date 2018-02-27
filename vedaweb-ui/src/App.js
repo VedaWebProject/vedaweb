@@ -6,6 +6,7 @@ import ContentView from './ContentView';
 import Footer from './Footer';
 
 import "./App.css";
+import UIData from './ui-data.js';
 
 class App extends Component {
 
@@ -38,7 +39,7 @@ class App extends Component {
                 <NavBar onClickOpenSearchView={this.openSearchView} />
                 <ContentView/>
                 <Footer/>
-                <SearchView visible={searchViewActive} onClose={this.closeSearchView} />
+                <SearchView visible={searchViewActive} onClose={this.closeSearchView} uiData={UIData.search} />
             </div>
         );
     }

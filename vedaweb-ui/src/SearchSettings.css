@@ -1,0 +1,28 @@
+#search-settings {
+    margin-top: 1rem;
+    border: 1px solid #d9d9d9;
+    border-radius: 4px;
+
+    -webkit-box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.2);
+    -moz-box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.2);
+    box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.2);
+}
+
+#search-settings-title {
+    padding: 1rem;
+    background: #fff;
+    color: rgba(0, 0, 0, 0.85);
+    font-size: 14px;
+    font-weight: bold;
+}
+
+#search-settings-body {
+    padding: 1rem;
+    background: #eed;
+    color: rgba(0, 0, 0, 0.65);
+    border-top: 1px solid #d9d9d9;
+}
+
+.search-settings-row {
+    margin-bottom: 1rem;
+}
