@@ -21,14 +21,6 @@ class SearchField extends Component {
         this.state = {
             fieldName: null,
             fieldValue: null,
-            fieldNameOptions: [
-                {text: 'Case', value: 'casus' },
-                {text: 'Person', value: 'person' },
-                {text: 'Number', value: 'numerus' },
-                {text: 'Time', value: 'tempus' },
-                {text: 'Diathesis', value: 'diathesis' },
-                {text: 'Mode', value: 'modus' }
-            ],
             fieldValueOptions: [],
             isLoaded: true
         };
@@ -39,6 +31,8 @@ class SearchField extends Component {
     }
 
     onChangeFieldName(value, option){
+
+        //TODO: use data from this.props.grammarData !!!
 
         this.setState({
             isLoaded: false,
@@ -113,10 +107,10 @@ class SearchField extends Component {
                     placeholder="Attribute..."
                     onSelect={this.onChangeFieldName}
                     style={{ width: '98%' }} >
-                        {this.state.fieldNameOptions.map((option, i) => (
+                        {this.props.grammarData.map((option, i) => (
                             <Option
                                 key={i.toString(36) + i}
-                                value={option.value}>
+                                value={option.field}>
                                     {option.text}
                             </Option>
                         ))}

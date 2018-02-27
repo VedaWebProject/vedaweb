@@ -105,7 +105,9 @@ class SearchView extends Component {
                         </Panel>
 
                         <Panel header="Advanced search" key="advanced" style={customPanelStyle}>
-                            <SearchBlockList onUpdateSearchData={this.updateAdvancedSearchData} />
+                            <SearchBlockList
+                            onUpdateSearchData={this.updateAdvancedSearchData}
+                            grammarData={this.props.uiData.grammar} />
                         </Panel>
 
                     </Collapse>

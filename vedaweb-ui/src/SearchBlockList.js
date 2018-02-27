@@ -58,7 +58,8 @@ class SearchBlockList extends Component {
                         <SearchBlock
                         key={block.blockId}
                         blockId={block.blockId}
-                        onUpdateBlockData={this.updateSearchData} />
+                        onUpdateBlockData={this.updateSearchData}
+                        grammarData={this.props.grammarData} />
                 ))}
 
                 <Row

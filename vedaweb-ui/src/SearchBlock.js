@@ -70,7 +70,8 @@ class SearchBlock extends Component {
                         onClickAdd={this.addField}
                         onSetData={this.updateBlockData}
                         isRemovable={this.state.searchFields.length > 1}
-                        isLastField={this.state.searchFields.length < 4 && this.state.searchFields.length === i + 1} />
+                        isLastField={this.state.searchFields.length < 4 && this.state.searchFields.length === i + 1}
+                        grammarData={this.props.uiData.grammar} />
                     ))}
 
                 </div>

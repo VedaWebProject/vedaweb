@@ -2,18 +2,22 @@ export default {
 	"search": {
 		"grammar": [
 			{
+				"text": "Person",
 				"field": "person",
 				"values": ["1.", "2.", "2./3."]
 			},
 			{
+				"text": "Case",
 				"field": "case",
 				"values": ["Akk.", "Gen.", "Dat.", "Ind."]
 			},
 			{
+				"text": "Diathesis",
 				"field": "diathesis",
 				"values": ["med.", "dings."]
 			},
 			{
+				"text": "Time",
 				"field": "time",
 				"values": ["pres.", "past.", "fut."]
 			}
