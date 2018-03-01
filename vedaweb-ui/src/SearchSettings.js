@@ -16,9 +16,9 @@ class SearchSettings extends Component {
             toBook: -1,
             toBookRange: [],
             fromHymn: -1,
-            fromHymnRange: 10,
+            fromHymnRange: [1,10],
             toHymn: -1,
-            toHymnRange: 10,
+            toHymnRange: [1,10],
             scoped: false
         };
 
@@ -34,7 +34,7 @@ class SearchSettings extends Component {
 
         for (let book of this.props.books){
             if (Number(book.id) === value){
-                fromHymnRange = book.hymns;
+                fromHymnRange = [1, book.hymns];
             }
             if (Number(book.id) >= value){
                 toBookRange.push(book);
@@ -57,12 +57,16 @@ class SearchSettings extends Component {
 
         for (let book of this.props.books){
             if (Number(book.id) === value){
-                toHymnRange = book.hymns;
+                toHymnRange = [
+                    (value === this.state.fromBook ? this.state.fromHymn : 1),
+                    book.hymns
+                ];
             }
         }
 
         this.setState({
             toBook: value,
+            toHymn: -1,
             toHymnRange: toHymnRange
         });
     }
@@ -146,11 +150,11 @@ class SearchSettings extends Component {
                                     value={-1}>
                                         {'all'}
                                 </Option>
-                                {[...Array(this.state.fromHymnRange)].map((x, i) => (
+                                {[...Array(this.state.fromHymnRange[1])].map((x, i) => (
                                     <Option
-                                    key={'fromHymn_' + i}
-                                    value={i+1}>
-                                        {("00" + (i+1)).slice(-3)}
+                                    key={'fromHymn_' + i + this.state.fromHymnRange[0]}
+                                    value={i + this.state.fromHymnRange[0]}>
+                                        {("00" + (i + this.state.fromHymnRange[0])).slice(-3)}
                                     </Option>
                                 ))}
                             </Select>
@@ -198,7 +202,7 @@ class SearchSettings extends Component {
                             <Select
                             onSelect={this.onChangeHymnTo}
                             defaultValue={'all'}
-                            key={'toHymn' + this.state.fromBook + this.state.scoped}
+                            key={'toHymn' + this.state.fromBook + this.state.toBook}
                             disabled={!this.state.scoped || this.state.toBook === -1}
                             style={{ width: '95%' }} >
                                 <Option
@@ -206,11 +210,11 @@ class SearchSettings extends Component {
                                     value={-1}>
                                         {'all'}
                                 </Option>
-                                {[...Array(this.state.toHymnRange)].map((x, i) => (
+                                {[...Array(this.state.toHymnRange[1] - this.state.toHymnRange[0] + 1)].map((x, i) => (
                                     <Option
-                                    key={'toHymn_' + i}
-                                    value={i+1}>
-                                        {("00" + (i+1)).slice(-3)}
+                                    key={'toHymn_' + i + this.state.toHymnRange[0]}
+                                    value={i + this.state.toHymnRange[0]}>
+                                        {("00" + (i + this.state.toHymnRange[0])).slice(-3)}
                                     </Option>
                                 ))}
                             </Select>
