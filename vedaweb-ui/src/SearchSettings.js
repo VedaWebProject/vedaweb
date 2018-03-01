@@ -61,6 +61,7 @@ class SearchSettings extends Component {
                     (value === this.state.fromBook ? this.state.fromHymn : 1),
                     book.hymns
                 ];
+                break;
             }
         }
 

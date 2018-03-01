@@ -8,12 +8,6 @@ const Option = Select.Option;
 class SearchField extends Component {
 
 
-    /**
-     * STATE:
-     * fieldName = field
-     * fieldValue = value
-     */
-
     constructor(props){
         super(props);
 
@@ -21,8 +15,7 @@ class SearchField extends Component {
         this.state = {
             fieldName: null,
             fieldValue: null,
-            fieldValueOptions: [],
-            isLoaded: true
+            fieldValueOptions: []
         };
 
         this.onRemove = this.onRemove.bind(this);
@@ -31,45 +24,26 @@ class SearchField extends Component {
     }
 
     onChangeFieldName(value, option){
+        let fieldValueOptions = this.state.fieldValueOptions;
 
-        //TODO: use data from this.props.grammarData !!!
+        for (let gramm of this.props.grammarData){
+            if (value === gramm.field){
+                fieldValueOptions = gramm.values;
+                break;
+            }
+        }
 
         this.setState({
-            isLoaded: false,
-            fieldName: value
+            fieldName: value,
+            fieldValue: null,
+            fieldValueOptions : fieldValueOptions
         });
-        
-        fetch("/data/grammar/" + value)
-        .then(res => res.json())
-        .then(
-            (result) => {
 
-                var valueOptions = result.values.map(function(val) {
-                    return {
-                        text: val,
-                        value: val
-                    };
-                });
-
-                this.setState({
-                    isLoaded: true,
-                    fieldValueOptions: valueOptions
-                });
-
-                this.props.onSetData({
-                    fieldId: this.props.fieldId,
-                    fieldName: value,
-                    fieldValue: null
-                });
-
-            },
-            (error) => {
-                this.setState({
-                    isLoaded: true,
-                    error
-                });
-            }
-        )
+        this.props.onSetData({
+            fieldId: this.props.fieldId,
+            fieldName: value,
+            fieldValue: null
+        });
     }
 
     onChangeFieldValue(value, option){
@@ -83,7 +57,6 @@ class SearchField extends Component {
     onRemove(e){
         this.props.onClickRemove(this);
     }
-
 
     render() {
 
@@ -119,6 +92,7 @@ class SearchField extends Component {
 
                 <Col span={8}>
                     <Select
+                    key={'fieldValue_of_' + this.state.fieldName}
                     showSearch
                     placeholder="Value..."
                     onSelect={this.onChangeFieldValue}
@@ -126,9 +100,9 @@ class SearchField extends Component {
                     style={{ width: '98%' }} >
                         {this.state.fieldValueOptions.map((option, i) => (
                             <Option
-                                key={i.toString(36) + i}
-                                value={option.value}>
-                                    {option.text}
+                                key={this.state.fieldName + i}
+                                value={option}>
+                                    {option}
                             </Option>
                         ))}
                     </Select>

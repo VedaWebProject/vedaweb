@@ -38,6 +38,7 @@ class SearchView extends Component {
         this.setState = ({
             advancedSearchData: data
         });
+        console.log(JSON.stringify(data));
     }
 
     updateSearchSettings(data){
