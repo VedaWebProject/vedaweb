@@ -33,6 +33,11 @@ export default {
             {"id": "08", "hymns": 13},
             {"id": "09", "hymns": 142},
             {"id": "10", "hymns": 86}
-        ]
+		],
+		"transliteration": [
+			{"id": "hk", "name": "Harvard-Kyoto"},
+			{"id": "iast", "name": "IAST"},
+			{"id": "iso", "name": "ISO"}
+		]
 	}
 }

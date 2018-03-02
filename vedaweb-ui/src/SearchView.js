@@ -105,7 +105,7 @@ class SearchView extends Component {
                             />
                         </Panel>
 
-                        <Panel header="Advanced search" key="advanced" style={customPanelStyle}>
+                        <Panel header="Advanced Search" key="advanced" style={customPanelStyle}>
                             <SearchBlockList
                             onUpdateSearchData={this.updateAdvancedSearchData}
                             grammarData={this.props.uiData.grammar} />
@@ -116,6 +116,7 @@ class SearchView extends Component {
                     <SearchSettings
                     bookRange={this.props.uiData.books.length}
                     books={this.props.uiData.books}
+                    transliteration={this.props.uiData.transliteration}
                     onSearchSettingsChanged={this.updateSearchSettings}/>
 
                     <Row id="search-view-buttons">

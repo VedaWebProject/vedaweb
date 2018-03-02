@@ -25,3 +25,7 @@ a {
 .hidden {
     display: none;
 }
+
+.bottom-gap {
+    margin-bottom: 1rem;
+}

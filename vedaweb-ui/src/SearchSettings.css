@@ -26,3 +26,15 @@
 .search-settings-row {
     margin-bottom: 1rem;
 }
+
+.search-settings-category {
+    padding: .8rem;
+    border: 1px solid #d9d9d9;
+    border-radius: 4px;
+    background-color: #fff;
+}
+
+.search-settings-category-title {
+    font-weight: bold;
+    padding-bottom: 1rem;
+}

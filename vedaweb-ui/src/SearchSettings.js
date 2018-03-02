@@ -107,129 +107,140 @@ class SearchSettings extends Component {
             <div id="search-settings">
 
                 <div id="search-settings-title">
-                    <Icon type="setting"/>&nbsp;&nbsp;&nbsp;Search Scope
+                    <Icon type="setting"/>&nbsp;&nbsp;&nbsp;Search Settings
                 </div>
 
                 <div id="search-settings-body">
 
-                    <Row type="flex" align="middle" className="search-settings-row">
-
-                        <Col span={2} className="bold">
-                            From:
-                        </Col>
-
-                        <Col span={2} className="content-right">
-                            book:&nbsp;
-                        </Col>
-
-                        <Col span={4}>
-                            <Select
-                            onSelect={this.onChangeBookFrom}
-                            defaultValue='all'
-                            style={{ width: '95%' }} >
+                    <div className="search-settings-category bottom-gap">
+                        <div className="search-settings-category-title">Input Transliteration</div>
+                        <Select
+                        placeholder="Choose..."
+                        style={{ width: '100%' }}>
+                            {this.props.transliteration.map((trans, i) => (
                                 <Option
-                                    key={'all_-1'}
-                                    value={-1}>
-                                        {'all'}
+                                key={'trans_' + trans.id}
+                                value={trans.id}>
+                                    {trans.name}
                                 </Option>
-                                {this.props.books.map((book, i) => (
+                            ))}
+                        </Select>
+                    </div>
+
+                    <div className="search-settings-category">
+                        <div className="search-settings-category-title">Search Scope</div>
+
+                        <Row type="flex" align="middle" className="search-settings-row">
+
+                            <Col span={3} className="content-right">
+                                from book&nbsp;
+                            </Col>
+
+                            <Col span={4}>
+                                <Select
+                                onSelect={this.onChangeBookFrom}
+                                defaultValue='all'
+                                style={{ width: '95%' }} >
                                     <Option
-                                    key={'fromBook_' + book.id}
-                                    value={Number(book.id)}>
-                                        {book.id}
+                                        key={'all_-1'}
+                                        value={-1}>
+                                            {'all'}
                                     </Option>
-                                ))}
-                            </Select>
-                        </Col>
+                                    {this.props.books.map((book, i) => (
+                                        <Option
+                                        key={'fromBook_' + book.id}
+                                        value={Number(book.id)}>
+                                            {book.id}
+                                        </Option>
+                                    ))}
+                                </Select>
+                            </Col>
 
-                        <Col span={3} className="content-right">
-                            hymn:&nbsp;
-                        </Col>
+                            <Col span={2} className="content-right">
+                                hymn&nbsp;
+                            </Col>
 
-                        <Col span={4}>
-                            <Select
-                            onSelect={this.onChangeHymnFrom}
-                            defaultValue={'all'}
-                            key={'fromHymn' + this.state.fromBook + this.state.scoped}
-                            disabled={!this.state.scoped}
-                            style={{ width: '95%' }} >
-                                <Option
-                                    key={'all_-1'}
-                                    value={-1}>
-                                        {'all'}
-                                </Option>
-                                {[...Array(this.state.fromHymnRange[1])].map((x, i) => (
+                            <Col span={4}>
+                                <Select
+                                onSelect={this.onChangeHymnFrom}
+                                defaultValue={'all'}
+                                key={'fromHymn' + this.state.fromBook + this.state.scoped}
+                                disabled={!this.state.scoped}
+                                style={{ width: '95%' }} >
                                     <Option
-                                    key={'fromHymn_' + i + this.state.fromHymnRange[0]}
-                                    value={i + this.state.fromHymnRange[0]}>
-                                        {("00" + (i + this.state.fromHymnRange[0])).slice(-3)}
+                                        key={'all_-1'}
+                                        value={-1}>
+                                            {'all'}
                                     </Option>
-                                ))}
-                            </Select>
-                        </Col>
+                                    {[...Array(this.state.fromHymnRange[1])].map((x, i) => (
+                                        <Option
+                                        key={'fromHymn_' + i + this.state.fromHymnRange[0]}
+                                        value={i + this.state.fromHymnRange[0]}>
+                                            {("00" + (i + this.state.fromHymnRange[0])).slice(-3)}
+                                        </Option>
+                                    ))}
+                                </Select>
+                            </Col>
 
-                    </Row>
+                        </Row>
 
-                    <Row type="flex" align="middle">
+                        <Row type="flex" align="middle">
 
-                        <Col span={2} className="bold">
-                            To:
-                        </Col>
+                            <Col span={3} className="content-right">
+                                to book&nbsp;
+                            </Col>
 
-                        <Col span={2} className="content-right">
-                            book:&nbsp;
-                        </Col>
-
-                        <Col span={4}>
-                            <Select
-                            onSelect={this.onChangeBookTo}
-                            defaultValue={'all'}
-                            key={'toBook' + this.state.fromBook + this.state.scoped}
-                            disabled={!this.state.scoped}
-                            style={{ width: '95%' }} >
-                                <Option
-                                    key={'all_-1'}
-                                    value={-1}>
-                                        {'all'}
-                                </Option>
-                                {this.state.toBookRange.map((book, i) => (
+                            <Col span={4}>
+                                <Select
+                                onSelect={this.onChangeBookTo}
+                                defaultValue={'all'}
+                                key={'toBook' + this.state.fromBook + this.state.scoped}
+                                disabled={!this.state.scoped}
+                                style={{ width: '95%' }} >
                                     <Option
-                                    key={'toBook_' + book.id}
-                                    value={Number(book.id)}>
-                                        {book.id}
+                                        key={'all_-1'}
+                                        value={-1}>
+                                            {'all'}
                                     </Option>
-                                ))}
-                            </Select>
-                        </Col>
+                                    {this.state.toBookRange.map((book, i) => (
+                                        <Option
+                                        key={'toBook_' + book.id}
+                                        value={Number(book.id)}>
+                                            {book.id}
+                                        </Option>
+                                    ))}
+                                </Select>
+                            </Col>
 
-                        <Col span={3} className="content-right">
-                            hymn:&nbsp;
-                        </Col>
+                            <Col span={2} className="content-right">
+                                hymn&nbsp;
+                            </Col>
 
-                        <Col span={4}>
-                            <Select
-                            onSelect={this.onChangeHymnTo}
-                            defaultValue={'all'}
-                            key={'toHymn_' + this.state.fromBook + this.state.toBook + this.state.fromHymn}
-                            disabled={!this.state.scoped || this.state.toBook === -1}
-                            style={{ width: '95%' }} >
-                                <Option
-                                    key={'all_-1'}
-                                    value={-1}>
-                                        {'all'}
-                                </Option>
-                                {[...Array(this.state.toHymnRange[1] - this.state.toHymnRange[0] + 1)].map((x, i) => (
+                            <Col span={4}>
+                                <Select
+                                onSelect={this.onChangeHymnTo}
+                                defaultValue={'all'}
+                                key={'toHymn_' + this.state.fromBook + this.state.toBook + this.state.fromHymn}
+                                disabled={!this.state.scoped || this.state.toBook === -1}
+                                style={{ width: '95%' }} >
                                     <Option
-                                    key={'toHymn_' + i + this.state.toHymnRange[0]}
-                                    value={i + this.state.toHymnRange[0]}>
-                                        {("00" + (i + this.state.toHymnRange[0])).slice(-3)}
+                                        key={'all_-1'}
+                                        value={-1}>
+                                            {'all'}
                                     </Option>
-                                ))}
-                            </Select>
-                        </Col>
+                                    {[...Array(this.state.toHymnRange[1] - this.state.toHymnRange[0] + 1)].map((x, i) => (
+                                        <Option
+                                        key={'toHymn_' + i + this.state.toHymnRange[0]}
+                                        value={i + this.state.toHymnRange[0]}>
+                                            {("00" + (i + this.state.toHymnRange[0])).slice(-3)}
+                                        </Option>
+                                    ))}
+                                </Select>
+                            </Col>
 
-                    </Row>
+                        </Row>
 
+                    </div>
                 </div>
             </div>
         );
