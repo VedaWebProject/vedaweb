@@ -1,10 +1,11 @@
 import React, { Component } from "react";
-import { Row, Col, Icon } from 'antd';
-
+import { Row, Col, Icon, Input } from 'antd';
 
 import SearchField from "./SearchField";
 
-import './SearchBlock.css'
+import './SearchBlock.css';
+
+const Search = Input.Search;
 
 
 class SearchBlock extends Component {
@@ -77,6 +78,17 @@ class SearchBlock extends Component {
                     </Col>
 
                     <Col span={23}>
+
+                        <Row
+                        type="flex"
+                        align="middle"
+                        justify="center">
+                            <Col span={18}>
+                                <Search placeholder="search term"/>
+                            </Col>
+                            <Col span={4}></Col>
+                        </Row>
+
                         {this.state.searchFields.map((field, i) => (
                             <SearchField
                             key={field.fieldId}
@@ -88,6 +100,7 @@ class SearchBlock extends Component {
                             isLastField={this.state.searchFields.length < 4 && this.state.searchFields.length === i + 1}
                             grammarData={this.props.grammarData} />
                         ))}
+
                     </Col>
 
                 </Row>
