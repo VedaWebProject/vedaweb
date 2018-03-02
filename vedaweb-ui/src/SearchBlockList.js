@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Row, Col, Button } from 'antd';
+import { Row, Col, Icon } from 'antd';
 
 import SearchBlock from "./SearchBlock";
 
@@ -32,15 +32,21 @@ class SearchBlockList extends Component {
         });
     }
 
-    removeBlock(b){
-        //TODO update data
+    removeBlock(blockId){
+        var searchBlocks = this.state.searchBlocks.filter(block => block.blockId !== blockId);
+        
         this.setState({
-            searchBlocks: this.state.searchBlocks.slice(0, -1)
+            searchBlocks: searchBlocks
         });
+
+        this.updateSearchData({blockId: blockId, blockData: []});
     }
 
     updateSearchData(blockData){
-        var newSearchData = this.state.searchData.filter(b => b.blockId !== blockData.blockId).concat(blockData);
+        var newSearchData = this.state.searchData.filter(b => b.blockId !== blockData.blockId);
+
+        if (blockData.blockData.length > 0)
+            newSearchData = newSearchData.concat(blockData);
         
         this.setState({
             searchData: newSearchData
@@ -58,32 +64,19 @@ class SearchBlockList extends Component {
                         <SearchBlock
                         key={block.blockId}
                         blockId={block.blockId}
+                        showRemoveButton={this.state.searchBlocks.length > 1}
                         onUpdateBlockData={this.updateSearchData}
-                        grammarData={this.props.grammarData} />
+                        grammarData={this.props.grammarData}
+                        onClickRemove={this.removeBlock} />
                 ))}
 
-                <Row
-                type="flex"
-                className="search-block-list-controls"
-                align="middle"
-                justify="center"
-                gutter={32}>
-                    <Col span={12} className="content-right"> 
-                            <Button
-                            onClick={this.addBlock}
-                            disabled={!(this.state.searchBlocks.length < 4)}
-                            icon="plus">
-                                Add another search block
-                            </Button>
-                    </Col>
-
-                    <Col span={12} className="content-left"> 
-                        <Button
-                        onClick={this.removeBlock}
-                        disabled={!(this.state.searchBlocks.length > 1)}
-                        icon="minus">
-                            Remove one search block
-                        </Button>
+                <Row className={'search-block-list-controls' + (this.state.searchBlocks.length >= 4 ? ' hidden' : '')}>
+                    <Col span={1}>
+                        <div
+                        className={'search-block-add content-center'}
+                        onClick={this.addBlock}>
+                            <Icon type="plus"/>
+                        </div>
                     </Col>
                 </Row>
 

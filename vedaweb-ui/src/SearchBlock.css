@@ -5,4 +5,19 @@
     background-color: #fff;
     border-radius: 3px;
     border: 1px solid #ddc;
+    border-left: 6px solid #aa9;
+}
+
+.search-block-tab {
+    padding: .2rem;
+    background-color: #aa9;
+    color: #fff;
+    font-weight: bold;
+    border-radius: 0px 4px 4px 0px;
+    transition: .2s;
+    cursor: pointer;
+}
+
+.search-block-tab:hover {
+    background-color: #A55;
 }

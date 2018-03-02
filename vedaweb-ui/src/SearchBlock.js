@@ -1,4 +1,6 @@
 import React, { Component } from "react";
+import { Row, Col, Icon } from 'antd';
+
 
 import SearchField from "./SearchField";
 
@@ -17,6 +19,7 @@ class SearchBlock extends Component {
 
         this.addField = this.addField.bind(this);
         this.removeField = this.removeField.bind(this);
+        this.onClickRemove = this.onClickRemove.bind(this);
         this.updateBlockData = this.updateBlockData.bind(this);
     }
 
@@ -29,6 +32,10 @@ class SearchBlock extends Component {
         this.setState({
             searchFields : this.state.searchFields.concat({'fieldId': fieldId})
         });
+    }
+
+    onClickRemove(){
+        this.props.onClickRemove(this.props.blockId);
     }
 
     removeField(toRemove){
@@ -59,22 +66,31 @@ class SearchBlock extends Component {
     render() {
         return (
 
-                <div className="search-block">
+                <Row type="flex" align="middle" className="search-block">
                     
-                    {this.state.searchFields.map((field, i) => (
-                        <SearchField
-                        key={field.fieldId}
-                        fieldId={field.fieldId}
-                        isFirstField={i === 0}
-                        onClickRemove={this.removeField}
-                        onClickAdd={this.addField}
-                        onSetData={this.updateBlockData}
-                        isRemovable={this.state.searchFields.length > 1}
-                        isLastField={this.state.searchFields.length < 4 && this.state.searchFields.length === i + 1}
-                        grammarData={this.props.grammarData} />
-                    ))}
+                    <Col span={1}>
+                        <div
+                        className={'search-block-tab content-center' + (!this.props.showRemoveButton ? ' hidden' : '')}
+                        onClick={this.onClickRemove}>
+                            <Icon type="close"/>
+                        </div>
+                    </Col>
 
-                </div>
+                    <Col span={23}>
+                        {this.state.searchFields.map((field, i) => (
+                            <SearchField
+                            key={field.fieldId}
+                            fieldId={field.fieldId}
+                            onClickRemove={this.removeField}
+                            onClickAdd={this.addField}
+                            onSetData={this.updateBlockData}
+                            isRemovable={this.state.searchFields.length > 1}
+                            isLastField={this.state.searchFields.length < 4 && this.state.searchFields.length === i + 1}
+                            grammarData={this.props.grammarData} />
+                        ))}
+                    </Col>
+
+                </Row>
             
         );
     }

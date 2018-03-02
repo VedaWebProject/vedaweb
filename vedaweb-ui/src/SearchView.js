@@ -74,7 +74,7 @@ class SearchView extends Component {
         };
 
         const customBodyStyle = {
-            background: '#bba',
+            background: '#aa9',
             paddingBottom: '0px'
         };
 

@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Row, Col, Button, Icon, Select } from 'antd';
+import { Row, Col, Button, Select } from 'antd';
 
 import './SearchField.css';
 
@@ -68,13 +68,7 @@ class SearchField extends Component {
             justify="center"
             className="search-field">
 
-                <Col span={2} className="block-number">
-                    { this.props.isFirstField &&
-                        <Icon type="paper-clip" />
-                    }
-                </Col>
-
-                <Col span={8}>
+                <Col span={9}>
                     <Select
                     showSearch
                     placeholder="Attribute..."
@@ -90,7 +84,7 @@ class SearchField extends Component {
                     </Select>
                 </Col>
 
-                <Col span={8}>
+                <Col span={9}>
                     <Select
                     key={'fieldValue_of_' + this.state.fieldName}
                     showSearch
