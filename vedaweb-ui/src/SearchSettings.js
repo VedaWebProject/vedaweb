@@ -73,8 +73,15 @@ class SearchSettings extends Component {
     }
 
     onChangeHymnFrom(value){
+        var toHymnRange = this.state.toHymnRange;
+
+        if (this.state.fromBook === this.state.toBook)
+            toHymnRange[0] = value
+
         this.setState({
-            fromHymn: value
+            fromHymn: value,
+            toHymn: -1,
+            toHymnRange: toHymnRange
         });
     }
 
@@ -203,7 +210,7 @@ class SearchSettings extends Component {
                             <Select
                             onSelect={this.onChangeHymnTo}
                             defaultValue={'all'}
-                            key={'toHymn' + this.state.fromBook + this.state.toBook}
+                            key={'toHymn_' + this.state.fromBook + this.state.toBook + this.state.fromHymn}
                             disabled={!this.state.scoped || this.state.toBook === -1}
                             style={{ width: '95%' }} >
                                 <Option
