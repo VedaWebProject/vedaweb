@@ -91,7 +91,7 @@ class SearchField extends Component {
                     placeholder="Value..."
                     onSelect={this.onChangeFieldValue}
                     disabled = {this.state.fieldValueOptions.length === 0}
-                    style={{ width: '98%' }} >
+                    style={{ width: '100%' }} >
                         {this.state.fieldValueOptions.map((option, i) => (
                             <Option
                                 key={this.state.fieldName + i}

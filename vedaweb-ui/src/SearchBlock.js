@@ -22,6 +22,7 @@ class SearchBlock extends Component {
         this.removeField = this.removeField.bind(this);
         this.onClickRemove = this.onClickRemove.bind(this);
         this.updateBlockData = this.updateBlockData.bind(this);
+        this.onTermChange = this.onTermChange.bind(this);
     }
 
     componentDidMount(){
@@ -63,6 +64,14 @@ class SearchBlock extends Component {
         this.props.onUpdateBlockData({blockId: this.props.blockId, blockData: newBlockData});
     }
 
+    onTermChange(event){
+        this.updateBlockData({
+            fieldId: 'term_' + this.props.blockId,
+            fieldName: 'term',
+            fieldValue: event.target.value
+        });
+    }
+
 
     render() {
         return (
@@ -84,7 +93,10 @@ class SearchBlock extends Component {
                         align="middle"
                         justify="center">
                             <Col span={18}>
-                                <Search placeholder="search term"/>
+                                <Search
+                                onChange={this.onTermChange}
+                                placeholder="search term (optional)"
+                                className="search-term-input"/>
                             </Col>
                             <Col span={4}></Col>
                         </Row>

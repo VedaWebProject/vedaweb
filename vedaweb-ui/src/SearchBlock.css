@@ -21,3 +21,8 @@
 .search-block-tab:hover {
     background-color: #A55;
 }
+
+.search-term-input {
+    padding-top: .2rem;
+    padding-bottom: .2rem;
+}
