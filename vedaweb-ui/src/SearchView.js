@@ -17,20 +17,20 @@ class SearchView extends Component {
         super(props);
 
         this.state = {
-            simpleSearch: true,
+            searchMode: 'simple',
             simpleSearchData: {},
             advancedSearchData: {},
             searchSettings: {}
         };
 
-        this.switchSearchMode = this.switchSearchMode.bind(this);
+        this.onChangeSearchMode = this.onChangeSearchMode.bind(this);
         this.updateAdvancedSearchData = this.updateAdvancedSearchData.bind(this);
         this.updateSearchSettings = this.updateSearchSettings.bind(this);
     }
 
-    switchSearchMode(e){
+    onChangeSearchMode(mode){
         this.setState = ({
-            simpleSearch: e.target.activeKey === 'simple'
+            searchMode: mode
         });
     }
 
@@ -96,7 +96,10 @@ class SearchView extends Component {
                 style={{top: 20}}
                 footer={null} >
 
-                    <Collapse accordion defaultActiveKey="simple">
+                    <Collapse
+                    accordion
+                    defaultActiveKey="simple"
+                    onChange={this.onChangeSearchMode}>
 
                         <Panel header="Simple Search" key="simple" style={customPanelStyle}>
                             <Search

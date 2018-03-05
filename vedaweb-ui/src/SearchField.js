@@ -47,6 +47,10 @@ class SearchField extends Component {
     }
 
     onChangeFieldValue(value, option){
+        this.setState({
+            fieldValue: value
+        });
+
         this.props.onSetData({
             fieldId: this.props.fieldId,
             fieldName: this.state.fieldName,
