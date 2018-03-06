@@ -35,7 +35,7 @@ class App extends Component {
 
         return (
 
-            <div className={ searchViewActive ? "blurred" : "" }>
+            <div id="app" className={ searchViewActive ? "blurred" : "" }>
                 <NavBar onClickOpenSearchView={this.openSearchView} />
                 <ContentView/>
                 <Footer/>

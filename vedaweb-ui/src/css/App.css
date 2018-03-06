@@ -1,3 +1,7 @@
+#app {
+    min-width: 768px;    
+}
+
 a {
     outline: 0;
 }
