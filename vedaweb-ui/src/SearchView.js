@@ -87,6 +87,7 @@ class SearchView extends Component {
         return (
             <div id="search-view" key="search-view">
                 <Modal
+                id="search-view"
                 width={768}
                 visible={this.props.visible}
                 title={titleHTML}
