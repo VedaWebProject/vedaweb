@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Row, Col, Icon } from 'antd';
 
 import logo from "./img/logo_white.png";
-import "./NavBar.css";
+import "./css/NavBar.css";
 
 class NavBar extends Component {
 

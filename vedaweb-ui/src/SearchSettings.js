@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Row, Col, Select, Icon } from 'antd';
 
-import './SearchSettings.css';
+import './css/SearchSettings.css';
 
 const Option = Select.Option;
 

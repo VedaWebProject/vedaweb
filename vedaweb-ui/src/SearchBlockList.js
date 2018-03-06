@@ -3,7 +3,7 @@ import { Row, Col, Icon } from 'antd';
 
 import SearchBlock from "./SearchBlock";
 
-import './SearchBlockList.css'
+import './css/SearchBlockList.css'
 
 
 class SearchBlockList extends Component {

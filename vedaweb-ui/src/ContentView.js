@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Row, Col } from 'antd';
 
-import "./ContentView.css";
+import "./css/ContentView.css";
 
 
 class ContentView extends Component {

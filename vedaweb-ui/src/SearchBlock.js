@@ -3,7 +3,7 @@ import { Row, Col, Icon, Input } from 'antd';
 
 import SearchField from "./SearchField";
 
-import './SearchBlock.css';
+import './css/SearchBlock.css';
 
 const Search = Input.Search;
 

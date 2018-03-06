@@ -5,7 +5,7 @@ import SearchView from './SearchView';
 import ContentView from './ContentView';
 import Footer from './Footer';
 
-import "./App.css";
+import "./css/App.css";
 import UIData from './ui-data.js';
 
 class App extends Component {

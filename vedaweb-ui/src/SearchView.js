@@ -4,7 +4,7 @@ import { Row, Col, Collapse, Icon, Modal, Button, Input } from 'antd';
 import SearchBlockList from "./SearchBlockList";
 import SearchSettings from "./SearchSettings";
 
-import './SearchView.css';
+import './css/SearchView.css';
 
 const Panel = Collapse.Panel;
 const Search = Input.Search;

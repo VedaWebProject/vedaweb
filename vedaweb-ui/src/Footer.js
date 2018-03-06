@@ -6,7 +6,7 @@ import logoCSALT from "./img/logo_csalt.png";
 import logoCSL from "./img/logo_csl.png";
 import logoTCSL from "./img/logo_tcsl.png";
 
-import "./Footer.css";
+import "./css/Footer.css";
 
 class Footer extends Component {
 
