@@ -24,7 +24,7 @@ class SearchView extends Component {
         };
 
         this.onChangeSearchMode = this.onChangeSearchMode.bind(this);
-        this.updateAdvancedSearchData = this.updateAdvancedSearchData.bind(this);
+        this.updateAdvancedSearch = this.updateAdvancedSearch.bind(this);
         this.updateSearchSettings = this.updateSearchSettings.bind(this);
     }
 
@@ -34,10 +34,8 @@ class SearchView extends Component {
         });
     }
 
-    updateAdvancedSearchData(data){
-        this.setState = ({
-            advancedSearchData: data
-        });
+    updateAdvancedSearch(data){
+        //this.props.onUpdateAdvancedSearch(data);
         console.log(JSON.stringify(data));
     }
 
@@ -47,20 +45,6 @@ class SearchView extends Component {
         });
         console.log(JSON.stringify(data));
     }
-
-    prepareAdvancedSearchData(){
-        var data = [];
-        //transform search block data
-        for (const block of this.state.advancedSearchData){
-            let b = {};
-            for (const field of block.blockData){
-                b[field.fieldName] = field.fieldValue;
-            }
-            data.push(b);
-        }
-        return data;
-    }
-
 
     render() {
 
@@ -111,7 +95,7 @@ class SearchView extends Component {
 
                         <Panel header="Advanced Search" key="advanced" style={customPanelStyle}>
                             <SearchBlockList
-                            onUpdateSearchData={this.updateAdvancedSearchData}
+                            onUpdate={this.updateAdvancedSearch}
                             grammarData={this.props.uiData.grammar} />
                         </Panel>
 

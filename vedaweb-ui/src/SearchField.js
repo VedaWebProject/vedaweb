@@ -11,55 +11,33 @@ class SearchField extends Component {
     constructor(props){
         super(props);
 
-        //TODO: change defaults
         this.state = {
-            fieldName: null,
-            fieldValue: null,
-            fieldValueOptions: []
-        };
-
-        this.onRemove = this.onRemove.bind(this);
-        this.onChangeFieldName = this.onChangeFieldName.bind(this);
-        this.onChangeFieldValue = this.onChangeFieldValue.bind(this);
-    }
-
-    onChangeFieldName(value, option){
-        let fieldValueOptions = this.state.fieldValueOptions;
-
-        for (let gramm of this.props.grammarData){
-            if (value === gramm.field){
-                fieldValueOptions = gramm.values;
-                break;
-            }
+            valueOptions: []
         }
 
-        this.setState({
-            fieldName: value,
-            fieldValue: null,
-            fieldValueOptions : fieldValueOptions
-        });
+        this.onRemove = this.onRemove.bind(this);
+        this.updateFieldName = this.updateFieldName.bind(this);
+        this.updateFieldValue = this.updateFieldValue.bind(this);
+    }
 
-        this.props.onSetData({
-            fieldId: this.props.fieldId,
-            fieldName: value,
-            fieldValue: null
+    updateFieldName(value, option){
+        this.props.onUpdateField({
+            id: this.props.id,
+            name: value,
+            value: ''
         });
     }
 
-    onChangeFieldValue(value, option){
-        this.setState({
-            fieldValue: value
-        });
-
-        this.props.onSetData({
-            fieldId: this.props.fieldId,
-            fieldName: this.state.fieldName,
-            fieldValue: value
+    updateFieldValue(value, option){
+        this.props.onUpdateField({
+            id: this.props.id,
+            name: this.props.fieldName,
+            value: value
         });
     }
 
     onRemove(e){
-        this.props.onClickRemove(this);
+        this.props.onClickRemove(this.props.id);
     }
 
     render() {
@@ -75,12 +53,14 @@ class SearchField extends Component {
                 <Col span={9}>
                     <Select
                     showSearch
-                    placeholder="Attribute..."
-                    onSelect={this.onChangeFieldName}
+                    defaultValue={this.props.grammarData[0].field}
+                    value={this.props.fieldName}
+                    placeholder="Select a person"
+                    onSelect={this.updateFieldName}
                     style={{ width: '98%' }} >
                         {this.props.grammarData.map((option, i) => (
                             <Option
-                                key={i.toString(36) + i}
+                                key={'fValOpt_' + i}
                                 value={option.field}>
                                     {option.text}
                             </Option>
@@ -90,19 +70,20 @@ class SearchField extends Component {
 
                 <Col span={9}>
                     <Select
-                    key={'fieldValue_of_' + this.state.fieldName}
                     showSearch
-                    placeholder="Value..."
-                    onSelect={this.onChangeFieldValue}
-                    disabled = {this.state.fieldValueOptions.length === 0}
+                    key={'fieldValue_of_' + this.props.id}
+                    value={this.props.fieldValue}
+                    onSelect={this.updateFieldValue}
+                    disabled = {this.props.fieldName.length === 0}
                     style={{ width: '100%' }} >
-                        {this.state.fieldValueOptions.map((option, i) => (
-                            <Option
-                                key={this.state.fieldName + i}
-                                value={option}>
-                                    {option}
-                            </Option>
-                        ))}
+                        {this.props.fieldName.length > 0 &&
+                            this.props.grammarData.filter(cat => cat.field === this.props.fieldName)[0].values.map(value => (
+                                <Option
+                                key={'value_' + this.props.id}
+                                value={value}>
+                                    {value}
+                                </Option>
+                            ))}
                     </Select>
                 </Col>
 

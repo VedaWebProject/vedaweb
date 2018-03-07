@@ -12,65 +12,122 @@ class SearchBlockList extends Component {
         super(props);
 
         this.state = {
-            searchBlocks: [],
-            searchData: []
+            blocks: []
         };
 
         this.addBlock = this.addBlock.bind(this);
         this.removeBlock = this.removeBlock.bind(this);
-        this.updateSearchData = this.updateSearchData.bind(this);
+        this.updateBlock = this.updateBlock.bind(this);
+        this.addField = this.addField.bind(this);
+        this.removeField = this.removeField.bind(this);
     }
 
-    componentDidMount(){
+    componentWillMount(){
         this.addBlock();
     }
 
+    componentDidUpdate(){
+        //transform search block data into format expected by API
+        let data = [];
+        let countBlocks = 0;
+        
+        for (let block of this.state.blocks){
+            let b = {};
+            b['index'] = countBlocks++;
+            if (block.term.length > 0) b['term'] = block.term;
+            for (let field of block.fields){
+                if (field.value.length > 0) b[field.name] = field.value;
+            }
+            if (Object.keys(b).length > 1) data.push(b);
+        }
+        this.props.onUpdate(data);
+    }
+
     addBlock(){
-        var blockId = 'block_' + Date.now();
         this.setState({
-            searchBlocks : this.state.searchBlocks.concat({'blockId': blockId})
+            blocks: this.state.blocks.concat({
+                id: 'block_' + Date.now(),
+                term: '',
+                fields: []
+            })
         });
     }
 
-    removeBlock(blockId){
-        var searchBlocks = this.state.searchBlocks.filter(block => block.blockId !== blockId);
-        
+    removeBlock(id){
         this.setState({
-            searchBlocks: searchBlocks
+            blocks: this.state.blocks.filter(block => block.id !== id)
         });
-
-        this.updateSearchData({blockId: blockId, blockData: []});
     }
 
-    updateSearchData(blockData){
-        var newSearchData = this.state.searchData.filter(b => b.blockId !== blockData.blockId);
+    updateBlock(blockData){
+        let blocksUpdated = this.state.blocks.map(block => (
+            block.id !== blockData.id ? block : {
+                id: blockData.id,
+                term: blockData.hasOwnProperty('term') ? blockData.term : block.term,
+                fields: !blockData.hasOwnProperty('field') ? block.fields :
+                    block.fields.map(field => (
+                        field.id !== blockData.field.id ? field : {
+                            id: field.id,
+                            name: blockData.field.name,
+                            value: blockData.field.value
+                        }
+                    ))
+            }
+        ));
 
-        if (blockData.blockData.length > 0)
-            newSearchData = newSearchData.concat(blockData);
-        
         this.setState({
-            searchData: newSearchData
+            blocks: blocksUpdated
         });
+    }
 
-        this.props.onUpdateSearchData(newSearchData);
+    addField(blockId){
+        this.setState({
+            blocks: this.state.blocks.map(block => (
+                block.id !== blockId ? block : {
+                    id: block.id,
+                    term: block.term,
+                    fields: block.fields.concat({
+                        id: 'field_' + Date.now(),
+                        name: '',
+                        value: ''
+                    })
+                }
+            ))
+        });
+    }
+
+    removeField(blockId, fieldId){
+        this.setState({
+            blocks: this.state.blocks.map(block => (
+                block.id !== blockId ? block : {
+                    id: block.id,
+                    term: block.term,
+                    fields: block.fields.filter(field => field.id !== fieldId)
+                }
+            ))
+        });
     }
 
     render() {
+
         return (
             
             <div className="search-block-list">
 
-                {this.state.searchBlocks.map((block, i) => (
-                        <SearchBlock
-                        key={block.blockId}
-                        blockId={block.blockId}
-                        showRemoveButton={this.state.searchBlocks.length > 1}
-                        onUpdateBlockData={this.updateSearchData}
-                        grammarData={this.props.grammarData}
-                        onClickRemove={this.removeBlock} />
+                {this.state.blocks.map((block, i) => (
+                    <SearchBlock
+                    key={block.id}
+                    id={block.id}
+                    fields={block.fields}
+                    showRemoveButton={this.state.blocks.length > 1}
+                    onAddField={this.addField}
+                    onRemoveField={this.removeField}
+                    onUpdateBlock={this.updateBlock}
+                    onRemoveBlock={this.removeBlock}
+                    grammarData={this.props.grammarData} />
                 ))}
 
-                <Row className={'search-block-list-controls' + (this.state.searchBlocks.length >= 4 ? ' hidden' : '')}>
+                <Row className={'search-block-list-controls' + (this.state.blocks.length >= 4 ? ' hidden' : '')}>
                     <Col span={1}>
                         <div
                         className={'search-block-add content-center'}
