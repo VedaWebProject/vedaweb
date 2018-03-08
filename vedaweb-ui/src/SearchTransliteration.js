@@ -1,16 +1,15 @@
 import React, { Component } from "react";
-import { Row, Col, Select, Icon } from 'antd';
+import { Select } from 'antd';
 
 import './css/SearchTransliteration.css';
+
+import searchTransliterationStore from "./stores/searchTransliterationStore";
+import { view } from 'react-easy-state';
 
 const Option = Select.Option;
 
 
 class SearchTransliteration extends Component {
-
-    constructor(props){
-        super(props);
-    }
 
 
     render() {
@@ -20,10 +19,10 @@ class SearchTransliteration extends Component {
             <div className="search-settings-category bottom-gap">
                 <div className="search-settings-category-title">Input Transliteration</div>
                 <Select
-                value={this.props.value}
+                value={searchTransliterationStore.transliteration}
                 className="full-width"
-                onSelect={this.props.onSelect}>
-                    {this.props.options.map((option, i) => (
+                onSelect={(value, o) => searchTransliterationStore.setTransliteration(value)}>
+                    {searchTransliterationStore.transliterationOptions.map((option, i) => (
                         <Option
                         key={'trans_' + option.id}
                         value={option.id}>
@@ -38,4 +37,4 @@ class SearchTransliteration extends Component {
     }
 }
 
-export default SearchTransliteration;
+export default view(SearchTransliteration);

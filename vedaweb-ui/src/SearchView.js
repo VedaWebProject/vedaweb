@@ -64,16 +64,12 @@ class SearchView extends Component {
 
                         <Panel header="Advanced Search" key="advanced" style={customPanelStyle}>
                             <SearchBlockList
-                            onUpdate={this.updateAdvancedSearch}
-                            grammarData={this.props.uiData.grammar} />
+                            onUpdate={this.updateAdvancedSearch} />
                         </Panel>
 
                     </Collapse>
 
-                    <SearchSettings
-                    bookRange={this.props.uiData.books.length}
-                    books={this.props.uiData.books}
-                    transliteration={this.props.uiData.transliteration} />
+                    <SearchSettings/>
 
                     <Row id="search-view-buttons">
                         <Col span={12} className="content-left">

@@ -6,12 +6,21 @@ import ContentView from './ContentView';
 import Footer from './Footer';
 
 import "./css/App.css";
-import UIData from './ui-data.js';
+
+import UIData from './ui-data.js'; //DEV: load from server!
+
+import searchTransliterationStore from "./stores/searchTransliterationStore";
+import searchAdvancedStore from "./stores/searchAdvancedStore";
+import searchScopeStore from "./stores/searchScopeStore";
 
 class App extends Component {
 
     constructor(props){
         super(props);
+
+        searchTransliterationStore.setTransliterationOptions(UIData.search.transliteration); //DEV: load from server!
+        searchAdvancedStore.setGrammarOptions(UIData.search.grammar); //DEV: load from server!
+        searchScopeStore.setScopeOptions(UIData.search.books); //DEV: load from server!
 
         this.state = {
             searchViewActive: false
@@ -39,8 +48,9 @@ class App extends Component {
                 <NavBar onClickOpenSearchView={this.openSearchView} />
                 <ContentView/>
                 <Footer/>
-                <SearchView visible={searchViewActive} onClose={this.closeSearchView} uiData={UIData.search} />
+                <SearchView visible={searchViewActive} onClose={this.closeSearchView} />
             </div>
+
         );
     }
 }

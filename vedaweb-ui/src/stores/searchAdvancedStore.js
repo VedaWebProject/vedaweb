@@ -7,6 +7,12 @@ const searchAdvancedStore = store({
         blocks: []
     },
 
+    grammarOptions: [],
+
+    setGrammarOptions(grammarOptions){
+        searchAdvancedStore.grammarOptions = grammarOptions;
+    },
+
     addBlock(){
         let blockId = 'block_' + Date.now()
         searchAdvancedStore.data.blocks = searchAdvancedStore.data.blocks.concat({

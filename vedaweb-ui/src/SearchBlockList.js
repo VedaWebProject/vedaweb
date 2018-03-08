@@ -64,8 +64,7 @@ class SearchBlockList extends Component {
                     term={block.term}
                     fields={block.fields}
                     showRemoveButton={data.blocks.length > 1}
-                    onRemoveBlock={this.removeBlock}
-                    grammarData={this.props.grammarData} />
+                    onRemoveBlock={this.removeBlock} />
                 ))}
 
                 <Row className={'search-block-list-controls' + (data.blocks.length >= 4 ? ' hidden' : '')}>
