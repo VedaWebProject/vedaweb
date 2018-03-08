@@ -1,25 +1,30 @@
-#search-view {
-    background-color: #eed;
-}
 
 .ant-modal {
     min-width: 768px;
 }
 
-.ant-collapse-content,
-.ant-collapse-content > .ant-collapse-content-box,
-.ant-collapse > .ant-collapse-item,
-.ant-collapse-item,
-.ant-collapse {
-    background: #eed !important;
+.ant-collapse-header {
+    background: #887;
+    color: #fff !important;
+    border-radius: 0px !important;
 }
 
-.ant-collapse-header {
-    background: #fff;
-    font-weight: bold;
+.ant-collapse-header:first-child {
+    border-bottom: 1px solid #fff;
+}
+
+.ant-collapse-content {
+    border: none;
+    border-radius: 0px !important;
 }
 
 #search-view-buttons {
     padding-top: 1rem;
     padding-bottom: 1rem;
+}
+
+#search-view-buttons button {
+    -webkit-box-shadow: 0px 0px 3px 0px rgba(0,0,0,0.2);
+    -moz-box-shadow: 0px 0px 3px 0px rgba(0,0,0,0.2);
+    box-shadow: 0px 0px 3px 0px rgba(0,0,0,0.2);
 }

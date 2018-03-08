@@ -1,44 +1,14 @@
 import React, { Component } from "react";
 import { Row, Col, Button, Select } from 'antd';
 
+import searchAdvancedStore from "./stores/searchAdvancedStore";
+
 import './css/SearchField.css';
 
 const Option = Select.Option;
 
 class SearchField extends Component {
 
-
-    constructor(props){
-        super(props);
-
-        this.state = {
-            valueOptions: []
-        }
-
-        this.onRemove = this.onRemove.bind(this);
-        this.updateFieldName = this.updateFieldName.bind(this);
-        this.updateFieldValue = this.updateFieldValue.bind(this);
-    }
-
-    updateFieldName(value, option){
-        this.props.onUpdateField({
-            id: this.props.id,
-            name: value,
-            value: ''
-        });
-    }
-
-    updateFieldValue(value, option){
-        this.props.onUpdateField({
-            id: this.props.id,
-            name: this.props.fieldName,
-            value: value
-        });
-    }
-
-    onRemove(e){
-        this.props.onClickRemove(this.props.id);
-    }
 
     render() {
 
@@ -56,7 +26,9 @@ class SearchField extends Component {
                     defaultValue={this.props.grammarData[0].field}
                     value={this.props.fieldName}
                     placeholder="Select a person"
-                    onSelect={this.updateFieldName}
+                    onSelect={(value, option) => searchAdvancedStore.updateFieldName(
+                        this.props.parentBlockId, this.props.id, value
+                    )}
                     style={{ width: '98%' }} >
                         {this.props.grammarData.map((option, i) => (
                             <Option
@@ -73,7 +45,9 @@ class SearchField extends Component {
                     showSearch
                     key={'fieldValue_of_' + this.props.id}
                     value={this.props.fieldValue}
-                    onSelect={this.updateFieldValue}
+                    onSelect={(value, option) => searchAdvancedStore.updateFieldValue(
+                        this.props.parentBlockId, this.props.id, value
+                    )}
                     disabled = {this.props.fieldName.length === 0}
                     style={{ width: '100%' }} >
                         {this.props.fieldName.length > 0 &&
@@ -90,13 +64,13 @@ class SearchField extends Component {
                 <Col span={2} className="content-right">
                     <Button
                     disabled={!this.props.isRemovable}
-                    onClick={this.onRemove}
+                    onClick={() => searchAdvancedStore.removeFieldFromBlock(this.props.parentBlockId, this.props.id)}
                     icon="minus" />
                 </Col>
 
                 <Col span={2} className="content-right">
                     <Button
-                    onClick={this.props.onClickAdd}
+                    onClick={() => searchAdvancedStore.addFieldToBlock(this.props.parentBlockId)}
                     disabled={!this.props.isLastField}
                     className={!this.props.isLastField ? "hidden-button" : ""}
                     icon="plus" />

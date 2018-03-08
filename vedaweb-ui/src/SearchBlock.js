@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import { Row, Col, Icon, Input } from 'antd';
 
+import searchAdvancedStore from "./stores/searchAdvancedStore";
+
 import SearchField from "./SearchField";
 
 import './css/SearchBlock.css';
@@ -9,50 +11,6 @@ const Search = Input.Search;
 
 
 class SearchBlock extends Component {
-
-    constructor(props){
-        super(props);
-
-        this.addField = this.addField.bind(this);
-        this.removeField = this.removeField.bind(this);
-        this.onRemove = this.onRemove.bind(this);
-        this.updateField = this.updateField.bind(this);
-        this.updateTerm = this.updateTerm.bind(this);
-    }
-
-    componentDidMount(){
-        this.addField();
-    }
-
-    addField(){
-        this.props.onAddField(this.props.id);
-    }
-
-    removeField(fieldId){
-        this.props.onRemoveField(this.props.id, fieldId);
-    }
-
-    onRemove(){
-        this.props.onRemoveBlock(this.props.id);
-    }
-
-    updateField(fieldData){
-        this.props.onUpdateBlock({
-            id: this.props.id,
-            field: {
-                id: fieldData.id,
-                name: fieldData.name,
-                value: fieldData.value
-            }
-        })
-    }
-
-    updateTerm(event){
-        this.props.onUpdateBlock({
-            id: this.props.id,
-            term: event.target.value
-        })
-    }
 
 
     render() {
@@ -64,7 +22,7 @@ class SearchBlock extends Component {
                     <Col span={1}>
                         <div
                         className={'search-block-tab content-center' + (!this.props.showRemoveButton ? ' hidden' : '')}
-                        onClick={this.onRemove}>
+                        onClick={() => this.props.onRemoveBlock(this.props.id)}>
                             <Icon type="close"/>
                         </div>
                     </Col>
@@ -77,7 +35,8 @@ class SearchBlock extends Component {
                         justify="center">
                             <Col span={18}>
                                 <Search
-                                onChange={this.updateTerm}
+                                value={this.props.term}
+                                onChange={(e) => searchAdvancedStore.updateTerm(this.props.id, e.target.value)}
                                 placeholder="search term (optional)"
                                 className="search-term-input"/>
                             </Col>
@@ -88,11 +47,9 @@ class SearchBlock extends Component {
                             <SearchField
                             key={field.id}
                             id={field.id}
+                            parentBlockId={this.props.id}
                             fieldName={field.name}
                             fieldValue={field.value}
-                            onClickRemove={this.removeField}
-                            onClickAdd={this.addField}
-                            onUpdateField={this.updateField}
                             isRemovable={this.props.fields.length > 1}
                             isLastField={this.props.fields.length < 4 && this.props.fields.length === i + 1}
                             grammarData={this.props.grammarData} />

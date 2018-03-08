@@ -1,6 +1,5 @@
 #search-settings {
     margin-top: 1rem;
-    border: 1px solid #d9d9d9;
     border-radius: 4px;
 
     -webkit-box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.2);
@@ -10,15 +9,14 @@
 
 #search-settings-title {
     padding: 1rem;
-    background: #fff;
-    color: rgba(0, 0, 0, 0.85);
+    background: #887;
+    color: #fff;
     font-size: 14px;
-    font-weight: bold;
 }
 
 #search-settings-body {
     padding: 1rem;
-    background: #eed;
+    background: #fff;
     color: rgba(0, 0, 0, 0.65);
     border-top: 1px solid #d9d9d9;
 }
@@ -31,7 +29,7 @@
     padding: .8rem;
     border: 1px solid #d9d9d9;
     border-radius: 4px;
-    background-color: #fff;
+    background-color: #eed;
 }
 
 .search-settings-category-title {

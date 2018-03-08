@@ -13,38 +13,6 @@ const Search = Input.Search;
 
 class SearchView extends Component {
 
-    constructor(props){
-        super(props);
-
-        this.state = {
-            searchMode: 'simple',
-            simpleSearchData: {},
-            advancedSearchData: {},
-            searchSettings: {}
-        };
-
-        this.onChangeSearchMode = this.onChangeSearchMode.bind(this);
-        this.updateAdvancedSearch = this.updateAdvancedSearch.bind(this);
-        this.updateSearchSettings = this.updateSearchSettings.bind(this);
-    }
-
-    onChangeSearchMode(mode){
-        this.setState = ({
-            searchMode: mode
-        });
-    }
-
-    updateAdvancedSearch(data){
-        //this.props.onUpdateAdvancedSearch(data);
-        console.log(JSON.stringify(data));
-    }
-
-    updateSearchSettings(data){
-        this.setState = ({
-            searchSettings: data
-        });
-        console.log(JSON.stringify(data));
-    }
 
     render() {
 
@@ -52,13 +20,14 @@ class SearchView extends Component {
 
         const customPanelStyle = {
             background: '#fff',
-            'WebkitBoxShadow': '0px 0px 5px 0px rgba(0,0,0,0.2)',
-	        'MozBoxShadow': '0px 0px 5px 0px rgba(0,0,0,0.2)',
-	        'boxShadow': '0px 0px 5px 0px rgba(0,0,0,0.2)'
+            'WebkitBoxShadow': '0px 0px 3px 0px rgba(0,0,0,0.2)',
+	        'MozBoxShadow': '0px 0px 3px 0px rgba(0,0,0,0.2)',
+            'boxShadow': '0px 0px 3px 0px rgba(0,0,0,0.2)',
+            border: 'none'
         };
 
         const customBodyStyle = {
-            background: '#aa9',
+            background: '#ddc',
             paddingBottom: '0px'
         };
 
@@ -104,8 +73,7 @@ class SearchView extends Component {
                     <SearchSettings
                     bookRange={this.props.uiData.books.length}
                     books={this.props.uiData.books}
-                    transliteration={this.props.uiData.transliteration}
-                    onSearchSettingsChanged={this.updateSearchSettings}/>
+                    transliteration={this.props.uiData.transliteration} />
 
                     <Row id="search-view-buttons">
                         <Col span={12} className="content-left">
@@ -121,6 +89,7 @@ class SearchView extends Component {
         );
 
     }
+
 }
 
 export default SearchView;
