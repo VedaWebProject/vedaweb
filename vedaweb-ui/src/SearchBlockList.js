@@ -30,23 +30,6 @@ class SearchBlockList extends Component {
         searchAdvancedStore.removeBlock(blockId);
     }
 
-    // componentDidUpdate(){
-    //     //transform search block data into format expected by API
-    //     let data = [];
-    //     let countBlocks = 0;
-        
-    //     for (let block of this.state.blocks){
-    //         let b = {};
-    //         b['index'] = countBlocks++;
-    //         if (block.term.length > 0) b['term'] = block.term;
-    //         for (let field of block.fields){
-    //             if (field.value.length > 0) b[field.name] = field.value;
-    //         }
-    //         if (Object.keys(b).length > 1) data.push(b);
-    //     }
-    //     this.props.onUpdate(data);
-    // }
-
 
     render() {
 
