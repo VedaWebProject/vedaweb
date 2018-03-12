@@ -12,6 +12,8 @@ class SearchField extends Component {
 
     render() {
 
+        const usedFieldNames = searchAdvancedStore.getUsedFieldNamesForBlock(this.props.parentBlockId);
+
         return (
             
             <Row
@@ -30,8 +32,9 @@ class SearchField extends Component {
                     )}
                     style={{ width: '98%' }} >
                         {searchAdvancedStore.grammarOptions.map((option, i) => (
+                            (usedFieldNames.indexOf(option.field) === -1 || option.field === this.props.fieldName) &&
                             <Option
-                                key={'fValOpt_' + i}
+                                key={'fValOpt_' + option.field}
                                 value={option.field}>
                                     {option.text}
                             </Option>

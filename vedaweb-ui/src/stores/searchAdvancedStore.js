@@ -91,6 +91,18 @@ const searchAdvancedStore = store({
                 fields: block.fields
             }
         ));
+    },
+
+    getUsedFieldNamesForBlock(blockId){
+        let usedFieldNames = [];
+        for (let block of searchAdvancedStore.data.blocks){
+            if (block.id === blockId){
+                for (let field of block.fields){
+                    usedFieldNames.push(field.name);
+                }
+            }
+        }
+        return usedFieldNames;
     }
 
 })
