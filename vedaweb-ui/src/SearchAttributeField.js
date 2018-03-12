@@ -7,7 +7,7 @@ import './css/SearchField.css';
 
 const Option = Select.Option;
 
-class SearchField extends Component {
+class SearchAttributeField extends Component {
 
 
     render() {
@@ -89,4 +89,4 @@ class SearchField extends Component {
     }
 }
 
-export default SearchField;
+export default SearchAttributeField;

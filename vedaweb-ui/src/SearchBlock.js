@@ -3,7 +3,7 @@ import { Row, Col, Icon, Input } from 'antd';
 
 import searchAdvancedStore from "./stores/searchAdvancedStore";
 
-import SearchField from "./SearchField";
+import SearchAttributeField from "./SearchAttributeField";
 
 import './css/SearchBlock.css';
 
@@ -44,7 +44,7 @@ class SearchBlock extends Component {
                         </Row>
 
                         {this.props.fields.map((field, i) => (
-                            <SearchField
+                            <SearchAttributeField
                             key={field.id}
                             id={field.id}
                             parentBlockId={this.props.id}
