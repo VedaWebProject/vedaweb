@@ -11,7 +11,7 @@ import UIData from './ui-data.js'; //DEV: load from server!
 
 import searchTransliterationStore from "./stores/searchTransliterationStore";
 import searchAdvancedStore from "./stores/searchAdvancedStore";
-import searchScopeStore from "./stores/searchScopeStore";
+import scopeStore from "./stores/scopeStore";
 
 class App extends Component {
 
@@ -20,7 +20,7 @@ class App extends Component {
 
         searchTransliterationStore.setTransliterationOptions(UIData.search.transliteration); //DEV: load from server!
         searchAdvancedStore.setGrammarOptions(UIData.search.grammar); //DEV: load from server!
-        searchScopeStore.setScopeOptions(UIData.search.books); //DEV: load from server!
+        scopeStore.setOptions(UIData.search.books); //DEV: load from server!
 
         this.state = {
             searchViewActive: false

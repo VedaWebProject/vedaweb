@@ -4,7 +4,7 @@ import { Row, Col, Select } from 'antd';
 import './css/SearchScope.css';
 
 import { view } from 'react-easy-state';
-import searchScopeStore from "./stores/searchScopeStore";
+import scopeStore from "./stores/scopeStore";
 
 const Option = Select.Option;
 
@@ -13,8 +13,8 @@ class SearchScope extends Component {
 
     render() {
 
-        const { fromBookRange, fromHymnRange, toBookRange, toHymnRange } = searchScopeStore.scopeRanges;
-        const { fromBook, fromHymn, toBook, toHymn } = searchScopeStore.scopeSettings;
+        const { fromBookRange, fromHymnRange, toBookRange, toHymnRange } = scopeStore.ranges;
+        const { fromBook, fromHymn, toBook, toHymn } = scopeStore.scope;
 
         return (
            
@@ -32,7 +32,7 @@ class SearchScope extends Component {
                         value={fromBook}
                         defaultValue={0}
                         className="search-scope-select-book"
-                        onSelect={(value, o) => searchScopeStore.updateFromBook(value)}>
+                        onSelect={(value, o) => scopeStore.updateFromBook(value)}>
                             <Option
                             key={'fromBook_all'}
                             value={0}>
@@ -57,7 +57,7 @@ class SearchScope extends Component {
                         value={fromHymn}
                         defaultValue={0}
                         className="search-scope-select-book"
-                        onSelect={(value, o) => searchScopeStore.updateFromHymn(value)}
+                        onSelect={(value, o) => scopeStore.updateFromHymn(value)}
                         disabled={fromBook === 0}>
                             <Option
                             key={'fromHymn_all'}
@@ -87,7 +87,7 @@ class SearchScope extends Component {
                         value={toBook}
                         defaultValue={0}
                         className="search-scope-select-book"
-                        onSelect={(value, o) => searchScopeStore.updateToBook(value)}
+                        onSelect={(value, o) => scopeStore.updateToBook(value)}
                         disabled={fromBook === 0}>
                             <Option
                             key={'toBook_all'}
@@ -113,7 +113,7 @@ class SearchScope extends Component {
                         value={toHymn}
                         defaultValue={0}
                         className="search-scope-select-book"
-                        onSelect={(value, o) => searchScopeStore.updateToHymn(value)}
+                        onSelect={(value, o) => scopeStore.updateToHymn(value)}
                         disabled={toBook === 0}>
                             <Option
                             key={'toHymn_all'}
