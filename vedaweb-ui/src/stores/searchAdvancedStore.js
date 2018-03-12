@@ -103,6 +103,15 @@ const searchAdvancedStore = store({
             }
         }
         return usedFieldNames;
+    },
+
+    getValueOptionsForFieldName(fieldName){
+        for (let grammar of searchAdvancedStore.grammarOptions){
+            if (grammar.field === fieldName){
+                return grammar.values;
+            }
+        }
+        return [];
     }
 
 })

@@ -12,7 +12,8 @@ class SearchField extends Component {
 
     render() {
 
-        const usedFieldNames = searchAdvancedStore.getUsedFieldNamesForBlock(this.props.parentBlockId);
+        let usedFieldNames = searchAdvancedStore.getUsedFieldNamesForBlock(this.props.parentBlockId);
+        let valueOptions = searchAdvancedStore.getValueOptionsForFieldName(this.props.fieldName);
 
         return (
             
@@ -26,11 +27,15 @@ class SearchField extends Component {
                     <Select
                     showSearch
                     value={this.props.fieldName}
-                    placeholder="Select a person"
                     onSelect={(value, option) => searchAdvancedStore.updateFieldName(
                         this.props.parentBlockId, this.props.id, value
                     )}
                     style={{ width: '98%' }} >
+                        <Option
+                            key={'fValOpt_none'}
+                            value={''}>
+                                {'Select attribute (optional)'}
+                        </Option>
                         {searchAdvancedStore.grammarOptions.map((option, i) => (
                             (usedFieldNames.indexOf(option.field) === -1 || option.field === this.props.fieldName) &&
                             <Option
@@ -46,14 +51,14 @@ class SearchField extends Component {
                     <Select
                     showSearch
                     key={'fieldValue_of_' + this.props.id}
-                    value={this.props.fieldValue}
+                    value={this.props.fieldValue.length > 0 ? this.props.fieldValue : valueOptions[0]}
                     onSelect={(value, option) => searchAdvancedStore.updateFieldValue(
                         this.props.parentBlockId, this.props.id, value
                     )}
                     disabled = {this.props.fieldName.length === 0}
                     style={{ width: '100%' }} >
                         {this.props.fieldName.length > 0 &&
-                            searchAdvancedStore.grammarOptions.filter(cat => cat.field === this.props.fieldName)[0].values.map(value => (
+                            valueOptions.map(value => (
                                 <Option
                                 key={'value_' + this.props.id}
                                 value={value}>
