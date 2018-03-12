@@ -21,7 +21,7 @@ class SearchSettings extends Component {
                 <div id="search-settings-body">
 
                     <SearchTransliteration/>
-                    {/* <SearchScope/> */}
+                    <SearchScope/>
 
                 </div>
             </div>

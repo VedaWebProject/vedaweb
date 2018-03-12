@@ -16,8 +16,6 @@ class SearchScope extends Component {
         const { fromBookRange, fromHymnRange, toBookRange, toHymnRange } = searchScopeStore.scopeRanges;
         const { fromBook, fromHymn, toBook, toHymn } = searchScopeStore.scopeSettings;
 
-        console.log(JSON.stringify(fromBookRange));
-
         return (
            
             <div className="search-settings-category">
@@ -32,20 +30,19 @@ class SearchScope extends Component {
                     <Col span={4}>
                         <Select
                         value={fromBook}
-                        defaultValue={'all'}
+                        defaultValue={0}
                         className="search-scope-select-book"
-                        onSelect={(value, o) => searchScopeStore.updateFromBook(value)}
-                        disabled={this.props.fromBookDisabled}>
+                        onSelect={(value, o) => searchScopeStore.updateFromBook(value)}>
                             <Option
                             key={'fromBook_all'}
-                            value={''}>
+                            value={0}>
                                 {'all'}
                             </Option>
                             {fromBookRange.map((book, i) => (
                                 <Option
-                                key={'fromBook_' + book.id}
+                                key={'fromBook_' + book.display}
                                 value={book.value}>
-                                    {book.id}
+                                    {book.display}
                                 </Option>
                             ))}
                         </Select>
@@ -58,19 +55,20 @@ class SearchScope extends Component {
                     <Col span={4}>
                         <Select
                         value={fromHymn}
-                        defaultValue={'all'}
-                        onSelect={this.onSelectFromHymn}
-                        disabled={this.props.fromHymnDisabled}>
+                        defaultValue={0}
+                        className="search-scope-select-book"
+                        onSelect={(value, o) => searchScopeStore.updateFromHymn(value)}
+                        disabled={fromBook === 0}>
                             <Option
                             key={'fromHymn_all'}
-                            value={''}>
+                            value={0}>
                                 {'all'}
                             </Option>
                             {fromHymnRange.map((hymn) => (
                                 <Option
-                                key={'fromHymn_' + hymn.id}
+                                key={'fromHymn_' + hymn.display}
                                 value={hymn.value}>
-                                    {hymn.id}
+                                    {hymn.display}
                                 </Option>
                             ))}
                         </Select>
@@ -87,20 +85,20 @@ class SearchScope extends Component {
                     <Col span={4}>
                         <Select
                         value={toBook}
-                        defaultValue={'all'}
+                        defaultValue={0}
                         className="search-scope-select-book"
-                        onSelect={this.props.onSelectToBook}
-                        disabled={this.props.toBookDisabled}>
-                        <Option
+                        onSelect={(value, o) => searchScopeStore.updateToBook(value)}
+                        disabled={fromBook === 0}>
+                            <Option
                             key={'toBook_all'}
-                            value={''}>
+                            value={0}>
                                 {'all'}
                             </Option>
-                            {toBookRange.map((book, i) => (
+                            {toBookRange.map((book) => (
                                 <Option
-                                key={'toBook_' + book.id}
-                                value={toBookRange.value}>
-                                    {book.id}
+                                key={'toBook_' + book.display}
+                                value={book.value}>
+                                    {book.display}
                                 </Option>
                             ))}
                         </Select>
@@ -113,19 +111,20 @@ class SearchScope extends Component {
                     <Col span={4}>
                         <Select
                         value={toHymn}
-                        defaultValue={'all'}
-                        onSelect={this.onSelectToHymn}
-                        disabled={this.props.toHymnDisabled}>
+                        defaultValue={0}
+                        className="search-scope-select-book"
+                        onSelect={(value, o) => searchScopeStore.updateToHymn(value)}
+                        disabled={toBook === 0}>
                             <Option
                             key={'toHymn_all'}
-                            value={''}>
+                            value={0}>
                                 {'all'}
                             </Option>
                             {toHymnRange.map((hymn) => (
                                 <Option
-                                key={'toHymn_' + hymn.id}
+                                key={'toHymn_' + hymn.display}
                                 value={hymn.value}>
-                                    {hymn.id}
+                                    {hymn.display}
                                 </Option>
                             ))}
                         </Select>
