@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Icon } from 'antd';
+import { Row, Col, Icon } from 'antd';
 
 import SearchTransliteration from "./SearchTransliteration";
 import SearchScope from "./SearchScope";
@@ -19,10 +19,10 @@ class SearchSettings extends Component {
                 </div>
 
                 <div id="search-settings-body">
-
-                    <SearchTransliteration/>
-                    <SearchScope/>
-
+                    <Row gutter={16}>
+                        <Col span={10}><SearchTransliteration/></Col>
+                        <Col span={14}><SearchScope/></Col>
+                    </Row>
                 </div>
             </div>
         );
