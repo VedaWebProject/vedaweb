@@ -38,7 +38,8 @@ class SearchBlock extends Component {
                                 value={this.props.term}
                                 onChange={(e) => searchAdvancedStore.updateTerm(this.props.id, e.target.value)}
                                 placeholder="search term (optional)"
-                                className="search-term-input"/>
+                                className="search-term-input"
+                                size={'large'}/>
                             </Col>
                             <Col span={4}></Col>
                         </Row>

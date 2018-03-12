@@ -19,9 +19,12 @@ class SearchScope extends Component {
         return (
            
             <div className="search-settings-category">
-                <div className="search-settings-category-title">Search Scope</div>
 
                 <Row type="flex" align="middle" className="search-settings-row">
+
+                    <Col span={4} className="bold">
+                        Search Scope:
+                    </Col>
 
                     <Col span={3} className="content-right">
                         from book&nbsp;
@@ -78,7 +81,7 @@ class SearchScope extends Component {
 
                 <Row type="flex" align="middle">
 
-                    <Col span={3} className="content-right">
+                    <Col span={3} offset={4} className="content-right">
                         to book&nbsp;
                     </Col>
 
