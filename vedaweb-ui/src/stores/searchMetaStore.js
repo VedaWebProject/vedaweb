@@ -96,7 +96,7 @@ const searchMetaStore = store({
         
         //toBook
         if (searchMetaStore.scope.settings.fromBook > 0) {
-            searchMetaStore.scope.ranges.toBookRange = searchMetaStore.options.filter((book, i) =>
+            searchMetaStore.scope.ranges.toBookRange = searchMetaStore.scope.data.filter((book, i) =>
                 i >= searchMetaStore.scope.settings.fromBook
             )
         } else {
