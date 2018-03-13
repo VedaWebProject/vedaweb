@@ -46,6 +46,9 @@ class SearchView extends Component {
                 footer={null} >
 
                     <SearchTransliteration/>
+
+                    <hr/>
+                    
                     <SearchScope/>
 
                     <hr/>

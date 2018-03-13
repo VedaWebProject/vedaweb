@@ -6,6 +6,8 @@ import './css/SearchScope.css';
 import { view } from 'react-easy-state';
 import searchMetaStore from "./stores/searchMetaStore";
 
+import SearchScopeIndicator from "./SearchScopeIndicator";
+
 const Option = Select.Option;
 
 
@@ -52,7 +54,7 @@ class SearchScope extends Component {
                     </Col>
 
                     <Col span={3} className="content-right">
-                        &mdash;&nbsp;Hymn:&nbsp;
+                        ...&nbsp;Hymn:&nbsp;
                     </Col>
 
                     <Col span={6}>
@@ -81,7 +83,15 @@ class SearchScope extends Component {
 
                 <Row type="flex" align="middle">
 
-                    <Col span={3} offset={6} className="content-right">
+                    <Col span={6}>
+                        <SearchScopeIndicator
+                            fromBook={fromBook}
+                            fromHymn={fromHymn}
+                            toBook={toBook}
+                            toHymn={toHymn} />
+                    </Col>
+
+                    <Col span={3} className="content-right">
                         To Book:&nbsp;
                     </Col>
 
@@ -108,7 +118,7 @@ class SearchScope extends Component {
                     </Col>
 
                     <Col span={3} className="content-right">
-                        &mdash;&nbsp;Hymn:&nbsp;
+                        ...&nbsp;Hymn:&nbsp;
                     </Col>
 
                     <Col span={6}>

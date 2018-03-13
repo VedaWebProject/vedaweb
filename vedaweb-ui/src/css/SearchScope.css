@@ -1,3 +1,8 @@
 .search-scope-select-book {
     width: 98%;
 }
+
+#search-scope-indicator {
+    font-style: italic;
+    font-size: 110%;
+}
