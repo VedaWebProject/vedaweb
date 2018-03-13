@@ -4,7 +4,7 @@ import { Row, Col, Select } from 'antd';
 import './css/SearchScope.css';
 
 import { view } from 'react-easy-state';
-import scopeStore from "./stores/scopeStore";
+import searchMetaStore from "./stores/searchMetaStore";
 
 const Option = Select.Option;
 
@@ -13,26 +13,29 @@ class SearchScope extends Component {
 
     render() {
 
-        const { fromBookRange, fromHymnRange, toBookRange, toHymnRange } = scopeStore.ranges;
-        const { fromBook, fromHymn, toBook, toHymn } = scopeStore.scope;
+        const { fromBookRange, fromHymnRange, toBookRange, toHymnRange } = searchMetaStore.scope.ranges;
+        const { fromBook, fromHymn, toBook, toHymn } = searchMetaStore.scope.settings;
 
         return (
+
+            <div>
            
-            <div className="search-settings-category">
-                <div className="bold bottom-gap     ">Search Scope:</div>
+                <Row type="flex" align="middle" className="top-gap bottom-gap-small">
 
-                <Row type="flex" align="middle" className="search-settings-row">
+                    <Col span={6}>
+                        <div className="bold">Search Scope:</div>
+                    </Col>
 
-                    <Col span={5} className="content-right">
+                    <Col span={3} className="content-right">
                         from book&nbsp;
                     </Col>
 
-                    <Col span={8}>
+                    <Col span={6}>
                         <Select
                         value={fromBook}
                         defaultValue={0}
                         className="search-scope-select-book"
-                        onSelect={(value, o) => scopeStore.updateFromBook(value)}>
+                        onSelect={(value, o) => searchMetaStore.setScopeFromBook(value)}>
                             <Option
                             key={'fromBook_all'}
                             value={0}>
@@ -52,12 +55,12 @@ class SearchScope extends Component {
                         hymn&nbsp;
                     </Col>
 
-                    <Col span={8}>
+                    <Col span={6}>
                         <Select
                         value={fromHymn}
                         defaultValue={0}
                         className="search-scope-select-book"
-                        onSelect={(value, o) => scopeStore.updateFromHymn(value)}
+                        onSelect={(value, o) => searchMetaStore.setScopeFromHymn(value)}
                         disabled={fromBook === 0}>
                             <Option
                             key={'fromHymn_all'}
@@ -78,16 +81,16 @@ class SearchScope extends Component {
 
                 <Row type="flex" align="middle">
 
-                    <Col span={5} className="content-right">
+                    <Col span={3} offset={6} className="content-right">
                         to book&nbsp;
                     </Col>
 
-                    <Col span={8}>
+                    <Col span={6}>
                         <Select
                         value={toBook}
                         defaultValue={0}
                         className="search-scope-select-book"
-                        onSelect={(value, o) => scopeStore.updateToBook(value)}
+                        onSelect={(value, o) => searchMetaStore.setScopeToBook(value)}
                         disabled={fromBook === 0}>
                             <Option
                             key={'toBook_all'}
@@ -108,12 +111,12 @@ class SearchScope extends Component {
                         hymn&nbsp;
                     </Col>
 
-                    <Col span={8}>
+                    <Col span={6}>
                         <Select
                         value={toHymn}
                         defaultValue={0}
                         className="search-scope-select-book"
-                        onSelect={(value, o) => scopeStore.updateToHymn(value)}
+                        onSelect={(value, o) => searchMetaStore.setScopeToHymn(value)}
                         disabled={toBook === 0}>
                             <Option
                             key={'toHymn_all'}

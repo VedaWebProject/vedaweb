@@ -1,9 +1,9 @@
 import React, { Component } from "react";
-import { Select } from 'antd';
+import { Row, Col, Select } from 'antd';
 
 import './css/SearchTransliteration.css';
 
-import searchTransliterationStore from "./stores/searchTransliterationStore";
+import searchMetaStore from "./stores/searchMetaStore";
 import { view } from 'react-easy-state';
 
 const Option = Select.Option;
@@ -16,23 +16,27 @@ class SearchTransliteration extends Component {
 
         return (
 
-            <div className="search-settings-category bottom-gap">
-                <div className="bold bottom-gap">Input Transliteration:</div>
+            <Row type="flex" align="middle">
+                <Col span={6}>
+                    <span className="bold">Input Transliteration:</span>
+                </Col>
 
-                <Select
-                value={searchTransliterationStore.transliteration}
-                className="full-width"
-                size={'large'}
-                onSelect={(value, o) => searchTransliterationStore.setTransliteration(value)}>
-                    {searchTransliterationStore.transliterationOptions.map((option, i) => (
-                        <Option
-                        key={'trans_' + option.id}
-                        value={option.id}>
-                            {option.name}
-                        </Option>
-                    ))}
-                </Select>
-            </div>
+                <Col span={18}>
+                    <Select
+                    value={searchMetaStore.transliteration.setting}
+                    className="full-width"
+                    size={'large'}
+                    onSelect={(value, o) => searchMetaStore.setTransliteration(value)}>
+                        {searchMetaStore.transliteration.data.map((option, i) => (
+                            <Option
+                            key={'trans_' + option.id}
+                            value={option.id}>
+                                {option.name}
+                            </Option>
+                        ))}
+                    </Select>
+                </Col>
+            </Row>
 
         );
 

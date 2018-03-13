@@ -1,13 +1,16 @@
 import React, { Component } from "react";
-import { Row, Col, Collapse, Icon, Modal, Button, Input } from 'antd';
+import { Row, Col, Modal, Button } from 'antd';
 
-import SearchBlockList from "./SearchBlockList";
-import SearchSettings from "./SearchSettings";
+import SearchHeader from "./SearchHeader";
+import SearchSimple from "./SearchSimple";
+import SearchAdvanced from "./SearchAdvanced";
+import SearchScope from "./SearchScope";
+import SearchTransliteration from "./SearchTransliteration";
 
 import './css/SearchView.css';
 
-const Panel = Collapse.Panel;
-const Search = Input.Search;
+import searchMetaStore from "./stores/searchMetaStore";
+import { view } from 'react-easy-state';
 
 
 
@@ -16,26 +19,18 @@ class SearchView extends Component {
 
     render() {
 
-        const searchIcon = <Icon type="search" className="bold"/>;
-
-        const customPanelStyle = {
-            background: '#fff',
-            'WebkitBoxShadow': '0px 0px 3px 0px rgba(0,0,0,0.2)',
-	        'MozBoxShadow': '0px 0px 3px 0px rgba(0,0,0,0.2)',
-            'boxShadow': '0px 0px 3px 0px rgba(0,0,0,0.2)',
-            border: 'none'
-        };
+        const mode = searchMetaStore.mode;
 
         const customBodyStyle = {
             background: '#ddc',
-            paddingBottom: '0px'
+            padding: '1rem'
         };
 
         const customMaskStyle = {
             background: 'rgba(0,0,0,0.4)'
         };
 
-        const titleHTML = <div>{searchIcon} Search</div>;
+        //const titleHTML = <div>{searchIcon} Search</div>;
         
         return (
             <div id="search-view" key="search-view">
@@ -43,35 +38,24 @@ class SearchView extends Component {
                 id="search-view"
                 width={768}
                 visible={this.props.visible}
-                title={titleHTML}
+                title={<SearchHeader/>}
                 maskStyle={customMaskStyle}
                 bodyStyle={customBodyStyle}
                 onCancel={this.props.onClose}
                 style={{top: 20}}
                 footer={null} >
 
-                    <Collapse
-                    accordion
-                    defaultActiveKey="simple"
-                    onChange={this.onChangeSearchMode}>
+                    <SearchTransliteration/>
+                    <SearchScope/>
 
-                        <Panel header="Simple Search" key="simple" style={customPanelStyle}>
-                            <Search
-                            placeholder="search input"
-                            style={{ width: 200, marginTop: '.1em' }}
-                            />
-                        </Panel>
+                    <hr/>
 
-                        <Panel header="Advanced Search" key="advanced" style={customPanelStyle}>
-                            <SearchBlockList
-                            onUpdate={this.updateAdvancedSearch} />
-                        </Panel>
+                    <div className="search-container">
+                        <SearchSimple active={mode === 'simple'}/>
+                        <SearchAdvanced active={mode === 'advanced'}/>
+                    </div>
 
-                    </Collapse>
-
-                    <SearchSettings/>
-
-                    <Row id="search-view-buttons">
+                    <Row>
                         <Col span={12} className="content-left">
                             <Button icon="cross" size="large" onClick={this.props.onClose}>Close</Button>
                         </Col>
@@ -88,4 +72,4 @@ class SearchView extends Component {
 
 }
 
-export default SearchView;
+export default view(SearchView);

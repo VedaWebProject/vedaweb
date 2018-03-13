@@ -9,18 +9,17 @@ import "./css/App.css";
 
 import UIData from './ui-data.js'; //DEV: load from server!
 
-import searchTransliterationStore from "./stores/searchTransliterationStore";
 import searchAdvancedStore from "./stores/searchAdvancedStore";
-import scopeStore from "./stores/scopeStore";
+import searchMetaStore from "./stores/searchMetaStore";
 
 class App extends Component {
 
     constructor(props){
         super(props);
 
-        searchTransliterationStore.setTransliterationOptions(UIData.search.transliteration); //DEV: load from server!
         searchAdvancedStore.setGrammarOptions(UIData.search.grammar); //DEV: load from server!
-        scopeStore.setOptions(UIData.search.books); //DEV: load from server!
+        searchMetaStore.setScopeData(UIData.search.books); //DEV: load from server!
+        searchMetaStore.setTransliterationData(UIData.search.transliteration); //DEV: load from server!
 
         this.state = {
             searchViewActive: false
