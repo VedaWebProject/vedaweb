@@ -3,7 +3,7 @@ import { Row, Col, Button, Select } from 'antd';
 
 import searchAdvancedStore from "./stores/searchAdvancedStore";
 
-import './css/SearchField.css';
+import './css/SearchAttributeField.css';
 
 const Option = Select.Option;
 

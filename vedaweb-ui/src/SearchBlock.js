@@ -7,8 +7,6 @@ import SearchAttributeField from "./SearchAttributeField";
 
 import './css/SearchBlock.css';
 
-const Search = Input.Search;
-
 
 class SearchBlock extends Component {
 
@@ -34,12 +32,11 @@ class SearchBlock extends Component {
                         align="middle"
                         justify="center">
                             <Col span={18}>
-                                <Search
+                                <Input
                                 value={this.props.term}
-                                onChange={(e) => searchAdvancedStore.updateTerm(this.props.id, e.target.value)}
+                                onChange={value => searchAdvancedStore.updateTerm(this.props.id, value)}
                                 placeholder="search term (optional)"
-                                className="search-term-input"
-                                size={'large'}/>
+                                className="search-term-input" />
                             </Col>
                             <Col span={4}></Col>
                         </Row>

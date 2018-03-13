@@ -23,11 +23,11 @@ class SearchScope extends Component {
                 <Row type="flex" align="middle" className="top-gap bottom-gap-small">
 
                     <Col span={6}>
-                        <div className="bold">Search Scope:</div>
+                        <div className="bold">Limit Search Scope:</div>
                     </Col>
 
                     <Col span={3} className="content-right">
-                        from book&nbsp;
+                        From Book:&nbsp;
                     </Col>
 
                     <Col span={6}>
@@ -52,7 +52,7 @@ class SearchScope extends Component {
                     </Col>
 
                     <Col span={3} className="content-right">
-                        hymn&nbsp;
+                        &mdash;&nbsp;Hymn:&nbsp;
                     </Col>
 
                     <Col span={6}>
@@ -82,7 +82,7 @@ class SearchScope extends Component {
                 <Row type="flex" align="middle">
 
                     <Col span={3} offset={6} className="content-right">
-                        to book&nbsp;
+                        To Book:&nbsp;
                     </Col>
 
                     <Col span={6}>
@@ -108,7 +108,7 @@ class SearchScope extends Component {
                     </Col>
 
                     <Col span={3} className="content-right">
-                        hymn&nbsp;
+                        &mdash;&nbsp;Hymn:&nbsp;
                     </Col>
 
                     <Col span={6}>
