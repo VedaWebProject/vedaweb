@@ -12,6 +12,8 @@ import UIData from './ui-data.js'; //DEV: load from server!
 import searchSimpleStore from "./stores/searchSimpleStore";
 import searchAdvancedStore from "./stores/searchAdvancedStore";
 import searchMetaStore from "./stores/searchMetaStore";
+import { view } from 'react-easy-state';
+
 
 class App extends Component {
 
@@ -22,38 +24,31 @@ class App extends Component {
         searchAdvancedStore.setGrammarOptions(UIData.search.grammar); //DEV: load from server!
         searchMetaStore.setScopeData(UIData.search.books); //DEV: load from server!
         searchMetaStore.setTransliterationData(UIData.search.transliteration); //DEV: load from server!
-
-        this.state = {
-            searchViewActive: false
-        };
-
-        this.openSearchView = this.openSearchView.bind(this);
-        this.closeSearchView = this.closeSearchView.bind(this);
     }
 
-    openSearchView(){
-        this.setState({ searchViewActive: true});
-    }
-
-    closeSearchView(){
-        this.setState({ searchViewActive: false});
-    }
-
+    
     render() {
 
-        const { searchViewActive } = this.state;
+        const searchViewActive = searchMetaStore.searchViewActive;
 
         return (
 
             <div id="app" className={ searchViewActive ? "blurred" : "" }>
-                <NavBar onClickOpenSearchView={this.openSearchView} />
+
+                <NavBar onClickOpenSearchView={() => searchMetaStore.openSearchView(true)} />
+
                 <ContentView/>
+
                 <Footer/>
-                <SearchView visible={searchViewActive} onClose={this.closeSearchView} />
+
+                <SearchView
+                visible={searchViewActive}
+                onClose={() => searchMetaStore.openSearchView(false)} />
+
             </div>
 
         );
     }
 }
 
-export default App;
+export default view(App);
