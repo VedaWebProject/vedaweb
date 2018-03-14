@@ -11,9 +11,3 @@ src/main/resources/static/
 .settings
 .springBeans
 /index/
-
-
-### PROPERTIES FILES ###
-src/main/resources/application.properties
-src/main/resources/db.properties
-src/main/resources/es.properties
