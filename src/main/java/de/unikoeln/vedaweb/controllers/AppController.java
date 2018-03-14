@@ -15,19 +15,8 @@ public class AppController {
     		Model model,
     		HttpServletRequest request) {
 		
-		System.out.println("[INFO] called '/', serving template 'app'.");
-    	return "app";
+		System.out.println("[INFO] called '/', serving app frontend.");
+    	return "index";
     }
-	
-	
-	@RequestMapping("/start")
-    public String start(
-    		Model model,
-    		HttpServletRequest request) {
-		
-		System.out.println("[INFO] called '/start', serving template 'start'.");
-    	return "start";
-    }
-	
 	
 }
