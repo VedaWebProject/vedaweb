@@ -12,10 +12,16 @@ class SearchSimple extends Component {
     render() {
 
         const selectBefore = (
-            <Select defaultValue="text">
-                <Option value="text">Rigveda text</Option>
-                <Option value="translation_de">Translation DE</Option>
-                <Option value="translation_en">Translation EN</Option>
+            <Select
+            defaultValue="text"
+            onSelect={(value, option) => searchSimpleStore.setField(value)}>
+                {searchSimpleStore.fields.map(field => (
+                    <Option
+                    key={'simple_field_' + field.field}
+                    value={field.field}>
+                        {field.ui}
+                    </Option>
+                ))}
             </Select>
         );
         

@@ -9,6 +9,7 @@ import "./css/App.css";
 
 import UIData from './ui-data.js'; //DEV: load from server!
 
+import searchSimpleStore from "./stores/searchSimpleStore";
 import searchAdvancedStore from "./stores/searchAdvancedStore";
 import searchMetaStore from "./stores/searchMetaStore";
 
@@ -17,6 +18,7 @@ class App extends Component {
     constructor(props){
         super(props);
 
+        searchSimpleStore.setFieldsData(UIData.search.textSearch.fields);  //DEV: load from server!
         searchAdvancedStore.setGrammarOptions(UIData.search.grammar); //DEV: load from server!
         searchMetaStore.setScopeData(UIData.search.books); //DEV: load from server!
         searchMetaStore.setTransliterationData(UIData.search.transliteration); //DEV: load from server!

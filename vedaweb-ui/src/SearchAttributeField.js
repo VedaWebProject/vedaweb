@@ -41,7 +41,7 @@ class SearchAttributeField extends Component {
                             <Option
                                 key={'fValOpt_' + option.field}
                                 value={option.field}>
-                                    {option.text}
+                                    {option.ui}
                             </Option>
                         ))}
                     </Select>
@@ -64,7 +64,7 @@ class SearchAttributeField extends Component {
                                 value={value}>
                                     {value}
                                 </Option>
-                            ))}
+                        ))}
                     </Select>
                 </Col>
 

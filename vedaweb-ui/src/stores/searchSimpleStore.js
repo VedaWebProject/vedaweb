@@ -5,10 +5,18 @@ const searchSimpleStore = store({
 
     term: '',
     field: '',
-    fieldData: [],
+    fields: [],
+
+    setFieldsData(fields){
+        searchSimpleStore.fields = fields;
+    },
 
     setTerm(term){
         searchSimpleStore.term = term;
+    },
+
+    setField(field){
+        searchSimpleStore.field = field;
     }
 
 })

@@ -1,23 +1,31 @@
 export default {
 	"search": {
+		"textSearch": {
+			"fields": [
+				{"field": "text", "ui": "Rigveda text"},
+				{"field": "translation_de", "ui": "Translation DE"},
+				{"field": "translation_en", "ui": "Translation EN"},
+				{"field": "translation_fr", "ui": "Translation FR"}
+			]
+		},
 		"grammar": [
 			{
-				"text": "Person",
+				"ui": "Person",
 				"field": "person",
 				"values": ["1.", "2.", "2./3."]
 			},
 			{
-				"text": "Case",
+				"ui": "Case",
 				"field": "case",
 				"values": ["Akk.", "Gen.", "Dat.", "Ind."]
 			},
 			{
-				"text": "Diathesis",
+				"ui": "Diathesis",
 				"field": "diathesis",
 				"values": ["med.", "dings."]
 			},
 			{
-				"text": "Time",
+				"ui": "Time",
 				"field": "time",
 				"values": ["pres.", "past.", "fut."]
 			}
