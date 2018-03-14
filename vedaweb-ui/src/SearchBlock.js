@@ -34,7 +34,7 @@ class SearchBlock extends Component {
                             <Col span={18}>
                                 <Input
                                 value={this.props.term}
-                                onChange={value => searchAdvancedStore.updateTerm(this.props.id, value)}
+                                onChange={e => searchAdvancedStore.updateTerm(this.props.id, e.target.value)}
                                 placeholder="search term (optional)"
                                 className="search-term-input" />
                             </Col>

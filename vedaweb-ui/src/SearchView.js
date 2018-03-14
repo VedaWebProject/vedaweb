@@ -13,16 +13,14 @@ import searchMetaStore from "./stores/searchMetaStore";
 import { view } from 'react-easy-state';
 
 
-
 class SearchView extends Component {
-
 
     render() {
 
         const mode = searchMetaStore.mode;
 
         const customBodyStyle = {
-            background: '#ddc',
+            background: '#eed',
             padding: '1rem'
         };
 
@@ -30,8 +28,6 @@ class SearchView extends Component {
             background: 'rgba(0,0,0,0.4)'
         };
 
-        //const titleHTML = <div>{searchIcon} Search</div>;
-        
         return (
             <div id="search-view" key="search-view">
                 <Modal
@@ -52,11 +48,10 @@ class SearchView extends Component {
                     <SearchScope/>
 
                     <hr/>
-
-                    <div className="search-container">
-                        <SearchSimple active={mode === 'simple'}/>
-                        <SearchAdvanced active={mode === 'advanced'}/>
-                    </div>
+                    
+                    <span className="bold">What are you searching for?</span>
+                    <SearchSimple active={mode === 'simple'}/>
+                    <SearchAdvanced active={mode === 'advanced'}/>
 
                     <Row>
                         <Col span={12} className="content-left">

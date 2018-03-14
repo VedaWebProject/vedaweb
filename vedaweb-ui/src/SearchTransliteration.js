@@ -25,7 +25,6 @@ class SearchTransliteration extends Component {
                     <Select
                     value={searchMetaStore.transliteration.setting}
                     className="full-width"
-                    size={'large'}
                     onSelect={(value, o) => searchMetaStore.setTransliteration(value)}>
                         {searchMetaStore.transliteration.data.map((option, i) => (
                             <Option

@@ -38,8 +38,8 @@ class SearchAdvanced extends Component {
         return (
             <div>
                 { this.props.active &&
-
-                    <div className="search-block-list">
+                
+                    <div className="search-container search-block-list">
 
                         {data.blocks.map((block, i) => (
                             <SearchBlock

@@ -26,12 +26,13 @@ class SearchSimple extends Component {
         );
         
         return (
-            <div>
+            <div className="top-gap bottom-gap">
                 {this.props.active &&
                     <Input
                     addonBefore={selectBefore}
-                    onChange={value => searchSimpleStore.setTerm(value)}
-                    placeholder="search term" />
+                    onChange={e => searchSimpleStore.setTerm(e.target.value)}
+                    placeholder="type your search input, here..."
+                    size="large" />
                 }
             </div>
         );
