@@ -33,8 +33,10 @@ export default {
         "books": [99, 104, 34, 65, 13, 86, 45, 19, 67, 11],
 		"transliteration": [
 			{"id": "hk", "name": "Harvard-Kyoto"},
-			{"id": "iast", "name": "IAST"},
-			{"id": "iso", "name": "ISO"}
+			{"id": "iast", "name": "IAST (International Alphabet of Sanskrit Transliteration)"},
+			{"id": "itrans", "name": "ITRANS"},
+			{"id": "slp1", "name": "SLP1 (Sanskrit Library Phonetic Basic)"},
+			{"id": "velthuis", "name": "Velthuis"}
 		]
 	}
 }

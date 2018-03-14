@@ -2,8 +2,10 @@ import React, { Component } from "react";
 import { Row, Col, Icon, Input } from 'antd';
 
 import searchAdvancedStore from "./stores/searchAdvancedStore";
+import searchMetaStore from "./stores/searchMetaStore";
 
 import SearchAttributeField from "./SearchAttributeField";
+import TransliterationPreview from "./TransliterationPreview";
 
 import './css/SearchBlock.css';
 
@@ -31,13 +33,22 @@ class SearchBlock extends Component {
                         type="flex"
                         align="middle"
                         justify="center">
-                            <Col span={18}>
+
+                            <Col span={9}>
                                 <Input
                                 value={this.props.term}
                                 onChange={e => searchAdvancedStore.updateTerm(this.props.id, e.target.value)}
                                 placeholder="search term (optional)"
-                                className="search-term-input" />
+                                className="search-term-input"
+                                style={{ width: '98%' }} />
                             </Col>
+
+                            <Col span={9}>
+                                <TransliterationPreview
+                                input={this.props.term}
+                                transliteration={searchMetaStore.transliteration.setting}/>
+                            </Col>
+
                             <Col span={4}></Col>
                         </Row>
 
