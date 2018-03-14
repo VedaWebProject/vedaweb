@@ -28,12 +28,10 @@ class SearchSimple extends Component {
         return (
             <div>
                 {this.props.active &&
-
                     <Input
                     addonBefore={selectBefore}
                     onChange={value => searchSimpleStore.setTerm(value)}
                     placeholder="search term" />
-
                 }
             </div>
         );

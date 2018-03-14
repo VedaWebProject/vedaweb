@@ -2,7 +2,7 @@ export default {
 	"search": {
 		"textSearch": {
 			"fields": [
-				{"field": "text", "ui": "Rigveda text"},
+				{"field": "text", "ui": "Rigveda Text"},
 				{"field": "translation_de", "ui": "Translation DE"},
 				{"field": "translation_en", "ui": "Translation EN"},
 				{"field": "translation_fr", "ui": "Translation FR"}

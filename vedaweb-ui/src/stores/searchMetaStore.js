@@ -3,8 +3,6 @@ import { store } from 'react-easy-state';
 
 const searchMetaStore = store({
 
-    searchViewActive: false,
-
     mode: 'simple',
 
     scope: {
@@ -26,10 +24,6 @@ const searchMetaStore = store({
     transliteration: {
         data: [],
         setting: ''
-    },
-
-    openSearchView(open){
-        searchMetaStore.searchViewActive = open;
     },
 
     setSearchMode(mode){

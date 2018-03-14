@@ -20,8 +20,8 @@ class SearchHeader extends Component {
                         <Radio.Group
                         value={searchMetaStore.mode}
                         onChange={(e) => searchMetaStore.setSearchMode(e.target.value)}>
-                            <Radio.Button value="simple">Simple</Radio.Button>
-                            <Radio.Button value="advanced">Advanced</Radio.Button>
+                            <Radio.Button value="simple">Text Search</Radio.Button>
+                            <Radio.Button value="advanced">Grammar Search</Radio.Button>
                         </Radio.Group>
                     </div>
                 </Col>

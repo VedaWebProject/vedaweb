@@ -9,6 +9,7 @@ import "./css/App.css";
 
 import UIData from './ui-data.js'; //DEV: load from server!
 
+import appStateStore from "./stores/appStateStore";
 import searchSimpleStore from "./stores/searchSimpleStore";
 import searchAdvancedStore from "./stores/searchAdvancedStore";
 import searchMetaStore from "./stores/searchMetaStore";
@@ -29,13 +30,13 @@ class App extends Component {
     
     render() {
 
-        const searchViewActive = searchMetaStore.searchViewActive;
+        const searchViewActive = appStateStore.searchViewActive;
 
         return (
 
             <div id="app" className={ searchViewActive ? "blurred" : "" }>
 
-                <NavBar onClickOpenSearchView={() => searchMetaStore.openSearchView(true)} />
+                <NavBar onClickOpenSearchView={() => appStateStore.openSearchView(true)} />
 
                 <ContentView/>
 
@@ -43,7 +44,7 @@ class App extends Component {
 
                 <SearchView
                 visible={searchViewActive}
-                onClose={() => searchMetaStore.openSearchView(false)} />
+                onClose={() => appStateStore.openSearchView(false)} />
 
             </div>
 
