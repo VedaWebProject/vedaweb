@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import Sanscript from 'sanscript';
 
+import "./css/TransliterationPreview.css";
 
 class TransliterationPreview extends Component {
 
@@ -9,8 +10,15 @@ class TransliterationPreview extends Component {
 
         return (
 
-            <div class="transliteration">
-                {Sanscript.t(this.props.input, this.props.transliteration, "devanagari")}
+            <div className="transliteration">
+                {(this.props.input !== null && this.props.input.length > 0) &&
+                    Sanscript.t(this.props.input, this.props.transliteration, "devanagari")
+                }
+                {(this.props.input === null || this.props.input.length) === 0 &&
+                    <span className="transliteration-placeholder">
+                        {Sanscript.t(this.props.placeholder, this.props.transliteration, "devanagari")}
+                    </span>
+                }
             </div>
             
         );

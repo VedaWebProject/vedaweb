@@ -4,7 +4,7 @@ import { store } from 'react-easy-state';
 const searchSimpleStore = store({
 
     term: '',
-    field: '',
+    field: 'text',
     fields: [],
 
     setFieldsData(fields){

@@ -3,6 +3,7 @@ import { Row, Col, Icon, Input } from 'antd';
 
 import searchAdvancedStore from "./stores/searchAdvancedStore";
 import searchMetaStore from "./stores/searchMetaStore";
+import { view } from 'react-easy-state';
 
 import SearchAttributeField from "./SearchAttributeField";
 import TransliterationPreview from "./TransliterationPreview";
@@ -40,16 +41,17 @@ class SearchBlock extends Component {
                                 onChange={e => searchAdvancedStore.updateTerm(this.props.id, e.target.value)}
                                 placeholder="search term (optional)"
                                 className="search-term-input"
-                                style={{ width: '98%' }} />
+                                style={{ width: '98%' }}
+                                size="large" />
                             </Col>
 
-                            <Col span={9}>
+                            <Col span={13}>
                                 <TransliterationPreview
                                 input={this.props.term}
-                                transliteration={searchMetaStore.transliteration.setting}/>
+                                transliteration={searchMetaStore.transliteration.setting}
+                                placeholder="agnim" />
                             </Col>
 
-                            <Col span={4}></Col>
                         </Row>
 
                         {this.props.fields.map((field, i) => (
@@ -72,4 +74,4 @@ class SearchBlock extends Component {
     }
 }
 
-export default SearchBlock;
+export default view(SearchBlock);

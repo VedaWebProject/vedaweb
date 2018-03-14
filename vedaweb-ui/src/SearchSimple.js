@@ -1,8 +1,12 @@
 import React, { Component } from "react";
-import { Input, Select } from 'antd';
+import { Row, Col, Input, Select } from 'antd';
 
+import searchMetaStore from "./stores/searchMetaStore";
 import searchSimpleStore from "./stores/searchSimpleStore";
 import { view } from 'react-easy-state';
+
+import TransliterationPreview from "./TransliterationPreview";
+
 
 const Option = Select.Option;
 
@@ -28,11 +32,30 @@ class SearchSimple extends Component {
         return (
             <div className="top-gap bottom-gap">
                 {this.props.active &&
-                    <Input
-                    addonBefore={selectBefore}
-                    onChange={e => searchSimpleStore.setTerm(e.target.value)}
-                    placeholder="type your search input, here..."
-                    size="large" />
+
+                    <Row
+                    type="flex"
+                    align="middle">
+
+                        <Col span={16}>
+                            <Input
+                            value={searchSimpleStore.term}
+                            addonBefore={selectBefore}
+                            onChange={e => searchSimpleStore.setTerm(e.target.value)}
+                            placeholder="type your search input, here..."
+                            size="large" />
+                        </Col>
+
+                        { searchSimpleStore.field === "text" &&
+                            <Col span={8}>
+                                <TransliterationPreview
+                                input={searchSimpleStore.term}
+                                transliteration={searchMetaStore.transliteration.setting}
+                                placeholder="agnim" />
+                            </Col>
+                        }
+                    </Row>
+
                 }
             </div>
         );
