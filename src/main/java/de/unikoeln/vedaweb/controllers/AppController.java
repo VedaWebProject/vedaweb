@@ -10,13 +10,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class AppController {
 	
 	
-	@RequestMapping("/")
-    public String app(
-    		Model model,
-    		HttpServletRequest request) {
-		
-		System.out.println("[INFO] called '/', serving app frontend.");
-    	return "index";
-    }
+//	@RequestMapping("/")
+//    public String app(
+//    		Model model,
+//    		HttpServletRequest request) {
+//		
+//		System.out.println("[INFO] called '/', serving app frontend.");
+//    	return "index";
+//    }
 	
 }

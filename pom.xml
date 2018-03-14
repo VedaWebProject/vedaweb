@@ -25,23 +25,23 @@
 	</properties>
 
 	<dependencies>
-	
+
 		<!-- Spring logging -->
-	    <dependency>
-	        <groupId>org.springframework.boot</groupId>
-	        <artifactId>spring-boot-starter</artifactId>
-	        <exclusions>
-	            <exclusion>
-	                <groupId>org.springframework.boot</groupId>
-	                <artifactId>spring-boot-starter-logging</artifactId>
-	            </exclusion>
-	        </exclusions>
-	    </dependency>
-	    
-	    <dependency>
-	        <groupId>org.springframework.boot</groupId>
-	        <artifactId>spring-boot-starter-log4j2</artifactId>
-	    </dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter</artifactId>
+			<exclusions>
+				<exclusion>
+					<groupId>org.springframework.boot</groupId>
+					<artifactId>spring-boot-starter-logging</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-log4j2</artifactId>
+		</dependency>
 
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -59,61 +59,45 @@
 			<scope>test</scope>
 		</dependency>
 
-		<!-- 
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-security</artifactId>
-		</dependency>
-		-->
+		<!-- <dependency> <groupId>org.springframework.boot</groupId> <artifactId>spring-boot-starter-security</artifactId> 
+			</dependency> -->
 
 		<dependency>
 			<groupId>net.sourceforge.nekohtml</groupId>
 			<artifactId>nekohtml</artifactId>
 		</dependency>
-		
-		<!-- https://mvnrepository.com/artifact/org.apache.lucene/lucene-core 
-		<dependency>
-			<groupId>org.apache.lucene</groupId>
-			<artifactId>lucene-core</artifactId>
-			<version>6.5.0</version>
-		</dependency>
-		-->
+
+		<!-- https://mvnrepository.com/artifact/org.apache.lucene/lucene-core <dependency> 
+			<groupId>org.apache.lucene</groupId> <artifactId>lucene-core</artifactId> 
+			<version>6.5.0</version> </dependency> -->
 
 		<!-- https://mvnrepository.com/artifact/org.apache.lucene/lucene-queryparser 
-		<dependency>
-			<groupId>org.apache.lucene</groupId>
-			<artifactId>lucene-queryparser</artifactId>
-			<version>6.5.0</version>
-		</dependency>
-		-->
+			<dependency> <groupId>org.apache.lucene</groupId> <artifactId>lucene-queryparser</artifactId> 
+			<version>6.5.0</version> </dependency> -->
 
-		<!-- https://mvnrepository.com/artifact/org.apache.lucene/lucene-queries
-		<dependency>
-			<groupId>org.apache.lucene</groupId>
-			<artifactId>lucene-queries</artifactId>
-			<version>6.5.0</version>
-		</dependency>
-		-->
-		
+		<!-- https://mvnrepository.com/artifact/org.apache.lucene/lucene-queries 
+			<dependency> <groupId>org.apache.lucene</groupId> <artifactId>lucene-queries</artifactId> 
+			<version>6.5.0</version> </dependency> -->
+
 		<!-- elasticsearch -->
 		<dependency>
-		    <groupId>org.elasticsearch</groupId>
-		    <artifactId>elasticsearch</artifactId>
-		    <version>6.1.1</version>
+			<groupId>org.elasticsearch</groupId>
+			<artifactId>elasticsearch</artifactId>
+			<version>6.1.1</version>
 		</dependency>
-		
+
 		<!-- elasticsearch high level REST client -->
 		<dependency>
-	  		<groupId>org.elasticsearch.client</groupId>
-	  		<artifactId>elasticsearch-rest-high-level-client</artifactId>
-	  		<version>6.1.1</version>
-	  	</dependency>
-	  	
-	  	<!-- https://mvnrepository.com/artifact/org.json/json -->
+			<groupId>org.elasticsearch.client</groupId>
+			<artifactId>elasticsearch-rest-high-level-client</artifactId>
+			<version>6.1.1</version>
+		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/org.json/json -->
 		<dependency>
-		    <groupId>org.json</groupId>
-		    <artifactId>json</artifactId>
-		    <version>20171018</version>
+			<groupId>org.json</groupId>
+			<artifactId>json</artifactId>
+			<version>20171018</version>
 		</dependency>
 
 	</dependencies>
@@ -127,29 +111,28 @@
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
 
-			<!--
 			<plugin>
 				<artifactId>maven-resources-plugin</artifactId>
+				<version>3.0.2</version>
 				<executions>
 					<execution>
-						<id>Copy App Content</id>
-						<phase>generate-resources</phase>
+						<id>copy-resources</id>
+						<phase>validate</phase>
 						<goals>
 							<goal>copy-resources</goal>
 						</goals>
 						<configuration>
-							<outputDirectory>src/main/resources/static</outputDirectory>
-							<overwrite>true</overwrite>
+							<outputDirectory>${basedir}/src/main/resources/static</outputDirectory>
 							<resources>
 								<resource>
-									<directory>${project.basedir}/frontend/target/dist</directory>
+									<directory>vedaweb-ui/build</directory>
+									<filtering>true</filtering>
 								</resource>
 							</resources>
 						</configuration>
 					</execution>
 				</executions>
 			</plugin>
-			-->
 
 		</plugins>
 
