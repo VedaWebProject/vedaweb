@@ -53,13 +53,20 @@ class SearchAdvanced extends Component {
                             onRemoveBlock={this.removeBlock} />
                         ))}
 
-                        <Row className={'search-block-list-controls' + (data.blocks.length >= 4 ? ' hidden' : '')}>
+                        <Row
+                        className={"search-block-list-controls" + (data.blocks.length >= 4 ? " hidden" : "")}
+                        type="flex"
+                        align="middle">
                             <Col span={1}>
                                 <div
-                                className={'search-block-add content-center'}
+                                className={"search-block-add content-center"}
                                 onClick={this.addBlock}>
                                     <Icon type="plus"/>
                                 </div>
+                            </Col>
+                            <Col span={22} offset={1} className="translucent">
+                                <Icon type="arrow-left"/>
+                                Click here to add additional search terms
                             </Col>
                         </Row>
 

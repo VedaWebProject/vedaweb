@@ -26,6 +26,7 @@ const searchAdvancedStore = store({
 
     removeBlock(blockId){
         searchAdvancedStore.data.blocks = searchAdvancedStore.data.blocks.filter(block => block.id !== blockId);
+        searchAdvancedStore.data.blocks[0].distance = 0;
     },
 
     addFieldToBlock(blockId){

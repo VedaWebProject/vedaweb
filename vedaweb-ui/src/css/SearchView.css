@@ -25,3 +25,7 @@
     border-radius: 4px;
     border: 1px solid #ccb;
 }
+
+.search-input-label {
+    padding-right: .5rem;
+}

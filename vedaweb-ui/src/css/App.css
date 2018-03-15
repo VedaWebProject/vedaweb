@@ -53,6 +53,10 @@ button {
     margin-bottom: .5rem;
 }
 
+.gap-right {
+    margin-right: .5rem;
+}
+
 .full-width {
     width: 100%;
 }
@@ -67,4 +71,8 @@ button {
 
 .top-line {
     border-top: 1px solid #bba;
+}
+
+.translucent {
+    color: rgba(0, 0, 0, 0.3);
 }

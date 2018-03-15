@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Row, Col, Select } from 'antd';
+import { Row, Col, Select, Icon } from 'antd';
 
 import './css/SearchScope.css';
 
@@ -24,15 +24,16 @@ class SearchScope extends Component {
            
                 <Row type="flex" align="middle" className="top-gap bottom-gap-small">
 
-                    <Col span={6}>
-                        <div className="bold">Limit Search Scope:</div>
+                    <Col span={8}>
+                        <Icon type="eye-o" className="gap-right"/>
+                        <span className="bold">Limit Search Scope:</span>
                     </Col>
 
-                    <Col span={3} className="content-right">
-                        From Book:&nbsp;
+                    <Col span={3} className="search-input-label content-right">
+                        From Book:
                     </Col>
 
-                    <Col span={6}>
+                    <Col span={5}>
                         <Select
                         value={fromBook}
                         defaultValue={0}
@@ -53,11 +54,11 @@ class SearchScope extends Component {
                         </Select>
                     </Col>
 
-                    <Col span={3} className="content-right">
-                        ...&nbsp;Hymn:&nbsp;
+                    <Col span={3} className="search-input-label content-right">
+                        ... Hymn:
                     </Col>
 
-                    <Col span={6}>
+                    <Col span={5}>
                         <Select
                         value={fromHymn}
                         defaultValue={0}
@@ -83,7 +84,7 @@ class SearchScope extends Component {
 
                 <Row type="flex" align="middle">
 
-                    <Col span={6}>
+                    <Col span={8} className="search-scope-indicator-container">
                         <SearchScopeIndicator
                             fromBook={fromBook}
                             fromHymn={fromHymn}
@@ -91,11 +92,11 @@ class SearchScope extends Component {
                             toHymn={toHymn} />
                     </Col>
 
-                    <Col span={3} className="content-right">
-                        To Book:&nbsp;
+                    <Col span={3} className="search-input-label content-right">
+                        To Book:
                     </Col>
 
-                    <Col span={6}>
+                    <Col span={5}>
                         <Select
                         value={toBook}
                         defaultValue={0}
@@ -117,11 +118,11 @@ class SearchScope extends Component {
                         </Select>
                     </Col>
 
-                    <Col span={3} className="content-right">
-                        ...&nbsp;Hymn:&nbsp;
+                    <Col span={3} className="search-input-label content-right">
+                        ... Hymn:
                     </Col>
 
-                    <Col span={6}>
+                    <Col span={5}>
                         <Select
                         value={toHymn}
                         defaultValue={0}

@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Row, Col, Icon, Input, Slider, Checkbox, Tooltip } from 'antd';
+import { Row, Col, Icon, Input, Tooltip, Select } from 'antd';
 
 import searchAdvancedStore from "./stores/searchAdvancedStore";
 import searchMetaStore from "./stores/searchMetaStore";
@@ -9,6 +9,12 @@ import SearchAttributeField from "./SearchAttributeField";
 import TransliterationPreview from "./TransliterationPreview";
 
 import './css/SearchBlock.css';
+
+const Option = Select.Option;
+
+const distanceOptions = Array(10).fill(0).map((e, i) => (
+    i === 0 ? "none" : i + " token" + (i > 1 ? "s" : "")
+));
 
 
 class SearchBlock extends Component {
@@ -39,34 +45,13 @@ class SearchBlock extends Component {
                         <Row
                         type="flex"
                         align="middle"
-                        className={this.props.isFirstBlock ? "hidden" : ""}>
-                            <Col span={10} offset={1}>
-                                <Checkbox
-                                checked={this.props.distance > 0}
-                                onChange={e => searchAdvancedStore.updateDistance(this.props.id, e.target.checked ? 1 : 0)}
-                                disabled={this.props.isFirstBlock}>
-                                    Maximum distance to previous term:&nbsp;
-                                    {this.props.distance === 0 ? "all" : this.props.distance}
-                                </Checkbox>
-                            </Col>
-                            <Col span={10}>
-                                <Slider
-                                value={this.props.distance}
-                                defaultValue={0}
-                                onChange={value => searchAdvancedStore.updateDistance(this.props.id, value)}
-                                min={0}
-                                max={5}
-                                disabled={this.props.distance === 0}
-                                className={this.props.distance === 0 ? "hidden" : ""} />
-                            </Col>
-                        </Row>
-
-                        <Row
-                        type="flex"
-                        align="middle"
                         justify="center">
 
-                            <Col span={18}>
+                            <Col span={9} className="search-input-label content-right">
+                                Search term:
+                            </Col>
+
+                            <Col span={9}>
                                 <Tooltip
                                 title={transliteration}
                                 trigger="focus"
@@ -74,16 +59,39 @@ class SearchBlock extends Component {
                                     <Input
                                     value={this.props.term}
                                     onChange={e => searchAdvancedStore.updateTerm(this.props.id, e.target.value)}
-                                    placeholder="search term (optional)"
-                                    className="search-term-input"
-                                    size="large" />
+                                    placeholder="(optional)"
+                                    className="search-block-input" />
                                 </Tooltip>
                             </Col>
 
-                            <Col span={4} className="content-right">
+                            <Col span={4}>
                                 {/* ??? */}
                             </Col>
 
+                        </Row>
+
+                        <Row
+                        type="flex"
+                        align="middle"
+                        justify="center"
+                        className={this.props.isFirstBlock ? "hidden" : ""}>
+                            <Col span={9} className="search-input-label content-right">
+                                Maximum distance to previous term:
+                            </Col>
+                            <Col span={9} className="search-block-input">
+                                <Select
+                                value={this.props.distance}
+                                onSelect={(value, o) => searchAdvancedStore.updateDistance(this.props.id, value)}
+                                disabled={this.props.isFirstBlock}
+                                style={{ width: '100%' }} >
+                                    {distanceOptions.map((e, i) => (
+                                        <Option
+                                        key={'distance_' + this.props.id + '_' + i}
+                                        value={i}>{e}</Option>
+                                    ))}
+                                </Select>
+                            </Col>
+                            <Col span={4}></Col>
                         </Row>
 
                         {this.props.fields.map((field, i) => (

@@ -6,3 +6,7 @@
     font-style: italic;
     font-size: 110%;
 }
+
+.search-scope-indicator-container {
+    padding-left: 2rem;
+}

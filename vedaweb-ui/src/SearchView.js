@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Row, Col, Modal, Button } from 'antd';
+import { Row, Col, Modal, Button, Icon } from 'antd';
 
 import SearchHeader from "./SearchHeader";
 import SearchSimple from "./SearchSimple";
@@ -49,6 +49,7 @@ class SearchView extends Component {
 
                     <hr/>
                     
+                    <Icon type="search" className="gap-right"/>
                     <span className="bold">What are you searching for?</span>
                     <SearchSimple active={mode === 'simple'}/>
                     <SearchAdvanced active={mode === 'advanced'}/>
