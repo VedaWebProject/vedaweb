@@ -26,7 +26,7 @@ class SearchScope extends Component {
 
                     <Col span={8}>
                         <Icon type="eye-o" className="gap-right"/>
-                        <span className="bold">Limit Search Scope:</span>
+                        <span className="bold">Search Scope:</span>
                     </Col>
 
                     <Col span={3} className="search-input-label content-right">

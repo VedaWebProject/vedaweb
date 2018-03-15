@@ -5,14 +5,6 @@
     padding-right: 1.5em;
 }
 
-.navbar-left {
-    
-}
-
-.navbar-right {
-    text-align: right;
-}
-
 .navbar-app-title {
     font-size: 1.5em;
     color: #fff;
@@ -34,4 +26,36 @@ img.navbar-logo {
 .navbar-icon-search:hover {
     color: rgba(255, 255, 255, 1);
     text-shadow: 0px 0px 4px rgba(255, 255, 255, 0.5);
+}
+
+.ant-menu-item,
+.ant-menu-submenu-title {
+    color: rgba(255,255,255,0.8);
+    border-color: rgba(255,255,255,0.8);
+}
+
+.ant-menu-horizontal > .ant-menu-item:hover,
+.ant-menu-horizontal > .ant-menu-submenu:hover,
+.ant-menu-horizontal > .ant-menu-item-active,
+.ant-menu-horizontal > .ant-menu-submenu-active,
+.ant-menu-horizontal > .ant-menu-item-open,
+.ant-menu-horizontal > .ant-menu-submenu-open,
+.ant-menu-horizontal > .ant-menu-item-selected,
+.ant-menu-horizontal > .ant-menu-submenu-selected{
+    border-bottom: 2px solid #fff;
+    color: #fff;
+}
+
+.ant-menu-horizontal .ant-menu-submenu-title-active,
+.ant-menu-horizontal .ant-menu-submenu-title-selected,
+.ant-menu-horizontal .ant-menu-submenu-title:hover {
+    color: #fff;
+}
+
+.ant-menu-submenu .ant-menu-item {
+    color: #363636;
+}
+
+.ant-menu-submenu .ant-menu-item:hover {
+    background-color: #eed;
 }
