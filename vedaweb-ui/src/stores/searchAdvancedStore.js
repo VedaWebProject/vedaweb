@@ -18,6 +18,7 @@ const searchAdvancedStore = store({
         searchAdvancedStore.data.blocks = searchAdvancedStore.data.blocks.concat({
             id: blockId,
             term: '',
+            distance: 0,
             fields: []
         });
         searchAdvancedStore.addFieldToBlock(blockId);
@@ -32,6 +33,7 @@ const searchAdvancedStore = store({
             block.id !== blockId ? block : {
                 id: block.id,
                 term: block.term,
+                distance: block.distance,
                 fields: block.fields.concat({
                     id: 'field_' + Date.now(),
                     name: '',
@@ -46,6 +48,7 @@ const searchAdvancedStore = store({
             block.id !== blockId ? block : {
                 id: block.id,
                 term: block.term,
+                distance: block.distance,
                 fields: block.fields.filter(field => field.id !== fieldId)
             }
         ));
@@ -56,6 +59,7 @@ const searchAdvancedStore = store({
             block.id !== blockId ? block : {
                 id: block.id,
                 term: block.term,
+                distance: block.distance,
                 fields: block.fields.map(field => (
                     field.id !== fieldId ? field : {
                         id: field.id,
@@ -72,6 +76,7 @@ const searchAdvancedStore = store({
             block.id !== blockId ? block : {
                 id: block.id,
                 term: block.term,
+                distance: block.distance,
                 fields: block.fields.map(field => (
                     field.id !== fieldId ? field : {
                         id: field.id,
@@ -83,14 +88,27 @@ const searchAdvancedStore = store({
         ));
     },
 
-    updateTerm(blockId, termValue){
+    updateTerm(blockId, term){
         searchAdvancedStore.data.blocks = searchAdvancedStore.data.blocks.map(block => (
             block.id !== blockId ? block : {
                 id: block.id,
-                term: termValue,
+                term: term,
+                distance: block.distance,
                 fields: block.fields
             }
         ));
+    },
+
+    updateDistance(blockId, distance){
+        searchAdvancedStore.data.blocks = searchAdvancedStore.data.blocks.map(block => (
+            block.id !== blockId ? block : {
+                id: block.id,
+                term: block.term,
+                distance: distance,
+                fields: block.fields
+            }
+        ));
+        console.log(JSON.stringify(searchAdvancedStore.data.blocks));
     },
 
     getUsedFieldNamesForBlock(blockId){

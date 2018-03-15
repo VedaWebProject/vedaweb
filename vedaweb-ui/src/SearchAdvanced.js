@@ -39,13 +39,15 @@ class SearchAdvanced extends Component {
             <div>
                 { this.props.active &&
                 
-                    <div className="search-container search-block-list">
+                    <div className="search-container search-block-list top-gap">
 
                         {data.blocks.map((block, i) => (
                             <SearchBlock
                             key={block.id}
                             id={block.id}
                             term={block.term}
+                            distance={block.distance}
+                            isFirstBlock={i === 0}
                             fields={block.fields}
                             showRemoveButton={data.blocks.length > 1}
                             onRemoveBlock={this.removeBlock} />

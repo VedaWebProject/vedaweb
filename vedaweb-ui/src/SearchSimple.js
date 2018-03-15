@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Row, Col, Input, Select } from 'antd';
+import { Input, Select, Tooltip } from 'antd';
 
 import searchMetaStore from "./stores/searchMetaStore";
 import searchSimpleStore from "./stores/searchSimpleStore";
@@ -28,34 +28,32 @@ class SearchSimple extends Component {
                 ))}
             </Select>
         );
+
+        const transliteration = (
+            <TransliterationPreview
+            input={searchSimpleStore.term}
+            transliteration={searchMetaStore.transliteration.setting}/>
+        );
         
         return (
-            <div className="top-gap bottom-gap">
+
+            <div>
                 {this.props.active &&
-
-                    <Row
-                    type="flex"
-                    align="middle">
-
-                        <Col span={16}>
+                    <div className="top-gap bottom-gap">
+                        <Tooltip
+                        title={searchSimpleStore.field === "text" ? transliteration : ""}
+                        trigger="focus"
+                        placement="top">
+                        
                             <Input
                             value={searchSimpleStore.term}
                             addonBefore={selectBefore}
                             onChange={e => searchSimpleStore.setTerm(e.target.value)}
                             placeholder="type your search input, here..."
                             size="large" />
-                        </Col>
 
-                        { searchSimpleStore.field === "text" &&
-                            <Col span={8}>
-                                <TransliterationPreview
-                                input={searchSimpleStore.term}
-                                transliteration={searchMetaStore.transliteration.setting}
-                                placeholder="agnim" />
-                            </Col>
-                        }
-                    </Row>
-
+                        </Tooltip>
+                    </div>
                 }
             </div>
         );

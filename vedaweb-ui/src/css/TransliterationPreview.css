@@ -1,14 +1,6 @@
 .transliteration {
-    color: #000;
-    line-height: 26px;
-    font-size: 26px;
-    padding-left: .5rem;
-    font-weight: bold;
-    word-wrap: none;
-    white-space: nowrap;
-    overflow: hidden;
-}
-
-.transliteration-placeholder {
-    color: #ccb;
+    color: #fff;
+    font-size: 20px;
+    line-height: 20px;
+    padding: .2rem;
 }
