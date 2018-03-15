@@ -27,9 +27,8 @@ class SearchAttributeField extends Component {
                     <Select
                     showSearch
                     value={this.props.fieldName}
-                    onSelect={(value, option) => searchAdvancedStore.updateFieldName(
-                        this.props.parentBlockId, this.props.id, value
-                    )}
+                    onSelect={(value, option) => searchAdvancedStore.updateField(
+                        this.props.parentBlockId, this.props.id, "name", value)}
                     style={{ width: '98%' }} >
                         <Option
                             key={'fValOpt_none'}
@@ -52,9 +51,8 @@ class SearchAttributeField extends Component {
                     showSearch
                     key={'fieldValue_of_' + this.props.id}
                     value={this.props.fieldValue.length > 0 ? this.props.fieldValue : valueOptions[0]}
-                    onSelect={(value, option) => searchAdvancedStore.updateFieldValue(
-                        this.props.parentBlockId, this.props.id, value
-                    )}
+                    onSelect={(value, option) => searchAdvancedStore.updateField(
+                        this.props.parentBlockId, this.props.id, "value", value)}
                     disabled = {this.props.fieldName.length === 0}
                     style={{ width: '100%' }} >
                         {this.props.fieldName.length > 0 &&

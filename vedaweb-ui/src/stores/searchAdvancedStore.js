@@ -30,86 +30,131 @@ const searchAdvancedStore = store({
     },
 
     addFieldToBlock(blockId){
-        searchAdvancedStore.data.blocks = searchAdvancedStore.data.blocks.map(block => (
-            block.id !== blockId ? block : {
-                id: block.id,
-                term: block.term,
-                distance: block.distance,
-                fields: block.fields.concat({
+        for (let i = 0; i < searchAdvancedStore.data.blocks.length; i++){
+            if (searchAdvancedStore.data.blocks[i].id === blockId){
+                searchAdvancedStore.data.blocks[i].fields.push({
                     id: 'field_' + Date.now(),
                     name: '',
                     value: ''
-                })
+                });
+                break;
             }
-        ));
+        }
+
+        ////LEGACY
+        // searchAdvancedStore.data.blocks = searchAdvancedStore.data.blocks.map(block => (
+        //     block.id !== blockId ? block : {
+        //         id: block.id,
+        //         term: block.term,
+        //         distance: block.distance,
+        //         fields: block.fields.concat({
+        //             id: 'field_' + Date.now(),
+        //             name: '',
+        //             value: ''
+        //         })
+        //     }
+        // ));
     },
 
     removeFieldFromBlock(blockId, fieldId){
-        searchAdvancedStore.data.blocks = searchAdvancedStore.data.blocks.map(block => (
-            block.id !== blockId ? block : {
-                id: block.id,
-                term: block.term,
-                distance: block.distance,
-                fields: block.fields.filter(field => field.id !== fieldId)
+        for (let i = 0; i < searchAdvancedStore.data.blocks.length; i++){
+            if (searchAdvancedStore.data.blocks[i].id === blockId){
+                searchAdvancedStore.data.blocks[i].fields
+                    = searchAdvancedStore.data.blocks[i].fields.filter(field => field.id !== fieldId);
+                break;
             }
-        ));
+        }
+
+        // //LEGACY
+        // searchAdvancedStore.data.blocks = searchAdvancedStore.data.blocks.map(block => (
+        //     block.id !== blockId ? block : {
+        //         id: block.id,
+        //         term: block.term,
+        //         distance: block.distance,
+        //         fields: block.fields.filter(field => field.id !== fieldId)
+        //     }
+        // ));
     },
 
-    updateFieldName(blockId, fieldId, fieldName){
-        searchAdvancedStore.data.blocks = searchAdvancedStore.data.blocks.map(block => (
-            block.id !== blockId ? block : {
-                id: block.id,
-                term: block.term,
-                distance: block.distance,
-                fields: block.fields.map(field => (
-                    field.id !== fieldId ? field : {
-                        id: field.id,
-                        name: fieldName,
-                        value: ''
+    updateField(blockId, fieldId, fieldProp, value){
+        for (let i = 0; i < searchAdvancedStore.data.blocks.length; i++){
+            if (searchAdvancedStore.data.blocks[i].id === blockId){
+                for (let j = 0; j < searchAdvancedStore.data.blocks[i].fields.length; j++){
+                    if (searchAdvancedStore.data.blocks[i].fields[j].id === fieldId){
+                        searchAdvancedStore.data.blocks[i].fields[j][fieldProp] = value;
                     }
-                ))
+                }
             }
-        ));
+        }
+
+        // //LEGACY
+        // searchAdvancedStore.data.blocks = searchAdvancedStore.data.blocks.map(block => (
+        //     block.id !== blockId ? block : {
+        //         id: block.id,
+        //         term: block.term,
+        //         distance: block.distance,
+        //         fields: block.fields.map(field => (
+        //             field.id !== fieldId ? field : {
+        //                 id: field.id,
+        //                 name: fieldName,
+        //                 value: ''
+        //             }
+        //         ))
+        //     }
+        // ));
     },
 
-    updateFieldValue(blockId, fieldId, fieldValue){
-        searchAdvancedStore.data.blocks = searchAdvancedStore.data.blocks.map(block => (
-            block.id !== blockId ? block : {
-                id: block.id,
-                term: block.term,
-                distance: block.distance,
-                fields: block.fields.map(field => (
-                    field.id !== fieldId ? field : {
-                        id: field.id,
-                        name: field.name,
-                        value: fieldValue
-                    }
-                ))
-            }
-        ));
-    },
+    // updateFieldValue(blockId, fieldId, fieldValue){
+    //     searchAdvancedStore.data.blocks = searchAdvancedStore.data.blocks.map(block => (
+    //         block.id !== blockId ? block : {
+    //             id: block.id,
+    //             term: block.term,
+    //             distance: block.distance,
+    //             fields: block.fields.map(field => (
+    //                 field.id !== fieldId ? field : {
+    //                     id: field.id,
+    //                     name: field.name,
+    //                     value: fieldValue
+    //                 }
+    //             ))
+    //         }
+    //     ));
+    // },
 
     updateTerm(blockId, term){
-        searchAdvancedStore.data.blocks = searchAdvancedStore.data.blocks.map(block => (
-            block.id !== blockId ? block : {
-                id: block.id,
-                term: term,
-                distance: block.distance,
-                fields: block.fields
+        for (let i = 0; i < searchAdvancedStore.data.blocks.length; i++){
+            if (searchAdvancedStore.data.blocks[i].id === blockId){
+                searchAdvancedStore.data.blocks[i].term = term;
             }
-        ));
+        }
+
+        // //LEGACY
+        // searchAdvancedStore.data.blocks = searchAdvancedStore.data.blocks.map(block => (
+        //     block.id !== blockId ? block : {
+        //         id: block.id,
+        //         term: term,
+        //         distance: block.distance,
+        //         fields: block.fields
+        //     }
+        // ));
     },
 
     updateDistance(blockId, distance){
-        searchAdvancedStore.data.blocks = searchAdvancedStore.data.blocks.map(block => (
-            block.id !== blockId ? block : {
-                id: block.id,
-                term: block.term,
-                distance: distance,
-                fields: block.fields
+        for (let i = 0; i < searchAdvancedStore.data.blocks.length; i++){
+            if (searchAdvancedStore.data.blocks[i].id === blockId){
+                searchAdvancedStore.data.blocks[i].distance = distance;
             }
-        ));
-        console.log(JSON.stringify(searchAdvancedStore.data.blocks));
+        }
+
+        // //LEGACY
+        // searchAdvancedStore.data.blocks = searchAdvancedStore.data.blocks.map(block => (
+        //     block.id !== blockId ? block : {
+        //         id: block.id,
+        //         term: block.term,
+        //         distance: distance,
+        //         fields: block.fields
+        //     }
+        // ));
     },
 
     getUsedFieldNamesForBlock(blockId){
