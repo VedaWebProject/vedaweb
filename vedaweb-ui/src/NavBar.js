@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Row, Col, Icon, Menu } from 'antd';
 
-import logo from "./img/logo_white.png";
+import logo from "./img/logo.png";
 import "./css/NavBar.css";
 
 import searchMetaStore from "./stores/searchMetaStore";
