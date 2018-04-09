@@ -27,8 +27,7 @@ class NavBar extends Component {
             align="middle"
             className="navbar">
 
-                <Col
-                span={2}>
+                <Col span={2}>
                     <Icon
                     type="search"
                     onClick={this.props.onClickOpenSearchView}

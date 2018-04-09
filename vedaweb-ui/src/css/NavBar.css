@@ -1,8 +1,8 @@
 .navbar {
     background-color: #fff;
-    padding: .8em;
-    padding-left: 1.5em;
-    padding-right: 1.5em;
+    padding: 1rem;
+    padding-left: 2rem;
+    padding-right: 2rem;
 
     border-bottom: 1px solid #ddc;
 
@@ -14,12 +14,12 @@
 }
 
 .navbar-app-title {
-    font-size: 1.5em;
+    font-size: 1.2rem;
     color: #931111;
 }
 
 img.navbar-logo {
-    height: 50px;
+    height: 56px;
     margin-left: 1em;
 }
 
