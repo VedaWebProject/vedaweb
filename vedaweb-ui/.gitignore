@@ -9,6 +9,9 @@
 # production
 /build
 
+# fonts
+/public/fonts
+
 # misc
 .DS_Store
 .env.local
