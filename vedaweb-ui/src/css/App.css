@@ -2,6 +2,17 @@
     min-width: 768px;
 }
 
+.page-content {
+    background-color: #eed;
+}
+
+.card {
+    margin: .8rem;
+    padding: 1.5rem;
+    background-color: #fff;
+    border: 1px solid #ddc;
+}
+
 a {
     outline: 0;
 }

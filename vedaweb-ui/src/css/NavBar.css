@@ -4,11 +4,13 @@
     padding-left: 1.5em;
     padding-right: 1.5em;
 
-    z-Index: 99;
+    border-bottom: 1px solid #ddc;
 
+    /*
     -webkit-box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.2);
 	-moz-box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.2);
-	box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.2);
+    box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.2);
+    */
 }
 
 .navbar-app-title {
@@ -17,7 +19,7 @@
 }
 
 img.navbar-logo {
-    height: 64px;
+    height: 50px;
     margin-left: 1em;
 }
 
@@ -31,7 +33,7 @@ img.navbar-logo {
 
 .navbar-icon-search:hover {
     color: rgba(0, 0, 0, 0.6);
-    text-shadow: 0px 0px 4px rgba(0, 0, 0, 0.2);
+    text-shadow: 0px 0px 5px rgba(0, 0, 0, 0.3);
 }
 
 .ant-menu-item,
