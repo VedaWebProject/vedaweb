@@ -12,7 +12,8 @@ class TransliterationPreview extends Component {
 
             <div className="transliteration">
                 {(this.props.input !== null && this.props.input.length > 0) &&
-                    Sanscript.t(this.props.input, this.props.transliteration, "iast")
+                    Sanscript.t(this.props.input, this.props.transliteration, "iast") + " / " +
+                    Sanscript.t(this.props.input, this.props.transliteration, "devanagari")
                 }
                 {(this.props.input === null || this.props.input.length) === 0 &&
                     <span>...</span>
