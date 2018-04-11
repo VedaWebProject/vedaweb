@@ -56,7 +56,8 @@ img.navbar-logo {
 .ant-menu-horizontal > .ant-menu-submenu-open,
 .ant-menu-horizontal > .ant-menu-item-selected,
 .ant-menu-horizontal > .ant-menu-submenu-selected{
-    border-bottom: 2px solid rgba(0,0,0,0.5);
+    /* border-bottom: 2px solid rgba(0,0,0,0.5); */
+    border-bottom: 0px solid #fff;
     color: rgba(0,0,0,0.8);
 }
 
@@ -71,5 +72,5 @@ img.navbar-logo {
 }
 
 .ant-menu-submenu .ant-menu-item:hover {
-    background-color: rgba(0,0,0,0.8);
+    background-color: rgba(0,0,0,0.2);
 }
