@@ -2,6 +2,7 @@ package de.unikoeln.vedaweb.services;
 
 import java.io.IOException;
 import java.util.Map;
+import java.util.Optional;
 
 import org.elasticsearch.action.search.SearchRequest;
 import org.elasticsearch.action.search.SearchResponse;
@@ -9,6 +10,7 @@ import org.elasticsearch.search.SearchHit;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import de.unikoeln.vedaweb.data.Verse;
 import de.unikoeln.vedaweb.data.VerseRepository;
 import de.unikoeln.vedaweb.search.SearchFormData;
 import de.unikoeln.vedaweb.search.SearchRequestBuilder;
@@ -48,7 +50,9 @@ public class ElasticSearchService {
 	private SearchResults buildSearchResults(SearchResponse response){
 		SearchResults results = new SearchResults();
 		for (SearchHit hit : response.getHits()){
-			results.add(new SearchResult(hit.getScore(), hit.getId(), verseRepo.findById(hit.getId())));
+			Optional<Verse> verse = verseRepo.findById(hit.getId());
+			if (verse.isPresent())
+				results.add(new SearchResult(hit.getScore(), hit.getId(), verse.get()));
 		}
 		return results;
 	}

@@ -1,15 +1,15 @@
 package de.unikoeln.vedaweb.search;
-import de.unikoeln.vedaweb.data.VerseDocument;
+import de.unikoeln.vedaweb.data.Verse;
 
 
 public class SearchResult implements Comparable<SearchResult>{
 	
 	private float score;
 	private String locationId;
-	private VerseDocument doc;
+	private Verse doc;
 	
 	
-	public SearchResult(float score, String locationId, VerseDocument doc) {
+	public SearchResult(float score, String locationId, Verse doc) {
 		super();
 		this.score = score;
 		this.locationId = locationId;
@@ -24,7 +24,7 @@ public class SearchResult implements Comparable<SearchResult>{
 		return locationId;
 	}
 	
-	public VerseDocument getDoc(){
+	public Verse getDoc(){
 		return doc;
 	}
 

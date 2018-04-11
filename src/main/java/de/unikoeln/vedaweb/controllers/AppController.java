@@ -1,17 +1,27 @@
 package de.unikoeln.vedaweb.controllers;
 
-import org.springframework.stereotype.Controller;
+import org.json.JSONObject;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
-@Controller
+import de.unikoeln.vedaweb.data.VerseRepository;
+import de.unikoeln.vedaweb.services.DataImportService;
+
+@RestController
 public class AppController {
 	
-//	@RequestMapping("/")
-//    public String app(
-//    		Model model,
-//    		HttpServletRequest request) {
-//		
-//		System.out.println("[INFO] called '/', serving app frontend.");
-//    	return "index";
-//    }
+	@Autowired
+	DataImportService dataImportService;
+	
+	@Autowired
+	VerseRepository verseRepo;
+	
+	
+	@RequestMapping(value = "/data/import", produces = {"application/json"})
+    public String importData() {
+		dataImportService.importXMLData(DataImportService.DEV_LOCAL_XML);
+    	return "VERSES: " + verseRepo.count();
+    }
 	
 }

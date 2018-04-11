@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
 import java.util.Map.Entry;
 
 import org.elasticsearch.action.bulk.BulkRequest;
@@ -14,8 +13,9 @@ import org.elasticsearch.common.xcontent.XContentType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import de.unikoeln.vedaweb.data.Part;
-import de.unikoeln.vedaweb.data.VerseDocument;
+import de.unikoeln.vedaweb.data.Pada;
+import de.unikoeln.vedaweb.data.Token;
+import de.unikoeln.vedaweb.data.Verse;
 import de.unikoeln.vedaweb.data.VerseRepository;
 import net.minidev.json.JSONObject;
 
@@ -31,13 +31,13 @@ public class ElasticIndexService {
 	
 	public void indexDbDocuments() {
 		// get all documents from db
-		Iterator<VerseDocument> dbIter = verseRepo.findAll().iterator();
+		Iterator<Verse> dbIter = verseRepo.findAll().iterator();
 		// create es bulk request
 		BulkRequest bulkRequest = new BulkRequest();
 
 		// process docs
 		while (dbIter.hasNext()) {
-			VerseDocument dbDoc = dbIter.next();
+			Verse dbDoc = dbIter.next();
 			JSONObject indexDoc = new JSONObject();
 
 			System.out.println("[INFO] processing: " + dbDoc.getIndex());
@@ -46,8 +46,8 @@ public class ElasticIndexService {
 			indexDoc.put("book_nr", dbDoc.getBook());
 			indexDoc.put("hymn_nr", dbDoc.getHymn());
 			indexDoc.put("verse_nr", dbDoc.getVerse());
-			indexDoc.put("translation_de", dbDoc.getTranslation());
-			indexDoc.put("form", concatPartForms(dbDoc));
+			//indexDoc.put("translation_de", dbDoc.getTranslation());
+			indexDoc.put("form", concatPadaForms(dbDoc));
 			indexDoc.put("tokens", buildTokensList(dbDoc));
 
 			// create index request
@@ -72,17 +72,19 @@ public class ElasticIndexService {
 	}
 	
 
-	private List<JSONObject> buildTokensList(VerseDocument doc) {
-		List<Part> parts = doc.getParts();
+	private List<JSONObject> buildTokensList(Verse doc) {
+		List<Pada> padas = doc.getPadas();
 		List<JSONObject> tokens = new ArrayList<JSONObject>();
 		int count = 0;
 
-		for (Part part : parts) {
-			for (Map<String, Object> token : part.getTokens()) {
+		for (Pada pada : padas) {
+			for (Token token : pada.getTokens()) {
 				JSONObject indexToken = new JSONObject();
-
-				for (Entry<String, Object> e : token.entrySet()) {
-					indexToken.put(e.getKey(), e.getKey().equals("index") ? count : e.getValue());
+				indexToken.put("index", token.getIndex());
+				indexToken.put("lemma", token.getLemma());
+				//grammar
+				for (String attr : token.getGrammarAttributes().keySet()) {
+					indexToken.put(attr, token.getGrammarAttribute(attr));
 				}
 				tokens.add(indexToken);
 				count++;
@@ -93,14 +95,14 @@ public class ElasticIndexService {
 	}
 	
 
-	private String concatPartForms(VerseDocument doc) {
-		List<Part> parts = doc.getParts();
+	private String concatPadaForms(Verse doc) {
+		List<Pada> padas = doc.getPadas();
 		StringBuilder sb = new StringBuilder();
-		for (Part part : parts) {
-			sb.append(part.getForm());
+		for (Pada pada : padas) {
+			sb.append(pada.getForm());
 			sb.append(" ");
 		}
-		return sb.toString().trim().replaceAll("|", "");
+		return sb.toString().trim();
 	}
 	
 	

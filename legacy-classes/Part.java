@@ -1,4 +1,4 @@
-package de.unikoeln.vedaweb.data;
+package de.unikoeln.vedaweb.legacy;
 
 import java.util.List;
 import java.util.Map;
