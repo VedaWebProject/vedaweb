@@ -1,5 +1,9 @@
+
+  
 #app {
     min-width: 768px;
+    font-family: 'Gentium', "Tahoma", "Arial", sans-serif;
+    font-size: 18px;
 }
 
 .page-content {
@@ -11,6 +15,7 @@
     padding: 1.5rem;
     background-color: #fff;
     border: 1px solid #ddc;
+    border-radius: 3px;
 }
 
 a {
@@ -86,4 +91,8 @@ button {
 
 .translucent {
     color: rgba(0, 0, 0, 0.3);
+}
+
+.v-middle > * {
+    vertical-align: middle;
 }

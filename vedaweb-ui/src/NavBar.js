@@ -56,8 +56,11 @@ class NavBar extends Component {
 
                 <Col
                 span={8}
-                className="content-right">
-                    <span className="navbar-app-title">VedaWeb</span>
+                className="content-right v-middle">
+                    <div className="navbar-app-title">
+                        <span className="bold">VedaWeb</span><br/>
+                        Rigveda online
+                    </div>
                     <img src={logo} className="navbar-logo" alt="" />
                 </Col>
 
