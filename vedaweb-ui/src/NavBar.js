@@ -27,11 +27,14 @@ class NavBar extends Component {
             align="middle"
             className="navbar">
 
-                <Col span={2}>
-                    <Icon
-                    type="search"
-                    onClick={this.props.onClickOpenSearchView}
-                    className="navbar-icon-search"/>
+                <Col
+                span={8}
+                className="content-left v-middle">
+                    <img src={logo} className="navbar-logo" alt="" />
+                    <div className="navbar-app-title">
+                        <span className="bold">VedaWeb</span><br/>
+                        Rigveda online
+                    </div>
                 </Col>
 
                 <Col span={14}>
@@ -54,14 +57,11 @@ class NavBar extends Component {
                     </Menu>
                 </Col>
 
-                <Col
-                span={8}
-                className="content-right v-middle">
-                    <div className="navbar-app-title">
-                        <span className="bold">VedaWeb</span><br/>
-                        Rigveda online
-                    </div>
-                    <img src={logo} className="navbar-logo" alt="" />
+                <Col span={2} className="content-right">
+                    <Icon
+                    type="search"
+                    onClick={this.props.onClickOpenSearchView}
+                    className="navbar-icon-search"/>
                 </Col>
 
             </Row>
