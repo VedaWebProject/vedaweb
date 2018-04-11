@@ -9,16 +9,16 @@ fi
 
 if [[ "$1" == 'on' ]]
 then
-	service mongod start
-	service elasticsearch start
+	sudo service mongod start
+	sudo service elasticsearch start
 	echo "started services."
     exit
 fi
 
 if [[ "$1" == 'off' ]]
 then
-	service mongod stop
-	service elasticsearch stop
+	sudo service mongod stop
+	sudo service elasticsearch stop
 	echo "stopped services."
     exit
 fi
