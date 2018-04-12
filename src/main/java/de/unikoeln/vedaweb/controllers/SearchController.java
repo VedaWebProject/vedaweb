@@ -10,10 +10,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import de.unikoeln.vedaweb.data.VerseRepository;
-import de.unikoeln.vedaweb.search.SearchFormData;
+import de.unikoeln.vedaweb.search.SearchDataAdvanced;
+import de.unikoeln.vedaweb.search.SearchDataSimple;
 import de.unikoeln.vedaweb.search.SearchResults;
 import de.unikoeln.vedaweb.services.ElasticSearchService;
-import de.unikoeln.vedaweb.services.JsonService;
+import de.unikoeln.vedaweb.services.MappingService;
 
 
 
@@ -28,16 +29,16 @@ public class SearchController {
 	private VerseRepository verseRepo;
 	
 	@Autowired
-	private JsonService jsonService;
+	private MappingService mappingService;
 	
 	
-	@RequestMapping(value = "/", method = RequestMethod.POST, produces = {"application/json"})
-    public String searchView(@RequestBody SearchFormData formData) {
+	@RequestMapping(value = "/simple", method = RequestMethod.POST, produces = {"application/json"})
+    public String searchView(@RequestBody SearchDataSimple searchData) {
 		
-		System.out.println(formData);
-		SearchResults results = search.search(formData);
+		System.out.println(searchData);
+		//SearchResults results = search.search(searchData);
 		
-    	return jsonService.mapToJSON(results);
+    	return mappingService.mapToJSON(searchData);
     }
 	
 }

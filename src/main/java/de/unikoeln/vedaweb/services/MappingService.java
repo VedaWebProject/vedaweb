@@ -9,16 +9,17 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 
 @Service
-public class JsonService {
+public class MappingService {
 	
 	private ObjectMapper mapper;
 	
-	public JsonService(){
+	
+	public MappingService(){
 		mapper = new ObjectMapper();
 	}
 	
 	
-	public <T> String mapToJSON(Optional<T> o){
+	public String mapToJSON(Optional<?> o){
 		if (!o.isPresent())
 			return mapToJSON(null);
 		else
@@ -27,7 +28,8 @@ public class JsonService {
 	
 	public String mapToJSON(Object o){
 		String json = "{}";
-		if (o == null) return json;
+		if (o == null)
+			return json;
 		try {
 			json = mapper.writeValueAsString(o);
 		} catch (JsonProcessingException e) {

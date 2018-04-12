@@ -19,7 +19,7 @@ public class SearchRequestBuilder {
 	public static final String AGGREGATE_GRAMMAR_FIELDS = "grammar_fields";
 	
 	
-	public static SearchRequest buildAdvanced(SearchFormData formData){
+	public static SearchRequest buildAdvanced(SearchDataAdvanced formData){
 		SearchRequest searchRequest = new SearchRequest("vedaweb"); 
 		searchRequest.types("doc");
 		SearchSourceBuilder searchSourceBuilder = new SearchSourceBuilder(); 
@@ -67,7 +67,7 @@ public class SearchRequestBuilder {
 	}
 	
 	
-	private static void addScopeQueries(BoolQueryBuilder rootQuery, SearchFormData formData){
+	private static void addScopeQueries(BoolQueryBuilder rootQuery, SearchDataAdvanced formData){
 		//check if book scope is set
 		if (formData.getScopeBook() < 1) return;
 		
@@ -88,7 +88,7 @@ public class SearchRequestBuilder {
 	}
 	
 	
-	private static void addBlockQueries(BoolQueryBuilder rootQuery, SearchFormData formData){
+	private static void addBlockQueries(BoolQueryBuilder rootQuery, SearchDataAdvanced formData){
 		//iterate search blocks
 		for (Map<String, Object> block : formData.getBlocks()){
 			//construct bool query for each block

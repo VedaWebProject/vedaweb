@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
 
 import de.unikoeln.vedaweb.data.Verse;
 import de.unikoeln.vedaweb.data.VerseRepository;
-import de.unikoeln.vedaweb.search.SearchFormData;
+import de.unikoeln.vedaweb.search.SearchDataAdvanced;
 import de.unikoeln.vedaweb.search.SearchRequestBuilder;
 import de.unikoeln.vedaweb.search.SearchResult;
 import de.unikoeln.vedaweb.search.SearchResults;
@@ -27,7 +27,7 @@ public class ElasticSearchService {
 	private ElasticService elastic;
 	
 	
-	public SearchResults search(SearchFormData formData){
+	public SearchResults search(SearchDataAdvanced formData){
 		formData.cleanAndFormatFields();
 		System.out.println(formData);
 		
