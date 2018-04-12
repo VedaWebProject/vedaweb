@@ -1,25 +1,36 @@
 package de.unikoeln.vedaweb.services;
 
 import java.io.IOException;
+import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Map.Entry;
 
+import org.elasticsearch.action.admin.indices.create.CreateIndexRequest;
+import org.elasticsearch.action.admin.indices.create.CreateIndexResponse;
+import org.elasticsearch.action.admin.indices.delete.DeleteIndexRequest;
+import org.elasticsearch.action.admin.indices.delete.DeleteIndexResponse;
 import org.elasticsearch.action.bulk.BulkRequest;
 import org.elasticsearch.action.bulk.BulkResponse;
 import org.elasticsearch.action.index.IndexRequest;
 import org.elasticsearch.common.xcontent.XContentType;
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.PropertySource;
+import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Service;
 
 import de.unikoeln.vedaweb.data.Pada;
 import de.unikoeln.vedaweb.data.Token;
+import de.unikoeln.vedaweb.data.Translation;
 import de.unikoeln.vedaweb.data.Verse;
 import de.unikoeln.vedaweb.data.VerseRepository;
-import net.minidev.json.JSONObject;
+
 
 @Service
+@PropertySource(value = "classpath:es.properties")
 public class ElasticIndexService {
 	
 	@Autowired
@@ -27,10 +38,28 @@ public class ElasticIndexService {
 	
 	@Autowired
 	private ElasticService elastic;
+	
+	@Value("${es.index.name}")
+	private String indexName;
+	
+	@Value("classpath:es-index.json")
+	private Resource indexDef;
 
 	
-	public void indexDbDocuments() {
+	public void rebuildIndex(){
+		//delete old index
+		System.out.println("[INFO] deleting old index...");
+		System.out.println(deleteIndex());
+		//create new Index
+		System.out.println("[INFO] creating new index...");
+		System.out.println(createIndex());
 		// get all documents from db
+		System.out.println("[INFO] creating and inserting new index documents...");
+		System.out.println(indexDbDocuments().hasFailures() ? "ERROR INDEXING DOCS" : "DONE.");
+	}
+	
+	
+	public BulkResponse indexDbDocuments(){
 		Iterator<Verse> dbIter = verseRepo.findAll().iterator();
 		// create es bulk request
 		BulkRequest bulkRequest = new BulkRequest();
@@ -40,21 +69,24 @@ public class ElasticIndexService {
 			Verse dbDoc = dbIter.next();
 			JSONObject indexDoc = new JSONObject();
 
-			System.out.println("[INFO] processing: " + dbDoc.getIndex());
-
-			indexDoc.put("location", dbDoc.getIndex());
-			indexDoc.put("book_nr", dbDoc.getBook());
-			indexDoc.put("hymn_nr", dbDoc.getHymn());
-			indexDoc.put("verse_nr", dbDoc.getVerse());
-			//indexDoc.put("translation_de", dbDoc.getTranslation());
-			indexDoc.put("form", concatPadaForms(dbDoc));
-			indexDoc.put("tokens", buildTokensList(dbDoc));
-
+			try {
+				indexDoc.put("id", dbDoc.getId());
+				indexDoc.put("index", dbDoc.getIndex());
+				indexDoc.put("book", dbDoc.getBook());
+				indexDoc.put("hymn", dbDoc.getHymn());
+				indexDoc.put("verse", dbDoc.getVerse());
+				indexDoc.put("translation", concatTranslations(dbDoc));
+				indexDoc.put("form", concatPadaForms(dbDoc) + concatTokenLemmata(dbDoc));
+				indexDoc.put("tokens", buildTokensList(dbDoc));
+			} catch (JSONException e) {
+				e.printStackTrace();
+			}
+			
 			// create index request
 			IndexRequest request = new IndexRequest("vedaweb", "doc", dbDoc.getId());
 
 			// add request source
-			request.source(indexDoc.toJSONString(), XContentType.JSON);
+			request.source(indexDoc.toString(), XContentType.JSON);
 
 			// add to bulk request
 			bulkRequest.add(request);
@@ -68,26 +100,25 @@ public class ElasticIndexService {
 			e.printStackTrace();
 		}
 
-		System.out.println(bulkResponse.hasFailures() ? "ERRORS IN BULK RESPONSE!" : "NO ERRORS");
+		return bulkResponse;
 	}
 	
 
-	private List<JSONObject> buildTokensList(Verse doc) {
+	private List<JSONObject> buildTokensList(Verse doc) throws JSONException{
 		List<Pada> padas = doc.getPadas();
 		List<JSONObject> tokens = new ArrayList<JSONObject>();
-		int count = 0;
 
 		for (Pada pada : padas) {
 			for (Token token : pada.getTokens()) {
 				JSONObject indexToken = new JSONObject();
 				indexToken.put("index", token.getIndex());
+				indexToken.put("form", token.getForm());
 				indexToken.put("lemma", token.getLemma());
 				//grammar
 				for (String attr : token.getGrammarAttributes().keySet()) {
 					indexToken.put(attr, token.getGrammarAttribute(attr));
 				}
 				tokens.add(indexToken);
-				count++;
 			}
 		}
 
@@ -95,15 +126,70 @@ public class ElasticIndexService {
 	}
 	
 
+	public DeleteIndexResponse deleteIndex(){
+		DeleteIndexRequest request = new DeleteIndexRequest(indexName);
+		DeleteIndexResponse response = null;
+		try {
+			response = elastic.client().indices().delete(request);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return response;
+	}
+	
+	
+	public CreateIndexResponse createIndex(){
+		CreateIndexRequest request = new CreateIndexRequest(indexName);
+		byte[] json = null;
+		
+		try {
+			json = Files.readAllBytes(indexDef.getFile().toPath());
+		} catch (IOException e1) {
+			e1.printStackTrace();
+		}
+		
+		request.source(json, XContentType.JSON);
+		CreateIndexResponse response = null;
+		
+		try {
+			response = elastic.client().indices().create(request);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		return response;
+	}
+	
+	
 	private String concatPadaForms(Verse doc) {
-		List<Pada> padas = doc.getPadas();
 		StringBuilder sb = new StringBuilder();
-		for (Pada pada : padas) {
+		for (Pada pada : doc.getPadas()) {
 			sb.append(pada.getForm());
 			sb.append(" ");
 		}
 		return sb.toString().trim();
 	}
 	
+	
+	private String concatTokenLemmata(Verse doc) {
+		StringBuilder sb = new StringBuilder();
+		for (Pada pada : doc.getPadas()) {
+			for (Token token : pada.getTokens()){
+				sb.append(token.getForm());
+				sb.append(" ");
+			}
+		}
+		return sb.toString().trim();
+	}
+	
+	
+	private String concatTranslations(Verse doc) {
+		StringBuilder sb = new StringBuilder();
+		for (Translation t : doc.getTranslations()) {
+			sb.append(t.getTranslation());
+			sb.append(" ");
+		}
+		return sb.toString().trim();
+	}
 	
 }

@@ -1,0 +1,52 @@
+{
+	"settings": {
+		"index" : {
+            "number_of_shards" : 1,
+            "number_of_replicas" : 0
+        },
+		"analysis": {
+			"normalizer": {
+				"lemma_normalizer": {
+					"type": "custom",
+					"char_filter": ["lemma_char_filter"],
+					"filter": ["lowercase"]
+				}
+			},
+			"char_filter": {
+				"lemma_char_filter": {
+					"type": "pattern_replace",
+					"pattern": "\\-$",
+					"replacement": ""
+				}
+			}
+		}
+	},
+	"mappings": {
+		"doc": {
+			"properties": {
+				"id":				{ "type": "keyword" },
+				"index":			{ "type": "short" },
+				"book": 			{ "type": "short" },
+				"hymn": 			{ "type": "short" },
+				"verse":			{ "type": "short" },
+				"translation": 		{ "type": "text" },
+				"form": 			{ "type": "text" },
+				"tokens": {
+					"type": "nested",
+					"properties": {
+						"index":		{ "type": "short" },
+						"form":			{ "type": "keyword" },
+						"lemma":		{ "type": "text"},
+						"diathesis":	{ "type": "keyword"},
+						"numerus":		{ "type": "keyword"},
+						"casus":		{ "type": "keyword"},
+						"person":		{ "type": "keyword"},
+						"genus":		{ "type": "keyword"},
+						"modus":		{ "type": "keyword"},
+						"tempus":		{ "type": "keyword"}
+					}
+				}
+			}
+		}
+	}
+}

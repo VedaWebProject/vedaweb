@@ -1,9 +1,6 @@
 package de.unikoeln.vedaweb.controllers;
 
-import javax.servlet.http.HttpServletRequest;
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -12,7 +9,6 @@ import org.springframework.web.bind.annotation.RestController;
 import de.unikoeln.vedaweb.data.VerseRepository;
 import de.unikoeln.vedaweb.search.SearchDataAdvanced;
 import de.unikoeln.vedaweb.search.SearchDataSimple;
-import de.unikoeln.vedaweb.search.SearchResults;
 import de.unikoeln.vedaweb.services.ElasticSearchService;
 import de.unikoeln.vedaweb.services.MappingService;
 
@@ -34,6 +30,16 @@ public class SearchController {
 	
 	@RequestMapping(value = "/simple", method = RequestMethod.POST, produces = {"application/json"})
     public String searchView(@RequestBody SearchDataSimple searchData) {
+		
+		System.out.println(searchData);
+		//SearchResults results = search.search(searchData);
+		
+    	return mappingService.mapToJSON(searchData);
+    }
+	
+	
+	@RequestMapping(value = "/advanced", method = RequestMethod.POST, produces = {"application/json"})
+    public String searchView(@RequestBody SearchDataAdvanced searchData) {
 		
 		System.out.println(searchData);
 		//SearchResults results = search.search(searchData);

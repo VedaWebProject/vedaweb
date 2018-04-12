@@ -83,14 +83,14 @@
 		<dependency>
 			<groupId>org.elasticsearch</groupId>
 			<artifactId>elasticsearch</artifactId>
-			<version>6.1.1</version>
+			<version>6.2.0</version>
 		</dependency>
 
 		<!-- elasticsearch high level REST client -->
 		<dependency>
 			<groupId>org.elasticsearch.client</groupId>
 			<artifactId>elasticsearch-rest-high-level-client</artifactId>
-			<version>6.1.1</version>
+			<version>6.2.0</version>
 		</dependency>
 
 		<!-- https://mvnrepository.com/artifact/org.json/json -->
