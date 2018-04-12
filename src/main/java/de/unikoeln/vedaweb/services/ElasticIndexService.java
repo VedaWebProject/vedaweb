@@ -46,20 +46,27 @@ public class ElasticIndexService {
 	private Resource indexDef;
 
 	
-	public void rebuildIndex(){
-		//delete old index
-		System.out.println("[INFO] deleting old index...");
-		System.out.println(deleteIndex());
-		//create new Index
-		System.out.println("[INFO] creating new index...");
-		System.out.println(createIndex());
-		// get all documents from db
-		System.out.println("[INFO] creating and inserting new index documents...");
-		System.out.println(indexDbDocuments().hasFailures() ? "ERROR INDEXING DOCS" : "DONE.");
+	public JSONObject rebuildIndex(){
+		JSONObject response = new JSONObject();
+		try {
+			//delete old index
+			System.out.println("[INFO] deleting old index...");
+			response.put("deleteOldIndex", deleteIndex().getString("response"));
+			//create new Index
+			System.out.println("[INFO] creating new index...");
+			response.put("createNewIndex", createIndex().getString("response"));
+			// get all documents from db
+			System.out.println("[INFO] creating and inserting new index documents...");
+			response.put("indexDbDocuments", indexDbDocuments().getString("response"));
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
+		return response;
 	}
 	
 	
-	public BulkResponse indexDbDocuments(){
+	public JSONObject indexDbDocuments(){
+		JSONObject jsonResponse = new JSONObject();
 		Iterator<Verse> dbIter = verseRepo.findAll().iterator();
 		// create es bulk request
 		BulkRequest bulkRequest = new BulkRequest();
@@ -99,8 +106,18 @@ public class ElasticIndexService {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		
+		//create response object
+		try {
+			jsonResponse.put("response",
+					bulkResponse != null && !bulkResponse.hasFailures()
+					? "{response:'OK'}"
+					: "{response:'Error'}");
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
 
-		return bulkResponse;
+		return jsonResponse;
 	}
 	
 
@@ -126,20 +143,33 @@ public class ElasticIndexService {
 	}
 	
 
-	public DeleteIndexResponse deleteIndex(){
-		DeleteIndexRequest request = new DeleteIndexRequest(indexName);
-		DeleteIndexResponse response = null;
+	public JSONObject deleteIndex(){
+		JSONObject jsonResponse = new JSONObject();
+		DeleteIndexRequest deleteRequest = new DeleteIndexRequest(indexName);
+		DeleteIndexResponse deleteResponse = null;
 		try {
-			response = elastic.client().indices().delete(request);
+			deleteResponse = elastic.client().indices().delete(deleteRequest);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		return response;
+		
+		//create response object
+		try {
+			jsonResponse.put("response",
+					deleteResponse != null && deleteResponse.isAcknowledged()
+					? "{response:'OK'}"
+					: "{response:'Error'}");
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
+
+		return jsonResponse;
 	}
 	
 	
-	public CreateIndexResponse createIndex(){
-		CreateIndexRequest request = new CreateIndexRequest(indexName);
+	public JSONObject createIndex(){
+		JSONObject jsonResponse = new JSONObject();
+		CreateIndexRequest createRequest = new CreateIndexRequest(indexName);
 		byte[] json = null;
 		
 		try {
@@ -148,16 +178,26 @@ public class ElasticIndexService {
 			e1.printStackTrace();
 		}
 		
-		request.source(json, XContentType.JSON);
-		CreateIndexResponse response = null;
+		createRequest.source(json, XContentType.JSON);
+		CreateIndexResponse createResponse = null;
 		
 		try {
-			response = elastic.client().indices().create(request);
+			createResponse = elastic.client().indices().create(createRequest);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 		
-		return response;
+		//create response object
+		try {
+			jsonResponse.put("response",
+					createResponse != null && createResponse.isAcknowledged()
+					? "{response:'OK'}"
+					: "{response:'Error'}");
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
+
+		return jsonResponse;
 	}
 	
 	

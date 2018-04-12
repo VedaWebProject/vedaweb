@@ -6,8 +6,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import de.unikoeln.vedaweb.data.VerseRepository;
+import de.unikoeln.vedaweb.services.DataImportService;
 import de.unikoeln.vedaweb.services.ElasticIndexService;
-import de.unikoeln.vedaweb.services.MappingService;
 
 
 
@@ -16,7 +16,13 @@ import de.unikoeln.vedaweb.services.MappingService;
 public class SystemController {
 	
 	@Autowired
+	DataImportService dataImportService;
+	
+	@Autowired
 	private ElasticIndexService indexService;
+	
+	@Autowired
+	VerseRepository verseRepo;
 	
 	
 	@RequestMapping(value = "/index/{action}", produces = {"application/json"})
@@ -31,6 +37,13 @@ public class SystemController {
 		default:
 			return "{response:'unknown command'}";
 		}
+    }
+	
+	
+	@RequestMapping(value = "/data/import", produces = {"application/json"})
+    public String importData() {
+		dataImportService.importXMLData(DataImportService.DEV_LOCAL_XML);
+    	return "VERSES: " + verseRepo.count();
     }
 	
 	
