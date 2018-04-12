@@ -2,4 +2,6 @@
     padding: .8rem;
     padding-left: 1rem;
     padding-right: 1rem;
+
+    z-index: -1;
 }

@@ -4,10 +4,7 @@ import ReactDOM from 'react-dom';
 import App from './App';
 import registerServiceWorker from './registerServiceWorker';
 
-import './index.css';
-
-document.body.style.backgroundColor = '#fff';
-document.body.style.height = '101%';
+import './css/index.css';
 
 //render app
 ReactDOM.render(<App />, document.getElementById('root'));
