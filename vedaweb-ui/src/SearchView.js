@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import { Row, Col, Modal, Button, Icon } from 'antd';
 
 import SearchHeader from "./SearchHeader";
-import SearchSimple from "./SearchSimple";
 import SearchAdvanced from "./SearchAdvanced";
 import SearchScope from "./SearchScope";
 import SearchTransliteration from "./SearchTransliteration";
@@ -51,7 +50,7 @@ class SearchView extends Component {
                     
                     <Icon type="search" className="gap-right"/>
                     <span className="bold">What are you searching for?</span>
-                    <SearchSimple active={mode === 'simple'}/>
+                    
                     <SearchAdvanced active={mode === 'advanced'}/>
 
                     <Row>

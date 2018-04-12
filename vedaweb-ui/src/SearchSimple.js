@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Input, Select, Tooltip } from 'antd';
+import { Input, Tooltip } from 'antd';
 
 import searchMetaStore from "./stores/searchMetaStore";
 import searchSimpleStore from "./stores/searchSimpleStore";
@@ -8,26 +8,36 @@ import { view } from 'react-easy-state';
 import TransliterationPreview from "./TransliterationPreview";
 
 
-const Option = Select.Option;
-
+//const Option = Select.Option;
+const Search = Input.Search;
 
 class SearchSimple extends Component {
 
+    constructor(props){
+        super(props);
+        this.handleSearch = this.handleSearch.bind(this);
+    }
+
+    handleSearch(input){
+        console.log("SMART SEARCH INPUT: " + input);
+        //TODO route to search results
+    }
+
     render() {
 
-        const selectBefore = (
-            <Select
-            defaultValue="text"
-            onSelect={(value, option) => searchSimpleStore.setField(value)}>
-                {searchSimpleStore.fields.map(field => (
-                    <Option
-                    key={'simple_field_' + field.field}
-                    value={field.field}>
-                        {field.ui}
-                    </Option>
-                ))}
-            </Select>
-        );
+        // const selectBefore = (
+        //     <Select
+        //     defaultValue="text"
+        //     onSelect={(value, option) => searchSimpleStore.setField(value)}>
+        //         {searchSimpleStore.fields.map(field => (
+        //             <Option
+        //             key={'simple_field_' + field.field}
+        //             value={field.field}>
+        //                 {field.ui}
+        //             </Option>
+        //         ))}
+        //     </Select>
+        // );
 
         const transliteration = (
             <TransliterationPreview
@@ -45,11 +55,11 @@ class SearchSimple extends Component {
                         trigger="focus"
                         placement="top">
                         
-                            <Input
+                            <Search
                             value={searchSimpleStore.term}
-                            addonBefore={selectBefore}
                             onChange={e => searchSimpleStore.setTerm(e.target.value)}
-                            placeholder="type your search input, here..."
+                            onSearch={this.handleSearch}
+                            placeholder="location, translation or text via HK"
                             size="large" />
 
                         </Tooltip>
