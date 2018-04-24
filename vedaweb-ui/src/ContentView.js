@@ -4,7 +4,7 @@ import Spinner from "./Spinner";
 
 import "./css/ContentView.css";
 
-import { Link } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 
 import appStateStore from "./stores/appStateStore";
 import { view } from 'react-easy-state';
@@ -59,11 +59,15 @@ class ContentView extends Component {
 
 
     filterChange(target, checked){
+        if (checked) appStateStore.viewScrollTo = true;
         appStateStore.viewFilter[target] = checked;
     }
 
     scrollTo(component){
-        scrollToComponent(component);
+        if (appStateStore.viewScrollTo){
+            scrollToComponent(component);
+            appStateStore.viewScrollTo = false;
+        }
     }
     
 
@@ -192,4 +196,4 @@ class ContentView extends Component {
     }
 }
 
-export default view(ContentView);
+export default withRouter(view(ContentView));
