@@ -26,7 +26,7 @@ public class DocumentController {
 	@RequestMapping(value = "/id/{id}", produces = {"application/json"})
     public String verseById(@PathVariable("id") String id) {
 		
-		if		(id.matches("[\\d\\.\\s]+")) id = id.replaceAll("\\D", "");
+		if (id.matches("[\\d\\.\\s]+")) id = id.replaceAll("\\D", "");
 		
 		return mappingService.mapToJSON(verseRepo.findById(id));
     }
