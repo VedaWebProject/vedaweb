@@ -92,8 +92,8 @@ class ContentView extends Component {
                         <div className="card">
 
                             <div className="content-plain content-block">
-                                <div className="location-controls">
-                                    <Link to={"/view/index/" + (data.index - 1)}>
+                                <div className="location">
+                                    <Link to={"/view/index/" + (data.index - 1)} className="location-controls">
                                         <Icon type="left"/>
                                     </Link>
                                     <span className="location-display">
@@ -103,7 +103,7 @@ class ContentView extends Component {
                                         (data.verse + "").padStart(2, "0")
                                     }
                                     </span>
-                                    <Link to={"/view/index/" + (data.index + 1)}>
+                                    <Link to={"/view/index/" + (data.index + 1)} className="location-controls">
                                         <Icon type="right"/>
                                     </Link>
                                 </div>
