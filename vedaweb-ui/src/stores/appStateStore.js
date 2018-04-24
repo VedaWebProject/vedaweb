@@ -10,8 +10,6 @@ const appStateStore = store({
         translations: false
     },
 
-    viewScrollTo: false,
-
     searchViewActive: false,
 
     openSearchView(open){
