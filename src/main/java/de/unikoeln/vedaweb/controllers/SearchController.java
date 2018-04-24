@@ -34,7 +34,7 @@ public class SearchController {
 		System.out.println(searchData);
 		//SearchResults results = search.search(searchData);
 		
-    	return mappingService.mapToJSON(searchData);
+    	return mappingService.mapObjectToJSON(searchData);
     }
 	
 	
@@ -44,7 +44,7 @@ public class SearchController {
 		System.out.println(searchData);
 		//SearchResults results = search.search(searchData);
 		
-    	return mappingService.mapToJSON(searchData);
+    	return mappingService.mapObjectToJSON(searchData);
     }
 	
 }

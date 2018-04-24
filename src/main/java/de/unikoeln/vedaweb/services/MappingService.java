@@ -7,6 +7,8 @@ import org.springframework.stereotype.Service;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import de.unikoeln.vedaweb.exceptions.NotFoundException;
+
 
 @Service
 public class MappingService {
@@ -21,15 +23,16 @@ public class MappingService {
 	
 	public String mapToJSON(Optional<?> o){
 		if (!o.isPresent())
-			return mapToJSON(null);
+			return mapObjectToJSON(null);
 		else
-			return mapToJSON(o.get());
+			return mapObjectToJSON(o.get());
 	}
 	
-	public String mapToJSON(Object o){
+	public String mapObjectToJSON(Object o){
 		String json = "{}";
-		if (o == null)
-			return json;
+		if (o == null){
+			throw new NotFoundException();
+		}
 		try {
 			json = mapper.writeValueAsString(o);
 		} catch (JsonProcessingException e) {
