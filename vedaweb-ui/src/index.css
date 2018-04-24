@@ -1,0 +1,24 @@
+
+/* APP FONTS */
+
+@font-face {
+    font-family: 'Gentium';
+    src: local('Gentium'), url(./fonts/GentiumPlus/GentiumPlus-R.woff) format('woff');
+}
+
+@font-face {
+    font-family: 'Dosis';
+    src: local('Dosis'), url(./fonts/Dosis/Dosis-Regular.ttf) format('truetype');
+}
+
+
+
+/* GLOBAL STYLING */
+
+html {
+    min-height: 101%;
+}
+
+body {
+    background-color: #fff;
+}

@@ -2,6 +2,51 @@
     padding: .8rem;
     padding-left: 1rem;
     padding-right: 1rem;
+}
 
-    z-index: -1;
+#content-view .content {
+    font-size: 110%;
+}
+
+.content-block {
+    margin-bottom: 2rem;
+}
+
+.content-plain {
+    
+}
+
+.glossing-line {
+    margin-bottom: 1rem;
+}
+
+.glossing-token {
+    font-weight: bold;
+    display: inline-block;
+	margin-right: 1rem;
+}
+
+.glossing-annotation {
+    font-weight: normal;
+    font-style: italic;
+}
+
+.view-filter {
+    margin-bottom: 1rem;
+    font-family: "Dosis", sans-serif;
+}
+
+.view-filter .ant-switch {
+    margin-right: 1rem;
+}
+
+.location-controls {
+    color: #931111;
+    margin-bottom: 1rem;
+}
+
+.location-display {
+    padding: 1rem;
+    font-weight: bold;
+    font-size: 120%;
 }

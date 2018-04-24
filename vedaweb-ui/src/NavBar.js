@@ -9,6 +9,8 @@ import searchMetaStore from "./stores/searchMetaStore";
 import appStateStore from "./stores/appStateStore";
 import { view } from 'react-easy-state';
 
+import { Link } from 'react-router-dom'
+
 const SubMenu = Menu.SubMenu;
 
 
@@ -42,13 +44,19 @@ class NavBar extends Component {
             className="navbar">
 
                 <Col
-                span={5}
-                className="content-left v-middle">
-                    <img src={logo} className="navbar-logo" alt="" />
-                    <div className="navbar-app-title">
-                        <span className="bold">VedaWeb</span><br/>
-                        Rigveda online
-                    </div>
+                span={4}
+                className="content-left">
+                    <Link to="/" className="v-middle">
+                        <img src={logo} className="navbar-logo" alt="" />
+                        <div className="navbar-app-title">
+                            <span className="bold">VedaWeb</span><br/>
+                            Rigveda online
+                        </div>
+                    </Link>
+                </Col>
+
+                <Col span={6}>
+                    <SearchSimple active={true}/>
                 </Col>
 
                 <Col span={14}>
@@ -65,7 +73,9 @@ class NavBar extends Component {
                         </Menu.Item>
                         <SubMenu title={<span>Browse Rigveda</span>}>
                             {searchMetaStore.scope.data.map(book => (
-                                <Menu.Item key={book.value}>Book {book.display}</Menu.Item>
+                                <Menu.Item key={book.value}>
+                                    <Link to={"/view/id/" + book.display + "00101"}>{book.display}</Link>
+                                </Menu.Item>
                             ))}
                         </SubMenu>
                         <Menu.Item key="search">
@@ -75,9 +85,7 @@ class NavBar extends Component {
                     </Menu>
                 </Col>
 
-                <Col span={5}>
-                    <SearchSimple active={true}/>
-                </Col>
+                
 
                 {/**
                 <Col span={2} className="content-right">

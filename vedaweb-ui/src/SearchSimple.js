@@ -7,6 +7,8 @@ import { view } from 'react-easy-state';
 
 import TransliterationPreview from "./TransliterationPreview";
 
+import { withRouter } from 'react-router-dom';
+
 
 //const Option = Select.Option;
 const Search = Input.Search;
@@ -21,6 +23,7 @@ class SearchSimple extends Component {
     handleSearch(input){
         console.log("SMART SEARCH INPUT: " + input);
         //TODO route to search results
+        this.props.history.push("/view/id/" + input);   //TEMP
     }
 
     render() {
@@ -49,7 +52,7 @@ class SearchSimple extends Component {
 
             <div>
                 {this.props.active &&
-                    <div className="top-gap bottom-gap">
+                
                         <Tooltip
                         title={searchSimpleStore.field === "text" ? transliteration : ""}
                         trigger="focus"
@@ -63,7 +66,6 @@ class SearchSimple extends Component {
                             size="large" />
 
                         </Tooltip>
-                    </div>
                 }
             </div>
         );
@@ -72,4 +74,4 @@ class SearchSimple extends Component {
 
 }
 
-export default view(SearchSimple);
+export default withRouter(view(SearchSimple));

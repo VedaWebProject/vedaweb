@@ -3,7 +3,7 @@ import { store } from 'react-easy-state';
 
 const searchMetaStore = store({
 
-    mode: 'simple',
+    mode: 'advanced',
 
     scope: {
         data: [],

@@ -17,8 +17,9 @@
 }
 
 img.navbar-logo {
-    height: 56px;
-    margin-right: 1em;
+    height: 50px;
+    margin: .8rem;
+    margin-left: 0px;
 }
 
 .navbar-icon-search {
@@ -32,6 +33,11 @@ img.navbar-logo {
 .navbar-icon-search:hover {
     color: rgba(0, 0, 0, 0.6);
     text-shadow: 0px 0px 5px rgba(0, 0, 0, 0.3);
+}
+
+.ant-menu-horizontal > .ant-menu-item,
+.ant-menu-horizontal > .ant-menu-submenu {
+    float: right !important;
 }
 
 .ant-menu-item,

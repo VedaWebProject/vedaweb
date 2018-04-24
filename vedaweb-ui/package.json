@@ -3,14 +3,16 @@
   "version": "0.1.0",
   "private": true,
   "proxy": "http://localhost:8080",
-  "homepage": "./",
+  "homepage": ".",
   "dependencies": {
     "antd": "^3.2.1",
     "immutability-helper": "^2.6.6",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
     "react-easy-state": "^5.0.0",
+    "react-router-dom": "^4.2.2",
     "react-scripts": "1.1.1",
+    "react-scroll-to-component": "^1.0.2",
     "sanscript": "0.0.2"
   },
   "scripts": {

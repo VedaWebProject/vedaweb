@@ -1,8 +1,11 @@
 import React, { Component } from "react";
+import { BackTop } from 'antd';
 
 import NavBar from './NavBar';
 import SearchView from './SearchView';
 import ContentView from './ContentView';
+import Start from './Start';
+import NotFound from './NotFound';
 import Footer from './Footer';
 
 import "./css/App.css";
@@ -14,6 +17,8 @@ import searchSimpleStore from "./stores/searchSimpleStore";
 import searchAdvancedStore from "./stores/searchAdvancedStore";
 import searchMetaStore from "./stores/searchMetaStore";
 import { view } from 'react-easy-state';
+
+import { Route, Switch, withRouter } from 'react-router-dom'
 
 
 class App extends Component {
@@ -33,23 +38,27 @@ class App extends Component {
         const searchViewActive = appStateStore.searchViewActive;
 
         return (
+                <div id="app" className={ searchViewActive ? "blurred" : "" }>
 
-            <div id="app" className={ searchViewActive ? "blurred" : "" }>
+                    <NavBar onClickOpenSearchView={() => appStateStore.openSearchView(true)} />
 
-                <NavBar onClickOpenSearchView={() => appStateStore.openSearchView(true)} />
+                    <Switch>
+                        <Route path="/view/:by/:value" component={ContentView} />
+                        <Route path="/" exact={true} component={Start} />
+                        <Route component={NotFound} />
+                    </Switch>
 
-                <ContentView/>
+                    <Footer/>
 
-                <Footer/>
+                    <SearchView
+                    visible={searchViewActive}
+                    onClose={() => appStateStore.openSearchView(false)} />
 
-                <SearchView
-                visible={searchViewActive}
-                onClose={() => appStateStore.openSearchView(false)} />
+                    <BackTop />
 
-            </div>
-
+                </div>
         );
     }
 }
 
-export default view(App);
+export default withRouter(view(App));

@@ -1,4 +1,8 @@
-
+h4 {
+    margin-bottom: 1rem;
+    color: #931111;
+    font-family: "Dosis", sans-serif;
+}
   
 #app {
     min-width: 768px;
@@ -7,7 +11,7 @@
 }
 
 .page-content {
-    background-color: #eed;
+    background-color: #efe7db;
 }
 
 .card {
@@ -16,6 +20,10 @@
     background-color: #fff;
     border: 1px solid #ddc;
     border-radius: 3px;
+}
+
+.card-nobox {
+    padding: 1.5rem;
 }
 
 a {
@@ -51,6 +59,14 @@ button {
 
 .bold {
     font-weight: bold;
+}
+
+.italic {
+    font-style: italic;
+}
+
+.first-cap {
+    text-transform:capitalize;
 }
 
 .hidden {
