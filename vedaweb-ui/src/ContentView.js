@@ -89,9 +89,9 @@ class ContentView extends Component {
 
                     {/** CONTENT **/}
                     {isLoaded && !error &&
-                        <div className="card">
 
-                            <div className="content-plain content-block">
+                        <div>
+                            <div className="content-plain content-block card">
                                 <div className="location">
                                     <Link to={"/view/index/" + (data.index - 1)} className="location-controls">
                                         <Icon type="left"/>
@@ -114,7 +114,7 @@ class ContentView extends Component {
 
                             {appStateStore.viewFilter.grammar &&
                                 <div
-                                className="glossing content-block"
+                                className="glossing content-block card"
                                 ref={this.scrollTo}>
                                     <h4>Grammatical Glossing</h4>
                                     {data.padas.map(pada => (
@@ -141,7 +141,7 @@ class ContentView extends Component {
 
                             {appStateStore.viewFilter.translations &&
                                 <div
-                                className="content-block"
+                                className="content-block card"
                                 ref={this.scrollTo}>
                                     <h4>Translations</h4>
                                     {data.translations.map(translation => (

@@ -1,13 +1,13 @@
-h4 {
-    margin-bottom: 1rem;
-    color: #931111;
-    font-family: "Dosis", sans-serif;
-}
-  
 #app {
     min-width: 768px;
     font-family: 'Gentium', "Tahoma", "Arial", sans-serif;
     font-size: 18px;
+}
+
+h4 {
+    margin-bottom: 1rem;
+    color: #931111;
+    font-family: "Dosis", sans-serif;
 }
 
 .page-content {

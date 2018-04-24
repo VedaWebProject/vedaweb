@@ -68,6 +68,8 @@ img.navbar-logo {
 }
 
 .ant-menu-submenu .ant-menu-item {
+    font-family: 'Gentium', "Tahoma", "Arial", sans-serif;
+    font-size: 16px;
     color: rgba(0,0,0,0.5);
 }
 

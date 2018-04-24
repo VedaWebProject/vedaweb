@@ -12,6 +12,10 @@
     margin-bottom: 2rem;
 }
 
+.content-block h4 {
+    font-family: 'Gentium', "Tahoma", "Arial", sans-serif;
+}
+
 .glossing-line {
     margin-bottom: 1rem;
 }
@@ -51,7 +55,7 @@
 }
 
 .location-display {
-    padding: 1rem;
-    font-weight: bold;
+    padding-left: 1rem;
+    padding-right: 1rem;
     font-size: 120%;
 }
