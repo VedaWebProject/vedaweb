@@ -154,6 +154,24 @@ class ContentView extends Component {
                                 </div>
                             }
 
+                            {appStateStore.viewFilter.something1 &&
+                                <div
+                                className="content-block card"
+                                ref={this.scrollTo}>
+                                    <h4>Something</h4>
+                                    Something...
+                                </div>
+                            }
+
+                            {appStateStore.viewFilter.something2 &&
+                                <div
+                                className="content-block card"
+                                ref={this.scrollTo}>
+                                    <h4>Something else</h4>
+                                    Something else...
+                                </div>
+                            }
+
                         </div>
                     }
                 </Col>
@@ -179,11 +197,17 @@ class ContentView extends Component {
                                 Translations
                             </div>
                             <div className="view-filter">
-                                <Switch disabled={!isLoaded} />
+                                <Switch
+                                onChange={(e) => this.filterChange("something1", e)}
+                                disabled={!isLoaded}
+                                checked={appStateStore.viewFilter.something1} />
                                 Something
                             </div>
                             <div className="view-filter">
-                                <Switch disabled={!isLoaded} />
+                                <Switch
+                                onChange={(e) => this.filterChange("something2", e)}
+                                disabled={!isLoaded}
+                                checked={appStateStore.viewFilter.something2} />
                                 Something else
                             </div>
                         </div>
