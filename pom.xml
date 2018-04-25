@@ -116,7 +116,7 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
-
+			
 			<plugin>
 				<artifactId>maven-resources-plugin</artifactId>
 				<version>3.0.2</version>
@@ -132,7 +132,6 @@
 							<resources>
 								<resource>
 									<directory>vedaweb-ui/build</directory>
-									<filtering>true</filtering>
 								</resource>
 							</resources>
 						</configuration>
