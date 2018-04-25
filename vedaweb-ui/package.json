@@ -3,9 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "proxy": "http://localhost:8080",
-  "homepage": ".",
   "dependencies": {
     "antd": "^3.2.1",
+    "axios": "^0.18.0",
     "immutability-helper": "^2.6.6",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",

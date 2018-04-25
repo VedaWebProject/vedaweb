@@ -11,6 +11,8 @@ import { view } from 'react-easy-state';
 
 import scrollToComponent from 'react-scroll-to-component';
 
+import axios from 'axios';
+
 
 class ContentView extends Component {
 
@@ -23,12 +25,10 @@ class ContentView extends Component {
     }
 
     componentDidMount() {
-        console.log("componentDidMount: " + JSON.stringify(this.props));
         this.loadData(this.props.match.params.by, this.props.match.params.value);
     }
 
     componentWillReceiveProps(newProps){
-        console.log("componentWillReceiveProps: " + JSON.stringify(newProps));
         this.loadData(newProps.match.params.by, newProps.match.params.value);
     }
 
@@ -37,24 +37,19 @@ class ContentView extends Component {
             isLoaded: false
         });
 
-        setTimeout((function() {
-            fetch("/api/document/" + by + "/" + value)
-            .then(res => res.json())
-            .then(
-                (result) => {
-                    this.setState({
-                        isLoaded: true,
-                        data: result
-                    });
-                },
-                (error) => {
-                    this.setState({
-                        isLoaded: true,
-                        error
-                    });
-                }
-            );
-        }).bind(this), 500);
+        axios.get("/api/document/" + by + "/" + value)
+            .then((response) => {
+                this.setState({
+                    isLoaded: true,
+                    data: response.data
+                });
+            })
+            .catch((error) => {
+                this.setState({
+                    isLoaded: true,
+                    error: error
+                });
+            });
     }
 
 
@@ -87,8 +82,15 @@ class ContentView extends Component {
                         <Spinner/>
                     }
 
+                    {/** ERROR **/}
+                    {isLoaded && error !== undefined &&
+                        <div className="card">
+                            There was an error requesting this data.
+                        </div>
+                    }
+
                     {/** CONTENT **/}
-                    {isLoaded && !error &&
+                    {isLoaded && error === undefined &&
 
                         <div>
                             <div className="content-plain content-block card">
