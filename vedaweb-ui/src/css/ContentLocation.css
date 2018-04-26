@@ -5,6 +5,7 @@
 
 .location-controls {
     color: #93111185;
+    font-weight: bold;
     transition: .2s;
 }
 

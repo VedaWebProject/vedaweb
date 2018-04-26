@@ -29,7 +29,8 @@ class NavBar extends Component {
             <Row
             type="flex"
             align="middle"
-            className="navbar">
+            id="navbar"
+            className="box-shadow">
 
                 <Col
                 span={4}

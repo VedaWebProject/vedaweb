@@ -79,7 +79,7 @@ class ContentView extends Component {
             type="flex"
             justify="center">
 
-                <Col span={16} className="content">
+                <Col span={18} className="content">
                     {/** LOADING SPINNER **/}
                     {!isLoaded &&
                         <Spinner/>
@@ -122,6 +122,10 @@ class ContentView extends Component {
                                         className="glossing-line"
                                         key={"p_" + pada.index}>
 
+                                            <span key={"p_gloss_line" + pada.index} className="pada-line">
+                                                {pada.line}
+                                            </span>
+
                                             {pada.tokens.map(token => (
                                                 <div
                                                 className="glossing-token"
@@ -129,7 +133,18 @@ class ContentView extends Component {
                                                     {token.form}
                                                     <br/>
                                                     <div className="glossing-annotation">
-                                                        {token.lemma}
+                                                        {
+                                                            token.lemma + "." +
+
+                                                            (token.grammar.case === undefined ? "" :
+                                                            (token.grammar.case + ".")) +
+
+                                                            (token.grammar.number === undefined ? "" :
+                                                            (token.grammar.number + ".")) +
+
+                                                            (token.grammar.gender === undefined ? "" :
+                                                            (token.grammar.gender + "."))
+                                                        }
                                                     </div>
                                                 </div>
                                             ))}
@@ -176,7 +191,7 @@ class ContentView extends Component {
                     }
                 </Col>
                 
-                <Col lg={6} md={8}>
+                <Col span={6}>
                     <Affix offsetTop={10}>
                         <div className="card-nobox">
                             <h4>View Filters</h4>

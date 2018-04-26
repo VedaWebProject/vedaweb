@@ -12,7 +12,7 @@ h4 {
 }
 
 .page-content {
-    background-color: #ece7db;
+    background-color: #e5e2d5;
 }
 
 .card {
@@ -21,6 +21,10 @@ h4 {
     background-color: #fff;
     border: 1px solid #ddc;
     border-radius: 3px;
+
+    -webkit-box-shadow: 0px 0px 4px 0px rgba(0,0,0,0.05);
+	-moz-box-shadow: 0px 0px 4px 0px rgba(0,0,0,0.05);
+    box-shadow: 0px 0px 4px 0px rgba(0,0,0,0.05);
 }
 
 .card-nobox {
@@ -115,9 +119,9 @@ button {
 }
 
 .box-shadow {
-    -webkit-box-shadow: 0px 0px 8px 0px rgba(0,0,0,0.1);
-	-moz-box-shadow: 0px 0px 8px 0px rgba(0,0,0,0.1);
-    box-shadow: 0px 0px 8px 0px rgba(0,0,0,0.1);
+    -webkit-box-shadow: 0px 0px 4px 0px rgba(0,0,0,0.05);
+	-moz-box-shadow: 0px 0px 4px 0px rgba(0,0,0,0.05);
+    box-shadow: 0px 0px 4px 0px rgba(0,0,0,0.05);
 }
 
 .ant-spin {

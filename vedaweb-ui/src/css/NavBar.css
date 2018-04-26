@@ -1,11 +1,10 @@
-.navbar {
+#navbar {
     background-color: #fff;
     padding: .5rem;
     padding-left: 2rem;
     padding-right: 2rem;
 
     border-bottom: 1px solid #ddc;
-
     font-family: "Dosis", sans-serif;
 }
 

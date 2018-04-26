@@ -18,18 +18,27 @@
 
 .pada-line {
     color: #931111;
-    font-weight: bold;
-    padding-right: 2rem;
+    padding-right: 1rem;
+}
+
+.glossing {
+    font-size: 18px;
 }
 
 .glossing-line {
     margin-bottom: 1rem;
 }
 
+.glossing-line > * {
+    vertical-align: middle;
+}
+
 .glossing-token {
+    padding-left: .3rem;
     font-weight: bold;
     display: inline-block;
-	margin-right: 1rem;
+    margin-right: .6rem;
+    border-left: 2px solid #ddc;
 }
 
 .glossing-annotation {
