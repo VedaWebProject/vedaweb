@@ -34,7 +34,8 @@ class ContentView extends Component {
 
     loadData(by, value){
         this.setState({
-            isLoaded: false
+            isLoaded: false,
+            error: undefined
         });
 
         axios.get("/api/document/" + by + "/" + value)
