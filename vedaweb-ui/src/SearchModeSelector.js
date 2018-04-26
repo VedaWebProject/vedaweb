@@ -3,12 +3,12 @@ import { Button, Radio } from 'antd';
 
 import showNote from "./Note";
 
-import './css/SearchHeader.css';
+import './css/SearchModeSelector.css';
 
 import { view } from 'react-easy-state';
 import searchMetaStore from "./stores/searchMetaStore";
 
-class SearchHeader extends Component {
+class SearchModeSelector extends Component {
 
     constructor(props){
         super(props);
@@ -25,7 +25,7 @@ class SearchHeader extends Component {
     render() {
 
         return (
-            <div className="content-center">
+            <div className="search-mode-selector">
                 <Radio.Group
                 value={searchMetaStore.mode}
                 onChange={e => searchMetaStore.setSearchMode(e.target.value)}>
@@ -43,4 +43,4 @@ class SearchHeader extends Component {
 
 }
 
-export default view(SearchHeader);
+export default view(SearchModeSelector);

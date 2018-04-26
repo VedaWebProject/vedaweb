@@ -1,21 +1,22 @@
-
-.ant-modal {
-    min-width: 768px;
+#search-view {
+    padding: .8rem;
+    min-width: 786px;
+    font-size: 16px;
+    font-family: "Dosis", sans-serif;
 }
 
-.ant-collapse-header {
-    background: #887;
-    color: #fff !important;
-    border-radius: 0px !important;
+.ant-tabs-tab {
+    font-family: "Dosis", sans-serif;
+    font-size: 16px;
 }
 
-.ant-collapse-header:first-child {
-    border-bottom: 1px solid #fff;
+.ant-tabs-tab .anticon {
+    margin-right: 0px !important;
 }
 
-.ant-collapse-content {
-    border: none;
-    border-radius: 0px !important;
+.ant-tabs-content {
+    padding: .5rem;
+    padding-top: 0px;
 }
 
 .search-container {

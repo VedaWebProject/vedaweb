@@ -1,69 +1,92 @@
 import React, { Component } from "react";
-import { Row, Col, Modal, Button, Icon } from 'antd';
+import { Row, Col, Button, Icon, Tabs } from 'antd';
 
-import SearchHeader from "./SearchHeader";
 import SearchAdvanced from "./SearchAdvanced";
 import SearchScope from "./SearchScope";
 import SearchTransliteration from "./SearchTransliteration";
 
 import './css/SearchView.css';
 
-import searchMetaStore from "./stores/searchMetaStore";
 import { view } from 'react-easy-state';
 
+import searchMetaStore from "./stores/searchMetaStore";
+
+const TabPane = Tabs.TabPane;
 
 class SearchView extends Component {
 
+    constructor(props){
+        super(props);
+        this.switchMode = this.switchMode.bind(this);
+    }
+
+    switchMode(key){
+        if (key !== "help")
+            searchMetaStore.mode = key;
+    }
+
+
     render() {
 
-        const mode = searchMetaStore.mode;
-
-        const customBodyStyle = {
-            background: '#eed',
-            padding: '1rem'
-        };
-
-        const customMaskStyle = {
-            background: 'rgba(0,0,0,0.4)'
-        };
+        const helpText = <p>
+            <h4>VedaVeb Search Modes</h4>
+            This document describes the holy search modes as they were handed down for generations.<br/>There is a simple one and a more complex one. Choose from your options wisely.<br/>If these enlightened words are not verbose enough for you, please feel free to call our hotline:<br/>+49 221 S-A-N-S-K-R-I-T
+        </p>;
 
         return (
-            <div id="search-view" key="search-view">
-                <Modal
+
+            <Row
+            className="search-view page-content"
+            type="flex"
+            justify="center">
+
+                <Col
+                span={12}
                 id="search-view"
-                width={768}
-                visible={this.props.visible}
-                title={<SearchHeader/>}
-                maskStyle={customMaskStyle}
-                bodyStyle={customBodyStyle}
-                onCancel={this.props.onClose}
-                style={{top: 20}}
-                footer={null} >
+                key="search-view">
 
-                    <SearchTransliteration/>
+                    <div className="card">
+                        <h4>Advanced Search</h4>
+                        
+                        <SearchTransliteration/>
+                        <hr/>
+                        <SearchScope/>
+                        <hr/>
+                        
+                        
+                        <div className="bold bottom-gap">
+                            <Icon type="search" className="gap-right"/>
+                            What are you searching for?
+                        </div>
+                        
+                        <Tabs
+                        onChange={this.switchMode}
+                        type="card"
+                        id="search-mode-selector"
+                        tabBarGutter={8}>
+                            <TabPane tab="Grammar Search" key="advanced">
+                                <SearchAdvanced />
+                            </TabPane>
+                            <TabPane tab="Other Search" key="somemode">
+                                Some other search mode...
+                            </TabPane>
+                            <TabPane tab={<Icon type="question"/>} key="help">
+                                {helpText}
+                            </TabPane>
+                        </Tabs>
 
-                    <hr/>
-                    
-                    <SearchScope/>
+                        <Row>
+                            <Col span={12} className="content-left">
+                                {/* <Button icon="cross" size="large" onClick={this.props.onClose}>Close</Button> */}
+                            </Col>
+                            <Col span={12} className="content-right">
+                                <Button icon="search" size="large">Search</Button>
+                            </Col>
+                        </Row>
+                    </div>
+                </Col>  
 
-                    <hr/>
-                    
-                    <Icon type="search" className="gap-right"/>
-                    <span className="bold">What are you searching for?</span>
-                    
-                    <SearchAdvanced active={mode === 'advanced'}/>
-
-                    <Row>
-                        <Col span={12} className="content-left">
-                            {/* <Button icon="cross" size="large" onClick={this.props.onClose}>Close</Button> */}
-                        </Col>
-                        <Col span={12} className="content-right">
-                            <Button icon="search" size="large">Search</Button>
-                        </Col>
-                    </Row>
-
-                </Modal>
-            </div>
+            </Row>
         );
 
     }

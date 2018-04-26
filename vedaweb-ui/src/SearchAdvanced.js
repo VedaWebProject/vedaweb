@@ -37,42 +37,38 @@ class SearchAdvanced extends Component {
 
         return (
             <div>
-                { this.props.active &&
-                
-                    <div className="search-container search-block-list top-gap">
+                <div className="search-block-list top-gap">
 
-                        {data.blocks.map((block, i) => (
-                            <SearchBlock
-                            key={block.id}
-                            id={block.id}
-                            term={block.term}
-                            distance={block.distance}
-                            isFirstBlock={i === 0}
-                            fields={block.fields}
-                            showRemoveButton={data.blocks.length > 1}
-                            onRemoveBlock={this.removeBlock} />
-                        ))}
+                    {data.blocks.map((block, i) => (
+                        <SearchBlock
+                        key={block.id}
+                        id={block.id}
+                        term={block.term}
+                        distance={block.distance}
+                        isFirstBlock={i === 0}
+                        fields={block.fields}
+                        showRemoveButton={data.blocks.length > 1}
+                        onRemoveBlock={this.removeBlock} />
+                    ))}
 
-                        <Row
-                        className={"search-block-list-controls" + (data.blocks.length >= 4 ? " hidden" : "")}
-                        type="flex"
-                        align="middle">
-                            <Col span={1}>
-                                <div
-                                className={"search-block-add content-center"}
-                                onClick={this.addBlock}>
-                                    <Icon type="plus"/>
-                                </div>
-                            </Col>
-                            <Col span={22} offset={1} className="translucent">
-                                <Icon type="arrow-left"/>
-                                Click here to add additional search terms
-                            </Col>
-                        </Row>
+                    <Row
+                    className={"search-block-list-controls" + (data.blocks.length >= 4 ? " hidden" : "")}
+                    type="flex"
+                    align="middle">
+                        <Col span={1}>
+                            <div
+                            className={"search-block-add content-center"}
+                            onClick={this.addBlock}>
+                                <Icon type="plus"/>
+                            </div>
+                        </Col>
+                        <Col span={22} offset={1} className="translucent">
+                            <Icon type="arrow-left"/>
+                            Click here to add additional search terms
+                        </Col>
+                    </Row>
 
-                    </div>
-
-                }
+                </div>
             </div>
         );
     }

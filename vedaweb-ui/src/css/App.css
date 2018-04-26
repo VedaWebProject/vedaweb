@@ -8,6 +8,7 @@ h4 {
     margin-bottom: 1rem;
     color: #931111;
     font-family: "Dosis", sans-serif;
+    font-size: 20px;
 }
 
 .page-content {
@@ -32,7 +33,7 @@ a {
 
 hr {
     border: none;
-    border-top: 1px solid #ccb;
+    border-top: 1px solid #eed;
     margin-top: 1rem;
     margin-bottom: 1rem;
 }

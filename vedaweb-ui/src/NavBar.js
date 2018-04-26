@@ -6,7 +6,7 @@ import logo from "./img/logo.png";
 import "./css/NavBar.css";
 
 import searchMetaStore from "./stores/searchMetaStore";
-import appStateStore from "./stores/appStateStore";
+
 import { view } from 'react-easy-state';
 
 import { Link } from 'react-router-dom'
@@ -16,18 +16,6 @@ const SubMenu = Menu.SubMenu;
 
 class NavBar extends Component {
 
-    constructor(props){
-        super(props);
-        this.handleMenu = this.handleMenu.bind(this);
-    }
-
-    handleMenu(e){
-        if (e.key === "search"){
-            this.props.onClickOpenSearchView();
-        } else {
-            appStateStore.view = e.key;
-        }
-    }
 
     render() {
 
@@ -62,7 +50,6 @@ class NavBar extends Component {
                 <Col span={14}>
                     <Menu
                     onSelect={this.handleMenu}
-                    selectedKeys={[appStateStore.view]}
                     mode="horizontal"
                     style={menuStyle}>
                         <Menu.Item key="about">
@@ -79,8 +66,10 @@ class NavBar extends Component {
                             ))}
                         </SubMenu>
                         <Menu.Item key="search">
-                            <Icon type="search"/>
-                            Advanced Search
+                            <Link to={"/search"}>
+                                <Icon type="search"/>
+                                Advanced Search
+                            </Link>
                         </Menu.Item>
                     </Menu>
                 </Col>

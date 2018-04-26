@@ -12,7 +12,6 @@ import "./css/App.css";
 
 import UIData from './ui-data.js'; //DEV: load from server!
 
-import appStateStore from "./stores/appStateStore";
 import searchSimpleStore from "./stores/searchSimpleStore";
 import searchAdvancedStore from "./stores/searchAdvancedStore";
 import searchMetaStore from "./stores/searchMetaStore";
@@ -35,24 +34,19 @@ class App extends Component {
     
     render() {
 
-        const searchViewActive = appStateStore.searchViewActive;
-
         return (
-                <div id="app" className={ searchViewActive ? "blurred" : "" }>
+                <div id="app">
 
-                    <NavBar onClickOpenSearchView={() => appStateStore.openSearchView(true)} />
+                    <NavBar />
 
                     <Switch>
                         <Route path="/view/:by/:value" component={ContentView} />
+                        <Route path="/search" component={SearchView} />
                         <Route path="/" exact={true} component={Start} />
                         <Route component={NotFound} />
                     </Switch>
 
                     <Footer/>
-
-                    <SearchView
-                    visible={searchViewActive}
-                    onClose={() => appStateStore.openSearchView(false)} />
 
                     <BackTop />
 
