@@ -36,7 +36,7 @@ class SearchAdvanced extends Component {
         const {data} = searchAdvancedStore;
 
         return (
-            <div>
+            <div className="search-container">
                 <div className="search-block-list top-gap">
 
                     {data.blocks.map((block, i) => (

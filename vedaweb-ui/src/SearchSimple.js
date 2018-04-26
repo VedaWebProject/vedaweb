@@ -42,21 +42,21 @@ class SearchSimple extends Component {
         //     </Select>
         // );
 
-        const transliteration = (
-            <TransliterationPreview
-            input={searchSimpleStore.term}
-            transliteration={searchMetaStore.transliteration.setting}/>
-        );
+        // const transliteration = (
+        //     <TransliterationPreview
+        //     input={searchSimpleStore.term}
+        //     transliteration={searchMetaStore.transliteration.setting}/>
+        // );
         
         return (
 
             <div>
                 {this.props.active &&
                 
-                        <Tooltip
+                        /*<Tooltip
                         title={searchSimpleStore.field === "text" ? transliteration : ""}
                         trigger="focus"
-                        placement="top">
+                        placement="top">*/
                         
                             <Search
                             value={searchSimpleStore.term}
@@ -65,7 +65,7 @@ class SearchSimple extends Component {
                             placeholder="location, translation or text via HK"
                             size="large" />
 
-                        </Tooltip>
+                        /*</Tooltip>*/
                 }
             </div>
         );

@@ -8,15 +8,21 @@
 .ant-tabs-tab {
     font-family: "Dosis", sans-serif;
     font-size: 16px;
+    border-radius: 0px;
+    border-top-left-radius: 4px !important;
+    border-top-right-radius: 4px !important;
+    border: 1px solid #ddc !important;
+    border-bottom: 0px solid transparent !important;
+    z-index: 99;
+    margin-bottom: -2px;
+}
+
+.ant-tabs-bar {
+    margin-bottom: 0px;
 }
 
 .ant-tabs-tab .anticon {
     margin-right: 0px !important;
-}
-
-.ant-tabs-content {
-    padding: .5rem;
-    padding-top: 0px;
 }
 
 .search-container {
@@ -24,7 +30,7 @@
     margin-bottom: 1rem;
     background-color: #fff;
     border-radius: 2px;
-    border: 1px solid #ccb;
+    border: 1px solid #ddc;
 }
 
 .search-input-label {

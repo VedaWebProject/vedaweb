@@ -28,10 +28,10 @@ class SearchView extends Component {
 
     render() {
 
-        const helpText = <p>
+        const helpText = <div className="search-container">
             <h4>VedaVeb Search Modes</h4>
             This document describes the holy search modes as they were handed down for generations.<br/>There is a simple one and a more complex one. Choose from your options wisely.<br/>If these enlightened words are not verbose enough for you, please feel free to call our hotline:<br/>+49 221 S-A-N-S-K-R-I-T
-        </p>;
+        </div>;
 
         return (
 
@@ -45,7 +45,7 @@ class SearchView extends Component {
                 id="search-view"
                 key="search-view">
 
-                    <div className="card">
+                    <div className="top-gap card-nobox">
                         <h4>Advanced Search</h4>
                         
                         <SearchTransliteration/>
@@ -68,7 +68,9 @@ class SearchView extends Component {
                                 <SearchAdvanced />
                             </TabPane>
                             <TabPane tab="Other Search" key="somemode">
+                                <div className="search-container">
                                 Some other search mode...
+                                </div>
                             </TabPane>
                             <TabPane tab={<Icon type="question"/>} key="help">
                                 {helpText}
