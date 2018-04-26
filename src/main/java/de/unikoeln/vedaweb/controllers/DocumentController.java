@@ -34,7 +34,19 @@ public class DocumentController {
 	
 	@RequestMapping(value = "/index/{index}", produces = {"application/json"})
     public String verseByLocation(@PathVariable("index") int index) {
-		return mappingService.mapToJSON(verseRepo.findByIndex(index));
+		return mappingService.mapToJSON(
+			verseRepo.findByIndex(normalizeIndex(index))
+		);
     }
+	
+	
+	private int normalizeIndex(int index){
+		int docCount = (int)verseRepo.count();
+		if (index < 0)
+			index = docCount + index;
+		else if (index >= verseRepo.count())
+			index = index - docCount;
+		return index;
+	}
 	
 }
