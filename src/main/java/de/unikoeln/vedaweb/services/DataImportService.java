@@ -45,7 +45,7 @@ public class DataImportService {
 	}
 	
 	
-	public void importXMLData(String xmlFilePath){
+	public void importXMLData(String xmlFilePath, boolean dryRun){
 		List<Verse> verses = null;
 		
 		System.out.println("[INFO] parsing XML data...");
@@ -54,6 +54,11 @@ public class DataImportService {
 			verses = transformXML2Verses(xmlFilePath);
 		} catch (SaxonApiException e) {
 			e.printStackTrace();
+		}
+		
+		if (dryRun){
+			verses.forEach((v)->System.out.println(v));
+			return;
 		}
 		
 		if (verses != null && !verses.isEmpty()){
@@ -140,10 +145,13 @@ public class DataImportService {
 					throws IndexOutOfBoundsException, SaxonApiUncheckedException, SaxonApiException{
 		
 		String form = compiler.evaluate("*:lg/*:l[@*:id='" + padaId + "']/text()", refNode).itemAt(0).getStringValue();
+		char line = padaId.charAt(padaId.length() - 1);
+				
 		XdmValue tokensNode = compiler.evaluate("*:lg/*:l[@*:id='" + padaId + "_tokens']/*:w", refNode);
 		Pada pada = new Pada();
 		pada.setForm(form);
 		pada.setIndex(padaIndex);
+		pada.setLine(line);
 		
 		for (XdmItem token : tokensNode){
 			Token tokenObj = new Token();

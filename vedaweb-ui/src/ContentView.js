@@ -105,7 +105,10 @@ class ContentView extends Component {
                                     locationVerse={data.verse} />
 
                                 {data.padas.map(pada => (
-                                    <span key={"p_plain_" + pada.index}>{pada.form}<br/></span>
+                                    <div className="bottom-gap-small">
+                                        <span key={"p_plain_line" + pada.index} className="pada-line">{pada.line}</span>
+                                        <span key={"p_plain_" + pada.index}>{pada.form}</span><br/>
+                                    </div>
                                 ))}
                             </div>
 

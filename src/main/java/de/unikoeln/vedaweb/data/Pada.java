@@ -6,6 +6,7 @@ import java.util.List;
 public class Pada {
 	
 	private int index;
+	private char line;
 	private String form;
 	private List<Token> tokens;
 	
@@ -23,6 +24,14 @@ public class Pada {
 		this.index = index;
 	}
 	
+	public char getLine() {
+		return line;
+	}
+
+	public void setLine(char line) {
+		this.line = line;
+	}
+
 	public String getForm() {
 		return form;
 	}
@@ -45,7 +54,7 @@ public class Pada {
 	
 	@Override
 	public String toString() {
-		return index + ":" + form + " " + tokens;
+		return index + ":(" + line + ")" + form + " " + tokens;
 	}
 
 }

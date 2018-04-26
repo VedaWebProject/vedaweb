@@ -16,6 +16,12 @@
     font-family: 'Gentium', "Tahoma", "Arial", sans-serif;
 }
 
+.pada-line {
+    color: #931111;
+    font-weight: bold;
+    padding-right: 2rem;
+}
+
 .glossing-line {
     margin-bottom: 1rem;
 }
