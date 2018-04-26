@@ -1,10 +1,12 @@
 import React, { Component } from "react";
-import { Row, Col, Affix, Switch, Icon } from 'antd';
+import { Row, Col, Affix, Switch } from 'antd';
+
 import Spinner from "./Spinner";
+import ContentLocation from "./ContentLocation";
 
 import "./css/ContentView.css";
 
-import { Link, withRouter } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 
 import appStateStore from "./stores/appStateStore";
 import { view } from 'react-easy-state';
@@ -95,21 +97,13 @@ class ContentView extends Component {
 
                         <div>
                             <div className="content-plain content-block card">
-                                <div className="location">
-                                    <Link to={"/view/index/" + (data.index - 1)} className="location-controls">
-                                        <Icon type="left"/>
-                                    </Link>
-                                    <span className="location-display">
-                                    {
-                                        (data.book + "").padStart(2, "0") + " . " +
-                                        (data.hymn + "").padStart(3, "0") + " . " +
-                                        (data.verse + "").padStart(2, "0")
-                                    }
-                                    </span>
-                                    <Link to={"/view/index/" + (data.index + 1)} className="location-controls">
-                                        <Icon type="right"/>
-                                    </Link>
-                                </div>
+
+                                <ContentLocation
+                                    currIndex={data.index}
+                                    locationBook={data.book}
+                                    locationHymn={data.hymn}
+                                    locationVerse={data.verse} />
+
                                 {data.padas.map(pada => (
                                     <span key={"p_plain_" + pada.index}>{pada.form}<br/></span>
                                 ))}

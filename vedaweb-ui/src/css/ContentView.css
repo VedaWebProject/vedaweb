@@ -39,23 +39,3 @@
 .view-filter .ant-switch {
     margin-right: 1rem;
 }
-
-.location {
-    color: #931111;
-    margin-bottom: 1rem;
-}
-
-.location-controls {
-    color: #93111185;
-    transition: .2s;
-}
-
-.location-controls a:hover{
-    color: #931111;
-}
-
-.location-display {
-    padding-left: 1rem;
-    padding-right: 1rem;
-    font-size: 130%;
-}
