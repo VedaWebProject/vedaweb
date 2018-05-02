@@ -1,7 +1,6 @@
 package de.unikoeln.vedaweb.services;
 
 import java.io.IOException;
-import java.util.Map;
 import java.util.Optional;
 
 import org.elasticsearch.action.search.SearchRequest;
@@ -27,13 +26,22 @@ public class ElasticSearchService {
 	private ElasticService elastic;
 	
 	
+	public SearchResults smartSearch(String query){
+		SearchRequest searchRequest = SearchRequestBuilder.buildSmart(query);
+		SearchResponse searchResponse = search(searchRequest);
+//		System.out.println(searchResponse);
+		SearchResults searchResults = buildSearchResults(searchResponse);
+		return searchResults;
+	}
+	
+	
 	public SearchResults search(SearchDataAdvanced formData){
 		formData.cleanAndFormatFields();
-		System.out.println(formData);
+//		System.out.println(formData);
 		
 		SearchRequest searchRequest = SearchRequestBuilder.buildAdvanced(formData);
 		SearchResponse searchResponse = search(searchRequest);
-		System.out.println(searchResponse);
+//		System.out.println(searchResponse);
 		SearchResults searchResults = buildSearchResults(searchResponse);
 		
 		return searchResults;

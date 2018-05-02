@@ -19,6 +19,23 @@ public class SearchRequestBuilder {
 	public static final String AGGREGATE_GRAMMAR_FIELDS = "grammar_fields";
 	
 	
+	public static SearchRequest buildSmart(String query){
+		SearchRequest searchRequest = new SearchRequest("vedaweb"); 
+		searchRequest.types("doc");
+		SearchSourceBuilder searchSourceBuilder = new SearchSourceBuilder(); 
+		
+		//bool query
+		BoolQueryBuilder bool = QueryBuilders.boolQuery();
+		bool.should(new MatchQueryBuilder("form", query));
+		
+		searchSourceBuilder.query(bool);
+		System.out.println("\n\n" + searchSourceBuilder.toString() + "\n\n");
+		searchRequest.source(searchSourceBuilder);
+			
+		return searchRequest;
+	}
+	
+	
 	public static SearchRequest buildAdvanced(SearchDataAdvanced formData){
 		SearchRequest searchRequest = new SearchRequest("vedaweb"); 
 		searchRequest.types("doc");

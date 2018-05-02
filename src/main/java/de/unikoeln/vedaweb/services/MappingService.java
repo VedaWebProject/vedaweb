@@ -21,7 +21,7 @@ public class MappingService {
 	}
 	
 	
-	public String mapToJSON(Optional<?> o){
+	public String mapOptionalToJSON(Optional<?> o){
 		if (!o.isPresent())
 			return mapObjectToJSON(null);
 		else
