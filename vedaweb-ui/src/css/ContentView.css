@@ -13,12 +13,17 @@
 }
 
 .content-block h4 {
-    font-family: 'Gentium', "Tahoma", "Arial", sans-serif;
+    font-size: 120%;
+}
+
+.pada-form {
+    font-size: 24px;
 }
 
 .pada-line {
+    font-size: 24px;
     color: #931111;
-    padding-right: 1rem;
+    padding-right: 2rem;
 }
 
 .glossing {
@@ -38,7 +43,7 @@
     font-weight: bold;
     display: inline-block;
     margin-right: .6rem;
-    border-left: 2px solid #ddc;
+    border-left: 2px solid #c9c6b9;
 }
 
 .glossing-annotation {
