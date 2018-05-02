@@ -8,7 +8,6 @@ import de.unikoeln.vedaweb.data.VerseRepository;
 import de.unikoeln.vedaweb.services.MappingService;
 
 
-
 @RestController
 @RequestMapping("api/document")
 public class DocumentController {
