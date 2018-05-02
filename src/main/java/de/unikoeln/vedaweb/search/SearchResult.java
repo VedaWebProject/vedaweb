@@ -1,19 +1,21 @@
 package de.unikoeln.vedaweb.search;
-import de.unikoeln.vedaweb.data.Verse;
+import java.util.Map;
+
+import org.elasticsearch.common.document.DocumentField;
 
 
 public class SearchResult implements Comparable<SearchResult>{
 	
 	private float score;
 	private String locationId;
-	private Verse doc;
+	private Map<String,DocumentField> fields;
 	
 	
-	public SearchResult(float score, String locationId, Verse doc) {
+	public SearchResult(float score, String locationId, Map<String,DocumentField> fields) {
 		super();
 		this.score = score;
 		this.locationId = locationId;
-		this.doc = doc;
+		this.fields = fields;
 	}
 
 	public float getScore() {
@@ -24,8 +26,8 @@ public class SearchResult implements Comparable<SearchResult>{
 		return locationId;
 	}
 	
-	public Verse getDoc(){
-		return doc;
+	public Map<String,DocumentField> getFields(){
+		return fields;
 	}
 
 	@Override
@@ -47,7 +49,7 @@ public class SearchResult implements Comparable<SearchResult>{
 	
 	@Override
 	public String toString() {
-		return score + "\t" + locationId + "\t" + doc;
+		return score + "\t" + locationId + "\t" + fields;
 	}
 	
 }

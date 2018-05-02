@@ -34,7 +34,7 @@ public class SmartSearchController {
 			return mappingService.mapOptionalToJSON(
 					verseRepo.findById(RequestTransformUtils.normalizeId(input)));
 		} else {
-			return mappingService.mapObjectToJSON(search.smartSearch(input));
+			return search.smartSearch(input).toString();
 		}
     }
 	

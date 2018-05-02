@@ -8,10 +8,13 @@ h4 {
     margin-bottom: 1rem;
     color: #931111;
     font-family: "Dosis", sans-serif;
-    font-size: 20px;
+    font-size: 24px;
 }
 
 .page-content {
+    padding: .8rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
     background-color: #e5e2d5;
 }
 

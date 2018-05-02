@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Row, Col, Icon, Menu } from 'antd';
 
-import SearchSimple from "./SearchSimple";
+import SearchSmart from "./SearchSmart";
 import logo from "./img/logo.png";
 import "./css/NavBar.css";
 
@@ -45,7 +45,7 @@ class NavBar extends Component {
                 </Col>
 
                 <Col span={6}>
-                    <SearchSimple active={true}/>
+                    <SearchSmart />
                 </Col>
 
                 <Col span={14}>

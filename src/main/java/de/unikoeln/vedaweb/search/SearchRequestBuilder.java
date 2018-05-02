@@ -13,6 +13,7 @@ import org.elasticsearch.search.aggregations.AggregationBuilders;
 import org.elasticsearch.search.aggregations.bucket.nested.NestedAggregationBuilder;
 import org.elasticsearch.search.aggregations.bucket.terms.TermsAggregationBuilder;
 import org.elasticsearch.search.builder.SearchSourceBuilder;
+import org.elasticsearch.search.fetch.subphase.highlight.HighlightBuilder;
 
 public class SearchRequestBuilder {
 	
@@ -27,8 +28,11 @@ public class SearchRequestBuilder {
 		//bool query
 		BoolQueryBuilder bool = QueryBuilders.boolQuery();
 		bool.should(new MatchQueryBuilder("form", query));
-		
 		searchSourceBuilder.query(bool);
+		
+		//Highlighting
+		addHighlighting(searchSourceBuilder, "form");
+		
 		System.out.println("\n\n" + searchSourceBuilder.toString() + "\n\n");
 		searchRequest.source(searchSourceBuilder);
 			
@@ -116,6 +120,20 @@ public class SearchRequestBuilder {
 			//wrap in nested query, add to root query
 			rootQuery.must(QueryBuilders.nestedQuery("tokens", bool, ScoreMode.Avg));
 		}
+	}
+	
+	
+	private static void addHighlighting(SearchSourceBuilder searchSourceBuilder, String... fields){
+		HighlightBuilder highlightBuilder = new HighlightBuilder(); 
+		
+		for (String field : fields){
+			HighlightBuilder.Field highlightField =
+			        new HighlightBuilder.Field(field); 
+			highlightField.highlighterType("unified");  
+			highlightBuilder.field(highlightField);
+		}
+		  
+		searchSourceBuilder.highlighter(highlightBuilder);
 	}
 	
 

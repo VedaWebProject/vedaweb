@@ -26,12 +26,14 @@ public class ElasticSearchService {
 	private ElasticService elastic;
 	
 	
-	public SearchResults smartSearch(String query){
+	public SearchResponse smartSearch(String query){
 		SearchRequest searchRequest = SearchRequestBuilder.buildSmart(query);
 		SearchResponse searchResponse = search(searchRequest);
+		System.out.println(searchResponse);
+		return searchResponse;
 //		System.out.println(searchResponse);
-		SearchResults searchResults = buildSearchResults(searchResponse);
-		return searchResults;
+//		SearchResults searchResults = buildSearchResults(searchResponse);
+//		return searchResults;
 	}
 	
 	
@@ -58,9 +60,11 @@ public class ElasticSearchService {
 	private SearchResults buildSearchResults(SearchResponse response){
 		SearchResults results = new SearchResults();
 		for (SearchHit hit : response.getHits()){
-			Optional<Verse> verse = verseRepo.findById(hit.getId());
-			if (verse.isPresent())
-				results.add(new SearchResult(hit.getScore(), hit.getId(), verse.get()));
+			results.add(
+				new SearchResult(
+					hit.getScore(),
+					hit.getId(),
+					hit.getFields()));
 		}
 		return results;
 	}

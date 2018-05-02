@@ -1,7 +1,5 @@
 #content-view {
-    padding: .8rem;
-    padding-left: 1rem;
-    padding-right: 1rem;
+    
 }
 
 #content-view .content {
@@ -10,10 +8,6 @@
 
 .content-block {
     margin-bottom: 2rem;
-}
-
-.content-block h4 {
-    font-size: 120%;
 }
 
 .pada-form {

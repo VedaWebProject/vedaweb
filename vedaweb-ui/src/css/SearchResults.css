@@ -1,0 +1,26 @@
+#search-results table  {
+    font-family: inherit;
+    vertical-align: top;
+}
+
+#search-results .ant-table-thead > tr > th,
+#search-results .ant-table-tbody > tr > td {
+    word-break: unset;
+}
+
+#search-results .ant-table-thead > tr > th {
+    font-family: "Dosis", sans-serif;
+    font-size: 20px;
+    color: rgba(0, 0, 0, 0.65);
+    background: transparent;
+}
+
+#search-results table td {
+    vertical-align: top;
+}
+
+.search-stats {
+    font-family: "Dosis", sans-serif;
+    font-size: 18px;
+    color: #776;
+}

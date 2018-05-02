@@ -18,6 +18,7 @@ import searchMetaStore from "./stores/searchMetaStore";
 import { view } from 'react-easy-state';
 
 import { Route, Switch, withRouter } from 'react-router-dom'
+import SearchResults from "./SearchResults";
 
 
 class App extends Component {
@@ -41,6 +42,7 @@ class App extends Component {
 
                     <Switch>
                         <Route path="/view/:by/:value" component={ContentView} />
+                        <Route path="/results/:querydata" component={SearchResults} />
                         <Route path="/search" component={SearchView} />
                         <Route path="/" exact={true} component={Start} />
                         <Route component={NotFound} />

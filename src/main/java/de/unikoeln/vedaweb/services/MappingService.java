@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
 
 import de.unikoeln.vedaweb.exceptions.NotFoundException;
 
@@ -18,6 +19,7 @@ public class MappingService {
 	
 	public MappingService(){
 		mapper = new ObjectMapper();
+		mapper.configure(SerializationFeature.FAIL_ON_EMPTY_BEANS, false);
 	}
 	
 	
