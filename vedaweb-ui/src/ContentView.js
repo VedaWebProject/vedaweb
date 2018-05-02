@@ -161,7 +161,11 @@ class ContentView extends Component {
                                     <h4>Translations</h4>
                                     {data.translations.map(translation => (
                                         <div key={"trans_" + translation.source}>
-                                            <span className="bold">{translation.language.toUpperCase()}</span>
+                                            <span className="bold">{
+                                                translation.language.toUpperCase() === "DE" ? "German" :
+                                                translation.language.toUpperCase() === "EN" ? "English" :
+                                                translation.language.toUpperCase() === "FR" ? "French" : "?"
+                                            }</span>
                                             <span className="first-cap"> ({translation.source})</span><br/>
                                             <span className="italic">{translation.translation}</span>
                                         </div>
