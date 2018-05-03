@@ -4,13 +4,13 @@
   "private": true,
   "proxy": "http://localhost:8080",
   "dependencies": {
-    "antd": "^3.2.1",
+    "antd": "^3.4.5",
     "axios": "^0.18.0",
-    "immutability-helper": "^2.6.6",
+    "immutability-helper": "^2.7.0",
     "js-base64": "^2.4.3",
-    "react": "^16.2.0",
-    "react-dom": "^16.2.0",
-    "react-easy-state": "^5.0.0",
+    "react": "^16.3.2",
+    "react-dom": "^16.3.2",
+    "react-easy-state": "^5.0.1",
     "react-router-dom": "^4.2.2",
     "react-scripts": "1.1.1",
     "react-scroll-to-component": "^1.0.2",
@@ -23,9 +23,9 @@
     "eject": "react-scripts eject"
   },
   "devDependencies": {
-    "babel-plugin-import": "^1.6.5",
+    "babel-plugin-import": "^1.7.0",
     "less-vars-to-js": "^1.2.1",
     "react-app-rewire-less": "^2.1.1",
-    "react-app-rewired": "^1.4.1"
+    "react-app-rewired": "^1.5.2"
   }
 }

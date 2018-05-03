@@ -2,6 +2,8 @@ package de.unikoeln.vedaweb.services;
 
 import java.io.IOException;
 import java.nio.file.Files;
+import java.text.Normalizer;
+import java.text.Normalizer.Form;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -83,7 +85,7 @@ public class ElasticIndexService {
 				indexDoc.put("hymn", dbDoc.getHymn());
 				indexDoc.put("verse", dbDoc.getVerse());
 				indexDoc.put("translation", concatTranslations(dbDoc));
-				indexDoc.put("form", concatPadaForms(dbDoc) + concatTokenLemmata(dbDoc));
+				indexDoc.put("form", normalizeForIndex(concatPadaForms(dbDoc) + concatTokenLemmata(dbDoc)));
 				indexDoc.put("tokens", buildTokensList(dbDoc));
 			} catch (JSONException e) {
 				e.printStackTrace();
@@ -129,8 +131,8 @@ public class ElasticIndexService {
 			for (Token token : pada.getTokens()) {
 				JSONObject indexToken = new JSONObject();
 				indexToken.put("index", token.getIndex());
-				indexToken.put("form", token.getForm());
-				indexToken.put("lemma", token.getLemma());
+				indexToken.put("form", normalizeForIndex(token.getForm()));
+				indexToken.put("lemma", normalizeForIndex(token.getLemma()));
 				//grammar
 				for (String attr : token.getGrammarAttributes().keySet()) {
 					indexToken.put(attr, token.getGrammarAttribute(attr));
@@ -230,6 +232,13 @@ public class ElasticIndexService {
 			sb.append(" ");
 		}
 		return sb.toString().trim();
+	}
+	
+	
+	public static String normalizeForIndex(String text) {
+	    return text == null ? null :
+	        Normalizer.normalize(text, Form.NFD)
+	            .replaceAll("\\u0301", "");
 	}
 	
 }

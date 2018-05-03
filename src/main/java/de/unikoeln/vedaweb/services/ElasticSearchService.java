@@ -1,6 +1,8 @@
 package de.unikoeln.vedaweb.services;
 
 import java.io.IOException;
+import java.text.Normalizer;
+import java.text.Normalizer.Form;
 import java.util.Optional;
 
 import org.elasticsearch.action.search.SearchRequest;
@@ -27,6 +29,7 @@ public class ElasticSearchService {
 	
 	
 	public SearchResponse smartSearch(String query){
+		query = ElasticIndexService.normalizeForIndex(query);
 		SearchRequest searchRequest = SearchRequestBuilder.buildSmart(query);
 		SearchResponse searchResponse = search(searchRequest);
 		System.out.println(searchResponse);

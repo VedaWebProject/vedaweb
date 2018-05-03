@@ -31,7 +31,13 @@ class ContentView extends Component {
     }
 
     componentWillReceiveProps(newProps){
-        this.loadData(newProps.match.params.by, newProps.match.params.value);
+        if (this.propsChanged(newProps)){
+            this.loadData(newProps.match.params.by, newProps.match.params.value);
+        }
+    }
+
+    propsChanged(newProps){
+        return JSON.stringify(this.props) !== JSON.stringify(newProps);
     }
 
     loadData(by, value){
@@ -88,7 +94,7 @@ class ContentView extends Component {
                     {/** ERROR **/}
                     {isLoaded && error !== undefined &&
                         <div className="card">
-                            There was an error requesting this data.
+                            The requested data could not be found.
                         </div>
                     }
 
@@ -105,9 +111,9 @@ class ContentView extends Component {
                                     locationVerse={data.verse} />
 
                                 {data.padas.map(pada => (
-                                    <div className="bottom-gap-small">
+                                    <div className="bottom-gap-small" key={"p_plain_" + pada.index}>
                                         <span key={"p_plain_line" + pada.index} className="pada-line">{pada.line}</span>
-                                        <span key={"p_plain_" + pada.index} className="pada-form">{pada.form}</span><br/>
+                                        <span key={"p_plain_form" + pada.index} className="pada-form">{pada.form}</span><br/>
                                     </div>
                                 ))}
                             </div>

@@ -1,8 +1,12 @@
 import React, { Component } from "react";
-import { Input } from 'antd';
+import { Input, Tooltip } from 'antd';
+
+import Sanscript from 'sanscript';
 
 import searchSimpleStore from "./stores/searchSimpleStore";
 import { view } from 'react-easy-state';
+
+import TransliterationPreview from "./TransliterationPreview";
 
 import { withRouter } from 'react-router-dom';
 import { Base64 } from 'js-base64';
@@ -19,21 +23,40 @@ class SearchSmart extends Component {
     }
 
     handleSearch(input){
-        console.log("SMART SEARCH INPUT: " + input);
-        this.props.history.push("/results/" + Base64.encode(JSON.stringify({ smart : input })));   //TEMP
+        if (/\d/.test(input)){
+            this.props.history.push("/view/id/" + input);
+        } else {
+            input = Sanscript.t(input, "hk", "iso");
+            this.props.history.push("/results/" + Base64.encode(JSON.stringify({ smart : input })));
+        }
     }
 
     render() {
 
+        const transliteration = (
+            <TransliterationPreview
+            input={searchSimpleStore.term}
+            transliteration="hk" />
+        );
+
+
         return (
 
             <div>
-                <Search
-                value={searchSimpleStore.term}
-                onChange={e => searchSimpleStore.setTerm(e.target.value)}
-                onSearch={this.handleSearch}
-                placeholder="location, translation or text via HK"
-                size="large" />
+                <Tooltip
+                title={searchSimpleStore.field === "text" ? transliteration : ""}
+                trigger="focus"
+                placement="top"
+                visible={ !/\d/.test(searchSimpleStore.term) && searchSimpleStore.term.length > 0 } >
+
+                    <Search
+                    value={searchSimpleStore.term}
+                    onChange={e => searchSimpleStore.setTerm(e.target.value)}
+                    onSearch={this.handleSearch}
+                    placeholder="location, translation or text via HK"
+                    size="large" />
+
+                </Tooltip>
             </div>
         );
 

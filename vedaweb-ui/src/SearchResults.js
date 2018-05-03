@@ -24,31 +24,42 @@ class SearchResults extends Component {
     }
 
     componentDidMount(){
-        let queryData = JSON.parse(Base64.decode(this.props.match.params.querydata));
-        this.loadData(queryData);
+        this.loadData(this.props.match.params.querydata);
     }
 
     componentWillReceiveProps(newProps){
-        let queryData = JSON.parse(Base64.decode(newProps.match.params.querydata));
-        this.loadData(queryData);
+        this.loadData(newProps.match.params.querydata);
     }
 
     loadData(queryData){
-        console.log("QUERY: " + JSON.stringify(queryData));
+        let queryJson = {};
+
+        try {
+            queryJson = JSON.parse(Base64.decode(queryData));
+        } catch (e) {
+            this.setState({
+                isLoaded: true,
+                error: "Invalid search data."
+            });
+            return;
+        }
+
+        console.log("QUERY: " + JSON.stringify(queryJson));
+
         this.setState({
             isLoaded: false,
             error: undefined
         });
 
-        if (queryData.hasOwnProperty("smart")){
-            this.loadSmartSearchData(queryData);
+        if (queryJson.hasOwnProperty("smart")){
+            this.loadSmartSearchData(queryJson);
         } else {
-            this.loadAdvancedSearchData(queryData);
+            this.loadAdvancedSearchData(queryJson);
         }
     }
 
-    loadSmartSearchData(queryData){
-        axios.get("/api/search/smart/" + queryData.smart)
+    loadSmartSearchData(queryJson){
+        axios.get("/api/search/smart/" + queryJson.smart)
             .then((response) => {
                 this.setState({
                     isLoaded: true,
@@ -63,7 +74,7 @@ class SearchResults extends Component {
             });
     }
 
-    loadAdvancedSearchData(queryData){
+    loadAdvancedSearchData(queryJson){
         axios.get("/api/search/smart/blablabla")
             .then((response) => {
                 this.setState({
@@ -83,6 +94,8 @@ class SearchResults extends Component {
     render() {
 
         const { error, isLoaded, data } = this.state;
+
+        console.log(JSON.stringify(data));
 
         //define table columns
         const columns = [{
@@ -105,11 +118,12 @@ class SearchResults extends Component {
             data.hits.hits.map( (hit, i) => ({
                 key: 'result_' + i,
                 location:   
-                    (hit.sourceAsMap.book + "").padStart(2, "0") + "." +
-                    (hit.sourceAsMap.hymn + "").padStart(3, "0") + "." +
-                    (hit.sourceAsMap.verse + "").padStart(2, "0"),
-                text: hit.sourceAsMap.form,
-                relevance: hit.score
+                    (hit._source.book + "").padStart(2, "0") + "." +
+                    (hit._source.hymn + "").padStart(3, "0") + "." +
+                    (hit._source.verse + "").padStart(2, "0"),
+                text: hit._source.form,
+               // text: hit.highlight.form[0],  // <---- how to force react to render this???
+                relevance: hit._score
             }));
 
             
@@ -129,24 +143,38 @@ class SearchResults extends Component {
                     {/** ERROR **/}
                     {isLoaded && error !== undefined &&
                         <div className="card">
-                            There was an error requesting this data.
+                            There was an error requesting this data: {error}
                         </div>
                     }
 
                     {/** SEARCH STATS **/}
-                    { isLoaded && data.hits.hits !== undefined &&
-                        <div class="search-stats bottom-gap">
-                            Hits: {data.hits.hits.length} &mdash; Took: {data.took.stringRep}
+                    { isLoaded && error === undefined && data.hits.hits !== undefined &&
+                        <div className="search-stats bottom-gap">
+                            Hits: {data.hits.hits.length} &mdash; Took: {data.took} ms
                         </div>
                     }
 
                     {/** RESULTS **/}
-                    {isLoaded && error === undefined &&
-                        //JSON.stringify(data) +
+                    { isLoaded
+                        && error === undefined
+                        && data.hits.hits !== undefined
+                        && data.hits.hits.length > 0 &&
+                        
+                        //JSON.stringify(data.hits.hits)
+
                         <Table
                         columns={columns}
                         dataSource={tableData}
                         pagination={false} />
+                    }
+
+                    {/** NO RESULTS **/}
+                    { isLoaded
+                        && error === undefined
+                        && data.hits.hits !== undefined
+                        && data.hits.hits.length === 0 &&
+                        
+                        "Sorry, there are no results for this search."
                     }
 
                 </div>
