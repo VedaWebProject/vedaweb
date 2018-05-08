@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Table } from 'antd';
+import { Table, Pagination } from 'antd';
 import Spinner from "./Spinner";
 
 import { Link, withRouter } from 'react-router-dom';
@@ -126,7 +126,6 @@ class SearchResults extends Component {
                 relevance: hit._score
             }));
 
-            
 
         return (
 
@@ -143,7 +142,7 @@ class SearchResults extends Component {
                     {/** ERROR **/}
                     {isLoaded && error !== undefined &&
                         <div className="card">
-                            There was an error requesting this data: {error}
+                            There was an error requesting the data.
                         </div>
                     }
 
@@ -165,7 +164,14 @@ class SearchResults extends Component {
                         <Table
                         columns={columns}
                         dataSource={tableData}
-                        pagination={false} />
+                        pagination={
+                            <Pagination
+                            defaultPageSize={10}
+                            pageSize={10}
+                            current={data.from}
+                            total={data.hits.total}
+                            onChange={this.onPageChange} />
+                        } />
                     }
 
                     {/** NO RESULTS **/}

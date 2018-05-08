@@ -4,6 +4,7 @@ import java.util.Map;
 
 import org.apache.lucene.search.join.ScoreMode;
 import org.elasticsearch.action.search.SearchRequest;
+import org.elasticsearch.common.unit.TimeValue;
 import org.elasticsearch.index.query.BoolQueryBuilder;
 import org.elasticsearch.index.query.MatchAllQueryBuilder;
 import org.elasticsearch.index.query.MatchQueryBuilder;
@@ -23,6 +24,10 @@ public class SearchRequestBuilder {
 	public static SearchRequest buildSmart(String query){
 		SearchRequest searchRequest = new SearchRequest("vedaweb"); 
 		searchRequest.types("doc");
+		
+		//TODO scrolling!
+		//searchRequest.scroll(TimeValue.timeValueMinutes(1L));
+		
 		SearchSourceBuilder searchSourceBuilder = new SearchSourceBuilder(); 
 		
 		//bool query
@@ -33,7 +38,9 @@ public class SearchRequestBuilder {
 		//Highlighting
 		addHighlighting(searchSourceBuilder, "form");
 		
-		System.out.println("\n\n" + searchSourceBuilder.toString() + "\n\n");
+		searchSourceBuilder.size(10);
+		
+		//System.out.println("\n\n" + searchSourceBuilder.toString() + "\n\n");
 		searchRequest.source(searchSourceBuilder);
 			
 		return searchRequest;
@@ -55,7 +62,7 @@ public class SearchRequestBuilder {
 		addScopeQueries(bool, formData);
 		
 		searchSourceBuilder.query(bool);
-		System.out.println("\n\n" + searchSourceBuilder.toString() + "\n\n");
+		//System.out.println("\n\n" + searchSourceBuilder.toString() + "\n\n");
 		searchRequest.source(searchSourceBuilder);
 			
 		return searchRequest;
@@ -82,7 +89,7 @@ public class SearchRequestBuilder {
 		searchSourceBuilder.query(match);
 		searchSourceBuilder.aggregation(nestedAgg);
 		searchSourceBuilder.size(0);
-		System.out.println("\n\n" + searchSourceBuilder.toString() + "\n\n");
+		//System.out.println("\n\n" + searchSourceBuilder.toString() + "\n\n");
 		searchRequest.source(searchSourceBuilder);
 		return searchRequest;
 	}

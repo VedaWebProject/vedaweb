@@ -40,20 +40,6 @@ const searchAdvancedStore = store({
                 break;
             }
         }
-
-        ////LEGACY
-        // searchAdvancedStore.data.blocks = searchAdvancedStore.data.blocks.map(block => (
-        //     block.id !== blockId ? block : {
-        //         id: block.id,
-        //         term: block.term,
-        //         distance: block.distance,
-        //         fields: block.fields.concat({
-        //             id: 'field_' + Date.now(),
-        //             name: '',
-        //             value: ''
-        //         })
-        //     }
-        // ));
     },
 
     removeFieldFromBlock(blockId, fieldId){
@@ -64,16 +50,6 @@ const searchAdvancedStore = store({
                 break;
             }
         }
-
-        // //LEGACY
-        // searchAdvancedStore.data.blocks = searchAdvancedStore.data.blocks.map(block => (
-        //     block.id !== blockId ? block : {
-        //         id: block.id,
-        //         term: block.term,
-        //         distance: block.distance,
-        //         fields: block.fields.filter(field => field.id !== fieldId)
-        //     }
-        // ));
     },
 
     updateField(blockId, fieldId, fieldProp, value){
@@ -86,40 +62,7 @@ const searchAdvancedStore = store({
                 }
             }
         }
-
-        // //LEGACY
-        // searchAdvancedStore.data.blocks = searchAdvancedStore.data.blocks.map(block => (
-        //     block.id !== blockId ? block : {
-        //         id: block.id,
-        //         term: block.term,
-        //         distance: block.distance,
-        //         fields: block.fields.map(field => (
-        //             field.id !== fieldId ? field : {
-        //                 id: field.id,
-        //                 name: fieldName,
-        //                 value: ''
-        //             }
-        //         ))
-        //     }
-        // ));
     },
-
-    // updateFieldValue(blockId, fieldId, fieldValue){
-    //     searchAdvancedStore.data.blocks = searchAdvancedStore.data.blocks.map(block => (
-    //         block.id !== blockId ? block : {
-    //             id: block.id,
-    //             term: block.term,
-    //             distance: block.distance,
-    //             fields: block.fields.map(field => (
-    //                 field.id !== fieldId ? field : {
-    //                     id: field.id,
-    //                     name: field.name,
-    //                     value: fieldValue
-    //                 }
-    //             ))
-    //         }
-    //     ));
-    // },
 
     updateTerm(blockId, term){
         for (let i = 0; i < searchAdvancedStore.data.blocks.length; i++){
@@ -127,16 +70,6 @@ const searchAdvancedStore = store({
                 searchAdvancedStore.data.blocks[i].term = term;
             }
         }
-
-        // //LEGACY
-        // searchAdvancedStore.data.blocks = searchAdvancedStore.data.blocks.map(block => (
-        //     block.id !== blockId ? block : {
-        //         id: block.id,
-        //         term: term,
-        //         distance: block.distance,
-        //         fields: block.fields
-        //     }
-        // ));
     },
 
     updateDistance(blockId, distance){
@@ -145,16 +78,6 @@ const searchAdvancedStore = store({
                 searchAdvancedStore.data.blocks[i].distance = distance;
             }
         }
-
-        // //LEGACY
-        // searchAdvancedStore.data.blocks = searchAdvancedStore.data.blocks.map(block => (
-        //     block.id !== blockId ? block : {
-        //         id: block.id,
-        //         term: block.term,
-        //         distance: distance,
-        //         fields: block.fields
-        //     }
-        // ));
     },
 
     getUsedFieldNamesForBlock(blockId){

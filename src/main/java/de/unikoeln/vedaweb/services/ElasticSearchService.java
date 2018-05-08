@@ -1,17 +1,12 @@
 package de.unikoeln.vedaweb.services;
 
 import java.io.IOException;
-import java.text.Normalizer;
-import java.text.Normalizer.Form;
-import java.util.Optional;
-
 import org.elasticsearch.action.search.SearchRequest;
 import org.elasticsearch.action.search.SearchResponse;
 import org.elasticsearch.search.SearchHit;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import de.unikoeln.vedaweb.data.Verse;
 import de.unikoeln.vedaweb.data.VerseRepository;
 import de.unikoeln.vedaweb.search.SearchDataAdvanced;
 import de.unikoeln.vedaweb.search.SearchRequestBuilder;
@@ -32,7 +27,7 @@ public class ElasticSearchService {
 		query = ElasticIndexService.normalizeForIndex(query);
 		SearchRequest searchRequest = SearchRequestBuilder.buildSmart(query);
 		SearchResponse searchResponse = search(searchRequest);
-		System.out.println(searchResponse);
+		//System.out.println(searchResponse);
 		return searchResponse;
 //		System.out.println(searchResponse);
 //		SearchResults searchResults = buildSearchResults(searchResponse);
