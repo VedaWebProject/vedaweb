@@ -1,5 +1,5 @@
 #search-results table  {
-    font-family: inherit;
+    font-family: 'Gentium', "Tahoma", "Arial", sans-serif;
     vertical-align: top;
 }
 
@@ -23,4 +23,9 @@
     font-family: "Dosis", sans-serif;
     font-size: 18px;
     color: #776;
+}
+
+#search-results table em {
+    font-style: normal;
+    font-weight: bold;
 }

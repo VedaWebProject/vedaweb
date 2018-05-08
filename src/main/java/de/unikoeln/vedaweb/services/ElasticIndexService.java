@@ -86,6 +86,7 @@ public class ElasticIndexService {
 				indexDoc.put("verse", dbDoc.getVerse());
 				indexDoc.put("translation", concatTranslations(dbDoc));
 				indexDoc.put("form", normalizeForIndex(concatPadaForms(dbDoc) + concatTokenLemmata(dbDoc)));
+				indexDoc.put("form_raw", concatPadaForms(dbDoc));
 				indexDoc.put("tokens", buildTokensList(dbDoc));
 			} catch (JSONException e) {
 				e.printStackTrace();
@@ -209,7 +210,7 @@ public class ElasticIndexService {
 			sb.append(pada.getForm());
 			sb.append(" ");
 		}
-		return sb.toString().trim();
+		return sb.toString().replaceAll("\\s+", " ").trim();
 	}
 	
 	

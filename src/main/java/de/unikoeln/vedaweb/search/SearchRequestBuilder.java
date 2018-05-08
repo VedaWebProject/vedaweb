@@ -1,9 +1,12 @@
 package de.unikoeln.vedaweb.search;
 
+import java.text.Normalizer;
+import java.text.Normalizer.Form;
 import java.util.Map;
 
 import org.apache.lucene.search.join.ScoreMode;
 import org.elasticsearch.action.search.SearchRequest;
+import org.elasticsearch.common.Strings;
 import org.elasticsearch.common.unit.TimeValue;
 import org.elasticsearch.index.query.BoolQueryBuilder;
 import org.elasticsearch.index.query.MatchAllQueryBuilder;
@@ -14,11 +17,16 @@ import org.elasticsearch.search.aggregations.AggregationBuilders;
 import org.elasticsearch.search.aggregations.bucket.nested.NestedAggregationBuilder;
 import org.elasticsearch.search.aggregations.bucket.terms.TermsAggregationBuilder;
 import org.elasticsearch.search.builder.SearchSourceBuilder;
+import org.elasticsearch.search.fetch.subphase.FetchSourceContext;
 import org.elasticsearch.search.fetch.subphase.highlight.HighlightBuilder;
+
 
 public class SearchRequestBuilder {
 	
 	public static final String AGGREGATE_GRAMMAR_FIELDS = "grammar_fields";
+	
+	public static final FetchSourceContext FETCH_SOURCE_CONTEXT =
+			new FetchSourceContext(true, new String[]{"book", "hymn", "verse"}, Strings.EMPTY_ARRAY);
 	
 	
 	public static SearchRequest buildSmart(String query){
@@ -32,13 +40,15 @@ public class SearchRequestBuilder {
 		
 		//bool query
 		BoolQueryBuilder bool = QueryBuilders.boolQuery();
-		bool.should(new MatchQueryBuilder("form", query));
+		bool.should(new MatchQueryBuilder(containsAccents(query) ? "form_raw" : "form", query));
+		bool.should(new MatchQueryBuilder("translation", query));
 		searchSourceBuilder.query(bool);
 		
 		//Highlighting
-		addHighlighting(searchSourceBuilder, "form");
+		addHighlighting(searchSourceBuilder, "form", "form_raw", "translation");
 		
 		searchSourceBuilder.size(10);
+		searchSourceBuilder.fetchSource(FETCH_SOURCE_CONTEXT);
 		
 		//System.out.println("\n\n" + searchSourceBuilder.toString() + "\n\n");
 		searchRequest.source(searchSourceBuilder);
@@ -62,6 +72,8 @@ public class SearchRequestBuilder {
 		addScopeQueries(bool, formData);
 		
 		searchSourceBuilder.query(bool);
+		searchSourceBuilder.fetchSource(FETCH_SOURCE_CONTEXT);
+
 		//System.out.println("\n\n" + searchSourceBuilder.toString() + "\n\n");
 		searchRequest.source(searchSourceBuilder);
 			
@@ -141,6 +153,13 @@ public class SearchRequestBuilder {
 		}
 		  
 		searchSourceBuilder.highlighter(highlightBuilder);
+	}
+	
+	
+	public static boolean containsAccents(String text) {
+	    return text == null ? false :
+	        Normalizer.normalize(text, Form.NFD)
+	            .matches(".*\\u0301.*");
 	}
 	
 

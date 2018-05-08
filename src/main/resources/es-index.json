@@ -29,8 +29,9 @@
 				"book": 			{ "type": "short" },
 				"hymn": 			{ "type": "short" },
 				"verse":			{ "type": "short" },
-				"translation": 		{ "type": "text" },
-				"form": 			{ "type": "text" },
+				"translation": 		{ "type": "text", "store": true },
+				"form": 			{ "type": "text", "store": true },
+				"form_raw": 		{ "type": "text", "store": true },
 				"tokens": {
 					"type": "nested",
 					"properties": {

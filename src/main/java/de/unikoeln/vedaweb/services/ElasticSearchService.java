@@ -24,7 +24,7 @@ public class ElasticSearchService {
 	
 	
 	public SearchResponse smartSearch(String query){
-		query = ElasticIndexService.normalizeForIndex(query);
+		//query = ElasticIndexService.normalizeForIndex(query);
 		SearchRequest searchRequest = SearchRequestBuilder.buildSmart(query);
 		SearchResponse searchResponse = search(searchRequest);
 		//System.out.println(searchResponse);

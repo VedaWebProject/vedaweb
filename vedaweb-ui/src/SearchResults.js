@@ -90,6 +90,21 @@ class SearchResults extends Component {
             });
     }
 
+    createHighlightHTML(highlight) {
+        let html = "";
+
+        if (highlight !== undefined){
+            Object.keys(highlight).forEach(function (key) {
+                if (highlight[key].length > 0){
+                    for (let high in highlight[key])
+                    html += (html.length > 0 ? " &mdash; " : "") + highlight[key][high];
+                }
+            });
+        }
+
+        return {__html: html};
+    }
+
 
     render() {
 
@@ -121,8 +136,8 @@ class SearchResults extends Component {
                     (hit._source.book + "").padStart(2, "0") + "." +
                     (hit._source.hymn + "").padStart(3, "0") + "." +
                     (hit._source.verse + "").padStart(2, "0"),
-                text: hit._source.form,
-               // text: hit.highlight.form[0],  // <---- how to force react to render this???
+                //text: hit._source.form,
+                text: <div dangerouslySetInnerHTML={this.createHighlightHTML(hit.highlight)}></div>,  // <---- how to force react to render this???
                 relevance: hit._score
             }));
 
@@ -149,7 +164,7 @@ class SearchResults extends Component {
                     {/** SEARCH STATS **/}
                     { isLoaded && error === undefined && data.hits.hits !== undefined &&
                         <div className="search-stats bottom-gap">
-                            Hits: {data.hits.hits.length} &mdash; Took: {data.took} ms
+                            Hits: {data.hits.total} &mdash; Took: {data.took} ms
                         </div>
                     }
 
@@ -159,8 +174,6 @@ class SearchResults extends Component {
                         && data.hits.hits !== undefined
                         && data.hits.hits.length > 0 &&
                         
-                        //JSON.stringify(data.hits.hits)
-
                         <Table
                         columns={columns}
                         dataSource={tableData}
@@ -172,6 +185,8 @@ class SearchResults extends Component {
                             total={data.hits.total}
                             onChange={this.onPageChange} />
                         } />
+
+                        //+ JSON.stringify(data)
                     }
 
                     {/** NO RESULTS **/}
