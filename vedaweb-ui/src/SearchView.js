@@ -64,7 +64,7 @@ class SearchView extends Component {
                         type="card"
                         id="search-mode-selector"
                         tabBarGutter={8}>
-                            <TabPane tab="Grammar Search" key="advanced">
+                            <TabPane tab="Grammar Search" key="grammar">
                                 <SearchGrammar />
                             </TabPane>
                             <TabPane tab="Other Search" key="somemode">

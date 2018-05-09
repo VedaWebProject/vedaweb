@@ -3,7 +3,7 @@ import { store } from 'react-easy-state';
 
 const searchMetaStore = store({
 
-    mode: 'advanced',
+    mode: 'grammar',
 
     scope: {
         data: [],
