@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Row, Col, Affix, Switch, Spin, Icon } from 'antd';
 
 import ContentLocation from "./ContentLocation";
+import ErrorMessage from "./ErrorMessage";
 
 import "./css/ContentView.css";
 
@@ -84,163 +85,169 @@ class ContentView extends Component {
             delay={200}
             spinning={!isLoaded}>
 
-                <Row
-                id="content-view"
-                className="page-content"
-                type="flex"
-                justify="center">
+                <div className="page-content">
 
-                    <Col span={18} className="content">
+                    {/** ERROR **/}
+                    { isLoaded && error !== undefined &&
+                        <ErrorMessage/>
+                    }
 
-                        {/** ERROR **/}
-                        {isLoaded && error !== undefined &&
-                            <div className="card">
-                                The requested data could not be found.
-                            </div>
-                        }
+                    {/** LOADED, NO ERROR **/}
+                    { isLoaded && error === undefined &&
 
-                        {/** CONTENT **/}
-                        {data.padas !== undefined && error === undefined &&
+                        <Row
+                        id="content-view"
+                        type="flex"
+                        justify="center">
 
-                            <div>
-                                <div className="content-plain content-block card">
+                            <Col span={18} className="content">
 
-                                    <ContentLocation
-                                        currIndex={data.index}
-                                        locationBook={data.book}
-                                        locationHymn={data.hymn}
-                                        locationVerse={data.verse} />
+                                
 
-                                    {data.padas.map(pada => (
-                                        <div className="bottom-gap-small" key={"p_plain_" + pada.index}>
-                                            <span key={"p_plain_line" + pada.index} className="pada-line">{pada.line}</span>
-                                            <span key={"p_plain_form" + pada.index} className="pada-form">{pada.form}</span><br/>
+                                {/** CONTENT **/}
+                                {data.padas !== undefined && error === undefined &&
+
+                                    <div>
+                                        <div className="content-plain content-block card">
+
+                                            <ContentLocation
+                                                currIndex={data.index}
+                                                locationBook={data.book}
+                                                locationHymn={data.hymn}
+                                                locationVerse={data.verse} />
+
+                                            {data.padas.map(pada => (
+                                                <div className="bottom-gap-small" key={"p_plain_" + pada.index}>
+                                                    <span key={"p_plain_line" + pada.index} className="pada-line">{pada.line}</span>
+                                                    <span key={"p_plain_form" + pada.index} className="pada-form">{pada.form}</span><br/>
+                                                </div>
+                                            ))}
                                         </div>
-                                    ))}
-                                </div>
 
-                                {appStateStore.viewFilter.grammar &&
-                                    <div
-                                    className="glossing content-block card"
-                                    ref={this.scrollTo}>
-                                        <h4>Grammatical Glossing</h4>
-                                        {data.padas.map(pada => (
+                                        {appStateStore.viewFilter.grammar &&
                                             <div
-                                            className="glossing-line"
-                                            key={"p_" + pada.index}>
-
-                                                <span key={"p_gloss_line" + pada.index} className="pada-line">
-                                                    {pada.line}
-                                                </span>
-
-                                                {pada.tokens.map(token => (
+                                            className="glossing content-block card"
+                                            ref={this.scrollTo}>
+                                                <h4>Grammatical Glossing</h4>
+                                                {data.padas.map(pada => (
                                                     <div
-                                                    className="glossing-token"
-                                                    key={"t_" + token.index}>
-                                                        {token.form}
-                                                        <br/>
-                                                        <div className="glossing-annotation">
-                                                            {
-                                                                token.lemma + "." +
+                                                    className="glossing-line"
+                                                    key={"p_" + pada.index}>
 
-                                                                (token.grammar.case === undefined ? "" :
-                                                                (token.grammar.case + ".")) +
+                                                        <span key={"p_gloss_line" + pada.index} className="pada-line">
+                                                            {pada.line}
+                                                        </span>
 
-                                                                (token.grammar.number === undefined ? "" :
-                                                                (token.grammar.number + ".")) +
+                                                        {pada.tokens.map(token => (
+                                                            <div
+                                                            className="glossing-token"
+                                                            key={"t_" + token.index}>
+                                                                {token.form}
+                                                                <br/>
+                                                                <div className="glossing-annotation">
+                                                                    {
+                                                                        token.lemma + "." +
 
-                                                                (token.grammar.gender === undefined ? "" :
-                                                                (token.grammar.gender + "."))
-                                                            }
-                                                        </div>
+                                                                        (token.grammar.case === undefined ? "" :
+                                                                        (token.grammar.case + ".")) +
+
+                                                                        (token.grammar.number === undefined ? "" :
+                                                                        (token.grammar.number + ".")) +
+
+                                                                        (token.grammar.gender === undefined ? "" :
+                                                                        (token.grammar.gender + "."))
+                                                                    }
+                                                                </div>
+                                                            </div>
+                                                        ))}
+
                                                     </div>
                                                 ))}
-
                                             </div>
-                                        ))}
-                                    </div>
-                                }
+                                        }
 
-                                {appStateStore.viewFilter.translations &&
-                                    <div
-                                    className="content-block card"
-                                    ref={this.scrollTo}>
-                                        <h4>Translations</h4>
-                                        {data.translations.map(translation => (
-                                            <div key={"trans_" + translation.source}>
-                                                <span className="bold">{
-                                                    translation.language.toUpperCase() === "DE" ? "German" :
-                                                    translation.language.toUpperCase() === "EN" ? "English" :
-                                                    translation.language.toUpperCase() === "FR" ? "French" : "?"
-                                                }</span>
-                                                <span className="first-cap"> ({translation.source})</span><br/>
-                                                <span className="italic">{translation.translation}</span>
+                                        {appStateStore.viewFilter.translations &&
+                                            <div
+                                            className="content-block card"
+                                            ref={this.scrollTo}>
+                                                <h4>Translations</h4>
+                                                {data.translations.map(translation => (
+                                                    <div key={"trans_" + translation.source}>
+                                                        <span className="bold">{
+                                                            translation.language.toUpperCase() === "DE" ? "German" :
+                                                            translation.language.toUpperCase() === "EN" ? "English" :
+                                                            translation.language.toUpperCase() === "FR" ? "French" : "?"
+                                                        }</span>
+                                                        <span className="first-cap"> ({translation.source})</span><br/>
+                                                        <span className="italic">{translation.translation}</span>
+                                                    </div>
+                                                ))}
                                             </div>
-                                        ))}
+                                        }
+
+                                        {appStateStore.viewFilter.something1 &&
+                                            <div
+                                            className="content-block card"
+                                            ref={this.scrollTo}>
+                                                <h4>Something</h4>
+                                                Something...
+                                            </div>
+                                        }
+
+                                        {appStateStore.viewFilter.something2 &&
+                                            <div
+                                            className="content-block card"
+                                            ref={this.scrollTo}>
+                                                <h4>Something else</h4>
+                                                Something else...
+                                            </div>
+                                        }
+
                                     </div>
                                 }
-
-                                {appStateStore.viewFilter.something1 &&
-                                    <div
-                                    className="content-block card"
-                                    ref={this.scrollTo}>
-                                        <h4>Something</h4>
-                                        Something...
+                            </Col>
+                            
+                            <Col span={6}>
+                                <Affix offsetTop={10}>
+                                    <div className="card-nobox">
+                                        <h4>View Filters</h4>
+                                        <div className="view-filter">
+                                            <Switch
+                                            defaultChecked
+                                            onChange={(e) => this.filterChange("grammar", e)}
+                                            disabled={!isLoaded || error !== undefined}
+                                            checked={appStateStore.viewFilter.grammar} />
+                                            Grammar Glossings
+                                        </div>
+                                        <div className="view-filter">
+                                            <Switch
+                                            defaultChecked
+                                            onChange={(e) => this.filterChange("translations", e)}
+                                            disabled={!isLoaded || error !== undefined}
+                                            checked={appStateStore.viewFilter.translations} />
+                                            Translations
+                                        </div>
+                                        <div className="view-filter">
+                                            <Switch
+                                            onChange={(e) => this.filterChange("something1", e)}
+                                            disabled={!isLoaded || error !== undefined}
+                                            checked={appStateStore.viewFilter.something1} />
+                                            Something
+                                        </div>
+                                        <div className="view-filter">
+                                            <Switch
+                                            onChange={(e) => this.filterChange("something2", e)}
+                                            disabled={!isLoaded || error !== undefined}
+                                            checked={appStateStore.viewFilter.something2} />
+                                            Something else
+                                        </div>
                                     </div>
-                                }
-
-                                {appStateStore.viewFilter.something2 &&
-                                    <div
-                                    className="content-block card"
-                                    ref={this.scrollTo}>
-                                        <h4>Something else</h4>
-                                        Something else...
-                                    </div>
-                                }
-
-                            </div>
-                        }
-                    </Col>
-                    
-                    <Col span={6}>
-                        <Affix offsetTop={10}>
-                            <div className="card-nobox">
-                                <h4>View Filters</h4>
-                                <div className="view-filter">
-                                    <Switch
-                                    defaultChecked
-                                    onChange={(e) => this.filterChange("grammar", e)}
-                                    disabled={!isLoaded}
-                                    checked={appStateStore.viewFilter.grammar} />
-                                    Grammar Glossings
-                                </div>
-                                <div className="view-filter">
-                                    <Switch
-                                    defaultChecked
-                                    onChange={(e) => this.filterChange("translations", e)}
-                                    disabled={!isLoaded}
-                                    checked={appStateStore.viewFilter.translations} />
-                                    Translations
-                                </div>
-                                <div className="view-filter">
-                                    <Switch
-                                    onChange={(e) => this.filterChange("something1", e)}
-                                    disabled={!isLoaded}
-                                    checked={appStateStore.viewFilter.something1} />
-                                    Something
-                                </div>
-                                <div className="view-filter">
-                                    <Switch
-                                    onChange={(e) => this.filterChange("something2", e)}
-                                    disabled={!isLoaded}
-                                    checked={appStateStore.viewFilter.something2} />
-                                    Something else
-                                </div>
-                            </div>
-                        </Affix>
-                    </Col>
-                    
-                </Row>
+                                </Affix>
+                            </Col>
+                            
+                        </Row>
+                    }
+                </div>
             </Spin>
         );
     }

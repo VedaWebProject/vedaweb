@@ -52,7 +52,7 @@ class SearchSmart extends Component {
                     value={searchSmartStore.data.input}
                     onChange={e => searchSmartStore.setInput(e.target.value)}
                     onSearch={this.handleSearch}
-                    placeholder="Harvard Kyoto or verse number"
+                    placeholder="Harvard-Kyoto or verse number"
                     size="large" />
 
                 </Tooltip>

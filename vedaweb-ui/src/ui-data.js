@@ -35,8 +35,7 @@ export default {
 			{"id": "hk", "name": "Harvard-Kyoto"},
 			{"id": "iast", "name": "IAST (International Alphabet of Sanskrit Transliteration)"},
 			{"id": "itrans", "name": "ITRANS"},
-			{"id": "slp1", "name": "SLP1 (Sanskrit Library Phonetic Basic)"},
-			{"id": "velthuis", "name": "Velthuis"}
+			{"id": "slp1", "name": "SLP1 (Sanskrit Library Phonetic Basic)"}
 		]
 	}
 }

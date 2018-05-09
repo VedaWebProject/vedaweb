@@ -121,6 +121,10 @@ button {
     vertical-align: middle;
 }
 
+div.inline-block {
+    display: inline-block;
+}
+
 .box-shadow {
     -webkit-box-shadow: 0px 0px 4px 0px rgba(0,0,0,0.05);
 	-moz-box-shadow: 0px 0px 4px 0px rgba(0,0,0,0.05);
