@@ -1,6 +1,14 @@
 package de.unikoeln.vedaweb.util;
 
+import java.text.Normalizer;
+import java.text.Normalizer.Form;
+
 public class RequestTransformUtils {
+	
+	
+	public static String normalizeNFD(String s){
+		return Normalizer.normalize(s, Form.NFD);
+	}
 	
 	
 	public static synchronized boolean isQueryForLocation(String input){
