@@ -2,14 +2,14 @@ import React, { Component } from "react";
 import { Row, Col, Icon } from 'antd';
 
 import { view } from 'react-easy-state';
-import searchAdvancedStore from "./stores/searchAdvancedStore";
+import searchGrammarStore from "./stores/searchGrammarStore";
 
 import SearchBlock from "./SearchBlock";
 
 import './css/SearchAdvanced.css'
 
 
-class SearchAdvanced extends Component {
+class SearchGrammar extends Component {
 
     constructor(props){
         super(props);
@@ -23,17 +23,17 @@ class SearchAdvanced extends Component {
     }
 
     addBlock(){
-        searchAdvancedStore.addBlock();
+        searchGrammarStore.addBlock();
     }
 
     removeBlock(blockId){
-        searchAdvancedStore.removeBlock(blockId);
+        searchGrammarStore.removeBlock(blockId);
     }
 
 
     render() {
 
-        const {data} = searchAdvancedStore;
+        const {data} = searchGrammarStore;
 
         return (
             <div className="search-container">
@@ -74,4 +74,4 @@ class SearchAdvanced extends Component {
     }
 }
 
-export default view(SearchAdvanced);
+export default view(SearchGrammar);

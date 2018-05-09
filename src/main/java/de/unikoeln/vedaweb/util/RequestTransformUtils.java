@@ -7,12 +7,8 @@ public class RequestTransformUtils {
 	
 	
 	public static String normalizeNFD(String s){
-		return Normalizer.normalize(s, Form.NFD);
-	}
-	
-	
-	public static synchronized boolean isQueryForLocation(String input){
-		return input.matches(".*\\d.*");
+		return s == null ? "" :
+			Normalizer.normalize(s, Form.NFD);
 	}
 	
 	

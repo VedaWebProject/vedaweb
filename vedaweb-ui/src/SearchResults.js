@@ -43,22 +43,15 @@ class SearchResults extends Component {
             return;
         }
 
-        console.log("QUERY: " + JSON.stringify(queryJson));
+        //console.log("QUERY: " + JSON.stringify(queryJson));
 
         this.setState({
             isLoaded: false,
             error: undefined
         });
 
-        if (queryJson.hasOwnProperty("smart")){
-            this.loadSmartSearchData(queryJson);
-        } else {
-            this.loadAdvancedSearchData(queryJson);
-        }
-    }
-
-    loadSmartSearchData(queryJson){
-        axios.get("/api/search/smart/" + queryJson.smart)
+        //request search api data
+        axios.post("/api/search", queryJson)
             .then((response) => {
                 this.setState({
                     isLoaded: true,
@@ -73,21 +66,6 @@ class SearchResults extends Component {
             });
     }
 
-    loadAdvancedSearchData(queryJson){
-        axios.get("/api/search/smart/blablabla")
-            .then((response) => {
-                this.setState({
-                    isLoaded: true,
-                    data: response.data
-                });
-            })
-            .catch((error) => {
-                this.setState({
-                    isLoaded: true,
-                    error: error
-                });
-            });
-    }
 
     createHighlightHTML(highlight) {
         let html = "";
@@ -109,7 +87,7 @@ class SearchResults extends Component {
 
         const { error, isLoaded, data } = this.state;
 
-        console.log(JSON.stringify(data));
+        //console.log(JSON.stringify(data));
 
         //define table columns
         const columns = [{

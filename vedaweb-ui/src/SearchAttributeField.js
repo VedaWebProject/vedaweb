@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Row, Col, Button, Select } from 'antd';
 
-import searchAdvancedStore from "./stores/searchAdvancedStore";
+import searchGrammarStore from "./stores/searchGrammarStore";
 
 import './css/SearchAttributeField.css';
 
@@ -12,8 +12,8 @@ class SearchAttributeField extends Component {
 
     render() {
 
-        let usedFieldNames = searchAdvancedStore.getUsedFieldNamesForBlock(this.props.parentBlockId);
-        let valueOptions = searchAdvancedStore.getValueOptionsForFieldName(this.props.fieldName);
+        let usedFieldNames = searchGrammarStore.getUsedFieldNamesForBlock(this.props.parentBlockId);
+        let valueOptions = searchGrammarStore.getValueOptionsForFieldName(this.props.fieldName);
 
         return (
             
@@ -27,7 +27,7 @@ class SearchAttributeField extends Component {
                     <Select
                     showSearch
                     value={this.props.fieldName}
-                    onSelect={(value, option) => searchAdvancedStore.updateField(
+                    onSelect={(value, option) => searchGrammarStore.updateField(
                         this.props.parentBlockId, this.props.id, "name", value)}
                     style={{ width: '98%' }} >
                         <Option
@@ -35,7 +35,7 @@ class SearchAttributeField extends Component {
                             value={''}>
                                 {'Select attribute (optional)'}
                         </Option>
-                        {searchAdvancedStore.grammarOptions.map((option, i) => (
+                        {searchGrammarStore.grammarOptions.map((option, i) => (
                             (usedFieldNames.indexOf(option.field) === -1 || option.field === this.props.fieldName) &&
                             <Option
                                 key={'fValOpt_' + option.field}
@@ -51,7 +51,7 @@ class SearchAttributeField extends Component {
                     showSearch
                     key={'fieldValue_of_' + this.props.id}
                     value={this.props.fieldValue.length > 0 ? this.props.fieldValue : valueOptions[0]}
-                    onSelect={(value, option) => searchAdvancedStore.updateField(
+                    onSelect={(value, option) => searchGrammarStore.updateField(
                         this.props.parentBlockId, this.props.id, "value", value)}
                     disabled = {this.props.fieldName.length === 0}
                     style={{ width: '100%' }} >
@@ -69,13 +69,13 @@ class SearchAttributeField extends Component {
                 <Col span={2} className="content-right">
                     <Button
                     disabled={!this.props.isRemovable}
-                    onClick={() => searchAdvancedStore.removeFieldFromBlock(this.props.parentBlockId, this.props.id)}
+                    onClick={() => searchGrammarStore.removeFieldFromBlock(this.props.parentBlockId, this.props.id)}
                     icon="minus" />
                 </Col>
 
                 <Col span={2} className="content-right">
                     <Button
-                    onClick={() => searchAdvancedStore.addFieldToBlock(this.props.parentBlockId)}
+                    onClick={() => searchGrammarStore.addFieldToBlock(this.props.parentBlockId)}
                     disabled={!this.props.isLastField}
                     className={!this.props.isLastField ? "hidden-button" : ""}
                     icon="plus" />

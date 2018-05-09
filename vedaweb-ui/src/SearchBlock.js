@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Row, Col, Icon, Input, Tooltip, Select } from 'antd';
 
-import searchAdvancedStore from "./stores/searchAdvancedStore";
+import searchGrammarStore from "./stores/searchGrammarStore";
 import searchMetaStore from "./stores/searchMetaStore";
 import { view } from 'react-easy-state';
 
@@ -58,7 +58,7 @@ class SearchBlock extends Component {
                                 placement="top">
                                     <Input
                                     value={this.props.term}
-                                    onChange={e => searchAdvancedStore.updateTerm(this.props.id, e.target.value)}
+                                    onChange={e => searchGrammarStore.updateTerm(this.props.id, e.target.value)}
                                     placeholder="(optional)"
                                     className="search-block-input" />
                                 </Tooltip>
@@ -81,7 +81,7 @@ class SearchBlock extends Component {
                             <Col span={9} className="search-block-input">
                                 <Select
                                 value={this.props.distance}
-                                onSelect={(value, o) => searchAdvancedStore.updateDistance(this.props.id, value)}
+                                onSelect={(value, o) => searchGrammarStore.updateDistance(this.props.id, value)}
                                 disabled={this.props.isFirstBlock}
                                 style={{ width: '100%' }} >
                                     {distanceOptions.map((e, i) => (

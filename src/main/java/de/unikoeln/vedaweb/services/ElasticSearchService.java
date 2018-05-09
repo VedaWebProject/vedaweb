@@ -3,72 +3,65 @@ package de.unikoeln.vedaweb.services;
 import java.io.IOException;
 import org.elasticsearch.action.search.SearchRequest;
 import org.elasticsearch.action.search.SearchResponse;
-import org.elasticsearch.search.SearchHit;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import de.unikoeln.vedaweb.data.VerseRepository;
-import de.unikoeln.vedaweb.search.SearchDataAdvanced;
+import de.unikoeln.vedaweb.search.SearchData;
 import de.unikoeln.vedaweb.search.SearchRequestBuilder;
-import de.unikoeln.vedaweb.search.SearchResult;
-import de.unikoeln.vedaweb.search.SearchResults;
+import de.unikoeln.vedaweb.util.RequestTransformUtils;
 
 @Service
 public class ElasticSearchService {
 
 	@Autowired
-	private VerseRepository verseRepo;
-	
-	@Autowired
 	private ElasticService elastic;
 	
 	
-	public SearchResponse smartSearch(String query){
-		//query = ElasticIndexService.normalizeForIndex(query);
-		SearchRequest searchRequest = SearchRequestBuilder.buildSmart(query);
-		SearchResponse searchResponse = search(searchRequest);
-		//System.out.println(searchResponse);
-		return searchResponse;
-//		System.out.println(searchResponse);
-//		SearchResults searchResults = buildSearchResults(searchResponse);
-//		return searchResults;
+	public SearchResponse search(SearchData searchData){
+		switch (searchData.getMode()){
+		case "smart":
+			return searchSmart(searchData.getInput());
+		case "grammar":
+			return searchGrammar(searchData);
+		default: return null;
+		}
 	}
 	
 	
-	public SearchResults search(SearchDataAdvanced formData){
-		formData.cleanAndFormatFields();
-//		System.out.println(formData);
-		
-		SearchRequest searchRequest = SearchRequestBuilder.buildAdvanced(formData);
-		SearchResponse searchResponse = search(searchRequest);
-//		System.out.println(searchResponse);
-		SearchResults searchResults = buildSearchResults(searchResponse);
-		
-		return searchResults;
+	private SearchResponse searchSmart(String input){
+		SearchRequest searchRequest = SearchRequestBuilder.buildSmart(
+				RequestTransformUtils.normalizeNFD(input));
+		return submitSearch(searchRequest);
+	}
+	
+	
+	private SearchResponse searchGrammar(SearchData searchData){
+		SearchRequest searchRequest = SearchRequestBuilder.buildGrammar(searchData);
+		return submitSearch(searchRequest);
 	}
 	
 	
 	public String aggregateGrammarField(String field){
 		SearchRequest searchRequest = SearchRequestBuilder.buildAggregationFor(field);
-		SearchResponse searchResponse = search(searchRequest);
+		SearchResponse searchResponse = submitSearch(searchRequest);
 		return searchResponse.toString();
 	}
 	
 	
-	private SearchResults buildSearchResults(SearchResponse response){
-		SearchResults results = new SearchResults();
-		for (SearchHit hit : response.getHits()){
-			results.add(
-				new SearchResult(
-					hit.getScore(),
-					hit.getId(),
-					hit.getFields()));
-		}
-		return results;
-	}
+//	private SearchResults buildSearchResults(SearchResponse response){
+//		SearchResults results = new SearchResults();
+//		for (SearchHit hit : response.getHits()){
+//			results.add(
+//				new SearchResult(
+//					hit.getScore(),
+//					hit.getId(),
+//					hit.getFields()));
+//		}
+//		return results;
+//	}
 	
 	
-	private SearchResponse search(SearchRequest searchRequest){
+	private SearchResponse submitSearch(SearchRequest searchRequest){
 		try {
 			return elastic.client().search(searchRequest);
 		} catch (IOException e) {

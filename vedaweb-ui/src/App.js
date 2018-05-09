@@ -13,7 +13,7 @@ import "./css/App.css";
 import UIData from './ui-data.js'; //DEV: load from server!
 
 import searchSimpleStore from "./stores/searchSimpleStore";
-import searchAdvancedStore from "./stores/searchAdvancedStore";
+import searchGrammarStore from "./stores/searchGrammarStore";
 import searchMetaStore from "./stores/searchMetaStore";
 import { view } from 'react-easy-state';
 
@@ -27,7 +27,7 @@ class App extends Component {
         super(props);
 
         searchSimpleStore.setFieldsData(UIData.search.textSearch.fields);  //DEV: load from server!
-        searchAdvancedStore.setGrammarOptions(UIData.search.grammar); //DEV: load from server!
+        searchGrammarStore.setGrammarOptions(UIData.search.grammar); //DEV: load from server!
         searchMetaStore.setScopeData(UIData.search.books); //DEV: load from server!
         searchMetaStore.setTransliterationData(UIData.search.transliteration); //DEV: load from server!
     }

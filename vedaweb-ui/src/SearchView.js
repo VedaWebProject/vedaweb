@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Row, Col, Button, Icon, Tabs } from 'antd';
 
-import SearchAdvanced from "./SearchAdvanced";
+import SearchGrammar from "./SearchGrammar";
 import SearchScope from "./SearchScope";
 import SearchTransliteration from "./SearchTransliteration";
 
@@ -65,7 +65,7 @@ class SearchView extends Component {
                         id="search-mode-selector"
                         tabBarGutter={8}>
                             <TabPane tab="Grammar Search" key="advanced">
-                                <SearchAdvanced />
+                                <SearchGrammar />
                             </TabPane>
                             <TabPane tab="Other Search" key="somemode">
                                 <div className="search-container">

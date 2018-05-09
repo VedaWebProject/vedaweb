@@ -3,7 +3,7 @@ import { Input, Tooltip } from 'antd';
 
 import Sanscript from 'sanscript';
 
-import searchSimpleStore from "./stores/searchSimpleStore";
+import searchSmartStore from "./stores/searchSmartStore";
 import { view } from 'react-easy-state';
 
 import TransliterationPreview from "./TransliterationPreview";
@@ -26,8 +26,8 @@ class SearchSmart extends Component {
         if (/\d/.test(input)){
             this.props.history.push("/view/id/" + input);
         } else {
-            input = Sanscript.t(input, "hk", "iso");
-            this.props.history.push("/results/" + Base64.encode(JSON.stringify({ smart : input })));
+            let jsonData = { mode: "smart", input: Sanscript.t(input, "hk", "iso") };
+            this.props.history.push("/results/" + Base64.encode(JSON.stringify(jsonData)));
         }
     }
 
@@ -35,7 +35,7 @@ class SearchSmart extends Component {
 
         const transliteration = (
             <TransliterationPreview
-            input={searchSimpleStore.term}
+            input={searchSmartStore.data.input}
             transliteration="hk" />
         );
 
@@ -44,16 +44,15 @@ class SearchSmart extends Component {
 
             <div>
                 <Tooltip
-                title={searchSimpleStore.field === "text" ? transliteration : ""}
+                title={transliteration}
                 trigger="focus"
-                placement="top"
-                visible={ !/\d/.test(searchSimpleStore.term) && searchSimpleStore.term.length > 0 } >
+                placement="top">
 
                     <Search
-                    value={searchSimpleStore.term}
-                    onChange={e => searchSimpleStore.setTerm(e.target.value)}
+                    value={searchSmartStore.data.input}
+                    onChange={e => searchSmartStore.setInput(e.target.value)}
                     onSearch={this.handleSearch}
-                    placeholder="location, translation or text via HK"
+                    placeholder="Harvard Kyoto or verse number"
                     size="large" />
 
                 </Tooltip>

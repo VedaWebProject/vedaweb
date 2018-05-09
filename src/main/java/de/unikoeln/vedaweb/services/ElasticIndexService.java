@@ -85,8 +85,8 @@ public class ElasticIndexService {
 				indexDoc.put("hymn", dbDoc.getHymn());
 				indexDoc.put("verse", dbDoc.getVerse());
 				indexDoc.put("translation", concatTranslations(dbDoc));
-				indexDoc.put("form", normalizeForIndex(concatPadaForms(dbDoc) + concatTokenLemmata(dbDoc)));
-				indexDoc.put("form_raw", concatPadaForms(dbDoc));
+				indexDoc.put("form", removeUnicodeAccents(normalize(concatPadaForms(dbDoc) + concatTokenLemmata(dbDoc))));
+				indexDoc.put("form_raw", normalize(concatPadaForms(dbDoc)));
 				indexDoc.put("tokens", buildTokensList(dbDoc));
 			} catch (JSONException e) {
 				e.printStackTrace();
@@ -132,8 +132,8 @@ public class ElasticIndexService {
 			for (Token token : pada.getTokens()) {
 				JSONObject indexToken = new JSONObject();
 				indexToken.put("index", token.getIndex());
-				indexToken.put("form", normalizeForIndex(token.getForm()));
-				indexToken.put("lemma", normalizeForIndex(token.getLemma()));
+				indexToken.put("form", removeUnicodeAccents(normalize(token.getForm())));
+				indexToken.put("lemma", removeUnicodeAccents(normalize(token.getLemma())));
 				//grammar
 				for (String attr : token.getGrammarAttributes().keySet()) {
 					indexToken.put(attr, token.getGrammarAttribute(attr));
@@ -236,10 +236,15 @@ public class ElasticIndexService {
 	}
 	
 	
-	public static String normalizeForIndex(String text) {
-	    return text == null ? null :
-	        Normalizer.normalize(text, Form.NFD)
-	            .replaceAll("\\u0301", "");
+	private String normalize(String text) {
+	    return text == null ? "" :
+	        Normalizer.normalize(text, Form.NFD);
+	}
+	
+	
+	private String removeUnicodeAccents(String text) {
+	    return text == null ? "" :
+	        text.replaceAll("\\u0301", "");
 	}
 	
 }
