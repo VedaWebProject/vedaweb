@@ -1,6 +1,5 @@
 import React, { Component } from "react";
-import { Table, Pagination } from 'antd';
-import Spinner from "./Spinner";
+import { Table, Pagination, Spin, Icon } from 'antd';
 
 import { Link, withRouter } from 'react-router-dom';
 
@@ -144,62 +143,64 @@ class SearchResults extends Component {
 
         return (
 
-            <div className="page-content">
-                <div id="search-results" className="content card">
+            <Spin
+            size="large"
+            indicator={<Icon type="loading" spin style={{ fontSize: 38 }}/>}
+            delay={200}
+            spinning={!isLoaded}>
 
-                    <h4>Search Results</h4>
+                <div className="page-content">
+                    <div id="search-results" className="content card">
 
-                    {/** LOADING SPINNER **/}
-                    {!isLoaded &&
-                        <Spinner/>
-                    }
+                        <h4>Search Results</h4>
 
-                    {/** ERROR **/}
-                    {isLoaded && error !== undefined &&
-                        <div className="card">
-                            There was an error requesting the data.
-                        </div>
-                    }
+                        {/** ERROR **/}
+                        {isLoaded && error !== undefined &&
+                            <div className="card">
+                                There was an error requesting the data.
+                            </div>
+                        }
 
-                    {/** SEARCH STATS **/}
-                    { isLoaded && error === undefined && data.hits.hits !== undefined &&
-                        <div className="search-stats bottom-gap">
-                            Hits: {data.hits.total} &mdash; Took: {data.took} ms
-                        </div>
-                    }
+                        {/** SEARCH STATS **/}
+                        { isLoaded && error === undefined && data.hits.hits !== undefined &&
+                            <div className="search-stats bottom-gap">
+                                Hits: {data.hits.total} &mdash; Took: {data.took} ms
+                            </div>
+                        }
 
-                    {/** RESULTS **/}
-                    { isLoaded
-                        && error === undefined
-                        && data.hits.hits !== undefined
-                        && data.hits.hits.length > 0 &&
-                        
-                        <Table
-                        columns={columns}
-                        dataSource={tableData}
-                        pagination={
-                            <Pagination
-                            defaultPageSize={10}
-                            pageSize={10}
-                            current={data.from}
-                            total={data.hits.total}
-                            onChange={this.onPageChange} />
-                        } />
+                        {/** RESULTS **/}
+                        { isLoaded
+                            && error === undefined
+                            && data.hits.hits !== undefined
+                            && data.hits.hits.length > 0 &&
+                            
+                            <Table
+                            columns={columns}
+                            dataSource={tableData}
+                            pagination={
+                                <Pagination
+                                defaultPageSize={10}
+                                pageSize={10}
+                                current={data.from}
+                                total={data.hits.total}
+                                onChange={this.onPageChange} />
+                            } />
 
-                        //+ JSON.stringify(data)
-                    }
+                            //+ JSON.stringify(data)
+                        }
 
-                    {/** NO RESULTS **/}
-                    { isLoaded
-                        && error === undefined
-                        && data.hits.hits !== undefined
-                        && data.hits.hits.length === 0 &&
-                        
-                        "Sorry, there are no results for this search."
-                    }
+                        {/** NO RESULTS **/}
+                        { isLoaded
+                            && error === undefined
+                            && data.hits.hits !== undefined
+                            && data.hits.hits.length === 0 &&
+                            
+                            "Sorry, there are no results for this search."
+                        }
 
+                    </div>
                 </div>
-            </div>
+            </Spin>
         );
     }
 
