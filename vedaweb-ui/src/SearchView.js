@@ -5,11 +5,17 @@ import SearchGrammar from "./SearchGrammar";
 import SearchScope from "./SearchScope";
 import SearchTransliteration from "./SearchTransliteration";
 
+import Sanscript from 'sanscript';
+
 import './css/SearchView.css';
 
 import { view } from 'react-easy-state';
 
+import { withRouter } from 'react-router-dom';
+import { Base64 } from 'js-base64';
+
 import searchMetaStore from "./stores/searchMetaStore";
+import searchGrammarStore from "./stores/searchGrammarStore";
 
 const TabPane = Tabs.TabPane;
 
@@ -18,6 +24,7 @@ class SearchView extends Component {
     constructor(props){
         super(props);
         this.switchMode = this.switchMode.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
     }
 
     switchMode(key){
@@ -25,13 +32,31 @@ class SearchView extends Component {
             searchMetaStore.mode = key;
     }
 
+    handleSubmit(e){
+        let jsonData = {
+            mode: searchMetaStore.mode,
+            scopes: searchMetaStore.scopes
+        };
+        
+        if (searchMetaStore.mode === "grammar"){
+            jsonData["blocks"] = searchGrammarStore.data.blocks;
+            for (let block of jsonData.blocks){
+                block.term = Sanscript.t(block.term, searchMetaStore.transliteration.setting, "iso")
+            }
+        }
+
+        console.log(JSON.stringify(jsonData));
+
+        this.props.history.push("/results/" + Base64.encode(JSON.stringify(jsonData)));
+    }
+
 
     render() {
 
         const helpText = <div className="search-container">
-            <h4>VedaVeb Search Modes</h4>
-            This document describes the holy search modes as they were handed down for generations.<br/>There is a simple one and a more complex one. Choose from your options wisely.<br/>If these enlightened words are not verbose enough for you, please feel free to call our hotline:<br/>+49 221 S-A-N-S-K-R-I-T
-        </div>;
+                            <h4>VedaVeb Search Modes</h4>
+                            This document describes the holy search modes as they were handed down for generations.<br/>There is a simple one and a more complex one. Choose from your options wisely.<br/>If these enlightened words are not verbose enough for you, please feel free to call our hotline:<br/>+49 221 S-A-N-S-K-R-I-T
+                        </div>;
 
         return (
 
@@ -82,7 +107,7 @@ class SearchView extends Component {
                                 {/* <Button icon="cross" size="large" onClick={this.props.onClose}>Close</Button> */}
                             </Col>
                             <Col span={12} className="content-right">
-                                <Button icon="search" size="large">Search</Button>
+                                <Button icon="search" size="large" onClick={this.handleSubmit}>Search</Button>
                             </Col>
                         </Row>
                     </div>
@@ -95,4 +120,4 @@ class SearchView extends Component {
 
 }
 
-export default view(SearchView);
+export default withRouter(view(SearchView));

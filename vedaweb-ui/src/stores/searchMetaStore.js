@@ -23,7 +23,7 @@ const searchMetaStore = store({
 
     transliteration: {
         data: [],
-        setting: ''
+        setting: 'hk'
     },
 
     setSearchMode(mode){

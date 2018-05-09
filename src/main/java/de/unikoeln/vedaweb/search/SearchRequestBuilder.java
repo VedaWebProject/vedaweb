@@ -106,6 +106,8 @@ public class SearchRequestBuilder {
 	
 	private static void addScopeQueries(BoolQueryBuilder rootQuery, List<SearchScope> scopes){
 		
+		if (scopes == null) return;
+		
 		//TODO temp: only one range!
 		SearchScope scope = null;
 		if (scopes.size() > 0)

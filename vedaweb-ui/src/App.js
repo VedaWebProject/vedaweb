@@ -20,6 +20,8 @@ import { view } from 'react-easy-state';
 import { Route, Switch, withRouter } from 'react-router-dom'
 import SearchResults from "./SearchResults";
 
+import Sanscript from 'sanscript';
+
 
 class App extends Component {
 
@@ -30,6 +32,12 @@ class App extends Component {
         searchGrammarStore.setGrammarOptions(UIData.search.grammar); //DEV: load from server!
         searchMetaStore.setScopeData(UIData.search.books); //DEV: load from server!
         searchMetaStore.setTransliterationData(UIData.search.transliteration); //DEV: load from server!
+
+        //TEMP DEV: configure iso scheme for sanscript.js
+        let iso = JSON.parse(JSON.stringify(Sanscript.schemes.iast));
+        iso.vowels = 'a ā i ī u ū r̥ r̥̄ l̥ l̥̄ ē e ai ō o au'.split(' ');
+        iso.other_marks = ['ṁ', 'ḥ', '~'];
+        Sanscript.addRomanScheme ('iso', iso);
     }
 
     
