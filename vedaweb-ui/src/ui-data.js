@@ -12,12 +12,12 @@ export default {
 			{
 				"ui": "Person",
 				"field": "person",
-				"values": ["1.", "2.", "2./3."]
+				"values": ["1", "2"]
 			},
 			{
 				"ui": "Case",
 				"field": "case",
-				"values": ["Akk.", "Gen.", "Dat.", "Ind."]
+				"values": ["NOM", "ACC", "GEN", "NOM/ACC"]
 			},
 			{
 				"ui": "Diathesis",
@@ -26,8 +26,8 @@ export default {
 			},
 			{
 				"ui": "Time",
-				"field": "time",
-				"values": ["pres.", "past.", "fut."]
+				"field": "tense",
+				"values": ["PRS", "PST", "FUT"]
 			}
 		],
         "books": [99, 104, 34, 65, 13, 86, 45, 19, 67, 11],

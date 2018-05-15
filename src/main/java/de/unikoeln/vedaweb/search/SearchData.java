@@ -1,6 +1,7 @@
 package de.unikoeln.vedaweb.search;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
@@ -76,20 +77,27 @@ public class SearchData {
 		return "mode:" + mode + (input != null ? " input:" + input : "");
 	}
 	
-//	public void cleanAndFormatFields(){
-//		//clean search blocks
-//		for (Map<String, Object> block : blocks){
-//			block.values().removeAll(Collections.singleton(""));
-//			for (String field : block.keySet()){
-//				if (block.get(field) instanceof String
-//						&& ((String)block.get(field)).matches("-?\\d+")){
-//					block.put(field, Integer.parseInt(((String)block.get(field))));
-//				}
-//			}
-//		}
-//		//clean search scope
-//		book = book > 0 ? book : -1;
-//		hymn = hymn > 0 ? hymn : -1;
-//	}
+	public void cleanAndFormatFields(){
+		//clean search blocks
+		for (Map<String, Object> block : blocks){
+			block.values().removeAll(Collections.singleton(""));
+			for (String field : block.keySet()){
+				if (block.get(field) instanceof String
+						&& ((String)block.get(field)).matches("-?\\d+")){
+					block.put(field, Integer.parseInt(((String)block.get(field))));
+				}
+			}
+		}
+		
+		//clean search scopes
+		if (scopes == null) return;
+		for (SearchScope scope : scopes){
+			scope.fromBook = scope.fromBook > 0 ? scope.fromBook : -1;
+			scope.fromHymn = scope.fromHymn > 0 ? scope.fromHymn : -1;
+			scope.toBook = scope.toBook > 0 ? scope.toBook : -1;
+			scope.toHymn = scope.toHymn > 0 ? scope.toHymn : -1;
+		}
+		
+	}
 	
 }

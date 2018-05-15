@@ -17,7 +17,7 @@ const searchGrammarStore = store({
         let blockId = 'block_' + Date.now()
         searchGrammarStore.data.blocks = searchGrammarStore.data.blocks.concat({
             id: blockId,
-            term: '',
+            form: '',
             distance: 0,
             fields: []
         });
@@ -58,16 +58,23 @@ const searchGrammarStore = store({
                 for (let j = 0; j < searchGrammarStore.data.blocks[i].fields.length; j++){
                     if (searchGrammarStore.data.blocks[i].fields[j].id === fieldId){
                         searchGrammarStore.data.blocks[i].fields[j][fieldProp] = value;
+                        if (fieldProp === "name" && value.length === 0){
+                            searchGrammarStore.data.blocks[i].fields[j].value = "";
+                        } else if (fieldProp === "name" && value.length > 0){
+                            searchGrammarStore.data.blocks[i].fields[j].value = searchGrammarStore.getValueOptionsForFieldName(value)[0];
+                        }
+                        break;
                     }
                 }
+                break;
             }
         }
     },
 
-    updateTerm(blockId, term){
+    updateForm(blockId, form){
         for (let i = 0; i < searchGrammarStore.data.blocks.length; i++){
             if (searchGrammarStore.data.blocks[i].id === blockId){
-                searchGrammarStore.data.blocks[i].term = term;
+                searchGrammarStore.data.blocks[i].form = form;
             }
         }
     },

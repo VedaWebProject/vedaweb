@@ -69,16 +69,18 @@ class SearchResults extends Component {
     }
 
 
-    createHighlightHTML(highlight) {
+    createHighlightHTML(hit) {
         let html = "";
 
-        if (highlight !== undefined){
-            Object.keys(highlight).forEach(function (key) {
-                if (highlight[key].length > 0){
-                    for (let high in highlight[key])
-                    html += (html.length > 0 ? " &mdash; " : "") + highlight[key][high];
+        if (hit.highlight !== undefined){
+            Object.keys(hit.highlight).forEach(function (key) {
+                if (hit.highlight[key].length > 0){
+                    for (let high in hit.highlight[key])
+                    html += (html.length > 0 ? " &mdash; " : "") + hit.highlight[key][high];
                 }
             });
+        } else {
+            html = hit._source.form;
         }
 
         return {__html: html};
@@ -116,7 +118,7 @@ class SearchResults extends Component {
                     (hit._source.hymn + "").padStart(3, "0") + "." +
                     (hit._source.verse + "").padStart(2, "0"),
                 //text: hit._source.form,
-                text: <div dangerouslySetInnerHTML={this.createHighlightHTML(hit.highlight)}></div>,  // <---- how to force react to render this???
+                text: <div dangerouslySetInnerHTML={this.createHighlightHTML(hit)}></div>,  // <---- how to force react to render this???
                 relevance: hit._score
             }));
 

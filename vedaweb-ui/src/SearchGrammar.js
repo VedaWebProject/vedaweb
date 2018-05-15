@@ -43,7 +43,7 @@ class SearchGrammar extends Component {
                         <SearchBlock
                         key={block.id}
                         id={block.id}
-                        term={block.term}
+                        form={block.form}
                         distance={block.distance}
                         isFirstBlock={i === 0}
                         fields={block.fields}

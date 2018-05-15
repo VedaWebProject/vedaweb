@@ -24,7 +24,7 @@ class SearchBlock extends Component {
 
         const transliteration = (
             <TransliterationPreview
-            input={this.props.term}
+            input={this.props.form}
             transliteration={searchMetaStore.transliteration.setting}/>
         );
 
@@ -57,8 +57,8 @@ class SearchBlock extends Component {
                                 trigger="focus"
                                 placement="top">
                                     <Input
-                                    value={this.props.term}
-                                    onChange={e => searchGrammarStore.updateTerm(this.props.id, e.target.value)}
+                                    value={this.props.form}
+                                    onChange={e => searchGrammarStore.updateForm(this.props.id, e.target.value)}
                                     placeholder="(optional)"
                                     className="search-block-input" />
                                 </Tooltip>

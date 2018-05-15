@@ -39,12 +39,12 @@
 						"form":			{ "type": "keyword" },
 						"lemma":		{ "type": "text"},
 						"diathesis":	{ "type": "keyword"},
-						"numerus":		{ "type": "keyword"},
-						"casus":		{ "type": "keyword"},
+						"number":		{ "type": "keyword"},
+						"case":			{ "type": "keyword"},
 						"person":		{ "type": "keyword"},
-						"genus":		{ "type": "keyword"},
-						"modus":		{ "type": "keyword"},
-						"tempus":		{ "type": "keyword"}
+						"gender":		{ "type": "keyword"},
+						"mode":			{ "type": "keyword"},
+						"tense":		{ "type": "keyword"}
 					}
 				}
 			}

@@ -18,6 +18,8 @@ public class ElasticSearchService {
 	
 	
 	public SearchResponse search(SearchData searchData){
+		searchData.cleanAndFormatFields();
+		
 		switch (searchData.getMode()){
 		case "smart":
 			return searchSmart(searchData.getInput());

@@ -35,13 +35,20 @@ class SearchView extends Component {
     handleSubmit(e){
         let jsonData = {
             mode: searchMetaStore.mode,
-            scopes: searchMetaStore.scopes
+            scopes: [searchMetaStore.scope.settings]
         };
         
         if (searchMetaStore.mode === "grammar"){
-            jsonData["blocks"] = searchGrammarStore.data.blocks;
+            jsonData["blocks"] = JSON.parse(JSON.stringify(searchGrammarStore.data.blocks));
+
             for (let block of jsonData.blocks){
-                block.term = Sanscript.t(block.term, searchMetaStore.transliteration.setting, "iso")
+                block.form = Sanscript.t(block.form, searchMetaStore.transliteration.setting, "iso");
+                for (let field of block.fields){
+                    if (field.value.length > 0)
+                        block[field.name] = field.value
+                }
+                delete block.fields;
+                delete block.id;
             }
         }
 
@@ -70,7 +77,7 @@ class SearchView extends Component {
                 id="search-view"
                 key="search-view">
 
-                    <div className="top-gap card-nobox">
+                    <div className="top-gap card">
                         <h4>Advanced Search</h4>
                         
                         <SearchTransliteration/>
