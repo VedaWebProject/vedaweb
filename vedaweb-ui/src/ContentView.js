@@ -6,6 +6,8 @@ import ErrorMessage from "./ErrorMessage";
 
 import "./css/ContentView.css";
 
+import Sanscript from 'sanscript';  
+
 import { withRouter } from 'react-router-dom';
 
 import appStateStore from "./stores/appStateStore";
@@ -93,7 +95,7 @@ class ContentView extends Component {
                     }
 
                     {/** LOADED, NO ERROR **/}
-                    { isLoaded && error === undefined &&
+                    { error === undefined &&
 
                         <Row
                         id="content-view"
@@ -105,7 +107,7 @@ class ContentView extends Component {
                                 
 
                                 {/** CONTENT **/}
-                                {data.padas !== undefined && error === undefined &&
+                                { data.padas !== undefined && error === undefined &&
 
                                     <div>
                                         <div className="content-plain content-block card">
@@ -123,6 +125,20 @@ class ContentView extends Component {
                                                 </div>
                                             ))}
                                         </div>
+
+                                        {appStateStore.viewFilter.devanagari &&
+                                            <div
+                                            className="glossing content-block card"
+                                            ref={this.scrollTo}>
+                                                <h4>Devanagari transliteration</h4>
+                                                {data.padas.map(pada => (
+                                                    <div className="bottom-gap-small" key={"p_plain_" + pada.index}>
+                                                        <span key={"p_plain_line" + pada.index} className="pada-line">{pada.line}</span>
+                                                        <span key={"p_plain_form" + pada.index} className="pada-form">{Sanscript.t(pada.form, "iso", "devanagari")}</span><br/>
+                                                    </div>
+                                                ))}
+                                            </div>
+                                        }
 
                                         {appStateStore.viewFilter.grammar &&
                                             <div
@@ -211,6 +227,14 @@ class ContentView extends Component {
                                 <Affix offsetTop={10}>
                                     <div className="card-nobox">
                                         <h4>View Filters</h4>
+                                        <div className="view-filter">
+                                            <Switch
+                                            defaultChecked
+                                            onChange={(e) => this.filterChange("devanagari", e)}
+                                            disabled={!isLoaded || error !== undefined}
+                                            checked={appStateStore.viewFilter.devanagari} />
+                                            Devanagari transliteration
+                                        </div>
                                         <div className="view-filter">
                                             <Switch
                                             defaultChecked

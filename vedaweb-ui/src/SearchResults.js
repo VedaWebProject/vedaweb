@@ -132,27 +132,27 @@ class SearchResults extends Component {
                 <div className="page-content">
 
                     {/** ERROR **/}
-                    {isLoaded && error !== undefined &&
+                    { isLoaded && error !== undefined &&
                         <ErrorMessage/>
                     }
 
                     {/** SEARCH RESULT VIEW **/}
-                    { isLoaded && error === undefined &&
+                    { error === undefined &&
 
                     
-                        <div id="search-results" className="content card">
+                        <div id="search-results" className="card">
 
                             <h4>Search Results</h4>
 
                             {/** SEARCH STATS **/}
-                            { data.hits.hits !== undefined &&
+                            { isLoaded && data.hits.hits !== undefined &&
                                 <div className="search-stats bottom-gap">
                                     Hits: {data.hits.total} &mdash; Took: {data.took} ms
                                 </div>
                             }
 
                             {/** RESULTS **/}
-                            { data.hits.hits !== undefined
+                            { isLoaded && data.hits.hits !== undefined
                                 && data.hits.hits.length > 0 &&
                                 
                                 <Table
@@ -171,7 +171,7 @@ class SearchResults extends Component {
                             }
 
                             {/** NO RESULTS **/}
-                            { data.hits.hits !== undefined
+                            { isLoaded && data.hits.hits !== undefined
                                 && data.hits.hits.length === 0 &&
                                 "There are no results for this search."
                             }

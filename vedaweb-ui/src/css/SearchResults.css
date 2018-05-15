@@ -1,3 +1,7 @@
+#search-results {
+    min-height: 50vh;
+}
+
 #search-results table  {
     font-family: 'Gentium', "Tahoma", "Arial", sans-serif;
     vertical-align: top;
