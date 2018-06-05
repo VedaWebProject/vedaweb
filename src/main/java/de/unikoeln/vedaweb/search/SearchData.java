@@ -16,6 +16,9 @@ public class SearchData {
 	@JsonProperty("input")
 	private String input;
 	
+	@JsonProperty("field")
+	private String field;
+	
 	@JsonProperty("scopes")
 	private List<SearchScope> scopes;
 	
@@ -45,6 +48,16 @@ public class SearchData {
 
 	public void setInput(String input) {
 		this.input = input;
+	}
+	
+	
+	public String getField() {
+		return field;
+	}
+
+
+	public void setField(String field) {
+		this.field = field;
 	}
 
 

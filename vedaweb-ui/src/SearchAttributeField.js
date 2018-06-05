@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Row, Col, Button, Select } from 'antd';
 
+import uiDataStore from "./stores/uiDataStore";
 import searchGrammarStore from "./stores/searchGrammarStore";
 
 import './css/SearchAttributeField.css';
@@ -35,7 +36,7 @@ class SearchAttributeField extends Component {
                             value={''}>
                                 {'Select attribute (optional)'}
                         </Option>
-                        {searchGrammarStore.grammarOptions.map((option, i) => (
+                        {uiDataStore.search.grammar.tags.map((option, i) => (
                             (usedFieldNames.indexOf(option.field) === -1 || option.field === this.props.fieldName) &&
                             <Option
                                 key={'fValOpt_' + option.field}

@@ -30,19 +30,21 @@ public class SearchRequestBuilder {
 	
 	
 	
-	public static SearchRequest buildSmart(String query){
+	public static SearchRequest buildSmart(String query, String field){
 		SearchRequest searchRequest = new SearchRequest("vedaweb"); 
 		searchRequest.types("doc");
 		
 		//TODO scrolling!
 		//searchRequest.scroll(TimeValue.timeValueMinutes(1L));
 		
-		SearchSourceBuilder searchSourceBuilder = new SearchSourceBuilder(); 
+		SearchSourceBuilder searchSourceBuilder = new SearchSourceBuilder();
 		
-		//bool query
-		BoolQueryBuilder bool = QueryBuilders.boolQuery();
-		bool.should(new MatchQueryBuilder(containsAccents(query) ? "form_raw" : "form", query));
-		searchSourceBuilder.query(bool);
+		if (field.equals("form") && containsAccents(query))
+			field = "form_raw";
+		
+		//match query
+		MatchQueryBuilder match = new MatchQueryBuilder(field, query);
+		searchSourceBuilder.query(match);
 		
 		//Highlighting
 		addHighlighting(searchSourceBuilder, "form", "form_raw", "translation");

@@ -22,7 +22,7 @@ public class ElasticSearchService {
 		
 		switch (searchData.getMode()){
 		case "smart":
-			return searchSmart(searchData.getInput());
+			return searchSmart(searchData);
 		case "grammar":
 			return searchGrammar(searchData);
 		default: return null;
@@ -30,9 +30,11 @@ public class ElasticSearchService {
 	}
 	
 	
-	private SearchResponse searchSmart(String input){
+	private SearchResponse searchSmart(SearchData searchData){
 		SearchRequest searchRequest = SearchRequestBuilder.buildSmart(
-				RequestTransformUtils.normalizeNFD(input));
+				RequestTransformUtils.normalizeNFD(searchData.getInput()),
+				searchData.getField()
+				);
 		return submitSearch(searchRequest);
 	}
 	

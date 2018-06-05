@@ -1,9 +1,10 @@
 import React, { Component } from "react";
-import { Input, Tooltip } from 'antd';
+import { Input, Tooltip, Select } from 'antd';
 
 import Sanscript from 'sanscript';
 
 import searchSmartStore from "./stores/searchSmartStore";
+import uiDataStore from "./stores/uiDataStore";
 import { view } from 'react-easy-state';
 
 import TransliterationPreview from "./TransliterationPreview";
@@ -12,7 +13,7 @@ import { withRouter } from 'react-router-dom';
 import { Base64 } from 'js-base64';
 
 
-//const Option = Select.Option;
+const Option = Select.Option;
 const Search = Input.Search;
 
 class SearchSmart extends Component {
@@ -26,12 +27,32 @@ class SearchSmart extends Component {
         if (/\d/.test(input)){
             this.props.history.push("/view/id/" + input);
         } else {
-            let jsonData = { mode: "smart", input: Sanscript.t(input, "hk", "iso") };
+            let jsonData = {
+                mode: "smart",
+                input: Sanscript.t(input, "hk", "iso"),
+                field: searchSmartStore.data.field
+            };
             this.props.history.push("/results/" + Base64.encode(JSON.stringify(jsonData)));
         }
     }
 
     render() {
+
+        const selectBefore = (
+            <Select
+            defaultValue="form"
+            onSelect={(value, option) => searchSmartStore.setField(value)}
+            className="secondary-font">
+                {uiDataStore.search.smart.fields.map(field => (
+                    <Option
+                    key={'simple_field_' + field.field}
+                    value={field.field}
+                    className="secondary-font">
+                        {field.ui}
+                    </Option>
+                ))}
+            </Select>
+        );
 
         const transliteration = (
             <TransliterationPreview
@@ -52,6 +73,7 @@ class SearchSmart extends Component {
                     value={searchSmartStore.data.input}
                     onChange={e => searchSmartStore.setInput(e.target.value)}
                     onSearch={this.handleSearch}
+                    addonBefore={selectBefore}
                     placeholder="Harvard-Kyoto or verse number"
                     size="large" />
 

@@ -6,7 +6,7 @@ import java.text.Normalizer.Form;
 public class RequestTransformUtils {
 	
 	
-	public static String normalizeNFD(String s){
+	public static synchronized String normalizeNFD(String s){
 		return s == null ? "" :
 			Normalizer.normalize(s, Form.NFD);
 	}

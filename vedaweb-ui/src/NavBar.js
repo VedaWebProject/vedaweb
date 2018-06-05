@@ -44,18 +44,15 @@ class NavBar extends Component {
                     </Link>
                 </Col>
 
-                <Col span={6}>
+                <Col span={8}>
                     <SearchSmart />
                 </Col>
 
-                <Col span={14}>
+                <Col span={12}>
                     <Menu
                     onSelect={this.handleMenu}
                     mode="horizontal"
                     style={menuStyle}>
-                        <Menu.Item key="about">
-                            About
-                        </Menu.Item>
                         <Menu.Item key="partners">
                             Partner Projects
                         </Menu.Item>

@@ -12,8 +12,7 @@ import "./css/App.css";
 
 import UIData from './ui-data.js'; //DEV: load from server!
 
-import searchSimpleStore from "./stores/searchSimpleStore";
-import searchGrammarStore from "./stores/searchGrammarStore";
+import uiDataStore from "./stores/uiDataStore";
 import searchMetaStore from "./stores/searchMetaStore";
 import { view } from 'react-easy-state';
 
@@ -28,10 +27,8 @@ class App extends Component {
     constructor(props){
         super(props);
 
-        searchSimpleStore.setFieldsData(UIData.search.textSearch.fields);  //DEV: load from server!
-        searchGrammarStore.setGrammarOptions(UIData.search.grammar); //DEV: load from server!
-        searchMetaStore.setScopeData(UIData.search.books); //DEV: load from server!
-        searchMetaStore.setTransliterationData(UIData.search.transliteration); //DEV: load from server!
+        uiDataStore.search = UIData.search;  //DEV: load from server!
+        searchMetaStore.setScopeData(uiDataStore.search.meta.scopes);
 
         //TEMP DEV: configure iso scheme for sanscript.js
         let iso = JSON.parse(JSON.stringify(Sanscript.schemes.iast));

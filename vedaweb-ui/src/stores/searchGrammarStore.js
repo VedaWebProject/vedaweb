@@ -1,16 +1,10 @@
 import { store } from 'react-easy-state';
-
+import uiDataStore from "./uiDataStore";
 
 const searchGrammarStore = store({
 
     data: {
         blocks: []
-    },
-
-    grammarOptions: [],
-
-    setGrammarOptions(grammarOptions){
-        searchGrammarStore.grammarOptions = grammarOptions;
     },
 
     addBlock(){
@@ -100,7 +94,7 @@ const searchGrammarStore = store({
     },
 
     getValueOptionsForFieldName(fieldName){
-        for (let grammar of searchGrammarStore.grammarOptions){
+        for (let grammar of uiDataStore.search.grammar.tags){
             if (grammar.field === fieldName){
                 return grammar.values;
             }

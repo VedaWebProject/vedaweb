@@ -6,7 +6,6 @@ const searchMetaStore = store({
     mode: 'grammar',
 
     scope: {
-        data: [],
         ranges: {
             fromBookRange: [],
             fromHymnRange: [],
@@ -21,22 +20,14 @@ const searchMetaStore = store({
         }
     },
 
-    transliteration: {
-        data: [],
-        setting: 'hk'
-    },
+    transliteration: 'hk',
 
     setSearchMode(mode){
         searchMetaStore.mode = mode;
     },
 
-    setTransliterationData(transliterationData){
-        searchMetaStore.transliteration.data = transliterationData;
-        searchMetaStore.transliteration.setting = searchMetaStore.transliteration.data[0].id;
-    },
-
     setTransliteration(id){
-        searchMetaStore.transliteration.setting = id;
+        searchMetaStore.transliteration = id;
     },
 
     setScopeData(scopeData){
