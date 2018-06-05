@@ -13,7 +13,7 @@ export default {
         },
         smart: {
             fields: [
-				{field: "form", ui: "Rigveda Text"},
+				{field: "form", ui: "Rigveda (HK)"},
 				{field: "translation", ui: "Translations"}
 			]
         },

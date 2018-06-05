@@ -19,7 +19,8 @@ class SearchGrammar extends Component {
     }
 
     componentDidMount(){
-        this.addBlock();
+        if (searchGrammarStore.data.blocks.length === 0)
+            this.addBlock();
     }
 
     addBlock(){

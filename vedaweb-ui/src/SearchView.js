@@ -43,7 +43,7 @@ class SearchView extends Component {
             jsonData["blocks"] = JSON.parse(JSON.stringify(searchGrammarStore.data.blocks));
 
             for (let block of jsonData.blocks){
-                block.form = Sanscript.t(block.form, searchMetaStore.transliteration.setting, "iso");
+                block.form = Sanscript.t(block.form, searchMetaStore.transliteration, "iso");
                 for (let field of block.fields){
                     if (field.value.length > 0)
                         block[field.name] = field.value

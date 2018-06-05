@@ -59,7 +59,7 @@ class SearchSmart extends Component {
             ? <TransliterationPreview input={searchSmartStore.data.input} transliteration="hk" />
             : null
         );
-        
+
 
         return (
 
@@ -74,8 +74,12 @@ class SearchSmart extends Component {
                     onChange={e => searchSmartStore.setInput(e.target.value)}
                     onSearch={this.handleSearch}
                     addonBefore={selectBefore}
-                    placeholder="Harvard-Kyoto or verse number"
-                    size="large" />
+                    size="large"
+                    placeholder={
+                        searchSmartStore.data.field === "form"
+                        ? "Harvard-Kyoto or verse number"
+                        : "Translation or verse number"
+                    } />
 
                 </Tooltip>
             </div>
