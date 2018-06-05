@@ -55,11 +55,11 @@ class SearchSmart extends Component {
         );
 
         const transliteration = (
-            <TransliterationPreview
-            input={searchSmartStore.data.input}
-            transliteration="hk" />
+            searchSmartStore.data.field === "form"
+            ? <TransliterationPreview input={searchSmartStore.data.input} transliteration="hk" />
+            : null
         );
-
+        
 
         return (
 
