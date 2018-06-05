@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Input, Tooltip } from 'antd';
+import { Input, Tooltip, Select } from 'antd';
 
 import searchMetaStore from "./stores/searchMetaStore";
 import searchSimpleStore from "./stores/searchSimpleStore";
@@ -10,8 +10,10 @@ import TransliterationPreview from "./TransliterationPreview";
 import { withRouter } from 'react-router-dom';
 
 
+
 //const Option = Select.Option;
 const Search = Input.Search;
+const Option = Select.Option;
 
 class SearchSimple extends Component {
 
@@ -60,6 +62,7 @@ class SearchSimple extends Component {
                         
                             <Search
                             value={searchSimpleStore.term}
+                            addonBefore={selectBefore}
                             onChange={e => searchSimpleStore.setTerm(e.target.value)}
                             onSearch={this.handleSearch}
                             placeholder="location, translation or text via HK"

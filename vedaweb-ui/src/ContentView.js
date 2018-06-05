@@ -171,7 +171,7 @@ class ContentView extends Component {
                                                                         (token.grammar.number + ".")) +
 
                                                                         (token.grammar.gender === undefined ? "" :
-                                                                        (token.grammar.gender + "."))
+                                                                        (token.grammar.gender))
                                                                     }
                                                                 </div>
                                                             </div>

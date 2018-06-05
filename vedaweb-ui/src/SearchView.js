@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Row, Col, Button, Icon, Tabs } from 'antd';
 
 import SearchGrammar from "./SearchGrammar";
+import SearchSimple from "./SearchSimple";
 import SearchScope from "./SearchScope";
 import SearchTransliteration from "./SearchTransliteration";
 
@@ -98,6 +99,9 @@ class SearchView extends Component {
                         tabBarGutter={8}>
                             <TabPane tab="Grammar Search" key="grammar">
                                 <SearchGrammar />
+                            </TabPane>
+                            <TabPane tab="Simple Search" key="simple">
+                                <SearchSimple/>
                             </TabPane>
                             <TabPane tab="Other Search" key="somemode">
                                 <div className="search-container">
