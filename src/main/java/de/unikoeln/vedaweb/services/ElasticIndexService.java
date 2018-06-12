@@ -1,5 +1,6 @@
 package de.unikoeln.vedaweb.services;
 
+import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.text.Normalizer;
@@ -29,6 +30,7 @@ import de.unikoeln.vedaweb.data.Token;
 import de.unikoeln.vedaweb.data.Translation;
 import de.unikoeln.vedaweb.data.Verse;
 import de.unikoeln.vedaweb.data.VerseRepository;
+import de.unikoeln.vedaweb.util.IOUtils;
 
 
 @Service
@@ -175,8 +177,10 @@ public class ElasticIndexService {
 		CreateIndexRequest createRequest = new CreateIndexRequest(indexName);
 		byte[] json = null;
 		
+		
+		
 		try {
-			json = Files.readAllBytes(indexDef.getFile().toPath());
+			json = IOUtils.convertStreamToByteArray(indexDef.getInputStream());
 		} catch (IOException e1) {
 			e1.printStackTrace();
 		}
