@@ -2,7 +2,6 @@ export default {
 
 	search: {
         meta: {
-            modes: [],
             scopes: [99, 104, 34, 65, 13, 86, 45, 19, 67, 11],
             transliterations: [
 				{id: "hk", name: "Harvard-Kyoto"},
