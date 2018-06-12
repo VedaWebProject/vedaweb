@@ -25,12 +25,12 @@ class SearchTransliteration extends Component {
 
                 <Col span={16}>
                     <Select
-                    value={searchMetaStore.transliteration}
+                    value={searchMetaStore.transliteration.id}
                     className="full-width"
-                    onSelect={(value, o) => searchMetaStore.setTransliteration(value)}>
+                    onSelect={(value, o) => searchMetaStore.setTransliteration(o.props.value, o.key)}>
                         {uiDataStore.search.meta.transliterations.map((option, i) => (
                             <Option
-                            key={'trans_' + option.id}
+                            key={option.name}
                             value={option.id}>
                                 {option.name}
                             </Option>

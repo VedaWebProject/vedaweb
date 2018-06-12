@@ -6,7 +6,7 @@ import searchGrammarStore from "./stores/searchGrammarStore";
 
 import SearchBlock from "./SearchBlock";
 
-import './css/SearchAdvanced.css'
+import './css/SearchGrammar.css'
 
 
 class SearchGrammar extends Component {

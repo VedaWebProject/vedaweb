@@ -3,15 +3,17 @@ import { store } from 'react-easy-state';
 
 const searchSimpleStore = store({
 
-    term: '',
-    field: 'text',
+    data: {
+        input: '',
+        field: 'form'
+    },
 
-    setTerm(term){
-        searchSimpleStore.term = term;
+    setInput(input){
+        searchSimpleStore.data.input = input;
     },
 
     setField(field){
-        searchSimpleStore.field = field;
+        searchSimpleStore.data.field = field;
     }
 
 })

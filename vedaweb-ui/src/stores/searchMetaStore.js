@@ -20,14 +20,14 @@ const searchMetaStore = store({
         }
     },
 
-    transliteration: 'hk',
+    transliteration: {id: 'hk', name: 'Harvard-Kyoto'},
 
     setSearchMode(mode){
         searchMetaStore.mode = mode;
     },
 
-    setTransliteration(id){
-        searchMetaStore.transliteration = id;
+    setTransliteration(id, name){
+        searchMetaStore.transliteration = {id: id, name: name};
     },
 
     setScopeData(scopeData){

@@ -12,6 +12,9 @@ const uiDataStore = store({
         smart: {
             fields: []
         },
+        simple: {
+            fields: []
+        },
         grammar: {
             tags: []
         }

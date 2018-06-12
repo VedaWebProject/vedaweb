@@ -1,19 +1,21 @@
 import React, { Component } from "react";
 import { Input, Tooltip, Select } from 'antd';
 
-import searchMetaStore from "./stores/searchMetaStore";
+import Sanscript from 'sanscript';
+
 import searchSimpleStore from "./stores/searchSimpleStore";
+import uiDataStore from "./stores/uiDataStore";
 import { view } from 'react-easy-state';
 
 import TransliterationPreview from "./TransliterationPreview";
 
 import { withRouter } from 'react-router-dom';
+import { Base64 } from 'js-base64';
+import searchMetaStore from "./stores/searchMetaStore";
 
 
-
-//const Option = Select.Option;
-const Search = Input.Search;
 const Option = Select.Option;
+const Search = Input.Search;
 
 class SearchSimple extends Component {
 
@@ -23,21 +25,30 @@ class SearchSimple extends Component {
     }
 
     handleSearch(input){
-        console.log("SMART SEARCH INPUT: " + input);
-        //TODO route to search results
-        this.props.history.push("/view/id/" + input);   //TEMP
+        if (/\d/.test(input)){
+            this.props.history.push("/view/id/" + input);
+        } else {
+            let jsonData = {
+                mode: "simple",
+                input: Sanscript.t(input, "hk", "iso"),
+                field: searchSimpleStore.data.field
+            };
+            this.props.history.push("/results/" + Base64.encode(JSON.stringify(jsonData)));
+        }
     }
 
     render() {
 
         const selectBefore = (
             <Select
-            defaultValue="text"
-            onSelect={(value, option) => searchSimpleStore.setField(value)}>
-                {searchSimpleStore.fields.map(field => (
+            defaultValue="form"
+            onSelect={(value, option) => searchSimpleStore.setField(value)}
+            className="secondary-font">
+                {uiDataStore.search.simple.fields.map(field => (
                     <Option
                     key={'simple_field_' + field.field}
-                    value={field.field}>
+                    value={field.field}
+                    className="secondary-font">
                         {field.ui}
                     </Option>
                 ))}
@@ -45,31 +56,35 @@ class SearchSimple extends Component {
         );
 
         const transliteration = (
-            <TransliterationPreview
-            input={searchSimpleStore.term}
-            transliteration={searchMetaStore.transliteration.setting}/>
+            searchSimpleStore.data.field === "form"
+            ? <TransliterationPreview
+                input={searchSimpleStore.data.input}
+                transliteration={searchMetaStore.transliteration.id} />
+            : null
         );
-        
+
+
         return (
 
-            <div>
-                {this.props.active &&
- 
-                        <Tooltip
-                        title={searchSimpleStore.field === "text" ? transliteration : ""}
-                        trigger="focus"
-                        placement="top">
-                        
-                            <Search
-                            value={searchSimpleStore.term}
-                            addonBefore={selectBefore}
-                            onChange={e => searchSimpleStore.setTerm(e.target.value)}
-                            onSearch={this.handleSearch}
-                            placeholder="location, translation or text via HK"
-                            size="large" />
+            <div className="search-container">
+                <Tooltip
+                title={transliteration}
+                trigger="focus"
+                placement="top">
 
-                        </Tooltip>
-                }
+                    <Search
+                    value={searchSimpleStore.data.input}
+                    onChange={e => searchSimpleStore.setInput(e.target.value)}
+                    onSearch={this.handleSearch}
+                    addonBefore={selectBefore}
+                    size="large"
+                    placeholder={
+                        searchSimpleStore.data.field === "form"
+                        ? "Search Rigveda using " + searchMetaStore.transliteration.name
+                        : "Search for translated text"
+                    } />
+
+                </Tooltip>
             </div>
         );
 

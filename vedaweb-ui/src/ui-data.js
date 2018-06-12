@@ -6,14 +6,20 @@ export default {
             scopes: [99, 104, 34, 65, 13, 86, 45, 19, 67, 11],
             transliterations: [
 				{id: "hk", name: "Harvard-Kyoto"},
-				{id: "iast", name: "IAST (International Alphabet of Sanskrit Transliteration)"},
-				{id: "itrans", name: "ITRANS"},
-				{id: "slp1", name: "SLP1 (Sanskrit Library Phonetic Basic)"}
+				{id: "slp1", name: "SLP1 (Sanskrit Library Phonetic Basic)"},
+				{id: "iast", name: "IAST (Internat. Alphabet of Sanskrit Translit.)"},
+				{id: "itrans", name: "ITRANS"}
 			]
         },
         smart: {
             fields: [
 				{field: "form", ui: "Rigveda (HK)"},
+				{field: "translation", ui: "Translations"}
+			]
+		},
+		simple: {
+            fields: [
+				{field: "form", ui: "Rigveda"},
 				{field: "translation", ui: "Translations"}
 			]
         },
