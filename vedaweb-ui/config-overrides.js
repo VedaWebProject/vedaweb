@@ -10,7 +10,8 @@ module.exports = function override(config, env) {
     //themeVariables["@icon-url"] = "'/fonts/iconfont'";
     config = injectBabelPlugin(['import', { libraryName: 'antd', libraryDirectory: 'es', style: true }], config);
     config = rewireLess.withLoaderOptions({
-        modifyVars: themeVariables
+        modifyVars: themeVariables,
+        javascriptEnabled: true
     })(config, env);
 
     return config;
