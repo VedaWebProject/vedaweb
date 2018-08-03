@@ -261,7 +261,8 @@ class ContentView extends Component {
                                             defaultChecked
                                             onChange={(e) => this.filterChange("devanagari", e)}
                                             disabled={!isLoaded || error !== undefined}
-                                            checked={appStateStore.viewFilter.devanagari} />
+                                            checked={appStateStore.viewFilter.devanagari}
+                                            size="small" />
                                             Devanagari transliteration
                                         </div>
                                         <div className="view-filter">
@@ -269,7 +270,8 @@ class ContentView extends Component {
                                             defaultChecked
                                             onChange={(e) => this.filterChange("grammar", e)}
                                             disabled={!isLoaded || error !== undefined}
-                                            checked={appStateStore.viewFilter.grammar} />
+                                            checked={appStateStore.viewFilter.grammar}
+                                            size="small" />
                                             Grammar Glossings
                                         </div>
                                         <div className="view-filter">
@@ -277,7 +279,8 @@ class ContentView extends Component {
                                             defaultChecked
                                             onChange={(e) => this.filterChange("translations", e)}
                                             disabled={!isLoaded || error !== undefined}
-                                            checked={appStateStore.viewFilter.translations} />
+                                            checked={appStateStore.viewFilter.translations}
+                                            size="small" />
                                             Translations
                                         </div>
                                         <div className="view-filter">
@@ -285,21 +288,24 @@ class ContentView extends Component {
                                             defaultChecked
                                             onChange={(e) => this.filterChange("dictionary", e)}
                                             disabled={!isLoaded || error !== undefined}
-                                            checked={appStateStore.viewFilter.dictionary} />
+                                            checked={appStateStore.viewFilter.dictionary}
+                                            size="small" />
                                             Dictionary
                                         </div>
                                         <div className="view-filter">
                                             <Switch
                                             onChange={(e) => this.filterChange("something1", e)}
                                             disabled={!isLoaded || error !== undefined}
-                                            checked={appStateStore.viewFilter.something1} />
+                                            checked={appStateStore.viewFilter.something1}
+                                            size="small" />
                                             Something
                                         </div>
                                         <div className="view-filter">
                                             <Switch
                                             onChange={(e) => this.filterChange("something2", e)}
                                             disabled={!isLoaded || error !== undefined}
-                                            checked={appStateStore.viewFilter.something2} />
+                                            checked={appStateStore.viewFilter.something2}
+                                            size="small" />
                                             Something else
                                         </div>
                                     </div>

@@ -33,7 +33,7 @@
     padding-left: .3rem;
     font-weight: bold;
     display: inline-block;
-    margin-right: 1.5rem;
+    margin-right: .5rem;
     
     font-style: italic;
 }
@@ -44,12 +44,13 @@
 }
 
 .view-filter {
-    margin-bottom: 1rem;
+    margin-bottom: .4rem;
     font-family: "Dosis", sans-serif;
 }
 
 .view-filter .ant-switch {
-    margin-right: 1rem;
+    margin-right: .8rem;
+    margin-bottom: .2rem;
 }
 
 .dict-links {
