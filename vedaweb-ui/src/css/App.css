@@ -15,6 +15,14 @@ h4 {
     font-family: "Dosis", sans-serif;
 }
 
+.trans-font {
+    font-family: 'Gentium', "Tahoma", "Arial", sans-serif;
+}
+
+.grey {
+    color: #514545;
+}
+
 .page-content {
     padding: .8rem;
     padding-left: 1rem;

@@ -52,7 +52,8 @@ class SearchResults extends Component {
         this.setState({
             isLoaded: false,
             error: undefined,
-            queryData: queryData
+            queryData: queryData,
+            queryDisplay: queryJson.mode === "grammar" ? "grammar search" : queryJson.input
         });
 
         //request search api data
@@ -147,7 +148,9 @@ class SearchResults extends Component {
                     
                         <div id="search-results" className="card">
 
-                            <h4>Search Results</h4>
+                            <h4>
+                                Search Results for <span className="trans-font grey">{this.state.queryDisplay}</span>
+                            </h4>
 
                             {/** SEARCH STATS **/}
                             { isLoaded && data.hits.hits !== undefined &&
