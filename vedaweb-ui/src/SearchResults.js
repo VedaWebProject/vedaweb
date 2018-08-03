@@ -107,10 +107,6 @@ class SearchResults extends Component {
             title: 'Text',
             dataIndex: 'text',
             key: 'text'
-          }, {
-            title: 'Relevance',
-            dataIndex: 'relevance',
-            key: 'relevance'
           }];
           
         //map table data
@@ -122,8 +118,7 @@ class SearchResults extends Component {
                     (hit._source.hymn + "").padStart(3, "0") + "." +
                     (hit._source.verse + "").padStart(2, "0"),
                 //text: hit._source.form,
-                text: <div dangerouslySetInnerHTML={this.createHighlightHTML(hit)}></div>,  // <---- how to force react to render this???
-                relevance: hit._score
+                text: <div dangerouslySetInnerHTML={this.createHighlightHTML(hit)}></div>
             }));
 
 
