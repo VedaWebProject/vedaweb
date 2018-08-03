@@ -20,6 +20,7 @@ class SearchResults extends Component {
         super(props)
         this.state ={
             data: {},
+            queryData: "",
             isLoaded: false
         }
     }
@@ -28,8 +29,9 @@ class SearchResults extends Component {
         this.loadData(this.props.match.params.querydata);
     }
 
-    componentWillReceiveProps(newProps){
-        this.loadData(newProps.match.params.querydata);
+    componentDidUpdate(){
+        if (this.state.queryData !== this.props.match.params.querydata)
+            this.loadData(this.props.match.params.querydata);
     }
 
     loadData(queryData){
@@ -49,7 +51,8 @@ class SearchResults extends Component {
 
         this.setState({
             isLoaded: false,
-            error: undefined
+            error: undefined,
+            queryData: queryData
         });
 
         //request search api data
