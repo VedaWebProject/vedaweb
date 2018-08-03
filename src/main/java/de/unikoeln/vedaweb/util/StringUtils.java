@@ -3,16 +3,16 @@ package de.unikoeln.vedaweb.util;
 import java.text.Normalizer;
 import java.text.Normalizer.Form;
 
-public class RequestTransformUtils {
+public class StringUtils {
 	
 	
-	public static synchronized String normalizeNFD(String s){
+	public static String normalizeNFD(String s){
 		return s == null ? "" :
 			Normalizer.normalize(s, Form.NFD);
 	}
 	
 	
-	public static synchronized String normalizeId(String id){
+	public static String normalizeId(String id){
 		if (id.matches("\\d{7}"))
 			return id;
 		else if (id.matches("\\D*\\d{2}\\D\\d{3}\\D\\d{2}\\D*"))
@@ -23,7 +23,7 @@ public class RequestTransformUtils {
 	}
 	
 	
-	public static synchronized String constructId(String input){
+	public static String constructId(String input){
 		String[] digits = input.split("\\D+");
 		if (digits.length != 3) return "invalid";
 		
@@ -37,12 +37,24 @@ public class RequestTransformUtils {
 	}
 	
 	
-	public static synchronized int normalizeIndex(int index, int docCount){
+	public static int normalizeIndex(int index, int docCount){
 		if (index < 0)
 			index = docCount + index;
 		else if (index >= docCount)
 			index = index - docCount;
 		return index;
+	}
+	
+	
+	public static boolean containsAccents(String text) {
+	    return text == null ? false :
+	        normalizeNFD(text).matches(".*\\u0301.*");
+	}
+	
+	
+	public static String removeUnicodeAccents(String text) {
+	    return text == null ? "" :
+	        normalizeNFD(text).replaceAll("\\u0301", "");
 	}
 	
 
