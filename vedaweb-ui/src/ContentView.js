@@ -24,6 +24,8 @@ class ContentView extends Component {
         super(props)
         this.state ={
             data: {},
+            viewBy: null,
+            viewValue: null,
             isLoaded: false
         }
     }
@@ -32,11 +34,18 @@ class ContentView extends Component {
         this.loadData(this.props.match.params.by, this.props.match.params.value);
     }
 
-    componentWillReceiveProps(newProps){
-        if (this.propsChanged(newProps)){
-            this.loadData(newProps.match.params.by, newProps.match.params.value);
+    componentDidUpdate() {
+        if (this.props.match.params.by !== this.state.viewBy
+                || this.props.match.params.value !== this.state.viewValue){
+            this.loadData(this.props.match.params.by, this.props.match.params.value);
         }
     }
+
+    // componentWillReceiveProps(newProps){
+    //     if (this.propsChanged(newProps)){
+    //         this.loadData(newProps.match.params.by, newProps.match.params.value);
+    //     }
+    // }
 
     propsChanged(newProps){
         return JSON.stringify(this.props) !== JSON.stringify(newProps);
@@ -45,7 +54,9 @@ class ContentView extends Component {
     loadData(by, value){
         this.setState({
             isLoaded: false,
-            error: undefined
+            error: undefined,
+            viewBy: by,
+            viewValue: value
         });
 
         axios.get("/api/document/" + by + "/" + value)
@@ -62,7 +73,6 @@ class ContentView extends Component {
                 });
             });
     }
-
 
     filterChange(target, checked){
         if (checked) appStateStore.viewScrollTo = true;
@@ -104,9 +114,8 @@ class ContentView extends Component {
 
                             <Col span={18} className="content">
 
-                                
-
                                 {/** CONTENT **/}
+
                                 { data.padas !== undefined && error === undefined &&
 
                                     <div>
@@ -161,9 +170,9 @@ class ContentView extends Component {
                                                                 {token.form}
                                                                 <br/>
                                                                 <div className="glossing-annotation">
+                                                                    <a href="http://vedaweb.uni-koeln.de">{token.lemma}</a>
                                                                     {
-                                                                        token.lemma + "." +
-
+                                                                        "." +
                                                                         (token.grammar.case === undefined ? "" :
                                                                         (token.grammar.case + ".")) +
 
@@ -198,6 +207,26 @@ class ContentView extends Component {
                                                         <span className="italic">{translation.translation}</span>
                                                     </div>
                                                 ))}
+                                            </div>
+                                        }
+
+                                        {appStateStore.viewFilter.dictionary &&
+                                            <div
+                                            className="glossing content-block card"
+                                            ref={this.scrollTo}>
+                                                <h4>Dictionary (Grassmann)</h4>
+                                                <div className="dict-links">
+                                                    {data.padas.map(pada => (
+                                                        pada.tokens.map((token, i) => (
+                                                            <div key={token + i}>
+                                                                {token.form + " (\u2192 "}
+                                                                <a className="dict-link" href="http://vedaweb.uni-koeln.de">
+                                                                    {token.lemma}
+                                                                </a>{")"}
+                                                            </div>
+                                                        ))
+                                                    ))}
+                                                </div>
                                             </div>
                                         }
 
@@ -250,6 +279,14 @@ class ContentView extends Component {
                                             disabled={!isLoaded || error !== undefined}
                                             checked={appStateStore.viewFilter.translations} />
                                             Translations
+                                        </div>
+                                        <div className="view-filter">
+                                            <Switch
+                                            defaultChecked
+                                            onChange={(e) => this.filterChange("dictionary", e)}
+                                            disabled={!isLoaded || error !== undefined}
+                                            checked={appStateStore.viewFilter.dictionary} />
+                                            Dictionary
                                         </div>
                                         <div className="view-filter">
                                             <Switch
