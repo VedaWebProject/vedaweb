@@ -19,7 +19,7 @@ h4 {
     padding: .8rem;
     padding-left: 1rem;
     padding-right: 1rem;
-    background-color: #e5e2d5;
+    background-color: #e7e6e0;
 }
 
 .card {
@@ -137,4 +137,14 @@ div.inline-block {
 
 .ant-spin {
     margin-right: 2rem;
+}
+
+.start {
+    -webkit-column-count: 4; /* Chrome, Safari, Opera */
+    -moz-column-count: 4; /* Firefox */
+    column-count: 4;
+
+    -webkit-column-gap: 2rem; /* Chrome, Safari, Opera */
+    -moz-column-gap: 2rem; /* Firefox */
+    column-gap: 2rem;
 }
