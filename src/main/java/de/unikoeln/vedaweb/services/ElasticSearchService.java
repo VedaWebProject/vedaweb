@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 
 import de.unikoeln.vedaweb.search.SearchData;
 import de.unikoeln.vedaweb.search.SearchRequestBuilder;
-import de.unikoeln.vedaweb.util.RequestTransformUtils;
+import de.unikoeln.vedaweb.util.StringUtils;
 
 @Service
 public class ElasticSearchService {
@@ -31,8 +31,8 @@ public class ElasticSearchService {
 	
 	
 	private SearchResponse searchSmart(SearchData searchData){
-		SearchRequest searchRequest = SearchRequestBuilder.buildSmart(
-				RequestTransformUtils.normalizeNFD(searchData.getInput()),
+		SearchRequest searchRequest = SearchRequestBuilder.buildSmartQuery(
+				StringUtils.normalizeNFD(searchData.getInput()),
 				searchData.getField()
 				);
 		return submitSearch(searchRequest);
@@ -40,7 +40,7 @@ public class ElasticSearchService {
 	
 	
 	private SearchResponse searchGrammar(SearchData searchData){
-		SearchRequest searchRequest = SearchRequestBuilder.buildGrammar(searchData);
+		SearchRequest searchRequest = SearchRequestBuilder.buildGrammarQuery(searchData);
 		return submitSearch(searchRequest);
 	}
 	

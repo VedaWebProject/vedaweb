@@ -1,10 +1,6 @@
 package de.unikoeln.vedaweb.services;
 
-import java.io.ByteArrayInputStream;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.text.Normalizer;
-import java.text.Normalizer.Form;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -31,6 +27,7 @@ import de.unikoeln.vedaweb.data.Translation;
 import de.unikoeln.vedaweb.data.Verse;
 import de.unikoeln.vedaweb.data.VerseRepository;
 import de.unikoeln.vedaweb.util.IOUtils;
+import de.unikoeln.vedaweb.util.StringUtils;
 
 
 @Service
@@ -87,8 +84,8 @@ public class ElasticIndexService {
 				indexDoc.put("hymn", dbDoc.getHymn());
 				indexDoc.put("verse", dbDoc.getVerse());
 				indexDoc.put("translation", concatTranslations(dbDoc));
-				indexDoc.put("form", removeUnicodeAccents(normalize(concatPadaForms(dbDoc) + concatTokenLemmata(dbDoc))));
-				indexDoc.put("form_raw", normalize(concatPadaForms(dbDoc)));
+				indexDoc.put("form", StringUtils.removeUnicodeAccents(concatPadaForms(dbDoc) + concatTokenLemmata(dbDoc)));
+				indexDoc.put("form_raw", StringUtils.normalizeNFD(concatPadaForms(dbDoc)));
 				indexDoc.put("tokens", buildTokensList(dbDoc));
 			} catch (JSONException e) {
 				e.printStackTrace();
@@ -134,8 +131,8 @@ public class ElasticIndexService {
 			for (Token token : pada.getTokens()) {
 				JSONObject indexToken = new JSONObject();
 				indexToken.put("index", token.getIndex());
-				indexToken.put("form", removeUnicodeAccents(normalize(token.getForm())));
-				indexToken.put("lemma", removeUnicodeAccents(normalize(token.getLemma())));
+				indexToken.put("form", StringUtils.removeUnicodeAccents(token.getForm()));
+				indexToken.put("lemma", StringUtils.removeUnicodeAccents(token.getLemma()));
 				//grammar
 				for (String attr : token.getGrammarAttributes().keySet()) {
 					indexToken.put(attr, token.getGrammarAttribute(attr));
@@ -239,16 +236,5 @@ public class ElasticIndexService {
 		return sb.toString().trim();
 	}
 	
-	
-	private String normalize(String text) {
-	    return text == null ? "" :
-	        Normalizer.normalize(text, Form.NFD);
-	}
-	
-	
-	private String removeUnicodeAccents(String text) {
-	    return text == null ? "" :
-	        text.replaceAll("\\u0301", "");
-	}
 	
 }

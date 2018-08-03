@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import de.unikoeln.vedaweb.data.VerseRepository;
 import de.unikoeln.vedaweb.services.MappingService;
-import de.unikoeln.vedaweb.util.RequestTransformUtils;
+import de.unikoeln.vedaweb.util.StringUtils;
 
 
 @RestController
@@ -23,14 +23,14 @@ public class DocumentController {
 	@RequestMapping(value = "/id/{id}", produces = {"application/json"})
     public String verseById(@PathVariable("id") String id) {
 		return mappingService.mapOptionalToJSON(
-				verseRepo.findById( RequestTransformUtils.normalizeId(id) ));
+				verseRepo.findById( StringUtils.normalizeId(id) ));
     }
 	
 	
 	@RequestMapping(value = "/index/{index}", produces = {"application/json"})
     public String verseByLocation(@PathVariable("index") int index) {
 		return mappingService.mapOptionalToJSON(
-				verseRepo.findByIndex( RequestTransformUtils.normalizeIndex(index, (int)verseRepo.count()) ));
+				verseRepo.findByIndex( StringUtils.normalizeIndex(index, (int)verseRepo.count()) ));
     }
 	
 }
