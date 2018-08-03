@@ -140,9 +140,9 @@ public class SearchRequestBuilder {
 		
 		for (String field : fields) {
 			if (must) {
-				bool.must(QueryBuilders.matchQuery("tokens." + field, query));
+				bool.must(QueryBuilders.matchQuery(field, query));
 			} else {
-				bool.should(QueryBuilders.matchQuery("tokens." + field, query));
+				bool.should(QueryBuilders.matchQuery(field, query));
 			}
 		}
 		
