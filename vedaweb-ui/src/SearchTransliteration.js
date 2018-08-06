@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Row, Col, Select, Icon } from 'antd';
+import { Select } from 'antd';
 
 import './css/SearchTransliteration.css';
 
@@ -17,13 +17,13 @@ class SearchTransliteration extends Component {
 
         return (
 
-            <Row type="flex" align="middle">
-                <Col span={8}>
-                    <Icon type="edit" className="gap-right"/>
-                    <span className="bold">Input Transliteration:</span>
-                </Col>
+            // <Row type="flex" align="middle">
+            //     <Col span={8}>
+            //         <Icon type="edit" className="gap-right"/>
+            //         <span className="bold">Input Transliteration:</span>
+            //     </Col>
 
-                <Col span={16}>
+            //     <Col span={16}>
                     <Select
                     value={searchMetaStore.transliteration.id}
                     className="full-width"
@@ -36,8 +36,8 @@ class SearchTransliteration extends Component {
                             </Option>
                         ))}
                     </Select>
-                </Col>
-            </Row>
+            //     </Col>
+            // </Row>
 
         );
 

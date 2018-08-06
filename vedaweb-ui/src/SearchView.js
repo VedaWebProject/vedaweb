@@ -1,10 +1,11 @@
 import React, { Component } from "react";
-import { Row, Col, Button, Icon, Tabs } from 'antd';
+import { Row, Col, Button, Icon, Tabs, Collapse } from 'antd';
 
 import SearchGrammar from "./SearchGrammar";
 import SearchSimple from "./SearchSimple";
 import SearchScope from "./SearchScope";
 import SearchTransliteration from "./SearchTransliteration";
+import SearchScopeIndicator from "./SearchScopeIndicator";
 
 import Sanscript from 'sanscript';
 
@@ -19,6 +20,7 @@ import searchMetaStore from "./stores/searchMetaStore";
 import searchGrammarStore from "./stores/searchGrammarStore";
 
 const TabPane = Tabs.TabPane;
+const Panel = Collapse.Panel;
 
 class SearchView extends Component {
 
@@ -61,36 +63,67 @@ class SearchView extends Component {
 
     render() {
 
+        const panelStyle = {color: "#f00", fontFamily: "Dosis", fontSize: "120%"};
+        const panelContentStyle = {padding: 12};
+        // const panelHeaderTransliteration = <div><Icon type="edit" className="gap-right"/> Input Transliteration</div>;
+        // const panelHeaderScope = <div><Icon type="eye-o" className="gap-right"/> Search Scope</div>;
+
         const helpText = <div className="search-container">
                             <h4>VedaVeb Search Modes</h4>
-                            This document describes the holy search modes as they were handed down for generations.<br/>There is a simple one and a more complex one. Choose from your options wisely.<br/>If these enlightened words are not verbose enough for you, please feel free to call our hotline:<br/>+49 221 S-A-N-S-K-R-I-T
+                            This document describes the holy search 
+                            modes as they were handed down for generations.<br/>
+                            There is a simple one and a more complex one. Choose from 
+                            your options wisely.<br/>If these enlightened words are not 
+                            verbose enough for you, please feel free to call our hotline:<br/>
+                            +49 221 S-A-N-S-K-R-I-T
                         </div>;
+
+        const searchScopePanelHeader =
+            <div>
+                Search Scope ( <SearchScopeIndicator
+                fromBook={searchMetaStore.scope.settings.fromBook}
+                fromHymn={searchMetaStore.scope.settings.fromHymn}
+                toBook={searchMetaStore.scope.settings.toBook}
+                toHymn={searchMetaStore.scope.settings.toHymn} /> )
+            </div>
 
         return (
 
-            <Row
-            className="search-view page-content"
-            type="flex"
-            justify="center">
-
-                <Col
-                span={12}
-                id="search-view"
-                key="search-view">
-
-                    <div className="top-gap card">
+            <div className="page-content" key="search-view">
+                <div className="card">
+                    <div id="search-view">
                         <h4>Advanced Search</h4>
-                        
-                        <SearchTransliteration/>
-                        <hr/>
-                        <SearchScope/>
-                        <hr/>
-                        
-                        
-                        <div className="bold bottom-gap">
+
+                        <h3 className="top-gap-big">
+                            <Icon type="setting" className="gap-right"/>
+                            Settings
+                        </h3>
+
+                        <Collapse>
+
+                            <Panel
+                            header={"Input Transliteration ( " + searchMetaStore.transliteration.name + " )"}
+                            key={"1" + searchMetaStore.transliteration.name}
+                            style={panelStyle}
+                            forceRender={true}>
+                                <div style={panelContentStyle}>
+                                    <SearchTransliteration/>
+                                </div>
+                            </Panel>
+
+                            <Panel
+                            header={searchScopePanelHeader}
+                            key="2"
+                            style={panelStyle}
+                            forceRender={true}>
+                                <SearchScope/>
+                            </Panel>
+                        </Collapse>
+
+                        <h3 className="top-gap-big">
                             <Icon type="search" className="gap-right"/>
                             What are you searching for?
-                        </div>
+                        </h3>
                         
                         <Tabs
                         onChange={this.switchMode}
@@ -121,10 +154,10 @@ class SearchView extends Component {
                                 <Button icon="search" size="large" onClick={this.handleSubmit}>Search</Button>
                             </Col>
                         </Row>
+                    
                     </div>
-                </Col>  
-
-            </Row>
+                </div>
+            </div>
         );
 
     }

@@ -1,12 +1,10 @@
 import React, { Component } from "react";
-import { Row, Col, Select, Icon } from 'antd';
+import { Row, Col, Select } from 'antd';
 
 import './css/SearchScope.css';
 
 import { view } from 'react-easy-state';
 import searchMetaStore from "./stores/searchMetaStore";
-
-import SearchScopeIndicator from "./SearchScopeIndicator";
 
 const Option = Select.Option;
 
@@ -24,10 +22,10 @@ class SearchScope extends Component {
            
                 <Row type="flex" align="middle" className="top-gap bottom-gap-small">
 
-                    <Col span={8}>
+                    {/* <Col span={8}>
                         <Icon type="eye-o" className="gap-right"/>
                         <span className="bold">Search Scope:</span>
-                    </Col>
+                    </Col> */}
 
                     <Col span={3} className="search-input-label content-right">
                         From Book:
@@ -84,13 +82,13 @@ class SearchScope extends Component {
 
                 <Row type="flex" align="middle">
 
-                    <Col span={8} className="search-scope-indicator-container">
+                    {/* <Col span={8} className="search-scope-indicator-container">
                         <SearchScopeIndicator
                             fromBook={fromBook}
                             fromHymn={fromHymn}
                             toBook={toBook}
                             toHymn={toHymn} />
-                    </Col>
+                    </Col> */}
 
                     <Col span={3} className="search-input-label content-right">
                         To Book:

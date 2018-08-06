@@ -11,6 +11,17 @@ h4 {
     font-size: 24px;
 }
 
+h3 {
+    margin-bottom: 1rem;
+    color: #931111;
+    font-family: "Dosis", sans-serif;
+    font-size: 20px;
+}
+
+gap {
+    padding-left: 1.5rem;
+}
+
 .secondary-font {
     font-family: "Dosis", sans-serif;
 }
@@ -95,6 +106,10 @@ button {
 
 .top-gap {
     margin-top: 1rem;
+}
+
+.top-gap-big {
+    margin-top: 2rem;
 }
 
 .bottom-gap {

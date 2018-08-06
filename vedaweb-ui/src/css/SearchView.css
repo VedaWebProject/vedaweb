@@ -1,8 +1,5 @@
 #search-view {
-    padding: .8rem;
-    min-width: 786px;
-    font-size: 16px;
-    font-family: "Dosis", sans-serif;
+    width: 786px;
 }
 
 .ant-tabs-tab {

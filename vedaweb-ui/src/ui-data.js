@@ -5,8 +5,8 @@ export default {
             scopes: [99, 104, 34, 65, 13, 86, 45, 19, 67, 11],
             transliterations: [
 				{id: "hk", name: "Harvard-Kyoto"},
-				{id: "slp1", name: "SLP1 (Sanskrit Library Phonetic Basic)"},
-				{id: "iast", name: "IAST (Internat. Alphabet of Sanskrit Translit.)"},
+				{id: "slp1", name: "SLP1"},
+				{id: "iast", name: "IAST"},
 				{id: "itrans", name: "ITRANS"}
 			]
         },

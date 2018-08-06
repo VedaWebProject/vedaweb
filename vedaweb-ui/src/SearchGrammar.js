@@ -63,9 +63,8 @@ class SearchGrammar extends Component {
                                 <Icon type="plus"/>
                             </div>
                         </Col>
-                        <Col span={22} offset={1} className="translucent">
-                            <Icon type="arrow-left"/>
-                            Click here to add additional search terms
+                        <Col span={23} className="secondary-font translucent">
+                            <gap/><Icon type="arrow-left"/> Click here to add additional search terms
                         </Col>
                     </Row>
 
