@@ -9,6 +9,7 @@
 .search-block-add {
     padding: .2rem;
     background-color: #aaa;
+    border-left: none;
     color: #fff;
     font-weight: bold;
     border-radius: 0px 3px 3px 0px;
@@ -17,5 +18,5 @@
 }
 
 .search-block-add:hover {
-    background-color: #5A5;
+    background-color: #5a7;
 }

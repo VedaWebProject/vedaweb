@@ -30,6 +30,10 @@ gap {
     font-family: 'Gentium', "Tahoma", "Arial", sans-serif;
 }
 
+.red {
+    color: #931111;
+}
+
 .grey {
     color: #514545;
 }
@@ -38,7 +42,7 @@ gap {
     padding: .8rem;
     padding-left: 1rem;
     padding-right: 1rem;
-    background-color: #e7e6e0;
+    background-color: #eaeaea;
 }
 
 .card {
@@ -48,9 +52,9 @@ gap {
     border: 1px solid #ddc;
     border-radius: 3px;
 
-    -webkit-box-shadow: 0px 0px 4px 0px rgba(0,0,0,0.05);
-	-moz-box-shadow: 0px 0px 4px 0px rgba(0,0,0,0.05);
-    box-shadow: 0px 0px 4px 0px rgba(0,0,0,0.05);
+    /* -webkit-box-shadow: 0px 0px 4px 0px rgba(0,0,0,0.1);
+	-moz-box-shadow: 0px 0px 4px 0px rgba(0,0,0,0.1);
+    box-shadow: 0px 0px 4px 0px rgba(0,0,0,0.1); */
 }
 
 .card-nobox {

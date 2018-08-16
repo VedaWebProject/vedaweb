@@ -2,7 +2,7 @@
     padding-top: .5rem;
     padding-bottom: .5rem;
     margin-bottom: .5rem;
-    background-color: #e7e6e0;
+    background-color: #fafafa;
     border-radius: 2px;
     border-top-left-radius: 4px;
     border-bottom-left-radius: 4px;
@@ -21,7 +21,7 @@
 }
 
 .search-block-tab:hover {
-    background-color: #A55;
+    background-color: #931111;
 }
 
 .search-block-input {

@@ -3,7 +3,7 @@ import { Row, Col, Button, Icon, Tabs, Collapse } from 'antd';
 
 import SearchGrammar from "./SearchGrammar";
 import SearchSimple from "./SearchSimple";
-import SearchScope from "./SearchScope";
+import SearchScope from "./SearchScopeNew";
 import SearchTransliteration from "./SearchTransliteration";
 import SearchScopeIndicator from "./SearchScopeIndicator";
 
@@ -63,7 +63,7 @@ class SearchView extends Component {
 
     render() {
 
-        const panelStyle = {color: "#f00", fontFamily: "Dosis", fontSize: "120%"};
+        const panelStyle = {fontFamily: "Dosis", fontSize: "120%"};
         const panelContentStyle = {padding: 12};
         // const panelHeaderTransliteration = <div><Icon type="edit" className="gap-right"/> Input Transliteration</div>;
         // const panelHeaderScope = <div><Icon type="eye-o" className="gap-right"/> Search Scope</div>;
@@ -78,14 +78,26 @@ class SearchView extends Component {
                             +49 221 S-A-N-S-K-R-I-T
                         </div>;
 
+        const searchTransliterationPanelHeader =
+            <div>
+                {"Input Transliteration: "}
+                <span className="red trans-font">
+                    {searchMetaStore.transliteration.name}
+                </span>
+            </div>
+
         const searchScopePanelHeader =
             <div>
-                Search Scope ( <SearchScopeIndicator
-                fromBook={searchMetaStore.scope.settings.fromBook}
-                fromHymn={searchMetaStore.scope.settings.fromHymn}
-                toBook={searchMetaStore.scope.settings.toBook}
-                toHymn={searchMetaStore.scope.settings.toHymn} /> )
+                {"Search Scope: "}
+                <span className="red trans-font">
+                    <SearchScopeIndicator
+                    fromBook={searchMetaStore.scope.settings.fromBook}
+                    fromHymn={searchMetaStore.scope.settings.fromHymn}
+                    toBook={searchMetaStore.scope.settings.toBook}
+                    toHymn={searchMetaStore.scope.settings.toHymn} />
+                </span>
             </div>
+
 
         return (
 
@@ -102,7 +114,7 @@ class SearchView extends Component {
                         <Collapse>
 
                             <Panel
-                            header={"Input Transliteration ( " + searchMetaStore.transliteration.name + " )"}
+                            header={searchTransliterationPanelHeader}
                             key={"1" + searchMetaStore.transliteration.name}
                             style={panelStyle}
                             forceRender={true}>
