@@ -33,3 +33,7 @@
 .search-input-label {
     padding-right: .5rem;
 }
+
+#search-view .ant-tabs-tab {
+    font-size: 120%;
+}

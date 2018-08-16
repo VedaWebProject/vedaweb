@@ -163,7 +163,13 @@ class SearchView extends Component {
                                 {/* <Button icon="cross" size="large" onClick={this.props.onClose}>Close</Button> */}
                             </Col>
                             <Col span={12} className="content-right">
-                                <Button icon="search" size="large" onClick={this.handleSubmit}>Search</Button>
+                                <Button
+                                icon="search"
+                                size="large"
+                                className={"secondary-font"}
+                                onClick={this.handleSubmit}>
+                                    Search
+                                </Button>
                             </Col>
                         </Row>
                     
