@@ -21,17 +21,15 @@ class SearchScope extends Component {
             <div>
 
                 <Row type="flex" align="middle" className="top-gap bottom-gap-small">
-                    <Col span={3} offset={3}>Book</Col>
-                    <Col span={3}>Hymn</Col>
-                    <Col span={3} offset={3}>Book</Col>
-                    <Col span={3}>Hymn</Col>
+                    <Col span={4}>Book</Col>
+                    <Col span={4}>Hymn</Col>
+                    <Col span={4} offset={2}>Book</Col>
+                    <Col span={4}>Hymn</Col>
                 </Row>
            
                 <Row type="flex" align="middle" className="top-gap bottom-gap-small">
 
-                    <Col span={3} className="content-center">From:</Col>
-
-                    <Col span={3}>
+                    <Col span={4}>
                         <Select
                         value={fromBook}
                         defaultValue={0}
@@ -52,7 +50,7 @@ class SearchScope extends Component {
                         </Select>
                     </Col>
 
-                    <Col span={3}>
+                    <Col span={4}>
                         <Select
                         value={fromHymn}
                         defaultValue={0}
@@ -74,9 +72,9 @@ class SearchScope extends Component {
                         </Select>
                     </Col>
 
-                    <Col span={3} className="content-center">To:</Col>
+                    <Col span={2} className="content-center trans-font">&nbsp;&rarr;&nbsp;</Col>
 
-                    <Col span={3}>
+                    <Col span={4}>
                         <Select
                         value={toBook}
                         defaultValue={0}
@@ -98,7 +96,7 @@ class SearchScope extends Component {
                         </Select>
                     </Col>
 
-                    <Col span={3}>
+                    <Col span={4}>
                         <Select
                         value={toHymn}
                         defaultValue={0}
