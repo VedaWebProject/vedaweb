@@ -72,7 +72,7 @@ class SearchScope extends Component {
                         </Select>
                     </Col>
 
-                    <Col span={2} className="content-center trans-font">&nbsp;&rarr;&nbsp;</Col>
+                    <Col span={2} className="content-center trans-font bold">&rarr;</Col>
 
                     <Col span={4}>
                         <Select

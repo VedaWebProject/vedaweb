@@ -42,14 +42,14 @@ gap {
     padding: .8rem;
     padding-left: 1rem;
     padding-right: 1rem;
-    background-color: #ece6e6;
+    background-color: #e5e5e5;
 }
 
 .card {
     margin: .8rem;
-    padding: 1.5rem;
+    padding: 1rem 1.5rem;
     background-color: #fff;
-    border: 1px solid #ddc;
+    border: 1px solid #ccb;
     border-radius: 3px;
 
     /* -webkit-box-shadow: 0px 0px 4px 0px rgba(0,0,0,0.1);
@@ -101,7 +101,7 @@ button {
 }
 
 .first-cap {
-    text-transform:capitalize;
+    text-transform: capitalize;
 }
 
 .hidden {
