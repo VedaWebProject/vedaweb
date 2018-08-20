@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Row, Col, Affix, Switch, Spin, Icon } from 'antd';
+import { Row, Col, Affix, Switch, Spin, Icon, Select, Button } from 'antd';
 
 import ContentLocation from "./ContentLocation";
 import ErrorMessage from "./ErrorMessage";
@@ -16,6 +16,8 @@ import { view } from 'react-easy-state';
 import scrollToComponent from 'react-scroll-to-component';
 
 import axios from 'axios';
+
+const Option = Select.Option;
 
 
 class ContentView extends Component {
@@ -89,6 +91,7 @@ class ContentView extends Component {
 
     render() {
         const { error, isLoaded, data } = this.state;
+        const exportOptions = ["PDF","HTML","XML","TEI-XML","Text","ODT"];
 
         return (
             <Spin
@@ -254,7 +257,7 @@ class ContentView extends Component {
                             
                             <Col span={6}>
                                 <Affix offsetTop={10}>
-                                    <div className="card-nobox">
+                                    <div className="card">
                                         <h4>View Filters</h4>
                                         <div className="view-filter">
                                             <Switch
@@ -308,6 +311,31 @@ class ContentView extends Component {
                                             size="small" />
                                             Something else
                                         </div>
+                                    </div>
+
+                                    <div className="card">
+                                        <h4>Export</h4>
+                                        <Row>
+                                            <Col span={20}>
+                                                <Select
+                                                defaultValue={"PDF"}
+                                                onSelect={(value) => console.log("Export triggered: " + value)}
+                                                style={{width:"100%"}}
+                                                className="secondary-font">
+                                                    {exportOptions.map((eOpt, i) => (
+                                                        <Option
+                                                        key={'eOpt_' + i}
+                                                        value={eOpt}
+                                                        className="secondary-font">
+                                                            {eOpt}
+                                                        </Option>
+                                                    ))}
+                                                </Select>
+                                            </Col>
+                                            <Col span={2} offset={1}>
+                                                <Button type="secondary" icon="download" />
+                                            </Col>
+                                        </Row>
                                     </div>
                                 </Affix>
                             </Col>

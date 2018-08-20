@@ -20,7 +20,7 @@ class SearchScope extends Component {
 
             <div>
 
-                <Row type="flex" align="middle" className="top-gap bottom-gap-small">
+                <Row type="flex" align="middle" className="bottom-gap-small">
                     <Col span={4}>Book</Col>
                     <Col span={4}>Hymn</Col>
                     <Col span={4} offset={2}>Book</Col>
