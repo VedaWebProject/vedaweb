@@ -13,6 +13,7 @@ import org.elasticsearch.action.bulk.BulkRequest;
 import org.elasticsearch.action.bulk.BulkResponse;
 import org.elasticsearch.action.index.IndexRequest;
 import org.elasticsearch.common.xcontent.XContentType;
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -134,9 +135,17 @@ public class ElasticIndexService {
 				indexToken.put("form", StringUtils.removeUnicodeAccents(token.getForm()));
 				indexToken.put("lemma", StringUtils.removeUnicodeAccents(token.getLemma()));
 				//grammar
+//				JSONArray indexTokenGrammar = new JSONArray();
+				JSONObject indexTokenGrammar = new JSONObject();
+//				JSONObject currGrammarAttribute;
 				for (String attr : token.getGrammarAttributes().keySet()) {
-					indexToken.put(attr, token.getGrammarAttribute(attr));
+//					currGrammarAttribute = new JSONObject();
+//					currGrammarAttribute.put("tag", attr);
+//					currGrammarAttribute.put("value", token.getGrammarAttribute(attr));
+//					indexTokenGrammar.put(currGrammarAttribute);
+					indexTokenGrammar.put(attr, token.getGrammarAttribute(attr));
 				}
+				indexToken.put("grammar", indexTokenGrammar);
 				tokens.add(indexToken);
 			}
 		}

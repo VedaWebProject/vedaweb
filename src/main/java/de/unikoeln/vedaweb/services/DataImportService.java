@@ -37,7 +37,7 @@ public class DataImportService {
 
 	public static void main(String[] args) throws SaxonApiException, IOException {
 		DataImportService trans = new DataImportService();
-		List<Verse> verses = trans.transformXML2Verses("/home/mumpitz/Documents/VedaWeb/rv_tei.xml");
+		List<Verse> verses = trans.transformXML2Verses(DEV_LOCAL_XML);
 		
 //		FileWriter fw = new FileWriter(new File("rv_parsed.txt"));
 //		for (Verse v : verses) fw.write(v.toString() + "\n");

@@ -47,17 +47,20 @@
 					"properties": {
 						"index":		{ "type": "short" },
 						"form":			{ "type": "keyword" },
-						"lemma":		{ "type": "text"},
-						"diathesis":	{ "type": "keyword"},
-						"number":		{ "type": "keyword"},
-						"case":			{ "type": "keyword"},
-						"person":		{ "type": "keyword"},
-						"gender":		{ "type": "keyword"},
-						"mode":			{ "type": "keyword"},
-						"tense":		{ "type": "keyword"}
+						"lemma":		{ "type": "text"}
 					}
 				}
-			}
+			},
+			"dynamic_templates": [
+				{
+				  	"morph_glossings": {
+				  		"path_match":   "tokens.grammar.*",
+					    "mapping": {
+							"type": "keyword"
+					    }
+				  	}
+				}
+			]
 		}
 	}
 }
