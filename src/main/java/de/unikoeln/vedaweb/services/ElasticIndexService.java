@@ -2,9 +2,14 @@ package de.unikoeln.vedaweb.services;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
+import org.apache.http.HttpEntity;
+import org.apache.http.util.EntityUtils;
 import org.elasticsearch.action.admin.indices.create.CreateIndexRequest;
 import org.elasticsearch.action.admin.indices.create.CreateIndexResponse;
 import org.elasticsearch.action.admin.indices.delete.DeleteIndexRequest;
@@ -12,7 +17,15 @@ import org.elasticsearch.action.admin.indices.delete.DeleteIndexResponse;
 import org.elasticsearch.action.bulk.BulkRequest;
 import org.elasticsearch.action.bulk.BulkResponse;
 import org.elasticsearch.action.index.IndexRequest;
+import org.elasticsearch.action.search.SearchRequest;
+import org.elasticsearch.action.search.SearchResponse;
 import org.elasticsearch.common.xcontent.XContentType;
+import org.elasticsearch.search.aggregations.Aggregation;
+import org.elasticsearch.search.aggregations.AggregationBuilders;
+import org.elasticsearch.search.aggregations.bucket.nested.Nested;
+import org.elasticsearch.search.aggregations.bucket.nested.NestedAggregationBuilder;
+import org.elasticsearch.search.aggregations.bucket.terms.Terms;
+import org.elasticsearch.search.builder.SearchSourceBuilder;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -211,6 +224,84 @@ public class ElasticIndexService {
 		}
 
 		return jsonResponse;
+	}
+	
+	
+	public JSONObject getGrammarMapping() {
+		List<String> grammarFields = new ArrayList<>();
+		
+		try {
+			HttpEntity http =
+					elastic.client()
+					.getLowLevelClient()
+					.performRequest("get", "vedaweb/_mapping/doc/field/tokens.grammar.*")
+					.getEntity();
+			JSONObject response = (JSONObject)
+					new JSONObject(EntityUtils.toString(http))
+					.query("/vedaweb/mappings/doc");
+			for (String prop : response.keySet()) {
+				grammarFields.add(prop.replaceAll("^(\\w+\\.)+", ""));
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		Collections.sort(grammarFields);
+		return convertGrammarAggregationsToJSON(collectGrammarFieldAggregations(grammarFields));
+	}
+	
+	
+	private Map<String, List<String>> collectGrammarFieldAggregations(List<String> grammarFields) {
+		Map<String, List<String>> grammarAggregations = new HashMap<>();
+		
+		SearchRequest req = new SearchRequest("vedaweb"); 
+		req.types("doc");
+		SearchSourceBuilder searchSourceBuilder = new SearchSourceBuilder(); 
+		
+		NestedAggregationBuilder tokens = AggregationBuilders.nested("tokens", "tokens");
+		
+		for (String grammarField : grammarFields) {
+			tokens.subAggregation(
+					AggregationBuilders.terms(grammarField).field("tokens.grammar." + grammarField).size(1000)
+			);
+		}
+		
+		searchSourceBuilder.aggregation(tokens);
+		req.source(searchSourceBuilder);
+		
+		try {
+			SearchResponse response = elastic.client().search(req);
+			Nested nested = response.getAggregations().get("tokens");
+			for (Aggregation agg : nested.getAggregations()) {
+				Terms terms = (Terms) agg;
+				List<String> values = new ArrayList<String>();
+				for (Terms.Bucket bucket : terms.getBuckets()) {
+					values.add(bucket.getKey().toString());
+				}
+				grammarAggregations.put(terms.getName(), values);
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		return grammarAggregations;
+	}
+	
+	
+	private JSONObject convertGrammarAggregationsToJSON(Map<String, List<String>> aggs) {
+		JSONObject json = new JSONObject();
+		JSONArray tagsArray = new JSONArray();
+		
+		for (String grammarField : aggs.keySet()) {
+			JSONObject tagData = new JSONObject();
+			tagData.put("field", grammarField);
+			tagData.put("ui", grammarField);
+			tagData.put("values", new JSONArray(aggs.get(grammarField)));
+			tagsArray.put(tagData);
+		}
+		
+		json.put("tags", tagsArray);
+		return json;
 	}
 	
 	
