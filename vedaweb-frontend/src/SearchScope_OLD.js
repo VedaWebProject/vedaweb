@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Row, Col, Select, Button } from 'antd';
+import { Row, Col, Select } from 'antd';
 
 import './css/SearchScope.css';
 
@@ -19,17 +19,19 @@ class SearchScope extends Component {
         return (
 
             <div>
-
-                <Row type="flex" align="middle" className="bottom-gap-small">
-                    <Col span={4}>Book</Col>
-                    <Col span={4}>Hymn</Col>
-                    <Col span={4} offset={2}>Book</Col>
-                    <Col span={4}>Hymn</Col>
-                </Row>
            
                 <Row type="flex" align="middle" className="top-gap bottom-gap-small">
 
-                    <Col span={4}>
+                    {/* <Col span={8}>
+                        <Icon type="eye-o" className="gap-right"/>
+                        <span className="bold">Search Scope:</span>
+                    </Col> */}
+
+                    <Col span={3} className="search-input-label content-right">
+                        From Book:
+                    </Col>
+
+                    <Col span={5}>
                         <Select
                         value={fromBook}
                         defaultValue={0}
@@ -50,7 +52,11 @@ class SearchScope extends Component {
                         </Select>
                     </Col>
 
-                    <Col span={4}>
+                    <Col span={3} className="search-input-label content-right">
+                        ... Hymn:
+                    </Col>
+
+                    <Col span={5}>
                         <Select
                         value={fromHymn}
                         defaultValue={0}
@@ -72,9 +78,23 @@ class SearchScope extends Component {
                         </Select>
                     </Col>
 
-                    <Col span={2} className="content-center trans-font bold">&rarr;</Col>
+                </Row>
 
-                    <Col span={4}>
+                <Row type="flex" align="middle">
+
+                    {/* <Col span={8} className="search-scope-indicator-container">
+                        <SearchScopeIndicator
+                            fromBook={fromBook}
+                            fromHymn={fromHymn}
+                            toBook={toBook}
+                            toHymn={toHymn} />
+                    </Col> */}
+
+                    <Col span={3} className="search-input-label content-right">
+                        To Book:
+                    </Col>
+
+                    <Col span={5}>
                         <Select
                         value={toBook}
                         defaultValue={0}
@@ -96,7 +116,11 @@ class SearchScope extends Component {
                         </Select>
                     </Col>
 
-                    <Col span={4}>
+                    <Col span={3} className="search-input-label content-right">
+                        ... Hymn:
+                    </Col>
+
+                    <Col span={5}>
                         <Select
                         value={toHymn}
                         defaultValue={0}
@@ -116,16 +140,6 @@ class SearchScope extends Component {
                                 </Option>
                             ))}
                         </Select>
-                    </Col>
-
-                    <Col span={2} offset={1} className="content-right">
-                        <Button
-                        icon="minus" />
-                    </Col>
-
-                    <Col span={2} className="content-right">
-                        <Button
-                        icon="plus" />
                     </Col>
 
                 </Row>

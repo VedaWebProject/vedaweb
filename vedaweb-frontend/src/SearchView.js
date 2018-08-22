@@ -3,7 +3,7 @@ import { Row, Col, Button, Icon, Tabs, Collapse } from 'antd';
 
 import SearchGrammar from "./SearchGrammar";
 import SearchSimple from "./SearchSimple";
-import SearchScope from "./SearchScopeNew";
+import SearchScope from "./SearchScope";
 import SearchTransliteration from "./SearchTransliteration";
 import SearchScopeIndicator from "./SearchScopeIndicator";
 
