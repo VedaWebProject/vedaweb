@@ -53,10 +53,7 @@ class NavBar extends Component {
                     onSelect={this.handleMenu}
                     mode="horizontal"
                     style={menuStyle}>
-                        <Menu.Item key="partners">
-                            Partner Projects
-                        </Menu.Item>
-                        <SubMenu title={<span>Browse Rigveda</span>}>
+                        <SubMenu title={<span><Icon type="book"/>View Book</span>}>
                             {searchMetaStore.scopeDataRaw.map((hymns, i) => (
                                 <Menu.Item key={'nav_browse_' + i}>
                                     <Link to={"/view/id/" + (i+1) + ".1.1"}>

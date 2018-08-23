@@ -60,10 +60,14 @@ img.navbar-logo {
     color: rgba(0,0,0,0.8);
 }
 
+.ant-menu-submenu-title {
+    color: rgba(0,0,0,0.65);
+}
+
 .ant-menu-horizontal .ant-menu-submenu-title-active,
 .ant-menu-horizontal .ant-menu-submenu-title-selected,
 .ant-menu-horizontal .ant-menu-submenu-title:hover {
-    color: rgba(0,0,0,0.8);
+    color: #931111;
 }
 
 .ant-menu-submenu .ant-menu-item {
@@ -73,5 +77,9 @@ img.navbar-logo {
 }
 
 .ant-menu-submenu .ant-menu-item:hover {
-    background-color: #d4c6c3;
+    background-color: #eee;
+}
+
+.ant-menu-submenu .ant-menu-item.ant-menu-item-selected {
+    background-color: #ddd;
 }
