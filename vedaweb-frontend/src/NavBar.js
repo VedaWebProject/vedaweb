@@ -59,7 +59,9 @@ class NavBar extends Component {
                         <SubMenu title={<span>Browse Rigveda</span>}>
                             {searchMetaStore.scopeDataRaw.map((hymns, i) => (
                                 <Menu.Item key={'nav_browse_' + i}>
-                                    <Link to={"/view/id/" + (i+1) + ".1.1"}>Book {('0' + (i)).slice(-2)} ({hymns} Hymns)</Link>
+                                    <Link to={"/view/id/" + (i+1) + ".1.1"}>
+                                        Book {('0' + (i+1)).slice(-2)} ({hymns} Hymns)
+                                    </Link>
                                 </Menu.Item>
                             ))}
                         </SubMenu>

@@ -65,8 +65,6 @@ class SearchView extends Component {
 
         const panelStyle = {fontFamily: "Dosis", fontSize: "120%"};
         const panelContentStyle = {padding: 12};
-        // const panelHeaderTransliteration = <div><Icon type="edit" className="gap-right"/> Input Transliteration</div>;
-        // const panelHeaderScope = <div><Icon type="eye-o" className="gap-right"/> Search Scope</div>;
 
         const helpText = <div className="search-container">
                             <h4>VedaVeb Search Modes</h4>
