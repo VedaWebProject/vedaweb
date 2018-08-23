@@ -28,7 +28,7 @@ class App extends Component {
         super(props);
 
         uiDataStore.search = UIData.search;  //DEV: load from server!
-        searchMetaStore.setScopeData(uiDataStore.search.meta.scopes);
+        searchMetaStore.initScopeData(uiDataStore.search.meta.scopes);
 
         //TEMP DEV: configure iso scheme for sanscript.js
         let iso = JSON.parse(JSON.stringify(Sanscript.schemes.iast));

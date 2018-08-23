@@ -69,6 +69,7 @@ const searchGrammarStore = store({
         for (let i = 0; i < searchGrammarStore.data.blocks.length; i++){
             if (searchGrammarStore.data.blocks[i].id === blockId){
                 searchGrammarStore.data.blocks[i].form = form;
+                break;
             }
         }
     },
@@ -77,6 +78,7 @@ const searchGrammarStore = store({
         for (let i = 0; i < searchGrammarStore.data.blocks.length; i++){
             if (searchGrammarStore.data.blocks[i].id === blockId){
                 searchGrammarStore.data.blocks[i].distance = distance;
+                break;
             }
         }
     },
@@ -89,6 +91,7 @@ const searchGrammarStore = store({
                     usedFieldNames.push(field.name);
                 }
             }
+            break;
         }
         return usedFieldNames;
     },
@@ -98,6 +101,7 @@ const searchGrammarStore = store({
             if (grammar.field === fieldName){
                 return grammar.values;
             }
+            break;
         }
         return [];
     }

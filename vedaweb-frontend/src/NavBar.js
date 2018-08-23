@@ -57,9 +57,9 @@ class NavBar extends Component {
                             Partner Projects
                         </Menu.Item>
                         <SubMenu title={<span>Browse Rigveda</span>}>
-                            {searchMetaStore.scope.data.map(book => (
-                                <Menu.Item key={book.value}>
-                                    <Link to={"/view/id/" + book.display + "00101"}>Book {book.display}</Link>
+                            {searchMetaStore.scopeDataRaw.map((hymns, i) => (
+                                <Menu.Item key={'nav_browse_' + i}>
+                                    <Link to={"/view/id/" + (i+1) + ".1.1"}>Book {('0' + (i)).slice(-2)} ({hymns} Hymns)</Link>
                                 </Menu.Item>
                             ))}
                         </SubMenu>

@@ -18,10 +18,6 @@ h3 {
     font-size: 20px;
 }
 
-gap {
-    padding-left: 1.5rem;
-}
-
 .secondary-font {
     font-family: "Dosis", sans-serif;
 }
@@ -126,6 +122,10 @@ button {
 
 .gap-right {
     margin-right: .5rem;
+}
+
+.gap-left {
+    margin-left: 1.5rem;
 }
 
 .full-width {

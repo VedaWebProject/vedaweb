@@ -3,7 +3,7 @@ import { Row, Col, Button, Icon, Tabs, Collapse } from 'antd';
 
 import SearchGrammar from "./SearchGrammar";
 import SearchSimple from "./SearchSimple";
-import SearchScope from "./SearchScope";
+import SearchScopeContainer from "./SearchScopeContainer";
 import SearchTransliteration from "./SearchTransliteration";
 import SearchScopeIndicator from "./SearchScopeIndicator";
 
@@ -38,7 +38,7 @@ class SearchView extends Component {
     handleSubmit(e){
         let jsonData = {
             mode: searchMetaStore.mode,
-            scopes: [searchMetaStore.scope.settings]
+            scopes: searchMetaStore.scopes
         };
         
         if (searchMetaStore.mode === "grammar"){
@@ -90,11 +90,7 @@ class SearchView extends Component {
             <div>
                 {"Search Scope: "}
                 <span className="red trans-font">
-                    <SearchScopeIndicator
-                    fromBook={searchMetaStore.scope.settings.fromBook}
-                    fromHymn={searchMetaStore.scope.settings.fromHymn}
-                    toBook={searchMetaStore.scope.settings.toBook}
-                    toHymn={searchMetaStore.scope.settings.toHymn} />
+                    <SearchScopeIndicator />
                 </span>
             </div>
 
@@ -128,7 +124,7 @@ class SearchView extends Component {
                             key="2"
                             style={panelStyle}
                             forceRender={true}>
-                                <SearchScope/>
+                                <SearchScopeContainer/>
                             </Panel>
                         </Collapse>
 
@@ -159,10 +155,7 @@ class SearchView extends Component {
                         </Tabs>
 
                         <Row>
-                            <Col span={12} className="content-left">
-                                {/* <Button icon="cross" size="large" onClick={this.props.onClose}>Close</Button> */}
-                            </Col>
-                            <Col span={12} className="content-right">
+                            <Col span={12} offset={12} className="content-right">
                                 <Button
                                 icon="search"
                                 size="large"
