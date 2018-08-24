@@ -227,7 +227,7 @@ public class ElasticIndexService {
 	}
 	
 	
-	public JSONObject getGrammarMapping() {
+	public JSONObject getGrammarAggregations() {
 		List<String> grammarFields = new ArrayList<>();
 		
 		try {

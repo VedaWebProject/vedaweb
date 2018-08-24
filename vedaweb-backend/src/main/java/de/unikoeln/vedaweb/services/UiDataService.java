@@ -38,7 +38,7 @@ public class UiDataService {
 			
 			//get missing data from index and add to uiData JSONObject
 			((JSONObject)uiData.query("/search/grammar"))
-				.put("tags", indexService.getGrammarMapping().getJSONArray("tags"));
+				.put("tags", indexService.getGrammarAggregations().getJSONArray("tags"));
 		}
 	}
 
