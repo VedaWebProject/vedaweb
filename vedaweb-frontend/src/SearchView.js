@@ -101,8 +101,8 @@ class SearchView extends Component {
                         <h4>Advanced Search</h4>
 
                         <h3 className="top-gap-big">
-                            <Icon type="setting" className="gap-right"/>
-                            Settings
+                            <Icon type="paper-clip" className="gap-right"/>
+                            Meta Settings
                         </h3>
 
                         <Collapse>
