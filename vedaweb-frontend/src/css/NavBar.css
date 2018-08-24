@@ -34,7 +34,6 @@ img.navbar-logo {
     text-shadow: 0px 0px 5px rgba(0, 0, 0, 0.3);
 }
 
-.ant-menu-horizontal > .ant-menu-item,
 .ant-menu-horizontal > .ant-menu-submenu {
     float: right !important;
 }
@@ -55,8 +54,7 @@ img.navbar-logo {
 .ant-menu-horizontal > .ant-menu-submenu-open,
 .ant-menu-horizontal > .ant-menu-item-selected,
 .ant-menu-horizontal > .ant-menu-submenu-selected{
-    /* border-bottom: 2px solid rgba(0,0,0,0.5); */
-    border-bottom: 0px solid #fff;
+    border-bottom: 2px solid rgba(0,0,0,0.0);
     color: rgba(0,0,0,0.8);
 }
 
@@ -64,11 +62,20 @@ img.navbar-logo {
     color: rgba(0,0,0,0.65);
 }
 
-.ant-menu-horizontal .ant-menu-submenu-title-active,
+.ant-menu-submenu-popup .ant-menu-vertical {
+    border-radius: 3px;
+    border: 1px solid #ccb;
+
+    -webkit-box-shadow: 0px 0px 4px 0px rgba(0,0,0,0.1);
+	-moz-box-shadow: 0px 0px 4px 0px rgba(0,0,0,0.1);
+    box-shadow: 0px 0px 4px 0px rgba(0,0,0,0.1);
+}
+
+/* .ant-menu-horizontal .ant-menu-submenu-title-active,
 .ant-menu-horizontal .ant-menu-submenu-title-selected,
 .ant-menu-horizontal .ant-menu-submenu-title:hover {
     color: #931111;
-}
+} */
 
 .ant-menu-submenu .ant-menu-item {
     font-family: 'Gentium', "Tahoma", "Arial", sans-serif;
@@ -81,5 +88,6 @@ img.navbar-logo {
 }
 
 .ant-menu-submenu .ant-menu-item.ant-menu-item-selected {
-    background-color: #ddd;
+    background-color: #eee;
+    color: rgba(0,0,0,0.5);
 }

@@ -101,7 +101,6 @@ const searchGrammarStore = store({
             if (grammar.field === fieldName){
                 return grammar.values;
             }
-            break;
         }
         return [];
     }

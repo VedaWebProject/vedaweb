@@ -47,10 +47,4 @@ public class SystemController {
     }
 	
 	
-	@RequestMapping(value = "/mapping/grammar", produces = {"application/json"})
-    public String mappingGrammar() {
-		return indexService.getGrammarMapping().toString();
-    }
-	
-	
 }

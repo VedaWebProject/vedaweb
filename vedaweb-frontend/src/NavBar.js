@@ -9,7 +9,7 @@ import searchMetaStore from "./stores/searchMetaStore";
 
 import { view } from 'react-easy-state';
 
-import { Link } from 'react-router-dom'
+import { NavLink } from 'react-router-dom'
 
 const SubMenu = Menu.SubMenu;
 
@@ -35,13 +35,13 @@ class NavBar extends Component {
                 <Col
                 span={4}
                 className="content-left">
-                    <Link to="/" className="v-middle">
+                    <NavLink to={"/home"} className="v-middle">
                         <img src={logo} className="navbar-logo" alt="" />
                         <div className="navbar-app-title">
                             <span className="bold">VedaWeb</span><br/>
                             Rigveda online
                         </div>
-                    </Link>
+                    </NavLink>
                 </Col>
 
                 <Col span={8}>
@@ -50,37 +50,29 @@ class NavBar extends Component {
 
                 <Col span={12}>
                     <Menu
-                    onSelect={this.handleMenu}
+                    selectedKeys={[]}
                     mode="horizontal"
                     style={menuStyle}>
-                        <SubMenu title={<span><Icon type="book"/>View Book</span>}>
+                        
+                        <Menu.Item key="search">
+                            <NavLink to={"/search"}>
+                                {/* <Icon type="search"/> */}
+                                Advanced Search
+                            </NavLink>
+                        </Menu.Item>
+
+                        <SubMenu title={<span><Icon type="book"/>Browse Rigveda</span>}>
                             {searchMetaStore.scopeDataRaw.map((hymns, i) => (
-                                <Menu.Item key={'nav_browse_' + i}>
-                                    <Link to={"/view/id/" + (i+1) + ".1.1"}>
+                                <Menu.Item key={'view_' + i}>
+                                    <NavLink to={"/view/id/" + (i+1) + ".1.1"}>
                                         Book {('0' + (i+1)).slice(-2)} ({hymns} Hymns)
-                                    </Link>
+                                    </NavLink>
                                 </Menu.Item>
                             ))}
                         </SubMenu>
-                        <Menu.Item key="search">
-                            <Link to={"/search"}>
-                                <Icon type="search"/>
-                                Advanced Search
-                            </Link>
-                        </Menu.Item>
+
                     </Menu>
                 </Col>
-
-                
-
-                {/**
-                <Col span={2} className="content-right">
-                    <Icon
-                    type="search"
-                    onClick={this.props.onClickOpenSearchView}
-                    className="navbar-icon-search"/>
-                </Col>
-                */}
 
             </Row>
             

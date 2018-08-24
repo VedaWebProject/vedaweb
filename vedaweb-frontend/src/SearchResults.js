@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Table, Pagination, Spin, Icon } from 'antd';
+import { Table, Pagination, Spin } from 'antd';
 
 import { Link, withRouter } from 'react-router-dom';
 
@@ -126,9 +126,8 @@ class SearchResults extends Component {
 
             <Spin
             size="large"
-            indicator={<Icon type="loading" spin style={{ fontSize: 38 }}/>}
-            delay={200}
-            spinning={!isLoaded}>
+            spinning={!isLoaded}
+            className="spinner-loading">
 
                 <div className="page-content">
 

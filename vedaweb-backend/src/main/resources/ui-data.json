@@ -1,0 +1,39 @@
+{ 
+
+	"search": {
+	    "meta": {
+	        "scopes": [99, 104, 34, 65, 13, 86, 45, 19, 67, 11],
+	        "transliterations": [
+				{"id": "hk", "name": "Harvard-Kyoto"},
+				{"id": "slp1", "name": "SLP1"},
+				{"id": "iast", "name": "IAST"},
+				{"id": "itrans", "name": "ITRANS"}
+			]
+	    },
+	    
+	    "grammar": {
+	        "tags": [
+				{
+					"ui": "Sample",
+					"field": "sample",
+					"values": ["VALUE_1", "VALUE_2"]
+				}
+			]
+	    },
+	    
+	    "smart": {
+	        "fields": [
+				{"field": "form", "ui": "Rigveda (HK)"},
+				{"field": "translation", "ui": "Translations"}
+			]
+		},
+		
+		"simple": {
+	        "fields": [
+				{"field": "form", "ui": "Rigveda"},
+				{"field": "translation", "ui": "Translations"}
+			]
+	    }
+	    
+	}
+}

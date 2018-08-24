@@ -1,25 +1,25 @@
 package de.unikoeln.vedaweb.controllers;
 
-import java.io.File;
-
-import javax.servlet.http.HttpServletRequest;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.mongodb.core.MongoTemplate;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import de.unikoeln.vedaweb.services.ElasticSearchService;
+import de.unikoeln.vedaweb.services.UiDataService;
 
 
 
 @RestController
+@RequestMapping("api")
 public class UIDataController {
+	
+	@Autowired
+	private UiDataService uiDataService;
+	
+	@RequestMapping(value = "/uidata", produces = {"application/json"})
+    public String getUiDataJSON() {
+		return uiDataService.getUiDataJSON();
+    }
+	
 //	
 //	@Autowired
 //	private ElasticSearchService search;

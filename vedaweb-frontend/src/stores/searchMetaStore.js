@@ -27,10 +27,6 @@ const searchMetaStore = store({
         searchMetaStore.transliteration = {id: id, name: name};
     },
 
-    initScopeData(scopeDataRaw){
-        searchMetaStore.scopeDataRaw = scopeDataRaw;
-    },
-
     setScopeFromBook(scopeId, index){
         for (let i = 0; i < searchMetaStore.scopes.length; i++){
             if (searchMetaStore.scopes[i].id === scopeId){

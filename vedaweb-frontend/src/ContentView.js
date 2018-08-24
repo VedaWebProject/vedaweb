@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Row, Col, Affix, Switch, Spin, Icon, Select, Button } from 'antd';
+import { Row, Col, Affix, Switch, Spin, Select, Button } from 'antd';
 
 import ContentLocation from "./ContentLocation";
 import ErrorMessage from "./ErrorMessage";
@@ -96,9 +96,8 @@ class ContentView extends Component {
         return (
             <Spin
             size="large"
-            indicator={<Icon type="loading" spin style={{ fontSize: 38 }}/>}
             delay={200}
-            spinning={!isLoaded}>
+            spinning={!isLoaded} >
 
                 <div className="page-content">
 
