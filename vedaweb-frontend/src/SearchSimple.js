@@ -70,7 +70,8 @@ class SearchSimple extends Component {
                 <Tooltip
                 title={transliteration}
                 trigger="focus"
-                placement="top">
+                placement="bottom"
+                overlayClassName="transliteration-tooltip">
 
                     <Search
                     value={searchSimpleStore.data.input}

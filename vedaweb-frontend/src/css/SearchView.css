@@ -16,6 +16,7 @@
 
 .ant-tabs-bar {
     margin-bottom: 0px;
+    border: none;
 }
 
 .ant-tabs-tab .anticon {

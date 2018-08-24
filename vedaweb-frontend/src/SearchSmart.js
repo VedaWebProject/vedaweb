@@ -67,7 +67,8 @@ class SearchSmart extends Component {
                 <Tooltip
                 title={transliteration}
                 trigger="focus"
-                placement="top">
+                placement="top"
+                overlayClassName="transliteration-tooltip">
 
                     <Search
                     value={searchSmartStore.data.input}

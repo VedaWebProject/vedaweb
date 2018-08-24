@@ -174,3 +174,13 @@ div.inline-block {
     -moz-column-gap: 2rem; /* Firefox */
     column-gap: 2rem;
 }
+
+.transliteration-tooltip > .ant-tooltip-content > .ant-tooltip-inner {
+    background-color: #fff;
+    border: 1px solid #ccb;
+    color: rgba(0, 0, 0, 0.6);
+}
+
+.transliteration-tooltip > .ant-tooltip-content > .ant-tooltip-arrow {
+    border-bottom-color: #ccb;
+}
