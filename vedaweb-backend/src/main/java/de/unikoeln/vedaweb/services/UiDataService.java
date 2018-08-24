@@ -36,9 +36,13 @@ public class UiDataService {
 				System.err.println("[ERROR] UI data template JSON could not be loaded. (UiDataService)");
 			}
 			
-			//get missing data from index and add to uiData JSONObject
+			//get grammar tags data from index and add to uiData JSONObject
 			((JSONObject)uiData.query("/search/grammar"))
-				.put("tags", indexService.getGrammarAggregations().getJSONArray("tags"));
+				.put("tags", indexService.getUIGrammarData());
+			
+			//TODO: get "locus" data from index and add to uiData JSONObject
+//			((JSONObject)uiData.query("/search/grammar"))
+//				.put("tags", indexService.getGrammarAggregations().getJSONArray("tags"));
 		}
 	}
 

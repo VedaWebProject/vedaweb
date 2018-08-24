@@ -196,8 +196,6 @@ public class ElasticIndexService {
 		CreateIndexRequest createRequest = new CreateIndexRequest(indexName);
 		byte[] json = null;
 		
-		
-		
 		try {
 			json = IOUtils.convertStreamToByteArray(indexDef.getInputStream());
 		} catch (IOException e1) {
@@ -227,7 +225,7 @@ public class ElasticIndexService {
 	}
 	
 	
-	public JSONObject getGrammarAggregations() {
+	public JSONArray getUIGrammarData() {
 		List<String> grammarFields = new ArrayList<>();
 		
 		try {
@@ -288,8 +286,7 @@ public class ElasticIndexService {
 	}
 	
 	
-	private JSONObject convertGrammarAggregationsToJSON(Map<String, List<String>> aggs) {
-		JSONObject json = new JSONObject();
+	private JSONArray convertGrammarAggregationsToJSON(Map<String, List<String>> aggs) {
 		JSONArray tagsArray = new JSONArray();
 		
 		for (String grammarField : aggs.keySet()) {
@@ -300,8 +297,7 @@ public class ElasticIndexService {
 			tagsArray.put(tagData);
 		}
 		
-		json.put("tags", tagsArray);
-		return json;
+		return tagsArray;
 	}
 	
 	
