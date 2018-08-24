@@ -295,7 +295,7 @@ public class ElasticIndexService {
 		for (String grammarField : aggs.keySet()) {
 			JSONObject tagData = new JSONObject();
 			tagData.put("field", grammarField);
-			tagData.put("ui", grammarField);
+			tagData.put("ui", grammarField.substring(0, 1).toUpperCase() + grammarField.substring(1).toLowerCase());
 			tagData.put("values", new JSONArray(aggs.get(grammarField)));
 			tagsArray.put(tagData);
 		}
