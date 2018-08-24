@@ -61,7 +61,9 @@ class NavBar extends Component {
                             </NavLink>
                         </Menu.Item>
 
-                        <SubMenu title={<span><Icon type="book"/>Browse Rigveda</span>}>
+                        <SubMenu
+                        title={<span><Icon type="book"/>Browse Rigveda</span>}
+                        className="right">
                             {searchMetaStore.scopeDataRaw.map((hymns, i) => (
                                 <Menu.Item key={'view_' + i}>
                                     <NavLink to={"/view/id/" + (i+1) + ".1.1"}>
