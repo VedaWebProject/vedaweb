@@ -72,7 +72,7 @@ public class SearchRequestBuilder {
 
 		searchSourceBuilder.fetchSource(FETCH_SOURCE_CONTEXT);
 
-		System.out.println("\n\n" + searchSourceBuilder.toString() + "\n\n");
+		//System.out.println("\n\n" + searchSourceBuilder.toString() + "\n\n");
 		searchRequest.source(searchSourceBuilder);
 			
 		return searchRequest;
