@@ -31,10 +31,7 @@ public class ElasticSearchService {
 	
 	
 	private SearchResponse searchSmart(SearchData searchData){
-		SearchRequest searchRequest = SearchRequestBuilder.buildSmartQuery(
-				StringUtils.normalizeNFD(searchData.getInput()),
-				searchData.getField()
-				);
+		SearchRequest searchRequest = SearchRequestBuilder.buildSmartQuery(searchData);
 		return submitSearch(searchRequest);
 	}
 	

@@ -15,7 +15,7 @@ import searchMetaStore from "./stores/searchMetaStore";
 import { view } from 'react-easy-state';
 
 import { Route, Switch, withRouter } from 'react-router-dom'
-import SearchResults from "./SearchResults";
+import SearchResults from "./SearchResultsNew";
 
 import Sanscript from 'sanscript';
 import axios from 'axios';

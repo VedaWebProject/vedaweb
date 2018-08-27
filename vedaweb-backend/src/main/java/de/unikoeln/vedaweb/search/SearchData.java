@@ -24,6 +24,9 @@ public class SearchData {
 	
 	@JsonProperty("blocks")
 	private List<Map<String, Object>> blocks;
+	
+	@JsonProperty("from")
+	private int from;
 
 	
 	public SearchData(){
@@ -85,6 +88,17 @@ public class SearchData {
 		this.blocks.add(block);
 	}
 	
+	
+	public int getFrom() {
+		return from;
+	}
+
+
+	public void setFrom(int from) {
+		this.from = from;
+	}
+
+
 	@Override
 	public String toString() {
 		return "mode:" + mode + (input != null ? " input:" + input : "");

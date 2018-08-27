@@ -28,14 +28,14 @@ public class SearchRequestBuilder {
 	
 	
 	
-	public static SearchRequest buildSmartQuery(String query, String field){
+	public static SearchRequest buildSmartQuery(SearchData searchData){
 		SearchRequest searchRequest = new SearchRequest("vedaweb"); 
 		searchRequest.types("doc");
 		
-		//TODO scrolling!
-		//searchRequest.scroll(TimeValue.timeValueMinutes(1L));
+		SearchSourceBuilder searchSourceBuilder = getCommonSearchSource(searchData);
 		
-		SearchSourceBuilder searchSourceBuilder = new SearchSourceBuilder();
+		String query = StringUtils.normalizeNFD(searchData.getInput());
+		String field = searchData.getField();
 		
 		if (field.equals("form") && StringUtils.containsAccents(query))
 			field = "form_raw";
@@ -57,7 +57,7 @@ public class SearchRequestBuilder {
 	public static SearchRequest buildGrammarQuery(SearchData searchData){
 		SearchRequest searchRequest = new SearchRequest("vedaweb"); 
 		searchRequest.types("doc");
-		SearchSourceBuilder searchSourceBuilder = new SearchSourceBuilder(); 
+		SearchSourceBuilder searchSourceBuilder = getCommonSearchSource(searchData);
 		
 		//root bool query
 		BoolQueryBuilder bool = QueryBuilders.boolQuery();
@@ -187,6 +187,14 @@ public class SearchRequestBuilder {
 		//System.out.println("\n\n" + searchSourceBuilder.toString() + "\n\n");
 		searchRequest.source(searchSourceBuilder);
 		return searchRequest;
+	}
+	
+	
+	private static SearchSourceBuilder getCommonSearchSource(SearchData searchData) {
+		SearchSourceBuilder source = new SearchSourceBuilder();
+		int from = searchData.getFrom();
+		source.from(from >= 0 ? from : 0);
+		return source;
 	}
 	
 	
