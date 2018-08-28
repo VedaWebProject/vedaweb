@@ -156,7 +156,16 @@ public class ElasticIndexService {
 //					currGrammarAttribute.put("tag", attr);
 //					currGrammarAttribute.put("value", token.getGrammarAttribute(attr));
 //					indexTokenGrammar.put(currGrammarAttribute);
-					indexTokenGrammar.put(attr, token.getGrammarAttribute(attr));
+					String values = token.getGrammarAttribute(attr);
+					if (values.split("\\/").length > 1) {
+						JSONArray tagValues = new JSONArray();
+						for (String tv : values.split("\\/")) {
+							tagValues.put(tv);
+						}
+						indexTokenGrammar.put(attr, tagValues);
+					} else {
+						indexTokenGrammar.put(attr, token.getGrammarAttribute(attr));
+					}
 				}
 				indexToken.put("grammar", indexTokenGrammar);
 				tokens.add(indexToken);

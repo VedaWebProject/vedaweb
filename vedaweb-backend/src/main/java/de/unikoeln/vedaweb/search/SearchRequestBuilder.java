@@ -125,7 +125,7 @@ public class SearchRequestBuilder {
 					));
 				} else {
 					//...otherwise, add a simple match query
-					bool.must(QueryBuilders.matchQuery("tokens.grammar." + key, block.get(key)));
+					bool.must(QueryBuilders.termQuery("tokens.grammar." + key, block.get(key)));
 				}
 			}
 			

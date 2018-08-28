@@ -51,7 +51,7 @@ class SearchResults extends Component {
 
         try {
             queryJSON = JSON.parse(Base64.decode(queryData));
-            queryJSON.from = 1;
+            queryJSON.from = 0;
             queryJSON.size = searchResultsStore.size;
             searchResultsStore.queryJSON = queryJSON;
         } catch (e) {
@@ -76,10 +76,10 @@ class SearchResults extends Component {
             queryDisplay: queryJSON.mode === "grammar" ? "grammar search" : queryJSON.input
         });
 
-        queryJSON.from = ((searchResultsStore.page - 1) * searchResultsStore.size) + 1;
+        queryJSON.from = ((searchResultsStore.page - 1) * searchResultsStore.size);
 
         //request search api data
-        console.log("REQUEST!!!!");
+        console.log("REQUEST!!!!" + JSON.stringify(queryJSON));
         axios.post("/api/search", queryJSON)
             .then((response) => {
                 searchResultsStore.resultsData = response.data;

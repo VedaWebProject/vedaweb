@@ -55,8 +55,6 @@ class SearchView extends Component {
             }
         }
 
-        console.log(JSON.stringify(jsonData));
-
         this.props.history.push("/results/" + Base64.encode(JSON.stringify(jsonData)));
     }
 
