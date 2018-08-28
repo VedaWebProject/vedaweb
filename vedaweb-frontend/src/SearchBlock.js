@@ -54,8 +54,9 @@ class SearchBlock extends Component {
                             <Col span={9}>
                                 <Tooltip
                                 title={transliteration}
+                                overlayClassName="transliteration-tooltip"
                                 trigger="focus"
-                                placement="top">
+                                placement="bottom">
                                     <Input
                                     value={this.props.form}
                                     onChange={e => searchGrammarStore.updateForm(this.props.id, e.target.value)}
