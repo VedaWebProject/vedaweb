@@ -105,7 +105,7 @@ class SearchView extends Component {
 
             <Row id="search-view" className="page-content" key="search-view">
 
-                <Col span={12}>
+                <Col xl={12}>
                     <div className="card">
                         <h4>
                             <Icon type="search" className="gap-right"/>
@@ -148,11 +148,11 @@ class SearchView extends Component {
                     </div>
                 </Col>
 
-                <Col span={12}>
+                <Col xl={12}>
                     <div className="card">
                         <h4>
                             <Icon type="paper-clip" className="gap-right"/>
-                            Additional Settings
+                            Search Settings
                         </h4>
 
                         <Collapse bordered={false}>
@@ -177,6 +177,7 @@ class SearchView extends Component {
                         </Collapse>
                     </div>
                 </Col>
+
             </Row>
         );
 

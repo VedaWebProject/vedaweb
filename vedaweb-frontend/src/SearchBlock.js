@@ -48,7 +48,7 @@ class SearchBlock extends Component {
                         justify="center">
 
                             <Col span={9} className="search-input-label content-right">
-                                Search term:
+                                <span className="secondary-font">Search term:</span>
                             </Col>
 
                             <Col span={9}>
@@ -77,7 +77,7 @@ class SearchBlock extends Component {
                         justify="center"
                         className={this.props.isFirstBlock ? "hidden" : ""}>
                             <Col span={9} className="search-input-label content-right">
-                                Maximum distance to previous term:
+                                <span className="secondary-font">Maximum distance to previous term:</span>
                             </Col>
                             <Col span={9} className="search-block-input">
                                 <Select

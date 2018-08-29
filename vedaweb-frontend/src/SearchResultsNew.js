@@ -187,6 +187,7 @@ class SearchResults extends Component {
                             columns={columns}
                             dataSource={this.state.tableData}
                             loading={!this.state.isLoaded}
+                            locale={{emptyText: 'No results'}}
                             pagination={{
                                 pageSize: searchResultsStore.size,
                                 current: searchResultsStore.page,

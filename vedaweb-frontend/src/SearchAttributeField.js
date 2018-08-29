@@ -30,17 +30,20 @@ class SearchAttributeField extends Component {
                     value={this.props.fieldName}
                     onSelect={(value, option) => searchGrammarStore.updateField(
                         this.props.parentBlockId, this.props.id, "name", value)}
-                    style={{ width: '98%' }} >
+                    style={{ width: '98%' }}
+                    className="secondary-font" >
                         <Option
                             key={'fValOpt_none'}
-                            value={''}>
+                            value={''}
+                            className="secondary-font">
                                 {'Select attribute (optional)'}
                         </Option>
                         {uiDataStore.search.grammar.tags.map((option, i) => (
                             (usedFieldNames.indexOf(option.field) === -1 || option.field === this.props.fieldName) &&
                             <Option
                                 key={'fValOpt_' + option.field}
-                                value={option.field}>
+                                value={option.field}
+                                className="secondary-font">
                                     {option.ui}
                             </Option>
                         ))}
