@@ -91,7 +91,7 @@ class ContentView extends Component {
 
     render() {
         const { error, isLoaded, data } = this.state;
-        const exportOptions = ["PDF","HTML","XML","TEI-XML","Text","ODT"];
+        const exportOptions = ["PDF","XML","TEI-XML","Text"];
 
         return (
             <Spin
@@ -332,7 +332,10 @@ class ContentView extends Component {
                                                 </Select>
                                             </Col>
                                             <Col span={2} offset={1}>
-                                                <Button type="secondary" icon="download" />
+                                                <Button
+                                                type="secondary"
+                                                icon="download"
+                                                onClick={() => {alert("Export functionality doesn't exist, yet.")}} />
                                             </Col>
                                         </Row>
                                     </div>
