@@ -105,11 +105,14 @@ public class SearchRequestBuilder {
 			//construct bool query for each block
 			BoolQueryBuilder bool = QueryBuilders.boolQuery();
 			
+			//remove empty fields
+			block.values().stream().filter(v -> v != null && v.toString().length() > 0);
+			
+			//trim values
+			block.values().forEach(v -> v = v.toString().trim());
+			
+			//add queries for block data
 			for (String key : block.keySet()){
-				
-				//ignore empty field names
-				if (block.get(key) == null || block.get(key).toString().length() == 0)
-					continue;
 				
 				//unimplemented
 				if (key.equalsIgnoreCase("distance"))
@@ -124,7 +127,7 @@ public class SearchRequestBuilder {
 							"tokens.lemma"
 					));
 				} else {
-					//...otherwise, add a simple match query
+					//...otherwise, add a simple term query
 					bool.must(QueryBuilders.termQuery("tokens.grammar." + key, block.get(key)));
 				}
 			}
@@ -138,11 +141,12 @@ public class SearchRequestBuilder {
 	private static BoolQueryBuilder getMultiFieldBoolQuery(String query, boolean must, String ... fields) {
 		BoolQueryBuilder bool = QueryBuilders.boolQuery();
 		
+		//TODO: fuzzy or nah?
 		for (String field : fields) {
 			if (must) {
-				bool.must(QueryBuilders.matchQuery(field, query));
+				bool.must(QueryBuilders.fuzzyQuery(field, query));
 			} else {
-				bool.should(QueryBuilders.matchQuery(field, query));
+				bool.should(QueryBuilders.fuzzyQuery(field, query));
 			}
 		}
 		

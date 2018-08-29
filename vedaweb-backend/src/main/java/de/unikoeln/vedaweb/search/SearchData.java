@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -50,7 +51,7 @@ public class SearchData {
 
 
 	public void setInput(String input) {
-		this.input = input;
+		this.input = input.trim();
 	}
 	
 	
@@ -117,13 +118,10 @@ public class SearchData {
 		}
 		
 		//clean search scopes
-		if (scopes == null) return;
-		for (SearchScope scope : scopes){
-			scope.fromBook = scope.fromBook > 0 ? scope.fromBook : -1;
-			scope.fromHymn = scope.fromHymn > 0 ? scope.fromHymn : -1;
-			scope.toBook = scope.toBook > 0 ? scope.toBook : -1;
-			scope.toHymn = scope.toHymn > 0 ? scope.toHymn : -1;
-		}
+		if (scopes != null)
+			scopes.stream()
+			.filter(scope -> !scope.isEmpty())
+			.collect(Collectors.toList());
 		
 	}
 	
