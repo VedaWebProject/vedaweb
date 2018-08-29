@@ -46,6 +46,7 @@ class SearchResults extends Component {
         });
 
         searchResultsStore.queryEncoded = queryData;
+        searchResultsStore.page = 1;
 
         let queryJSON = {};
 
@@ -66,10 +67,6 @@ class SearchResults extends Component {
     }
 
     loadData(queryJSON){
-        this.setState({
-            isLoaded: false
-        });
-
         this.setState({
             isLoaded: false,
             error: undefined,
