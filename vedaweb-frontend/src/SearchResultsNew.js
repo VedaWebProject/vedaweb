@@ -76,7 +76,7 @@ class SearchResults extends Component {
         queryJSON.from = ((searchResultsStore.page - 1) * searchResultsStore.size);
 
         //request search api data
-        console.log("REQUEST!!!!" + JSON.stringify(queryJSON));
+        console.log("SEARCH REQUEST: " + JSON.stringify(queryJSON));
         axios.post("/api/search", queryJSON)
             .then((response) => {
                 searchResultsStore.resultsData = response.data;
@@ -135,7 +135,7 @@ class SearchResults extends Component {
           }, {
             title: 'Text',
             dataIndex: 'text',
-            key: 'text'
+            key: 'text',
           }];
           
         return (
