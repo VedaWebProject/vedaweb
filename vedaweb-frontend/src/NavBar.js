@@ -32,9 +32,9 @@ class NavBar extends Component {
             id="navbar"
             className="box-shadow">
 
-                <Col
+                {/* <Col
                 span={4}
-                className="content-left">
+                className="content-left"> */}
                     <NavLink to={"/home"} className="v-middle">
                         <img src={logo} className="navbar-logo" alt="" />
                         <div className="navbar-app-title">
@@ -42,39 +42,43 @@ class NavBar extends Component {
                             Rigveda online
                         </div>
                     </NavLink>
-                </Col>
+                {/* </Col> */}
 
-                <Col span={8}>
+                {/* <Col span={8}> */}
+                <div className="flex-grow-1">
                     <SearchSmart />
-                </Col>
+                </div>
+                {/* </Col> */}
 
-                <Col span={12}>
-                    <Menu
-                    selectedKeys={[]}
-                    mode="horizontal"
-                    style={menuStyle}>
-                        
-                        <Menu.Item key="search">
-                            <NavLink to={"/search"}>
-                                {/* <Icon type="search"/> */}
-                                Advanced Search
-                            </NavLink>
-                        </Menu.Item>
+                {/* <Col span={12}> */}
+                    <div className="flex-grow-2">
+                        <Menu
+                        selectedKeys={[]}
+                        mode="horizontal"
+                        style={menuStyle}>
+                            
+                            <Menu.Item key="search">
+                                <NavLink to={"/search"}>
+                                    {/* <Icon type="search"/> */}
+                                    Advanced Search
+                                </NavLink>
+                            </Menu.Item>
 
-                        <SubMenu
-                        title={<span><Icon type="book"/>Browse Rigveda</span>}
-                        className="right">
-                            {searchMetaStore.scopeDataRaw.map((hymns, i) => (
-                                <Menu.Item key={'view_' + i}>
-                                    <NavLink to={"/view/id/" + (i+1) + ".1.1"}>
-                                        Book {('0' + (i+1)).slice(-2)} ({hymns} Hymns)
-                                    </NavLink>
-                                </Menu.Item>
-                            ))}
-                        </SubMenu>
+                            <SubMenu
+                            title={<span><Icon type="book"/>Browse Rigveda</span>}
+                            className="right">
+                                {searchMetaStore.scopeDataRaw.map((hymns, i) => (
+                                    <Menu.Item key={'view_' + i}>
+                                        <NavLink to={"/view/id/" + (i+1) + ".1.1"}>
+                                            Book {('0' + (i+1)).slice(-2)} ({hymns} Hymns)
+                                        </NavLink>
+                                    </Menu.Item>
+                                ))}
+                            </SubMenu>
 
-                    </Menu>
-                </Col>
+                        </Menu>
+                    </div>
+                {/* </Col> */}
 
             </Row>
             

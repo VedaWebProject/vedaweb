@@ -12,6 +12,8 @@ import TransliterationPreview from "./TransliterationPreview";
 import { withRouter } from 'react-router-dom';
 import { Base64 } from 'js-base64';
 
+import "./css/SearchSmart.css";
+
 
 const Option = Select.Option;
 const Search = Input.Search;
@@ -42,6 +44,7 @@ class SearchSmart extends Component {
             <Select
             defaultValue="form"
             onSelect={(value, option) => searchSmartStore.setField(value)}
+            style={{ width: 125 }}
             className="secondary-font">
                 {uiDataStore.search.smart.fields.map(field => (
                     <Option
@@ -63,7 +66,7 @@ class SearchSmart extends Component {
 
         return (
 
-            <div>
+            <div id="search-smart">
                 <Tooltip
                 title={transliteration}
                 trigger="focus"
@@ -75,10 +78,10 @@ class SearchSmart extends Component {
                     onChange={e => searchSmartStore.setInput(e.target.value)}
                     onSearch={this.handleSearch}
                     addonBefore={selectBefore}
-                    size="large"
+                    size={"large"}
                     placeholder={
                         searchSmartStore.data.field === "form"
-                        ? "Harvard-Kyoto or verse number"
+                        ? "HK or verse number"
                         : "Translation or verse number"
                     } />
 

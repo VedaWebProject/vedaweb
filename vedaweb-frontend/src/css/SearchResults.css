@@ -5,6 +5,7 @@
 #search-results table  {
     font-family: 'Gentium', "Tahoma", "Arial", sans-serif;
     vertical-align: top;
+    margin-bottom: 2rem;
 }
 
 #search-results .ant-table-thead > tr > th,

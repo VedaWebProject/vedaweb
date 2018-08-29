@@ -1,7 +1,12 @@
 #app {
-    min-width: 920px;
+    min-width: 1024px;
     font-family: 'Gentium', "Tahoma", "Arial", sans-serif;
     font-size: 18px;
+}
+
+.content-wrap {
+    max-width: 1800px;
+    margin: 0 auto;
 }
 
 h4 {
@@ -166,13 +171,16 @@ div.inline-block {
 }
 
 .start {
-    -webkit-column-count: 4; /* Chrome, Safari, Opera */
-    -moz-column-count: 4; /* Firefox */
-    column-count: 4;
+    -webkit-column-count: 3; /* Chrome, Safari, Opera */
+    -moz-column-count: 3; /* Firefox */
+    column-count: 3;
 
     -webkit-column-gap: 2rem; /* Chrome, Safari, Opera */
     -moz-column-gap: 2rem; /* Firefox */
     column-gap: 2rem;
+
+    text-align: justify;
+    text-justify: newspaper;
 }
 
 .transliteration-tooltip > .ant-tooltip-content > .ant-tooltip-inner {
@@ -183,4 +191,12 @@ div.inline-block {
 
 .transliteration-tooltip > .ant-tooltip-content > .ant-tooltip-arrow {
     border-bottom-color: #ccb;
+}
+
+.flex-grow-1 {
+    flex-grow: 1;
+}
+
+.flex-grow-2 {
+    flex-grow: 2;
 }
