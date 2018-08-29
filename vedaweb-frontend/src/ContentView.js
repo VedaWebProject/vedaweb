@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Row, Col, Affix, Switch, Spin, Select, Button } from 'antd';
+import { Row, Col, Affix, Switch, Spin, Select, Button, Icon } from 'antd';
 
 import ContentLocation from "./ContentLocation";
 import ErrorMessage from "./ErrorMessage";
@@ -257,7 +257,7 @@ class ContentView extends Component {
                             <Col span={6}>
                                 <Affix offsetTop={10}>
                                     <div className="card">
-                                        <h4>View Filters</h4>
+                                        <h4><Icon type="filter" className="gap-right"/> View Filters</h4>
                                         <div className="view-filter">
                                             <Switch
                                             defaultChecked
@@ -313,7 +313,7 @@ class ContentView extends Component {
                                     </div>
 
                                     <div className="card">
-                                        <h4>Export</h4>
+                                        <h4><Icon type="export" className="gap-right"/>Export</h4>
                                         <Row>
                                             <Col span={20}>
                                                 <Select
