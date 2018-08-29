@@ -69,10 +69,6 @@ hr {
     margin-bottom: 1rem;
 }
 
-button {
-    border: 1px solid #ccb;
-}
-
 .spinner-loading {
     position: absolute;
     top: 50%;

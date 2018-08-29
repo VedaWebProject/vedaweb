@@ -61,7 +61,17 @@ class SearchView extends Component {
 
     render() {
 
-        const panelStyle = {fontFamily: "Dosis", fontSize: "120%"};
+        //TEMP DEV
+        const customPanelStyle = {
+            background: '#fafafa',
+            borderRadius: 2,
+            marginBottom: 24,
+            border: '1px solid #ddc',
+            overflow: 'hidden',
+            fontFamily: 'Dosis, sans-serif',
+            fontSize: '18px'
+        };
+
         const panelContentStyle = {padding: 12};
 
         const helpText = <div className="search-container">
@@ -93,41 +103,14 @@ class SearchView extends Component {
 
         return (
 
-            <div className="page-content" key="search-view">
-                <div className="card">
-                    <div id="search-view">
-                        <h4>Advanced Search</h4>
+            <Row id="search-view" className="page-content" key="search-view">
 
-                        <h3 className="top-gap-big">
-                            <Icon type="paper-clip" className="gap-right"/>
-                            Meta Settings
-                        </h3>
-
-                        <Collapse>
-
-                            <Panel
-                            header={searchTransliterationPanelHeader}
-                            key={"1" + searchMetaStore.transliteration.name}
-                            style={panelStyle}
-                            forceRender={true}>
-                                <div style={panelContentStyle}>
-                                    <SearchTransliteration/>
-                                </div>
-                            </Panel>
-
-                            <Panel
-                            header={searchScopePanelHeader}
-                            key="2"
-                            style={panelStyle}
-                            forceRender={true}>
-                                <SearchScopeContainer/>
-                            </Panel>
-                        </Collapse>
-
-                        <h3 className="top-gap-big">
+                <Col span={12}>
+                    <div className="card">
+                        <h4>
                             <Icon type="search" className="gap-right"/>
-                            What are you searching for?
-                        </h3>
+                            Advanced Search
+                        </h4>
                         
                         <Tabs
                         onChange={this.switchMode}
@@ -163,8 +146,38 @@ class SearchView extends Component {
                         </Row>
                     
                     </div>
-                </div>
-            </div>
+                </Col>
+
+                <Col span={12}>
+                    <div className="card">
+                        <h4>
+                            <Icon type="paper-clip" className="gap-right"/>
+                            Additional Settings
+                        </h4>
+
+                        <Collapse bordered={false}>
+
+                            <Panel
+                            header={searchTransliterationPanelHeader}
+                            key={"1" + searchMetaStore.transliteration.name}
+                            style={customPanelStyle}
+                            forceRender={true}>
+                                <div style={panelContentStyle}>
+                                    <SearchTransliteration/>
+                                </div>
+                            </Panel>
+
+                            <Panel
+                            header={searchScopePanelHeader}
+                            key="2"
+                            style={customPanelStyle}
+                            forceRender={true}>
+                                <SearchScopeContainer/>
+                            </Panel>
+                        </Collapse>
+                    </div>
+                </Col>
+            </Row>
         );
 
     }
