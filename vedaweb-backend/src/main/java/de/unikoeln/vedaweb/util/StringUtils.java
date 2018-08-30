@@ -6,9 +6,9 @@ import java.text.Normalizer.Form;
 public class StringUtils {
 	
 	
-	public static String normalizeNFD(String s){
+	public static String normalize(String s){
 		return s == null ? "" :
-			Normalizer.normalize(s, Form.NFD);
+			Normalizer.normalize(s, Form.NFC);
 	}
 	
 	
@@ -48,13 +48,13 @@ public class StringUtils {
 	
 	public static boolean containsAccents(String text) {
 	    return text == null ? false :
-	        normalizeNFD(text).matches(".*\\u0301.*");
+	        normalize(text).matches(".*\\u0301.*");
 	}
 	
 	
 	public static String removeUnicodeAccents(String text) {
 	    return text == null ? "" :
-	        normalizeNFD(text).replaceAll("\\u0301", "");
+	        normalize(text).replaceAll("\\u0301", "");
 	}
 	
 

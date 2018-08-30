@@ -34,7 +34,7 @@ public class SearchRequestBuilder {
 		
 		SearchSourceBuilder searchSourceBuilder = getCommonSearchSource(searchData);
 		
-		String query = StringUtils.normalizeNFD(searchData.getInput());
+		String query = StringUtils.normalize(searchData.getInput());
 		String field = searchData.getField();
 		
 		if (field.equals("form") && StringUtils.containsAccents(query))
