@@ -1,5 +1,7 @@
 package de.unikoeln.vedaweb.controllers;
 
+import java.util.Date;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -21,6 +23,7 @@ public class SearchController {
 	
 	@PostMapping(value = "/search", produces = {"application/json"})
     public String searchView(@RequestBody SearchData searchData) {
+		System.out.println("SEARCH REQUEST: " + searchData.hashCode());
     	return search.search(searchData).toString();
     }
 	

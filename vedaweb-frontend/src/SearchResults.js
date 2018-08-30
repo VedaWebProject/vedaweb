@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Table, Icon, Select } from 'antd';
+import { Table, Icon } from 'antd';
 
 import { Link, withRouter } from 'react-router-dom';
 
@@ -13,8 +13,6 @@ import axios from 'axios';
 import { Base64 } from 'js-base64';
 
 import searchResultsStore from "./stores/searchResultsStore";
-
-const Option = Select.Option;
 
 
 class SearchResults extends Component {
@@ -36,17 +34,13 @@ class SearchResults extends Component {
             this.handleNewQuery(this.props.match.params.querydata);
     }
 
-    handleResultsPerPageChange = (value, option) => {
-        searchResultsStore.size = value;
-        this.loadData(searchResultsStore.queryJSON);
-    }
-
     handleTableChange = (pagination) => {
         searchResultsStore.page = pagination.current;
+        searchResultsStore.size = pagination.pageSize;
         this.loadData(searchResultsStore.queryJSON);
     }
 
-    handleNewQuery(queryData){
+    handleNewQuery = (queryData) => {
         this.setState({
             isLoaded: false
         });
@@ -72,7 +66,7 @@ class SearchResults extends Component {
         this.loadData(queryJSON);
     }
 
-    loadData(queryJSON){
+    loadData = (queryJSON) => {
         this.setState({
             isLoaded: false,
             error: undefined,
@@ -83,12 +77,10 @@ class SearchResults extends Component {
         queryJSON.size = searchResultsStore.size;
 
         //request search api data
-        console.log("SEARCH REQUEST: " + JSON.stringify(queryJSON));
         axios.post("/api/search", queryJSON)
             .then((response) => {
                 searchResultsStore.resultsData = response.data;
                 searchResultsStore.total = response.data.hits.total;
-                console.log("SEARCH RESPONSE: " + JSON.stringify(response.data));
                 this.setState({
                     isLoaded: true,
                     tableData: response.data.hits === undefined ? {} :
@@ -133,7 +125,6 @@ class SearchResults extends Component {
 
         const { error, isLoaded } = this.state;
         const data = searchResultsStore.resultsData;
-        const resultsPerPageOptions = [10, 25, 50, 100];
 
         //define table columns
         const columns = [{
@@ -184,24 +175,6 @@ class SearchResults extends Component {
                                 }
                             </div>
                             
-                            {/** RESULTS PER PAGE SELECT **/}
-                            <div className="content-right secondary-font bottom-gap">
-                                Results per page:
-                                <Select
-                                value={searchResultsStore.size}
-                                onSelect={this.handleResultsPerPageChange}
-                                className="gap-left secondary-font">
-                                    {resultsPerPageOptions.map(value => (
-                                        <Option
-                                        key={'rpp_' + value}
-                                        value={value}
-                                        className="secondary-font">
-                                            {value}
-                                        </Option>
-                                    ))}
-                                </Select>
-                            </div>
-
                             {/** RESULTS **/}
                             <Table
                             columns={columns}
@@ -212,7 +185,9 @@ class SearchResults extends Component {
                                 pageSize: searchResultsStore.size,
                                 current: searchResultsStore.page,
                                 total: searchResultsStore.total,
-                                position: 'both'
+                                position: 'both',
+                                showSizeChanger: true,
+                                pageSizeOptions: ['10','25','50','100']
                             }}
                             onChange={this.handleTableChange} />
 

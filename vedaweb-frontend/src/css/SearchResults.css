@@ -37,3 +37,8 @@
 .ant-pagination-item {
     font-family: "Dosis", sans-serif;
 }
+
+.ant-pagination-options-size-changer,
+#search-results .ant-select-dropdown {
+    font-family: "Dosis", sans-serif;
+}
