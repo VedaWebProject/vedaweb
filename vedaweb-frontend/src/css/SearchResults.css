@@ -25,7 +25,6 @@
 }
 
 .search-stats {
-    font-family: "Dosis", sans-serif;
     font-size: 18px;
     color: #776;
 }
@@ -33,4 +32,8 @@
 #search-results table em {
     font-style: normal;
     font-weight: bold;
+}
+
+.ant-pagination-item {
+    font-family: "Dosis", sans-serif;
 }

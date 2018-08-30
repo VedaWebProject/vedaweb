@@ -28,6 +28,10 @@ public class SearchData {
 	
 	@JsonProperty("from")
 	private int from;
+	
+	@JsonProperty("size")
+	private int size;
+	
 
 	
 	public SearchData(){
@@ -97,6 +101,16 @@ public class SearchData {
 
 	public void setFrom(int from) {
 		this.from = from;
+	}
+	
+
+	public int getSize() {
+		return size;
+	}
+
+
+	public void setSize(int size) {
+		this.size = size;
 	}
 
 

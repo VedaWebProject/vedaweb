@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import Sanscript from 'sanscript';
+import SanscriptAccents from './SanscriptAccents';
 
 import "./css/TransliterationPreview.css";
 
@@ -9,9 +9,9 @@ class TransliterationPreview extends Component {
 
         return (
 
-            <div className="transliteration">
+            <div className="transliteration trans-font">
                 {(this.props.input !== null && this.props.input.length > 0) &&
-                    Sanscript.t(this.props.input, this.props.transliteration, "iso")
+                    SanscriptAccents.t(this.props.input, this.props.transliteration, "iso")
                 }
                 {/*<br/><br/>{
                     Sanscript.t(this.props.input, this.props.transliteration, "devanagari")

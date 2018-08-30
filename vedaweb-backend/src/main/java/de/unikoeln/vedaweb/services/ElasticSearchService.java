@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 
 import de.unikoeln.vedaweb.search.SearchData;
 import de.unikoeln.vedaweb.search.SearchRequestBuilder;
-import de.unikoeln.vedaweb.util.StringUtils;
 
 @Service
 public class ElasticSearchService {

@@ -1,8 +1,6 @@
 import React, { Component } from "react";
 import { Input, Tooltip, Select } from 'antd';
 
-import Sanscript from 'sanscript';
-
 import searchSmartStore from "./stores/searchSmartStore";
 import uiDataStore from "./stores/uiDataStore";
 import { view } from 'react-easy-state';
@@ -13,6 +11,7 @@ import { withRouter } from 'react-router-dom';
 import { Base64 } from 'js-base64';
 
 import "./css/SearchSmart.css";
+import SanscriptAccents from "./SanscriptAccents";
 
 
 const Option = Select.Option;
@@ -31,7 +30,7 @@ class SearchSmart extends Component {
         } else {
             let jsonData = {
                 mode: "smart",
-                input: searchSmartStore.data.field === "form" ? Sanscript.t(input, "hk", "iso") : input,
+                input: searchSmartStore.data.field === "form" ? SanscriptAccents.t(input, "hk", "iso") : input,
                 field: searchSmartStore.data.field
             };
             this.props.history.push("/results/" + Base64.encode(JSON.stringify(jsonData)));
@@ -62,7 +61,6 @@ class SearchSmart extends Component {
             ? <TransliterationPreview input={searchSmartStore.data.input} transliteration="hk" />
             : null
         );
-
 
         return (
 

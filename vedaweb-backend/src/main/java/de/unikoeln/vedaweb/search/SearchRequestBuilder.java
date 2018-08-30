@@ -47,7 +47,6 @@ public class SearchRequestBuilder {
 		//Highlighting
 		addHighlighting(searchSourceBuilder, "form", "form_raw", "translation");
 		
-		searchSourceBuilder.size(10);
 		searchSourceBuilder.fetchSource(FETCH_SOURCE_CONTEXT);
 		searchRequest.source(searchSourceBuilder);
 		return searchRequest;
@@ -196,8 +195,8 @@ public class SearchRequestBuilder {
 	
 	private static SearchSourceBuilder getCommonSearchSource(SearchData searchData) {
 		SearchSourceBuilder source = new SearchSourceBuilder();
-		int from = searchData.getFrom();
-		source.from(from >= 0 ? from : 0);
+		source.from(searchData.getFrom() >= 0 ? searchData.getFrom() : 0);
+		source.size(searchData.getSize() >= 0 ? searchData.getSize() : 0);
 		return source;
 	}
 	

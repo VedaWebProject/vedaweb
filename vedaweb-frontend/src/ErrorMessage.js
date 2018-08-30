@@ -7,7 +7,7 @@ class ErrorMessage extends Component {
 
         return (
 
-            <div className="card-nobox content-center">
+            <div className="card-nobox content-center secondary-font">
                 <div className="inline-block content-left">
                     <Icon type="meh-o" className="gap-right" />
                     <b>There was an error requesting the data.</b>

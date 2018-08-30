@@ -6,8 +6,6 @@ import ErrorMessage from "./ErrorMessage";
 
 import "./css/ContentView.css";
 
-import Sanscript from 'sanscript';  
-
 import { withRouter } from 'react-router-dom';
 
 import appStateStore from "./stores/appStateStore";
@@ -16,6 +14,7 @@ import { view } from 'react-easy-state';
 import scrollToComponent from 'react-scroll-to-component';
 
 import axios from 'axios';
+import SanscriptAccents from "./SanscriptAccents";
 
 const Option = Select.Option;
 
@@ -141,11 +140,11 @@ class ContentView extends Component {
                                             <div
                                             className="glossing content-block card"
                                             ref={this.scrollTo}>
-                                                <h4>Devanagari transliteration</h4>
+                                                <h4>Devanagari (generated)</h4>
                                                 {data.padas.map(pada => (
                                                     <div className="bottom-gap-small" key={"p_plain_" + pada.index}>
                                                         <span key={"p_plain_line" + pada.index} className="pada-line">{pada.line}</span>
-                                                        <span key={"p_plain_form" + pada.index} className="pada-form">{Sanscript.t(pada.form, "iso", "devanagari")}</span><br/>
+                                                        <span key={"p_plain_form" + pada.index} className="pada-form">{SanscriptAccents.t(pada.form, "iso", "devanagari")}</span><br/>
                                                     </div>
                                                 ))}
                                             </div>
@@ -232,6 +231,7 @@ class ContentView extends Component {
                                             </div>
                                         }
 
+                                        {/*
                                         {appStateStore.viewFilter.something1 &&
                                             <div
                                             className="content-block card"
@@ -249,6 +249,7 @@ class ContentView extends Component {
                                                 Something else...
                                             </div>
                                         }
+                                        */}
 
                                     </div>
                                 }
@@ -265,7 +266,7 @@ class ContentView extends Component {
                                             disabled={!isLoaded || error !== undefined}
                                             checked={appStateStore.viewFilter.devanagari}
                                             size="small" />
-                                            Devanagari transliteration
+                                            Devanagari (generated)
                                         </div>
                                         <div className="view-filter">
                                             <Switch
@@ -294,6 +295,7 @@ class ContentView extends Component {
                                             size="small" />
                                             Dictionary
                                         </div>
+                                        {/*
                                         <div className="view-filter">
                                             <Switch
                                             onChange={(e) => this.filterChange("something1", e)}
@@ -310,6 +312,7 @@ class ContentView extends Component {
                                             size="small" />
                                             Something else
                                         </div>
+                                        */}
                                     </div>
 
                                     <div className="card">

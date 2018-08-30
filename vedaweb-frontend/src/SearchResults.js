@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Table, Pagination, Spin } from 'antd';
+import { Table, Icon, Select } from 'antd';
 
 import { Link, withRouter } from 'react-router-dom';
 
@@ -12,33 +12,55 @@ import { view } from 'react-easy-state';
 import axios from 'axios';
 import { Base64 } from 'js-base64';
 
+import searchResultsStore from "./stores/searchResultsStore";
+
+const Option = Select.Option;
+
 
 class SearchResults extends Component {
 
 
     constructor(props) {
         super(props)
-        this.state ={
-            data: {},
-            queryData: "",
+        this.state = {
             isLoaded: false
         }
     }
 
     componentDidMount(){
-        this.loadData(this.props.match.params.querydata);
+        this.handleNewQuery(this.props.match.params.querydata);
     }
 
     componentDidUpdate(){
-        if (this.state.queryData !== this.props.match.params.querydata)
-            this.loadData(this.props.match.params.querydata);
+        if (searchResultsStore.queryEncoded !== this.props.match.params.querydata)
+            this.handleNewQuery(this.props.match.params.querydata);
     }
 
-    loadData(queryData){
-        let queryJson = {};
+    handleResultsPerPageChange = (value, option) => {
+        searchResultsStore.size = value;
+        this.loadData(searchResultsStore.queryJSON);
+    }
+
+    handleTableChange = (pagination) => {
+        searchResultsStore.page = pagination.current;
+        this.loadData(searchResultsStore.queryJSON);
+    }
+
+    handleNewQuery(queryData){
+        this.setState({
+            isLoaded: false
+        });
+
+        searchResultsStore.queryEncoded = queryData;
+        searchResultsStore.page = 1;
+
+        let queryJSON = {};
 
         try {
-            queryJson = JSON.parse(Base64.decode(queryData));
+            queryJSON = JSON.parse(Base64.decode(queryData));
+            queryJSON.from = 0;
+            queryJSON.size = searchResultsStore.size;
+            searchResultsStore.queryJSON = queryJSON;
         } catch (e) {
             this.setState({
                 isLoaded: true,
@@ -47,21 +69,37 @@ class SearchResults extends Component {
             return;
         }
 
-        //console.log("QUERY: " + JSON.stringify(queryJson));
+        this.loadData(queryJSON);
+    }
 
+    loadData(queryJSON){
         this.setState({
             isLoaded: false,
             error: undefined,
-            queryData: queryData,
-            queryDisplay: queryJson.mode === "grammar" ? "grammar search" : queryJson.input
+            queryDisplay: queryJSON.mode === "grammar" ? "grammar search" : queryJSON.input
         });
 
+        queryJSON.from = ((searchResultsStore.page - 1) * searchResultsStore.size);
+        queryJSON.size = searchResultsStore.size;
+
         //request search api data
-        axios.post("/api/search", queryJson)
+        console.log("SEARCH REQUEST: " + JSON.stringify(queryJSON));
+        axios.post("/api/search", queryJSON)
             .then((response) => {
+                searchResultsStore.resultsData = response.data;
+                searchResultsStore.total = response.data.hits.total;
+                console.log("SEARCH RESPONSE: " + JSON.stringify(response.data));
                 this.setState({
                     isLoaded: true,
-                    data: response.data
+                    tableData: response.data.hits === undefined ? {} :
+                        response.data.hits.hits.map( (hit, i) => ({
+                            key: 'result_' + i,
+                            location:   
+                                (hit._source.book + "").padStart(2, "0") + "." +
+                                (hit._source.hymn + "").padStart(3, "0") + "." +
+                                (hit._source.verse + "").padStart(2, "0"),
+                            text: <div dangerouslySetInnerHTML={this.createHighlightHTML(hit)}></div>
+                        }))
                 });
             })
             .catch((error) => {
@@ -93,9 +131,9 @@ class SearchResults extends Component {
 
     render() {
 
-        const { error, isLoaded, data } = this.state;
-
-        //console.log(JSON.stringify(data));
+        const { error, isLoaded } = this.state;
+        const data = searchResultsStore.resultsData;
+        const resultsPerPageOptions = [10, 25, 50, 100];
 
         //define table columns
         const columns = [{
@@ -106,28 +144,10 @@ class SearchResults extends Component {
           }, {
             title: 'Text',
             dataIndex: 'text',
-            key: 'text'
+            key: 'text',
           }];
           
-        //map table data
-        const tableData = data.hits === undefined ? {} :
-            data.hits.hits.map( (hit, i) => ({
-                key: 'result_' + i,
-                location:   
-                    (hit._source.book + "").padStart(2, "0") + "." +
-                    (hit._source.hymn + "").padStart(3, "0") + "." +
-                    (hit._source.verse + "").padStart(2, "0"),
-                //text: hit._source.form,
-                text: <div dangerouslySetInnerHTML={this.createHighlightHTML(hit)}></div>
-            }));
-
-
         return (
-
-            <Spin
-            size="large"
-            spinning={!isLoaded}
-            className="spinner-loading">
 
                 <div className="page-content">
 
@@ -146,43 +166,61 @@ class SearchResults extends Component {
                                 Search Results for <span className="trans-font grey">{this.state.queryDisplay}</span>
                             </h4>
 
+
                             {/** SEARCH STATS **/}
-                            { isLoaded && data.hits.hits !== undefined &&
-                                <div className="search-stats bottom-gap">
-                                    Hits: {data.hits.total} &mdash; Took: {data.took} ms
-                                </div>
-                            }
+                            
+                            <div className="search-stats bottom-gap secondary-font">
+                                { isLoaded && data.hits.hits !== undefined ?
+                                    data.hits.total > 0 ?
+                                        <span>
+                                            Results: { data.hits.total } &mdash;
+                                            Took: { data.took } ms
+                                        </span>
+                                        :
+                                        <span>
+                                            There are no results for this search. <Icon type="frown-o"/>
+                                        </span>
+                                     : <span>Searching ...</span>
+                                }
+                            </div>
+                            
+                            {/** RESULTS PER PAGE SELECT **/}
+                            <div className="content-right secondary-font bottom-gap">
+                                Results per page:
+                                <Select
+                                value={searchResultsStore.size}
+                                onSelect={this.handleResultsPerPageChange}
+                                className="gap-left secondary-font">
+                                    {resultsPerPageOptions.map(value => (
+                                        <Option
+                                        key={'rpp_' + value}
+                                        value={value}
+                                        className="secondary-font">
+                                            {value}
+                                        </Option>
+                                    ))}
+                                </Select>
+                            </div>
 
                             {/** RESULTS **/}
-                            { isLoaded && data.hits.hits !== undefined
-                                && data.hits.hits.length > 0 &&
-                                
-                                <Table
-                                columns={columns}
-                                dataSource={tableData}
-                                pagination={
-                                    <Pagination
-                                    defaultPageSize={10}
-                                    pageSize={10}
-                                    current={data.from}
-                                    total={data.hits.total}
-                                    onChange={this.onPageChange} />
-                                } />
-
-                                //+ JSON.stringify(data)
-                            }
-
-                            {/** NO RESULTS **/}
-                            { isLoaded && data.hits.hits !== undefined
-                                && data.hits.hits.length === 0 &&
-                                "There are no results for this search."
-                            }
+                            <Table
+                            columns={columns}
+                            dataSource={this.state.tableData}
+                            loading={!this.state.isLoaded}
+                            locale={{emptyText: 'No results'}}
+                            pagination={{
+                                pageSize: searchResultsStore.size,
+                                current: searchResultsStore.page,
+                                total: searchResultsStore.total,
+                                position: 'both'
+                            }}
+                            onChange={this.handleTableChange} />
 
                         </div>
                     }
                 </div>
 
-            </Spin>
+            // </Spin>
         );
     }
 

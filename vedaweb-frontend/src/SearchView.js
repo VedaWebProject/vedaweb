@@ -7,7 +7,7 @@ import SearchScopeContainer from "./SearchScopeContainer";
 import SearchTransliteration from "./SearchTransliteration";
 import SearchScopeIndicator from "./SearchScopeIndicator";
 
-import Sanscript from 'sanscript';
+import SanscriptAccents from './SanscriptAccents';
 
 import './css/SearchView.css';
 
@@ -45,7 +45,7 @@ class SearchView extends Component {
             jsonData["blocks"] = JSON.parse(JSON.stringify(searchGrammarStore.data.blocks));
 
             for (let block of jsonData.blocks){
-                block.form = Sanscript.t(block.form, searchMetaStore.transliteration.id, "iso");
+                block.form = SanscriptAccents.t(block.form, searchMetaStore.transliteration.id, "iso");
                 for (let field of block.fields){
                     if (field.value.length > 0)
                         block[field.name] = field.value
@@ -155,11 +155,11 @@ class SearchView extends Component {
                             Search Settings
                         </h4>
 
-                        <Collapse bordered={false}>
+                        <Collapse bordered={false} defaultActiveKey="transliteration">
 
                             <Panel
                             header={searchTransliterationPanelHeader}
-                            key={"1" + searchMetaStore.transliteration.name}
+                            key={"transliteration"}
                             style={customPanelStyle}
                             forceRender={true}>
                                 <div style={panelContentStyle}>
@@ -169,7 +169,7 @@ class SearchView extends Component {
 
                             <Panel
                             header={searchScopePanelHeader}
-                            key="2"
+                            key="scope"
                             style={customPanelStyle}
                             forceRender={true}>
                                 <SearchScopeContainer/>
