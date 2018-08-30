@@ -8,7 +8,7 @@ public class StringUtils {
 	
 	public static String normalize(String s){
 		return s == null ? "" :
-			Normalizer.normalize(s, Form.NFC);
+			Normalizer.normalize(s, Form.NFD);
 	}
 	
 	

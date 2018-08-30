@@ -37,7 +37,7 @@ public class SearchRequestBuilder {
 		String query = StringUtils.normalize(searchData.getInput());
 		String field = searchData.getField();
 		
-		if (field.equals("form") && StringUtils.containsAccents(query))
+		if (StringUtils.containsAccents(query) && field.equals("form"))
 			field = "form_raw";
 		
 		//match query
