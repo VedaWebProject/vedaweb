@@ -23,7 +23,6 @@ public class SearchController {
 	
 	@PostMapping(value = "/search", produces = {"application/json"})
     public String searchView(@RequestBody SearchData searchData) {
-		System.out.println("SEARCH REQUEST: " + searchData.hashCode());
     	return search.search(searchData).toString();
     }
 	
