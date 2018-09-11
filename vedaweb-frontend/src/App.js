@@ -77,8 +77,13 @@ class App extends Component {
                         className="spinner-loading"/>
                     }
 
+                    {/* ERROR MESSAGE: FRONTEND UI DATA COULD NOT BE LOADED */}
                     { isLoaded && error !== undefined &&
-                        <h4>There was an error loading the application data.</h4>
+                        <div className="error-msg">
+                            <Icon type="frown-o" className="gap-right"/>
+                            There was an error loading the application data. 
+                            This could be due to a temporary server problem.
+                        </div>
                     }
 
                     { isLoaded && error === undefined &&

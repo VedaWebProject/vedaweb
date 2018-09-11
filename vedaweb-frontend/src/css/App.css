@@ -196,3 +196,12 @@ div.inline-block {
 .flex-grow-2 {
     flex-grow: 2;
 }
+
+.error-msg {
+    padding: 2rem;
+    text-align: center;
+    vertical-align: middle;
+    font-size: 20px;
+    color: #931111;
+    font-family: "Dosis", sans-serif;
+}
