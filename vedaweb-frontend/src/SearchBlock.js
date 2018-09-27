@@ -48,7 +48,7 @@ class SearchBlock extends Component {
                         justify="center">
 
                             <Col span={9} className="search-input-label content-right">
-                                <span className="secondary-font">Search term:</span>
+                                <span className="secondary-font font-18">Search term:</span>
                             </Col>
 
                             <Col span={9}>

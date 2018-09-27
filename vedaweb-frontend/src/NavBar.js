@@ -41,7 +41,7 @@ class NavBar extends Component {
                 </NavLink>
 
                 <div className="flex-grow-1">
-                    <SearchSmart />
+                    <SearchSmart /> 
                 </div>
 
                 <div className="flex-grow-2">
