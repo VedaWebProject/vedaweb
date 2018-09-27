@@ -22,6 +22,7 @@ class SearchScope extends Component {
 
                 <Col span={4}>
                     <Select
+                    showSearch
                     value={fromBook}
                     defaultValue={0}
                     className="search-scope-select-book"
@@ -43,6 +44,7 @@ class SearchScope extends Component {
 
                 <Col span={4}>
                     <Select
+                    showSearch
                     value={fromHymn}
                     defaultValue={0}
                     className="search-scope-select-book"
@@ -67,6 +69,7 @@ class SearchScope extends Component {
 
                 <Col span={4}>
                     <Select
+                    showSearch
                     value={toBook}
                     defaultValue={0}
                     className="search-scope-select-book"
@@ -89,6 +92,7 @@ class SearchScope extends Component {
 
                 <Col span={4}>
                     <Select
+                    showSearch
                     value={toHymn}
                     defaultValue={0}
                     className="search-scope-select-book"
