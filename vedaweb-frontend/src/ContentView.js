@@ -14,7 +14,6 @@ import { view } from 'react-easy-state';
 import scrollToComponent from 'react-scroll-to-component';
 
 import axios from 'axios';
-import SanscriptAccents from "./SanscriptAccents";
 
 const Option = Select.Option;
 
@@ -138,14 +137,13 @@ class ContentView extends Component {
 
                                         {appStateStore.viewFilter.devanagari &&
                                             <div
-                                            className="glossing content-block card"
+                                            className="content-block card deva-font"
                                             ref={this.scrollTo}>
-                                                <h4>Devanagari (generated)</h4>
-                                                {data.padas.map(pada => (
-                                                    <div className="bottom-gap-small" key={"p_plain_" + pada.index}>
-                                                        <span key={"p_plain_line" + pada.index} className="pada-line">{pada.line}</span>
-                                                        <span key={"p_plain_form" + pada.index} className="pada-form">{SanscriptAccents.t(pada.form, "iso", "devanagari")}</span><br/>
-                                                    </div>
+                                                <h4>Devanagari (Detlef)</h4>
+                                                {data.versions.filter(v => v.language === 'deva').map(v => (
+                                                    v.form.map(line => (
+                                                        <div>{line}</div>
+                                                    ))
                                                 ))}
                                             </div>
                                         }
@@ -154,7 +152,7 @@ class ContentView extends Component {
                                             <div
                                             className="glossing content-block card"
                                             ref={this.scrollTo}>
-                                                <h4>Grammatical Glossing</h4>
+                                                <h4>Morphological Glossing</h4>
                                                 {data.padas.map(pada => (
                                                     <div
                                                     className="glossing-line"
@@ -198,14 +196,19 @@ class ContentView extends Component {
                                             ref={this.scrollTo}>
                                                 <h4>Translations</h4>
                                                 {data.translations.map(translation => (
-                                                    <div key={"trans_" + translation.source}>
+                                                    <div key={"trans_" + translation.source} className="translation">
                                                         <span className="bold">{
                                                             translation.language.toUpperCase() === "DE" ? "German" :
                                                             translation.language.toUpperCase() === "EN" ? "English" :
                                                             translation.language.toUpperCase() === "FR" ? "French" : "?"
                                                         }</span>
-                                                        <span className="first-cap"> ({translation.source})</span><br/>
-                                                        <span className="italic">{translation.translation}</span>
+                                                        <span className="first-cap"> ({translation.source})</span>
+                                                        <br/>
+                                                        <div className="italic">
+                                                            {translation.form.map(line => (
+                                                                <div>{line}</div>
+                                                            ))}
+                                                        </div>
                                                     </div>
                                                 ))}
                                             </div>
@@ -228,6 +231,17 @@ class ContentView extends Component {
                                                         ))
                                                     ))}
                                                 </div>
+                                            </div>
+                                        }
+
+                                        {appStateStore.viewFilter.metaInfo &&
+                                            <div
+                                            className="glossing content-block card"
+                                            ref={this.scrollTo}>
+                                                <h4>Meta Info</h4>
+                                                <span className="bold gap-right">Hymn Addressee:</span>{data.hymnAddressee}<br/>
+                                                <span className="bold gap-right">Hymn Group:</span>{data.hymnGroup}<br/>
+                                                <span className="bold gap-right">Strata:</span>{data.strata}<br/>
                                             </div>
                                         }
 
@@ -266,7 +280,7 @@ class ContentView extends Component {
                                             disabled={!isLoaded || error !== undefined}
                                             checked={appStateStore.viewFilter.devanagari}
                                             size="small" />
-                                            Devanagari (generated)
+                                            Devanagari
                                         </div>
                                         <div className="view-filter">
                                             <Switch
@@ -275,7 +289,7 @@ class ContentView extends Component {
                                             disabled={!isLoaded || error !== undefined}
                                             checked={appStateStore.viewFilter.grammar}
                                             size="small" />
-                                            Grammar Glossings
+                                            Morphological Glossing
                                         </div>
                                         <div className="view-filter">
                                             <Switch
@@ -294,6 +308,15 @@ class ContentView extends Component {
                                             checked={appStateStore.viewFilter.dictionary}
                                             size="small" />
                                             Dictionary
+                                        </div>
+                                        <div className="view-filter">
+                                            <Switch
+                                            defaultChecked
+                                            onChange={(e) => this.filterChange("metaInfo", e)}
+                                            disabled={!isLoaded || error !== undefined}
+                                            checked={appStateStore.viewFilter.metaInfo}
+                                            size="small" />
+                                            Meta Info
                                         </div>
                                         {/*
                                         <div className="view-filter">
