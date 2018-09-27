@@ -75,18 +75,14 @@ class SearchView extends Component {
         const panelContentStyle = {padding: 12};
 
         const helpText = <div className="search-container">
-                            <h4>VedaVeb Search Modes</h4>
-                            This document describes the holy search 
-                            modes as they were handed down for generations.<br/>
-                            There is a simple one and a more complex one. Choose from 
-                            your options wisely.<br/>If these enlightened words are not 
-                            verbose enough for you, please feel free to call our hotline:<br/>
-                            +49 221 S-A-N-S-K-R-I-T
+                            <h3>VedaVeb Advanced Search Modes</h3>
+                            In the future, this place might be home to a detailed explanation of the different search modes.<br/>
+                            Rumors mention regular expressions and all kinds of useful magic.
                         </div>;
 
         const searchTransliterationPanelHeader =
             <div>
-                {"Input Transliteration: "}
+                {"Input Method: "}
                 <span className="red trans-font">
                     {searchMetaStore.transliteration.name}
                 </span>
@@ -94,7 +90,7 @@ class SearchView extends Component {
 
         const searchScopePanelHeader =
             <div>
-                {"Search Scope: "}
+                {"Delimit Search Range: "}
                 <span className="red trans-font">
                     <SearchScopeIndicator />
                 </span>
@@ -103,7 +99,12 @@ class SearchView extends Component {
 
         return (
 
-            <Row id="search-view" className="page-content" key="search-view">
+            <Row
+            type="flex"
+            justify="center"
+            id="search-view"
+            className="page-content"
+            key="search-view">
 
                 <Col xl={12}>
                     <div className="card">
@@ -111,6 +112,18 @@ class SearchView extends Component {
                             <Icon type="search" className="gap-right"/>
                             Advanced Search
                         </h4>
+
+                        <Collapse bordered={false}>
+                            <Panel
+                            header={searchTransliterationPanelHeader}
+                            key={"transliteration"}
+                            style={customPanelStyle}
+                            forceRender={true}>
+                                <div style={panelContentStyle}>
+                                    <SearchTransliteration/>
+                                </div>
+                            </Panel>
+                        </Collapse> 
                         
                         <Tabs
                         onChange={this.switchMode}
@@ -120,18 +133,28 @@ class SearchView extends Component {
                             <TabPane tab="Grammar Search" key="grammar">
                                 <SearchGrammar />
                             </TabPane>
-                            <TabPane tab="Simple Search" key="simple">
+                            {/* <TabPane tab="Simple Search" key="simple">
                                 <SearchSimple/>
-                            </TabPane>
+                            </TabPane> */}
                             <TabPane tab="Other Search" key="somemode">
                                 <div className="search-container">
-                                Some other search mode...
+                                    More additional search modes will find their way here, soon ...
                                 </div>
                             </TabPane>
                             <TabPane tab={<Icon type="question"/>} key="help">
                                 {helpText}
                             </TabPane>
                         </Tabs>
+
+                        <Collapse bordered={false}>
+                            <Panel
+                            header={searchScopePanelHeader}
+                            key="scope"
+                            style={customPanelStyle}
+                            forceRender={true}>
+                                <SearchScopeContainer/>
+                            </Panel>
+                        </Collapse>
 
                         <Row>
                             <Col span={12} offset={12} className="content-right">
@@ -147,37 +170,6 @@ class SearchView extends Component {
                     
                     </div>
                 </Col>
-
-                <Col xl={12}>
-                    <div className="card">
-                        <h4>
-                            <Icon type="paper-clip" className="gap-right"/>
-                            Search Settings
-                        </h4>
-
-                        <Collapse bordered={false} defaultActiveKey="transliteration">
-
-                            <Panel
-                            header={searchTransliterationPanelHeader}
-                            key={"transliteration"}
-                            style={customPanelStyle}
-                            forceRender={true}>
-                                <div style={panelContentStyle}>
-                                    <SearchTransliteration/>
-                                </div>
-                            </Panel>
-
-                            <Panel
-                            header={searchScopePanelHeader}
-                            key="scope"
-                            style={customPanelStyle}
-                            forceRender={true}>
-                                <SearchScopeContainer/>
-                            </Panel>
-                        </Collapse>
-                    </div>
-                </Col>
-
             </Row>
         );
 
