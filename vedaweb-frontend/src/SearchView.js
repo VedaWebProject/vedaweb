@@ -55,6 +55,10 @@ class SearchView extends Component {
             }
         }
 
+        jsonData.scopes = jsonData.scopes.filter(scope => (
+            (scope.fromBook + scope.toBook + scope.fromHymn + scope.toHymn) > 0
+        ));
+
         this.props.history.push("/results/" + Base64.encode(JSON.stringify(jsonData)));
     }
 

@@ -64,4 +64,9 @@ public class SearchScope {
 			&& toHymn == 0;
 	}
 	
+	@Override
+	public String toString() {
+		return fromBook + "." + fromHymn + "-" + toBook + "." + toHymn;
+	}
+	
 }

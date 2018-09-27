@@ -9,6 +9,7 @@ import org.elasticsearch.index.query.BoolQueryBuilder;
 import org.elasticsearch.index.query.MatchAllQueryBuilder;
 import org.elasticsearch.index.query.MatchQueryBuilder;
 import org.elasticsearch.index.query.QueryBuilders;
+import org.elasticsearch.index.query.RangeQueryBuilder;
 import org.elasticsearch.search.aggregations.AggregationBuilders;
 import org.elasticsearch.search.aggregations.bucket.nested.NestedAggregationBuilder;
 import org.elasticsearch.search.aggregations.bucket.terms.TermsAggregationBuilder;
@@ -65,7 +66,8 @@ public class SearchRequestBuilder {
 		addGrammarBlockQueries(bool, searchData);
 		
 		//add search scope queries
-		//addScopeQueries(bool, searchData.getScopes());
+		if (searchData.getScopes().size() > 0)
+			bool.must(getSearchScopesQuery(searchData));
 		
 		searchSourceBuilder.query(bool);
 
@@ -164,6 +166,35 @@ public class SearchRequestBuilder {
 		}
 		  
 		searchSourceBuilder.highlighter(highlightBuilder);
+	}
+	
+	
+	private static BoolQueryBuilder getSearchScopesQuery(SearchData searchData) {
+		BoolQueryBuilder scopesQuery = QueryBuilders.boolQuery();
+		for (SearchScope scope : searchData.getScopes()) {
+			BoolQueryBuilder scopeQuery = QueryBuilders.boolQuery();
+			//construct and add query for book range
+			if (scope.getFromBook() > 0 || scope.getToBook() > 0) {
+				RangeQueryBuilder bookRange = QueryBuilders.rangeQuery("book");
+				if (scope.getFromBook() > 0)
+					bookRange.gte(scope.getFromBook());
+				if (scope.getToBook() > 0)
+					bookRange.lte(scope.getToBook());
+				scopeQuery.must(bookRange);
+			}
+			//construct and add query for hymn range
+			if (scope.getFromHymn() > 0 || scope.getToHymn() > 0) {
+				RangeQueryBuilder hymnRange = QueryBuilders.rangeQuery("hymn");
+				if (scope.getFromHymn() > 0)
+					hymnRange.gte(scope.getFromHymn());
+				if (scope.getToHymn() > 0)
+					hymnRange.lte(scope.getToHymn());
+				scopeQuery.must(hymnRange);
+			}
+			//add to root scopes query
+			scopesQuery.should(scopeQuery);
+		}
+		return scopesQuery;
 	}
 	
 	
