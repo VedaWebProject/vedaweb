@@ -26,7 +26,9 @@ public class UiDataService {
 	
 	@PostConstruct
 	public void init() {
-		if (uiData == null) {
+		if (!indexService.indexExists()) {
+			System.err.println("[UiDataService] Error: Could not request UI data. Search index doesn't seem to exist.");
+		} else if (uiData == null) {
 			uiData = new JSONObject();
 			
 			//load ui data template file
@@ -40,9 +42,11 @@ public class UiDataService {
 			((JSONObject)uiData.query("/search/grammar"))
 				.put("tags", indexService.getUIGrammarData());
 			
-			//TODO: get "locus" data from index and add to uiData JSONObject
-//			((JSONObject)uiData.query("/search/grammar"))
-//				.put("tags", indexService.getGrammarAggregations().getJSONArray("tags"));
+			//get hymn count data for every book from index and add to uiData JSONObject
+			((JSONObject)uiData.query("/search/meta"))
+				.put("scopes", indexService.getUIBooksData());
+			
+			System.out.println("[UiDataService] Successfully initialized UI data object for frontend requests.");
 		}
 	}
 

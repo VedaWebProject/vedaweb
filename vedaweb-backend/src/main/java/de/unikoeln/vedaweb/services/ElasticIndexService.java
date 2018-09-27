@@ -19,7 +19,10 @@ import org.elasticsearch.action.bulk.BulkResponse;
 import org.elasticsearch.action.index.IndexRequest;
 import org.elasticsearch.action.search.SearchRequest;
 import org.elasticsearch.action.search.SearchResponse;
+import org.elasticsearch.client.Response;
 import org.elasticsearch.common.xcontent.XContentType;
+import org.elasticsearch.index.query.MatchQueryBuilder;
+import org.elasticsearch.index.query.QueryBuilders;
 import org.elasticsearch.search.aggregations.Aggregation;
 import org.elasticsearch.search.aggregations.AggregationBuilders;
 import org.elasticsearch.search.aggregations.bucket.nested.Nested;
@@ -246,7 +249,7 @@ public class ElasticIndexService {
 		JSONObject response = (JSONObject) urlRequest(
 				"get",
 				"vedaweb/_mapping/doc/field/tokens.grammar.*",
-				"\"/vedaweb/mappings/doc\"");
+				"/vedaweb/mappings/doc");
 		
 		for (String prop : response.keySet()) {
 			grammarFields.add(prop.replaceAll("^(\\w+\\.)+", ""));
@@ -258,9 +261,40 @@ public class ElasticIndexService {
 	
 	//TODO
 	public JSONArray getUIBooksData() {
-		//Map<Integer, Integer> books = new HashMap<>();
+		JSONArray books = new JSONArray();
+		int booksCount = (int) distinct("book");
 		
-		return null;
+		for (int i = 1; i <= booksCount; i++) {
+			//match current book
+			MatchQueryBuilder match = QueryBuilders.matchQuery("book", i);
+			//aggregation for distinct hymn number values
+			CardinalityAggregationBuilder agg = 
+					AggregationBuilders.cardinality("hymns").field("hymn");
+			//compose request source
+			SearchSourceBuilder searchSourceBuilder = 
+					new SearchSourceBuilder().query(match).aggregation(agg);
+			//create request
+			SearchRequest req = new SearchRequest("vedaweb").types("doc").source(searchSourceBuilder);
+			try {
+				SearchResponse response = elastic.client().search(req);
+				books.put(((Cardinality)response.getAggregations().get("hymns")).getValue());
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+		return books;
+	}
+	
+	
+	public boolean indexExists() {
+		Response response = null;
+		try {
+			response = elastic.client().getLowLevelClient().performRequest("HEAD", "/" + indexName);
+		} catch (IOException e) {
+			System.err.println("[IndexService] Error: Could not check if index exists. Request failed.");
+			e.printStackTrace();
+		}
+        return response != null && response.getStatusLine().getStatusCode() != 404;
 	}
 	
 	
@@ -283,11 +317,10 @@ public class ElasticIndexService {
 	private Object urlRequest(String method, String url, String jsonQuery) {
 		JSONObject response = urlRequest(method, url);
 		if (response == null) return null;
-		return response.query("/vedaweb/mappings/doc");
+		return response.query(jsonQuery);
 	}
 	
 	
-	@SuppressWarnings("unused")
 	private long distinct(String field) {
 		long count = 0;
 		CardinalityAggregationBuilder agg = AggregationBuilders.cardinality("agg");
