@@ -24,7 +24,7 @@ public class SearchRequestBuilder {
 	public static final String AGGREGATE_GRAMMAR_FIELDS = "grammar_fields";
 	
 	public static final FetchSourceContext FETCH_SOURCE_CONTEXT =
-			new FetchSourceContext(true, new String[]{"book", "hymn", "verse", "form"}, Strings.EMPTY_ARRAY);
+			new FetchSourceContext(true, new String[]{"book", "hymn", "verse", "form", "hymnAddressee", "hymnGroup", "strata"}, Strings.EMPTY_ARRAY);
 	
 	
 	

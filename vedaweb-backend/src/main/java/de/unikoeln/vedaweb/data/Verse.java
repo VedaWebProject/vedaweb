@@ -7,7 +7,7 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document(collection="verses")
-public class Verse {
+public class Verse implements Comparable<Verse> {
 	
 	@Id
 	private String id;
@@ -17,13 +17,17 @@ public class Verse {
 	private int hymn;
 	private int verse;
 	
-	private List<Translation> translations;
+	private String hymnAddressee;
+	private String hymnGroup;
+	private String strata;
+	
 	private List<Pada> padas;
 	
+	private List<VerseVersion> versions;
 	
 	
 	public Verse(){
-		translations = new ArrayList<Translation>();
+		versions = new ArrayList<VerseVersion>();
 		padas = new ArrayList<Pada>();
 	}
 	
@@ -67,13 +71,37 @@ public class Verse {
 	public void setVerse(int verse) {
 		this.verse = verse;
 	}
-
-	public List<Translation> getTranslations() {
-		return translations;
+	
+	public String getHymnAddressee() {
+		return hymnAddressee;
+	}
+	
+	public void setHymnAddressee(String hymnAddressee) {
+		this.hymnAddressee = hymnAddressee;
 	}
 
-	public void addTranslation(Translation translation) {
-		translations.add(translation);
+	public String getHymnGroup() {
+		return hymnGroup;
+	}
+
+	public void setHymnGroup(String hymnGroup) {
+		this.hymnGroup = hymnGroup;
+	}
+	
+	public String getStrata() {
+		return strata;
+	}
+
+	public void setStrata(String strata) {
+		this.strata = strata;
+	}
+
+	public List<VerseVersion> getTranslations(){
+		List<VerseVersion> translations = new ArrayList<VerseVersion>();
+		for (VerseVersion vv : versions)
+			if (vv.getType().equals("translation"))
+				translations.add(vv);
+		return translations;
 	}
 
 	public List<Pada> getPadas() {
@@ -84,11 +112,25 @@ public class Verse {
 		padas.add(pada);
 	}
 	
+	public List<VerseVersion> getVersions() {
+		return versions;
+	}
+	
+	public void addVersion(VerseVersion version) {
+		versions.add(version);
+	}
+
 	@Override
 	public String toString() {
-		return index + ":" + id + ":" + book + "." + hymn + "." + verse + "\t" +
+		return index + ";" + id + ";" + book + "." + hymn + "." + verse + ":\t" +
+				"(" + hymnAddressee + " / " + hymnGroup + ")\t" +
 				padas + "\t" +
-				translations;
+				versions;
+	}
+
+	@Override
+	public int compareTo(Verse o) {
+		return id.compareTo(o.getId());
 	}
 
 }

@@ -25,6 +25,8 @@ import org.elasticsearch.search.aggregations.AggregationBuilders;
 import org.elasticsearch.search.aggregations.bucket.nested.Nested;
 import org.elasticsearch.search.aggregations.bucket.nested.NestedAggregationBuilder;
 import org.elasticsearch.search.aggregations.bucket.terms.Terms;
+import org.elasticsearch.search.aggregations.metrics.cardinality.Cardinality;
+import org.elasticsearch.search.aggregations.metrics.cardinality.CardinalityAggregationBuilder;
 import org.elasticsearch.search.builder.SearchSourceBuilder;
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -37,9 +39,9 @@ import org.springframework.stereotype.Service;
 
 import de.unikoeln.vedaweb.data.Pada;
 import de.unikoeln.vedaweb.data.Token;
-import de.unikoeln.vedaweb.data.Translation;
 import de.unikoeln.vedaweb.data.Verse;
 import de.unikoeln.vedaweb.data.VerseRepository;
+import de.unikoeln.vedaweb.data.VerseVersion;
 import de.unikoeln.vedaweb.util.IOUtils;
 import de.unikoeln.vedaweb.util.StringUtils;
 
@@ -66,13 +68,13 @@ public class ElasticIndexService {
 		try {
 			//delete old index
 			System.out.println("[INFO] deleting old index...");
-			response.put("deleteOldIndex", deleteIndex().getString("response"));
+			response.put("deleteIndex", deleteIndex().getString("response"));
 			//create new Index
 			System.out.println("[INFO] creating new index...");
-			response.put("createNewIndex", createIndex().getString("response"));
+			response.put("createIndex", createIndex().getString("response"));
 			// get all documents from db
 			System.out.println("[INFO] creating and inserting new index documents...");
-			response.put("indexDbDocuments", indexDbDocuments().getString("response"));
+			response.put("fillIndex", indexDbDocuments().getString("response"));
 		} catch (JSONException e) {
 			e.printStackTrace();
 		}
@@ -97,9 +99,13 @@ public class ElasticIndexService {
 				indexDoc.put("book", dbDoc.getBook());
 				indexDoc.put("hymn", dbDoc.getHymn());
 				indexDoc.put("verse", dbDoc.getVerse());
+				indexDoc.put("hymnAddressee", dbDoc.getHymnAddressee());
+				indexDoc.put("hymnGroup", dbDoc.getHymnGroup());
+				indexDoc.put("strata", dbDoc.getStrata());
 				indexDoc.put("translation", concatTranslations(dbDoc));
-				indexDoc.put("form", StringUtils.removeUnicodeAccents(concatPadaForms(dbDoc) + concatTokenLemmata(dbDoc)));
-				indexDoc.put("form_raw", StringUtils.normalize(concatPadaForms(dbDoc)));
+				String concat = concatPadaForms(dbDoc) + concatTokenLemmata(dbDoc);
+				indexDoc.put("form", StringUtils.removeUnicodeAccents(concat));
+				indexDoc.put("form_raw", StringUtils.normalize(concat));
 				indexDoc.put("tokens", buildTokensList(dbDoc));
 			} catch (JSONException e) {
 				e.printStackTrace();
@@ -127,8 +133,8 @@ public class ElasticIndexService {
 		try {
 			jsonResponse.put("response",
 					bulkResponse != null && !bulkResponse.hasFailures()
-					? "{response:'OK'}"
-					: "{response:'Error'}");
+					? "{fillIndex:'OK'}"
+					: "{fillIndex:'Error'}");
 		} catch (JSONException e) {
 			e.printStackTrace();
 		}
@@ -190,8 +196,8 @@ public class ElasticIndexService {
 		try {
 			jsonResponse.put("response",
 					deleteResponse != null && deleteResponse.isAcknowledged()
-					? "{response:'OK'}"
-					: "{response:'Error'}");
+					? "{deleteIndex:'OK'}"
+					: "{deleteIndex:'Error'}");
 		} catch (JSONException e) {
 			e.printStackTrace();
 		}
@@ -224,8 +230,8 @@ public class ElasticIndexService {
 		try {
 			jsonResponse.put("response",
 					createResponse != null && createResponse.isAcknowledged()
-					? "{response:'OK'}"
-					: "{response:'Error'}");
+					? "{createIndex:'OK'}"
+					: "{createIndex:'Error'}");
 		} catch (JSONException e) {
 			e.printStackTrace();
 		}
@@ -237,24 +243,64 @@ public class ElasticIndexService {
 	public JSONArray getUIGrammarData() {
 		List<String> grammarFields = new ArrayList<>();
 		
-		try {
-			HttpEntity http =
-					elastic.client()
-					.getLowLevelClient()
-					.performRequest("get", "vedaweb/_mapping/doc/field/tokens.grammar.*")
-					.getEntity();
-			JSONObject response = (JSONObject)
-					new JSONObject(EntityUtils.toString(http))
-					.query("/vedaweb/mappings/doc");
-			for (String prop : response.keySet()) {
-				grammarFields.add(prop.replaceAll("^(\\w+\\.)+", ""));
-			}
-		} catch (IOException e) {
-			e.printStackTrace();
+		JSONObject response = (JSONObject) urlRequest(
+				"get",
+				"vedaweb/_mapping/doc/field/tokens.grammar.*",
+				"\"/vedaweb/mappings/doc\"");
+		
+		for (String prop : response.keySet()) {
+			grammarFields.add(prop.replaceAll("^(\\w+\\.)+", ""));
 		}
 		
 		Collections.sort(grammarFields);
 		return convertGrammarAggregationsToJSON(collectGrammarFieldAggregations(grammarFields));
+	}
+	
+	//TODO
+	public JSONArray getUIBooksData() {
+		//Map<Integer, Integer> books = new HashMap<>();
+		
+		return null;
+	}
+	
+	
+	private JSONObject urlRequest(String method, String url) {
+		JSONObject response = null;
+		try {
+			HttpEntity http =
+					elastic.client()
+					.getLowLevelClient()
+					.performRequest(method, url)
+					.getEntity();
+			response = new JSONObject(EntityUtils.toString(http));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return response;
+	}
+	
+	
+	private Object urlRequest(String method, String url, String jsonQuery) {
+		JSONObject response = urlRequest(method, url);
+		if (response == null) return null;
+		return response.query("/vedaweb/mappings/doc");
+	}
+	
+	
+	@SuppressWarnings("unused")
+	private long distinct(String field) {
+		long count = 0;
+		CardinalityAggregationBuilder agg = AggregationBuilders.cardinality("agg");
+		agg.field(field);
+		SearchSourceBuilder searchSourceBuilder = new SearchSourceBuilder().aggregation(agg);
+		SearchRequest req = new SearchRequest("vedaweb").types("doc").source(searchSourceBuilder);
+		try {
+			SearchResponse response = elastic.client().search(req);
+			count = ((Cardinality)response.getAggregations().get("agg")).getValue();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return count;
 	}
 	
 	
@@ -334,9 +380,11 @@ public class ElasticIndexService {
 	
 	private String concatTranslations(Verse doc) {
 		StringBuilder sb = new StringBuilder();
-		for (Translation t : doc.getTranslations()) {
-			sb.append(t.getTranslation());
-			sb.append(" ");
+		for (VerseVersion t : doc.getTranslations()) {
+			for (String line : t.getForm()) {
+				sb.append(line);
+				sb.append(" ");
+			}
 		}
 		return sb.toString().trim();
 	}

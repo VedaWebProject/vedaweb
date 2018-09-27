@@ -7,6 +7,7 @@ public class Pada {
 	
 	private int index;
 	private char line;
+	private String label;
 	private String form;
 	private List<Token> tokens;
 	
@@ -30,6 +31,14 @@ public class Pada {
 
 	public void setLine(char line) {
 		this.line = line;
+	}
+	
+	public String getLabel() {
+		return label;
+	}
+
+	public void setLabel(String label) {
+		this.label = label;
 	}
 
 	public String getForm() {
