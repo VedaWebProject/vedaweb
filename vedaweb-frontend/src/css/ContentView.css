@@ -66,3 +66,7 @@
 .dict-links > div > a.dict-link:hover {
     text-decoration: underline;
 }
+
+.translation {
+    margin-bottom: 1rem;
+}

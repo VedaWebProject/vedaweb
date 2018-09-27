@@ -11,6 +11,11 @@
     src: local('Dosis'), url(./fonts/Dosis/Dosis-Regular.ttf) format('truetype');
 }
 
+@font-face {
+    font-family: 'Siddhanta';
+    src: local('Dosis'), url(./fonts/Siddhanta/siddhanta.ttf) format('truetype');
+}
+
 
 
 /* GLOBAL STYLING */
