@@ -34,7 +34,7 @@ public class SearchRequestBuilder {
 		
 		SearchSourceBuilder searchSourceBuilder = getCommonSearchSource(searchData);
 		
-		String query = StringUtils.normalize(searchData.getInput());
+		String query = StringUtils.normalizeNFD(searchData.getInput());
 		String field = searchData.getField();
 		
 		if (StringUtils.containsAccents(query) && field.equals("form"))
@@ -143,9 +143,9 @@ public class SearchRequestBuilder {
 		//TODO: fuzzy or nah?
 		for (String field : fields) {
 			if (must) {
-				bool.must(QueryBuilders.fuzzyQuery(field, query));
+				bool.must(QueryBuilders.matchQuery(field, query));
 			} else {
-				bool.should(QueryBuilders.fuzzyQuery(field, query));
+				bool.should(QueryBuilders.matchQuery(field, query));
 			}
 		}
 		

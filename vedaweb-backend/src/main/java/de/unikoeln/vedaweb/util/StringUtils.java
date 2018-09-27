@@ -6,7 +6,13 @@ import java.text.Normalizer.Form;
 public class StringUtils {
 	
 	
-	public static String normalize(String s){
+	public static String normalizeNFC(String s){
+		return s == null ? "" :
+			Normalizer.normalize(s, Form.NFC);
+	}
+	
+	
+	public static String normalizeNFD(String s){
 		return s == null ? "" :
 			Normalizer.normalize(s, Form.NFD);
 	}
@@ -48,13 +54,14 @@ public class StringUtils {
 	
 	public static boolean containsAccents(String text) {
 	    return text == null ? false :
-	        normalize(text).matches(".*\\u0301.*");
+	        normalizeNFD(text).matches(".*\\u0301.*");
 	}
 	
 	
 	public static String removeUnicodeAccents(String text) {
 	    return text == null ? "" :
-	        normalize(text).replaceAll("\\u0301", "");
+	        normalizeNFD(text)
+	        .replaceAll("\\u0301", "");
 	}
 	
 

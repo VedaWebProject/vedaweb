@@ -21,6 +21,7 @@ public class SearchController {
 	
 	@PostMapping(value = "/search", produces = {"application/json"})
     public String searchView(@RequestBody SearchData searchData) {
+		System.out.println("QUERY BLOCKS: " + searchData.getBlocks());
     	return search.search(searchData).toString();
     }
 	

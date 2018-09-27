@@ -108,7 +108,7 @@ public class ElasticIndexService {
 				indexDoc.put("translation", concatTranslations(dbDoc));
 				String concat = concatPadaForms(dbDoc) + concatTokenLemmata(dbDoc);
 				indexDoc.put("form", StringUtils.removeUnicodeAccents(concat));
-				indexDoc.put("form_raw", StringUtils.normalize(concat));
+				indexDoc.put("form_raw", StringUtils.normalizeNFD(concat));
 				indexDoc.put("tokens", buildTokensList(dbDoc));
 			} catch (JSONException e) {
 				e.printStackTrace();
