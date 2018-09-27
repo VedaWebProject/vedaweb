@@ -49,6 +49,7 @@ class App extends Component {
         .then((response) => {
             uiDataStore.search = response.data.search;
             searchMetaStore.scopeDataRaw = uiDataStore.search.meta.scopes;
+            searchMetaStore.transliteration = uiDataStore.search.meta.transliterations[0];
             this.setState({
                 isLoaded: true
             });
