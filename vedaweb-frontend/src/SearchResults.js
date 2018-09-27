@@ -90,7 +90,10 @@ class SearchResults extends Component {
                                 (hit._source.book + "").padStart(2, "0") + "." +
                                 (hit._source.hymn + "").padStart(3, "0") + "." +
                                 (hit._source.verse + "").padStart(2, "0"),
-                            text: <div dangerouslySetInnerHTML={this.createHighlightHTML(hit)}></div>
+                            text: <div dangerouslySetInnerHTML={this.createHighlightHTML(hit)}></div>,
+                            addressee: hit._source.hymnAddressee,
+                            group: hit._source.hymnGroup,
+                            strata: hit._source.strata
                         }))
                 });
             })
@@ -136,6 +139,18 @@ class SearchResults extends Component {
             title: 'Text',
             dataIndex: 'text',
             key: 'text',
+          }, {
+            title: 'Addressee',
+            dataIndex: 'addressee',
+            key: 'addressee',
+          }, {
+            title: 'Group',
+            dataIndex: 'group',
+            key: 'group',
+          }, {
+            title: 'Strata',
+            dataIndex: 'strata',
+            key: 'strata',
           }];
           
         return (
