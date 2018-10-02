@@ -89,7 +89,10 @@ class ContentView extends Component {
 
     resolveAbbrevationToHTML(abb, cat){
         return abb.split('').map(key => (
-            <div><span className="bold secondary-font">{key}</span><span> - {uiDataStore.abbrevations[cat][key]}</span></div>
+            <span>
+                <span className="bold secondary-font">{key}</span>
+                <span> - {uiDataStore.abbrevations[cat][key]}</span><br/>
+            </span>
         ));
     }
     
@@ -279,8 +282,8 @@ class ContentView extends Component {
                                                         <td>
                                                             {data.padas.map(pada => (
                                                                 <div>
-                                                                    <span className="bold red secondary-font">{pada.line}:</span>
-                                                                    {this.resolveAbbrevationToHTML(pada.label, "label")}
+                                                                    <div style={{display:"inline-block", verticalAlign:"top"}} className="bold red secondary-font gap-right">{pada.line}:</div>
+                                                                    <div style={{display:"inline-block", verticalAlign:"top"}}>{this.resolveAbbrevationToHTML(pada.label, "label")}</div>
                                                                 </div>
                                                             ))}
                                                         </td>
