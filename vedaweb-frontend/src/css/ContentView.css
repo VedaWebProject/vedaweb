@@ -70,3 +70,7 @@
 .translation {
     margin-bottom: 1rem;
 }
+
+table td {
+    vertical-align: top;
+}

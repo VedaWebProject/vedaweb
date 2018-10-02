@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import { Row, Col, Button, Icon, Tabs, Collapse } from 'antd';
 
 import SearchGrammar from "./SearchGrammar";
-import SearchSimple from "./SearchSimple";
 import SearchScopeContainer from "./SearchScopeContainer";
 import SearchTransliteration from "./SearchTransliteration";
 import SearchScopeIndicator from "./SearchScopeIndicator";

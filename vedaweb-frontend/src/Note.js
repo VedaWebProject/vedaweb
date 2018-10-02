@@ -10,14 +10,15 @@ const showNote = function(title, text) {
 
     notification.open({
         key: key,
-        message: title,
+        message: <span className="bold red secondary-font">{title}</span>,
         description: text,
         duration: 0,
-        placement: "topLeft",
+        placement: "bottomLeft",
         icon: image,
         btn: button,
         style: {
-            width: "512px"
+            width: "512px",
+            border: "1px solid #ccb"
         }
     });
 }

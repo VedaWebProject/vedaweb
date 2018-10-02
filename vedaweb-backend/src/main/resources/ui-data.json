@@ -34,5 +34,45 @@
 				{"field": "translation", "ui": "Translations"}
 			]
 	    }
+	},
+	
+	"abbrevations" : {
+		"strata" : {
+			"A" : "Archaic",
+			"a" : "Archaic on metrical evidence alone",
+			"S" : "Strophic",
+			"s" : "Strophic on metrical evidence alone",
+			"N" : "Normal",
+			"n" : "Normal on metrical evidence alone",
+			"C" : "Cretic",
+			"c" : "Cretic on metrical evidence alone",
+			"P" : "Popular for linguistic reasons, and possibly also for non-linguistic reasons",
+			"p" : "Popular for non-linguistic reasons"
+		},
+		
+		"label" : {
+			"D": "genre D",
+			"E2": "epic anuṣṭubh (424)",
+			"R": "repeated line",
+			"E3a": "epic anuṣṭubh (292)",
+			"H": "12 = 5+7, ending LHX|| — a type of hypersyllabic triṣṭubh.",
+			"S": "line affected by realignment",
+			"V": "Vālakhilya",
+			"M": "genre M",
+			"4": "12 = 8+4",
+			"5": "pentad (decasyllabic), including Arnold’s “pure” and “mixed”; see Prolegomena 95–8 and VM 238–40.",
+			"B": "bhārgavī; see VM 240–1.",
+			"h": "11 = 4+7, ending HLX|| — a type of hyposyllabic jagatī.",
+			"G": "gautamī; see VM 240–1",
+			"O": "The gāyatrī corpus that Oldenberg used to study some things in the Prolegomena.",
+			"T": "Trochaic gāyatrī; see Prolegomena 25 and Vedic Metre (VM) 165.",
+			"U": "uneven lyric; see VM 154, 244 (Appendix III).",
+			"4b": "11 = 8+3",
+			"v": "virāṭsthānā; see Prolegomena 86–95 and VM 240–1, 246.",
+			"P": "popular",
+			"E1": "epic anuṣṭubh (525)",
+			"E3b": "epic anuṣṭubh (380)"
+		}
 	}
+	
 }

@@ -33,7 +33,8 @@ public class UiDataService {
 			
 			//load ui data template file
 			try {
-				uiData = new JSONObject(new String(IOUtils.convertStreamToByteArray(uiDataTemplate.getInputStream())));
+//				uiData = new JSONObject(IOUtils.convertStreamToString(uiDataTemplate.getInputStream()));
+				uiData = new JSONObject(IOUtils.readFileUTF8(uiDataTemplate.getFile()));
 			} catch (IOException e) {
 				System.err.println("[ERROR] UI data template JSON could not be loaded. (UiDataService)");
 			}

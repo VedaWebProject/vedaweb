@@ -14,6 +14,7 @@ import { view } from 'react-easy-state';
 import scrollToComponent from 'react-scroll-to-component';
 
 import axios from 'axios';
+import uiDataStore from "./stores/uiDataStore";
 
 const Option = Select.Option;
 
@@ -84,6 +85,12 @@ class ContentView extends Component {
             scrollToComponent(component);
             appStateStore.viewScrollTo = false;
         }
+    }
+
+    resolveAbbrevationToHTML(abb, cat){
+        return abb.split('').map(key => (
+            <div><span className="bold secondary-font">{key}</span><span> - {uiDataStore.abbrevations[cat][key]}</span></div>
+        ));
     }
     
 
@@ -239,9 +246,46 @@ class ContentView extends Component {
                                             className="glossing content-block card"
                                             ref={this.scrollTo}>
                                                 <h4>Meta Info</h4>
-                                                <span className="bold gap-right">Hymn Addressee:</span>{data.hymnAddressee}<br/>
-                                                <span className="bold gap-right">Hymn Group:</span>{data.hymnGroup}<br/>
-                                                <span className="bold gap-right">Strata:</span>{data.strata}<br/>
+
+                                                <table>
+                                                    <tr>
+                                                        <td>
+                                                            <span className="bold gap-right secondary-font">Hymn Addressee:</span>
+                                                        </td>
+                                                        <td>
+                                                            {data.hymnAddressee}
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            <span className="bold gap-right secondary-font">Hymn Group:</span>
+                                                        </td>
+                                                        <td>
+                                                            {data.hymnGroup}
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            <span className="bold gap-right secondary-font">Strata:</span>
+                                                        </td>
+                                                        <td>
+                                                            {this.resolveAbbrevationToHTML(data.strata, "strata")}
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            <span className="bold gap-right secondary-font">Hymn Labels:</span>
+                                                        </td>
+                                                        <td>
+                                                            {data.padas.map(pada => (
+                                                                <div>
+                                                                    <span className="bold red secondary-font">{pada.line}:</span>
+                                                                    {this.resolveAbbrevationToHTML(pada.label, "label")}
+                                                                </div>
+                                                            ))}
+                                                        </td>
+                                                    </tr>
+                                                </table>
                                             </div>
                                         }
 
