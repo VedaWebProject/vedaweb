@@ -12,8 +12,8 @@
 }
 
 @font-face {
-    font-family: 'Siddhanta';
-    src: local('Dosis'), url(./fonts/Siddhanta/siddhanta.ttf) format('truetype');
+    font-family: 'NotoDeva';
+    src: local('NotoSerifDevanagari'), url(./fonts/NotoSerifDeva/NotoSerifDevanagari.ttf) format('truetype');
 }
 
 

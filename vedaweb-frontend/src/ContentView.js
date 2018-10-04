@@ -89,8 +89,8 @@ class ContentView extends Component {
     }
 
     resolveAbbrevationToHTML(abb, cat){
-        return abb.split('').map(key => (
-            <span>
+        return abb.split('').map((key, i) => (
+            <span key={"abb_" + i}>
                 <span className="bold secondary-font">{key}</span>
                 <span> - {uiDataStore.abbrevations[cat][key]}</span><br/>
             </span>
@@ -166,8 +166,8 @@ class ContentView extends Component {
                                             ref={this.scrollTo}>
                                                 <h4>Devanagari (Detlef)</h4>
                                                 {data.versions.filter(v => v.language === 'deva').map(v => (
-                                                    v.form.map(line => (
-                                                        <div>{line}</div>
+                                                    v.form.map((line, i) => (
+                                                        <div key={"deva_" + i}>{line}</div>
                                                     ))
                                                 ))}
                                             </div>
@@ -226,8 +226,8 @@ class ContentView extends Component {
                                                         <span className="first-cap"> ({translation.source})</span>
                                                         <br/>
                                                         <div className="italic">
-                                                            {translation.form.map(line => (
-                                                                <div>{line}</div>
+                                                            {translation.form.map((line, i) => (
+                                                                <div key={"trans_" + i}>{line}</div>
                                                             ))}
                                                         </div>
                                                     </div>
@@ -248,7 +248,8 @@ class ContentView extends Component {
                                                             {token.lemmaRef.map((ref, i) => (
                                                                 <a
                                                                 className="dict-link"
-                                                                onClick={e => this.openDict(token.lemma, ref)}>
+                                                                onClick={e => this.openDict(token.lemma, ref)}
+                                                                key={"lemma_" + i}>
                                                                     <Icon type="eye-o"/>
                                                                     {(i+1) + " "}
                                                                 </a>
