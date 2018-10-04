@@ -54,14 +54,15 @@ public class StringUtils {
 	
 	public static boolean containsAccents(String text) {
 	    return text == null ? false :
-	        normalizeNFD(text).matches(".*\\u0301.*");
+	        normalizeNFD(text).matches(".*(\\u0301|\\u0300).*");
 	}
 	
 	
 	public static String removeUnicodeAccents(String text) {
 	    return text == null ? "" :
 	        normalizeNFD(text)
-	        .replaceAll("\\u0301", "");
+	        .replaceAll("\\u0301", "")
+	        .replaceAll("\\u0300", "");
 	}
 	
 

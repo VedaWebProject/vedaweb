@@ -75,7 +75,7 @@ class SearchBlock extends Component {
                         type="flex"
                         align="middle"
                         justify="center"
-                        className={this.props.isFirstBlock ? "hidden" : ""}>
+                        className={true || this.props.isFirstBlock ? "hidden" : ""}>
                             <Col span={9} className="search-input-label content-right">
                                 <span className="secondary-font">Maximum distance to previous term:</span>
                             </Col>

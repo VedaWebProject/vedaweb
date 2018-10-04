@@ -3,6 +3,7 @@ import { Row, Col, Affix, Switch, Spin, Select, Button, Icon } from 'antd';
 
 import ContentLocation from "./ContentLocation";
 import ErrorMessage from "./ErrorMessage";
+import showNote from "./Note";
 
 import "./css/ContentView.css";
 
@@ -95,6 +96,20 @@ class ContentView extends Component {
             </span>
         ));
     }
+
+    openDict(lemma, ref){
+        showNote(lemma, "TODO: content of ref '" + ref + "'");
+    }
+
+    cleanLemmaString(lemma){
+        if (typeof lemma === 'string' || lemma instanceof String){
+            lemma = lemma.replace(/\s?\d/g,'');
+            if (lemma.startsWith('\u221A') && lemma.charAt(lemma.length - 1) === '-'){
+                lemma = lemma.substr(0, lemma.length - 1);
+            }
+        }
+        return lemma.trim();
+    }
     
 
     render() {
@@ -179,17 +194,13 @@ class ContentView extends Component {
                                                                 {token.form}
                                                                 <br/>
                                                                 <div className="glossing-annotation">
-                                                                    <a href="http://vedaweb.uni-koeln.de">{token.lemma}</a>
+                                                                    {this.cleanLemmaString(token.lemma)}
                                                                     {
-                                                                        "." +
-                                                                        (token.grammar.case === undefined ? "" :
-                                                                        (token.grammar.case + ".")) +
-
-                                                                        (token.grammar.number === undefined ? "" :
-                                                                        (token.grammar.number + ".")) +
-
-                                                                        (token.grammar.gender === undefined ? "" :
-                                                                        (token.grammar.gender))
+                                                                        Object.keys(token.grammar).map(key => (
+                                                                            <span key={"t_" + token.index + "_" + key}>
+                                                                                .{token.grammar[key]}
+                                                                            </span>
+                                                                        ))
                                                                     }
                                                                 </div>
                                                             </div>
@@ -229,18 +240,23 @@ class ContentView extends Component {
                                             className="glossing content-block card"
                                             ref={this.scrollTo}>
                                                 <h4>Dictionary (Grassmann)</h4>
-                                                <div className="dict-links">
-                                                    {data.padas.map(pada => (
-                                                        pada.tokens.map((token, i) => (
-                                                            <div key={token + i}>
-                                                                {token.form + " (\u2192 "}
-                                                                <a className="dict-link" href="http://vedaweb.uni-koeln.de">
-                                                                    {token.lemma}
-                                                                </a>{")"}
-                                                            </div>
-                                                        ))
-                                                    ))}
-                                                </div>
+                                                {data.padas.map(pada => (
+                                                    pada.tokens.map((token, i) => (
+                                                        <div key={token + i}>
+                                                            {token.form + " ("}
+                                                            <span className="bold">{token.lemma}</span>
+                                                            {token.lemmaRef.map((ref, i) => (
+                                                                <a
+                                                                className="dict-link"
+                                                                onClick={e => this.openDict(token.lemma, ref)}>
+                                                                    <Icon type="eye-o"/>
+                                                                    {(i+1) + " "}
+                                                                </a>
+                                                            ))}
+                                                            {")"}
+                                                        </div>
+                                                    ))
+                                                ))}
                                             </div>
                                         }
 
@@ -251,6 +267,7 @@ class ContentView extends Component {
                                                 <h4>Meta Info</h4>
 
                                                 <table>
+                                                    <tbody>
                                                     <tr>
                                                         <td>
                                                             <span className="bold gap-right secondary-font">Hymn Addressee:</span>
@@ -277,7 +294,7 @@ class ContentView extends Component {
                                                     </tr>
                                                     <tr>
                                                         <td>
-                                                            <span className="bold gap-right secondary-font">Hymn Labels:</span>
+                                                            <span className="bold gap-right secondary-font">Pada Labels:</span>
                                                         </td>
                                                         <td>
                                                             {data.padas.map(pada => (
@@ -288,29 +305,10 @@ class ContentView extends Component {
                                                             ))}
                                                         </td>
                                                     </tr>
+                                                    </tbody>
                                                 </table>
                                             </div>
                                         }
-
-                                        {/*
-                                        {appStateStore.viewFilter.something1 &&
-                                            <div
-                                            className="content-block card"
-                                            ref={this.scrollTo}>
-                                                <h4>Something</h4>
-                                                Something...
-                                            </div>
-                                        }
-
-                                        {appStateStore.viewFilter.something2 &&
-                                            <div
-                                            className="content-block card"
-                                            ref={this.scrollTo}>
-                                                <h4>Something else</h4>
-                                                Something else...
-                                            </div>
-                                        }
-                                        */}
 
                                     </div>
                                 }
@@ -365,24 +363,6 @@ class ContentView extends Component {
                                             size="small" />
                                             Meta Info
                                         </div>
-                                        {/*
-                                        <div className="view-filter">
-                                            <Switch
-                                            onChange={(e) => this.filterChange("something1", e)}
-                                            disabled={!isLoaded || error !== undefined}
-                                            checked={appStateStore.viewFilter.something1}
-                                            size="small" />
-                                            Something
-                                        </div>
-                                        <div className="view-filter">
-                                            <Switch
-                                            onChange={(e) => this.filterChange("something2", e)}
-                                            disabled={!isLoaded || error !== undefined}
-                                            checked={appStateStore.viewFilter.something2}
-                                            size="small" />
-                                            Something else
-                                        </div>
-                                        */}
                                     </div>
 
                                     <div className="card">

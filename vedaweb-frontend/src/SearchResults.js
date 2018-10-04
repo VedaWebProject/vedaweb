@@ -134,7 +134,7 @@ class SearchResults extends Component {
             title: 'Location',
             dataIndex: 'location',
             key: 'location',
-            render: loc => <Link to={"/view/id/" + loc}>{loc}</Link>,
+            render: loc => <Link to={"/view/id/" + loc} className="bold">{loc}</Link>,
           }, {
             title: 'Text',
             dataIndex: 'text',

@@ -53,18 +53,8 @@
     margin-bottom: .2rem;
 }
 
-.dict-links {
-    -webkit-column-count: 4; /* Chrome, Safari, Opera */
-    -moz-column-count: 4; /* Firefox */
-    column-count: 4;
-
-    -webkit-column-gap: 2rem; /* Chrome, Safari, Opera */
-    -moz-column-gap: 2rem; /* Firefox */
-    column-gap: 2rem;
-}
-
-.dict-links > div > a.dict-link:hover {
-    text-decoration: underline;
+a.dict-link {
+    margin-left: .5rem;
 }
 
 .translation {

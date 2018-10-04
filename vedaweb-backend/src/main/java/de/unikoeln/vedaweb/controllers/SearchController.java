@@ -21,7 +21,6 @@ public class SearchController {
 	
 	@PostMapping(value = "/search", produces = {"application/json"})
     public String searchView(@RequestBody SearchData searchData) {
-		System.out.println(searchData.getScopes());
     	return search.search(searchData).toString();
     }
 	

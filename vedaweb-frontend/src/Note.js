@@ -1,24 +1,24 @@
 import React from "react";
-import { notification, Button } from 'antd';
+import { notification } from 'antd';
 import logo from "./img/logo.png";
 
 const showNote = function(title, text) {
 
     let key = Date.now();
-    let button = <Button onClick={() => notification.close(key)}>Close</Button>;
+    //let button = <Button onClick={() => notification.close(key)}>Close</Button>;
     let image = <img src={logo} style={{width: '32px'}} alt="" />;
 
     notification.open({
         key: key,
-        message: <span className="bold red secondary-font">{title}</span>,
+        message: <span className="bold red trans-font">{title}</span>,
         description: text,
         duration: 0,
-        placement: "bottomLeft",
+        placement: "topLeft",
         icon: image,
-        btn: button,
+        //btn: button,
         style: {
             width: "512px",
-            border: "1px solid #ccb"
+            border: "1px solid #931111"
         }
     });
 }

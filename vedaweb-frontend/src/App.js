@@ -20,6 +20,8 @@ import SearchResults from "./SearchResults";
 import Sanscript from 'sanscript';
 import axios from 'axios';
 
+import "./polyfills";
+
 
 class App extends Component {
 

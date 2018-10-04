@@ -242,7 +242,8 @@ public class XmlDataImportUtils {
 		
 		for (XdmItem token : padaTokens){
 			Token tokenObj = new Token();
-			tokenObj.setLemma(((XdmNode)token).getAttributeValue(new QName("lemma")));
+			tokenObj.setLemma(((XdmNode)token).getAttributeValue(new QName("lemma")).trim());
+			tokenObj.setLemmaRef(extractLemmaRefs((XdmNode)token));
 			tokenObj.setForm(compiler.evaluate("text()", token).itemAt(0).getStringValue().trim());
 			//iterate token attributes
 			XdmValue tokenAttributes = compiler.evaluate(".//*:f/*:symbol", token);
@@ -255,6 +256,14 @@ public class XmlDataImportUtils {
 		}
 		
 		return pada;
+	}
+	
+	
+	private static String[] extractLemmaRefs(XdmNode token) {
+		//sample for lemmaRef attribute value: ['lemma_id_1695', 'lemma_iq_1681']
+		return token.getAttributeValue(new QName("lemmaRef"))
+				.replaceAll("[\\[\\]\\'\\s]", "")
+				.split("\\,");
 	}
 	
 	

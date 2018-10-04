@@ -79,6 +79,8 @@ public class DataImportService {
 		//dry run?
 		if (dryRun){
 			System.out.println("[DataImport] dry run: Read " + verses.size() + " verses from XML.");
+			if (verses.size() > 0)
+				System.out.println("[DataImport] dry run: sample doc: " + verses.get(0));
 			return verses.size();
 		}
 		
