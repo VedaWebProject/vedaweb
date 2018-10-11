@@ -28,7 +28,7 @@ class SanscriptAccents {
             }
         }
         
-        return noAcc.normalize("NFC");
+        return noAcc;
     }
 
 }

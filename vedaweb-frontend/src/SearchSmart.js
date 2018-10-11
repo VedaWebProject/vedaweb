@@ -33,7 +33,7 @@ class SearchSmart extends Component {
                 input: searchSmartStore.data.field === "form" ? SanscriptAccents.t(input, "hk", "iso") : input,
                 field: searchSmartStore.data.field
             };
-            this.props.history.push("/results/" + Base64.encode(JSON.stringify(jsonData)));
+            this.props.history.push("/results/" + Base64.encodeURI(JSON.stringify(jsonData)));
         }
     }
 

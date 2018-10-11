@@ -28,11 +28,11 @@ h3 {
 }
 
 .trans-font {
-    font-family: 'Gentium', "Tahoma", "Arial", sans-serif;
+    font-family: "Gentium", "Tahoma", "Arial", sans-serif;
 }
 
 .deva-font {
-    font-family: 'NotoDeva', 'Gentium', "Tahoma", "Arial", sans-serif;
+    font-family: "NotoDeva", "Gentium", "Tahoma", "Arial", sans-serif;
     font-size: 1.6rem;
 }
 
@@ -161,7 +161,7 @@ hr {
     vertical-align: middle;
 }
 
-div.inline-block {
+.inline-block {
     display: inline-block;
 }
 

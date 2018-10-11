@@ -6,29 +6,11 @@
         },
 		"analysis": {
 			"analyzer": {
-			    "sample_analyzer": {
-			      "type": "custom",
-			      "tokenizer": "keyword",
-			      "filter": [
-			        "lowercase",
-			        "trim"
-			      ]
-			    }
-			  },
-			"normalizer": {
-				"lemma_normalizer": {
-					"type": "custom",
-					"char_filter": ["lemma_char_filter"],
-					"filter": ["lowercase"]
-				}
-			},
-			"char_filter": {
-				"lemma_char_filter": {
-					"type": "pattern_replace",
-					"pattern": "\\-$",
-					"replacement": ""
-				}
-			}
+		        "custom_german": {
+		          "tokenizer":  "standard",
+		          "filter": ["lowercase", "german_normalization"]
+		       	}
+		    }
 		}
 	},
 	"mappings": {
@@ -42,9 +24,9 @@
 				"hymnAddressee":	{ "type": "keyword" },
 				"hymnGroup":		{ "type": "keyword" },
 				"strata":			{ "type": "keyword" },
-				"translation": 		{ "type": "text", "store": true },
-				"form": 			{ "type": "text", "store": true },
-				"form_raw": 		{ "type": "text", "store": true },
+				"translation": 		{ "type": "text", "analyzer": "custom_german" },
+				"form": 			{ "type": "text" },
+				"form_raw": 		{ "type": "text" },
 				"tokens": {
 					"type": "nested",
 					"properties": {

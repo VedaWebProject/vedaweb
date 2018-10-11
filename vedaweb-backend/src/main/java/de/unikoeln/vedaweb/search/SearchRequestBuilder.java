@@ -35,14 +35,14 @@ public class SearchRequestBuilder {
 		
 		SearchSourceBuilder searchSourceBuilder = getCommonSearchSource(searchData);
 		
-		String query = StringUtils.normalizeNFD(searchData.getInput());
+		String searchTerm = StringUtils.normalizeNFC(searchData.getInput());
 		String field = searchData.getField();
 		
-		if (StringUtils.containsAccents(query) && field.equals("form"))
+		if (StringUtils.containsAccents(searchTerm) && field.equals("form"))
 			field = "form_raw";
 		
 		//match query
-		MatchQueryBuilder match = new MatchQueryBuilder(field, query);
+		MatchQueryBuilder match = new MatchQueryBuilder(field, searchTerm);
 		searchSourceBuilder.query(match);
 		
 		//Highlighting
@@ -122,7 +122,7 @@ public class SearchRequestBuilder {
 				//if fields="form", also search in "lemma"-field
 				if (key.equals("form")) {
 					bool.must(getMultiFieldBoolQuery(
-							StringUtils.removeUnicodeAccents((String)block.get(key)),
+							StringUtils.removeUnicodeAccents((String)block.get(key), true),
 							false,
 							"tokens.form",
 							"tokens.lemma"

@@ -1,7 +1,8 @@
 import React, { Component } from "react";
-import { Row, Col, Affix, Switch, Spin, Select, Button, Icon } from 'antd';
+import { Row, Col, Affix, Spin, Select, Button, Icon } from 'antd';
 
 import ContentLocation from "./ContentLocation";
+import ContentFilterSwitch from "./ContentFilterSwitch";
 import ErrorMessage from "./ErrorMessage";
 import showNote from "./Note";
 
@@ -9,7 +10,6 @@ import "./css/ContentView.css";
 
 import { withRouter } from 'react-router-dom';
 
-import appStateStore from "./stores/appStateStore";
 import { view } from 'react-easy-state';
 
 import scrollToComponent from 'react-scroll-to-component';
@@ -43,12 +43,6 @@ class ContentView extends Component {
         }
     }
 
-    // componentWillReceiveProps(newProps){
-    //     if (this.propsChanged(newProps)){
-    //         this.loadData(newProps.match.params.by, newProps.match.params.value);
-    //     }
-    // }
-
     propsChanged(newProps){
         return JSON.stringify(this.props) !== JSON.stringify(newProps);
     }
@@ -77,14 +71,14 @@ class ContentView extends Component {
     }
 
     filterChange(target, checked){
-        if (checked) appStateStore.viewScrollTo = true;
-        appStateStore.viewFilter[target] = checked;
+        if (checked) uiDataStore.viewScrollTo = true;
+        uiDataStore.viewFilter[target] = checked;
     }
 
     scrollTo(component){
-        if (appStateStore.viewScrollTo){
+        if (uiDataStore.viewScrollTo){
             scrollToComponent(component);
-            appStateStore.viewScrollTo = false;
+            uiDataStore.viewScrollTo = false;
         }
     }
 
@@ -141,7 +135,7 @@ class ContentView extends Component {
 
                                 {/** CONTENT **/}
 
-                                { data.padas !== undefined && error === undefined &&
+                                { data.padas !== undefined &&
 
                                     <div>
                                         <div className="content-plain content-block card">
@@ -160,7 +154,7 @@ class ContentView extends Component {
                                             ))}
                                         </div>
 
-                                        {appStateStore.viewFilter.devanagari &&
+                                        {uiDataStore.viewFilter.devanagari &&
                                             <div
                                             className="content-block card deva-font"
                                             ref={this.scrollTo}>
@@ -173,7 +167,7 @@ class ContentView extends Component {
                                             </div>
                                         }
 
-                                        {appStateStore.viewFilter.grammar &&
+                                        {uiDataStore.viewFilter.glossing &&
                                             <div
                                             className="glossing content-block card"
                                             ref={this.scrollTo}>
@@ -211,12 +205,35 @@ class ContentView extends Component {
                                             </div>
                                         }
 
-                                        {appStateStore.viewFilter.translations &&
+                                        {uiDataStore.viewFilter.translations &&
                                             <div
                                             className="content-block card"
                                             ref={this.scrollTo}>
-                                                <h4>Translations</h4>
+                                                <h4 className="inline-block">Translations</h4>
+
+                                                <ContentFilterSwitch
+                                                label="EN (Griffith)"
+                                                onChange={(e) => {uiDataStore.disabledTranslations["Griffith"] = !e}}
+                                                disabled={data.translations.filter(t => t.source === "Griffith").length === 0}
+                                                checked={!uiDataStore.disabledTranslations["Griffith"]}
+                                                inline={true} />
+
+                                                <ContentFilterSwitch
+                                                label="DE (Geldner)"
+                                                onChange={(e) => {uiDataStore.disabledTranslations["Geldner"] = !e}}
+                                                disabled={data.translations.filter(t => t.source === "Geldner").length === 0}
+                                                checked={!uiDataStore.disabledTranslations["Geldner"]} 
+                                                inline={true} />
+
+                                                <ContentFilterSwitch
+                                                label="DE (Grassmann)"
+                                                onChange={(e) => {uiDataStore.disabledTranslations["Grassmann"] = !e}}
+                                                disabled={data.translations.filter(t => t.source === "Grassmann").length === 0}
+                                                checked={!uiDataStore.disabledTranslations["Grassmann"]} 
+                                                inline={true} />
+
                                                 {data.translations.map(translation => (
+                                                    !uiDataStore.disabledTranslations[translation.source] &&
                                                     <div key={"trans_" + translation.source} className="translation">
                                                         <span className="bold">{
                                                             translation.language.toUpperCase() === "DE" ? "German" :
@@ -235,7 +252,7 @@ class ContentView extends Component {
                                             </div>
                                         }
 
-                                        {appStateStore.viewFilter.dictionary &&
+                                        {uiDataStore.viewFilter.dictionary &&
                                             <div
                                             className="glossing content-block card"
                                             ref={this.scrollTo}>
@@ -261,7 +278,7 @@ class ContentView extends Component {
                                             </div>
                                         }
 
-                                        {appStateStore.viewFilter.metaInfo &&
+                                        {uiDataStore.viewFilter.metaInfo &&
                                             <div
                                             className="glossing content-block card"
                                             ref={this.scrollTo}>
@@ -319,51 +336,36 @@ class ContentView extends Component {
                                 <Affix offsetTop={10}>
                                     <div className="card">
                                         <h4><Icon type="filter" className="gap-right"/> View Filters</h4>
-                                        <div className="view-filter">
-                                            <Switch
-                                            defaultChecked
-                                            onChange={(e) => this.filterChange("devanagari", e)}
-                                            disabled={!isLoaded || error !== undefined}
-                                            checked={appStateStore.viewFilter.devanagari}
-                                            size="small" />
-                                            Devanagari
-                                        </div>
-                                        <div className="view-filter">
-                                            <Switch
-                                            defaultChecked
-                                            onChange={(e) => this.filterChange("grammar", e)}
-                                            disabled={!isLoaded || error !== undefined}
-                                            checked={appStateStore.viewFilter.grammar}
-                                            size="small" />
-                                            Morphological Glossing
-                                        </div>
-                                        <div className="view-filter">
-                                            <Switch
-                                            defaultChecked
-                                            onChange={(e) => this.filterChange("translations", e)}
-                                            disabled={!isLoaded || error !== undefined}
-                                            checked={appStateStore.viewFilter.translations}
-                                            size="small" />
-                                            Translations
-                                        </div>
-                                        <div className="view-filter">
-                                            <Switch
-                                            defaultChecked
-                                            onChange={(e) => this.filterChange("dictionary", e)}
-                                            disabled={!isLoaded || error !== undefined}
-                                            checked={appStateStore.viewFilter.dictionary}
-                                            size="small" />
-                                            Dictionary
-                                        </div>
-                                        <div className="view-filter">
-                                            <Switch
-                                            defaultChecked
-                                            onChange={(e) => this.filterChange("metaInfo", e)}
-                                            disabled={!isLoaded || error !== undefined}
-                                            checked={appStateStore.viewFilter.metaInfo}
-                                            size="small" />
-                                            Meta Info
-                                        </div>
+
+                                        <ContentFilterSwitch
+                                        label="Devanagari"
+                                        disabled={!isLoaded || error !== undefined}
+                                        checked={uiDataStore.viewFilter.devanagari}
+                                        onChange={(e) => this.filterChange("devanagari", e)} />
+
+                                        <ContentFilterSwitch
+                                        label="Morphological Glossing"
+                                        disabled={!isLoaded || error !== undefined}
+                                        checked={uiDataStore.viewFilter.glossing}
+                                        onChange={(e) => this.filterChange("glossing", e)} />
+
+                                        <ContentFilterSwitch
+                                        label="Translations"
+                                        disabled={!isLoaded || error !== undefined}
+                                        checked={uiDataStore.viewFilter.translations}
+                                        onChange={(e) => this.filterChange("translations", e)} />
+
+                                        <ContentFilterSwitch
+                                        label="Dictionary"
+                                        disabled={!isLoaded || error !== undefined}
+                                        checked={uiDataStore.viewFilter.dictionary}
+                                        onChange={(e) => this.filterChange("dictionary", e)} />
+
+                                        <ContentFilterSwitch
+                                        label="Meta Info"
+                                        disabled={!isLoaded || error !== undefined}
+                                        checked={uiDataStore.viewFilter.metaInfo}
+                                        onChange={(e) => this.filterChange("metaInfo", e)} />
                                     </div>
 
                                     <div className="card">

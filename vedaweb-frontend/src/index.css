@@ -21,7 +21,7 @@
 /* GLOBAL STYLING */
 
 html {
-    min-height: 101%;
+    overflow-y: scroll;
 }
 
 body {

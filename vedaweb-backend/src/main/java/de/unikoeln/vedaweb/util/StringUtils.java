@@ -58,11 +58,13 @@ public class StringUtils {
 	}
 	
 	
-	public static String removeUnicodeAccents(String text) {
-	    return text == null ? "" :
-	        normalizeNFD(text)
-	        .replaceAll("\\u0301", "")
-	        .replaceAll("\\u0300", "");
+	public static String removeUnicodeAccents(String text, boolean nfc) {
+	    text = text == null ? "" :
+        		normalizeNFD(text)
+		        .replaceAll("\\u0301", "")
+		        .replaceAll("\\u0300", "");
+	    if (nfc) return normalizeNFC(text);
+	    else	 return text;
 	}
 	
 

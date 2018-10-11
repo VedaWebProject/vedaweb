@@ -107,8 +107,8 @@ public class ElasticIndexService {
 				indexDoc.put("strata", dbDoc.getStrata());
 				indexDoc.put("translation", concatTranslations(dbDoc));
 				String concat = concatPadaForms(dbDoc) + concatTokenLemmata(dbDoc);
-				indexDoc.put("form", StringUtils.removeUnicodeAccents(concat));
-				indexDoc.put("form_raw", StringUtils.normalizeNFD(concat));
+				indexDoc.put("form", StringUtils.removeUnicodeAccents(concat, true));
+				indexDoc.put("form_raw", StringUtils.normalizeNFC(concat));
 				indexDoc.put("tokens", buildTokensList(dbDoc));
 			} catch (JSONException e) {
 				e.printStackTrace();
@@ -154,8 +154,8 @@ public class ElasticIndexService {
 			for (Token token : pada.getTokens()) {
 				JSONObject indexToken = new JSONObject();
 				indexToken.put("index", token.getIndex());
-				indexToken.put("form", StringUtils.removeUnicodeAccents(token.getForm()));
-				indexToken.put("lemma", StringUtils.removeUnicodeAccents(token.getLemma()));
+				indexToken.put("form", StringUtils.removeUnicodeAccents(token.getForm(), true));
+				indexToken.put("lemma", StringUtils.removeUnicodeAccents(token.getLemma(), true));
 				//grammar
 //				JSONArray indexTokenGrammar = new JSONArray();
 				JSONObject indexTokenGrammar = new JSONObject();
@@ -251,6 +251,11 @@ public class ElasticIndexService {
 				"vedaweb/_mapping/doc/field/tokens.grammar.*",
 				"/vedaweb/mappings/doc");
 		
+		if (response == null) {
+			System.err.println("[ERROR] Could'nt find index grammar mapping");
+			return new JSONArray();
+		}
+		
 		for (String prop : response.keySet()) {
 			grammarFields.add(prop.replaceAll("^(\\w+\\.)+", ""));
 		}
@@ -339,6 +344,7 @@ public class ElasticIndexService {
 	
 	private Map<String, List<String>> collectGrammarFieldAggregations(List<String> grammarFields) {
 		Map<String, List<String>> grammarAggregations = new HashMap<>();
+		System.out.println(grammarFields);
 		
 		SearchRequest req = new SearchRequest("vedaweb"); 
 		req.types("doc");

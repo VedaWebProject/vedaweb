@@ -29,7 +29,8 @@ class App extends Component {
         super(props);
 
         this.state = {
-            isLoaded: false
+            isLoaded: false,
+            error: undefined
         }
 
         //configure iso scheme for sanscript.js
@@ -54,7 +55,8 @@ class App extends Component {
             searchMetaStore.scopeDataRaw = uiDataStore.search.meta.scopes;
             searchMetaStore.transliteration = uiDataStore.search.meta.transliterations[0];
             this.setState({
-                isLoaded: true
+                isLoaded: true,
+                error: undefined
             });
         })
         .catch((error) => {
@@ -69,6 +71,9 @@ class App extends Component {
     render() {
 
         const { error, isLoaded } = this.state;
+
+        if (isLoaded && error !== undefined)
+            console.log(JSON.stringify(error));
 
         return (
 
