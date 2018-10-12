@@ -4,7 +4,7 @@
     border-radius: 0px;
     border-top-left-radius: 4px !important;
     border-top-right-radius: 4px !important;
-    border: 1px solid #ddc !important;
+    border: 1px solid #c9bbac !important;
     border-bottom: 0px solid transparent !important;
     z-index: 99;
     margin-bottom: -2px;
@@ -24,7 +24,7 @@
     margin-bottom: 1rem;
     background-color: #fff;
     border-radius: 2px;
-    border: 1px solid #ddc;
+    border: 1px solid #c9bbac;
 }
 
 .search-input-label {

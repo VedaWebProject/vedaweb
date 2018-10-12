@@ -69,7 +69,7 @@ class SearchView extends Component {
             background: '#fafafa',
             borderRadius: 2,
             marginBottom: 24,
-            border: '1px solid #ddc',
+            border: '1px solid #c9bbac',
             overflow: 'hidden',
             fontFamily: 'Dosis, sans-serif',
             fontSize: '18px'

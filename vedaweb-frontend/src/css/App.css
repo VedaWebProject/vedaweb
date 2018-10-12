@@ -52,14 +52,14 @@ h3 {
     padding: .8rem;
     padding-left: 1rem;
     padding-right: 1rem;
-    background-color: #cfcfcf;
+    background-color: #d6cece;
 }
 
 .card {
     margin: .8rem;
     padding: 1rem 1.5rem;
     background-color: #fff;
-    border: 1px solid #ccb;
+    border: 1px solid #c9bbac;
     border-radius: 3px;
 }
 
@@ -73,7 +73,7 @@ a {
 
 hr {
     border: none;
-    border-top: 1px solid #ccb;
+    border-top: 1px solid #beae97;
     margin-top: 1rem;
     margin-bottom: 1rem;
 }
@@ -190,12 +190,12 @@ hr {
 
 .transliteration-tooltip > .ant-tooltip-content > .ant-tooltip-inner {
     background-color: #fff;
-    border: 1px solid #ccb;
+    border: 1px solid #beae97;
     color: rgba(0, 0, 0, 0.6);
 }
 
 .transliteration-tooltip > .ant-tooltip-content > .ant-tooltip-arrow {
-    border-bottom-color: #ccb;
+    border-bottom-color: #beae97;
 }
 
 .flex-grow-1 {
