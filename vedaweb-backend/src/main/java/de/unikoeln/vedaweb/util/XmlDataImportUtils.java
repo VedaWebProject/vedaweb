@@ -32,9 +32,9 @@ public class XmlDataImportUtils {
 		XdmValue hymns = compiler.evaluate(".//*:div[@type='hymn']", xmlDoc);
 		for(XdmItem hymn : hymns){
 			//collect hymn data
-			String hymnAddressee = compiler.evaluate("*:div[@type='dedication']/*:div[@type='addressee']/*:p/text()[1]", hymn)
+			String hymnAddressee = compiler.evaluate("*:div[@type='dedication']/*:div[@type='addressee']/*:p[@*:lang='en']/text()[1]", hymn)
 					.itemAt(0).getStringValue();
-			String hymnGroup = compiler.evaluate("*:div[@type='dedication']/*:div[@type='group']/*:p/text()[1]", hymn)
+			String hymnGroup = compiler.evaluate("*:div[@type='dedication']/*:div[@type='group']/*:p[@*:lang='en']/text()[1]", hymn)
 					.itemAt(0).getStringValue();
 		
 			//iterate: verses

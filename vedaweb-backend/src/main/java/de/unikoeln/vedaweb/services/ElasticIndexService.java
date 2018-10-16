@@ -28,6 +28,8 @@ import org.elasticsearch.search.aggregations.AggregationBuilders;
 import org.elasticsearch.search.aggregations.bucket.nested.Nested;
 import org.elasticsearch.search.aggregations.bucket.nested.NestedAggregationBuilder;
 import org.elasticsearch.search.aggregations.bucket.terms.Terms;
+import org.elasticsearch.search.aggregations.bucket.terms.Terms.Bucket;
+import org.elasticsearch.search.aggregations.bucket.terms.TermsAggregationBuilder;
 import org.elasticsearch.search.aggregations.metrics.cardinality.Cardinality;
 import org.elasticsearch.search.aggregations.metrics.cardinality.CardinalityAggregationBuilder;
 import org.elasticsearch.search.builder.SearchSourceBuilder;
@@ -264,7 +266,7 @@ public class ElasticIndexService {
 		return convertGrammarAggregationsToJSON(collectGrammarFieldAggregations(grammarFields));
 	}
 	
-	//TODO
+	
 	public JSONArray getUIBooksData() {
 		JSONArray books = new JSONArray();
 		int booksCount = (int) distinct("book");
@@ -288,6 +290,30 @@ public class ElasticIndexService {
 			}
 		}
 		return books;
+	}
+	
+	
+	public JSONArray getVersesMetaData(String field) {
+		List<String> addressees = new ArrayList<String>();
+		
+		//aggregation for distinct hymn addressee values
+		TermsAggregationBuilder agg = 
+				AggregationBuilders.terms("metaAgg").field(field).size(1000);
+		//compose request source
+		SearchSourceBuilder searchSourceBuilder = 
+				new SearchSourceBuilder().aggregation(agg);
+		//create request
+		SearchRequest req = new SearchRequest("vedaweb").types("doc").source(searchSourceBuilder);
+		try {
+			SearchResponse response = elastic.client().search(req);
+			for (Bucket b : ((Terms)response.getAggregations().get("metaAgg")).getBuckets()) {
+				addressees.add(b.getKeyAsString());
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		Collections.sort(addressees);
+		return new JSONArray(addressees);
 	}
 	
 	

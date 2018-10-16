@@ -5,7 +5,7 @@ const uiDataStore = store({
 
     //will be filled dynamically with data fetched from server
     search: {},
-    abbreviations: {},
+    meta: {},
     contentView: {},
     viewScrollTo: false,
     viewFilter: {glossing: true, translations: true},

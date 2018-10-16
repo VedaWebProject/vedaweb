@@ -51,7 +51,8 @@ class App extends Component {
         axios.get("/api/uidata")
         .then((response) => {
             uiDataStore.search = response.data.search;
-            uiDataStore.abbrevations = response.data.abbrevations;
+            uiDataStore.meta = response.data.meta;
+            uiDataStore.abbreviations = response.data.abbreviations;
             searchMetaStore.scopeDataRaw = uiDataStore.search.meta.scopes;
             searchMetaStore.transliteration = uiDataStore.search.meta.transliterations[0];
             this.setState({

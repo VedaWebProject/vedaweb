@@ -23,6 +23,9 @@ public class SearchData {
 	@JsonProperty("scopes")
 	private List<SearchScope> scopes;
 	
+	@JsonProperty("meta")
+	private Map<String, String[]> meta;
+	
 	@JsonProperty("blocks")
 	private List<Map<String, Object>> blocks;
 	
@@ -76,6 +79,16 @@ public class SearchData {
 
 	public void setScopes(List<SearchScope> scopes) {
 		this.scopes = scopes;
+	}
+	
+
+	public Map<String, String[]> getMeta() {
+		return meta;
+	}
+
+
+	public void setMeta(Map<String, String[]> meta) {
+		this.meta = meta;
 	}
 
 

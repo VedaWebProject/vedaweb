@@ -36,7 +36,7 @@
 	    }
 	},
 	
-	"abbrevations" : {
+	"abbreviations" : {
 		"strata" : {
 			"A" : "Archaic",
 			"a" : "Archaic on metrical evidence alone",
@@ -73,6 +73,8 @@
 			"E1": "epic anuṣṭubh (525)",
 			"E3b": "epic anuṣṭubh (380)"
 		}
-	}
+	},
+	
+	"meta": {}
 	
 }

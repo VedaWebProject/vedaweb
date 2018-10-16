@@ -47,6 +47,18 @@ public class UiDataService {
 			((JSONObject)uiData.query("/search/meta"))
 				.put("scopes", indexService.getUIBooksData());
 			
+			//get addressees data from index and add to uiData JSONObject
+			((JSONObject)uiData.query("/meta"))
+				.put("hymnAddressee", indexService.getVersesMetaData("hymnAddressee"));
+			
+			//get group data from index and add to uiData JSONObject
+			((JSONObject)uiData.query("/meta"))
+				.put("hymnGroup", indexService.getVersesMetaData("hymnGroup"));
+			
+			//get strata data from index and add to uiData JSONObject
+			((JSONObject)uiData.query("/meta"))
+				.put("strata", indexService.getVersesMetaData("strata"));
+			
 			System.out.println("[UiDataService] Successfully initialized UI data object for frontend requests.");
 		}
 	}

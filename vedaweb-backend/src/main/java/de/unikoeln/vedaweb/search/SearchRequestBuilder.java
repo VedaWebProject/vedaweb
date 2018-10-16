@@ -69,6 +69,10 @@ public class SearchRequestBuilder {
 		if (searchData.getScopes().size() > 0)
 			bool.must(getSearchScopesQuery(searchData));
 		
+		//add search meta queries
+		if (searchData.getMeta().size() > 0)
+			bool.must(getSearchMetaQuery(searchData));
+		
 		searchSourceBuilder.query(bool);
 
 		searchSourceBuilder.fetchSource(FETCH_SOURCE_CONTEXT);
@@ -80,6 +84,21 @@ public class SearchRequestBuilder {
 	}
 	
 	
+	private static BoolQueryBuilder getSearchMetaQuery(SearchData searchData) {
+		BoolQueryBuilder metasQuery = QueryBuilders.boolQuery();
+		for (String meta : searchData.getMeta().keySet()) {
+			if (searchData.getMeta().get(meta).length == 0) continue;
+			BoolQueryBuilder metaQuery = QueryBuilders.boolQuery();
+			for (String value : searchData.getMeta().get(meta)) {
+				metaQuery.should(QueryBuilders.termQuery(meta, value));
+			}
+			//add to root meta query
+			metasQuery.should(metaQuery);
+		}
+		return metasQuery;
+	}
+
+
 //	private static void addScopeQueries(BoolQueryBuilder rootQuery, List<SearchScope> scopes){
 //		if (scopes == null || scopes.size() == 0) return;
 //		

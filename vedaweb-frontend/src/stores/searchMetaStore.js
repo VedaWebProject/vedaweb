@@ -19,6 +19,18 @@ const searchMetaStore = store({
 
     transliteration: {id: 'hk', name: 'Harvard-Kyoto'},
 
+    meta: {
+        hymnAddressee: [],
+        hymnGroup: [],
+        strata: []
+    },
+
+    hasMetas(){
+        return searchMetaStore.meta.hymnAddressee.length > 0
+        || searchMetaStore.meta.hymnGroup.length > 0
+        || searchMetaStore.meta.strata.length > 0
+    },
+
     setSearchMode(mode){
         searchMetaStore.mode = mode;
     },

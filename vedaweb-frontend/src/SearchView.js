@@ -5,6 +5,7 @@ import SearchGrammar from "./SearchGrammar";
 import SearchScopeContainer from "./SearchScopeContainer";
 import SearchTransliteration from "./SearchTransliteration";
 import SearchScopeIndicator from "./SearchScopeIndicator";
+import SearchMetaFilterList from "./SearchMetaFilterList";
 
 import SanscriptAccents from './SanscriptAccents';
 
@@ -16,6 +17,7 @@ import { withRouter } from 'react-router-dom';
 import { Base64 } from 'js-base64';
 
 import searchMetaStore from "./stores/searchMetaStore";
+import uiDataStore from "./stores/uiDataStore";
 import searchGrammarStore from "./stores/searchGrammarStore";
 
 const TabPane = Tabs.TabPane;
@@ -37,7 +39,8 @@ class SearchView extends Component {
     handleSubmit(e){
         let jsonData = {
             mode: searchMetaStore.mode,
-            scopes: searchMetaStore.scopes
+            scopes: searchMetaStore.scopes,
+            meta: searchMetaStore.meta
         };
         
         if (searchMetaStore.mode === "grammar"){
@@ -155,6 +158,33 @@ class SearchView extends Component {
                             style={customPanelStyle}
                             forceRender={true}>
                                 <SearchScopeContainer/>
+                            </Panel>
+
+                            <Panel
+                            header={"Meta Filters" + (searchMetaStore.hasMetas() ? " (filters set!)" : "")}
+                            key="metafilters"
+                            style={customPanelStyle}
+                            forceRender={true}>
+                                <div style={panelContentStyle}>
+                                    <SearchMetaFilterList
+                                    label="Hymn Addressees"
+                                    placeholder="all Addressees"
+                                    items={uiDataStore.meta.hymnAddressee}
+                                    selected={searchMetaStore.meta.hymnAddressee}
+                                    handleChange={v => {searchMetaStore.meta.hymnAddressee = v}}/>
+                                    <SearchMetaFilterList
+                                    label="Hymn Groups"
+                                    placeholder="all Groups"
+                                    items={uiDataStore.meta.hymnGroup}
+                                    selected={searchMetaStore.meta.hymnGroup}
+                                    handleChange={v => {searchMetaStore.meta.hymnGroup = v}}/>
+                                    <SearchMetaFilterList
+                                    label="Verse Strata"
+                                    placeholder="all Strata"
+                                    items={uiDataStore.meta.strata}
+                                    selected={searchMetaStore.meta.strata}
+                                    handleChange={v => {searchMetaStore.meta.strata = v}}/>
+                                </div>
                             </Panel>
                         </Collapse>
 
