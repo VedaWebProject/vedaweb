@@ -101,6 +101,18 @@ class SearchView extends Component {
                 </span>
             </div>
 
+        const customMetaFilterPanelHeader =
+            <div>
+                Meta Filters: 
+                {searchMetaStore.hasMetas() ?
+                    <span className="red trans-font"> Adressee ({searchMetaStore.meta.hymnAddressee.length}),
+                        Group({searchMetaStore.meta.hymnGroup.length}),
+                        Strata({searchMetaStore.meta.strata.length})
+                    </span>
+                    : <span className="red trans-font"> none</span>
+                }
+            </div>
+
 
         return (
 
@@ -161,7 +173,7 @@ class SearchView extends Component {
                             </Panel>
 
                             <Panel
-                            header={"Meta Filters" + (searchMetaStore.hasMetas() ? " (filters set!)" : "")}
+                            header={customMetaFilterPanelHeader}
                             key="metafilters"
                             style={customPanelStyle}
                             forceRender={true}>
