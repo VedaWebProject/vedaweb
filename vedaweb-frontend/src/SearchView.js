@@ -6,6 +6,7 @@ import SearchScopeContainer from "./SearchScopeContainer";
 import SearchTransliteration from "./SearchTransliteration";
 import SearchScopeIndicator from "./SearchScopeIndicator";
 import SearchMetaFilterList from "./SearchMetaFilterList";
+import HelpButton from "./HelpButton";
 
 import SanscriptAccents from './SanscriptAccents';
 
@@ -158,7 +159,7 @@ class SearchView extends Component {
                                     More additional search modes will follow ...
                                 </div>
                             </TabPane>
-                            <TabPane tab={<Icon type="question"/>} key="help">
+                            <TabPane tab={"Help"} key="help">
                                 {helpText}
                             </TabPane>
                         </Tabs>
