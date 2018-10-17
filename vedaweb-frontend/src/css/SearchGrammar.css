@@ -1,6 +1,6 @@
 
 .search-block-list-controls {
-    border-left: 6px solid #c9bbac;
+    border-left: 6px solid #b4b1ae;
     border-radius: 4px;
     padding-top: .8rem;
     padding-bottom: .8rem;
@@ -8,7 +8,7 @@
 
 .search-block-add {
     padding: .2rem;
-    background-color: #c9bbac;
+    background-color: #b4b1ae;
     border-left: none;
     color: #fff;
     font-weight: bold;
