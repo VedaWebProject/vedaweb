@@ -2,14 +2,30 @@ import React, { Component } from "react";
 import { Icon, Modal } from 'antd';
 import logo from "./img/logo.png";
 
+const helpTexts = {
+    transliteration: {
+        title: "Input Transliteration",
+        content:
+            <div>
+                <p>This is a sample paragraph.</p>
+                <p>And this is, too.</p>
+            </div>
+    }
+};
+
+
 class HelpButton extends Component {
 
     state = { visible: false }
 
     showModal = () => {
-        this.setState({
-            visible: true,
-        });
+        if (helpTexts.hasOwnProperty(this.props.type)){
+            this.setState({
+                visible: true,
+            });
+        } else {
+            console.log("Error: '" + this.props.type + "' is not a valid help text type, so i won't open the help view.")
+        }
     }
 
     hideModal = () => {
@@ -27,7 +43,7 @@ class HelpButton extends Component {
                 alt=""
                 style={{height:"32px", paddingRight:"1rem"}}/>
                 <span style={{verticalAlign:"middle"}}>
-                    {this.props.title}
+                    {helpTexts[this.props.type].title}
                 </span>
             </div>;
 
@@ -48,9 +64,7 @@ class HelpButton extends Component {
                 onOk={this.hideModal}
                 onCancel={this.hideModal}
                 okText="OK">
-                    <p>Bla bla ...</p>
-                    <p>Bla bla ...</p>
-                    <p>Bla bla ...</p>
+                    {helpTexts[this.props.type].content}
                 </Modal>
             </span>
         );

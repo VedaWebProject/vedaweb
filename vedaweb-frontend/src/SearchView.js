@@ -139,8 +139,7 @@ class SearchView extends Component {
                             style={customPanelStyle}
                             forceRender={true}>
                                 <div style={panelContentStyle}>
-                                    <HelpButton
-                                    title="Input Transliteration"/>
+                                    <HelpButton type="transliteration" />
                                     <SearchTransliteration/>
                                 </div>
                             </Panel>
