@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Icon, Modal } from 'antd';
+import logo from "./img/logo.png";
 
 class HelpButton extends Component {
 
@@ -19,17 +20,28 @@ class HelpButton extends Component {
 
     render() {
 
+        const modalHeader =
+            <div className="secondary-font red bold">
+                <img
+                src={logo}
+                alt=""
+                style={{height:"32px", paddingRight:"1rem"}}/>
+                <span style={{verticalAlign:"middle"}}>
+                    {this.props.title}
+                </span>
+            </div>;
+
         return (
             
-            <span>
+            <span style={{float: this.props.align === undefined ? "right" : this.props.align}}>
                 <Icon
                 type="question-circle"
-                theme="twoTone"
-                twoToneColor="#b9b9b9"
-                onClick={this.showModal}/>
+                theme="outlined"
+                onClick={this.showModal}
+                style={{cursor:"pointer"}}/>
                 
                 <Modal
-                title="Modal"
+                title={modalHeader}
                 centered
                 footer={null}
                 visible={this.state.visible}

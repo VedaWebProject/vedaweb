@@ -88,7 +88,7 @@ class SearchView extends Component {
 
         const searchTransliterationPanelHeader =
             <div>
-                {"Input Method: "}
+                {"Input Transliteration: "}
                 <span className="red trans-font">
                     {uiDataStore.search.meta.transliterations
                         .filter(t => t.id === searchMetaStore.transliteration)[0].name}
@@ -139,6 +139,8 @@ class SearchView extends Component {
                             style={customPanelStyle}
                             forceRender={true}>
                                 <div style={panelContentStyle}>
+                                    <HelpButton
+                                    title="Input Transliteration"/>
                                     <SearchTransliteration/>
                                 </div>
                             </Panel>
