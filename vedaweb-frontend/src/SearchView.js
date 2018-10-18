@@ -172,6 +172,7 @@ class SearchView extends Component {
                             key="scope"
                             style={customPanelStyle}
                             forceRender={true}>
+                                <HelpButton type="searchScope" />
                                 <SearchScopeContainer/>
                             </Panel>
 
@@ -181,6 +182,7 @@ class SearchView extends Component {
                             style={customPanelStyle}
                             forceRender={true}>
                                 <div style={panelContentStyle}>
+                                    <HelpButton type="searchMetaFilters" />
                                     <SearchMetaFilterList
                                     label="Hymn Addressees"
                                     placeholder="all Addressees"

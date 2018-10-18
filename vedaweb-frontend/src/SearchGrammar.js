@@ -5,6 +5,7 @@ import { view } from 'react-easy-state';
 import searchGrammarStore from "./stores/searchGrammarStore";
 
 import SearchBlock from "./SearchBlock";
+import HelpButton from "./HelpButton";
 
 import './css/SearchGrammar.css'
 
@@ -38,6 +39,7 @@ class SearchGrammar extends Component {
 
         return (
             <div className="search-container">
+                <HelpButton type="grammarSearch" />
                 <div className="search-block-list top-gap">
 
                     {data.blocks.map((block, i) => (
