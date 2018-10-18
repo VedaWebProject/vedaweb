@@ -25,7 +25,7 @@ class SearchBlock extends Component {
         const transliteration = (
             <TransliterationPreview
             input={this.props.form}
-            transliteration={searchMetaStore.transliteration.id}/>
+            transliteration={searchMetaStore.transliteration}/>
         );
 
         return (

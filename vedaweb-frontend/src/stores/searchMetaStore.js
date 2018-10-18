@@ -17,7 +17,7 @@ const searchMetaStore = store({
 
     scopeDataRaw: [],
 
-    transliteration: {id: 'hk', name: 'Harvard-Kyoto'},
+    transliteration: {},
 
     meta: {
         hymnAddressee: [],
@@ -35,8 +35,8 @@ const searchMetaStore = store({
         searchMetaStore.mode = mode;
     },
 
-    setTransliteration(id, name){
-        searchMetaStore.transliteration = {id: id, name: name};
+    setTransliteration(id){
+        searchMetaStore.transliteration = id;
     },
 
     setScopeFromBook(scopeId, index){

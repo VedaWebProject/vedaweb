@@ -52,8 +52,7 @@ class NavBar extends Component {
                         
                         <Menu.Item key="search">
                             <NavLink to={"/search"}>
-                                {/* <Icon type="search"/> */}
-                                Advanced Search
+                                <Icon type="zoom-in"/>Advanced Search
                             </NavLink>
                         </Menu.Item>
 

@@ -48,7 +48,7 @@ class SearchView extends Component {
             jsonData["blocks"] = JSON.parse(JSON.stringify(searchGrammarStore.data.blocks));
 
             for (let block of jsonData.blocks){
-                block.form = SanscriptAccents.t(block.form, searchMetaStore.transliteration.id, "iso");
+                block.form = SanscriptAccents.t(block.form, searchMetaStore.transliteration, "iso");
                 for (let field of block.fields){
                     if (field.value.length > 0)
                         block[field.name] = field.value
@@ -90,7 +90,8 @@ class SearchView extends Component {
             <div>
                 {"Input Method: "}
                 <span className="red trans-font">
-                    {searchMetaStore.transliteration.name}
+                    {uiDataStore.search.meta.transliterations
+                        .filter(t => t.id === searchMetaStore.transliteration)[0].name}
                 </span>
             </div>
 
@@ -107,8 +108,8 @@ class SearchView extends Component {
                 Meta Filters: 
                 {searchMetaStore.hasMetas() ?
                     <span className="red trans-font"> Adressee ({searchMetaStore.meta.hymnAddressee.length}),
-                        Group({searchMetaStore.meta.hymnGroup.length}),
-                        Strata({searchMetaStore.meta.strata.length})
+                        Group ({searchMetaStore.meta.hymnGroup.length}),
+                        Strata ({searchMetaStore.meta.strata.length})
                     </span>
                     : <span className="red trans-font"> none</span>
                 }
@@ -124,7 +125,7 @@ class SearchView extends Component {
             className="page-content"
             key="search-view">
 
-                <Col xl={12}>
+                <Col xl={12} lg={18} md={20} sm={24}>
                     <div className="card">
                         <h4>
                             <Icon type="search" className="gap-right"/>
