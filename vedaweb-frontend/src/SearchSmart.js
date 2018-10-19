@@ -77,10 +77,10 @@ class SearchSmart extends Component {
                     onSearch={this.handleSearch}
                     addonBefore={selectBefore}
                     size={"large"}
-                    placeholder={
-                        searchSmartStore.data.field === "form"
-                        ? "HK or verse number"
-                        : "Translation or verse number"
+                    placeholder={"Quick search: " + 
+                        (searchSmartStore.data.field === "form"
+                        ? "Term in HK or verse no."
+                        : "Translation or verse no.")
                     } />
 
                 </Tooltip>
