@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Row, Col } from 'antd';
+import { Row, Col, Icon } from 'antd';
 
 
 class ContentView extends Component {
@@ -11,9 +11,22 @@ class ContentView extends Component {
                 <Col span={24}>
                     <div className="card">
                         <h4>VedaWeb beta</h4>
-                        <div>Projektzeitraum: Juli 2017 - Juni 2020<br/><br/></div>
-                        <div className="start">
-                            Das Projekt hat zum Ziel, eine webbasierte, frei zugängliche Plattform für die sprachwissenschaftliche Erforschung altindischer Texte aufzubauen. Das altindische Textkorpus soll digital einsehbar, morphologisch und metrisch annotiert sowie nach lexikographischen und korpuslinguistischen Kriterien durchsuchbar zur Verfügung gestellt werden. Als Pilottext wird der Rigveda eingespeist werden, der mit den Wörterbüchern Cologne Digital Sanskrit Dictionaries verknüpft werden soll. Die morphologische Annotation dieses Textes wurde an der Universität Zürich (UZH) durchgeführt und dem Projekt zur Verfügung gestellt. In Zukunft wird über die URL vedaweb.uni-koeln.de die Vedaweb-Anwendung erreichbar sein.
+                        <span className="secondary-font red">Projekt time frame: July 2017 - June 2020</span><br/><br/>
+                        <div>
+                            This is a beta version for testing some of our planned concepts and getting feedback from potential users.<br/>
+                            There are numerous things yet to be implemented, some of which are:<br/><br/>
+                            <ul>
+                                <li>Metric analysis (search and display)</li>
+                                <li>Data export</li>
+                                <li>Additional translations (Renou etc.)</li>
+                                <li>Additional search modes</li>
+                                <li>...</li>
+                            </ul>
+                            Look out for the <Icon type="question-circle" theme="outlined"/> icon to get explanations of the different features.<br/>
+                            Feel free to send us your feedback on functionality, usability and data correctness to ???@uni-koeln.de
+                            <br/><br/>
+                            Thank you for testing the <span className="secondary-font red">VedaWeb</span> beta!
+                            <br/><br/>
                         </div>
                     </div>
                 </Col>
