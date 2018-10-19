@@ -4,7 +4,7 @@ import { Row, Col, Affix, Spin, Select, Button, Icon } from 'antd';
 import ContentLocation from "./ContentLocation";
 import ContentFilterSwitch from "./ContentFilterSwitch";
 import ErrorMessage from "./ErrorMessage";
-import showNote from "./Note";
+
 
 import "./css/ContentView.css";
 
@@ -16,6 +16,7 @@ import scrollToComponent from 'react-scroll-to-component';
 
 import axios from 'axios';
 import uiDataStore from "./stores/uiDataStore";
+import DictionaryView from "./DictionaryView";
 
 const Option = Select.Option;
 
@@ -89,10 +90,6 @@ class ContentView extends Component {
                 <span> - {uiDataStore.abbreviations[cat][key]}</span><br/>
             </span>
         ));
-    }
-
-    openDict(lemma, ref){
-        showNote(lemma, "TODO: content of ref '" + ref + "'");
     }
 
     cleanLemmaString(lemma){
@@ -246,24 +243,7 @@ class ContentView extends Component {
                                                 className="glossing content-block card"
                                                 ref={this.scrollTo}>
                                                     <h4>Dictionary (Grassmann)</h4>
-                                                    {data.padas.map(pada => (
-                                                        pada.tokens.map((token, i) => (
-                                                            <div key={token + i}>
-                                                                {token.form + " ("}
-                                                                <span className="bold">{token.lemma}</span>
-                                                                {token.lemmaRef.map((ref, i) => (
-                                                                    <a
-                                                                    className="dict-link"
-                                                                    onClick={e => this.openDict(token.lemma, ref)}
-                                                                    key={"lemma_" + i}>
-                                                                        <Icon type="eye-o"/>
-                                                                        {(i+1) + " "}
-                                                                    </a>
-                                                                ))}
-                                                                {")"}
-                                                            </div>
-                                                        ))
-                                                    ))}
+                                                    <DictionaryView data={data.padas}/>
                                                 </div>
                                             }
 
