@@ -7,7 +7,7 @@ class ContentView extends Component {
     render() {
         return (
             
-            <Row id="content-view" className="page-content">
+            <Row className="page-content">
                 <Col span={24}>
                     <div className="card">
                         <h4>VedaWeb beta</h4>

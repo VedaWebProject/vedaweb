@@ -7,7 +7,7 @@ class ContentView extends Component {
     render() {
         return (
             
-            <Row id="content-view" className="page-content">
+            <Row className="page-content">
                 <Col span={8} offset={8}>
                     <div className="card">
                         404

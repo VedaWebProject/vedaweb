@@ -125,356 +125,360 @@ class ContentView extends Component {
 
                     {/** LOADED, NO ERROR **/}
                     { error === undefined &&
-
-                        <Row
-                        id="content-view"
-                        type="flex"
-                        justify="center">
-
-                            <Col span={18} className="content">
-
-                                {/** CONTENT **/}
-
-                                { data.padas !== undefined &&
-
-                                    <div>
-                                        <div className="content-plain content-block card">
-
+                        <div>
+                            <Row>
+                                <Col span={4}>
+                                    <div className="card content-center">
+                                        { data.book !== undefined &&
                                             <ContentLocation
                                                 currIndex={data.index}
                                                 locationBook={data.book}
                                                 locationHymn={data.hymn}
                                                 locationVerse={data.verse} />
+                                        }
+                                    </div>
+                                </Col>
+                            </Row>
 
-                                            {data.padas.map(pada => (
-                                                <div className="bottom-gap-small" key={"p_plain_" + pada.index}>
-                                                    <span key={"p_plain_line" + pada.index} className="pada-line">{pada.line}</span>
-                                                    <span key={"p_plain_form" + pada.index} className="pada-form">{pada.form}</span><br/>
+                            <Row>
+
+                                {/** CONTENT **/}
+                                <Col span={18}>
+
+                                    { data.padas !== undefined &&
+                                        <div>
+                                            <div className="content-plain content-block card">
+                                                {data.padas.map(pada => (
+                                                    <div className="bottom-gap-small" key={"p_plain_" + pada.index}>
+                                                        <span key={"p_plain_line" + pada.index} className="pada-line">{pada.line}</span>
+                                                        <span key={"p_plain_form" + pada.index} className="pada-form">{pada.form}</span><br/>
+                                                    </div>
+                                                ))}
+                                            </div>
+
+                                            {uiDataStore.viewFilter.glossing &&
+                                                <div
+                                                className="glossing content-block card"
+                                                ref={this.scrollTo}>
+                                                    <h4>Morphological Glossing</h4>
+                                                    {data.padas.map(pada => (
+                                                        <div
+                                                        className="glossing-line"
+                                                        key={"p_" + pada.index}>
+
+                                                            <span key={"p_gloss_line" + pada.index} className="pada-line">
+                                                                {pada.line}
+                                                            </span>
+
+                                                            {pada.tokens.map(token => (
+                                                                <div
+                                                                className="glossing-token"
+                                                                key={"t_" + token.index}>
+                                                                    {token.form}
+                                                                    <br/>
+                                                                    <div className="glossing-annotation">
+                                                                        {this.cleanLemmaString(token.lemma)}
+                                                                        {
+                                                                            Object.keys(token.grammar).map(key => (
+                                                                                <span key={"t_" + token.index + "_" + key}>
+                                                                                    .{token.grammar[key]}
+                                                                                </span>
+                                                                            ))
+                                                                        }
+                                                                    </div>
+                                                                </div>
+                                                            ))}
+
+                                                        </div>
+                                                    ))}
                                                 </div>
-                                            ))}
+                                            }
+
+                                            {uiDataStore.viewFilter.translations &&
+                                                <div
+                                                className="content-block card"
+                                                ref={this.scrollTo}>
+                                                    <h4 className="inline-block">Translations</h4>
+
+                                                    <ContentFilterSwitch
+                                                    label="EN (Griffith)"
+                                                    onChange={(e) => {uiDataStore.disabledTranslations["Griffith"] = !e}}
+                                                    disabled={data.translations.filter(t => t.source === "Griffith").length === 0}
+                                                    checked={!uiDataStore.disabledTranslations["Griffith"]}
+                                                    inline={true} />
+
+                                                    <ContentFilterSwitch
+                                                    label="DE (Geldner)"
+                                                    onChange={(e) => {uiDataStore.disabledTranslations["Geldner"] = !e}}
+                                                    disabled={data.translations.filter(t => t.source === "Geldner").length === 0}
+                                                    checked={!uiDataStore.disabledTranslations["Geldner"]} 
+                                                    inline={true} />
+
+                                                    <ContentFilterSwitch
+                                                    label="DE (Grassmann)"
+                                                    onChange={(e) => {uiDataStore.disabledTranslations["Grassmann"] = !e}}
+                                                    disabled={data.translations.filter(t => t.source === "Grassmann").length === 0}
+                                                    checked={!uiDataStore.disabledTranslations["Grassmann"]} 
+                                                    inline={true} />
+
+                                                    {data.translations.map(translation => (
+                                                        !uiDataStore.disabledTranslations[translation.source] &&
+                                                        <div key={"trans_" + translation.source} className="translation">
+                                                            <span className="bold">{
+                                                                translation.language.toUpperCase() === "DE" ? "German" :
+                                                                translation.language.toUpperCase() === "EN" ? "English" :
+                                                                translation.language.toUpperCase() === "FR" ? "French" : "?"
+                                                            }</span>
+                                                            <span className="first-cap"> ({translation.source})</span>
+                                                            <br/>
+                                                            <div className="italic">
+                                                                {translation.form.map((line, i) => (
+                                                                    <div key={"trans_" + i}>{line}</div>
+                                                                ))}
+                                                            </div>
+                                                        </div>
+                                                    ))}
+                                                </div>
+                                            }
+
+                                            {uiDataStore.viewFilter.dictionary &&
+                                                <div
+                                                className="glossing content-block card"
+                                                ref={this.scrollTo}>
+                                                    <h4>Dictionary (Grassmann)</h4>
+                                                    {data.padas.map(pada => (
+                                                        pada.tokens.map((token, i) => (
+                                                            <div key={token + i}>
+                                                                {token.form + " ("}
+                                                                <span className="bold">{token.lemma}</span>
+                                                                {token.lemmaRef.map((ref, i) => (
+                                                                    <a
+                                                                    className="dict-link"
+                                                                    onClick={e => this.openDict(token.lemma, ref)}
+                                                                    key={"lemma_" + i}>
+                                                                        <Icon type="eye-o"/>
+                                                                        {(i+1) + " "}
+                                                                    </a>
+                                                                ))}
+                                                                {")"}
+                                                            </div>
+                                                        ))
+                                                    ))}
+                                                </div>
+                                            }
+
+                                            {uiDataStore.viewFilter.metaInfo &&
+                                                <div
+                                                className="glossing content-block card"
+                                                ref={this.scrollTo}>
+                                                    <h4>Meta Info</h4>
+
+                                                    <table>
+                                                        <tbody>
+                                                        <tr>
+                                                            <td>
+                                                                <span className="bold gap-right secondary-font">Hymn Addressee:</span>
+                                                            </td>
+                                                            <td>
+                                                                {data.hymnAddressee}
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>
+                                                                <span className="bold gap-right secondary-font">Hymn Group:</span>
+                                                            </td>
+                                                            <td>
+                                                                {data.hymnGroup}
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>
+                                                                <span className="bold gap-right secondary-font">Strata (Arnold):</span>
+                                                            </td>
+                                                            <td>
+                                                                {this.resolveAbbrevationToHTML(data.strata, "strata")}
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>
+                                                                <span className="bold gap-right secondary-font">Pada Labels (Gunkel, Ryan):</span>
+                                                            </td>
+                                                            <td>
+                                                                {data.padas.map(pada => (
+                                                                    <div>
+                                                                        <div style={{display:"inline-block", verticalAlign:"top"}} className="bold red secondary-font gap-right">{pada.line}:</div>
+                                                                        <div style={{display:"inline-block", verticalAlign:"top"}}>{this.resolveAbbrevationToHTML(pada.label, "label")}</div>
+                                                                    </div>
+                                                                ))}
+                                                            </td>
+                                                        </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            }
+
+                                            {uiDataStore.viewFilter.devanagari &&
+                                                <div
+                                                className="content-block card deva-font"
+                                                ref={this.scrollTo}>
+                                                    <h4>Devanagari (Detlef)</h4>
+                                                    {data.versions.filter(v => v.language === 'deva').map(v => (
+                                                        v.form.map((line, i) => (
+                                                            <div key={"deva_" + i}>{line}</div>
+                                                        ))
+                                                    ))}
+                                                </div>
+                                            }
+
+                                            {uiDataStore.viewFilter.padapatha &&
+                                                <div
+                                                className="content-block card"
+                                                ref={this.scrollTo}>
+                                                    <h4>Padapatha</h4>
+                                                    {data.versions.filter(v => v.source === 'Padapatha').map(v => (
+                                                        v.form.map((line, i) => (
+                                                            <div key={"padapatha_" + i}>{line}</div>
+                                                        ))
+                                                    ))}
+                                                </div>
+                                            }
+
+                                            {uiDataStore.viewFilter.sasapatha &&
+                                                <div
+                                                className="content-block card"
+                                                ref={this.scrollTo}>
+                                                    <h4>Sasa Patha (Gunkel, Ryan)</h4>
+                                                    {data.versions.filter(v => v.source === 'Sasa Patha (Gunkel, Ryan)').map(v => (
+                                                        v.form.map((line, i) => (
+                                                            <div key={"sasa_" + i}>{line}</div>
+                                                        ))
+                                                    ))}
+                                                </div>
+                                            }
+
+                                            {uiDataStore.viewFilter.vnh &&
+                                                <div
+                                                className="content-block card"
+                                                ref={this.scrollTo}>
+                                                    <h4>Van Nooten, Holland</h4>
+                                                    {data.versions.filter(v => v.source === 'Van Nooten, Holland').map(v => (
+                                                        v.form.map((line, i) => (
+                                                            <div key={"vnh_" + i}>{line}</div>
+                                                        ))
+                                                    ))}
+                                                </div>
+                                            }
+
+                                            {uiDataStore.viewFilter.aufrecht &&
+                                                <div
+                                                className="content-block card"
+                                                ref={this.scrollTo}>
+                                                    <h4>Aufrecht</h4>
+                                                    {data.versions.filter(v => v.source === 'Aufrecht').map(v => (
+                                                        v.form.map((line, i) => (
+                                                            <div key={"aufrecht_" + i}>{line}</div>
+                                                        ))
+                                                    ))}
+                                                </div>
+                                            }
+
+                                        </div>
+                                    }
+                                </Col>
+                                
+                                <Col span={6}>
+                                    <Affix offsetTop={10}>
+                                        <div className="card">
+                                            <h4><Icon type="filter" className="gap-right"/> View Filters</h4>
+
+                                            <ContentFilterSwitch
+                                            label="Morphological Glossing"
+                                            disabled={!isLoaded || error !== undefined}
+                                            checked={uiDataStore.viewFilter.glossing}
+                                            onChange={(e) => this.filterChange("glossing", e)} />
+
+                                            <ContentFilterSwitch
+                                            label="Translations"
+                                            disabled={!isLoaded || error !== undefined}
+                                            checked={uiDataStore.viewFilter.translations}
+                                            onChange={(e) => this.filterChange("translations", e)} />
+
+                                            <ContentFilterSwitch
+                                            label="Dictionary"
+                                            disabled={!isLoaded || error !== undefined}
+                                            checked={uiDataStore.viewFilter.dictionary}
+                                            onChange={(e) => this.filterChange("dictionary", e)} />
+
+                                            <ContentFilterSwitch
+                                            label="Meta Info"
+                                            disabled={!isLoaded || error !== undefined}
+                                            checked={uiDataStore.viewFilter.metaInfo}
+                                            onChange={(e) => this.filterChange("metaInfo", e)} />
+
+                                            <ContentFilterSwitch
+                                            label="Devanagari"
+                                            disabled={!isLoaded || error !== undefined}
+                                            checked={uiDataStore.viewFilter.devanagari}
+                                            onChange={(e) => this.filterChange("devanagari", e)} />
+
+                                            <ContentFilterSwitch
+                                            label="Padapatha"
+                                            disabled={!isLoaded || error !== undefined}
+                                            checked={uiDataStore.viewFilter.padapatha}
+                                            onChange={(e) => this.filterChange("padapatha", e)} />
+
+                                            <ContentFilterSwitch
+                                            label="Sasa Patha"
+                                            disabled={!isLoaded || error !== undefined}
+                                            checked={uiDataStore.viewFilter.sasapatha}
+                                            onChange={(e) => this.filterChange("sasapatha", e)} />
+
+                                            <ContentFilterSwitch
+                                            label="Van Nooten, Holland"
+                                            disabled={!isLoaded || error !== undefined}
+                                            checked={uiDataStore.viewFilter.vnh}
+                                            onChange={(e) => this.filterChange("vnh", e)} />
+
+                                            <ContentFilterSwitch
+                                            label="Aufrecht"
+                                            disabled={!isLoaded || error !== undefined}
+                                            checked={uiDataStore.viewFilter.aufrecht}
+                                            onChange={(e) => this.filterChange("aufrecht", e)} />
+                                            
                                         </div>
 
-                                        {uiDataStore.viewFilter.devanagari &&
-                                            <div
-                                            className="content-block card deva-font"
-                                            ref={this.scrollTo}>
-                                                <h4>Devanagari (Detlef)</h4>
-                                                {data.versions.filter(v => v.language === 'deva').map(v => (
-                                                    v.form.map((line, i) => (
-                                                        <div key={"deva_" + i}>{line}</div>
-                                                    ))
-                                                ))}
-                                            </div>
-                                        }
-
-                                        {uiDataStore.viewFilter.sasapatha &&
-                                            <div
-                                            className="content-block card"
-                                            ref={this.scrollTo}>
-                                                <h4>Sasa Patha (Gunkel, Ryan)</h4>
-                                                {data.versions.filter(v => v.source === 'Sasa Patha (Gunkel, Ryan)').map(v => (
-                                                    v.form.map((line, i) => (
-                                                        <div key={"sasa_" + i}>{line}</div>
-                                                    ))
-                                                ))}
-                                            </div>
-                                        }
-
-                                        {uiDataStore.viewFilter.vnh &&
-                                            <div
-                                            className="content-block card"
-                                            ref={this.scrollTo}>
-                                                <h4>Van Nooten, Holland</h4>
-                                                {data.versions.filter(v => v.source === 'Van Nooten, Holland').map(v => (
-                                                    v.form.map((line, i) => (
-                                                        <div key={"vnh_" + i}>{line}</div>
-                                                    ))
-                                                ))}
-                                            </div>
-                                        }
-
-                                        {uiDataStore.viewFilter.aufrecht &&
-                                            <div
-                                            className="content-block card"
-                                            ref={this.scrollTo}>
-                                                <h4>Aufrecht</h4>
-                                                {data.versions.filter(v => v.source === 'Aufrecht').map(v => (
-                                                    v.form.map((line, i) => (
-                                                        <div key={"aufrecht_" + i}>{line}</div>
-                                                    ))
-                                                ))}
-                                            </div>
-                                        }
-
-                                        {uiDataStore.viewFilter.padapatha &&
-                                            <div
-                                            className="content-block card"
-                                            ref={this.scrollTo}>
-                                                <h4>Padapatha</h4>
-                                                {data.versions.filter(v => v.source === 'Padapatha').map(v => (
-                                                    v.form.map((line, i) => (
-                                                        <div key={"padapatha_" + i}>{line}</div>
-                                                    ))
-                                                ))}
-                                            </div>
-                                        }
-
-                                        {uiDataStore.viewFilter.glossing &&
-                                            <div
-                                            className="glossing content-block card"
-                                            ref={this.scrollTo}>
-                                                <h4>Morphological Glossing</h4>
-                                                {data.padas.map(pada => (
-                                                    <div
-                                                    className="glossing-line"
-                                                    key={"p_" + pada.index}>
-
-                                                        <span key={"p_gloss_line" + pada.index} className="pada-line">
-                                                            {pada.line}
-                                                        </span>
-
-                                                        {pada.tokens.map(token => (
-                                                            <div
-                                                            className="glossing-token"
-                                                            key={"t_" + token.index}>
-                                                                {token.form}
-                                                                <br/>
-                                                                <div className="glossing-annotation">
-                                                                    {this.cleanLemmaString(token.lemma)}
-                                                                    {
-                                                                        Object.keys(token.grammar).map(key => (
-                                                                            <span key={"t_" + token.index + "_" + key}>
-                                                                                .{token.grammar[key]}
-                                                                            </span>
-                                                                        ))
-                                                                    }
-                                                                </div>
-                                                            </div>
+                                        <div className="card">
+                                            <h4><Icon type="export" className="gap-right"/>Export</h4>
+                                            <Row>
+                                                <Col span={20}>
+                                                    <Select
+                                                    defaultValue={"PDF"}
+                                                    onSelect={(value) => console.log("Export triggered: " + value)}
+                                                    style={{width:"100%"}}
+                                                    className="secondary-font">
+                                                        {exportOptions.map((eOpt, i) => (
+                                                            <Option
+                                                            key={'eOpt_' + i}
+                                                            value={eOpt}
+                                                            className="secondary-font">
+                                                                {eOpt}
+                                                            </Option>
                                                         ))}
-
-                                                    </div>
-                                                ))}
-                                            </div>
-                                        }
-
-                                        {uiDataStore.viewFilter.translations &&
-                                            <div
-                                            className="content-block card"
-                                            ref={this.scrollTo}>
-                                                <h4 className="inline-block">Translations</h4>
-
-                                                <ContentFilterSwitch
-                                                label="EN (Griffith)"
-                                                onChange={(e) => {uiDataStore.disabledTranslations["Griffith"] = !e}}
-                                                disabled={data.translations.filter(t => t.source === "Griffith").length === 0}
-                                                checked={!uiDataStore.disabledTranslations["Griffith"]}
-                                                inline={true} />
-
-                                                <ContentFilterSwitch
-                                                label="DE (Geldner)"
-                                                onChange={(e) => {uiDataStore.disabledTranslations["Geldner"] = !e}}
-                                                disabled={data.translations.filter(t => t.source === "Geldner").length === 0}
-                                                checked={!uiDataStore.disabledTranslations["Geldner"]} 
-                                                inline={true} />
-
-                                                <ContentFilterSwitch
-                                                label="DE (Grassmann)"
-                                                onChange={(e) => {uiDataStore.disabledTranslations["Grassmann"] = !e}}
-                                                disabled={data.translations.filter(t => t.source === "Grassmann").length === 0}
-                                                checked={!uiDataStore.disabledTranslations["Grassmann"]} 
-                                                inline={true} />
-
-                                                {data.translations.map(translation => (
-                                                    !uiDataStore.disabledTranslations[translation.source] &&
-                                                    <div key={"trans_" + translation.source} className="translation">
-                                                        <span className="bold">{
-                                                            translation.language.toUpperCase() === "DE" ? "German" :
-                                                            translation.language.toUpperCase() === "EN" ? "English" :
-                                                            translation.language.toUpperCase() === "FR" ? "French" : "?"
-                                                        }</span>
-                                                        <span className="first-cap"> ({translation.source})</span>
-                                                        <br/>
-                                                        <div className="italic">
-                                                            {translation.form.map((line, i) => (
-                                                                <div key={"trans_" + i}>{line}</div>
-                                                            ))}
-                                                        </div>
-                                                    </div>
-                                                ))}
-                                            </div>
-                                        }
-
-                                        {uiDataStore.viewFilter.dictionary &&
-                                            <div
-                                            className="glossing content-block card"
-                                            ref={this.scrollTo}>
-                                                <h4>Dictionary (Grassmann)</h4>
-                                                {data.padas.map(pada => (
-                                                    pada.tokens.map((token, i) => (
-                                                        <div key={token + i}>
-                                                            {token.form + " ("}
-                                                            <span className="bold">{token.lemma}</span>
-                                                            {token.lemmaRef.map((ref, i) => (
-                                                                <a
-                                                                className="dict-link"
-                                                                onClick={e => this.openDict(token.lemma, ref)}
-                                                                key={"lemma_" + i}>
-                                                                    <Icon type="eye-o"/>
-                                                                    {(i+1) + " "}
-                                                                </a>
-                                                            ))}
-                                                            {")"}
-                                                        </div>
-                                                    ))
-                                                ))}
-                                            </div>
-                                        }
-
-                                        {uiDataStore.viewFilter.metaInfo &&
-                                            <div
-                                            className="glossing content-block card"
-                                            ref={this.scrollTo}>
-                                                <h4>Meta Info</h4>
-
-                                                <table>
-                                                    <tbody>
-                                                    <tr>
-                                                        <td>
-                                                            <span className="bold gap-right secondary-font">Hymn Addressee:</span>
-                                                        </td>
-                                                        <td>
-                                                            {data.hymnAddressee}
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>
-                                                            <span className="bold gap-right secondary-font">Hymn Group:</span>
-                                                        </td>
-                                                        <td>
-                                                            {data.hymnGroup}
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>
-                                                            <span className="bold gap-right secondary-font">Strata (Arnold):</span>
-                                                        </td>
-                                                        <td>
-                                                            {this.resolveAbbrevationToHTML(data.strata, "strata")}
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>
-                                                            <span className="bold gap-right secondary-font">Pada Labels (Gunkel, Ryan):</span>
-                                                        </td>
-                                                        <td>
-                                                            {data.padas.map(pada => (
-                                                                <div>
-                                                                    <div style={{display:"inline-block", verticalAlign:"top"}} className="bold red secondary-font gap-right">{pada.line}:</div>
-                                                                    <div style={{display:"inline-block", verticalAlign:"top"}}>{this.resolveAbbrevationToHTML(pada.label, "label")}</div>
-                                                                </div>
-                                                            ))}
-                                                        </td>
-                                                    </tr>
-                                                    </tbody>
-                                                </table>
-                                            </div>
-                                        }
-
-                                    </div>
-                                }
-                            </Col>
-                            
-                            <Col span={6}>
-                                <Affix offsetTop={10}>
-                                    <div className="card">
-                                        <h4><Icon type="filter" className="gap-right"/> View Filters</h4>
-
-                                        <ContentFilterSwitch
-                                        label="Devanagari"
-                                        disabled={!isLoaded || error !== undefined}
-                                        checked={uiDataStore.viewFilter.devanagari}
-                                        onChange={(e) => this.filterChange("devanagari", e)} />
-
-                                        <ContentFilterSwitch
-                                        label="Sasa Patha"
-                                        disabled={!isLoaded || error !== undefined}
-                                        checked={uiDataStore.viewFilter.sasapatha}
-                                        onChange={(e) => this.filterChange("sasapatha", e)} />
-
-                                        <ContentFilterSwitch
-                                        label="Van Nooten, Holland"
-                                        disabled={!isLoaded || error !== undefined}
-                                        checked={uiDataStore.viewFilter.vnh}
-                                        onChange={(e) => this.filterChange("vnh", e)} />
-
-                                        <ContentFilterSwitch
-                                        label="Aufrecht"
-                                        disabled={!isLoaded || error !== undefined}
-                                        checked={uiDataStore.viewFilter.aufrecht}
-                                        onChange={(e) => this.filterChange("aufrecht", e)} />
-
-                                        <ContentFilterSwitch
-                                        label="Padapatha"
-                                        disabled={!isLoaded || error !== undefined}
-                                        checked={uiDataStore.viewFilter.padapatha}
-                                        onChange={(e) => this.filterChange("padapatha", e)} />
-
-                                        <ContentFilterSwitch
-                                        label="Morphological Glossing"
-                                        disabled={!isLoaded || error !== undefined}
-                                        checked={uiDataStore.viewFilter.glossing}
-                                        onChange={(e) => this.filterChange("glossing", e)} />
-
-                                        <ContentFilterSwitch
-                                        label="Translations"
-                                        disabled={!isLoaded || error !== undefined}
-                                        checked={uiDataStore.viewFilter.translations}
-                                        onChange={(e) => this.filterChange("translations", e)} />
-
-                                        <ContentFilterSwitch
-                                        label="Dictionary"
-                                        disabled={!isLoaded || error !== undefined}
-                                        checked={uiDataStore.viewFilter.dictionary}
-                                        onChange={(e) => this.filterChange("dictionary", e)} />
-
-                                        <ContentFilterSwitch
-                                        label="Meta Info"
-                                        disabled={!isLoaded || error !== undefined}
-                                        checked={uiDataStore.viewFilter.metaInfo}
-                                        onChange={(e) => this.filterChange("metaInfo", e)} />
-                                    </div>
-
-                                    <div className="card">
-                                        <h4><Icon type="export" className="gap-right"/>Export</h4>
-                                        <Row>
-                                            <Col span={20}>
-                                                <Select
-                                                defaultValue={"PDF"}
-                                                onSelect={(value) => console.log("Export triggered: " + value)}
-                                                style={{width:"100%"}}
-                                                className="secondary-font">
-                                                    {exportOptions.map((eOpt, i) => (
-                                                        <Option
-                                                        key={'eOpt_' + i}
-                                                        value={eOpt}
-                                                        className="secondary-font">
-                                                            {eOpt}
-                                                        </Option>
-                                                    ))}
-                                                </Select>
-                                            </Col>
-                                            <Col span={2} offset={1}>
-                                                <Button
-                                                type="secondary"
-                                                icon="download"
-                                                onClick={() => {alert("Export functionality doesn't exist, yet.")}} />
-                                            </Col>
-                                        </Row>
-                                    </div>
-                                </Affix>
-                            </Col>
-                            
-                        </Row>
+                                                    </Select>
+                                                </Col>
+                                                <Col span={2} offset={1}>
+                                                    <Button
+                                                    type="secondary"
+                                                    icon="download"
+                                                    onClick={() => {alert("Export functionality doesn't exist, yet.")}} />
+                                                </Col>
+                                            </Row>
+                                        </div>
+                                    </Affix>
+                                </Col>
+                                
+                            </Row>
+                        </div>
                     }
                 </div>
             </Spin>
