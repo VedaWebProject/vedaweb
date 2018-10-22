@@ -17,7 +17,7 @@ const searchMetaStore = store({
 
     scopeDataRaw: [],
 
-    transliteration: {},
+    transliteration: "hk",
 
     meta: {
         hymnAddressee: [],

@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Input, Tooltip, Select } from 'antd';
 
 import searchSmartStore from "./stores/searchSmartStore";
+import searchMetaStore from "./stores/searchMetaStore";
 import uiDataStore from "./stores/uiDataStore";
 import { view } from 'react-easy-state';
 
@@ -79,7 +80,7 @@ class SearchSmart extends Component {
                     size={"large"}
                     placeholder={"Quick search: " + 
                         (searchSmartStore.data.field === "form"
-                        ? "Term in HK or verse no."
+                        ? searchMetaStore.transliteration.toUpperCase() + " or verse no."
                         : "Translation or verse no.")
                     } />
 

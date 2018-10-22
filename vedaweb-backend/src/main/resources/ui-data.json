@@ -23,7 +23,7 @@
 	    
 	    "smart": {
 	        "fields": [
-				{"field": "form", "ui": "Rigveda (HK)"},
+				{"field": "form", "ui": "Rigveda"},
 				{"field": "translation", "ui": "Translations"}
 			]
 		},

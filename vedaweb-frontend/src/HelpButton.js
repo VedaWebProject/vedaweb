@@ -7,8 +7,7 @@ const helpTexts = {
         title: "Input Transliteration",
         content:
             <div>
-                <p>This is a sample paragraph.</p>
-                <p>And this is, too.</p>
+                <p>You can select one of the available transliteration standards for your search inputs. This setting will be saved as long as you stay on this website.</p>
             </div>
     },
     grammarSearch : {
