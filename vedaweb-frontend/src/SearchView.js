@@ -159,7 +159,7 @@ class SearchView extends Component {
                             </TabPane>
                         </Tabs>
 
-                        <h3><Icon type="setting" className="gap-right"/>Additional Search Settings</h3>
+                        <h3><Icon type="tool" className="gap-right"/>Additional Search Settings</h3>
                         <Collapse bordered={false}>
                             <Panel
                             header={searchScopePanelHeader}
