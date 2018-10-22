@@ -14,8 +14,24 @@ const helpTexts = {
         title: "Grammar Search",
         content:
             <div>
-                <p>This is a sample paragraph.</p>
-                <p>And this is, too.</p>
+                <p>Using the grammar search, you can find verses containing terms with certain grammatical properties.</p>
+                <p>Define a search term (optional) and select an attribute (like case, number, person, etc.) and the value you are looking for (this is also optional). You may add multiple properties for the term by clicking the plus-button to the right.</p>
+                <p>To add more than one term to find in a verse, click on the plus-button below. This will display another block which lets you define the additional term.</p>
+            </div>
+    },
+    searchScope : {
+        title: "Search Range",
+        content:
+            <div>
+                <p>The search range setting lets you specify ranges of books (or hymns) to limit the search to. You may add more ranges by clicking the plus-button to the right.</p>
+            </div>
+    },
+    searchMetaFilters : {
+        title: "Meta Filters",
+        content:
+            <div>
+                <p>By setting up meta filters, you can limit your search to verses matching the specified meta properties.</p>
+                <p>It is possible to select multiple values per property. The results will only contain verses that match one value for every property specified!</p>
             </div>
     },
 };
