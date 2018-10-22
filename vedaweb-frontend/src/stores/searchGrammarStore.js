@@ -103,6 +103,13 @@ const searchGrammarStore = store({
             }
         }
         return [];
+    },
+
+    reset(){
+        searchGrammarStore.data = {
+            blocks: []
+        };
+        this.addBlock();
     }
 
 })

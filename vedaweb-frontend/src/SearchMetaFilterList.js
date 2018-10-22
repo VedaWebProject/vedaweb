@@ -3,8 +3,6 @@ import { Row, Col, Select } from 'antd';
 
 import './css/SearchTransliteration.css';
 
-import { view } from 'react-easy-state';
-
 const Option = Select.Option;
 
 
@@ -36,4 +34,4 @@ class SearchMetaFilterList extends Component {
     }
 }
 
-export default view(SearchMetaFilterList);
+export default SearchMetaFilterList;

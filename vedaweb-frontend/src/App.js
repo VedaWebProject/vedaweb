@@ -14,13 +14,14 @@ import uiDataStore from "./stores/uiDataStore";
 import searchMetaStore from "./stores/searchMetaStore";
 import { view } from 'react-easy-state';
 
-import { Route, Switch, withRouter } from 'react-router-dom'
+import { Route, Switch, withRouter } from 'react-router-dom';
 import SearchResults from "./SearchResults";
 
 import Sanscript from 'sanscript';
 import axios from 'axios';
 
 import "./polyfills";
+import Browserizr from 'browserizr'
 
 
 class App extends Component {
@@ -70,6 +71,16 @@ class App extends Component {
 
     
     render() {
+
+        //alert if IE
+        if (Browserizr.is_ie) {
+            alert("We suspect you are using Internet Explorer as your web browser.\nUnfortunately, VedaWeb only works with modern web browsers. We recommend you to use Firefox, Chrome or something similar instead.");
+        }
+
+        //alert if mobile browser
+        if (Browserizr.is_mobile) {
+            alert("We suspect you are using a mobile device.\nUnfortunately, VedaWeb is not designed to work well on mobile devices. You may try to use a desktop browser instead.");
+        }
 
         const { error, isLoaded } = this.state;
 

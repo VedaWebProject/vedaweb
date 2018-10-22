@@ -10,7 +10,7 @@ class ContentView extends Component {
             <Row className="page-content">
                 <Col span={24}>
                     <div className="card">
-                        <h4>VedaWeb beta</h4>
+                        <h4><Icon type="experiment"/> VedaWeb beta</h4>
                         <span className="secondary-font red">Projekt time frame: July 2017 - June 2020</span><br/><br/>
                         <div>
                             This is a beta version for testing some of our planned concepts and getting feedback from potential users.<br/>

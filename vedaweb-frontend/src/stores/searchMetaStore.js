@@ -130,6 +130,23 @@ const searchMetaStore = store({
 
     range(from, to) {
         return [...Array(to - from + 1).keys()].map(i => i + from);
+    },
+
+    reset(){
+        searchMetaStore.scopes = [
+            {
+                id: 'scope_0',
+                fromBook: 0,
+                fromHymn: 0,
+                toBook: 0,
+                toHymn: 0
+            }
+        ];
+        searchMetaStore.meta = {
+            hymnAddressee: [],
+            hymnGroup: [],
+            strata: []
+        };
     }
 
 });

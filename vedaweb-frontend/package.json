@@ -6,6 +6,7 @@
   "dependencies": {
     "antd": "^3.4.5",
     "axios": "^0.18.0",
+    "browserizr": "^2.1.1",
     "immutability-helper": "^2.7.0",
     "js-base64": "^2.4.3",
     "react": "^16.3.2",

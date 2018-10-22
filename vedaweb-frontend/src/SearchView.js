@@ -65,6 +65,11 @@ class SearchView extends Component {
         this.props.history.push("/results/" + Base64.encode(JSON.stringify(jsonData)));
     }
 
+    handleReset(e){
+        searchMetaStore.reset();
+        searchGrammarStore.reset();
+    }
+
 
     render() {
 
@@ -167,8 +172,7 @@ class SearchView extends Component {
                             <Panel
                             header={customMetaFilterPanelHeader}
                             key="metafilters"
-                            style={customPanelStyle}
-                            forceRender={true}>
+                            style={customPanelStyle} >
                                 <HelpButton type="searchMetaFilters" />
                                 <SearchMetaFilterList
                                 label="Hymn Addressees"
@@ -192,11 +196,20 @@ class SearchView extends Component {
                         </Collapse>
 
                         <Row>
-                            <Col span={12} offset={12} className="content-right">
+                            <Col span={24} className="content-right">
                                 <Button
-                                icon="search"
+                                icon="delete"
                                 size="large"
                                 className={"secondary-font"}
+                                onClick={this.handleReset}>
+                                    Reset
+                                </Button>
+
+                                <Button
+                                type="primary"
+                                icon="search"
+                                size="large"
+                                className={"secondary-font gap-left"}
                                 onClick={this.handleSubmit}>
                                     Search
                                 </Button>
