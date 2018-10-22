@@ -79,11 +79,6 @@ class SearchView extends Component {
             fontSize: '18px'
         };
 
-        const helpText = <div className="search-container">
-                            <h3>VedaVeb Advanced Search Modes</h3>
-                            In the future, this place might be home to a detailed explanation of the different search modes.
-                        </div>;
-
         const searchTransliterationPanelHeader =
             <div>
                 {"Input Transliteration: "}
@@ -154,11 +149,8 @@ class SearchView extends Component {
                             </TabPane> */}
                             <TabPane tab="Other Search" key="somemode">
                                 <div className="search-container">
-                                    More additional search modes will follow ...
+                                    More search modes will follow ...
                                 </div>
-                            </TabPane>
-                            <TabPane tab={"Help"} key="help">
-                                {helpText}
                             </TabPane>
                         </Tabs>
 
