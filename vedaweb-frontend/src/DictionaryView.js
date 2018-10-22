@@ -130,7 +130,7 @@ class DictionaryView extends Component {
 
                 {this.state.visible && this.state.error === undefined &&
                     <Modal
-                    title={<span className="trans-font bold">{this.state.lemma}</span>}
+                    title={<div><span className="bold">Grassmann: </span><span className="trans-font">{this.state.lemma}</span></div>}
                     centered
                     footer={null}
                     visible={true}
@@ -140,7 +140,7 @@ class DictionaryView extends Component {
                         {this.state.dictData.data.ids.map(id => (
                             <div className="trans-font">
                                 <span className="deva-font" style={{color:"#000"}}>{id.headwordDeva}</span><br/>
-                                <p><span className="bold">Grassmann:</span><br/>{id.senseTxtIso}</p>
+                                <p>{id.senseTxtIso}</p>
                             </div>
                         ))}
                     </Modal>
