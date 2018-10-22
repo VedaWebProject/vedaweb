@@ -115,13 +115,13 @@ class DictionaryView extends Component {
             <div>
                 {this.sort(this.transform(this.props.data)).map((token, i) => (
                         <div key={token + i}>
-                            <span className="bold">{token.lemma}</span>
+                            <span className="bold">{token.lemma} </span>
                             {token.lemmaRef.map((ref, i) => (
                                 <a
-                                className="dict-link"
+                                className="dict-link gap-left"
                                 onClick={e => this.openDict(token.lemma, ref)}
                                 key={"lemma_" + i}>
-                                    <Icon type="eye-o"/>
+                                    <Icon type="book"/>
                                     {(i+1) + " "}
                                 </a>
                             ))}
