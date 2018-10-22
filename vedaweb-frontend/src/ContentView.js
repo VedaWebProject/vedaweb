@@ -124,14 +124,19 @@ class ContentView extends Component {
                     { error === undefined &&
                         <div>
                             <Row>
-                                <Col span={4}>
-                                    <div className="card content-center">
+                                <Col span={24}>
+                                    <div className="card v-middle">
                                         { data.book !== undefined &&
+                                            <div>
                                             <ContentLocation
                                                 currIndex={data.index}
                                                 locationBook={data.book}
                                                 locationHymn={data.hymn}
                                                 locationVerse={data.verse} />
+                                        
+                                                <span className="bold gap-left">Hymn addressee: </span> {data.hymnAddressee}
+                                                <span className="bold gap-left">Hymn group: </span> {data.hymnGroup}
+                                            </div>
                                         }
                                     </div>
                                 </Col>

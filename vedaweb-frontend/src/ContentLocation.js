@@ -9,7 +9,7 @@ class ContentLocation extends Component {
 
         return (
 
-            <div className="location">
+            <span className="location">
                 <Link to={"/view/index/" + (this.props.currIndex - 1)} className="location-controls">
                     <Icon type="left"/>
                 </Link>
@@ -23,7 +23,7 @@ class ContentLocation extends Component {
                 <Link to={"/view/index/" + (this.props.currIndex + 1)} className="location-controls">
                     <Icon type="right"/>
                 </Link>
-            </div>
+            </span>
             
         );
     }
