@@ -79,8 +79,6 @@ class SearchView extends Component {
             fontSize: '18px'
         };
 
-        const panelContentStyle = {padding: 12};
-
         const helpText = <div className="search-container">
                             <h3>VedaVeb Advanced Search Modes</h3>
                             In the future, this place might be home to a detailed explanation of the different search modes.
@@ -125,7 +123,7 @@ class SearchView extends Component {
             className="page-content"
             key="search-view">
 
-                <Col xl={12} lg={18} md={20} sm={24}>
+                <Col xl={14} lg={18} md={20} sm={24}>
                     <div className="card">
                         <h4>
                             <Icon type="search" className="gap-right"/>
@@ -138,10 +136,8 @@ class SearchView extends Component {
                             key={"transliteration"}
                             style={customPanelStyle}
                             forceRender={true}>
-                                <div style={panelContentStyle}>
-                                    <HelpButton type="transliteration" />
-                                    <SearchTransliteration/>
-                                </div>
+                                <HelpButton type="transliteration" />
+                                <SearchTransliteration/>
                             </Panel>
                         </Collapse> 
                         
@@ -181,27 +177,25 @@ class SearchView extends Component {
                             key="metafilters"
                             style={customPanelStyle}
                             forceRender={true}>
-                                <div style={panelContentStyle}>
-                                    <HelpButton type="searchMetaFilters" />
-                                    <SearchMetaFilterList
-                                    label="Hymn Addressees"
-                                    placeholder="all Addressees"
-                                    items={uiDataStore.meta.hymnAddressee}
-                                    selected={searchMetaStore.meta.hymnAddressee}
-                                    handleChange={v => {searchMetaStore.meta.hymnAddressee = v}}/>
-                                    <SearchMetaFilterList
-                                    label="Hymn Groups"
-                                    placeholder="all Groups"
-                                    items={uiDataStore.meta.hymnGroup}
-                                    selected={searchMetaStore.meta.hymnGroup}
-                                    handleChange={v => {searchMetaStore.meta.hymnGroup = v}}/>
-                                    <SearchMetaFilterList
-                                    label="Verse Strata"
-                                    placeholder="all Strata"
-                                    items={uiDataStore.meta.strata}
-                                    selected={searchMetaStore.meta.strata}
-                                    handleChange={v => {searchMetaStore.meta.strata = v}}/>
-                                </div>
+                                <HelpButton type="searchMetaFilters" />
+                                <SearchMetaFilterList
+                                label="Hymn Addressees"
+                                placeholder="all Addressees"
+                                items={uiDataStore.meta.hymnAddressee}
+                                selected={searchMetaStore.meta.hymnAddressee}
+                                handleChange={v => {searchMetaStore.meta.hymnAddressee = v}}/>
+                                <SearchMetaFilterList
+                                label="Hymn Groups"
+                                placeholder="all Groups"
+                                items={uiDataStore.meta.hymnGroup}
+                                selected={searchMetaStore.meta.hymnGroup}
+                                handleChange={v => {searchMetaStore.meta.hymnGroup = v}}/>
+                                <SearchMetaFilterList
+                                label="Verse Strata"
+                                placeholder="all Strata"
+                                items={uiDataStore.meta.strata}
+                                selected={searchMetaStore.meta.strata}
+                                handleChange={v => {searchMetaStore.meta.strata = v}}/>
                             </Panel>
                         </Collapse>
 
