@@ -86,7 +86,7 @@ class SearchView extends Component {
 
         const searchTransliterationPanelHeader =
             <div>
-                {"Input Transliteration: "}
+                {"Selected Transliteration: "}
                 <span className="red trans-font">
                     {uiDataStore.search.meta.transliterations
                         .filter(t => t.id === searchMetaStore.transliteration)[0].name}
@@ -125,11 +125,9 @@ class SearchView extends Component {
 
                 <Col xl={14} lg={18} md={20} sm={24}>
                     <div className="card">
-                        <h4>
-                            <Icon type="search" className="gap-right"/>
-                            Advanced Search
-                        </h4>
+                        <h4>Advanced Search</h4>
 
+                        <h3><Icon type="edit" className="gap-right"/>Input Transliteration</h3>
                         <Collapse bordered={false}>
                             <Panel
                             header={searchTransliterationPanelHeader}
@@ -141,11 +139,13 @@ class SearchView extends Component {
                             </Panel>
                         </Collapse> 
                         
+                        <h3><Icon type="search" className="gap-right"/>Search Mode</h3>
                         <Tabs
                         onChange={this.switchMode}
                         type="card"
                         id="search-mode-selector"
-                        tabBarGutter={8}>
+                        tabBarGutter={8}
+                        className="bottom-gap">
                             <TabPane tab="Grammar Search" key="grammar">
                                 <SearchGrammar />
                             </TabPane>
@@ -159,6 +159,7 @@ class SearchView extends Component {
                             </TabPane>
                         </Tabs>
 
+                        <h3><Icon type="setting" className="gap-right"/>Additional Search Settings</h3>
                         <Collapse bordered={false}>
                             <Panel
                             header={searchScopePanelHeader}
