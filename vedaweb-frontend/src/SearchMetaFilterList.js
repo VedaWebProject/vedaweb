@@ -19,7 +19,7 @@ class SearchMetaFilterList extends Component {
                     <Select
                     mode="multiple"
                     allowClear={true}
-                    defaultValue={this.props.selected}
+                    value={this.props.selected}
                     style={{ width: '100%', margin: '0.5rem 0'}}
                     placeholder={"Select or leave blank for " + this.props.placeholder}
                     onChange={this.props.handleChange}>
