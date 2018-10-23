@@ -248,7 +248,9 @@ class ContentView extends Component {
                                                 className="glossing content-block card"
                                                 ref={this.scrollTo}>
                                                     <h4>Dictionary (Grassmann)</h4>
-                                                    <DictionaryView data={data.padas}/>
+                                                    <DictionaryView
+                                                    key={data.id}
+                                                    data={data.padas}/>
                                                 </div>
                                             }
 

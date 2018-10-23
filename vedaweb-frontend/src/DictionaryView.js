@@ -1,13 +1,28 @@
 import React, { Component } from "react";
-import { Icon, Modal } from 'antd';
+import { Icon, Modal, Spin } from 'antd';
 import axios from 'axios';
+
+import "./css/DictionaryView.css";
 
 const alphabet = ["a", "ā", "i", "ī", "u", "ū", "r̥", "r̥̄", "l̥", "l̥̄", "ē", "e", "ai", "ō", "o", "au", "k", "kh", "g", "gh", "ṅ", "c", "ch", "j", "jh", "ñ", "ṭ", "ṭh", "ḍ", "ḍh", "ṇ", "t", "th", "d", "dh", "n", "p", "ph", "b", "bh", "m", "y", "r", "l", "v", "ś", "ṣ", "s", "h", "ḻ", "kṣ", "jñ"];
 
 
 class DictionaryView extends Component {
 
-    state = { visible: false, lemma: '', lemmaRef: [], dictData: {} }
+    constructor(props) {
+        super(props)
+        this.state = {
+            isLoaded: false,
+            modalVisible: false,
+            modalData: undefined,
+            dictData: [],
+            error: undefined
+        }
+    }
+
+    componentDidMount(){
+        this.loadDictData();
+    }
 
     transform(padas){
         let out = [];
@@ -72,9 +87,20 @@ class DictionaryView extends Component {
         return string.normalize('NFD').replace(/[\u0300\u0301\u221a]/g, '').normalize('NFC');
     }
 
-    openDict(lemma, ref){
+    loadDictData(){
+        let tokenData = this.sort(this.transform(this.props.data));
+
+        let lemmaRefs = [];
+        for (let i = 0; i < tokenData.length; i++) {
+            const token = tokenData[i];
+            for (let j = 0; j < token.lemmaRef.length; j++) {
+                lemmaRefs.push(token.lemmaRef[j]);
+            }
+        }
+
         const GQLQ = `{
-            ids(lemmaId: ["` + ref + `"]) {
+            ids(lemmaId: ` + JSON.stringify(lemmaRefs) + `, size: 30) {
+                id
                 headwordDeva
                 headwordIso
                 senseTxtIso
@@ -83,69 +109,106 @@ class DictionaryView extends Component {
 
         axios.post("http://api.c-salt.uni-koeln.de/dicts/gra/graphql", {query: GQLQ})
             .then((response) => {
+                var dictData = [];
+                const entries = response.data.data.ids;
+                for (let i = 0; i < tokenData.length; i++) {
+                    let t = tokenData[i];
+                    t["dict"] = t.lemmaRef.map(ref => {
+                        let entry = entries.find(e => e.id === ref);
+                        return entry === undefined ? {} : {
+                            graRef: ref,
+                            graDeva: entry.headwordDeva,
+                            graTxt: entry.senseTxtIso,
+                            graLemma: entry.lemma
+                        };
+                    });
+                    dictData.push(t);
+                }
                 this.setState({
-                    visible: true,
-                    lemma: lemma,
-                    lemmaRef: ref,
-                    dictData: response.data
+                    isLoaded: true,
+                    dictData: dictData,
+                    error: undefined
                 });
             })
             .catch((error) => {
                 this.setState({
-                    visible: true,
+                    isLoaded: true,
                     error: error
                 });
             });
     }
 
+    openDict(modalData){
+        this.setState({
+            modalVisible: true,
+            modalData: modalData
+        });
+    }
+
     closeDict = () => {
         this.setState({
-            visible: false,
-            lemma: '',
-            lemmaRef: [],
-            dictData: {}
+            modalVisible: false,
+            modalData: {}
         });
     }
 
 
     render() {
 
+        const {modalVisible, modalData, dictData, isLoaded, error} = this.state;
+        
         return (
             
-            <div>
-                {this.sort(this.transform(this.props.data)).map((token, i) => (
-                        <div key={token + i}>
-                            <span className="bold">{token.lemma} </span>
-                            {token.lemmaRef.map((ref, i) => (
-                                <a
-                                className="dict-link gap-left"
-                                onClick={e => this.openDict(token.lemma, ref)}
-                                key={"lemma_" + i}>
-                                    <Icon type="book"/>
-                                    {(i+1) + " "}
-                                </a>
-                            ))}
-                        </div>
-                ))}
+            <Spin
+            spinning={!isLoaded} >
 
-                {this.state.visible && this.state.error === undefined &&
+                {isLoaded && error === undefined &&
+                    <table className="teaser"><tbody>
+                        {dictData.map((token, i) => (
+                        <tr key={token + i}>
+                            <td className="non-expanding bold">{token.lemma}</td>
+                            <td className="non-expanding" style={{padding:'0 1rem'}}>
+                                {token.lemmaRef.map((ref, i) => {
+                                    let entry = token.dict.find(d => d.graRef === ref);
+                                    return entry === undefined ? "" :
+                                    <a
+                                    className="dict-link gap-right secondary-font"
+                                    onClick={e => this.openDict(entry)}
+                                    key={"lemma_" + i}>
+                                        <Icon type="book"/>
+                                        {" " + (i+1)}
+                                    </a>
+                                })}
+                            </td>
+                            <td className="expanding">
+                                {token.dict[0] !== undefined && token.dict[0].graTxt}
+                            </td>
+                        </tr>))}
+                    </tbody></table>
+                }
+
+                {isLoaded && modalVisible && modalData !== undefined && error === undefined &&
                     <Modal
-                    title={<div><span className="bold">Grassmann: </span><span className="trans-font">{this.state.lemma}</span></div>}
+                    title={<div><span className="bold">Grassmann: </span><span className="trans-font">{modalData.lemma}</span></div>}
                     centered
                     footer={null}
                     visible={true}
                     onOk={this.closeDict}
                     onCancel={this.closeDict}
                     okText="OK">
-                        {this.state.dictData.data.ids.map(id => (
-                            <div className="trans-font">
-                                <span className="deva-font" style={{color:"#000"}}>{id.headwordDeva}</span><br/>
-                                <p>{id.senseTxtIso}</p>
-                            </div>
-                        ))}
+                        <div key={modalData.lemmaRef} className="trans-font">
+                            <span className="deva-font" style={{color:"#000"}}>{modalData.graDeva}</span><br/>
+                            <p>{modalData.graTxt}</p>
+                        </div>
                     </Modal>
                 }
-            </div>
+
+                {isLoaded && error !== undefined &&
+                    <span className="red secondary-font">
+                        Unfortunately, there was an error processing the dictionary data. <Icon type="meh"/>
+                    </span>
+                }
+            </Spin>
             
         );
     }

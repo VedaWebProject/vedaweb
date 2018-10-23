@@ -8,7 +8,7 @@ const uiDataStore = store({
     meta: {},
     contentView: {},
     viewScrollTo: false,
-    viewFilter: {glossing: true, translations: true},
+    viewFilter: {glossing: true, translations: true, dictionary: true},
     disabledTranslations: {}
 
 })

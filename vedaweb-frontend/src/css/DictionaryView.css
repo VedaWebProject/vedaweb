@@ -1,0 +1,16 @@
+table.teaser {
+    width: 95%;
+}
+  
+table.teaser td.expanding {
+    max-width: 1px;
+    width: 80%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+  
+table.teaser .non-expanding {
+    white-space: nowrap;
+    width: 1px;
+}
