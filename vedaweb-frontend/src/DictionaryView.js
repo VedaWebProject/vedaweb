@@ -119,7 +119,7 @@ class DictionaryView extends Component {
                             graRef: ref,
                             graDeva: entry.headwordDeva,
                             graTxt: entry.senseTxtIso,
-                            graLemma: entry.lemma
+                            graLemma: entry.headwordIso
                         };
                     });
                     dictData.push(t);
@@ -189,7 +189,7 @@ class DictionaryView extends Component {
 
                 {isLoaded && modalVisible && modalData !== undefined && error === undefined &&
                     <Modal
-                    title={<div><span className="bold">Grassmann: </span><span className="trans-font">{modalData.lemma}</span></div>}
+                    title={<div><span className="bold">Grassmann: </span><span className="trans-font">{modalData.graLemma}</span></div>}
                     centered
                     footer={null}
                     visible={true}
