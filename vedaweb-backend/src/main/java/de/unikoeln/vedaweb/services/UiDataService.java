@@ -28,7 +28,12 @@ public class UiDataService {
 	public void init() {
 		if (!indexService.indexExists()) {
 			System.err.println("[UiDataService] Error: Could not request UI data. Search index doesn't seem to exist.");
-		} else if (uiData == null) {
+			System.out.println("[UiDataService] Creating and filling new index...");
+			indexService.createIndex();
+			indexService.indexDbDocuments();
+			
+		}
+		if (uiData == null) {
 			uiData = new JSONObject();
 			
 			//load ui data template file
