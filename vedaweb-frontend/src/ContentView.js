@@ -78,7 +78,7 @@ class ContentView extends Component {
 
     scrollTo(component){
         if (uiDataStore.viewScrollTo){
-            scrollToComponent(component);
+            scrollToComponent(component, {align:'top'});
             uiDataStore.viewScrollTo = false;
         }
     }
