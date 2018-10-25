@@ -120,7 +120,7 @@
 							<outputDirectory>${basedir}/src/main/resources/static</outputDirectory>
 							<resources>
 								<resource>
-									<directory>vedaweb-ui/build</directory>
+									<directory>../vedaweb-frontend/build</directory>
 								</resource>
 							</resources>
 						</configuration>
