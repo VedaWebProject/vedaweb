@@ -203,6 +203,7 @@ class SearchView extends Component {
                                 icon="delete"
                                 size="large"
                                 className={"secondary-font"}
+                                htmlType="reset"
                                 onClick={this.handleReset}>
                                     Reset
                                 </Button>

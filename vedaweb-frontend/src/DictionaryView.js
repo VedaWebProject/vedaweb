@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Icon, Modal, Spin } from 'antd';
+import { Icon, Modal, Spin, Button } from 'antd';
 import axios from 'axios';
 
 import "./css/DictionaryView.css";
@@ -171,13 +171,13 @@ class DictionaryView extends Component {
                                 {token.lemmaRef.map((ref, i) => {
                                     let entry = token.dict.find(d => d.graRef === ref);
                                     return entry === undefined ? "" :
-                                    <a
+                                    <Button
                                     className="dict-link gap-right secondary-font"
                                     onClick={e => this.openDict(entry)}
                                     key={"lemma_" + i}>
                                         <Icon type="book"/>
                                         {" " + (i+1)}
-                                    </a>
+                                    </Button>
                                 })}
                             </td>
                             <td className="expanding">
