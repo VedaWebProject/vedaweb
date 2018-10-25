@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Icon, Modal } from 'antd';
-import logo from "./img/logo.png";
+import help from "./img/help.png";
 
 const helpTexts = {
     transliteration: {
@@ -62,7 +62,7 @@ class HelpButton extends Component {
         const modalHeader = !helpTexts.hasOwnProperty(this.props.type) ? "" :
             <div className="secondary-font red bold">
                 <img
-                src={logo}
+                src={help}
                 alt=""
                 style={{height:"32px", paddingRight:"1rem"}}/>
                 <span style={{verticalAlign:"middle"}}>
