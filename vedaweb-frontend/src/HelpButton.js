@@ -31,7 +31,7 @@ const helpTexts = {
         content:
             <div>
                 <p>By setting up meta filters, you can limit your search to verses matching the specified meta properties.</p>
-                <p>It is possible to select multiple values per property. The results will only contain verses that match one value for every property specified!</p>
+                <p>It is possible to select multiple values per property. The results will only contain verses that match one of the selected values of each property specified!</p>
             </div>
     },
 };
