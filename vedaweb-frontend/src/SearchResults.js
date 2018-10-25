@@ -24,6 +24,10 @@ class SearchResults extends Component {
             isLoaded: false
         }
         document.title = "VedaWeb | Search Results";
+        this.loadData = this.loadData.bind(this);
+        this.handleTableChange = this.handleTableChange.bind(this);
+        this.handleTableChange = this.handleTableChange.bind(this);
+        this.handleNewQuery = this.handleNewQuery.bind(this);
     }
 
     componentDidMount(){
