@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Row, Col, Icon, Button } from 'antd';
+import feedbackMailAddress from "./feedbackMailAddress.js";
 
 
 class ContentView extends Component {
@@ -27,8 +28,11 @@ class ContentView extends Component {
                             Look out for the <Icon type="question-circle" theme="outlined"/> icon to get explanations of the different features.<br/>
                             Feel free to send us your <strong>feedback on functionality, usability and data correctness:</strong>
                             <br/><br/>
-                            <Button href="mailto:veda-web@uni-koeln.de?subject=VedaWeb beta feedback" className="secondary-font">
-                                <Icon type="mail"/> veda-web@uni-koeln.de
+                            <Button
+                            type="primary"
+                            href={"mailto:" + feedbackMailAddress.mail + "?subject=VedaWeb beta feedback"}
+                            className="secondary-font">
+                                <Icon type="mail"/> {feedbackMailAddress.mail}
                             </Button>
                             <br/><br/>
                             Thank you for testing the <span className="secondary-font red bold">VedaWeb</span> beta!

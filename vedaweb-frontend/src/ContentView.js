@@ -17,6 +17,7 @@ import scrollToComponent from 'react-scroll-to-component';
 import axios from 'axios';
 import uiDataStore from "./stores/uiDataStore";
 import DictionaryView from "./DictionaryView";
+import HelpButton from "./HelpButton";
 
 const Option = Select.Option;
 
@@ -156,6 +157,7 @@ class ContentView extends Component {
                                     { data.padas !== undefined &&
                                         <div>
                                             <div className="content-plain content-block card">
+                                                <HelpButton type="zurichIso" float/>
                                                 {data.padas.map(pada => (
                                                     <div className="bottom-gap-small" key={"p_plain_" + pada.index}>
                                                         <span key={"p_plain_line" + pada.index} className="pada-line">{pada.line}</span>
@@ -168,6 +170,7 @@ class ContentView extends Component {
                                                 <div
                                                 className="glossing content-block card"
                                                 ref={this.scrollTo}>
+                                                    <HelpButton type="zurichGlossing" float/>
                                                     <h4>Morphological Glossing</h4>
                                                     {data.padas.map(pada => (
                                                         <div
