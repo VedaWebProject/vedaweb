@@ -370,7 +370,6 @@ public class ElasticIndexService {
 	
 	private Map<String, List<String>> collectGrammarFieldAggregations(List<String> grammarFields) {
 		Map<String, List<String>> grammarAggregations = new HashMap<>();
-		System.out.println(grammarFields);
 		
 		SearchRequest req = new SearchRequest("vedaweb"); 
 		req.types("doc");

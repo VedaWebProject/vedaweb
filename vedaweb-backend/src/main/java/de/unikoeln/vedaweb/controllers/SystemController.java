@@ -43,7 +43,7 @@ public class SystemController {
 	
 	@RequestMapping(value = "/data/import/{dryRun}", produces = {"application/json"})
     public String importData(@PathVariable("dryRun") String dryRun) {
-		int docCount = dataImportService.importXMLData(DataImportService.DEV_LOCAL_XML, dryRun.equals("true"));
+		int docCount = dataImportService.importXMLData(DataImportService.LOCAL_XML, dryRun.equals("true"));
     	return "{\"verses\":" + docCount + "}";
     }
 	

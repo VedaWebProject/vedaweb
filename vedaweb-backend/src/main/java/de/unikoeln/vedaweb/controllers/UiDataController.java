@@ -10,7 +10,7 @@ import de.unikoeln.vedaweb.services.UiDataService;
 
 @RestController
 @RequestMapping("api")
-public class UIDataController {
+public class UiDataController {
 	
 	@Autowired
 	private UiDataService uiDataService;

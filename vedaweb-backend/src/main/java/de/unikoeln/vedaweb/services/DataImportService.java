@@ -19,7 +19,7 @@ import net.sf.saxon.s9api.SaxonApiException;
 @Service
 public class DataImportService {
 	
-	public static final String DEV_LOCAL_XML = "/home/mumpitz/Documents/VedaWeb/tei";
+	public static final String LOCAL_XML = "tei";
 	
 	
 	@Autowired
@@ -31,7 +31,7 @@ public class DataImportService {
 	 */
 	public static void main(String[] args) throws SaxonApiException, IOException {
 		DataImportService trans = new DataImportService();
-		trans.importXMLData(DEV_LOCAL_XML, true);
+		trans.importXMLData(LOCAL_XML, true);
 	}
 	
 	
