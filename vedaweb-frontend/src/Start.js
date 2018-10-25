@@ -14,7 +14,7 @@ class ContentView extends Component {
                 <Col span={24}>
                     <div className="card">
                         <h4><Icon type="experiment"/> VedaWeb beta</h4>
-                        <span className="secondary-font red">Projekt time frame: July 2017 - June 2020</span><br/><br/>
+                        <span className="secondary-font red">Project time frame: July 2017 - June 2020</span><br/><br/>
                         <div>
                             This is a beta version for testing some of our planned concepts and getting feedback from potential users.<br/>
                             There are numerous things yet to be implemented, some of which are:<br/><br/>
