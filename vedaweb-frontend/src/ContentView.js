@@ -474,6 +474,7 @@ class ContentView extends Component {
                         </div>
                     }
                 </div>
+                
             </Spin>
         );
     }

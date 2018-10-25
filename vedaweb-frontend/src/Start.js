@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Row, Col, Icon } from 'antd';
+import { Row, Col, Icon, Button } from 'antd';
 
 
 class ContentView extends Component {
@@ -25,9 +25,13 @@ class ContentView extends Component {
                                 <li>...</li>
                             </ul>
                             Look out for the <Icon type="question-circle" theme="outlined"/> icon to get explanations of the different features.<br/>
-                            Feel free to send us your feedback on functionality, usability and data correctness to ???@uni-koeln.de
+                            Feel free to send us your <strong>feedback on functionality, usability and data correctness:</strong>
                             <br/><br/>
-                            Thank you for testing the <span className="secondary-font red">VedaWeb</span> beta!
+                            <Button href="mailto:veda-web@uni-koeln.de?subject=VedaWeb beta feedback" className="secondary-font">
+                                <Icon type="mail"/> veda-web@uni-koeln.de
+                            </Button>
+                            <br/><br/>
+                            Thank you for testing the <span className="secondary-font red bold">VedaWeb</span> beta!
                             <br/><br/>
                         </div>
                     </div>

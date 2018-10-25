@@ -16,6 +16,13 @@ const SubMenu = Menu.SubMenu;
 
 class NavBar extends Component {
 
+    constructor(props){
+        super(props);
+        this.state = {
+            showFeedbackModal: false
+        }
+    }
+
 
     render() {
 
@@ -48,7 +55,8 @@ class NavBar extends Component {
                     <Menu
                     selectedKeys={[]}
                     mode="horizontal"
-                    style={menuStyle}>
+                    style={menuStyle}
+                    onClick={() => {this.setState({showFeedbackModal: true})}}>
                         
                         <Menu.Item key="search">
                             <NavLink to={"/search"}>
@@ -68,8 +76,17 @@ class NavBar extends Component {
                             ))}
                         </SubMenu>
 
+                        {/* <Menu.Item
+                        key="feedback">
+                            <Icon type="message"/>Beta Feedback
+                        </Menu.Item> */}
+
                     </Menu>
                 </div>
+
+                {/* <FeedbackModal
+                visible={this.state.showFeedbackModal}
+                onCancel={() => this.setState({showFeedbackModal: false})} /> */}
 
             </Row>
             
