@@ -62,6 +62,12 @@ class ContentView extends Component {
                     isLoaded: true,
                     data: response.data
                 });
+                //set page title
+                document.title = "VedaWeb | " +
+                    ((response.data.id !== undefined)
+                        ? "Verse " + response.data.book + "." + response.data.hymn + "." + response.data.verse
+                            + " | " + response.data.hymnGroup
+                        : " Rigveda online");
             })
             .catch((error) => {
                 this.setState({

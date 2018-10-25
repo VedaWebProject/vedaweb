@@ -23,6 +23,7 @@ class SearchResults extends Component {
         this.state = {
             isLoaded: false
         }
+        document.title = "VedaWeb | Search Results";
     }
 
     componentDidMount(){
@@ -34,13 +35,13 @@ class SearchResults extends Component {
             this.handleNewQuery(this.props.match.params.querydata);
     }
 
-    handleTableChange = (pagination) => {
+    handleTableChange(pagination) {
         searchResultsStore.page = pagination.current;
         searchResultsStore.size = pagination.pageSize;
         this.loadData(searchResultsStore.queryJSON);
     }
 
-    handleNewQuery = (queryData) => {
+    handleNewQuery(queryData) {
         this.setState({
             isLoaded: false
         });
@@ -67,11 +68,15 @@ class SearchResults extends Component {
     }
 
     loadData = (queryJSON) => {
+        let queryDisplay = queryJSON.mode === "grammar" ? "grammar search" : queryJSON.input;
+
         this.setState({
             isLoaded: false,
             error: undefined,
-            queryDisplay: queryJSON.mode === "grammar" ? "grammar search" : queryJSON.input
+            queryDisplay: queryDisplay
         });
+
+        document.title = "VedaWeb | Search Results for '" + queryDisplay + "'";
 
         queryJSON.from = ((searchResultsStore.page - 1) * searchResultsStore.size);
         queryJSON.size = searchResultsStore.size;

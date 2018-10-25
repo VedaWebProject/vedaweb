@@ -5,6 +5,8 @@ import { Row, Col, Icon } from 'antd';
 class ContentView extends Component {
 
     render() {
+        document.title = "VedaWeb | Rigveda online";
+
         return (
             
             <Row className="page-content">

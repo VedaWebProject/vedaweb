@@ -30,6 +30,7 @@ class SearchView extends Component {
         super(props);
         this.switchMode = this.switchMode.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
+        document.title = "VedaWeb | Advanced Search";
     }
 
     switchMode(key){
