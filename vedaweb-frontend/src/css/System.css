@@ -1,0 +1,11 @@
+table {
+    width: 100%;
+}
+
+td, th {
+    padding: 0 1rem;
+}
+
+thead, th {
+    padding-bottom: 1rem;
+}

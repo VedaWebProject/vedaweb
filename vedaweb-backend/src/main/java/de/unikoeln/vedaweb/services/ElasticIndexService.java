@@ -138,8 +138,8 @@ public class ElasticIndexService {
 		try {
 			jsonResponse.put("response",
 					bulkResponse != null && !bulkResponse.hasFailures()
-					? "{fillIndex:'OK'}"
-					: "{fillIndex:'Error'}");
+					? "OK"
+					: "error");
 		} catch (JSONException e) {
 			e.printStackTrace();
 		}
@@ -201,8 +201,8 @@ public class ElasticIndexService {
 		try {
 			jsonResponse.put("response",
 					deleteResponse != null && deleteResponse.isAcknowledged()
-					? "{deleteIndex:'OK'}"
-					: "{deleteIndex:'Error'}");
+					? "OK"
+					: "error");
 		} catch (JSONException e) {
 			e.printStackTrace();
 		}
@@ -235,8 +235,8 @@ public class ElasticIndexService {
 		try {
 			jsonResponse.put("response",
 					createResponse != null && createResponse.isAcknowledged()
-					? "{createIndex:'OK'}"
-					: "{createIndex:'Error'}");
+					? "OK"
+					: "error");
 		} catch (JSONException e) {
 			e.printStackTrace();
 		}

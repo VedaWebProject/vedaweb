@@ -7,6 +7,7 @@ import ContentView from './ContentView';
 import Start from './Start';
 import NotFound from './NotFound';
 import Footer from './Footer';
+import System from './System';
 
 import "./css/App.css";
 
@@ -114,6 +115,7 @@ class App extends Component {
                                 <Route path="/view/:by/:value" component={ContentView} />
                                 <Route path="/results/:querydata" component={SearchResults} />
                                 <Route path="/search" component={SearchView} />
+                                <Route path="/system/:auth" component={System} />
                                 <Route path="/home" component={Start} />
                                 <Route path="/" exact={true} component={Start} />
                                 <Route component={NotFound} />

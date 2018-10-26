@@ -2,9 +2,12 @@ package de.unikoeln.vedaweb.controllers;
 
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import de.unikoeln.vedaweb.services.DataImportService;
@@ -14,7 +17,11 @@ import de.unikoeln.vedaweb.services.ElasticIndexService;
 
 @RestController
 @RequestMapping("system")
+@PropertySource(value = "classpath:application.properties")
 public class SystemController {
+	
+	@Value("${vw.system.auth}")
+	private String auth;
 	
 	@Autowired
 	DataImportService dataImportService;
@@ -25,25 +32,46 @@ public class SystemController {
 //	@Autowired
 //	VerseRepository verseRepo;
 	
-	
-	@RequestMapping(value = "/index/{action}", produces = {"application/json"})
-    public String verseById(@PathVariable("action") String action) {
+	@GetMapping(value = {"/index/{action}"}, produces = {"application/json"})
+    public String verseById(
+    		@PathVariable(name = "action") String action,
+    		@RequestParam(name = "auth", required = false) String auth) {
+		
+		JSONObject response = new JSONObject();
+		
+		if (!auth(auth)) {
+			response.put("error", "authentication failed");
+			return response.toString();
+		}
+					
 		switch (action){
 		case "delete":
-			return indexService.deleteIndex().toString();
+			response.put("indexDelete", indexService.deleteIndex());
+			break;
 		case "create":
-			return indexService.createIndex().toString();
+			response.put("indexCreate", indexService.createIndex());
+			break;
 		case "fill":
-			return indexService.indexDbDocuments().toString();
-		case "refresh":
-			return indexService.rebuildIndex().toString();
+			response.put("indexFill", indexService.indexDbDocuments());
+			break;
+		case "rebuild":
+			response.put("indexRebuild", indexService.rebuildIndex());
+			break;
 		default:
-			return "{\"response\":\"unknown command\"}";
+			response.put("error", "unknown command");
+			break;
 		}
+		return response.toString();
     }
 	
 	@GetMapping(value = {"/import/{dryRun}", "/import"}, produces = {"application/json"})
-    public String importData(@PathVariable(name = "dryRun", required = false) String dryRun) {
+    public String importData(
+    		@PathVariable(name = "dryRun", required = false) String dryRun,
+    		@RequestParam(name = "auth", required = false) String auth) {
+		
+		if (!auth(auth))
+			return "{error:'authentication failed'}";
+		
 		boolean dry = dryRun != null;
 		int docCount = dataImportService.importXMLData(DataImportService.LOCAL_XML, dry);
 		JSONObject response = new JSONObject();
@@ -52,5 +80,9 @@ public class SystemController {
 		if (!dry) response.put("indexActions", indexService.rebuildIndex());
 		return response.toString();
     }
+	
+	private boolean auth(String auth) {
+		return auth != null && auth.equals(this.auth);
+	}
 	
 }
