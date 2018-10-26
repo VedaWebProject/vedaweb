@@ -12,3 +12,6 @@ src/main/resources/templates/
 .settings
 .springBeans
 /index/
+
+### IMPORT DATA ###
+tei/
