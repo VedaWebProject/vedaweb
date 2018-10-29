@@ -42,13 +42,8 @@ public class SearchRequestBuilder {
 		if (StringUtils.containsAccents(searchTerm) && field.equals("form"))
 			field = "form_raw";
 		
-		if (searchTerm.matches(".*[\\*\\?].*")) {
-			//wildcard query
-			searchSourceBuilder.query(new WildcardQueryBuilder(field, searchTerm));
-		} else {
-			//match query
-			searchSourceBuilder.query(new MatchQueryBuilder(field, searchTerm));
-		}
+		//add wildcard query
+		searchSourceBuilder.query(new WildcardQueryBuilder(field, searchTerm));
 
 		//Highlighting
 		addHighlighting(searchSourceBuilder, "form", "form_raw", "translation");
