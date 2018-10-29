@@ -10,6 +10,7 @@ import org.elasticsearch.index.query.MatchAllQueryBuilder;
 import org.elasticsearch.index.query.MatchQueryBuilder;
 import org.elasticsearch.index.query.QueryBuilders;
 import org.elasticsearch.index.query.RangeQueryBuilder;
+import org.elasticsearch.index.query.WildcardQueryBuilder;
 import org.elasticsearch.search.aggregations.AggregationBuilders;
 import org.elasticsearch.search.aggregations.bucket.nested.NestedAggregationBuilder;
 import org.elasticsearch.search.aggregations.bucket.terms.TermsAggregationBuilder;
@@ -41,10 +42,14 @@ public class SearchRequestBuilder {
 		if (StringUtils.containsAccents(searchTerm) && field.equals("form"))
 			field = "form_raw";
 		
-		//match query
-		MatchQueryBuilder match = new MatchQueryBuilder(field, searchTerm);
-		searchSourceBuilder.query(match);
-		
+		if (searchTerm.matches(".*[\\*\\?].*")) {
+			//wildcard query
+			searchSourceBuilder.query(new WildcardQueryBuilder(field, searchTerm));
+		} else {
+			//match query
+			searchSourceBuilder.query(new MatchQueryBuilder(field, searchTerm));
+		}
+
 		//Highlighting
 		addHighlighting(searchSourceBuilder, "form", "form_raw", "translation");
 		

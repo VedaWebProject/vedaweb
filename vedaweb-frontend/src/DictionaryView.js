@@ -107,7 +107,7 @@ class DictionaryView extends Component {
             }
         }`;
 
-        axios.post("http://api.c-salt.uni-koeln.de/dicts/gra/graphql", {query: GQLQ})
+        axios.post("https://api.c-salt.uni-koeln.de/dicts/gra/graphql", {query: GQLQ})
             .then((response) => {
                 var dictData = [];
                 const entries = response.data.data.ids;
