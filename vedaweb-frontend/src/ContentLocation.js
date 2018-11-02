@@ -15,8 +15,8 @@ class ContentLocation extends Component {
                 </Link>
                 <span className="location-display">
                 {
-                    (this.props.locationBook + "").padStart(2, "0") + " . " +
-                    (this.props.locationHymn + "").padStart(3, "0") + " . " +
+                    (this.props.locationBook + "").padStart(2, "0") + "." +
+                    (this.props.locationHymn + "").padStart(3, "0") + "." +
                     (this.props.locationVerse + "").padStart(2, "0")
                 }
                 </span>
