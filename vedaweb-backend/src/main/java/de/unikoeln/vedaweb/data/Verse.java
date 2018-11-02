@@ -132,5 +132,5 @@ public class Verse implements Comparable<Verse> {
 	public int compareTo(Verse o) {
 		return id.compareTo(o.getId());
 	}
-
+	
 }

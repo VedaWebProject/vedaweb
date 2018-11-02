@@ -10,6 +10,7 @@ import java.util.Map;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.util.EntityUtils;
+import org.apache.lucene.queryparser.xml.builders.BooleanQueryBuilder;
 import org.elasticsearch.action.admin.indices.create.CreateIndexRequest;
 import org.elasticsearch.action.admin.indices.create.CreateIndexResponse;
 import org.elasticsearch.action.admin.indices.delete.DeleteIndexRequest;
@@ -21,6 +22,7 @@ import org.elasticsearch.action.search.SearchRequest;
 import org.elasticsearch.action.search.SearchResponse;
 import org.elasticsearch.client.Response;
 import org.elasticsearch.common.xcontent.XContentType;
+import org.elasticsearch.index.query.BoolQueryBuilder;
 import org.elasticsearch.index.query.MatchQueryBuilder;
 import org.elasticsearch.index.query.QueryBuilders;
 import org.elasticsearch.search.aggregations.Aggregation;
@@ -328,6 +330,31 @@ public class ElasticIndexService {
         return response != null && response.getStatusLine().getStatusCode() != 404;
 	}
 	
+
+	public int countVerses(int book, int hymn) {
+		MatchQueryBuilder matchBook = QueryBuilders.matchQuery("book", book);
+		MatchQueryBuilder matchHymn = QueryBuilders.matchQuery("hymn", hymn);
+		BoolQueryBuilder bool = QueryBuilders.boolQuery();
+		bool.must(matchBook);
+		bool.must(matchHymn);
+		
+		//aggregation for distinct hymn number values
+		CardinalityAggregationBuilder agg = 
+				AggregationBuilders.cardinality("verses").field("verse");
+		//compose request source
+		SearchSourceBuilder searchSourceBuilder = 
+				new SearchSourceBuilder().query(bool).aggregation(agg);
+		//create request
+		SearchRequest req = new SearchRequest("vedaweb").types("doc").source(searchSourceBuilder);
+		try {
+			SearchResponse response = elastic.client().search(req);
+			return (int)((Cardinality)response.getAggregations().get("verses")).getValue();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return 0;
+	}
+	
 	
 	private JSONObject urlRequest(String method, String url) {
 		JSONObject response = null;
@@ -452,6 +479,5 @@ public class ElasticIndexService {
 		}
 		return sb.toString().trim();
 	}
-	
 	
 }

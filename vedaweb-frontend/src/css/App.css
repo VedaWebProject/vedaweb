@@ -214,3 +214,7 @@ hr {
     color: #931111;
     font-family: "Dosis", sans-serif;
 }
+
+.font-big {
+    font-size: 24px;
+}

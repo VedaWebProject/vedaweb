@@ -1,6 +1,7 @@
 package de.unikoeln.vedaweb.services;
 
 import java.io.IOException;
+import java.util.Collection;
 
 import javax.annotation.PostConstruct;
 
@@ -78,8 +79,8 @@ public class UiDataService {
 		}
 	}
 
-	public String getUiDataJSON() {
-		return uiData.toString();
+	public JSONObject getUiDataJSON() {
+		return uiData;
 	}
 
 }

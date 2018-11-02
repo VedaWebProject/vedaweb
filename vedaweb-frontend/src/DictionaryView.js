@@ -21,7 +21,54 @@ class DictionaryView extends Component {
     }
 
     componentDidMount(){
-        this.loadDictData();
+        let tokenData = this.sort(this.transform(this.props.data));
+
+        let lemmaRefs = [];
+        for (let i = 0; i < tokenData.length; i++) {
+            const token = tokenData[i];
+            for (let j = 0; j < token.lemmaRef.length; j++) {
+                lemmaRefs.push(token.lemmaRef[j]);
+            }
+        }
+
+        const GQLQ = `{
+            ids(lemmaId: ` + JSON.stringify(lemmaRefs) + `, size: 30) {
+                id
+                headwordDeva
+                headwordIso
+                senseTxtIso
+            }
+        }`;
+
+        axios.post("https://api.c-salt.uni-koeln.de/dicts/gra/graphql", {query: GQLQ})
+            .then((response) => {
+                var dictData = [];
+                const entries = response.data.data.ids;
+                for (let i = 0; i < tokenData.length; i++) {
+                    let t = tokenData[i];
+                    t["dict"] = t.lemmaRef.map(ref => {
+                        let entry = entries.find(e => e.id === ref);
+                        return entry === undefined ? {} : {
+                            graRef: ref,
+                            graDeva: entry.headwordDeva,
+                            graTxt: entry.senseTxtIso,
+                            graLemma: entry.headwordIso
+                        };
+                    });
+                    dictData.push(t);
+                }
+                this.setState({
+                    isLoaded: true,
+                    dictData: dictData,
+                    error: undefined
+                });
+            })
+            .catch((error) => {
+                this.setState({
+                    isLoaded: true,
+                    error: error
+                });
+            });
     }
 
     transform(padas){
@@ -85,57 +132,6 @@ class DictionaryView extends Component {
 
     cleanLemma(string){
         return string.normalize('NFD').replace(/[\u0300\u0301\u221a]/g, '').normalize('NFC');
-    }
-
-    loadDictData(){
-        let tokenData = this.sort(this.transform(this.props.data));
-
-        let lemmaRefs = [];
-        for (let i = 0; i < tokenData.length; i++) {
-            const token = tokenData[i];
-            for (let j = 0; j < token.lemmaRef.length; j++) {
-                lemmaRefs.push(token.lemmaRef[j]);
-            }
-        }
-
-        const GQLQ = `{
-            ids(lemmaId: ` + JSON.stringify(lemmaRefs) + `, size: 30) {
-                id
-                headwordDeva
-                headwordIso
-                senseTxtIso
-            }
-        }`;
-
-        axios.post("https://api.c-salt.uni-koeln.de/dicts/gra/graphql", {query: GQLQ})
-            .then((response) => {
-                var dictData = [];
-                const entries = response.data.data.ids;
-                for (let i = 0; i < tokenData.length; i++) {
-                    let t = tokenData[i];
-                    t["dict"] = t.lemmaRef.map(ref => {
-                        let entry = entries.find(e => e.id === ref);
-                        return entry === undefined ? {} : {
-                            graRef: ref,
-                            graDeva: entry.headwordDeva,
-                            graTxt: entry.senseTxtIso,
-                            graLemma: entry.headwordIso
-                        };
-                    });
-                    dictData.push(t);
-                }
-                this.setState({
-                    isLoaded: true,
-                    dictData: dictData,
-                    error: undefined
-                });
-            })
-            .catch((error) => {
-                this.setState({
-                    isLoaded: true,
-                    error: error
-                });
-            });
     }
 
     openDict(modalData){

@@ -43,6 +43,7 @@ class SearchSmart extends Component {
         const selectBefore = (
             <Select
             defaultValue="form"
+            value={searchSmartStore.data.field}
             onSelect={(value, option) => searchSmartStore.setField(value)}
             style={{ width: 125 }}
             className="secondary-font">

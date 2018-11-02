@@ -1,9 +1,15 @@
 package de.unikoeln.vedaweb.controllers;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
+import de.unikoeln.vedaweb.data.Verse;
+import de.unikoeln.vedaweb.data.VerseLocation;
 import de.unikoeln.vedaweb.data.VerseRepository;
 import de.unikoeln.vedaweb.services.MappingService;
 import de.unikoeln.vedaweb.util.StringUtils;
@@ -21,9 +27,18 @@ public class DocumentController {
 	
 	
 	@RequestMapping(value = "/id/{id}", produces = {"application/json"})
-    public String verseById(@PathVariable("id") String id) {
-		return mappingService.mapOptionalToJSON(
-				verseRepo.findById( StringUtils.normalizeId(id) ));
+    public String verseById(
+    		@PathVariable("id") String id,
+    		@RequestParam(name="browse", required=false) String browse) {
+		VerseLocation loc = new VerseLocation(id);
+		Optional<Verse> v;
+		
+		while (!(v = verseRepo.findByBookAndHymnAndVerse(
+				loc.getBook(), loc.getHymn(), loc.getVerse())).isPresent()) {
+			loc.setNextFallbackLocation();
+		}
+		
+		return mappingService.mapOptionalToJSON(v);
     }
 	
 	

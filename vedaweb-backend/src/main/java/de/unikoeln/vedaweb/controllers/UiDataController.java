@@ -1,9 +1,12 @@
 package de.unikoeln.vedaweb.controllers;
 
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import de.unikoeln.vedaweb.services.ElasticIndexService;
 import de.unikoeln.vedaweb.services.UiDataService;
 
 
@@ -15,9 +18,19 @@ public class UiDataController {
 	@Autowired
 	private UiDataService uiDataService;
 	
+	@Autowired
+	private ElasticIndexService indexService;
+	
 	@RequestMapping(value = "/uidata", produces = {"application/json"})
     public String getUiDataJSON() {
-		return uiDataService.getUiDataJSON();
+		return uiDataService.getUiDataJSON().toString();
+    }
+
+	@RequestMapping(value = "/uidata/count/verses/{book}/{hymn}", produces = {"application/json"})
+    public String getHymnCountJSON(@PathVariable("book") int book, @PathVariable("hymn") int hymn) {
+		JSONObject response = new JSONObject();
+		response.put("count", indexService.countVerses(book, hymn));
+		return response.toString();
     }
 	
 //	

@@ -132,14 +132,16 @@ class ContentView extends Component {
                         <div>
                             <Row>
                                 <Col span={24}>
-                                    <div className="card v-middle">
+                                    <div className="card">
                                         { data.book !== undefined &&
-                                            <div>
+                                            <div className="v-middle">
                                             <ContentLocation
+                                                key={'loc_' + data.id}
                                                 currIndex={data.index}
-                                                locationBook={data.book}
-                                                locationHymn={data.hymn}
-                                                locationVerse={data.verse} />
+                                                currId={data.id}
+                                                book={data.book}
+                                                hymn={data.hymn}
+                                                verse={data.verse} />
                                         
                                                 <span className="bold gap-left">Hymn addressee: </span> {data.hymnAddressee}
                                                 <span className="bold gap-left">Hymn group: </span> {data.hymnGroup}
