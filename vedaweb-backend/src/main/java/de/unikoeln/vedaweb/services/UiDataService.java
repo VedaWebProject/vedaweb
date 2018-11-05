@@ -1,7 +1,6 @@
 package de.unikoeln.vedaweb.services;
 
 import java.io.IOException;
-import java.util.Collection;
 
 import javax.annotation.PostConstruct;
 
@@ -9,7 +8,6 @@ import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.Resource;
-import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Service;
 
 import de.unikoeln.vedaweb.data.VerseRepository;

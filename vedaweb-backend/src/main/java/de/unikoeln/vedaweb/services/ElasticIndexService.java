@@ -10,7 +10,6 @@ import java.util.Map;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.util.EntityUtils;
-import org.apache.lucene.queryparser.xml.builders.BooleanQueryBuilder;
 import org.elasticsearch.action.admin.indices.create.CreateIndexRequest;
 import org.elasticsearch.action.admin.indices.create.CreateIndexResponse;
 import org.elasticsearch.action.admin.indices.delete.DeleteIndexRequest;
