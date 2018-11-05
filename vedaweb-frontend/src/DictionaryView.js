@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Icon, Modal, Spin, Button } from 'antd';
+import { Icon, Modal, Button } from 'antd';
 import axios from 'axios';
 
 import "./css/DictionaryView.css";
@@ -21,16 +21,22 @@ class DictionaryView extends Component {
     }
 
     componentDidMount(){
-        let tokenData = this.sort(this.transform(this.props.data));
+        let lemmaData = this.sort(this.transform(this.props.data));
+        
+        this.setState({
+            dictData: lemmaData
+        });
 
+        //collect lemma refs
         let lemmaRefs = [];
-        for (let i = 0; i < tokenData.length; i++) {
-            const token = tokenData[i];
+        for (let i = 0; i < lemmaData.length; i++) {
+            const token = lemmaData[i];
             for (let j = 0; j < token.lemmaRef.length; j++) {
                 lemmaRefs.push(token.lemmaRef[j]);
             }
         }
 
+        //construct GraphQL query
         const GQLQ = `{
             ids(lemmaId: ` + JSON.stringify(lemmaRefs) + `, size: 30) {
                 id
@@ -40,12 +46,13 @@ class DictionaryView extends Component {
             }
         }`;
 
+        //request API data
         axios.post("https://api.c-salt.uni-koeln.de/dicts/gra/graphql", {query: GQLQ})
             .then((response) => {
                 var dictData = [];
                 const entries = response.data.data.ids;
-                for (let i = 0; i < tokenData.length; i++) {
-                    let t = tokenData[i];
+                for (let i = 0; i < lemmaData.length; i++) {
+                    let t = lemmaData[i];
                     t["dict"] = t.lemmaRef.map(ref => {
                         let entry = entries.find(e => e.id === ref);
                         return entry === undefined ? {} : {
@@ -82,9 +89,15 @@ class DictionaryView extends Component {
                 if (done.indexOf(token.lemma) === -1){
                     out.push({
                         lemma: token.lemma,
-                        lemmaRef: token.lemmaRef
+                        lemmaRef: token.lemmaRef,
+                        tokens: [token.form]
                     });
                     done.push(token.lemma);
+                } else {
+                    let match = out.find(t => t.lemma === token.lemma);
+                    if (match.tokens.indexOf(token.form) === -1){
+                        match.tokens.push(token.form);
+                    }
                 }
             }
         }
@@ -135,6 +148,7 @@ class DictionaryView extends Component {
     }
 
     openDict(modalData){
+        if (modalData === undefined) return;
         this.setState({
             modalVisible: true,
             modalData: modalData
@@ -154,34 +168,35 @@ class DictionaryView extends Component {
         const {modalVisible, modalData, dictData, isLoaded, error} = this.state;
         
         return (
-            
-            <Spin
-            spinning={!isLoaded} >
-
-                {isLoaded && error === undefined &&
-                    <table className="teaser"><tbody>
-                        {dictData.map((token, i) => (
-                        <tr key={token + i}>
-                            <td className="non-expanding bold">{token.lemma}</td>
-                            <td className="non-expanding" style={{padding:'0 1rem'}}>
-                                {token.lemmaRef.map((ref, i) => {
-                                    let entry = token.dict.find(d => d.graRef === ref);
-                                    return entry === undefined ? "" :
-                                    <Button
-                                    className="dict-link gap-right secondary-font"
-                                    onClick={e => this.openDict(entry)}
-                                    key={"lemma_" + i}>
-                                        <Icon type="book"/>
-                                        {" " + (i+1)}
-                                    </Button>
-                                })}
-                            </td>
-                            <td className="expanding">
-                                {token.dict[0] !== undefined && token.dict[0].graTxt}
-                            </td>
-                        </tr>))}
-                    </tbody></table>
-                }
+        
+            <div>
+                <table className="teaser"><tbody>
+                    {dictData.map((token, i) => (
+                    <tr key={token + i}>
+                        <td className="non-expanding bold">{token.lemma}</td>
+                        <td className="non-expanding" style={{color:'rgba(0,0,0,0.4)'}}>
+                            <span>({token.tokens.map((t, i ) => t + (i < token.tokens.length - 1 ? ", " : ""))})</span>
+                        </td>
+                        <td className="expanding">
+                            {token.dict !== undefined && token.dict[0].graTxt}
+                        </td>
+                        <td className="non-expanding">
+                            {token.lemmaRef.map((ref, i) => {
+                                let entry = token.dict === undefined ? undefined
+                                    : token.dict.find(d => d.graRef === ref);
+                                return  <Button
+                                        disabled={!isLoaded || error !== undefined}
+                                        className="dict-link gap-right secondary-font"
+                                        onClick={e => this.openDict(entry)}
+                                        title={"show full entry #" + (i+1)}
+                                        key={"lemma_" + i}>
+                                            <Icon type="book"/>
+                                            {" " + (i+1)}
+                                        </Button>;
+                            })}
+                        </td>
+                    </tr>))}
+                </tbody></table>
 
                 {isLoaded && modalVisible && modalData !== undefined && error === undefined &&
                     <Modal
@@ -204,8 +219,7 @@ class DictionaryView extends Component {
                         Unfortunately, there was an error processing the dictionary data. <Icon type="meh"/>
                     </span>
                 }
-            </Spin>
-            
+            </div>
         );
     }
 }
