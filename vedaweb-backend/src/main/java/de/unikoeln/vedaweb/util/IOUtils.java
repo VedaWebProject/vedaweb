@@ -1,12 +1,10 @@
 package de.unikoeln.vedaweb.util;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
+import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.io.UnsupportedEncodingException;
+import java.nio.charset.StandardCharsets;
 
 public class IOUtils {
 	
@@ -18,31 +16,14 @@ public class IOUtils {
 	
 	public static String convertStreamToString(InputStream stream) throws IOException {
 	    StringBuilder sb = new StringBuilder();
-	    int i;
-	    while((i = stream.read()) > -1){
-	    	sb.append((char)i);
+	    BufferedReader in = new BufferedReader(new InputStreamReader(stream, StandardCharsets.UTF_8));
+	    String line;
+	    while((line = in.readLine()) != null){
+	    	sb.append(line);
+	    	sb.append("\n");
 	    }
 	    stream.close();
 	    return sb.toString();
 	}
-	
-	public static String readFileUTF8(File f) {
-		StringBuilder sb = new StringBuilder();
-		try (InputStreamReader isr = new InputStreamReader(new FileInputStream(f), "utf-8")){
-			int c;
-			while ((c = isr.read()) > -1) {
-				sb.append((char)c);
-			}
-			isr.close();
-		} catch (UnsupportedEncodingException e) {
-			e.printStackTrace();
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		return sb.toString();
-	}
-
 	
 }
