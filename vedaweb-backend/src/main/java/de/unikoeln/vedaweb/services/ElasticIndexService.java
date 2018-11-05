@@ -468,15 +468,14 @@ public class ElasticIndexService {
 	}
 	
 	
-	private String concatTranslations(Verse doc) {
-		StringBuilder sb = new StringBuilder();
+	private JSONArray concatTranslations(Verse doc) {
+		JSONArray translations = new JSONArray();
 		for (VerseVersion t : doc.getTranslations()) {
 			for (String line : t.getForm()) {
-				sb.append(line);
-				sb.append(" ");
+				translations.put(line);
 			}
 		}
-		return sb.toString().trim();
+		return translations;
 	}
 	
 }
