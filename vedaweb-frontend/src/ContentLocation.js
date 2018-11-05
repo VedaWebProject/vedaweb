@@ -4,6 +4,8 @@ import { Link, withRouter } from 'react-router-dom';
 import { view } from 'react-easy-state';
 import "./css/ContentLocation.css";
 
+import mouseTrap from 'react-mousetrap';
+
 import axios from 'axios';
 import uiDataStore from "./stores/uiDataStore";
 
@@ -11,9 +13,24 @@ const Option = Select.Option;
 
 class ContentLocation extends Component {
 
-    state = {verseCount: 0, isLoaded: false, error: undefined};
+    constructor(props){
+        super(props);
+        this.state = {verseCount: 0, isLoaded: false, error: undefined};
+        this.browseNext = this.browseNext.bind(this);
+        this.browsePrevious = this.browsePrevious.bind(this);
+    }
+
+    
+
+    componentWillUnmount(){
+        this.props.unbindShortcut('right');
+        this.props.unbindShortcut('left');
+    }
 
     componentDidMount(){
+        this.props.bindShortcut('right', this.browseNext);
+        this.props.bindShortcut('left', this.browsePrevious);
+
         axios.get("/api/uidata/count/verses/" + this.props.book + "/" + this.props.hymn)
         .then((response) => {
             this.setState({
@@ -29,6 +46,14 @@ class ContentLocation extends Component {
                 error: error
             });
         });
+    }
+
+    browseNext(){
+        this.props.history.push("/view/index/" + (this.props.currIndex + 1));
+    }
+
+    browsePrevious(){
+        this.props.history.push("/view/index/" + (this.props.currIndex - 1));
     }
 
     handleSelect(changed, value){
@@ -127,4 +152,4 @@ class ContentLocation extends Component {
     }
 }
 
-export default withRouter(view(ContentLocation));
+export default mouseTrap(withRouter(view(ContentLocation)));

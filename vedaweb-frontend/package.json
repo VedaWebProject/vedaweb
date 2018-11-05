@@ -12,6 +12,7 @@
     "react": "^16.3.2",
     "react-dom": "^16.3.2",
     "react-easy-state": "^5.0.1",
+    "react-mousetrap": "^0.2.0",
     "react-router-dom": "^4.3.1",
     "react-rte": "^0.16.1",
     "react-scripts": "2.0.5",
