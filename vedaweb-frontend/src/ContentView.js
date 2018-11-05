@@ -271,7 +271,7 @@ class ContentView extends Component {
                                                 ref={this.scrollTo}>
                                                     <h4>Meta Info</h4>
 
-                                                    <table>
+                                                    <table style={{width:'auto'}}>
                                                         <tbody>
                                                         <tr>
                                                             <td>
