@@ -9,7 +9,7 @@ class TransliterationPreview extends Component {
 
         return (
 
-            <div className="transliteration trans-font">
+            <div className="transliteration text-font">
                 {(this.props.input !== null && this.props.input.length > 0) &&
                     SanscriptAccents.t(this.props.input, this.props.transliteration, "iso")
                 }

@@ -178,7 +178,7 @@ class SearchResults extends Component {
                         <div id="search-results" className="card">
 
                             <h4>
-                                Search Results for <span className="trans-font grey">{this.state.queryDisplay}</span>
+                                Search Results for <span className="text-font grey">{this.state.queryDisplay}</span>
                             </h4>
 
 

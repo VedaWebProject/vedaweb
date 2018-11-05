@@ -134,8 +134,8 @@ class ContentView extends Component {
                                 <Col span={24}>
                                     <div className="card">
                                         { data.book !== undefined &&
-                                            <div className="v-middle">
-                                            <ContentLocation
+                                            <div>
+                                                <ContentLocation
                                                 key={'loc_' + data.id}
                                                 currIndex={data.index}
                                                 currId={data.id}
@@ -143,8 +143,10 @@ class ContentView extends Component {
                                                 hymn={data.hymn}
                                                 verse={data.verse} />
                                         
-                                                <span className="bold gap-left">Hymn addressee: </span> {data.hymnAddressee}
-                                                <span className="bold gap-left">Hymn group: </span> {data.hymnGroup}
+                                                <span className="bold gap-left">Hymn addressee: </span>
+                                                <span className="text-font">{data.hymnAddressee}</span>
+                                                <span className="bold gap-left">Hymn group: </span>
+                                                <span className="text-font">{data.hymnGroup}</span>
                                             </div>
                                         }
                                     </div>
@@ -160,10 +162,15 @@ class ContentView extends Component {
                                         <div>
                                             <div className="content-plain content-block card">
                                                 <HelpButton type="zurichIso" float/>
+                                                <h4>
+                                                    {('0' + data.book).slice(-2)}.
+                                                    {('00' + data.hymn).slice(-3)}.
+                                                    {('0' + data.verse).slice(-2)}
+                                                </h4>
                                                 {data.padas.map(pada => (
                                                     <div className="bottom-gap-small" key={"p_plain_" + pada.index}>
                                                         <span key={"p_plain_line" + pada.index} className="pada-line">{pada.line}</span>
-                                                        <span key={"p_plain_form" + pada.index} className="pada-form">{pada.form}</span><br/>
+                                                        <span key={"p_plain_form" + pada.index} className="pada-form text-font">{pada.form}</span><br/>
                                                     </div>
                                                 ))}
                                             </div>
@@ -185,7 +192,7 @@ class ContentView extends Component {
 
                                                             {pada.tokens.map(token => (
                                                                 <div
-                                                                className="glossing-token"
+                                                                className="glossing-token text-font"
                                                                 key={"t_" + token.index}>
                                                                     {token.form}
                                                                     <br/>
@@ -244,7 +251,7 @@ class ContentView extends Component {
                                                             }</span>
                                                             <span className="first-cap"> ({translation.source})</span>
                                                             <br/>
-                                                            <div className="italic">
+                                                            <div className="text-font">
                                                                 {translation.form.map((line, i) => (
                                                                     <div key={"trans_" + i}>{line}</div>
                                                                 ))}
@@ -275,37 +282,39 @@ class ContentView extends Component {
                                                         <tbody>
                                                         <tr>
                                                             <td>
-                                                                <span className="bold gap-right secondary-font">Hymn Addressee:</span>
+                                                                <span className="bold gap-right">Hymn Addressee:</span>
                                                             </td>
-                                                            <td>
+                                                            <td className="text-font">
                                                                 {data.hymnAddressee}
                                                             </td>
                                                         </tr>
                                                         <tr>
                                                             <td>
-                                                                <span className="bold gap-right secondary-font">Hymn Group:</span>
+                                                                <span className="bold gap-right">Hymn Group:</span>
                                                             </td>
-                                                            <td>
+                                                            <td className="text-font">
                                                                 {data.hymnGroup}
                                                             </td>
                                                         </tr>
                                                         <tr>
                                                             <td>
-                                                                <span className="bold gap-right secondary-font">Strata (Arnold):</span>
+                                                                <span className="bold gap-right">Strata (Arnold):</span>
                                                             </td>
-                                                            <td>
+                                                            <td className="text-font">
                                                                 {this.resolveAbbrevationToHTML(data.strata, "strata")}
                                                             </td>
                                                         </tr>
                                                         <tr>
                                                             <td>
-                                                                <span className="bold gap-right secondary-font">Pada Labels (Gunkel, Ryan):</span>
+                                                                <span className="bold gap-right">Pada Labels (Gunkel, Ryan):</span>
                                                             </td>
                                                             <td>
                                                                 {data.padas.map(pada => (
                                                                     <div>
-                                                                        <div style={{display:"inline-block", verticalAlign:"top"}} className="bold red secondary-font gap-right">{pada.line}:</div>
-                                                                        <div style={{display:"inline-block", verticalAlign:"top"}}>{this.resolveAbbrevationToHTML(pada.label, "label")}</div>
+                                                                        <div style={{display:"inline-block", verticalAlign:"top"}} className="bold red gap-right">{pada.line}:</div>
+                                                                        <div style={{display:"inline-block", verticalAlign:"top"}} className="text-font">
+                                                                            {this.resolveAbbrevationToHTML(pada.label, "label")}
+                                                                        </div>
                                                                     </div>
                                                                 ))}
                                                             </td>
@@ -330,7 +339,7 @@ class ContentView extends Component {
 
                                             {uiDataStore.viewFilter.padapatha &&
                                                 <div
-                                                className="content-block card"
+                                                className="content-block card text-font"
                                                 ref={this.scrollTo}>
                                                     <h4>Padapatha</h4>
                                                     {data.versions.filter(v => v.source === 'Padapatha').map(v => (
@@ -343,7 +352,7 @@ class ContentView extends Component {
 
                                             {uiDataStore.viewFilter.sasapatha &&
                                                 <div
-                                                className="content-block card"
+                                                className="content-block card text-font"
                                                 ref={this.scrollTo}>
                                                     <h4>Sasa Patha (Gunkel, Ryan)</h4>
                                                     {data.versions.filter(v => v.source === 'Sasa Patha (Gunkel, Ryan)').map(v => (
@@ -356,7 +365,7 @@ class ContentView extends Component {
 
                                             {uiDataStore.viewFilter.vnh &&
                                                 <div
-                                                className="content-block card"
+                                                className="content-block card text-font"
                                                 ref={this.scrollTo}>
                                                     <h4>Van Nooten, Holland</h4>
                                                     {data.versions.filter(v => v.source === 'Van Nooten, Holland').map(v => (
@@ -369,7 +378,7 @@ class ContentView extends Component {
 
                                             {uiDataStore.viewFilter.aufrecht &&
                                                 <div
-                                                className="content-block card"
+                                                className="content-block card text-font"
                                                 ref={this.scrollTo}>
                                                     <h4>Aufrecht</h4>
                                                     {data.versions.filter(v => v.source === 'Aufrecht').map(v => (

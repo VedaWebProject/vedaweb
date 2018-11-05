@@ -81,14 +81,13 @@ class SearchView extends Component {
             marginBottom: 24,
             border: '1px solid #b4b1ae',
             overflow: 'hidden',
-            fontFamily: 'Dosis, sans-serif',
             fontSize: '18px'
         };
 
         const searchTransliterationPanelHeader =
             <div>
                 {"Selected Transliteration: "}
-                <span className="red trans-font">
+                <span className="red">
                     {uiDataStore.search.meta.transliterations
                         .filter(t => t.id === searchMetaStore.transliteration)[0].name}
                 </span>
@@ -97,7 +96,7 @@ class SearchView extends Component {
         const searchScopePanelHeader =
             <div>
                 {"Delimit Search Range: "}
-                <span className="red trans-font">
+                <span className="red">
                     <SearchScopeIndicator />
                 </span>
             </div>
@@ -106,11 +105,11 @@ class SearchView extends Component {
             <div>
                 Meta Filters: 
                 {searchMetaStore.hasMetas() ?
-                    <span className="red trans-font"> Adressee ({searchMetaStore.meta.hymnAddressee.length}),
+                    <span className="red"> Adressee ({searchMetaStore.meta.hymnAddressee.length}),
                         Group ({searchMetaStore.meta.hymnGroup.length}),
                         Strata ({searchMetaStore.meta.strata.length})
                     </span>
-                    : <span className="red trans-font"> none</span>
+                    : <span className="red"> none</span>
                 }
             </div>
 

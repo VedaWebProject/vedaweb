@@ -3,7 +3,6 @@
 }
 
 #search-results table  {
-    font-family: 'Gentium', "Tahoma", "Arial", sans-serif;
     vertical-align: top;
     margin-bottom: 2rem;
 }
@@ -14,7 +13,6 @@
 }
 
 #search-results .ant-table-thead > tr > th {
-    font-family: "Dosis", sans-serif;
     font-size: 20px;
     color: rgba(0, 0, 0, 0.65);
     background: transparent;
@@ -32,13 +30,4 @@
 #search-results table em {
     font-style: normal;
     font-weight: bold;
-}
-
-.ant-pagination-item {
-    font-family: "Dosis", sans-serif;
-}
-
-.ant-pagination-options-size-changer,
-#search-results .ant-select-dropdown {
-    font-family: "Dosis", sans-serif;
 }

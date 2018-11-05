@@ -7,7 +7,6 @@
     padding-right: 2rem;
 
     border-bottom: 1px solid #b4b1ae;
-    font-family: "Dosis", sans-serif;
 }
 
 .navbar-app-title {
@@ -32,7 +31,6 @@ img.navbar-logo {
 .ant-menu-submenu-title {
     color: rgba(0,0,0,0.65);
     border-color: rgba(0,0,0,0.5);
-    font-family: "Dosis", sans-serif;
     font-size: 16px;
 }
 
@@ -68,7 +66,6 @@ img.navbar-logo {
 } */
 
 .ant-menu-submenu .ant-menu-item {
-    font-family: 'Gentium', "Tahoma", "Arial", sans-serif;
     font-size: 16px;
     color: rgba(0,0,0,0.5);
 }

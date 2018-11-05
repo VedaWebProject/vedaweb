@@ -92,7 +92,7 @@ class ContentLocation extends Component {
 
         return (
 
-            <div className="v-middle inline-block">
+            <div className="inline-block">
                 <Link to={"/view/index/" + (this.props.currIndex - 1)} className="location-controls">
                     <Icon type="left"/>
                 </Link>

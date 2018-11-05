@@ -1,6 +1,6 @@
 #app {
     min-width: 1024px;
-    font-family: 'Gentium', "Tahoma", "Arial", sans-serif;
+    font-family: "Assistant", "Tahoma", "Arial", sans-serif;
     font-size: 18px;
 }
 
@@ -10,24 +10,20 @@
 }
 
 h4 {
+    font-family: "Assistant", "Tahoma", "Arial", sans-serif;
     margin-bottom: 1rem;
     color: #931111;
-    font-family: "Dosis", sans-serif;
     font-size: 24px;
 }
 
 h3 {
+    font-family: "Assistant", "Tahoma", "Arial", sans-serif;
     margin-bottom: 1rem;
     color: #931111;
-    font-family: "Dosis", sans-serif;
     font-size: 20px;
 }
 
-.secondary-font {
-    font-family: "Dosis", sans-serif;
-}
-
-.trans-font {
+.text-font {
     font-family: "Gentium", "Tahoma", "Arial", sans-serif;
 }
 
@@ -69,6 +65,10 @@ h3 {
 
 a {
     outline: 0;
+}
+
+.ant-input {
+    font-family: "Gentium", "Tahoma", "Arial", sans-serif;
 }
 
 hr {
@@ -212,9 +212,4 @@ hr {
     vertical-align: middle;
     font-size: 20px;
     color: #931111;
-    font-family: "Dosis", sans-serif;
-}
-
-.font-big {
-    font-size: 24px;
 }

@@ -121,6 +121,7 @@ class HelpButton extends Component {
                 type="question-circle"
                 theme="outlined"
                 onClick={this.showModal}
+                title={"Show help: \"" + helpTexts[this.props.type].title + "\""}
                 style={{cursor:"pointer", margin:"0"}}/>
                 
                 {this.state.visible &&

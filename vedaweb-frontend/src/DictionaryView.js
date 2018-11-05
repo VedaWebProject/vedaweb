@@ -173,11 +173,11 @@ class DictionaryView extends Component {
                 <table className="teaser"><tbody>
                     {dictData.map((token, i) => (
                     <tr key={token + i}>
-                        <td className="non-expanding bold">{token.lemma}</td>
-                        <td className="non-expanding" style={{color:'rgba(0,0,0,0.4)'}}>
+                        <td className="non-expanding bold text-font">{token.lemma}</td>
+                        <td className="non-expanding text-font" style={{color:'rgba(0,0,0,0.4)'}}>
                             <span>({token.tokens.map((t, i ) => t + (i < token.tokens.length - 1 ? ", " : ""))})</span>
                         </td>
-                        <td className="expanding">
+                        <td className="expanding text-font">
                             {token.dict !== undefined && token.dict[0].graTxt}
                         </td>
                         <td className="non-expanding">
@@ -186,9 +186,9 @@ class DictionaryView extends Component {
                                     : token.dict.find(d => d.graRef === ref);
                                 return  <Button
                                         disabled={!isLoaded || error !== undefined}
-                                        className="dict-link gap-right secondary-font"
+                                        className="dict-link gap-right"
                                         onClick={e => this.openDict(entry)}
-                                        title={"show full entry #" + (i+1)}
+                                        title={"Show full entry for \"" + token.lemma + "\": #" + (i+1)}
                                         key={"lemma_" + i}>
                                             <Icon type="book"/>
                                             {" " + (i+1)}
@@ -200,16 +200,16 @@ class DictionaryView extends Component {
 
                 {isLoaded && modalVisible && modalData !== undefined && error === undefined &&
                     <Modal
-                    title={<div><span className="bold">Grassmann: </span><span className="trans-font">{modalData.graLemma}</span></div>}
+                    title={<div><span className="bold">Grassmann: </span><span className="text-font">{modalData.graLemma}</span></div>}
                     centered
                     footer={null}
                     visible={true}
                     onOk={this.closeDict}
                     onCancel={this.closeDict}
                     okText="OK">
-                        <div key={modalData.lemmaRef} className="trans-font">
+                        <div key={modalData.lemmaRef}>
                             <span className="deva-font" style={{color:"#000"}}>{modalData.graDeva}</span><br/>
-                            <p>{modalData.graTxt}</p>
+                            <p className="text-font">{modalData.graTxt}</p>
                         </div>
                     </Modal>
                 }

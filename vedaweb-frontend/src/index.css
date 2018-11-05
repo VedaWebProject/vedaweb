@@ -3,17 +3,17 @@
 
 @font-face {
     font-family: 'Gentium';
-    src: local('Gentium'), url(./fonts/GentiumPlus/GentiumPlus-R.woff) format('woff');
+    src: local('Gentium'), url(./fonts/GentiumPlus-R.woff) format('woff');
 }
 
 @font-face {
-    font-family: 'Dosis';
-    src: local('Dosis'), url(./fonts/Dosis/Dosis-Regular.ttf) format('truetype');
+    font-family: 'Assistant';
+    src: local('Assistant'), url(./fonts/Assistant-Regular.ttf) format('truetype');
 }
 
 @font-face {
     font-family: 'NotoDeva';
-    src: local('NotoSerifDevanagari'), url(./fonts/NotoSerifDeva/NotoSerifDevanagari.ttf) format('truetype');
+    src: local('NotoSerifDevanagari'), url(./fonts/NotoSerifDevanagari.ttf) format('truetype');
 }
 
 
