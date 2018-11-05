@@ -7,6 +7,7 @@ import org.elasticsearch.action.search.SearchRequest;
 import org.elasticsearch.common.Strings;
 import org.elasticsearch.index.query.BoolQueryBuilder;
 import org.elasticsearch.index.query.MatchAllQueryBuilder;
+import org.elasticsearch.index.query.MatchQueryBuilder;
 import org.elasticsearch.index.query.QueryBuilders;
 import org.elasticsearch.index.query.RangeQueryBuilder;
 import org.elasticsearch.index.query.WildcardQueryBuilder;
@@ -41,8 +42,11 @@ public class SearchRequestBuilder {
 		if (StringUtils.containsAccents(searchTerm) && field.equals("form"))
 			field = "form_raw";
 		
-		//add wildcard query
-		searchSourceBuilder.query(new WildcardQueryBuilder(field, searchTerm));
+		//add search query
+		if (searchTerm.matches(".*[\\*\\?].*"))
+			searchSourceBuilder.query(new WildcardQueryBuilder(field, searchTerm));
+		else
+			searchSourceBuilder.query(new MatchQueryBuilder(field, searchTerm));
 
 		//Highlighting
 		addHighlighting(searchSourceBuilder, "form", "form_raw", "translation");
