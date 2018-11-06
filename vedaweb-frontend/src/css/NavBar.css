@@ -30,6 +30,10 @@ img.navbar-logo {
     font-size: 16px;
 }
 
+.ant-menu-horizontal {
+    line-height: 22px;
+}
+
 .ant-menu-horizontal > .ant-menu-item:hover,
 .ant-menu-horizontal > .ant-menu-submenu:hover,
 .ant-menu-horizontal > .ant-menu-item-active,
