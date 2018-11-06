@@ -96,7 +96,6 @@ class SearchResults extends Component {
         //request search api data
         axios.post("/api/search", queryJSON)
             .then((response) => {
-                console.log(JSON.stringify(response.data));
                 searchResultsStore.resultsData = response.data;
                 searchResultsStore.total = response.data.hits.total;
                 this.setState({
