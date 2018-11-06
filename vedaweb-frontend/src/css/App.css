@@ -23,6 +23,11 @@ h3 {
     font-size: 20px;
 }
 
+h2 {
+    font-size: 20px;
+    margin-bottom: .2rem;
+}
+
 .text-font {
     font-family: "Gentium", "Tahoma", "Arial", sans-serif;
 }

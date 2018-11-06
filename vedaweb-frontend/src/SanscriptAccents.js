@@ -2,6 +2,8 @@ import Sanscript from "sanscript";
 
 class SanscriptAccents {
 
+    static excludes = ["OR", "AND"];
+
     static t(input, from, to){
         input = input.normalize("NFD");
         let noAcc = "";
@@ -18,7 +20,12 @@ class SanscriptAccents {
         }
 
         //process string without accents
-        noAcc = Sanscript.t(noAcc, from, to);
+        let noAccTerms = noAcc.split(' ');
+        for (let i = 0; i < noAccTerms.length; i++) {
+            if (this.excludes.indexOf(noAccTerms[i]) !== -1) continue;
+            noAccTerms[i] = Sanscript.t(noAccTerms[i], from, to);
+        }
+        noAcc = noAccTerms.join(' ');
 
         //re-add accents (if any) to right chars (only if target is roman scheme!)
         if(Sanscript.isRomanScheme(to)){

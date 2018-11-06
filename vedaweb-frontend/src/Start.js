@@ -25,14 +25,14 @@ class ContentView extends Component {
                                 <li>Additional search modes</li>
                                 <li>...</li>
                             </ul>
-                            Look out for the <Icon type="question-circle" theme="outlined"/> icon to get explanations of the different features.<br/>
+                            Look out for the <Icon type="question-circle" theme="outlined" style={{color: '#bba'}}/> icon to get explanations of the different features.<br/>
                             Feel free to send us your <strong>feedback on functionality, usability and data correctness:</strong>
                             <br/><br/>
                             <Button
                             type="primary"
                             href={"mailto:" + feedbackMailAddress.mail + "?subject=VedaWeb beta feedback"}
                             className="secondary-font">
-                                <Icon type="mail"/> {feedbackMailAddress.mail}
+                                <Icon type="mail" /> {feedbackMailAddress.mail}
                             </Button>
                             <br/><br/>
                             Thank you for testing the <span className="secondary-font red bold">VedaWeb</span> beta!

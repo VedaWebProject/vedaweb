@@ -465,7 +465,7 @@ public class ElasticIndexService {
 		StringBuilder sb = new StringBuilder();
 		for (Pada pada : doc.getPadas()) {
 			for (Token token : pada.getTokens()){
-				sb.append(token.getForm());
+				sb.append(token.getForm().replaceAll("\u221a", ""));
 				sb.append(", ");
 			}
 		}

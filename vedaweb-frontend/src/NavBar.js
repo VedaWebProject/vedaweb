@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Row, Icon, Menu } from 'antd';
 
+import HelpButton from "./HelpButton";
 import SearchSmart from "./SearchSmart";
 import logo from "./img/logo.png";
 import "./css/NavBar.css";
@@ -28,7 +29,9 @@ class NavBar extends Component {
 
         const menuStyle = {
             backgroundColor: "transparent",
-            borderBottom: "none"
+            borderBottom: "none",
+            textAlign: "right",
+            width: "99%"
         };
 
         return (
@@ -50,6 +53,8 @@ class NavBar extends Component {
                 <div className="flex-grow-1">
                     <SearchSmart /> 
                 </div>
+
+                <HelpButton type="quickSearch" style={{paddingLeft:'1rem'}} />
 
                 <div className="flex-grow-2">
                     <Menu
