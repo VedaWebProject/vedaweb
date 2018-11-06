@@ -6,12 +6,12 @@
 .footer-box {
     text-align: center;
     cursor: pointer;
-    filter: opacity(0.6);
+    filter: grayscale(100%) opacity(50%);
     transition: .2s;
 }
 
 .footer-box:hover {
-    filter: opacity(1);
+    filter: none;
 }
 
 .footer-box img {

@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Table, Icon } from 'antd';
+import { Table } from 'antd';
 
 import { Link, withRouter } from 'react-router-dom';
 
@@ -13,6 +13,14 @@ import axios from 'axios';
 import { Base64 } from 'js-base64';
 
 import searchResultsStore from "./stores/searchResultsStore";
+
+const fieldDisplayMapping = {
+    "form": "Verse text",
+    "form_raw": "Verse text",
+    "translation": "Translation",
+    "lemmata": "Lemmata",
+    "lemmata_raw": "Lemmata"
+}
 
 
 class SearchResults extends Component {
@@ -88,6 +96,7 @@ class SearchResults extends Component {
         //request search api data
         axios.post("/api/search", queryJSON)
             .then((response) => {
+                console.log(JSON.stringify(response.data));
                 searchResultsStore.resultsData = response.data;
                 searchResultsStore.total = response.data.hits.total;
                 this.setState({
@@ -119,14 +128,22 @@ class SearchResults extends Component {
         let html = "";
 
         if (hit.highlight !== undefined){
-            Object.keys(hit.highlight).forEach(function (key) {
+            let fieldKeys = Object.keys(hit.highlight).sort();
+            fieldKeys.forEach(function (key) {
                 if (hit.highlight[key].length > 0){
-                    for (let high in hit.highlight[key])
-                    html += (html.length > 0 ? " &mdash; " : "") + hit.highlight[key][high];
+                    html += "<span class='red'>" + fieldDisplayMapping[key] + ":</span> ";
+                    for (let high in hit.highlight[key]){
+                        html += hit.highlight[key][high] + " ";
+                    }
+                    html += "<br/>"
                 }
             });
         } else {
-            html = hit._source.form;
+            console.log(JSON.stringify(hit._source.form_raw));
+            for (let form in hit._source.form_raw){
+                html += hit._source.form_raw[form]
+                    + (form < hit._source.form_raw.length - 1 ? " / " : "");
+            }
         }
 
         return {__html: html};
@@ -143,19 +160,22 @@ class SearchResults extends Component {
             title: 'Location',
             dataIndex: 'location',
             key: 'location',
-            render: loc => <Link to={"/view/id/" + loc} className="bold">{loc}</Link>,
+            render: loc => <Link to={"/view/id/" + loc} className="bold" style={{fontSize: '18px'}}>{loc}</Link>,
           }, {
             title: 'Text',
             dataIndex: 'text',
             key: 'text',
+            render: content => <span className="text-font">{content}</span>
           }, {
             title: 'Addressee',
             dataIndex: 'addressee',
             key: 'addressee',
+            render: content => <span className="text-font">{content}</span>
           }, {
             title: 'Group',
             dataIndex: 'group',
             key: 'group',
+            render: content => <span className="text-font">{content}</span>
           }, {
             title: 'Strata',
             dataIndex: 'strata',
@@ -178,23 +198,16 @@ class SearchResults extends Component {
                         <div id="search-results" className="card">
 
                             <h4>
-                                Search Results for <span className="text-font grey">{this.state.queryDisplay}</span>
+                                Search Results for <span className="text-font grey">"{this.state.queryDisplay}"</span>
                             </h4>
-
 
                             {/** SEARCH STATS **/}
                             
-                            <div className="search-stats bottom-gap secondary-font">
+                            <div className="search-stats secondary-font">
                                 { isLoaded && data.hits.hits !== undefined ?
                                     data.hits.total > 0 ?
-                                        <span>
-                                            Results: { data.hits.total } &mdash;
-                                            Took: { data.took } ms
-                                        </span>
-                                        :
-                                        <span>
-                                            There are no results for this search. <Icon type="frown-o"/>
-                                        </span>
+                                        <span>Found { data.hits.total } matching verses in { data.took } ms</span>
+                                        : ""
                                      : <span>Searching ...</span>
                                 }
                             </div>
@@ -204,7 +217,7 @@ class SearchResults extends Component {
                             columns={columns}
                             dataSource={this.state.tableData}
                             loading={!this.state.isLoaded}
-                            locale={{emptyText: 'No results'}}
+                            locale={{emptyText: 'There are no results for this search.'}}
                             pagination={{
                                 pageSize: searchResultsStore.size,
                                 current: searchResultsStore.page,

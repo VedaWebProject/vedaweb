@@ -11,7 +11,13 @@
 		          "tokenizer":  "standard",
 		          "filter": ["lowercase", "german_normalization"]
 		       	}
-		    }
+		    },
+            "filter" : {
+                "ascii_folding" : {
+                    "type" : "asciifolding",
+                    "preserve_original" : true
+                }
+            }
 		}
 	},
 	"mappings": {
@@ -28,6 +34,8 @@
 				"translation": 		{ "type": "text", "analyzer": "custom_german" },
 				"form": 			{ "type": "text" },
 				"form_raw": 		{ "type": "text" },
+				"lemmata": 			{ "type": "text" },
+				"lemmata_raw": 		{ "type": "text" },
 				"tokens": {
 					"type": "nested",
 					"properties": {

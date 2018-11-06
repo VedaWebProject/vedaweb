@@ -109,9 +109,10 @@ public class ElasticIndexService {
 				indexDoc.put("hymnGroup", dbDoc.getHymnGroup());
 				indexDoc.put("strata", dbDoc.getStrata());
 				indexDoc.put("translation", concatTranslations(dbDoc));
-				String concat = concatPadaForms(dbDoc) + concatTokenLemmata(dbDoc);
-				indexDoc.put("form", StringUtils.removeUnicodeAccents(concat, true));
-				indexDoc.put("form_raw", StringUtils.normalizeNFC(concat));
+				indexDoc.put("form", concatPadaForms(dbDoc, true));
+				indexDoc.put("form_raw", concatPadaForms(dbDoc, false));
+				indexDoc.put("lemmata", StringUtils.removeUnicodeAccents(concatTokenLemmata(dbDoc), true));
+				indexDoc.put("lemmata_raw", StringUtils.normalizeNFC(concatTokenLemmata(dbDoc)));
 				indexDoc.put("tokens", buildTokensList(dbDoc));
 			} catch (JSONException e) {
 				e.printStackTrace();
@@ -446,25 +447,29 @@ public class ElasticIndexService {
 	}
 	
 	
-	private String concatPadaForms(Verse doc) {
-		StringBuilder sb = new StringBuilder();
+	private JSONArray concatPadaForms(Verse doc, boolean removeAccents) {
+		JSONArray padaForms = new JSONArray();
 		for (Pada pada : doc.getPadas()) {
-			sb.append(pada.getForm());
-			sb.append(" ");
+			padaForms.put(
+				removeAccents
+					? StringUtils.removeUnicodeAccents(pada.getForm(), true)
+					: pada.getForm()
+			);
 		}
-		return sb.toString().replaceAll("\\s+", " ").trim();
+		return padaForms;
 	}
 	
 	
 	private String concatTokenLemmata(Verse doc) {
+		//TODO only use unique lemmata!
 		StringBuilder sb = new StringBuilder();
 		for (Pada pada : doc.getPadas()) {
 			for (Token token : pada.getTokens()){
 				sb.append(token.getForm());
-				sb.append(" ");
+				sb.append(", ");
 			}
 		}
-		return sb.toString().trim();
+		return sb.substring(0, sb.length() - 2).toString().trim();
 	}
 	
 	

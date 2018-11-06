@@ -7,10 +7,9 @@ import org.elasticsearch.action.search.SearchRequest;
 import org.elasticsearch.common.Strings;
 import org.elasticsearch.index.query.BoolQueryBuilder;
 import org.elasticsearch.index.query.MatchAllQueryBuilder;
-import org.elasticsearch.index.query.MatchQueryBuilder;
 import org.elasticsearch.index.query.QueryBuilders;
+import org.elasticsearch.index.query.QueryStringQueryBuilder;
 import org.elasticsearch.index.query.RangeQueryBuilder;
-import org.elasticsearch.index.query.WildcardQueryBuilder;
 import org.elasticsearch.search.aggregations.AggregationBuilders;
 import org.elasticsearch.search.aggregations.bucket.nested.NestedAggregationBuilder;
 import org.elasticsearch.search.aggregations.bucket.terms.TermsAggregationBuilder;
@@ -23,11 +22,10 @@ import de.unikoeln.vedaweb.util.StringUtils;
 
 public class SearchRequestBuilder {
 	
-	public static final String AGGREGATE_GRAMMAR_FIELDS = "grammar_fields";
+	private static final FetchSourceContext FETCH_SOURCE_CONTEXT_SMART =
+			new FetchSourceContext(true, new String[]{"book", "hymn", "verse", "form", "form_raw", "hymnAddressee", "hymnGroup", "strata"}, Strings.EMPTY_ARRAY);
 	
-	public static final FetchSourceContext FETCH_SOURCE_CONTEXT =
-			new FetchSourceContext(true, new String[]{"book", "hymn", "verse", "form", "hymnAddressee", "hymnGroup", "strata"}, Strings.EMPTY_ARRAY);
-	
+	private static final String[] HIGHLIGHT_SMART = {"form", "lemmata", "form_raw", "lemmata_raw", "translation"};
 	
 	
 	public static SearchRequest buildSmartQuery(SearchData searchData){
@@ -38,20 +36,27 @@ public class SearchRequestBuilder {
 		
 		String searchTerm = StringUtils.normalizeNFC(searchData.getInput());
 		String field = searchData.getField();
+		String lemmataField = "lemmata";
 		
-		if (StringUtils.containsAccents(searchTerm) && field.equals("form"))
-			field = "form_raw";
+		if (StringUtils.containsAccents(searchTerm) && !field.equals("translation")) {
+			field += "_raw";
+			lemmataField += "_raw";
+		}
 		
 		//add search query
-		if (searchTerm.matches(".*[\\*\\?].*"))
-			searchSourceBuilder.query(new WildcardQueryBuilder(field, searchTerm));
-		else
-			searchSourceBuilder.query(new MatchQueryBuilder(field, searchTerm));
+//		if (searchTerm.matches(".*[\\*\\?].*"))
+//			searchSourceBuilder.query(new WildcardQueryBuilder(field, searchTerm));
+//		else
+//			searchSourceBuilder.query(new MultiMatchQueryBuilder(searchTerm, field, lemmataField));
+		QueryStringQueryBuilder query = new QueryStringQueryBuilder(searchTerm);
+		query.field(field, 2);
+		query.field(lemmataField, 1);
+		searchSourceBuilder.query(query);
 
 		//Highlighting
-		addHighlighting(searchSourceBuilder, "form", "form_raw", "translation");
+		addHighlighting(searchSourceBuilder, HIGHLIGHT_SMART);
 		
-		searchSourceBuilder.fetchSource(FETCH_SOURCE_CONTEXT);
+		searchSourceBuilder.fetchSource(FETCH_SOURCE_CONTEXT_SMART);
 		searchRequest.source(searchSourceBuilder);
 		return searchRequest;
 	}
@@ -78,7 +83,7 @@ public class SearchRequestBuilder {
 		
 		searchSourceBuilder.query(bool);
 
-		searchSourceBuilder.fetchSource(FETCH_SOURCE_CONTEXT);
+		searchSourceBuilder.fetchSource(FETCH_SOURCE_CONTEXT_SMART);
 
 		//System.out.println("\n\n" + searchSourceBuilder.toString() + "\n\n");
 		searchRequest.source(searchSourceBuilder);
@@ -100,26 +105,6 @@ public class SearchRequestBuilder {
 		}
 		return metasQuery;
 	}
-
-
-//	private static void addScopeQueries(BoolQueryBuilder rootQuery, List<SearchScope> scopes){
-//		if (scopes == null || scopes.size() == 0) return;
-//		
-//		//TODO temp: only one range!
-//		SearchScope scope = scopes.get(0);
-//		
-//		//construct book scope query
-//		RangeQueryBuilder bookRange = QueryBuilders.rangeQuery("book");
-//		if (scope.fromBook > 0) bookRange.gte(scope.fromBook);
-//		if (scope.toBook > 0) bookRange.lte(scope.toBook);
-//		rootQuery.must(bookRange);
-//		
-//		//construct book scope query
-//		RangeQueryBuilder hymnRange = QueryBuilders.rangeQuery("hymn");
-//		if (scope.fromHymn > 0) hymnRange.gte(scope.fromHymn);
-//		if (scope.toHymn > 0) hymnRange.lte(scope.toHymn);
-//		rootQuery.must(hymnRange);
-//	}
 	
 	
 	private static void addGrammarBlockQueries(BoolQueryBuilder rootQuery, SearchData searchData){
@@ -186,6 +171,9 @@ public class SearchRequestBuilder {
 			highlightField.highlighterType("unified");  
 			highlightBuilder.field(highlightField);
 		}
+		
+		//disable highlight fragmentation
+		highlightBuilder.numOfFragments(0);
 		  
 		searchSourceBuilder.highlighter(highlightBuilder);
 	}
