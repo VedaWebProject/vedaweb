@@ -461,7 +461,6 @@ public class ElasticIndexService {
 	
 	
 	private String concatTokenLemmata(Verse doc) {
-		//TODO only use unique lemmata!
 		StringBuilder sb = new StringBuilder();
 		for (Pada pada : doc.getPadas()) {
 			for (Token token : pada.getTokens()){
