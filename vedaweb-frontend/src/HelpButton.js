@@ -65,11 +65,20 @@ const helpTexts = {
             </div>
     },
     zurichIso : {
-        title: "Morphological Glossing from Zürich",
+        title: "Rigveda in ISO-15919 from Zürich",
         content:
             <div>
                 <p>
-                    This morphological glossing data from Zurich follows the Leipzig Glossing Rules.
+                    Text version from Zurich... (wip)
+                </p>
+            </div>
+    },
+    zurichGlossing : {
+        title: "Morphological glossings from Zürich",
+        content:
+            <div>
+                <p>
+                    This morphological glossing data from Zürich follows the Leipzig Glossing Rules.
                     The abbreviations used are listed below:
                 </p>
                 <p>
@@ -112,15 +121,6 @@ const helpTexts = {
                         <tr><td className="bold">SG</td><td>singular</td></tr>
                         <tr><td className="bold">VOC</td><td>vocative</td></tr>
                     </tbody></table>
-                </p>
-            </div>
-    },
-    zurichGlossing : {
-        title: "Morphological glossings from Zürich",
-        content:
-            <div>
-                <p>
-                    These are morphological glossings from Zürich.
                 </p>
             </div>
     },
