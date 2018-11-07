@@ -16,7 +16,7 @@ class ContentView extends Component {
             justify="center"
             className="page-content">
 
-                <Col md={24} lg={20} xl={16}>
+                <Col xl={14} lg={18} md={20} sm={24}>
                     <div className="card">
                         <h4><Icon type="experiment"/> VedaWeb beta</h4>
                         <span className="secondary-font red">Project time frame: July 2017 - June 2020</span><br/><br/>
