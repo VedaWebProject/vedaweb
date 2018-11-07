@@ -64,7 +64,7 @@ class NavBar extends Component {
                     onClick={() => {this.setState({showFeedbackModal: true})}}>
 
                         <SubMenu
-                        title={<div style={{textAlign: 'center'}}><Icon type="book"/><br/>Browse Rigveda</div>}
+                        title={<div className="content-center"><Icon type="book"/><br/>Browse Rigveda</div>}
                         className="right">
                             {searchMetaStore.scopeDataRaw.map((hymns, i) => (
                                 <Menu.Item key={'view_' + i}>
@@ -76,8 +76,14 @@ class NavBar extends Component {
                         </SubMenu>
 
                         <Menu.Item key="search">
-                            <NavLink to={"/search"} style={{textAlign: 'center'}}>
+                            <NavLink to={"/search"} className="content-center">
                                 <Icon type="zoom-in"/><br/>Advanced Search
+                            </NavLink>
+                        </Menu.Item>
+
+                        <Menu.Item key="betafb">
+                            <NavLink to={"/betafeedback"} className="content-center">
+                                <Icon type="message"/><br/>Beta Feedback
                             </NavLink>
                         </Menu.Item>
 

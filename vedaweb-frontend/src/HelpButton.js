@@ -158,8 +158,9 @@ class HelpButton extends Component {
             </div>;
 
         const containerStyle = {
-            textAlign: this.props.align === undefined ? "right" : this.props.align,
-            float: this.props.float === undefined ? "none" : (this.props.align === undefined ? "right" : this.props.align)
+            textAlign: this.props.align ? this.props.align : "right",
+            float: this.props.float ? (this.props.align === undefined ? "right" : this.props.align) : "none",
+            display: this.props.inline ? "inline-block" : "block"
         }
 
         //apply styles from props

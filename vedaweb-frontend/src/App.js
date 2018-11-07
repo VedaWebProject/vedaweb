@@ -116,8 +116,9 @@ class App extends Component {
                                 <Route path="/results/:querydata" component={SearchResults} />
                                 <Route path="/search" component={SearchView} />
                                 <Route path="/system/:auth" component={System} />
+                                <Route path="/betafeedback" component={Start} />
                                 <Route path="/home" component={Start} />
-                                <Route path="/" exact={true} component={Start} />
+                                <Route path="/" exact={true} component={ContentView} />
                                 <Route component={NotFound} />
                             </Switch>
                             <Footer/>

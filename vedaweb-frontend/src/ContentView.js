@@ -28,19 +28,22 @@ class ContentView extends Component {
         super(props)
         this.state ={
             data: {},
-            viewBy: null,
-            viewValue: null,
             isLoaded: false
         }
     }
 
     componentDidMount() {
-        this.loadData(this.props.match.params.by, this.props.match.params.value);
+        if (this.props.match.params.by === undefined
+            || this.props.match.params.value === undefined){
+            this.props.history.push("/view/index/0");
+        } else {
+            this.loadData(this.props.match.params.by, this.props.match.params.value);
+        }
     }
 
-    componentDidUpdate() {
-        if (this.props.match.params.by !== this.state.viewBy
-                || this.props.match.params.value !== this.state.viewValue){
+    componentDidUpdate(prevProps, prevState) {
+        if (this.props.match.params.by !== prevProps.match.params.by
+                || this.props.match.params.value !== prevProps.match.params.value){
             this.loadData(this.props.match.params.by, this.props.match.params.value);
         }
     }
@@ -53,8 +56,6 @@ class ContentView extends Component {
         this.setState({
             isLoaded: false,
             error: undefined,
-            viewBy: by,
-            viewValue: value
         });
 
         axios.get("/api/document/" + by + "/" + value)

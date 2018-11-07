@@ -59,11 +59,11 @@ img.navbar-logo {
     box-shadow: 0px 0px 4px 0px rgba(0,0,0,0.1);
 }
 
-/* .ant-menu-horizontal .ant-menu-submenu-title-active,
-.ant-menu-horizontal .ant-menu-submenu-title-selected,
-.ant-menu-horizontal .ant-menu-submenu-title:hover {
-    color: #931111;
-} */
+.ant-menu-item .anticon,
+.ant-menu-submenu-title .anticon {
+    font-size: 18px;
+    margin: 0px;
+}
 
 .ant-menu-submenu .ant-menu-item {
     font-size: 16px;
