@@ -9,6 +9,14 @@
     margin: 0 auto;
 }
 
+h5 {
+    font-family: "Assistant", "Tahoma", "Arial", sans-serif;
+    margin-top: .5rem;
+    margin-bottom: .3rem;
+    color: #931111;
+    font-size: 20px;
+}
+
 h4 {
     font-family: "Assistant", "Tahoma", "Arial", sans-serif;
     margin-bottom: 1rem;
