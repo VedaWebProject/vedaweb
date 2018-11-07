@@ -8,12 +8,29 @@ import './index.css';
 
 import { BrowserRouter as Router } from 'react-router-dom'
 
+import Browserizr from 'browserizr';
 
-//render app
-ReactDOM.render(
-    <Router>
-        <App />
-    </Router>
-    , document.getElementById('root')
-);
-registerServiceWorker();
+
+
+//just alert if IE or mobile
+if (Browserizr.is_ie) {
+    alert("We suspect you are using the Internet Explorer.\nUnfortunately, VedaWeb only works with modern web browsers.\nYou will need to use Firefox, Chrome or something similar instead.");
+} else if (Browserizr.is_mobile) {
+    alert("We suspect you are using a mobile device.\nUnfortunately, VedaWeb is not designed to work on mobile devices. You will need to try to use a desktop browser instead.");
+} else{
+
+
+    //render app
+    ReactDOM.render(
+        <Router>
+            <App />
+        </Router>
+        , document.getElementById('root')
+    );
+    registerServiceWorker();
+
+
+}
+
+
+
