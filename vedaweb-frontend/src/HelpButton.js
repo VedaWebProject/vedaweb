@@ -32,8 +32,8 @@ const helpTexts = {
                 </p>
                 <p>
                     Define a search term (optional) and select an attribute (like case, number, person, etc.)
-                     and the value you are looking for (this is also optional). You may add multiple properties 
-                     for the term by clicking the plus-button to the right.
+                     and the value you are looking for (optional). This will also search for matching lemmata.
+                     You may add more properties to your search term by clicking the plus-button to the right.
                 </p>
                 <p>
                     To add more than one term to find in a verse, click on the plus-button below. This will display 

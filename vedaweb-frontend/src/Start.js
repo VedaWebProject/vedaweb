@@ -30,7 +30,7 @@ class ContentView extends Component {
                                 <li>Additional search modes</li>
                                 <li>...</li>
                             </ul>
-                            Look out for the <HelpButton type="start" inline/> icon to get explanations of the different features.<br/>
+                            Look out for the <HelpButton type="start" inline/> buttons to get explanations of the different features.<br/>
                             Feel free to send us your <strong>feedback on functionality, usability and data correctness:</strong>
                             <br/><br/>
                             <Button

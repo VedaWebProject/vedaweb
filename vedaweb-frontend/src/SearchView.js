@@ -139,7 +139,7 @@ class SearchView extends Component {
                             </Panel>
                         </Collapse> 
                         
-                        <h3><Icon type="search" className="gap-right"/>Search Mode</h3>
+                        <h3><Icon type="search" className="gap-right"/>What are you searching for?</h3>
                         <Tabs
                         onChange={this.switchMode}
                         type="card"
