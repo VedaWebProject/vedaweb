@@ -78,7 +78,6 @@ class SearchSmart extends Component {
                     onChange={e => searchSmartStore.setInput(e.target.value)}
                     onSearch={this.handleSearch}
                     addonBefore={selectBefore}
-                    size={"large"}
                     placeholder={"Quick search: " + 
                         (searchSmartStore.data.field === "form"
                         ? searchMetaStore.transliteration.toUpperCase() + " or verse no."
