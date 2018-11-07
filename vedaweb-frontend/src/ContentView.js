@@ -172,6 +172,71 @@ class ContentView extends Component {
                                                 ))}
                                             </div>
 
+                                            {uiDataStore.viewFilter.devanagari &&
+                                                <div
+                                                className="content-plain content-block card deva-font"
+                                                ref={this.scrollTo}>
+                                                    <h4>Devanagari (Detlef)</h4>
+                                                    {data.versions.filter(v => v.language === 'deva').map(v => (
+                                                        v.form.map((line, i) => (
+                                                            <div key={"deva_" + i}>{line}</div>
+                                                        ))
+                                                    ))}
+                                                </div>
+                                            }
+
+                                            {uiDataStore.viewFilter.padapatha &&
+                                                <div
+                                                className="content-plain content-block card text-font"
+                                                ref={this.scrollTo}>
+                                                    <h4>Padapatha</h4>
+                                                    {data.versions.filter(v => v.source === 'Padapatha').map(v => (
+                                                        v.form.map((line, i) => (
+                                                            <div key={"padapatha_" + i}>{line}</div>
+                                                        ))
+                                                    ))}
+                                                </div>
+                                            }
+
+                                            {uiDataStore.viewFilter.sasapatha &&
+                                                <div
+                                                className="content-plain content-block card text-font"
+                                                ref={this.scrollTo}>
+                                                    <h4>Sasa Patha (Gunkel, Ryan)</h4>
+                                                    {data.versions.filter(v => v.source === 'Sasa Patha (Gunkel, Ryan)').map(v => (
+                                                        v.form.map((line, i) => (
+                                                            <div key={"sasa_" + i}>{line}</div>
+                                                        ))
+                                                    ))}
+                                                </div>
+                                            }
+
+                                            {uiDataStore.viewFilter.vnh &&
+                                                <div
+                                                className="content-plain content-block card text-font"
+                                                ref={this.scrollTo}>
+                                                    <h4>Van Nooten, Holland</h4>
+                                                    {data.versions.filter(v => v.source === 'Van Nooten, Holland').map(v => (
+                                                        v.form.map((line, i) => (
+                                                            <div key={"vnh_" + i}>{line}</div>
+                                                        ))
+                                                    ))}
+                                                </div>
+                                            }
+
+                                            {uiDataStore.viewFilter.aufrecht &&
+                                                <div
+                                                className="content-plain content-block card text-font"
+                                                ref={this.scrollTo}>
+                                                    <h4>Aufrecht</h4>
+                                                    {data.versions.filter(v => v.source === 'Aufrecht').map(v => (
+                                                        v.form.map((line, i) => (
+                                                            <div key={"aufrecht_" + i}>{line}</div>
+                                                        ))
+                                                    ))}
+                                                </div>
+                                            }
+
                                             {uiDataStore.viewFilter.glossing &&
                                                 <div
                                                 className="glossing content-block card"
@@ -321,71 +386,6 @@ class ContentView extends Component {
                                                 </div>
                                             }
 
-                                            {uiDataStore.viewFilter.devanagari &&
-                                                <div
-                                                className="content-block card deva-font"
-                                                ref={this.scrollTo}>
-                                                    <h4>Devanagari (Detlef)</h4>
-                                                    {data.versions.filter(v => v.language === 'deva').map(v => (
-                                                        v.form.map((line, i) => (
-                                                            <div key={"deva_" + i}>{line}</div>
-                                                        ))
-                                                    ))}
-                                                </div>
-                                            }
-
-                                            {uiDataStore.viewFilter.padapatha &&
-                                                <div
-                                                className="content-block card text-font"
-                                                ref={this.scrollTo}>
-                                                    <h4>Padapatha</h4>
-                                                    {data.versions.filter(v => v.source === 'Padapatha').map(v => (
-                                                        v.form.map((line, i) => (
-                                                            <div key={"padapatha_" + i}>{line}</div>
-                                                        ))
-                                                    ))}
-                                                </div>
-                                            }
-
-                                            {uiDataStore.viewFilter.sasapatha &&
-                                                <div
-                                                className="content-block card text-font"
-                                                ref={this.scrollTo}>
-                                                    <h4>Sasa Patha (Gunkel, Ryan)</h4>
-                                                    {data.versions.filter(v => v.source === 'Sasa Patha (Gunkel, Ryan)').map(v => (
-                                                        v.form.map((line, i) => (
-                                                            <div key={"sasa_" + i}>{line}</div>
-                                                        ))
-                                                    ))}
-                                                </div>
-                                            }
-
-                                            {uiDataStore.viewFilter.vnh &&
-                                                <div
-                                                className="content-block card text-font"
-                                                ref={this.scrollTo}>
-                                                    <h4>Van Nooten, Holland</h4>
-                                                    {data.versions.filter(v => v.source === 'Van Nooten, Holland').map(v => (
-                                                        v.form.map((line, i) => (
-                                                            <div key={"vnh_" + i}>{line}</div>
-                                                        ))
-                                                    ))}
-                                                </div>
-                                            }
-
-                                            {uiDataStore.viewFilter.aufrecht &&
-                                                <div
-                                                className="content-block card text-font"
-                                                ref={this.scrollTo}>
-                                                    <h4>Aufrecht</h4>
-                                                    {data.versions.filter(v => v.source === 'Aufrecht').map(v => (
-                                                        v.form.map((line, i) => (
-                                                            <div key={"aufrecht_" + i}>{line}</div>
-                                                        ))
-                                                    ))}
-                                                </div>
-                                            }
-
                                         </div>
                                     }
                                 </Col>
@@ -394,32 +394,6 @@ class ContentView extends Component {
                                     <Affix offsetTop={10}>
                                         <div className="card">
                                             <h4><Icon type="filter" className="gap-right"/> View Filters</h4>
-
-                                            <h5>Metadata</h5>
-                                            
-                                            <ContentFilterSwitch
-                                            label="Morphological Glossing"
-                                            disabled={!isLoaded || error !== undefined}
-                                            checked={uiDataStore.viewFilter.glossing}
-                                            onChange={(e) => this.filterChange("glossing", e)} />
-
-                                            <ContentFilterSwitch
-                                            label="Translations"
-                                            disabled={!isLoaded || error !== undefined}
-                                            checked={uiDataStore.viewFilter.translations}
-                                            onChange={(e) => this.filterChange("translations", e)} />
-
-                                            <ContentFilterSwitch
-                                            label="Dictionary"
-                                            disabled={!isLoaded || error !== undefined}
-                                            checked={uiDataStore.viewFilter.dictionary}
-                                            onChange={(e) => this.filterChange("dictionary", e)} />
-
-                                            <ContentFilterSwitch
-                                            label="Meta Tags"
-                                            disabled={!isLoaded || error !== undefined}
-                                            checked={uiDataStore.viewFilter.metaInfo}
-                                            onChange={(e) => this.filterChange("metaInfo", e)} />
 
                                             <h5>Additional versions</h5>
 
@@ -452,6 +426,32 @@ class ContentView extends Component {
                                             disabled={!isLoaded || error !== undefined}
                                             checked={uiDataStore.viewFilter.aufrecht}
                                             onChange={(e) => this.filterChange("aufrecht", e)} />
+
+                                            <h5>Metadata</h5>
+                                            
+                                            <ContentFilterSwitch
+                                            label="Morphological Glossing"
+                                            disabled={!isLoaded || error !== undefined}
+                                            checked={uiDataStore.viewFilter.glossing}
+                                            onChange={(e) => this.filterChange("glossing", e)} />
+
+                                            <ContentFilterSwitch
+                                            label="Translations"
+                                            disabled={!isLoaded || error !== undefined}
+                                            checked={uiDataStore.viewFilter.translations}
+                                            onChange={(e) => this.filterChange("translations", e)} />
+
+                                            <ContentFilterSwitch
+                                            label="Dictionary"
+                                            disabled={!isLoaded || error !== undefined}
+                                            checked={uiDataStore.viewFilter.dictionary}
+                                            onChange={(e) => this.filterChange("dictionary", e)} />
+
+                                            <ContentFilterSwitch
+                                            label="Meta Tags"
+                                            disabled={!isLoaded || error !== undefined}
+                                            checked={uiDataStore.viewFilter.metaInfo}
+                                            onChange={(e) => this.filterChange("metaInfo", e)} />
                                             
                                         </div>
 
