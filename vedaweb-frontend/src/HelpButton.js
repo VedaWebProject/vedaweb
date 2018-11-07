@@ -65,11 +65,53 @@ const helpTexts = {
             </div>
     },
     zurichIso : {
-        title: "Rigveda from Zürich",
+        title: "Morphological Glossing from Zürich",
         content:
             <div>
                 <p>
-                    This is the Rigveda text from Zürich.
+                    This morphological glossing data from Zurich follows the Leipzig Glossing Rules.
+                    The abbreviations used are listed below:
+                </p>
+                <p>
+                    <table style={{width: 'auto'}}><tbody>
+                        <tr><td className="bold">1</td><td>first person</td></tr>
+                        <tr><td className="bold">2</td><td>second person</td></tr>
+                        <tr><td className="bold">3</td><td>third person</td></tr>
+                        <tr><td className="bold">ABL</td><td>ablative</td></tr>
+                        <tr><td className="bold">ACC</td><td>accusative</td></tr>
+                        <tr><td className="bold">ACT</td><td>actor</td></tr>
+                        <tr><td className="bold">AOR</td><td>aorist</td></tr>
+                        <tr><td className="bold">COND</td><td>conditional</td></tr>
+                        <tr><td className="bold">CVB</td><td>converb</td></tr>
+                        <tr><td className="bold">DAT</td><td>dative</td></tr>
+                        <tr><td className="bold">DU</td><td>dual</td></tr>
+                        <tr><td className="bold">F</td><td>feminine</td></tr>
+                        <tr><td className="bold">FUT</td><td>future</td></tr>
+                        <tr><td className="bold">GEN</td><td>genitive</td></tr>
+                        <tr><td className="bold">IMP</td><td>imperative</td></tr>
+                        <tr><td className="bold">IND</td><td>indicative</td></tr>
+                        <tr><td className="bold">INF</td><td>infinitive</td></tr>
+                        <tr><td className="bold">INJ</td><td>injuctive</td></tr>
+                        <tr><td className="bold">INS</td><td>instrumental</td></tr>
+                        <tr><td className="bold">IPRF</td><td>imperfect</td></tr>
+                        <tr><td className="bold">LOC</td><td>locative</td></tr>
+                        <tr><td className="bold">M</td><td>mascuiline</td></tr>
+                        <tr><td className="bold">MED</td><td>middle voice</td></tr>
+                        <tr><td className="bold">N</td><td>neuter</td></tr>
+                        <tr><td className="bold">NOM</td><td>nominative</td></tr>
+                        <tr><td className="bold">OPT</td><td>optative</td></tr>
+                        <tr><td className="bold">PASS</td><td>passive voice</td></tr>
+                        <tr><td className="bold">PL</td><td>plural</td></tr>
+                        <tr><td className="bold">PLUPRF</td><td>past perfect</td></tr>
+                        <tr><td className="bold">PPP</td><td>na participle perfective passive</td></tr>
+                        <tr><td className="bold">PPP</td><td>ta participle perfective passive</td></tr>
+                        <tr><td className="bold">PRF</td><td>perfect</td></tr>
+                        <tr><td className="bold">PRS</td><td>present</td></tr>
+                        <tr><td className="bold">PTCP</td><td>participle</td></tr>
+                        <tr><td className="bold">SBJV</td><td>subjunctive</td></tr>
+                        <tr><td className="bold">SG</td><td>singular</td></tr>
+                        <tr><td className="bold">VOC</td><td>vocative</td></tr>
+                    </tbody></table>
                 </p>
             </div>
     },
@@ -183,7 +225,7 @@ class HelpButton extends Component {
                 theme="outlined"
                 onClick={this.showModal}
                 title={helpTexts[this.props.type] !== undefined ? "Show help: \"" + helpTexts[this.props.type].title + "\"" : undefined}
-                style={{cursor:"pointer", margin:"0", color: '#aaa'}}/>
+                style={{cursor:"pointer", margin:"0", color: '#aaa', fontSize: '18px'}}/>
                 
                 {this.state.visible &&
                     <Modal
