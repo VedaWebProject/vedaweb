@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Row, Col, Icon, Button } from 'antd';
 import feedbackMailAddress from "./feedbackMailAddress.js";
+import HelpButton from "./HelpButton";
 
 
 class ContentView extends Component {
@@ -10,8 +11,12 @@ class ContentView extends Component {
 
         return (
             
-            <Row className="page-content">
-                <Col span={24}>
+            <Row
+            type="flex"
+            justify="center"
+            className="page-content">
+
+                <Col md={24} lg={20} xl={16}>
                     <div className="card">
                         <h4><Icon type="experiment"/> VedaWeb beta</h4>
                         <span className="secondary-font red">Project time frame: July 2017 - June 2020</span><br/><br/>
@@ -25,7 +30,7 @@ class ContentView extends Component {
                                 <li>Additional search modes</li>
                                 <li>...</li>
                             </ul>
-                            Look out for the <Icon type="question-circle" theme="outlined" style={{color: '#bba'}}/> icon to get explanations of the different features.<br/>
+                            Look out for the <HelpButton type="start" inline/> icon to get explanations of the different features.<br/>
                             Feel free to send us your <strong>feedback on functionality, usability and data correctness:</strong>
                             <br/><br/>
                             <Button

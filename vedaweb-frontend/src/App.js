@@ -8,6 +8,8 @@ import Start from './Start';
 import NotFound from './NotFound';
 import Footer from './Footer';
 import System from './System';
+import LegalNotice from './LegalNotice';
+import PrivacyNotice from './PrivacyNotice';
 
 import "./css/App.css";
 
@@ -105,6 +107,8 @@ class App extends Component {
                                 <Route path="/results/:querydata" component={SearchResults} />
                                 <Route path="/search" component={SearchView} />
                                 <Route path="/system/:auth" component={System} />
+                                <Route path="/legal" component={LegalNotice} />
+                                <Route path="/privacy" component={PrivacyNotice} />
                                 <Route path="/betafeedback" component={Start} />
                                 <Route path="/home" component={Start} />
                                 <Route path="/" exact={true} component={ContentView} />

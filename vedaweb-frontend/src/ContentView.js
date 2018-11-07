@@ -144,9 +144,9 @@ class ContentView extends Component {
                                                 hymn={data.hymn}
                                                 verse={data.verse} />
                                         
-                                                <span className="bold gap-left">Hymn addressee: </span>
+                                                <span className="bold gap-left-big">Hymn addressee: </span>
                                                 <span className="text-font">{data.hymnAddressee}</span>
-                                                <span className="bold gap-left">Hymn group: </span>
+                                                <span className="bold gap-left-big">Hymn group: </span>
                                                 <span className="text-font">{data.hymnGroup}</span>
                                             </div>
                                         }

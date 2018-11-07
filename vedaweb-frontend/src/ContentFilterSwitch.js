@@ -8,7 +8,7 @@ class ContentViewFilterSwitch extends Component {
     render() {
 
         return (
-            <div className={"view-filter" + (this.props.inline ? " inline-block gap-left" : "")}>
+            <div className={"view-filter" + (this.props.inline ? " inline-block gap-left-big" : "")}>
                 <Switch
                 defaultChecked
                 onChange={this.props.onChange}

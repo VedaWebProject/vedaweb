@@ -14,6 +14,15 @@ const helpTexts = {
                 </p>
             </div>
     },
+    start: {
+        title: "There you go!",
+        content:
+            <div>
+                <p>
+                    Right, this is how it works. But this particular help button was meant for demonstration purposes only.
+                </p>
+            </div>
+    },
     grammarSearch : {
         title: "Grammar Search",
         content:

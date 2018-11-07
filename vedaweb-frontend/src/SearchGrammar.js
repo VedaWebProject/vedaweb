@@ -66,7 +66,7 @@ class SearchGrammar extends Component {
                             </div>
                         </Col>
                         <Col span={23} className="secondary-font translucent font-18">
-                            <Icon type="arrow-left" className="gap-left"/> Click here to add additional search terms
+                            <Icon type="arrow-left" className="gap-left-big"/> Click here to add additional search terms
                         </Col>
                     </Row>
 

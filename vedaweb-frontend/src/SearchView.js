@@ -211,7 +211,7 @@ class SearchView extends Component {
                                 type="primary"
                                 icon="search"
                                 size="large"
-                                className={"secondary-font gap-left"}
+                                className={"secondary-font gap-left-big"}
                                 onClick={this.handleSubmit}>
                                     Search
                                 </Button>
