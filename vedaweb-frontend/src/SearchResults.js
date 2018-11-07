@@ -138,7 +138,6 @@ class SearchResults extends Component {
                 }
             });
         } else {
-            console.log(JSON.stringify(hit._source.form_raw));
             for (let form in hit._source.form_raw){
                 html += hit._source.form_raw[form]
                     + (form < hit._source.form_raw.length - 1 ? " / " : "");
