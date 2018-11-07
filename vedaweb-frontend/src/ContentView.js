@@ -132,7 +132,10 @@ class ContentView extends Component {
                     { error === undefined &&
                         <div>
                             <Row>
-                                <Col span={24}>
+
+                                {/** CONTENT **/}
+                                <Col span={18}>
+
                                     <div className="card">
                                         { data.book !== undefined &&
                                             <div>
@@ -151,19 +154,12 @@ class ContentView extends Component {
                                             </div>
                                         }
                                     </div>
-                                </Col>
-                            </Row>
-
-                            <Row>
-
-                                {/** CONTENT **/}
-                                <Col span={18}>
 
                                     { data.padas !== undefined &&
                                         <div>
                                             <div className="content-plain content-block card">
                                                 <HelpButton type="zurichIso" float/>
-                                                <h4>
+                                                <h4 title={"Rigveda, book " + data.book + ", hymn " + data.hymn + ", verse " + data.verse}>
                                                     {('0' + data.book).slice(-2)}.
                                                     {('00' + data.hymn).slice(-3)}.
                                                     {('0' + data.verse).slice(-2)}
@@ -399,6 +395,8 @@ class ContentView extends Component {
                                         <div className="card">
                                             <h4><Icon type="filter" className="gap-right"/> View Filters</h4>
 
+                                            <h5>Metadata</h5>
+                                            
                                             <ContentFilterSwitch
                                             label="Morphological Glossing"
                                             disabled={!isLoaded || error !== undefined}
@@ -418,10 +416,12 @@ class ContentView extends Component {
                                             onChange={(e) => this.filterChange("dictionary", e)} />
 
                                             <ContentFilterSwitch
-                                            label="Meta Info"
+                                            label="Meta Tags"
                                             disabled={!isLoaded || error !== undefined}
                                             checked={uiDataStore.viewFilter.metaInfo}
                                             onChange={(e) => this.filterChange("metaInfo", e)} />
+
+                                            <h5>Additional versions</h5>
 
                                             <ContentFilterSwitch
                                             label="Devanagari"
