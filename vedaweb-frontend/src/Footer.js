@@ -3,6 +3,7 @@ import { Row, Col } from 'antd';
 
 import logoCPDO from "./img/logo_cpdo.png";
 import logoCSALT from "./img/logo_csalt.png";
+import logoCSALTAPI from "./img/logo_csalt_api.png";
 import logoCSL from "./img/logo_csl.png";
 import logoTCSL from "./img/logo_tcsl.png";
 
@@ -54,6 +55,15 @@ class Footer extends Component {
                             <a href="http://cpd.uni-koeln.de" target="_blank" rel="noopener noreferrer">
                                 <img src={logoCPDO} alt="" /><br/><br/>
                                 Critical Pāli<br/>Dictionary Online
+                            </a>
+                        </div>
+                    </Col>
+
+                    <Col span={3} className="footer-box">
+                        <div className="footer-box">
+                            <a href="https://cceh.github.io/m-salt-api/api.html" target="_blank" rel="noopener noreferrer">
+                                <img src={logoCSALTAPI} alt="" /><br/><br/>
+                                C-SALT APIs<br/>for Dictionaries
                             </a>
                         </div>
                     </Col>
