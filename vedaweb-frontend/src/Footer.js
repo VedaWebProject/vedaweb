@@ -27,7 +27,7 @@ class Footer extends Component {
                         <div className="footer-box">
                             <a href="http://c-salt.uni-koeln.de" target="_blank" rel="noopener noreferrer">
                                 <img src={logoCSALT} alt="" /><br/><br/>
-                                CSALT
+                                C-SALT
                             </a>
                         </div>
                     </Col>

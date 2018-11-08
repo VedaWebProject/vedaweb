@@ -395,7 +395,7 @@ class ContentView extends Component {
                                         <div className="card">
                                             <h4><Icon type="filter" className="gap-right"/> View Filters</h4>
 
-                                            <h5>Additional versions</h5>
+                                            <h5>Additional Versions</h5>
 
                                             <ContentFilterSwitch
                                             label="Devanagari"
