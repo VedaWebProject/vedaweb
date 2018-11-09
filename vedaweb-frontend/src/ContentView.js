@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Row, Col, Affix, Spin, Select, Button, Icon } from 'antd';
+import { Row, Col, Affix, Spin, Button, Icon, Drawer, Badge, Radio, Modal } from 'antd';
 
 import ContentLocation from "./ContentLocation";
 import ContentFilterSwitch from "./ContentFilterSwitch";
@@ -18,8 +18,9 @@ import axios from 'axios';
 import uiDataStore from "./stores/uiDataStore";
 import DictionaryView from "./DictionaryView";
 import HelpButton from "./HelpButton";
+import layersInfoImg from "./img/layersInfo.png";
 
-const Option = Select.Option;
+const RadioGroup = Radio.Group;
 
 
 class ContentView extends Component {
@@ -28,7 +29,9 @@ class ContentView extends Component {
         super(props)
         this.state ={
             data: {},
-            isLoaded: false
+            isLoaded: false,
+            filtersVisible: false,
+            exportVisible: false
         }
     }
 
@@ -39,6 +42,7 @@ class ContentView extends Component {
         } else {
             this.loadData(this.props.match.params.by, this.props.match.params.value);
         }
+        this.infoModal();
     }
 
     componentDidUpdate(prevProps, prevState) {
@@ -79,9 +83,9 @@ class ContentView extends Component {
             });
     }
 
-    filterChange(target, checked){
-        if (checked) uiDataStore.viewScrollTo = true;
-        uiDataStore.viewFilter[target] = checked;
+    filterChange(target, show){
+        if (show) uiDataStore.viewScrollTo = true;
+        uiDataStore.toggleLayer(target, show);
     }
 
     scrollTo(component){
@@ -109,7 +113,21 @@ class ContentView extends Component {
         }
         return lemma.trim();
     }
-    
+
+    infoModal(){
+        if (uiDataStore.firstTime){
+            Modal.info({
+                icon: <Icon type="export"/>,
+                title: 'By clicking this button on the right edge of the screen, you can choose what kind of data you want to see (Translations, Glossings, ...)',
+                content: (
+                <div style={{textAlign: 'center'}}>
+                    <img src={layersInfoImg} alt=""/>
+                </div>
+                ),
+                onOk() {uiDataStore.firstTime = false},
+            });
+        }
+    }
 
     render() {
         const { error, isLoaded, data } = this.state;
@@ -134,7 +152,7 @@ class ContentView extends Component {
                             <Row>
 
                                 {/** CONTENT **/}
-                                <Col span={18}>
+                                <Col span={22}>
 
                                     <div className="card">
                                         { data.book !== undefined &&
@@ -172,72 +190,56 @@ class ContentView extends Component {
                                                 ))}
                                             </div>
 
-                                            {uiDataStore.viewFilter.devanagari &&
+                                            {uiDataStore.isLayerVisible('version_') &&
                                                 <div
-                                                className="content-plain content-block card deva-font"
+                                                className="content-plain content-block card"
                                                 ref={this.scrollTo}>
-                                                    <h4>Devanagari (Detlef)</h4>
-                                                    {data.versions.filter(v => v.language === 'deva').map(v => (
-                                                        v.form.map((line, i) => (
-                                                            <div key={"deva_" + i}>{line}</div>
-                                                        ))
+                                                    <h4 className="inline-block">Text Versions</h4>
+
+                                                    {uiDataStore.layers.filter(l => l.id.startsWith('version_') && l.id !== 'version_' && l.show).map(version => {
+                                                        let v = data.versions.find(x => x.id === version.id);
+                                                        console.log(JSON.stringify(v))
+                                                        return <div
+                                                        key={"v_" + v.id}
+                                                        className="translation"
+                                                        ref={this.scrollTo}>
+                                                            <div className="bold">{v.source}</div>
+                                                            <div className="text-font gap-left">
+                                                                {v.form.map((line, i) => (
+                                                                    <div key={"trans_" + i}>{line}</div>
+                                                                ))}
+                                                            </div>
+                                                        </div>
+                                                    })}
+                                                </div>
+                                            }
+
+                                            {uiDataStore.isLayerVisible('translation_') &&
+                                                <div
+                                                className="content-plain content-block card"
+                                                ref={this.scrollTo}>
+                                                    <h4 className="inline-block">Translations</h4>
+
+                                                    {data.versions.map(v => (
+                                                        v.id.startsWith('translation_') && uiDataStore.isLayerVisible(v.id) &&
+                                                        <div
+                                                        key={"t_" + v.source}
+                                                        className="translation"
+                                                        ref={this.scrollTo}>
+                                                            <div>
+                                                                <span className="bold">{v.source} </span>({v.language})
+                                                            </div>
+                                                            <div className="text-font gap-left">
+                                                                {v.form.map((line, i) => (
+                                                                    <div key={"trans_" + i}>{line}</div>
+                                                                ))}
+                                                            </div>
+                                                        </div>
                                                     ))}
                                                 </div>
                                             }
 
-                                            {uiDataStore.viewFilter.padapatha &&
-                                                <div
-                                                className="content-plain content-block card text-font"
-                                                ref={this.scrollTo}>
-                                                    <h4>Padapatha</h4>
-                                                    {data.versions.filter(v => v.source === 'Padapatha').map(v => (
-                                                        v.form.map((line, i) => (
-                                                            <div key={"padapatha_" + i}>{line}</div>
-                                                        ))
-                                                    ))}
-                                                </div>
-                                            }
-
-                                            {uiDataStore.viewFilter.sasapatha &&
-                                                <div
-                                                className="content-plain content-block card text-font"
-                                                ref={this.scrollTo}>
-                                                    <h4>Sasa Patha (Gunkel, Ryan)</h4>
-                                                    {data.versions.filter(v => v.source === 'Sasa Patha (Gunkel, Ryan)').map(v => (
-                                                        v.form.map((line, i) => (
-                                                            <div key={"sasa_" + i}>{line}</div>
-                                                        ))
-                                                    ))}
-                                                </div>
-                                            }
-
-                                            {uiDataStore.viewFilter.vnh &&
-                                                <div
-                                                className="content-plain content-block card text-font"
-                                                ref={this.scrollTo}>
-                                                    <h4>Van Nooten, Holland</h4>
-                                                    {data.versions.filter(v => v.source === 'Van Nooten, Holland').map(v => (
-                                                        v.form.map((line, i) => (
-                                                            <div key={"vnh_" + i}>{line}</div>
-                                                        ))
-                                                    ))}
-                                                </div>
-                                            }
-
-                                            {uiDataStore.viewFilter.aufrecht &&
-                                                <div
-                                                className="content-plain content-block card text-font"
-                                                ref={this.scrollTo}>
-                                                    <h4>Aufrecht</h4>
-                                                    {data.versions.filter(v => v.source === 'Aufrecht').map(v => (
-                                                        v.form.map((line, i) => (
-                                                            <div key={"aufrecht_" + i}>{line}</div>
-                                                        ))
-                                                    ))}
-                                                </div>
-                                            }
-
-                                            {uiDataStore.viewFilter.glossing &&
+                                            {uiDataStore.isLayerVisible('glossing_') &&
                                                 <div
                                                 className="glossing content-block card"
                                                 ref={this.scrollTo}>
@@ -276,65 +278,18 @@ class ContentView extends Component {
                                                 </div>
                                             }
 
-                                            {uiDataStore.viewFilter.translations &&
-                                                <div
-                                                className="content-block card"
-                                                ref={this.scrollTo}>
-                                                    <h4 className="inline-block">Translations</h4>
-
-                                                    <ContentFilterSwitch
-                                                    label="EN (Griffith)"
-                                                    onChange={(e) => {uiDataStore.disabledTranslations["Griffith"] = !e}}
-                                                    disabled={data.translations.filter(t => t.source === "Griffith").length === 0}
-                                                    checked={!uiDataStore.disabledTranslations["Griffith"]}
-                                                    inline={true} />
-
-                                                    <ContentFilterSwitch
-                                                    label="DE (Geldner)"
-                                                    onChange={(e) => {uiDataStore.disabledTranslations["Geldner"] = !e}}
-                                                    disabled={data.translations.filter(t => t.source === "Geldner").length === 0}
-                                                    checked={!uiDataStore.disabledTranslations["Geldner"]} 
-                                                    inline={true} />
-
-                                                    <ContentFilterSwitch
-                                                    label="DE (Grassmann)"
-                                                    onChange={(e) => {uiDataStore.disabledTranslations["Grassmann"] = !e}}
-                                                    disabled={data.translations.filter(t => t.source === "Grassmann").length === 0}
-                                                    checked={!uiDataStore.disabledTranslations["Grassmann"]} 
-                                                    inline={true} />
-
-                                                    {data.translations.map(translation => (
-                                                        !uiDataStore.disabledTranslations[translation.source] &&
-                                                        <div key={"trans_" + translation.source} className="translation">
-                                                            <span className="bold">{
-                                                                translation.language.toUpperCase() === "DE" ? "German" :
-                                                                translation.language.toUpperCase() === "EN" ? "English" :
-                                                                translation.language.toUpperCase() === "FR" ? "French" : "?"
-                                                            }</span>
-                                                            <span className="first-cap"> ({translation.source})</span>
-                                                            <br/>
-                                                            <div className="text-font">
-                                                                {translation.form.map((line, i) => (
-                                                                    <div key={"trans_" + i}>{line}</div>
-                                                                ))}
-                                                            </div>
-                                                        </div>
-                                                    ))}
-                                                </div>
-                                            }
-
-                                            {uiDataStore.viewFilter.dictionary &&
+                                            {uiDataStore.isLayerVisible('dictionaries_') &&
                                                 <div
                                                 className="glossing content-block card"
                                                 ref={this.scrollTo}>
-                                                    <h4>Dictionary (Grassmann)</h4>
+                                                    <h4>Dictionaries</h4>
                                                     <DictionaryView
-                                                    key={data.id}
+                                                    key={'dict_' + data.id}
                                                     data={data.padas}/>
                                                 </div>
                                             }
 
-                                            {uiDataStore.viewFilter.metaInfo &&
+                                            {uiDataStore.isLayerVisible('metaInfo_') &&
                                                 <div
                                                 className="glossing content-block card"
                                                 ref={this.scrollTo}>
@@ -372,7 +327,7 @@ class ContentView extends Component {
                                                             </td>
                                                             <td>
                                                                 {data.padas.map(pada => (
-                                                                    <div>
+                                                                    <div key={pada.index}>
                                                                         <div style={{display:"inline-block", verticalAlign:"top"}} className="bold red gap-right">{pada.line}:</div>
                                                                         <div style={{display:"inline-block", verticalAlign:"top"}} className="text-font">
                                                                             {this.resolveAbbrevationToHTML(pada.label, "label")}
@@ -390,104 +345,192 @@ class ContentView extends Component {
                                     }
                                 </Col>
                                 
-                                <Col span={6}>
+                                <Col span={2}>
+
                                     <Affix offsetTop={10}>
-                                        <div className="card">
-                                            <h4><Icon type="filter" className="gap-right"/> View Filters</h4>
-
-                                            <h5>Additional Versions</h5>
-
-                                            <ContentFilterSwitch
-                                            label="Devanagari"
-                                            disabled={!isLoaded || error !== undefined}
-                                            checked={uiDataStore.viewFilter.devanagari}
-                                            onChange={(e) => this.filterChange("devanagari", e)} />
-
-                                            <ContentFilterSwitch
-                                            label="Padapatha"
-                                            disabled={!isLoaded || error !== undefined}
-                                            checked={uiDataStore.viewFilter.padapatha}
-                                            onChange={(e) => this.filterChange("padapatha", e)} />
-
-                                            <ContentFilterSwitch
-                                            label="Sasa Patha"
-                                            disabled={!isLoaded || error !== undefined}
-                                            checked={uiDataStore.viewFilter.sasapatha}
-                                            onChange={(e) => this.filterChange("sasapatha", e)} />
-
-                                            <ContentFilterSwitch
-                                            label="Van Nooten, Holland"
-                                            disabled={!isLoaded || error !== undefined}
-                                            checked={uiDataStore.viewFilter.vnh}
-                                            onChange={(e) => this.filterChange("vnh", e)} />
-
-                                            <ContentFilterSwitch
-                                            label="Aufrecht"
-                                            disabled={!isLoaded || error !== undefined}
-                                            checked={uiDataStore.viewFilter.aufrecht}
-                                            onChange={(e) => this.filterChange("aufrecht", e)} />
-
-                                            <h5>Metadata</h5>
-                                            
-                                            <ContentFilterSwitch
-                                            label="Morphological Glossing"
-                                            disabled={!isLoaded || error !== undefined}
-                                            checked={uiDataStore.viewFilter.glossing}
-                                            onChange={(e) => this.filterChange("glossing", e)} />
-
-                                            <ContentFilterSwitch
-                                            label="Translations"
-                                            disabled={!isLoaded || error !== undefined}
-                                            checked={uiDataStore.viewFilter.translations}
-                                            onChange={(e) => this.filterChange("translations", e)} />
-
-                                            <ContentFilterSwitch
-                                            label="Dictionary"
-                                            disabled={!isLoaded || error !== undefined}
-                                            checked={uiDataStore.viewFilter.dictionary}
-                                            onChange={(e) => this.filterChange("dictionary", e)} />
-
-                                            <ContentFilterSwitch
-                                            label="Meta Tags"
-                                            disabled={!isLoaded || error !== undefined}
-                                            checked={uiDataStore.viewFilter.metaInfo}
-                                            onChange={(e) => this.filterChange("metaInfo", e)} />
-                                            
+                                        <div
+                                        className="card red"
+                                        title="Show view filters"
+                                        onClick={() => this.setState({filtersVisible: true})}
+                                        style={{cursor:'pointer', textAlign:'center', padding:'1rem .5rem'}}>
+                                            <Badge
+                                            showZero
+                                            style={{backgroundColor:'#931111'}}
+                                            count={uiDataStore.layers.filter(l => l.show).length}>
+                                                <div style={{textAlign:'center', fontSize:'20px', lineHeight:'1.2'}}>
+                                                    <Icon type="bars" style={{fontSize:'24px'}}/><br/>
+                                                    Choose Layers
+                                                </div>
+                                            </Badge>
                                         </div>
 
-                                        <div className="card">
-                                            <h4><Icon type="export" className="gap-right"/>Export</h4>
-                                            <Row>
-                                                <Col span={20}>
-                                                    <Select
-                                                    defaultValue={"PDF"}
-                                                    onSelect={(value) => console.log("Export triggered: " + value)}
-                                                    style={{width:"100%"}}
-                                                    className="secondary-font">
-                                                        {exportOptions.map((eOpt, i) => (
-                                                            <Option
-                                                            key={'eOpt_' + i}
-                                                            value={eOpt}
-                                                            className="secondary-font">
-                                                                {eOpt}
-                                                            </Option>
-                                                        ))}
-                                                    </Select>
-                                                </Col>
-                                                <Col span={2} offset={1}>
-                                                    <Button
-                                                    type="secondary"
-                                                    icon="download"
-                                                    onClick={() => {alert("Export functionality doesn't exist, yet.")}} />
-                                                </Col>
-                                            </Row>
+                                        <div
+                                        className="card red"
+                                        title="Show export options"
+                                        onClick={() => this.setState({exportVisible: true})}
+                                        style={{cursor:'pointer', textAlign:'center', fontSize:'20px'}}>
+                                            <Icon type="export" style={{fontSize:'24px'}}/><br/>
+                                            Export
                                         </div>
                                     </Affix>
+
                                 </Col>
-                                
                             </Row>
                         </div>
                     }
+
+                    <Drawer
+                    title={<h4 style={{marginBottom:'0'}}><Icon type="bars" className="gap-right"/> Choose Layers</h4>}
+                    placement="right"
+                    width="400"
+                    closable={true}
+                    onClose={() => this.setState({filtersVisible: false})}
+                    visible={this.state.filtersVisible}
+                    style={{padding:'.5rem 1.5rem'}}>
+
+                        {/* LAYER SWITCHES */}
+                        { data.versions !== undefined && uiDataStore.layers.map(l => (
+                            <ContentFilterSwitch
+                            key={'switch_' + l.id}
+                            label={l.label}
+                            size={l.id.endsWith('_') ? "default" : "small"}
+                            disabled={!l.id.endsWith('_') && data.versions.find(v => v.id === l.id) === undefined}
+                            checked={l.show}
+                            onChange={(e) => this.filterChange(l.id, e)} />
+                        )) }
+
+                        {/* 
+                        <ContentFilterSwitch
+                        label="Text Versions"
+                        checked={true}
+                        onChange={(e) => this.filterChange("text_versions", e)} />
+
+                        <ContentFilterSwitch
+                        label="Devanagari"
+                        size="small"
+                        disabled={!isLoaded || error !== undefined}
+                        checked={uiDataStore.viewFilter.devanagari}
+                        onChange={(e) => this.filterChange("devanagari", e)} />
+
+                        <ContentFilterSwitch
+                        label="Padapatha"
+                        size="small"
+                        disabled={!isLoaded || error !== undefined}
+                        checked={uiDataStore.viewFilter.padapatha}
+                        onChange={(e) => this.filterChange("padapatha", e)} />
+
+                        <ContentFilterSwitch
+                        label="Sasa Patha"
+                        size="small"
+                        disabled={!isLoaded || error !== undefined}
+                        checked={uiDataStore.viewFilter.sasapatha}
+                        onChange={(e) => this.filterChange("sasapatha", e)} />
+
+                        <ContentFilterSwitch
+                        label="Van Nooten, Holland"
+                        size="small"
+                        disabled={!isLoaded || error !== undefined}
+                        checked={uiDataStore.viewFilter.vnh}
+                        onChange={(e) => this.filterChange("vnh", e)} />
+
+                        <ContentFilterSwitch
+                        label="Aufrecht"
+                        size="small"
+                        disabled={!isLoaded || error !== undefined}
+                        checked={uiDataStore.viewFilter.aufrecht}
+                        onChange={(e) => this.filterChange("aufrecht", e)} />
+
+                        
+
+                        <ContentFilterSwitch
+                        label="Translations"
+                        disabled={uiDataStore.areTranslationsVisible()}
+                        checked={uiDataStore.areTranslationsVisible()}
+                        onChange={() => this.filterChange("translations_", false)} />
+
+                        <ContentFilterSwitch
+                        label="EN (Griffith)"
+                        size="small"
+                        disabled={!isLoaded || error !== undefined}
+                        checked={uiDataStore.viewFilter.griffith}
+                        onChange={(e) => this.filterChange("griffith", e)} />
+
+                        <ContentFilterSwitch
+                        label="FR (Renou)"
+                        size="small"
+                        disabled={!isLoaded || error !== undefined}
+                        checked={uiDataStore.viewFilter.renou}
+                        onChange={(e) => this.filterChange("renou", e)} />
+
+                        <ContentFilterSwitch
+                        label="DE (Geldner)"
+                        size="small"
+                        disabled={!isLoaded || error !== undefined}
+                        checked={uiDataStore.viewFilter.geldner}
+                        onChange={(e) => this.filterChange("geldner", e)} />
+
+                        <ContentFilterSwitch
+                        label="DE (Grassmann)"
+                        size="small"
+                        disabled={!isLoaded || error !== undefined}
+                        checked={uiDataStore.viewFilter.grassmann}
+                        onChange={(e) => this.filterChange("grassmann", e)} />
+
+                        
+                        
+                        <ContentFilterSwitch
+                        label="Morphological Glossing"
+                        disabled={!isLoaded || error !== undefined}
+                        checked={uiDataStore.viewFilter.glossing}
+                        onChange={(e) => this.filterChange("glossing", e)} />
+
+                        <ContentFilterSwitch
+                        label="Dictionary"
+                        disabled={!isLoaded || error !== undefined}
+                        checked={uiDataStore.viewFilter.dictionary}
+                        onChange={(e) => this.filterChange("dictionary", e)} />
+
+                        <ContentFilterSwitch
+                        label="Meta Tags"
+                        disabled={!isLoaded || error !== undefined}
+                        checked={uiDataStore.viewFilter.metaInfo}
+                        onChange={(e) => this.filterChange("metaInfo", e)} /> */}
+                    </Drawer>
+
+
+                    <Drawer
+                    title={<h4 style={{marginBottom:'0'}}><Icon type="export" className="gap-right"/>Export</h4>}
+                    placement="right"
+                    width="400"
+                    closable={true}
+                    onClose={() => this.setState({exportVisible: false})}
+                    visible={this.state.exportVisible}
+                    style={{padding:'.5rem 1.5rem'}}>
+                        
+                        <RadioGroup
+                        onChange={(e) => console.log("Export format selected: " + e.target.value)}
+                        defaultValue={"PDF"}>
+                            {exportOptions.map((eOpt, i) => (
+                                <Radio
+                                key={'eOpt_' + i}
+                                value={eOpt}
+                                style={{ display: 'block', height: '30px', lineHeight: '30px' }}>
+                                    {eOpt}
+                                </Radio>
+                            ))}
+                        </RadioGroup>
+                    
+                        <Button
+                        block
+                        type="secondary"
+                        icon="download"
+                        style={{marginTop:'2rem'}}
+                        onClick={() => {alert("Export functionality doesn't exist, yet.")}}>
+                            Export
+                        </Button>
+                            
+                    </Drawer>
+
                 </div>
                 
             </Spin>

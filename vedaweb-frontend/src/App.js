@@ -56,6 +56,7 @@ class App extends Component {
             uiDataStore.search = response.data.search;
             uiDataStore.meta = response.data.meta;
             uiDataStore.abbreviations = response.data.abbreviations;
+            uiDataStore.layers = response.data.layers;
             searchMetaStore.scopeDataRaw = uiDataStore.search.meta.scopes;
             searchMetaStore.transliteration = uiDataStore.search.meta.transliterations[0].id;
             this.setState({

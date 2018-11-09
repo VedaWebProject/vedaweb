@@ -4,7 +4,7 @@
 }
 
 .content-plain {
-    font-size: 24px;
+    font-size: 20px;
 }
 
 .pada-line {
@@ -39,15 +39,6 @@
     font-style: normal;
 }
 
-.view-filter {
-    margin-bottom: .4rem;
-}
-
-.view-filter .ant-switch {
-    margin-right: .8rem;
-    margin-bottom: .2rem;
-}
-
 a.dict-link {
     margin-left: .2rem;
 }
@@ -59,4 +50,8 @@ a.dict-link {
 table td {
     vertical-align: top;
     padding-bottom: .5rem;
+}
+
+.ant-popover .ant-btn-primary {
+    display: none;
 }
