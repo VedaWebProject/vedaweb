@@ -196,32 +196,37 @@ class ContentView extends Component {
                                                 ref={this.scrollTo}>
                                                     <h4 className="inline-block">Text Versions</h4>
 
-                                                    {uiDataStore.layers.filter(l => l.id.startsWith('version_') && l.id !== 'version_' && l.show).map(version => {
-                                                        let v = data.versions.find(x => x.id === version.id);
-                                                        console.log(JSON.stringify(v))
-                                                        return <div
-                                                        key={"v_" + v.id}
-                                                        className="translation"
-                                                        ref={this.scrollTo}>
-                                                            <div className="bold">{v.source}</div>
-                                                            <div className="text-font gap-left">
-                                                                {v.form.map((line, i) => (
-                                                                    <div key={"trans_" + i}>{line}</div>
-                                                                ))}
+                                                    {uiDataStore.layers.filter(l => l.id.startsWith('version_')
+                                                        && l.id !== 'version_' && l.show).map(version => {
+                                                            let v = data.versions.find(x => x.id === version.id);
+                                                            return <div
+                                                            key={"v_" + v.id}
+                                                            className="translation"
+                                                            ref={this.scrollTo}>
+                                                                <div className="bold">{v.source}</div>
+                                                                <div className="text-font gap-left">
+                                                                    {v.form.map((line, i) => (
+                                                                        <div key={"trans_" + i}>{line}</div>
+                                                                    ))}
+                                                                </div>
                                                             </div>
-                                                        </div>
                                                     })}
                                                 </div>
                                             }
 
-                                            {uiDataStore.isLayerVisible('translation_') &&
+                                            {uiDataStore.isLayerVisible('translation_')
+                                                && data.versions.filter(v => (
+                                                    v.id.startsWith('translation_') && uiDataStore.isLayerVisible(v.id))
+                                                ).length > 0 &&
+
                                                 <div
                                                 className="content-plain content-block card"
                                                 ref={this.scrollTo}>
                                                     <h4 className="inline-block">Translations</h4>
 
                                                     {data.versions.map(v => (
-                                                        v.id.startsWith('translation_') && uiDataStore.isLayerVisible(v.id) &&
+                                                        v.id.startsWith('translation_')
+                                                        && uiDataStore.isLayerVisible(v.id) &&
                                                         <div
                                                         key={"t_" + v.source}
                                                         className="translation"
