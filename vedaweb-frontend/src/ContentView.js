@@ -118,10 +118,12 @@ class ContentView extends Component {
         if (uiDataStore.firstTime){
             Modal.info({
                 icon: <Icon type="export"/>,
-                title: 'By clicking this button on the right edge of the screen, you can choose what kind of data you want to see (Translations, Glossings, ...)',
+                title: 'Please Note:',
+                centered: true,
                 content: (
-                <div style={{textAlign: 'center'}}>
-                    <img src={layersInfoImg} alt=""/>
+                <div>
+                    By clicking this button on the right edge of the screen, you can choose what kind of data you want to see (Translations, Glossings, ...)<br/><br/>
+                    <div style={{textAlign: 'center'}}><img src={layersInfoImg} alt=""/></div>
                 </div>
                 ),
                 onOk() {uiDataStore.firstTime = false},
