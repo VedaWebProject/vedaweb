@@ -361,10 +361,10 @@ class ContentView extends Component {
                                             <Badge
                                             showZero
                                             style={{backgroundColor:'#931111'}}
-                                            count={uiDataStore.layers.filter(l => !l.id.endsWith('_') && l.show).length}>
-                                                <div style={{textAlign:'center', fontSize:'20px', lineHeight:'1.2'}}>
-                                                    <Icon type="bars" style={{fontSize:'24px'}}/><br/>
-                                                    Choose Layers
+                                            count={uiDataStore.layers.filter(l => l.id.endsWith('_') && l.show).length}>
+                                                <div style={{textAlign:'center', fontSize:'20px', lineHeight:'1.5'}}>
+                                                    <Icon type="filter" style={{fontSize:'24px'}}/><br/>
+                                                    View Filters
                                                 </div>
                                             </Badge>
                                         </div>
@@ -385,7 +385,7 @@ class ContentView extends Component {
                     }
 
                     <Drawer
-                    title={<h4 style={{marginBottom:'0'}}><Icon type="bars" className="gap-right"/> Choose Layers</h4>}
+                    title={<h4 style={{marginBottom:'0'}}><Icon type="filter" className="gap-right"/> View Filters</h4>}
                     placement="right"
                     width="400"
                     closable={true}
