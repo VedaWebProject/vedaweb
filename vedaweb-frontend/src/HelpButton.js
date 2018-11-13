@@ -148,7 +148,7 @@ const helpTexts = {
                 <h2>Transliteration</h2>
                 <p>
                     If you search for terms in the Rigveda verses, you can <strong>use a transliteration method of your choice</strong>.
-                    Our data is in ISO-15919, but your search input can be transliterated from several other standards to ISO-15919.
+                    Our data is in ISO-15919 (so if you want to type in ISO-15919 you can just do that), but your search input can be transliterated from several other standards to ISO-15919.
                     The <strong>default setting is Harvard-Kyoto (HK)</strong>, but you can change this in the <strong>Advanced Search Settings</strong>.
                 </p>
                 <h2>Wildcards</h2>
