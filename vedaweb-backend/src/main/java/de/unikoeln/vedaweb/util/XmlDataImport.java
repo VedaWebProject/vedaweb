@@ -18,7 +18,7 @@ import net.sf.saxon.s9api.XdmItem;
 import net.sf.saxon.s9api.XdmNode;
 import net.sf.saxon.s9api.XdmValue;
 
-public class XmlDataImportUtils {
+public class XmlDataImport {
 	
 	
 	public static void collectVersesFromXML(File xmlFile, List<Verse> versesList) throws SaxonApiException{
@@ -213,6 +213,21 @@ public class XmlDataImportUtils {
 					verseObj.addVersion(version);
 				}
 				
+				// Translation (fr) / renou
+				temp = compiler.evaluate("*:l[@*:source='renou']", verse);
+				if (temp.size() > 0) {
+					versionNode = temp.itemAt(0);
+					versionForm = new String[]{versionNode.getStringValue()};
+					version = new VerseVersion(
+						"Renou",
+						"fr",
+						versionForm,
+						"translation"
+					);
+					verseObj.addVersion(version);
+				}
+				
+				//add verse object to verses list
 				versesList.add(verseObj);
 			}
 		}

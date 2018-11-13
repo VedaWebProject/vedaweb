@@ -13,13 +13,13 @@ import org.springframework.stereotype.Service;
 import de.unikoeln.vedaweb.data.Verse;
 import de.unikoeln.vedaweb.data.VerseRepository;
 import de.unikoeln.vedaweb.util.Timer;
-import de.unikoeln.vedaweb.util.XmlDataImportUtils;
+import de.unikoeln.vedaweb.util.XmlDataImport;
 import net.sf.saxon.s9api.SaxonApiException;
 
 @Service
 public class DataImportService {
 	
-	public static final String LOCAL_XML = "tei";
+	public static final String LOCAL_XML_DIR = "tei";
 	
 	
 	@Autowired
@@ -31,7 +31,7 @@ public class DataImportService {
 	 */
 	public static void main(String[] args) throws SaxonApiException, IOException {
 		DataImportService trans = new DataImportService();
-		trans.importXMLData(LOCAL_XML, true);
+		trans.importXMLData(LOCAL_XML_DIR, true);
 	}
 	
 	
@@ -59,7 +59,7 @@ public class DataImportService {
 		for (File xmlFile : files) {
 			timer.start();
 			try {
-				XmlDataImportUtils.collectVersesFromXML(xmlFile, verses);
+				XmlDataImport.collectVersesFromXML(xmlFile, verses);
 			} catch (SaxonApiException e) {
 				System.err.println("[DataImport] error reading XML data.");
 				e.printStackTrace();

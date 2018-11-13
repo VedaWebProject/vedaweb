@@ -35,7 +35,7 @@ public class UiDataService {
 	public void init() {
 		if (verseRepo.count() == 0) {
 			System.out.println("[UiDataService] WARNING: DB collection seems to be empty. Trying to import data from XML...");
-			importService.importXMLData(DataImportService.LOCAL_XML, false);
+			importService.importXMLData(DataImportService.LOCAL_XML_DIR, false);
 		}
 		if (!indexService.indexExists()) {
 			System.out.println("[UiDataService] WARNING: Could not request UI data. Search index doesn't seem to exist.");
