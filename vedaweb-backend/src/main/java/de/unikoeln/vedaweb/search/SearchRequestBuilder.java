@@ -43,14 +43,10 @@ public class SearchRequestBuilder {
 			lemmataField += "_raw";
 		}
 		
-		//add search query
-//		if (searchTerm.matches(".*[\\*\\?].*"))
-//			searchSourceBuilder.query(new WildcardQueryBuilder(field, searchTerm));
-//		else
-//			searchSourceBuilder.query(new MultiMatchQueryBuilder(searchTerm, field, lemmataField));
+		//query string query (using lucene query language)
 		QueryStringQueryBuilder query = new QueryStringQueryBuilder(searchTerm);
-		query.field(field, 2);
-		query.field(lemmataField, 1);
+		query.field(field, 1.2f);
+		query.field(lemmataField);
 		searchSourceBuilder.query(query);
 
 		//Highlighting

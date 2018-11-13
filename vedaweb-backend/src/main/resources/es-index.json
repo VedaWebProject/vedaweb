@@ -31,11 +31,11 @@
 				"hymnAddressee":	{ "type": "keyword" },
 				"hymnGroup":		{ "type": "keyword" },
 				"strata":			{ "type": "keyword" },
-				"translation": 		{ "type": "text", "analyzer": "custom_german" },
-				"form": 			{ "type": "text" },
-				"form_raw": 		{ "type": "text" },
-				"lemmata": 			{ "type": "text" },
-				"lemmata_raw": 		{ "type": "text" },
+				"translation": 		{ "type": "text", "analyzer": "custom_german", "similarity": "boolean" },
+				"form": 			{ "type": "text", "similarity": "boolean" },
+				"form_raw": 		{ "type": "text", "similarity": "boolean" },
+				"lemmata": 			{ "type": "text", "similarity": "boolean" },
+				"lemmata_raw": 		{ "type": "text", "similarity": "boolean" },
 				"tokens": {
 					"type": "nested",
 					"properties": {
