@@ -361,7 +361,7 @@ class ContentView extends Component {
                                             <Badge
                                             showZero
                                             style={{backgroundColor:'#931111'}}
-                                            count={uiDataStore.layers.filter(l => l.show).length}>
+                                            count={uiDataStore.layers.filter(l => !l.id.endsWith('_') && l.show).length}>
                                                 <div style={{textAlign:'center', fontSize:'20px', lineHeight:'1.2'}}>
                                                     <Icon type="bars" style={{fontSize:'24px'}}/><br/>
                                                     Choose Layers
