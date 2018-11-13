@@ -34,7 +34,7 @@ public class SearchRequestBuilder {
 		
 		SearchSourceBuilder searchSourceBuilder = getCommonSearchSource(searchData);
 		
-		String searchTerm = StringUtils.normalizeNFC(searchData.getInput());
+		String searchTerm = StringUtils.normalizeNFC(searchData.getInput()).replaceAll("\"", "");
 		String field = searchData.getField();
 		String lemmataField = "lemmata";
 		
