@@ -1,6 +1,8 @@
 
 
 #navbar {
+    position: relative;
+    z-index: 9;
     background-color: #fff;
     padding: .5rem;
     padding-left: 2rem;

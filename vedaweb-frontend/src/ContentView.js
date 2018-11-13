@@ -330,7 +330,7 @@ class ContentView extends Component {
                                                         </tr>
                                                         <tr>
                                                             <td>
-                                                                <span className="bold gap-right">Pada Labels (Gunkel, Ryan):</span>
+                                                                <span className="bold gap-right">Pada Labels<br/>(Gunkel, Ryan):</span>
                                                             </td>
                                                             <td>
                                                                 {data.padas.map(pada => (
@@ -356,15 +356,20 @@ class ContentView extends Component {
 
                                     <Affix offsetTop={10}>
                                         <div
-                                        className="card red"
+                                        className="card red flex-center"
                                         title="Show view filters"
                                         onClick={() => this.setState({filtersVisible: true})}
-                                        style={{cursor:'pointer', textAlign:'center', padding:'1rem .5rem'}}>
+                                        style={{
+                                            cursor:'pointer',
+                                            textAlign:'center',
+                                            padding:'1rem .5rem',
+                                            minHeight: '100px'
+                                        }}>
                                             <Badge
                                             showZero
                                             style={{backgroundColor:'#931111'}}
                                             count={uiDataStore.layers.filter(l => l.id.endsWith('_') && l.show).length}>
-                                                <div style={{textAlign:'center', fontSize:'20px', lineHeight:'1.5'}}>
+                                                <div style={{textAlign:'center', fontSize:'20px', lineHeight: '1.2',}}>
                                                     <Icon type="filter" style={{fontSize:'24px'}}/><br/>
                                                     View Filters
                                                 </div>
@@ -372,12 +377,19 @@ class ContentView extends Component {
                                         </div>
 
                                         <div
-                                        className="card red"
+                                        className="card red flex-center"
                                         title="Show export options"
                                         onClick={() => this.setState({exportVisible: true})}
-                                        style={{cursor:'pointer', textAlign:'center', fontSize:'20px'}}>
-                                            <Icon type="export" style={{fontSize:'24px'}}/><br/>
-                                            Export
+                                        style={{
+                                            cursor:'pointer',
+                                            fontSize:'20px',
+                                            padding:'1rem .5rem',
+                                            minHeight: '100px'
+                                        }}>
+                                            <div style={{textAlign:'center', fontSize:'20px', lineHeight: '1.2',}}>
+                                                <Icon type="export" style={{fontSize:'24px'}}/><br/>
+                                                Export
+                                            </div>
                                         </div>
                                     </Affix>
 
@@ -529,7 +541,7 @@ class ContentView extends Component {
                     
                         <Button
                         block
-                        type="secondary"
+                        type="primary"
                         icon="download"
                         style={{marginTop:'2rem'}}
                         onClick={() => {alert("Export functionality doesn't exist, yet.")}}>

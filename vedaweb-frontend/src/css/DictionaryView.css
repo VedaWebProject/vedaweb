@@ -1,6 +1,10 @@
 table.teaser {
     width: 100%;
 }
+
+table.teaser > thead > tr > th {
+    white-space: nowrap;
+}
   
 table.teaser td.expanding {
     max-width: 1px;

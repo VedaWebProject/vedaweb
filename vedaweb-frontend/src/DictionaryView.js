@@ -170,33 +170,45 @@ class DictionaryView extends Component {
         return (
         
             <div>
-                <table className="teaser"><tbody>
-                    {dictData.map((token, i) => (
-                    <tr key={token + i}>
-                        <td className="non-expanding bold text-font">{token.lemma}</td>
-                        <td className="non-expanding text-font" style={{color:'rgba(0,0,0,0.4)'}}>
-                            <span>({token.tokens.map((t, i ) => t + (i < token.tokens.length - 1 ? ", " : ""))})</span>
-                        </td>
-                        <td className="expanding text-font">
-                            {token.dict !== undefined && token.dict[0].graTxt}
-                        </td>
-                        <td className="non-expanding">
-                            {token.lemmaRef.map((ref, i) => {
-                                let entry = token.dict === undefined ? undefined
-                                    : token.dict.find(d => d.graRef === ref);
-                                return  <Button
-                                        disabled={!isLoaded || error !== undefined}
-                                        className="dict-link gap-right"
-                                        onClick={e => this.openDict(entry)}
-                                        title={"Show full entry for \"" + token.lemma + "\": #" + (i+1)}
-                                        key={"lemma_" + i}>
-                                            <Icon type="book"/>
-                                            {" " + (i+1)}
-                                        </Button>;
-                            })}
-                        </td>
-                    </tr>))}
-                </tbody></table>
+                <table className="teaser">
+                    <thead>
+                        <tr>
+                            <th>Lemma</th>
+                            <th>Full Forms</th>
+                            <th>Excerpt</th>
+                            <th>Grassmann</th>
+                            <th>Others</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {dictData.map((token, i) => (
+                        <tr key={token + i}>
+                            <td className="non-expanding bold text-font">{token.lemma}</td>
+                            <td className="non-expanding text-font" style={{color:'rgba(0,0,0,0.4)'}}>
+                                <span>({token.tokens.map((t, i ) => t + (i < token.tokens.length - 1 ? ", " : ""))})</span>
+                            </td>
+                            <td className="expanding text-font">
+                                {token.dict !== undefined && token.dict[0].graTxt}
+                            </td>
+                            <td className="non-expanding">
+                                {token.lemmaRef.map((ref, i) => {
+                                    let entry = token.dict === undefined ? undefined
+                                        : token.dict.find(d => d.graRef === ref);
+                                    return  <Button
+                                            disabled={!isLoaded || error !== undefined}
+                                            className="dict-link gap-right"
+                                            onClick={e => this.openDict(entry)}
+                                            title={"Show full entry for \"" + token.lemma + "\": #" + (i+1)}
+                                            key={"lemma_" + i}>
+                                                <Icon type="book"/>
+                                                {" " + (i+1)}
+                                            </Button>;
+                                })}
+                            </td>
+                            <td>n/a</td>
+                        </tr>))}
+                    </tbody>
+                </table>
 
                 {isLoaded && modalVisible && modalData !== undefined && error === undefined &&
                     <Modal

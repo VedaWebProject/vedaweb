@@ -1,6 +1,9 @@
 #footer {
     padding: 2rem;
     border-top: 1px solid #b4b1ae;
+
+    position: relative;
+    z-index: 9;
 }
 
 .footer-box {
