@@ -64,9 +64,9 @@ public class ElasticSearchService {
 	private SearchResponse submitSearch(SearchRequest searchRequest){
 		try {
 			return elastic.client().search(searchRequest);
-		} catch (IOException e) {
-			System.err.println("[ERROR] Search request error");
-			e.printStackTrace();
+		} catch (Exception e) {
+			System.err.println("[ERROR] in ElasticSearchService:submitSearch() [MALFORMED QUERY?]");
+			//e.printStackTrace();
 		}
 		return null;
 	}

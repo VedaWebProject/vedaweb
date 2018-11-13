@@ -1,5 +1,6 @@
 package de.unikoeln.vedaweb.controllers;
 
+import org.elasticsearch.action.search.SearchResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -21,7 +22,11 @@ public class SearchController {
 	
 	@PostMapping(value = "/search", produces = {"application/json"})
     public String searchView(@RequestBody SearchData searchData) {
-    	return search.search(searchData).toString();
+		SearchResponse response = search.search(searchData);
+		if (response == null)
+			return "{status: 'error'}";
+		else
+			return response.toString();
     }
 	
 }
