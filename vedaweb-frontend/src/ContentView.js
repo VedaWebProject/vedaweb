@@ -205,7 +205,8 @@ class ContentView extends Component {
                                                             key={"v_" + v.id}
                                                             className="translation"
                                                             ref={this.scrollTo}>
-                                                                <div className="bold">{v.source}</div>
+                                                                <span className="bold gap-right">{v.source}</span>
+                                                                <HelpButton inline type={v.id}/>
                                                                 <div className="text-font gap-left">
                                                                     {v.form.map((line, i) => (
                                                                         <div key={"trans_" + i}>{line}</div>
@@ -233,9 +234,8 @@ class ContentView extends Component {
                                                         key={"t_" + v.source}
                                                         className="translation"
                                                         ref={this.scrollTo}>
-                                                            <div>
-                                                                <span className="bold">{v.source} </span>({v.language})
-                                                            </div>
+                                                            <span className="bold">{v.source} </span>({v.language})
+                                                            <HelpButton inline type={v.id} style={{marginLeft:'.5rem'}}/>
                                                             <div className="text-font gap-left">
                                                                 {v.form.map((line, i) => (
                                                                     <div key={"trans_" + i}>{line}</div>
@@ -305,6 +305,7 @@ class ContentView extends Component {
                                                     <table style={{width:'auto'}}>
                                                         <tbody>
                                                         <tr>
+                                                            <td><HelpButton inline float align="right" type="metaHymnAddressee"/></td>
                                                             <td>
                                                                 <span className="bold gap-right">Hymn Addressee:</span>
                                                             </td>
@@ -313,6 +314,7 @@ class ContentView extends Component {
                                                             </td>
                                                         </tr>
                                                         <tr>
+                                                            <td><HelpButton inline float align="right" type="metaHymnGroup"/></td>
                                                             <td>
                                                                 <span className="bold gap-right">Hymn Group:</span>
                                                             </td>
@@ -321,6 +323,7 @@ class ContentView extends Component {
                                                             </td>
                                                         </tr>
                                                         <tr>
+                                                            <td><HelpButton inline float align="right" type="metaStrata"/></td>
                                                             <td>
                                                                 <span className="bold gap-right">Strata (Arnold):</span>
                                                             </td>
@@ -329,8 +332,9 @@ class ContentView extends Component {
                                                             </td>
                                                         </tr>
                                                         <tr>
+                                                            <td><HelpButton inline float align="right" type="metaLabels"/></td>
                                                             <td>
-                                                                <span className="bold gap-right">Pada Labels<br/>(Gunkel, Ryan):</span>
+                                                                <span className="bold gap-right">Pada Labels</span>
                                                             </td>
                                                             <td>
                                                                 {data.padas.map(pada => (

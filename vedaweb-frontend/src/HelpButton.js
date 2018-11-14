@@ -172,6 +172,154 @@ const helpTexts = {
                 </p>
             </div>
     },
+    version_detlef : {
+        title: "Detlef",
+        content:
+            <div>
+                <p>
+                    Devanagari version provided by Detlef Eichler.<br/>
+                    <a href="http://www.detlef108.de/Rigveda.htm" target="_blank" rel="noopener noreferrer">http://www.detlef108.de/Rigveda.htm</a>
+                </p>
+            </div>
+    },
+    version_vannootenholland : {
+        title: "Van Nooten, Holland",
+        content:
+            <div>
+                <p>
+                    Nooten, Barend A. van & Gary Holland (eds.). 1994. Rig Veda: a metrically restored text with an introduction and notes. Cambridge, Mass. [u.a.]: Harvard University Press.
+                </p>
+            </div>
+    },
+    version_aufrecht : {
+        title: "Aufrecht",
+        content:
+            <div>
+                <p>
+                    Aufrecht, Theodor. 1955. Die Hymnen des Rigveda. Erster Teil. Mandala I-VI. Darmstadt: Wissenschaftliche Buchgesellschaft. UND Aufrecht, Theodor. 1955. Die Hymnen des Rigveda. Zweiter Teil. Mandala VII-X. Darmstadt: Wissenschaftliche Buchgesellschaft.
+                </p>
+            </div>
+    },
+    version_padapatha : {
+        title: "Padapatha",
+        content:
+            <div>
+                <p>
+                    (source info is yet to be provided)
+                </p>
+            </div>
+    },
+    version_gunkelryan : {
+        title: "Samitha (Gunkel/Ryan)",
+        content:
+            <div>
+                <p>
+                    provided by D. Gunkel and K. Ryan
+                </p>
+            </div>
+    },
+    version_lubotsky : {
+        title: "Sasa Patha (Lubotsky)",
+        content:
+            <div>
+                <p>
+                    Lubotsky, Alexander. 1997. A Rgvedic word concordance. (2 Vols.) New Haven, Conn.: American Oriental Society.
+                </p>
+            </div>
+    },
+    translation_griffith : {
+        title: "Griffith",
+        content:
+            <div>
+                <p>
+                    Griffith, Ralph Thomas Hotchkin. 1890. The Hymns of the Rigveda. E.J. Lazarus.
+                </p>
+            </div>
+    },
+    translation_renou : {
+        title: "Renou",
+        content:
+            <div>
+                <p>
+                    Renou, Louis. (1955-1964) Études védiques et pāṇinéennes (several vols). Paris: Boccard.
+                </p>
+            </div>
+    },
+    translation_geldner : {
+        title: "Geldner",
+        content:
+            <div>
+                <p>
+                    Geldner, Karl Friedrich. 1951. Der Rig-Veda (aus d. Sanskrit ins Dt. übers. u. mit e. laufenden Kommentar versehen).  Cambridge, Mass.: Harvard University Press.
+                </p>
+            </div>
+    },
+    translation_grassmann : {
+        title: "Graßmann",
+        content:
+            <div>
+                <p>
+                    Graßmann, Hermann. 1876, 1877. Rig-Veda (Vol 1 and 2). Leipzig.
+                </p>
+            </div>
+    },
+    metaLabels : {
+        title: "Pada Labels",
+        content:
+            <div>
+                <p>
+                    provided by D. Gunkel and K. Ryan
+                </p>
+                <p>
+                    <table style={{width: 'auto'}}><tbody>
+                        <tr><td className="bold">D</td><td>genre D</td></tr>
+                        <tr><td className="bold">E2</td><td>epic anuṣṭubh (424)</td></tr>
+                        <tr><td className="bold">R</td><td>repeated line</td></tr>
+                        <tr><td className="bold">E3a</td><td>epic anuṣṭubh (292)</td></tr>
+                        <tr><td className="bold">H</td><td>12 = 5+7, ending LHX|| — a type of hypersyllabic triṣṭubh.</td></tr>
+                        <tr><td className="bold">S</td><td>line affected by realignment</td></tr>
+                        <tr><td className="bold">V</td><td>Vālakhilya</td></tr>
+                        <tr><td className="bold">M</td><td>genre M</td></tr>
+                        <tr><td className="bold">4</td><td>12 = 8+4</td></tr>
+                        <tr><td className="bold">5</td><td>pentad (decasyllabic), including Arnold’s “pure” and “mixed”; see Prolegomena 95–8 and VM 238–40.</td></tr>
+                        <tr><td className="bold">B</td><td>bhārgavī; see VM 240–1.</td></tr>
+                        <tr><td className="bold">h</td><td>11 = 4+7, ending HLX|| — a type of hyposyllabic jagatī.</td></tr>
+                        <tr><td className="bold">G</td><td>gautamī; see VM 240–1</td></tr>
+                        <tr><td className="bold">O</td><td>Oldenberg's gāyatrī-corpus, cf. Oldenberg (1888: 9f.).</td></tr>
+                        <tr><td className="bold">T</td><td>Trochaic gāyatrī; see Prolegomena 25 and Vedic Metre (VM) 165.</td></tr>
+                        <tr><td className="bold">U</td><td>uneven lyric; see VM 154, 244 (Appendix III).</td></tr>
+                        <tr><td className="bold">4b</td><td>11 = 8+3</td></tr>
+                        <tr><td className="bold">v</td><td>virāṭsthānā; see Prolegomena 86–95 and VM 240–1, 246.</td></tr>
+                        <tr><td className="bold">P</td><td>popular</td></tr>
+                        <tr><td className="bold">E1</td><td>epic anuṣṭubh (525)</td></tr>
+                        <tr><td className="bold">E3b</td><td>epic anuṣṭubh (380)</td></tr>
+                    </tbody></table>
+                </p>
+            </div>
+    },
+    metaStrata : {
+        title: "Verse Strata",
+        content:
+            <div>
+                <p>
+                    provided by Arnold
+                </p>
+                <p>
+                    <table style={{width: 'auto'}}><tbody>
+                        <tr><td className="bold">A</td><td>Archaic</td></tr>
+                        <tr><td className="bold">a</td><td>Archaic on metrical evidence alone</td></tr>
+                        <tr><td className="bold">S</td><td>Strophic</td></tr>
+                        <tr><td className="bold">s</td><td>Strophic on metrical evidence alone</td></tr>
+                        <tr><td className="bold">N</td><td>Normal</td></tr>
+                        <tr><td className="bold">n</td><td>Normal on metrical evidence alone</td></tr>
+                        <tr><td className="bold">C</td><td>Cretic</td></tr>
+                        <tr><td className="bold">c</td><td>Cretic on metrical evidence alone</td></tr>
+                        <tr><td className="bold">P</td><td>Popular for linguistic reasons, and possibly also for non-linguistic reasons</td></tr>
+                        <tr><td className="bold">p</td><td>Popular for non-linguistic reasons</td></tr>
+                    </tbody></table>
+                </p>
+            </div>
+    },
 };
 
 

@@ -101,19 +101,36 @@ public class XmlDataImport {
 				}
 				
 				
-				// SASA PATHA / gunkel_ryan
+				// Samitha / gunkel_ryan
 				temp = compiler.evaluate("*:lg[@*:source='gunkel_ryan']", verse);
 				if (temp.size() > 0) {
 					versionNode = temp.itemAt(0);
-					versionForm = concatTextContents(compiler.evaluate(".//*:l[@*:ana='sasa_patha']", versionNode));
+					versionForm = concatTextContents(compiler.evaluate(".//*:l[@*:ana='samhita']", versionNode));
 					version = new VerseVersion(
-						"Sasa Patha (Gunkel, Ryan)",
+						"Gunkel, Ryan",
 						compiler.evaluate("@*:lang", versionNode).itemAt(0).getStringValue(),
 						versionForm,
 						"version"
 					);
 					verseObj.addVersion(version);
 				}
+				
+				
+				// SASA PATHA / lubotsky
+				temp = compiler.evaluate("*:lg[@*:source='gunkel_ryan']", verse);
+				if (temp.size() > 0) {
+					versionNode = temp.itemAt(0);
+					versionForm = concatTextContents(compiler.evaluate(".//*:l[@*:ana='sasa_patha']", versionNode));
+					version = new VerseVersion(
+						"Lubotsky",
+						compiler.evaluate("@*:lang", versionNode).itemAt(0).getStringValue(),
+						versionForm,
+						"version"
+					);
+					verseObj.addVersion(version);
+				}
+				
+				
 				
 				// Van Nooten, Holland / vnh
 				temp = compiler.evaluate("*:lg[@*:source='vnh']", verse);
@@ -191,7 +208,7 @@ public class XmlDataImport {
 					versionNode = temp.itemAt(0);
 					versionForm = new String[]{versionNode.getStringValue()};
 					version = new VerseVersion(
-						"Grassmann",
+						"Graßmann",
 						"de",
 						versionForm,
 						"translation"

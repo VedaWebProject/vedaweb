@@ -76,17 +76,18 @@
 		{ "id": "version_vannootenholland", "label": "Van Nooten, Holland", "show": false },
 		{ "id": "version_aufrecht", "label": "Aufrecht", "show": false },
 		{ "id": "version_padapatha", "label": "Padapatha", "show": false },
-		{ "id": "version_sasapathagunkelryan", "label": "Sasa Patha", "show": false },
+		{ "id": "version_gunkelryan", "label": "Gunkel/Ryan", "show": false },
+		{ "id": "version_lubotsky", "label": "Lubotsky", "show": false },
 	
 		{ "id": "translation_", "label": "Translations", "show": true },
 		{ "id": "translation_griffith", "label": "Griffith (EN)", "show": true },
 		{ "id": "translation_renou", "label": "Renou (FR)", "show": true },
 		{ "id": "translation_geldner", "label": "Geldner (DE)", "show": true },
-		{ "id": "translation_grassmann", "label": "Grassmann (DE)", "show": false },
+		{ "id": "translation_grassmann", "label": "Graßmann (DE)", "show": false },
 		
 		{ "id": "glossing_", "label": "Morphological Glossing", "show": true },
 		{ "id": "dictionaries_", "label": "Dictionaries", "show": true },
-		{ "id": "metaInfo_", "label": "Meta Tags", "show": true }
+		{ "id": "metaInfo_", "label": "Meta Info", "show": true }
 	]
 	
 }
