@@ -123,7 +123,7 @@ class ContentView extends Component {
                                 </tr>
                                 <tr>
                                     <td><Icon type="delete"/></td>
-                                    <td className="bold">Delete Search Index</td>
+                                    <td className="bold">Search Index: Delete</td>
                                     <td>Deletes the search index</td>
                                     <td>
                                         <Button
@@ -137,7 +137,7 @@ class ContentView extends Component {
                                 </tr>
                                 <tr>
                                     <td><Icon type="build"/></td>
-                                    <td className="bold">Create Search Index</td>
+                                    <td className="bold">Search Index: Create</td>
                                     <td>Creates a new, empty search index following the internal specifications</td>
                                     <td>
                                         <Button
@@ -151,7 +151,7 @@ class ContentView extends Component {
                                 </tr>
                                 <tr>
                                     <td><Icon type="filter"/></td>
-                                    <td className="bold">Fill Search Index</td>
+                                    <td className="bold">Search Index: Fill</td>
                                     <td>Fills an existing search index using DB data</td>
                                     <td>
                                         <Button
@@ -165,7 +165,7 @@ class ContentView extends Component {
                                 </tr>
                                 <tr>
                                     <td><Icon type="reload"/></td>
-                                    <td className="bold">Rebuild Search Index</td>
+                                    <td className="bold">Search Index: Rebuild</td>
                                     <td>Deletes, creates and fills the search index in one go</td>
                                     <td>
                                         <Button
