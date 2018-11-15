@@ -46,7 +46,7 @@ public class SearchRequestBuilder {
 		//query string query (using lucene query language)
 		QueryStringQueryBuilder query = new QueryStringQueryBuilder(searchTerm);
 		query.field(field, 1.2f);
-		query.field(lemmataField);
+		if (!field.equals("translation")) query.field(lemmataField);
 		searchSourceBuilder.query(query);
 
 		//Highlighting

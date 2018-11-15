@@ -130,11 +130,11 @@ class SearchResults extends Component {
             let fieldKeys = Object.keys(hit.highlight).sort();
             fieldKeys.forEach(function (key) {
                 if (hit.highlight[key].length > 0){
-                    html += "<span class='red'>" + fieldDisplayMapping[key] + ":</span> ";
                     for (let high in hit.highlight[key]){
+                        html += "<span class='red'>" + fieldDisplayMapping[key] + ":</span> ";
                         html += hit.highlight[key][high] + " ";
+                        html += "<br/>"
                     }
-                    html += "<br/>"
                 }
             });
         } else {
