@@ -38,7 +38,7 @@ class DictionaryView extends Component {
 
         //construct GraphQL query
         const GQLQ = `{
-            ids(lemmaId: ` + JSON.stringify(lemmaRefs) + `, size: 30) {
+            ids(dictId:"gra",lemmaId: ` + JSON.stringify(lemmaRefs) + `, size: 30) {
                 id
                 headwordDeva
                 headwordIso
@@ -47,7 +47,7 @@ class DictionaryView extends Component {
         }`;
 
         //request API data
-        axios.post("https://api.c-salt.uni-koeln.de/dicts/gra/graphql", {query: GQLQ})
+        axios.post("https://api.c-salt.uni-koeln.de/dicts/sa/graphql", {query: GQLQ})
             .then((response) => {
                 var dictData = [];
                 const entries = response.data.data.ids;
