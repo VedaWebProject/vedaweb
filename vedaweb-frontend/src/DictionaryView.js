@@ -228,7 +228,7 @@ class DictionaryView extends Component {
 
                 {isLoaded && error !== undefined &&
                     <span className="red secondary-font">
-                        Unfortunately, there was an error processing the dictionary data. <Icon type="meh"/>
+                        <Icon type="meh"/> There was an error loading the dictionary data. Please try again later.
                     </span>
                 }
             </div>
