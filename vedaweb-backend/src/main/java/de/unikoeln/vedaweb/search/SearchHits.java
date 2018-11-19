@@ -53,8 +53,8 @@ public class SearchHits {
 	 */
 	private void processSearchResponse(SearchResponse response) {
 		this.hits = new ArrayList<SearchHit>();
-		this.total = response.getHits().getTotalHits();
-		this.took = response.getTook().getMillis();
+		setTotal(response.getHits().getTotalHits());
+		setTook(response.getTook().getMillis());
 		
 		//TODO process hits
 		response.getHits().forEach(esHit -> {

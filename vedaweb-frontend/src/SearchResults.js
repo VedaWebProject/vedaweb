@@ -97,7 +97,7 @@ class SearchResults extends Component {
         axios.post("/api/search", queryJSON)
             .then((response) => {
                 searchResultsStore.resultsData = response.data;
-                searchResultsStore.total = response.data.hits.total;
+                searchResultsStore.total = response.data.total;
                 this.setState({
                     isLoaded: true,
                     tableData: response.data.hits === undefined ? {} :
