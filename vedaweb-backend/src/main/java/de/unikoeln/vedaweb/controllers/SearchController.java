@@ -8,7 +8,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import de.unikoeln.vedaweb.search.SearchData;
+import de.unikoeln.vedaweb.search.SearchHits;
 import de.unikoeln.vedaweb.services.ElasticSearchService;
+import de.unikoeln.vedaweb.services.MappingService;
 
 
 
@@ -19,14 +21,15 @@ public class SearchController {
 	@Autowired
 	private ElasticSearchService search;
 	
+	@Autowired
+	private MappingService mappingService;
+	
 	
 	@PostMapping(value = "/search", produces = {"application/json"})
     public String searchView(@RequestBody SearchData searchData) {
-		SearchResponse response = search.search(searchData);
-		if (response == null)
-			return "{status: 'error'}";
-		else
-			return response.toString();
+		
+		SearchHits hits = new SearchHits(search.search(searchData));
+		return mappingService.mapObjectToJSON(hits);
     }
 	
 }

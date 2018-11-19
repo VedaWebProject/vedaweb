@@ -6,9 +6,9 @@ import org.apache.lucene.search.join.ScoreMode;
 import org.elasticsearch.action.search.SearchRequest;
 import org.elasticsearch.common.Strings;
 import org.elasticsearch.index.query.BoolQueryBuilder;
+import org.elasticsearch.index.query.InnerHitBuilder;
 import org.elasticsearch.index.query.MatchAllQueryBuilder;
 import org.elasticsearch.index.query.QueryBuilders;
-import org.elasticsearch.index.query.QueryStringQueryBuilder;
 import org.elasticsearch.index.query.RangeQueryBuilder;
 import org.elasticsearch.search.aggregations.AggregationBuilders;
 import org.elasticsearch.search.aggregations.bucket.nested.NestedAggregationBuilder;
@@ -22,46 +22,68 @@ import de.unikoeln.vedaweb.util.StringUtils;
 
 public class SearchRequestBuilder {
 	
-	private static final FetchSourceContext FETCH_SOURCE_CONTEXT_SMART =
-			new FetchSourceContext(true, new String[]{"book", "hymn", "verse", "form", "form_raw", "hymnAddressee", "hymnGroup", "strata"}, Strings.EMPTY_ARRAY);
+	private static final FetchSourceContext FETCH_SOURCE_CONTEXT =
+			new FetchSourceContext(true, new String[]{"book", "hymn", "form_raw", "verse", "hymnAddressee", "hymnGroup", "strata"}, Strings.EMPTY_ARRAY);
 	
-	private static final String[] HIGHLIGHT_SMART = {"form", "lemmata", "form_raw", "lemmata_raw", "translation"};
+	private static final String[] HIGHLIGHT_SMART = {"form", "lemmata", "form_raw", "lemmata_raw"};
+	private static final String[] HIGHLIGHT_SMART_TRANSLATIONS = {"translation.form"};
 	
 	
 	public static SearchRequest buildSmartQuery(SearchData searchData){
-		SearchRequest searchRequest = new SearchRequest("vedaweb"); 
-		searchRequest.types("doc");
+		if (searchData.getField().equals("translation")) {
+			return buildTranslationQuery(searchData);
+		}
+		SearchSourceBuilder source = getCommonSearchSource(searchData);
 		
-		SearchSourceBuilder searchSourceBuilder = getCommonSearchSource(searchData);
-		
-		String searchTerm = StringUtils.normalizeNFC(searchData.getInput()).replaceAll("\"", "");
+		String searchTerm = StringUtils.normalizeNFC(searchData.getInput());
 		String field = searchData.getField();
 		String lemmataField = "lemmata";
 		
-		if (StringUtils.containsAccents(searchTerm) && !field.equals("translation")) {
+		if (StringUtils.containsAccents(searchTerm)) {
 			field += "_raw";
 			lemmataField += "_raw";
 		}
 		
 		//query string query (using lucene query language)
-		QueryStringQueryBuilder query = new QueryStringQueryBuilder(searchTerm);
-		query.field(field, 1.2f);
-		if (!field.equals("translation")) query.field(lemmataField);
-		searchSourceBuilder.query(query);
+		source.query(
+			QueryBuilders.queryStringQuery(searchTerm)
+				.field(field, 1.2f)
+				.field(lemmataField)
+		);
 
 		//Highlighting
-		addHighlighting(searchSourceBuilder, HIGHLIGHT_SMART);
+		source.highlighter(getHighlighting(HIGHLIGHT_SMART));
+		//set _source fields
+		source.fetchSource(FETCH_SOURCE_CONTEXT);
 		
-		searchSourceBuilder.fetchSource(FETCH_SOURCE_CONTEXT_SMART);
-		searchRequest.source(searchSourceBuilder);
-		return searchRequest;
+		return getCommonSearchRequest().source(source);
+	}
+	
+	
+	private static SearchRequest buildTranslationQuery(SearchData searchData) {
+		SearchSourceBuilder source = getCommonSearchSource(searchData);
+		String searchTerm = StringUtils.normalizeNFC(searchData.getInput());
+			
+		source.query(
+			QueryBuilders.nestedQuery(
+				"translation",
+				QueryBuilders.queryStringQuery(searchTerm).field("translation.form"),
+				ScoreMode.Max
+			).innerHit(
+				new InnerHitBuilder()
+					.setHighlightBuilder(getHighlighting(HIGHLIGHT_SMART_TRANSLATIONS)))
+		);
+		
+		//set _source fields
+		source.fetchSource(FETCH_SOURCE_CONTEXT);
+		
+		return getCommonSearchRequest().source(source);
 	}
 	
 	
 	public static SearchRequest buildGrammarQuery(SearchData searchData){
-		SearchRequest searchRequest = new SearchRequest("vedaweb"); 
-		searchRequest.types("doc");
-		SearchSourceBuilder searchSourceBuilder = getCommonSearchSource(searchData);
+		SearchRequest req = getCommonSearchRequest();
+		SearchSourceBuilder source = getCommonSearchSource(searchData);
 		
 		//root bool query
 		BoolQueryBuilder bool = QueryBuilders.boolQuery();
@@ -77,14 +99,14 @@ public class SearchRequestBuilder {
 		if (searchData.getMeta().size() > 0)
 			bool.must(getSearchMetaQuery(searchData));
 		
-		searchSourceBuilder.query(bool);
+		source.query(bool);
 
-		searchSourceBuilder.fetchSource(FETCH_SOURCE_CONTEXT_SMART);
+		source.fetchSource(FETCH_SOURCE_CONTEXT);
 
 		//System.out.println("\n\n" + searchSourceBuilder.toString() + "\n\n");
-		searchRequest.source(searchSourceBuilder);
+		req.source(source);
 			
-		return searchRequest;
+		return req;
 	}
 	
 	
@@ -137,7 +159,7 @@ public class SearchRequestBuilder {
 			}
 			
 			//wrap in nested query, add to root query
-			rootQuery.must(QueryBuilders.nestedQuery("tokens", bool, ScoreMode.Avg));
+			rootQuery.must(QueryBuilders.nestedQuery("tokens", bool, ScoreMode.Max));
 		}
 	}
 	
@@ -158,7 +180,7 @@ public class SearchRequestBuilder {
 	}
 	
 	
-	private static void addHighlighting(SearchSourceBuilder searchSourceBuilder, String... fields){
+	private static HighlightBuilder getHighlighting(String... fields){
 		HighlightBuilder highlightBuilder = new HighlightBuilder(); 
 		
 		for (String field : fields){
@@ -171,7 +193,7 @@ public class SearchRequestBuilder {
 		//disable highlight fragmentation
 		highlightBuilder.numOfFragments(0);
 		  
-		searchSourceBuilder.highlighter(highlightBuilder);
+		return(highlightBuilder);
 	}
 	
 	
@@ -205,9 +227,8 @@ public class SearchRequestBuilder {
 	
 	
 	public static SearchRequest buildAggregationFor(String grammarField){
-		SearchRequest searchRequest = new SearchRequest("vedaweb"); 
-		searchRequest.types("doc");
-		SearchSourceBuilder searchSourceBuilder = new SearchSourceBuilder(); 
+		SearchRequest req = getCommonSearchRequest();
+		SearchSourceBuilder source = new SearchSourceBuilder(); 
 		
 		//match all
 		MatchAllQueryBuilder match = QueryBuilders.matchAllQuery();
@@ -221,20 +242,24 @@ public class SearchRequestBuilder {
 			= AggregationBuilders.nested("tokens", "tokens")
 				.subAggregation(terms);
 		
-		searchSourceBuilder.query(match);
-		searchSourceBuilder.aggregation(nestedAgg);
-		searchSourceBuilder.size(0);
+		source.query(match);
+		source.aggregation(nestedAgg);
+		source.size(0);
 		//System.out.println("\n\n" + searchSourceBuilder.toString() + "\n\n");
-		searchRequest.source(searchSourceBuilder);
-		return searchRequest;
+		req.source(source);
+		return req;
+	}
+	
+	
+	private static SearchRequest getCommonSearchRequest() {
+		return new SearchRequest("vedaweb").types("doc");
 	}
 	
 	
 	private static SearchSourceBuilder getCommonSearchSource(SearchData searchData) {
-		SearchSourceBuilder source = new SearchSourceBuilder();
-		source.from(searchData.getFrom() >= 0 ? searchData.getFrom() : 0);
-		source.size(searchData.getSize() >= 0 ? searchData.getSize() : 0);
-		return source;
+		return new SearchSourceBuilder()
+			.from(searchData.getFrom() >= 0 ? searchData.getFrom() : 0)
+			.size(searchData.getSize() >= 0 ? searchData.getSize() : 0);
 	}
 	
 	

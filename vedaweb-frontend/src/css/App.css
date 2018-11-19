@@ -31,6 +31,10 @@ h2 {
     margin-bottom: .2rem;
 }
 
+.main-font {
+    font-family: "Assistant", "Tahoma", "Arial", sans-serif;
+}
+
 .text-font {
     font-family: "Gentium", "Tahoma", "Arial", sans-serif;
 }

@@ -101,16 +101,13 @@ class SearchResults extends Component {
                 this.setState({
                     isLoaded: true,
                     tableData: response.data.hits === undefined ? {} :
-                        response.data.hits.hits.map( (hit, i) => ({
+                        response.data.hits.map( (hit, i) => ({
                             key: 'result_' + i,
-                            location:   
-                                (hit._source.book + "").padStart(2, "0") + "." +
-                                (hit._source.hymn + "").padStart(3, "0") + "." +
-                                (hit._source.verse + "").padStart(2, "0"),
+                            location: hit.docId,
                             text: <div dangerouslySetInnerHTML={this.createHighlightHTML(hit)}></div>,
-                            addressee: hit._source.hymnAddressee,
-                            group: hit._source.hymnGroup,
-                            strata: hit._source.strata
+                            addressee: hit.hymnAddressee,
+                            group: hit.hymnGroup,
+                            strata: hit.verseStrata
                         }))
                 });
             })
@@ -126,23 +123,56 @@ class SearchResults extends Component {
     createHighlightHTML(hit) {
         let html = "";
 
-        if (hit.highlight !== undefined){
-            let fieldKeys = Object.keys(hit.highlight).sort();
-            fieldKeys.forEach(function (key) {
-                if (hit.highlight[key].length > 0){
-                    for (let high in hit.highlight[key]){
-                        html += "<span class='red'>" + fieldDisplayMapping[key] + ":</span> ";
-                        html += hit.highlight[key][high] + " ";
-                        html += "<br/>"
-                    }
-                }
+        if (hit.highlight !== undefined && Object.keys(hit.highlight).length > 0){
+            Object.keys(hit.highlight).forEach(highlightField => {
+                html +=
+                    "<span class='red main-font'>" +
+                    (fieldDisplayMapping[highlightField] !== undefined ? fieldDisplayMapping[highlightField] : highlightField) +
+                    ":</span> " +
+                    hit.highlight[highlightField]
+                    + "<br/>";
             });
         } else {
-            for (let form in hit._source.form_raw){
-                html += hit._source.form_raw[form]
-                    + (form < hit._source.form_raw.length - 1 ? " / " : "");
-            }
+            html += hit.source.form_raw.join(" / ");
         }
+
+        // //normalize hits and inner_hits (incomplete I)
+        // let hits = superHit.inner_hits === undefined
+        //         ? [superHit]
+        //
+        //         : (innerFields = superHit.inner_hits) => {
+        //             let innerHits = [];
+        //             Object.keys(innerFields).forEach(key => {
+        //                 let innerField = superHit.inner_hits[key];
+
+        //             });
+        //             return innerHits;
+        //         }
+
+        // // (incomplete II)
+        //         // : Object.keys(superHit.inner_hits).map(innerName => {
+        //         //     let innerHits = [];
+        //         //     superHit.inner_hits[innerName].hits.hits
+        //         //     return innerHits;
+        //         // });
+
+        //process hit(s)
+            // if (hit.highlight !== undefined){
+            //     Object.keys(hit.highlight).sort().forEach( i => {
+            //         if (hit.highlight[i].length > 0){
+            //             for (let high in hit.highlight[i]){
+            //                 html += "<span class='red'>" + fieldDisplayMapping[i] + ":</span> ";
+            //                 html += hit.highlight[i][high] + " ";
+            //                 html += "<br/>"
+            //             }
+            //         }
+            //     });
+            // } else {
+            //     for (let form in hit._source.form_raw){
+            //         html += hit._source.form_raw[form]
+            //             + (form < hit._source.form_raw.length - 1 ? " / " : "");
+            //     }
+            // }
 
         return {__html: html};
     }
@@ -192,7 +222,6 @@ class SearchResults extends Component {
                     {/** SEARCH RESULT VIEW **/}
                     { error === undefined &&
 
-                    
                         <div id="search-results" className="card">
 
                             <h4>

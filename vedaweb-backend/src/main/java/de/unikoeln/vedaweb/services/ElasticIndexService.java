@@ -108,7 +108,7 @@ public class ElasticIndexService {
 				indexDoc.put("hymnAddressee", dbDoc.getHymnAddressee());
 				indexDoc.put("hymnGroup", dbDoc.getHymnGroup());
 				indexDoc.put("strata", dbDoc.getStrata());
-				indexDoc.put("translation", concatTranslations(dbDoc));
+				indexDoc.put("translation", buildTranslationsList(dbDoc));
 				indexDoc.put("form", concatPadaForms(dbDoc, true));
 				indexDoc.put("form_raw", concatPadaForms(dbDoc, false));
 				indexDoc.put("lemmata", StringUtils.removeUnicodeAccents(concatTokenLemmata(dbDoc), true));
@@ -472,12 +472,17 @@ public class ElasticIndexService {
 	}
 	
 	
-	private JSONArray concatTranslations(Verse doc) {
-		JSONArray translations = new JSONArray();
+	private List<JSONObject> buildTranslationsList(Verse doc) {
+		List<JSONObject> translations = new ArrayList<JSONObject>();
 		for (VerseVersion t : doc.getTranslations()) {
+			JSONObject translation = new JSONObject();
+			StringBuilder form = new StringBuilder();
 			for (String line : t.getForm()) {
-				translations.put(line);
+				form.append(line + "\n");
 			}
+			translation.put("form", form);
+			translation.put("source", t.getSource());
+			translations.add(translation);
 		}
 		return translations;
 	}
