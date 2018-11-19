@@ -63,7 +63,7 @@ class SearchView extends Component {
             (scope.fromBook + scope.toBook + scope.fromHymn + scope.toHymn) > 0
         ));
 
-        this.props.history.push("/results/" + Base64.encode(JSON.stringify(jsonData), true));
+        this.props.history.push("/results/" + Base64.encodeURI(JSON.stringify(jsonData)));
     }
 
     handleReset(e){

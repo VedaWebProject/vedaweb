@@ -80,6 +80,7 @@ class SearchResults extends Component {
     }
 
     loadData = (queryJSON) => {
+        //console.log("QUERY: " + JSON.stringify(queryJSON));
         let queryDisplay = queryJSON.mode === "grammar" ? "grammar search" : queryJSON.input;
 
         this.setState({
@@ -96,6 +97,7 @@ class SearchResults extends Component {
         //request search api data
         axios.post("/api/search", queryJSON)
             .then((response) => {
+                //console.log(JSON.stringify(response.data));
                 searchResultsStore.resultsData = response.data;
                 searchResultsStore.total = response.data.total;
                 this.setState({
@@ -231,9 +233,9 @@ class SearchResults extends Component {
                             {/** SEARCH STATS **/}
                             
                             <div className="search-stats secondary-font">
-                                { isLoaded && data.hits.hits !== undefined ?
-                                    data.hits.total > 0 ?
-                                        <span>Found { data.hits.total } matching verses in { data.took } ms</span>
+                                { isLoaded && data.hits !== undefined ?
+                                    data.total > 0 ?
+                                        <span>Found { data.total } matching verses in { data.took } ms</span>
                                         : ""
                                      : <span>Searching ...</span>
                                 }

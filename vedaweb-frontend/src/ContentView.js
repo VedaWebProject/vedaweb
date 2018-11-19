@@ -250,8 +250,10 @@ class ContentView extends Component {
                                                 <div
                                                 className="glossing content-block card"
                                                 ref={this.scrollTo}>
-                                                    <HelpButton type="zurichGlossing" float/>
-                                                    <h4>Morphological Glossing</h4>
+                                                    <h4>
+                                                        Morphological Glossing
+                                                        <HelpButton type="zurichGlossing" inline style={{marginLeft:'.5rem'}}/>
+                                                    </h4>
                                                     {data.padas.map(pada => (
                                                         <div
                                                         className="glossing-line"

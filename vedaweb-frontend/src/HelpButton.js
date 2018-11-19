@@ -81,47 +81,45 @@ const helpTexts = {
                     This morphological glossing data from Zürich follows the Leipzig Glossing Rules.
                     The abbreviations used are listed below:
                 </p>
-                <p>
-                    <table style={{width: 'auto'}}><tbody>
-                        <tr><td className="bold">1</td><td>first person</td></tr>
-                        <tr><td className="bold">2</td><td>second person</td></tr>
-                        <tr><td className="bold">3</td><td>third person</td></tr>
-                        <tr><td className="bold">ABL</td><td>ablative</td></tr>
-                        <tr><td className="bold">ACC</td><td>accusative</td></tr>
-                        <tr><td className="bold">ACT</td><td>actor</td></tr>
-                        <tr><td className="bold">AOR</td><td>aorist</td></tr>
-                        <tr><td className="bold">COND</td><td>conditional</td></tr>
-                        <tr><td className="bold">CVB</td><td>converb</td></tr>
-                        <tr><td className="bold">DAT</td><td>dative</td></tr>
-                        <tr><td className="bold">DU</td><td>dual</td></tr>
-                        <tr><td className="bold">F</td><td>feminine</td></tr>
-                        <tr><td className="bold">FUT</td><td>future</td></tr>
-                        <tr><td className="bold">GEN</td><td>genitive</td></tr>
-                        <tr><td className="bold">IMP</td><td>imperative</td></tr>
-                        <tr><td className="bold">IND</td><td>indicative</td></tr>
-                        <tr><td className="bold">INF</td><td>infinitive</td></tr>
-                        <tr><td className="bold">INJ</td><td>injuctive</td></tr>
-                        <tr><td className="bold">INS</td><td>instrumental</td></tr>
-                        <tr><td className="bold">IPRF</td><td>imperfect</td></tr>
-                        <tr><td className="bold">LOC</td><td>locative</td></tr>
-                        <tr><td className="bold">M</td><td>mascuiline</td></tr>
-                        <tr><td className="bold">MED</td><td>middle voice</td></tr>
-                        <tr><td className="bold">N</td><td>neuter</td></tr>
-                        <tr><td className="bold">NOM</td><td>nominative</td></tr>
-                        <tr><td className="bold">OPT</td><td>optative</td></tr>
-                        <tr><td className="bold">PASS</td><td>passive voice</td></tr>
-                        <tr><td className="bold">PL</td><td>plural</td></tr>
-                        <tr><td className="bold">PLUPRF</td><td>past perfect</td></tr>
-                        <tr><td className="bold">PPP</td><td>na participle perfective passive</td></tr>
-                        <tr><td className="bold">PPP</td><td>ta participle perfective passive</td></tr>
-                        <tr><td className="bold">PRF</td><td>perfect</td></tr>
-                        <tr><td className="bold">PRS</td><td>present</td></tr>
-                        <tr><td className="bold">PTCP</td><td>participle</td></tr>
-                        <tr><td className="bold">SBJV</td><td>subjunctive</td></tr>
-                        <tr><td className="bold">SG</td><td>singular</td></tr>
-                        <tr><td className="bold">VOC</td><td>vocative</td></tr>
-                    </tbody></table>
-                </p>
+                <table style={{width: 'auto'}}><tbody>
+                    <tr><td className="bold">1</td><td>first person</td></tr>
+                    <tr><td className="bold">2</td><td>second person</td></tr>
+                    <tr><td className="bold">3</td><td>third person</td></tr>
+                    <tr><td className="bold">ABL</td><td>ablative</td></tr>
+                    <tr><td className="bold">ACC</td><td>accusative</td></tr>
+                    <tr><td className="bold">ACT</td><td>actor</td></tr>
+                    <tr><td className="bold">AOR</td><td>aorist</td></tr>
+                    <tr><td className="bold">COND</td><td>conditional</td></tr>
+                    <tr><td className="bold">CVB</td><td>converb</td></tr>
+                    <tr><td className="bold">DAT</td><td>dative</td></tr>
+                    <tr><td className="bold">DU</td><td>dual</td></tr>
+                    <tr><td className="bold">F</td><td>feminine</td></tr>
+                    <tr><td className="bold">FUT</td><td>future</td></tr>
+                    <tr><td className="bold">GEN</td><td>genitive</td></tr>
+                    <tr><td className="bold">IMP</td><td>imperative</td></tr>
+                    <tr><td className="bold">IND</td><td>indicative</td></tr>
+                    <tr><td className="bold">INF</td><td>infinitive</td></tr>
+                    <tr><td className="bold">INJ</td><td>injuctive</td></tr>
+                    <tr><td className="bold">INS</td><td>instrumental</td></tr>
+                    <tr><td className="bold">IPRF</td><td>imperfect</td></tr>
+                    <tr><td className="bold">LOC</td><td>locative</td></tr>
+                    <tr><td className="bold">M</td><td>mascuiline</td></tr>
+                    <tr><td className="bold">MED</td><td>middle voice</td></tr>
+                    <tr><td className="bold">N</td><td>neuter</td></tr>
+                    <tr><td className="bold">NOM</td><td>nominative</td></tr>
+                    <tr><td className="bold">OPT</td><td>optative</td></tr>
+                    <tr><td className="bold">PASS</td><td>passive voice</td></tr>
+                    <tr><td className="bold">PL</td><td>plural</td></tr>
+                    <tr><td className="bold">PLUPRF</td><td>past perfect</td></tr>
+                    <tr><td className="bold">PPP</td><td>na participle perfective passive</td></tr>
+                    <tr><td className="bold">PPP</td><td>ta participle perfective passive</td></tr>
+                    <tr><td className="bold">PRF</td><td>perfect</td></tr>
+                    <tr><td className="bold">PRS</td><td>present</td></tr>
+                    <tr><td className="bold">PTCP</td><td>participle</td></tr>
+                    <tr><td className="bold">SBJV</td><td>subjunctive</td></tr>
+                    <tr><td className="bold">SG</td><td>singular</td></tr>
+                    <tr><td className="bold">VOC</td><td>vocative</td></tr>
+                </tbody></table>
             </div>
     },
     quickSearch : {
@@ -270,31 +268,29 @@ const helpTexts = {
                 <p>
                     provided by D. Gunkel and K. Ryan
                 </p>
-                <p>
-                    <table style={{width: 'auto'}}><tbody>
-                        <tr><td className="bold">D</td><td>genre D</td></tr>
-                        <tr><td className="bold">E2</td><td>epic anuṣṭubh (424)</td></tr>
-                        <tr><td className="bold">R</td><td>repeated line</td></tr>
-                        <tr><td className="bold">E3a</td><td>epic anuṣṭubh (292)</td></tr>
-                        <tr><td className="bold">H</td><td>12 = 5+7, ending LHX|| — a type of hypersyllabic triṣṭubh.</td></tr>
-                        <tr><td className="bold">S</td><td>line affected by realignment</td></tr>
-                        <tr><td className="bold">V</td><td>Vālakhilya</td></tr>
-                        <tr><td className="bold">M</td><td>genre M</td></tr>
-                        <tr><td className="bold">4</td><td>12 = 8+4</td></tr>
-                        <tr><td className="bold">5</td><td>pentad (decasyllabic), including Arnold’s “pure” and “mixed”; see Prolegomena 95–8 and VM 238–40.</td></tr>
-                        <tr><td className="bold">B</td><td>bhārgavī; see VM 240–1.</td></tr>
-                        <tr><td className="bold">h</td><td>11 = 4+7, ending HLX|| — a type of hyposyllabic jagatī.</td></tr>
-                        <tr><td className="bold">G</td><td>gautamī; see VM 240–1</td></tr>
-                        <tr><td className="bold">O</td><td>Oldenberg's gāyatrī-corpus, cf. Oldenberg (1888: 9f.).</td></tr>
-                        <tr><td className="bold">T</td><td>Trochaic gāyatrī; see Prolegomena 25 and Vedic Metre (VM) 165.</td></tr>
-                        <tr><td className="bold">U</td><td>uneven lyric; see VM 154, 244 (Appendix III).</td></tr>
-                        <tr><td className="bold">4b</td><td>11 = 8+3</td></tr>
-                        <tr><td className="bold">v</td><td>virāṭsthānā; see Prolegomena 86–95 and VM 240–1, 246.</td></tr>
-                        <tr><td className="bold">P</td><td>popular</td></tr>
-                        <tr><td className="bold">E1</td><td>epic anuṣṭubh (525)</td></tr>
-                        <tr><td className="bold">E3b</td><td>epic anuṣṭubh (380)</td></tr>
-                    </tbody></table>
-                </p>
+                <table style={{width: 'auto'}}><tbody>
+                    <tr><td className="bold">D</td><td>genre D</td></tr>
+                    <tr><td className="bold">E2</td><td>epic anuṣṭubh (424)</td></tr>
+                    <tr><td className="bold">R</td><td>repeated line</td></tr>
+                    <tr><td className="bold">E3a</td><td>epic anuṣṭubh (292)</td></tr>
+                    <tr><td className="bold">H</td><td>12 = 5+7, ending LHX|| — a type of hypersyllabic triṣṭubh.</td></tr>
+                    <tr><td className="bold">S</td><td>line affected by realignment</td></tr>
+                    <tr><td className="bold">V</td><td>Vālakhilya</td></tr>
+                    <tr><td className="bold">M</td><td>genre M</td></tr>
+                    <tr><td className="bold">4</td><td>12 = 8+4</td></tr>
+                    <tr><td className="bold">5</td><td>pentad (decasyllabic), including Arnold’s “pure” and “mixed”; see Prolegomena 95–8 and VM 238–40.</td></tr>
+                    <tr><td className="bold">B</td><td>bhārgavī; see VM 240–1.</td></tr>
+                    <tr><td className="bold">h</td><td>11 = 4+7, ending HLX|| — a type of hyposyllabic jagatī.</td></tr>
+                    <tr><td className="bold">G</td><td>gautamī; see VM 240–1</td></tr>
+                    <tr><td className="bold">O</td><td>Oldenberg's gāyatrī-corpus, cf. Oldenberg (1888: 9f.).</td></tr>
+                    <tr><td className="bold">T</td><td>Trochaic gāyatrī; see Prolegomena 25 and Vedic Metre (VM) 165.</td></tr>
+                    <tr><td className="bold">U</td><td>uneven lyric; see VM 154, 244 (Appendix III).</td></tr>
+                    <tr><td className="bold">4b</td><td>11 = 8+3</td></tr>
+                    <tr><td className="bold">v</td><td>virāṭsthānā; see Prolegomena 86–95 and VM 240–1, 246.</td></tr>
+                    <tr><td className="bold">P</td><td>popular</td></tr>
+                    <tr><td className="bold">E1</td><td>epic anuṣṭubh (525)</td></tr>
+                    <tr><td className="bold">E3b</td><td>epic anuṣṭubh (380)</td></tr>
+                </tbody></table>
             </div>
     },
     metaStrata : {
@@ -304,20 +300,18 @@ const helpTexts = {
                 <p>
                     provided by Arnold
                 </p>
-                <p>
-                    <table style={{width: 'auto'}}><tbody>
-                        <tr><td className="bold">A</td><td>Archaic</td></tr>
-                        <tr><td className="bold">a</td><td>Archaic on metrical evidence alone</td></tr>
-                        <tr><td className="bold">S</td><td>Strophic</td></tr>
-                        <tr><td className="bold">s</td><td>Strophic on metrical evidence alone</td></tr>
-                        <tr><td className="bold">N</td><td>Normal</td></tr>
-                        <tr><td className="bold">n</td><td>Normal on metrical evidence alone</td></tr>
-                        <tr><td className="bold">C</td><td>Cretic</td></tr>
-                        <tr><td className="bold">c</td><td>Cretic on metrical evidence alone</td></tr>
-                        <tr><td className="bold">P</td><td>Popular for linguistic reasons, and possibly also for non-linguistic reasons</td></tr>
-                        <tr><td className="bold">p</td><td>Popular for non-linguistic reasons</td></tr>
-                    </tbody></table>
-                </p>
+                <table style={{width: 'auto'}}><tbody>
+                    <tr><td className="bold">A</td><td>Archaic</td></tr>
+                    <tr><td className="bold">a</td><td>Archaic on metrical evidence alone</td></tr>
+                    <tr><td className="bold">S</td><td>Strophic</td></tr>
+                    <tr><td className="bold">s</td><td>Strophic on metrical evidence alone</td></tr>
+                    <tr><td className="bold">N</td><td>Normal</td></tr>
+                    <tr><td className="bold">n</td><td>Normal on metrical evidence alone</td></tr>
+                    <tr><td className="bold">C</td><td>Cretic</td></tr>
+                    <tr><td className="bold">c</td><td>Cretic on metrical evidence alone</td></tr>
+                    <tr><td className="bold">P</td><td>Popular for linguistic reasons, and possibly also for non-linguistic reasons</td></tr>
+                    <tr><td className="bold">p</td><td>Popular for non-linguistic reasons</td></tr>
+                </tbody></table>
             </div>
     },
 };
