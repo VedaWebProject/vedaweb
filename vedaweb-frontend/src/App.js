@@ -51,7 +51,7 @@ class App extends Component {
 
 
     loadUiData(){
-        axios.get("/api/uidata")
+        axios.get(process.env.PUBLIC_URL + "/api/uidata")
         .then((response) => {
             uiDataStore.search = response.data.search;
             uiDataStore.meta = response.data.meta;

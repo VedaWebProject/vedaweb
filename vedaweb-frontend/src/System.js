@@ -25,7 +25,7 @@ class ContentView extends Component {
             action: action
         });
 
-        let path = "/system/";
+        let path = process.env.PUBLIC_URL + "/system/";
         if (action === "import_dry")
             path += "import/dryrun";
         else if (action === "import")

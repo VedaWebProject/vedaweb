@@ -95,7 +95,7 @@ class SearchResults extends Component {
         queryJSON.size = searchResultsStore.size;
 
         //request search api data
-        axios.post("/api/search", queryJSON)
+        axios.post(process.env.PUBLIC_URL + "/api/search", queryJSON)
             .then((response) => {
                 //console.log(JSON.stringify(response.data));
                 searchResultsStore.resultsData = response.data;

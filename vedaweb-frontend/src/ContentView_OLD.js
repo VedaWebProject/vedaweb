@@ -58,7 +58,7 @@ class ContentView extends Component {
             error: undefined,
         });
 
-        axios.get("/api/document/" + by + "/" + value)
+        axios.get(process.env.PUBLIC_URL + "/api/document/" + by + "/" + value)
             .then((response) => {
                 this.setState({
                     isLoaded: true,

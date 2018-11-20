@@ -31,7 +31,7 @@ class ContentLocation extends Component {
         this.props.bindShortcut('right', this.browseNext);
         this.props.bindShortcut('left', this.browsePrevious);
 
-        axios.get("/api/uidata/count/verses/" + this.props.book + "/" + this.props.hymn)
+        axios.get(process.env.PUBLIC_URL + "/api/uidata/count/verses/" + this.props.book + "/" + this.props.hymn)
         .then((response) => {
             this.setState({
                 verseCount: response.data.count,

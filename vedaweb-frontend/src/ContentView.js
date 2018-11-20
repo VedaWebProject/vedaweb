@@ -62,7 +62,7 @@ class ContentView extends Component {
             error: undefined,
         });
 
-        axios.get("/api/document/" + by + "/" + value)
+        axios.get(process.env.PUBLIC_URL + "/api/document/" + by + "/" + value)
             .then((response) => {
                 this.setState({
                     isLoaded: true,
@@ -122,7 +122,7 @@ class ContentView extends Component {
                 centered: true,
                 content: (
                 <div>
-                    By clicking this button on the right edge of the screen, you can choose what kind of data you want to see (Translations, Glossings, ...)<br/><br/>
+                    By clicking this button on the right side of the screen, you can choose what you want to see (Translations, Glossings, etc.).<br/><br/>
                     <div style={{textAlign: 'center'}}><img src={layersInfoImg} alt=""/></div>
                 </div>
                 ),
@@ -154,7 +154,7 @@ class ContentView extends Component {
                             <Row>
 
                                 {/** CONTENT **/}
-                                <Col span={22}>
+                                <Col span={21}>
 
                                     <div className="card">
                                         { data.book !== undefined &&
@@ -358,7 +358,7 @@ class ContentView extends Component {
                                     }
                                 </Col>
                                 
-                                <Col span={2}>
+                                <Col span={3}>
 
                                     <Affix offsetTop={10}>
                                         <div
