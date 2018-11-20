@@ -178,11 +178,11 @@ class ContentView extends Component {
                                     { data.padas !== undefined &&
                                         <div>
                                             <div className="content-plain content-block card">
-                                                <HelpButton type="zurichIso" float/>
                                                 <h4 title={"Rigveda, book " + data.book + ", hymn " + data.hymn + ", verse " + data.verse}>
                                                     {('0' + data.book).slice(-2)}.
                                                     {('00' + data.hymn).slice(-3)}.
                                                     {('0' + data.verse).slice(-2)}
+                                                    <HelpButton type="zurichIso" inline style={{marginLeft:'.5rem'}}/>
                                                 </h4>
                                                 {data.padas.map(pada => (
                                                     <div className="bottom-gap-small" key={"p_plain_" + pada.index}>
@@ -307,7 +307,7 @@ class ContentView extends Component {
                                                     <table style={{width:'auto'}}>
                                                         <tbody>
                                                         <tr>
-                                                            <td><HelpButton inline float align="right" type="metaHymnAddressee"/></td>
+                                                            <td><HelpButton inline float align="right" type="metaAdrGroup"/></td>
                                                             <td>
                                                                 <span className="bold gap-right">Hymn Addressee:</span>
                                                             </td>
@@ -316,7 +316,7 @@ class ContentView extends Component {
                                                             </td>
                                                         </tr>
                                                         <tr>
-                                                            <td><HelpButton inline float align="right" type="metaHymnGroup"/></td>
+                                                            <td><HelpButton inline float align="right" type="metaAdrGroup"/></td>
                                                             <td>
                                                                 <span className="bold gap-right">Hymn Group:</span>
                                                             </td>

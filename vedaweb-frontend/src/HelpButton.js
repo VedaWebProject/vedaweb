@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Icon, Modal } from 'antd';
 import help from "./img/help.png";
+import "./css/HelpButton.css";
 
 const helpTexts = {
     transliteration: {
@@ -65,21 +66,21 @@ const helpTexts = {
             </div>
     },
     zurichIso : {
-        title: "Rigveda in ISO-15919 from Zürich",
+        title: "Rigveda version in ISO-15919",
         content:
             <div>
                 <p>
-                    Text version from Zurich... (wip)
+                    The Rigveda data from the University of Zurich is the basis of VedaWeb's grammar and full text search tools.
                 </p>
             </div>
     },
     zurichGlossing : {
-        title: "Morphological glossings from Zürich",
+        title: "Morphological glossings from Zurich",
         content:
             <div>
                 <p>
-                    This morphological glossing data from Zürich follows the Leipzig Glossing Rules.
-                    The abbreviations used are listed below:
+                    The morphological annotation was carried out at the University of Zurich.<br/>
+                    It follows the Leipzig Glossing Rules. The abbreviations used are listed below:
                 </p>
                 <table style={{width: 'auto'}}><tbody>
                     <tr><td className="bold">1</td><td>first person</td></tr>
@@ -298,7 +299,10 @@ const helpTexts = {
         content:
             <div>
                 <p>
-                    provided by Arnold
+                    Arnold, Edward Vernon.
+                    'Sketch of the Historical Grammar of the Rig and Atharva Vedas'. 
+                    Journal of the American Oriental Society 18 (1897): 203–352.
+                    <a href="https://www.jstor.org/stable/592303" target="_blank" rel="noopener noreferrer"> https://www.jstor.org/stable/592303</a>
                 </p>
                 <table style={{width: 'auto'}}><tbody>
                     <tr><td className="bold">A</td><td>Archaic</td></tr>
@@ -314,6 +318,15 @@ const helpTexts = {
                 </tbody></table>
             </div>
     },
+    metaAdrGroup : {
+        title: "Hymn Addressees / Hymn Groups",
+        content:
+            <div>
+                <p>
+                    Geldner, Karl Friedrich. <i>Der Rig-Veda. Aus dem Sanskrit ins Deutsche übersetzt und mit einem laufenden Kommentar versehen von Karl Friedrich Geldner.</i> Cambridge (Mass.) [repr. 2003]: Harvard Univ. Pr., 1951.
+                </p>
+            </div>
+    }
 };
 
 
@@ -365,9 +378,9 @@ class HelpButton extends Component {
                 <Icon
                 type="question-circle"
                 theme="outlined"
+                className="help-button-icon"
                 onClick={this.showModal}
-                title={helpTexts[this.props.type] !== undefined ? "Show help: \"" + helpTexts[this.props.type].title + "\"" : undefined}
-                style={{cursor:"pointer", margin:"0", color: '#aaa', fontSize: '18px'}}/>
+                title={helpTexts[this.props.type] !== undefined ? "Show help: \"" + helpTexts[this.props.type].title + "\"" : undefined} />
                 
                 {this.state.visible &&
                     <Modal
