@@ -61,7 +61,7 @@ class Footer extends Component {
 
                     <Col span={3} className="footer-box">
                         <div className="footer-box">
-                            <a href="https://cceh.github.io/m-salt-api/api.html" target="_blank" rel="noopener noreferrer">
+                            <a href="https://api.c-salt.uni-koeln.de/" target="_blank" rel="noopener noreferrer">
                                 <img src={logoCSALTAPI} alt="" /><br/><br/>
                                 C-SALT APIs<br/>for Dictionaries
                             </a>
