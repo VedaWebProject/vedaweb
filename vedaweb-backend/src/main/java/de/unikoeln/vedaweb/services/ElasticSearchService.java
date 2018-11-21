@@ -1,6 +1,5 @@
 package de.unikoeln.vedaweb.services;
 
-import java.io.IOException;
 import org.elasticsearch.action.search.SearchRequest;
 import org.elasticsearch.action.search.SearchResponse;
 import org.springframework.beans.factory.annotation.Autowired;
