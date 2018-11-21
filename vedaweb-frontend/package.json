@@ -17,7 +17,7 @@
     "react-polyfills": "^0.0.1",
     "react-router-dom": "^4.3.1",
     "react-rte": "^0.16.1",
-    "react-scripts": "^1.0.14",
+    "react-scripts": "^2.1.1",
     "react-scroll-to-component": "^1.0.2",
     "sanscript": "0.0.2"
   },
