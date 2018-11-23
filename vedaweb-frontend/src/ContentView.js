@@ -171,6 +171,8 @@ class ContentView extends Component {
                                                 <span className="text-font">{data.hymnAddressee}</span>
                                                 <span className="bold gap-left-big">Hymn group: </span>
                                                 <span className="text-font">{data.hymnGroup}</span>
+                                                <span className="bold gap-left-big">Abs. hymn #: </span>
+                                                <span className="text-font">{data.hymnAbs}</span>
                                             </div>
                                         }
                                     </div>

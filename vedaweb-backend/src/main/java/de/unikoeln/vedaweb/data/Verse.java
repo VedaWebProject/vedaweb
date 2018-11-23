@@ -17,6 +17,8 @@ public class Verse implements Comparable<Verse> {
 	private int hymn;
 	private int verse;
 	
+	private int hymnAbs;
+	
 	private String hymnAddressee;
 	private String hymnGroup;
 	private String strata;
@@ -72,6 +74,15 @@ public class Verse implements Comparable<Verse> {
 		this.verse = verse;
 	}
 	
+	public int getHymnAbs() {
+		return hymnAbs;
+	}
+
+	public void setHymnAbs(int hymnAbs) {
+		this.hymnAbs = hymnAbs;
+	}
+
+
 	public String getHymnAddressee() {
 		return hymnAddressee;
 	}

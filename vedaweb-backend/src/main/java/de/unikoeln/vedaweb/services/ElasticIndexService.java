@@ -73,13 +73,10 @@ public class ElasticIndexService {
 		JSONObject response = new JSONObject();
 		try {
 			//delete old index
-			System.out.println("[INFO] deleting old index...");
 			response.put("deleteIndex", deleteIndex().getString("response"));
 			//create new Index
-			System.out.println("[INFO] creating new index...");
 			response.put("createIndex", createIndex().getString("response"));
 			// get all documents from db
-			System.out.println("[INFO] creating and inserting new index documents...");
 			response.put("fillIndex", indexDbDocuments().getString("response"));
 		} catch (JSONException e) {
 			e.printStackTrace();
@@ -89,6 +86,7 @@ public class ElasticIndexService {
 	
 	
 	public JSONObject indexDbDocuments(){
+		System.out.println("[INFO] creating and inserting new index documents...");
 		JSONObject jsonResponse = new JSONObject();
 		Iterator<Verse> dbIter = verseRepo.findAll().iterator();
 		// create es bulk request
@@ -190,6 +188,7 @@ public class ElasticIndexService {
 	
 
 	public JSONObject deleteIndex(){
+		System.out.println("[INFO] deleting old index...");
 		JSONObject jsonResponse = new JSONObject();
 		DeleteIndexRequest deleteRequest = new DeleteIndexRequest(indexName);
 		DeleteIndexResponse deleteResponse = null;
@@ -214,6 +213,7 @@ public class ElasticIndexService {
 	
 	
 	public JSONObject createIndex(){
+		System.out.println("[INFO] creating new index...");
 		JSONObject jsonResponse = new JSONObject();
 		CreateIndexRequest createRequest = new CreateIndexRequest(indexName);
 		byte[] json = null;
