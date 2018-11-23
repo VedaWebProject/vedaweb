@@ -77,7 +77,7 @@ public class SystemController {
 		JSONObject response = new JSONObject();
 		response.put("dryRun", dry);
 		response.put("importedDocsCount", docCount);
-		if (!dry) response.put("indexActions", indexService.rebuildIndex());
+		//if (!dry) response.put("indexActions", indexService.rebuildIndex());
 		return response.toString();
     }
 	

@@ -110,7 +110,7 @@ class ContentView extends Component {
                                 <tr>
                                     <td><Icon type="download"/></td>
                                     <td className="bold">Import Data</td>
-                                    <td>Import XML data to DB and rebuild search index</td>
+                                    <td>Import XML data to DB (clears old data!)</td>
                                     <td>
                                         <Button
                                         loading={!isLoaded && action === 'import'}
