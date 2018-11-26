@@ -275,6 +275,7 @@ class ContentView extends Component {
                                                                         {this.cleanLemmaString(token.lemma)}
                                                                         {
                                                                             Object.keys(token.grammar).map(key => (
+                                                                                key !== "lemma type" &&
                                                                                 <span key={"t_" + token.index + "_" + key}>
                                                                                     .{token.grammar[key]}
                                                                                 </span>
