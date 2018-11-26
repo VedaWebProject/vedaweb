@@ -31,21 +31,23 @@ class ContentLocation extends Component {
         this.props.bindShortcut('right', this.browseNext);
         this.props.bindShortcut('left', this.browsePrevious);
 
-        axios.get(process.env.PUBLIC_URL + "/api/uidata/count/verses/" + this.props.book + "/" + this.props.hymn)
-        .then((response) => {
-            this.setState({
-                verseCount: response.data.count,
-                isLoaded: true,
-                error: undefined
+        if (this.props.book !== undefined && this.props.hymn !== undefined){
+            axios.get(process.env.PUBLIC_URL + "/api/uidata/count/verses/" + this.props.book + "/" + this.props.hymn)
+            .then((response) => {
+                this.setState({
+                    verseCount: response.data.count,
+                    isLoaded: true,
+                    error: undefined
+                });
+            })
+            .catch((error) => {
+                this.setState({
+                    verseCount: 0,
+                    isLoaded: true,
+                    error: error
+                });
             });
-        })
-        .catch((error) => {
-            this.setState({
-                verseCount: 0,
-                isLoaded: true,
-                error: error
-            });
-        });
+        }
     }
 
     browseNext(){
@@ -73,7 +75,6 @@ class ContentLocation extends Component {
                 break;
         }
 
-        console.log(id);
         this.props.history.push("/view/id/" + id);
     }
 
@@ -85,13 +86,13 @@ class ContentLocation extends Component {
         const verseCount = this.state.verseCount;
 
         const selectStyle = {
-            width: '80px',
             fontSize: '18px',
-            fontWeight: 'bold'
+            fontWeight: 'bold',
+            width: '80px'
         }
 
         return (
-
+            this.props.book !== undefined && this.props.hymn !== undefined &&
             <div className="inline-block">
                 <Link to={"/view/index/" + (this.props.currIndex - 1)} className="location-controls">
                     <Icon type="left"/>
