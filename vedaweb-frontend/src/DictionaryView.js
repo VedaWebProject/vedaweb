@@ -46,14 +46,11 @@ class DictionaryView extends Component {
             }
         }`;
 
-        console.log(JSON.stringify(GQLQ));
-
         //request API data
         axios.post("https://api.c-salt.uni-koeln.de/dicts/sa/graphql", {query: GQLQ})
             .then((response) => {
                 var dictData = [];
                 const entries = response.data.data.ids;
-                console.log(JSON.stringify(entries));
                 for (let i = 0; i < lemmaData.length; i++) {
                     let t = lemmaData[i];
                     t["dict"] = t.lemmaRef.map(ref => {
