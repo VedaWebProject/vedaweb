@@ -5,7 +5,6 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import de.unikoeln.vedaweb.data.Verse;
@@ -28,8 +27,7 @@ public class DocumentController {
 	
 	@RequestMapping(value = "/id/{id}", produces = {"application/json"})
     public String verseById(
-    		@PathVariable("id") String id,
-    		@RequestParam(name="browse", required=false) String browse) {
+    		@PathVariable("id") String id) {
 		VerseLocation loc = new VerseLocation(id);
 		Optional<Verse> v;
 		
@@ -43,7 +41,7 @@ public class DocumentController {
 	
 	
 	@RequestMapping(value = "/index/{index}", produces = {"application/json"})
-    public String verseByLocation(@PathVariable("index") int index) {
+    public String verseByLocation(@PathVariable int index) {
 		return mappingService.mapOptionalToJSON(
 				verseRepo.findByIndex( StringUtils.normalizeIndex(index, (int)verseRepo.count()) ));
     }
