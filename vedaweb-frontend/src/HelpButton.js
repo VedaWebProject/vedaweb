@@ -262,6 +262,24 @@ const helpTexts = {
                 </p>
             </div>
     },
+    translation_otto : {
+        title: "Otto",
+        content:
+            <div>
+                <p>
+                    Otto, Rudolf. 1948. Varuna-Hymnen des Rig-Veda. Bonn: Ludwig Röhrscheid Verlag.
+                </p>
+            </div>
+    },
+    translation_macdonell : {
+        title: "MacDonell",
+        content:
+            <div>
+                <p>
+                    MacDonell, Arthur A. 1922. Hymns from the Rigveda. Selected and Metrically Translated. London: Oxford University Press.
+                </p>
+            </div>
+    },
     metaLabels : {
         title: "Pada Labels",
         content:
