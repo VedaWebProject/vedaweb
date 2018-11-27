@@ -31,8 +31,10 @@ class DictionaryView extends Component {
         let lemmaRefs = [];
         for (let i = 0; i < lemmaData.length; i++) {
             const token = lemmaData[i];
-            for (let j = 0; j < token.lemmaRef.length; j++) {
-                lemmaRefs.push(token.lemmaRef[j]);
+            if (token.lemmaRef !== undefined && token.lemmaRef !== null){
+                for (let j = 0; j < token.lemmaRef.length; j++) {
+                    lemmaRefs.push(token.lemmaRef[j]);
+                }
             }
         }
 
@@ -73,7 +75,7 @@ class DictionaryView extends Component {
             .catch((error) => {
                 this.setState({
                     isLoaded: true,
-                    error: error
+                    error: !Object.isEmpty(error) ? error : undefined
                 });
             });
     }
@@ -191,7 +193,7 @@ class DictionaryView extends Component {
                                 {token.dict !== undefined && token.dict[0].graTxt}
                             </td>
                             <td className="non-expanding">
-                                {token.lemmaRef.map((ref, i) => {
+                                {token.lemmaRef !== undefined && token.lemmaRef !== null && token.lemmaRef.map((ref, i) => {
                                     let entry = token.dict === undefined ? undefined
                                         : token.dict.find(d => d.graRef === ref);
                                     return  <Button

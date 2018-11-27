@@ -6,3 +6,15 @@ if (!Object.keys) Object.keys = function(o) {
     for (p in o) if (Object.prototype.hasOwnProperty.call(o,p)) k.push(p);
     return k;
 }
+
+
+/* not actually a polyfill */
+if (!Object.isEmpty) Object.isEmpty = function(o) {
+    for(var k in o) {
+        if(o.hasOwnProperty(k))
+            break;
+        else
+            return false;
+    }
+    return true;
+}
