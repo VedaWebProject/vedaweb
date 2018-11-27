@@ -25,22 +25,10 @@ class ContentView extends Component {
             action: action
         });
 
-        let path = process.env.PUBLIC_URL + "/system/";
-        if (action === "import_dry")
-            path += "import/dryrun";
-        else if (action === "import")
-            path += "import";
-        else if (action === "index_delete")
-            path += "index/delete";
-        else if (action === "index_create")
-            path += "index/create";
-        else if (action === "index_fill")
-            path += "index/fill";
-        else if (action === "index_rebuild")
-            path += "index/rebuild";
-
-        //add auth param
-        path += ("?auth=" + this.props.match.params.auth);
+        let path = process.env.PUBLIC_URL
+            + "/system/"
+            + action
+            + "?auth=" + this.props.match.params.auth;
         
         axios.get(path)
             .then((response) => {
@@ -99,10 +87,10 @@ class ContentView extends Component {
                                     <td>Simulate XML data import for testing</td>
                                     <td>
                                         <Button
-                                        loading={!isLoaded && action === 'import_dry'}
+                                        loading={!isLoaded && action === 'import/dryrun'}
                                         disabled={!isLoaded}
                                         icon="play-circle"
-                                        onClick={() => this.run('import_dry')}>
+                                        onClick={() => this.run('import/dryrun')}>
                                             Run
                                         </Button>
                                     </td>
@@ -127,10 +115,10 @@ class ContentView extends Component {
                                     <td>Deletes the search index</td>
                                     <td>
                                         <Button
-                                        loading={!isLoaded && action === 'index_delete'}
+                                        loading={!isLoaded && action === 'index/delete'}
                                         disabled={!isLoaded}
                                         icon="play-circle"
-                                        onClick={() => this.run('index_delete')}>
+                                        onClick={() => this.run('index/delete')}>
                                             Run
                                         </Button>
                                     </td>
@@ -141,10 +129,10 @@ class ContentView extends Component {
                                     <td>Creates a new, empty search index following the internal specifications</td>
                                     <td>
                                         <Button
-                                        loading={!isLoaded && action === 'index_create'}
+                                        loading={!isLoaded && action === 'index/create'}
                                         disabled={!isLoaded}
                                         icon="play-circle"
-                                        onClick={() => this.run('index_create')}>
+                                        onClick={() => this.run('index/create')}>
                                             Run
                                         </Button>
                                     </td>
@@ -155,10 +143,10 @@ class ContentView extends Component {
                                     <td>Fills an existing search index using DB data</td>
                                     <td>
                                         <Button
-                                        loading={!isLoaded && action === 'index_fill'}
+                                        loading={!isLoaded && action === 'index/fill'}
                                         disabled={!isLoaded}
                                         icon="play-circle"
-                                        onClick={() => this.run('index_fill')}>
+                                        onClick={() => this.run('index/fill')}>
                                             Run
                                         </Button>
                                     </td>
@@ -169,10 +157,24 @@ class ContentView extends Component {
                                     <td>Deletes, creates and fills the search index in one go</td>
                                     <td>
                                         <Button
-                                        loading={!isLoaded && action === 'index_rebuild'}
+                                        loading={!isLoaded && action === 'index/rebuild'}
                                         disabled={!isLoaded}
                                         icon="play-circle"
-                                        onClick={() => this.run('index_rebuild')}>
+                                        onClick={() => this.run('index/rebuild')}>
+                                            Run
+                                        </Button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><Icon type="reload"/></td>
+                                    <td className="bold">UI data: Refresh</td>
+                                    <td>Refreshes the cached UI data</td>
+                                    <td>
+                                        <Button
+                                        loading={!isLoaded && action === 'uidata/refresh'}
+                                        disabled={!isLoaded}
+                                        icon="play-circle"
+                                        onClick={() => this.run('uidata/refresh')}>
                                             Run
                                         </Button>
                                     </td>

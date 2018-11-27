@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import de.unikoeln.vedaweb.services.DataImportService;
 import de.unikoeln.vedaweb.services.ElasticIndexService;
+import de.unikoeln.vedaweb.services.UiDataService;
 
 
 
@@ -24,13 +25,14 @@ public class SystemController {
 	private String auth;
 	
 	@Autowired
-	DataImportService dataImportService;
+	private DataImportService dataImportService;
 	
 	@Autowired
 	private ElasticIndexService indexService;
 	
-//	@Autowired
-//	VerseRepository verseRepo;
+	@Autowired
+	private UiDataService uiDataService;
+	
 	
 	@GetMapping(value = {"/index/{action}"}, produces = {"application/json"})
     public String verseById(
@@ -79,6 +81,16 @@ public class SystemController {
 		response.put("importedDocsCount", docCount);
 		//if (!dry) response.put("indexActions", indexService.rebuildIndex());
 		return response.toString();
+    }
+	
+	@GetMapping(value = {"/uidata/refresh"}, produces = {"application/json"})
+    public String importData(
+    		@RequestParam(name = "auth", required = false) String auth) {
+		
+		if (!auth(auth))
+			return "{error:'authentication failed'}";
+		
+		return uiDataService.init().toString();
     }
 	
 	private boolean auth(String auth) {
