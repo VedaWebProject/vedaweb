@@ -20,23 +20,11 @@ public class ElasticSearchService {
 		
 		switch (searchData.getMode()){
 		case "smart":
-			return searchSmart(searchData);
+			return submitSearch(SearchRequestBuilder.buildSmartQuery(searchData));
 		case "grammar":
-			return searchGrammar(searchData);
+			return submitSearch(SearchRequestBuilder.buildGrammarQuery(searchData));
 		default: return null;
 		}
-	}
-	
-	
-	private SearchResponse searchSmart(SearchData searchData){
-		SearchRequest searchRequest = SearchRequestBuilder.buildSmartQuery(searchData);
-		return submitSearch(searchRequest);
-	}
-	
-	
-	private SearchResponse searchGrammar(SearchData searchData){
-		SearchRequest searchRequest = SearchRequestBuilder.buildGrammarQuery(searchData);
-		return submitSearch(searchRequest);
 	}
 	
 	
@@ -45,19 +33,6 @@ public class ElasticSearchService {
 		SearchResponse searchResponse = submitSearch(searchRequest);
 		return searchResponse.toString();
 	}
-	
-	
-//	private SearchResults buildSearchResults(SearchResponse response){
-//		SearchResults results = new SearchResults();
-//		for (SearchHit hit : response.getHits()){
-//			results.add(
-//				new SearchResult(
-//					hit.getScore(),
-//					hit.getId(),
-//					hit.getFields()));
-//		}
-//		return results;
-//	}
 	
 	
 	private SearchResponse submitSearch(SearchRequest searchRequest){

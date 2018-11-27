@@ -86,10 +86,14 @@ public class SearchHits {
 			} else if (innerHits.containsKey("translation")) {
 				//with inner hits
 				for (org.elasticsearch.search.SearchHit innerHit : innerHits.get("translation").getHits()) {
-					hit.addHighlight(
-						innerHit.getSourceAsMap().get("source").toString(),
-						concatText(innerHit.getHighlightFields().get("translation.form").fragments())
-					);
+					try {
+						hit.addHighlight(
+							innerHit.getSourceAsMap().get("source").toString(),
+							concatText(innerHit.getHighlightFields().get("translation.form").fragments())
+						);
+					} catch (Exception e) {
+						continue;
+					}
 				}
 			}
 			
