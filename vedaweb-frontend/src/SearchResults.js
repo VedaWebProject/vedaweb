@@ -134,47 +134,15 @@ class SearchResults extends Component {
                     hit.highlight[highlightField]
                     + "<br/>";
             });
+        } else if (hit.source.tokens !== undefined){
+            html += hit.source.tokens.map(t => (
+                " " + t.form + " (" + 
+                Object.keys(t.grammar).filter(k => k !== "lemma type").map(key => t.grammar[key]))
+                + ")"
+            );
         } else {
             html += hit.source.form_raw.join(" / ");
         }
-
-        // //normalize hits and inner_hits (incomplete I)
-        // let hits = superHit.inner_hits === undefined
-        //         ? [superHit]
-        //
-        //         : (innerFields = superHit.inner_hits) => {
-        //             let innerHits = [];
-        //             Object.keys(innerFields).forEach(key => {
-        //                 let innerField = superHit.inner_hits[key];
-
-        //             });
-        //             return innerHits;
-        //         }
-
-        // // (incomplete II)
-        //         // : Object.keys(superHit.inner_hits).map(innerName => {
-        //         //     let innerHits = [];
-        //         //     superHit.inner_hits[innerName].hits.hits
-        //         //     return innerHits;
-        //         // });
-
-        //process hit(s)
-            // if (hit.highlight !== undefined){
-            //     Object.keys(hit.highlight).sort().forEach( i => {
-            //         if (hit.highlight[i].length > 0){
-            //             for (let high in hit.highlight[i]){
-            //                 html += "<span class='red'>" + fieldDisplayMapping[i] + ":</span> ";
-            //                 html += hit.highlight[i][high] + " ";
-            //                 html += "<br/>"
-            //             }
-            //         }
-            //     });
-            // } else {
-            //     for (let form in hit._source.form_raw){
-            //         html += hit._source.form_raw[form]
-            //             + (form < hit._source.form_raw.length - 1 ? " / " : "");
-            //     }
-            // }
 
         return {__html: html};
     }
@@ -190,7 +158,8 @@ class SearchResults extends Component {
             title: 'Location',
             dataIndex: 'location',
             key: 'location',
-            render: loc => <Link to={"/view/id/" + loc} className="bold" style={{fontSize: '18px'}}>{loc}</Link>,
+            className: 'loc-col',
+            render: loc => <Link to={"/view/id/" + loc}>{loc}</Link>,
           }, {
             title: 'Text',
             dataIndex: 'text',

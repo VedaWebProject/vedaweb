@@ -21,6 +21,11 @@
     vertical-align: middle;
 }
 
+#search-results table td.loc-col {
+    font-size: 18px;
+    font-weight: bold;
+}
+
 .search-stats {
     font-size: 18px;
     color: #776;

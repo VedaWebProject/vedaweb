@@ -248,23 +248,6 @@ class ContentView extends Component {
                                                                 </div>
                                                             </div>
                                                     })}
-
-                                                    {/* {data.versions.map(v => (
-                                                        v.id.startsWith('translation_')
-                                                        && uiDataStore.isLayerVisible(v.id) &&
-                                                        <div
-                                                        key={"t_" + v.source}
-                                                        className="translation"
-                                                        ref={this.scrollTo}>
-                                                            <span className="bold">{v.source} </span>({v.language})
-                                                            <HelpButton inline type={v.id} style={{marginLeft:'.5rem'}}/>
-                                                            <div className="text-font gap-left">
-                                                                {v.form.map((line, i) => (
-                                                                    <div key={"trans_" + i}>{line}</div>
-                                                                ))}
-                                                            </div>
-                                                        </div>
-                                                    ))} */}
                                                 </div>
                                             }
 

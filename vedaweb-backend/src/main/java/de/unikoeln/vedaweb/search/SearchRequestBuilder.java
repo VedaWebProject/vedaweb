@@ -22,8 +22,15 @@ import de.unikoeln.vedaweb.util.StringUtils;
 
 public class SearchRequestBuilder {
 	
-	private static final FetchSourceContext FETCH_SOURCE_CONTEXT =
-			new FetchSourceContext(true, new String[]{"book", "hymn", "form_raw", "verse", "hymnAddressee", "hymnGroup", "strata"}, Strings.EMPTY_ARRAY);
+	private static final FetchSourceContext FETCH_SOURCE_CONTEXT = new FetchSourceContext(
+			true,
+			new String[]{"book", "hymn", "form_raw", "verse", "hymnAddressee", "hymnGroup", "strata"},
+			Strings.EMPTY_ARRAY);
+	
+	private static final FetchSourceContext FETCH_SOURCE_CONTEXT_GRAMMAR = new FetchSourceContext(
+			true,
+			new String[]{"book", "hymn", "form_raw", "verse", "hymnAddressee", "hymnGroup", "strata", "tokens"},
+			Strings.EMPTY_ARRAY);
 	
 	private static final String[] HIGHLIGHT_SMART = {"form", "lemmata", "form_raw", "lemmata_raw"};
 	private static final String[] HIGHLIGHT_SMART_TRANSLATIONS = {"translation.form"};
@@ -99,14 +106,7 @@ public class SearchRequestBuilder {
 		if (searchData.getMeta().size() > 0)
 			bool.must(getSearchMetaQuery(searchData));
 		
-		source.query(bool);
-
-		source.fetchSource(FETCH_SOURCE_CONTEXT);
-
-		//System.out.println("\n\n" + searchSourceBuilder.toString() + "\n\n");
-		req.source(source);
-			
-		return req;
+		return req.source(source.query(bool).fetchSource(FETCH_SOURCE_CONTEXT_GRAMMAR));
 	}
 	
 	
