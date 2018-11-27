@@ -24,21 +24,21 @@ class Footer extends Component {
                 align="top">
 
                     <Col span={3} className="footer-box">
-                        <div className="footer-box">
-                            <a href="http://c-salt.uni-koeln.de" target="_blank" rel="noopener noreferrer">
+                        <a href="http://c-salt.uni-koeln.de" target="_blank" rel="noopener noreferrer">
+                            <div className="footer-box">
                                 <img src={logoCSALT} alt="" /><br/><br/>
                                 C-SALT
-                            </a>
-                        </div>
+                            </div>
+                        </a>
                     </Col>
 
                     <Col span={3} className="footer-box">
-                        <div className="footer-box">
-                            <a href="http://sanskrit-lexicon.uni-koeln.de" target="_blank" rel="noopener noreferrer">
+                        <a href="http://sanskrit-lexicon.uni-koeln.de" target="_blank" rel="noopener noreferrer">
+                            <div className="footer-box">
                                 <img src={logoCSL} alt="" /><br/><br/>
                                 Cologne Sanskrit<br/>Lexicon
-                            </a>
-                        </div>
+                            </div>
+                        </a>
                     </Col>
 
                     <Col span={3}>
@@ -51,21 +51,21 @@ class Footer extends Component {
                     </Col>
 
                     <Col span={3} className="footer-box">
-                        <div className="footer-box">
-                            <a href="http://cpd.uni-koeln.de" target="_blank" rel="noopener noreferrer">
+                        <a href="http://cpd.uni-koeln.de" target="_blank" rel="noopener noreferrer">
+                            <div className="footer-box">
                                 <img src={logoCPDO} alt="" /><br/><br/>
                                 Critical Pāli<br/>Dictionary Online
-                            </a>
-                        </div>
+                            </div>
+                        </a>
                     </Col>
 
                     <Col span={3} className="footer-box">
-                        <div className="footer-box">
-                            <a href="https://api.c-salt.uni-koeln.de/" target="_blank" rel="noopener noreferrer">
+                        <a href="https://api.c-salt.uni-koeln.de/" target="_blank" rel="noopener noreferrer">
+                            <div className="footer-box">
                                 <img src={logoCSALTAPI} alt="" /><br/><br/>
                                 C-SALT APIs<br/>for Dictionaries
-                            </a>
-                        </div>
+                            </div>
+                        </a>
                     </Col>
 
                 </Row>
