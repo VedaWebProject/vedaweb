@@ -229,7 +229,27 @@ class ContentView extends Component {
                                                 ref={this.scrollTo}>
                                                     <h4 className="inline-block">Translations</h4>
 
-                                                    {data.versions.map(v => (
+                                                    {uiDataStore.layers.filter(
+                                                        l => l.id.startsWith('translation_')
+                                                        && l.id !== 'translation_'
+                                                        && uiDataStore.isLayerVisible(l.id)).map(l => {
+                                                            let translation = data.versions.find(v => v.id === l.id);
+                                                            return translation === undefined ? "" :
+                                                            <div
+                                                            key={"t_" + translation.source}
+                                                            className="translation"
+                                                            ref={this.scrollTo}>
+                                                                <span className="bold">{translation.source} </span>({translation.language})
+                                                                <HelpButton inline type={l.id} style={{marginLeft:'.5rem'}}/>
+                                                                <div className="text-font gap-left">
+                                                                    {translation.form.map((line, i) => (
+                                                                        <div key={"trans_" + i}>{line}</div>
+                                                                    ))}
+                                                                </div>
+                                                            </div>
+                                                    })}
+
+                                                    {/* {data.versions.map(v => (
                                                         v.id.startsWith('translation_')
                                                         && uiDataStore.isLayerVisible(v.id) &&
                                                         <div
@@ -244,7 +264,7 @@ class ContentView extends Component {
                                                                 ))}
                                                             </div>
                                                         </div>
-                                                    ))}
+                                                    ))} */}
                                                 </div>
                                             }
 

@@ -1,9 +1,9 @@
 package de.unikoeln.vedaweb.data;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class VerseVersion {
 	
+	private String id;
 	private String source;
 	private String language;
 	private String[] form;
@@ -19,11 +19,15 @@ public class VerseVersion {
 		this.language = language;
 		this.form = form;
 		this.type = type;
+		generateId();
 	}
 	
-	@JsonProperty("id")
 	public String getId() {
-		return (type + "_" + source.replaceAll("\\P{L}", "")).toLowerCase();
+		return this.id;
+	}
+	
+	public void generateId() {
+		this.id = (type + "_" + source.replaceAll("\\P{L}", "")).toLowerCase();
 	}
 
 	public String getSource() {
