@@ -19,10 +19,10 @@
 #footer a:visited {
     text-decoration: none;
     color: #262626;
-    filter: grayscale(1) opacity(.5);
+    filter: opacity(.5);
     transition: .2s;
 }
 
 #footer a:hover {
-    filter: grayscale(0) opacity(1);
+    filter: opacity(1);
 }
