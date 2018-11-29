@@ -110,9 +110,8 @@ class App extends Component {
                                 <Route path="/system/:auth" component={System} />
                                 <Route path="/legal" component={LegalNotice} />
                                 <Route path="/privacy" component={PrivacyNotice} />
-                                <Route path="/betafeedback" component={Start} />
                                 <Route path="/home" component={Start} />
-                                <Route path="/" exact={true} component={ContentView} />
+                                <Route path="/" exact={true} component={Start} />
                                 <Route component={NotFound} />
                             </Switch>
                             <Footer/>

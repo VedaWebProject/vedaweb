@@ -10,7 +10,7 @@ import searchMetaStore from "./stores/searchMetaStore";
 
 import { view } from 'react-easy-state';
 
-import { NavLink } from 'react-router-dom'
+import { NavLink, withRouter } from 'react-router-dom';
 
 const SubMenu = Menu.SubMenu;
 
@@ -20,12 +20,27 @@ class NavBar extends Component {
     constructor(props){
         super(props);
         this.state = {
-            showFeedbackModal: false
+            showFeedbackModal: false,
+            //current: ''
         }
     }
 
 
+    // componentWillMount(){
+    //     this.props.history.listen((event)=>{
+    //         let pathname = event.pathname.split("/");
+    //         if (pathname !== null) {
+    //             this.setState({
+    //                 current: pathname[1].replace(/:.*/g, "")
+    //             });
+    //         }
+    //     });
+    // }
+
+
     render() {
+
+        console.log(JSON.stringify(this.state.current))
 
         const menuStyle = {
             backgroundColor: "transparent",
@@ -58,17 +73,18 @@ class NavBar extends Component {
 
                 <div className="flex-grow-2">
                     <Menu
+                    //selectedKeys={[this.state.current]}
                     selectedKeys={[]}
                     mode="horizontal"
                     style={menuStyle}
                     onClick={() => {this.setState({showFeedbackModal: true})}}>
 
                         <SubMenu
-                        title={<div className="content-center"><Icon type="book"/><br/>Browse Rigveda</div>}
+                        title={<div className="content-center submenu-title-wrapper"><Icon type="book"/><br/>Browse Rigveda</div>}
                         className="right">
                             {searchMetaStore.scopeDataRaw.map((hymns, i) => (
-                                <Menu.Item key={'view_' + i}>
-                                    <NavLink to={"/view/id/" + (i+1) + ".1.1"}>
+                                <Menu.Item key={'view:' + i}>
+                                    <NavLink to={"/view/id/" + (i+1) + ".1.1"} activeClassName="selected">
                                         Book {('0' + (i+1)).slice(-2)} ({hymns} Hymns)
                                     </NavLink>
                                 </Menu.Item>
@@ -76,21 +92,16 @@ class NavBar extends Component {
                         </SubMenu>
 
                         <Menu.Item key="search">
-                            <NavLink to={"/search"} className="content-center">
+                            <NavLink to={"/search"} className="content-center" activeClassName="selected">
                                 <Icon type="zoom-in"/><br/>Advanced Search
                             </NavLink>
                         </Menu.Item>
 
-                        <Menu.Item key="betafb">
-                            <NavLink to={"/betafeedback"} className="content-center">
+                        <Menu.Item key="home">
+                            <NavLink to={"/home"} className="content-center" activeClassName="selected">
                                 <Icon type="message"/><br/>Beta Feedback
                             </NavLink>
                         </Menu.Item>
-
-                        {/* <Menu.Item
-                        key="feedback">
-                            <Icon type="message"/>Beta Feedback
-                        </Menu.Item> */}
 
                     </Menu>
                 </div>
@@ -105,4 +116,4 @@ class NavBar extends Component {
     }
 }
 
-export default view(NavBar);
+export default withRouter(view(NavBar));

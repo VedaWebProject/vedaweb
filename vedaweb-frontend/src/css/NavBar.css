@@ -48,10 +48,6 @@ img.navbar-logo {
     color: #931111;
 }
 
-.ant-menu-submenu-title {
-    color: rgba(0,0,0,0.65);
-}
-
 .ant-menu-submenu-popup .ant-menu-vertical {
     border-radius: 3px;
     border: 1px solid #ccb;
@@ -79,4 +75,8 @@ img.navbar-logo {
 .ant-menu-submenu .ant-menu-item.ant-menu-item-selected {
     background-color: #eee;
     color: rgba(0,0,0,0.5);
+}
+
+a.selected {
+    color: #931111 !important;
 }
