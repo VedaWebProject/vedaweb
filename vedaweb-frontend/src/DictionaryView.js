@@ -45,6 +45,7 @@ class DictionaryView extends Component {
                 headwordDeva
                 headwordIso
                 senseTxtIso
+                senseHtmlIso
             }
         }`;
 
@@ -61,7 +62,8 @@ class DictionaryView extends Component {
                             graRef: ref,
                             graDeva: entry.headwordDeva,
                             graTxt: entry.senseTxtIso,
-                            graLemma: entry.headwordIso
+                            graLemma: entry.headwordIso,
+                            graHtml: entry.senseHtmlIso
                         };
                     });
                     dictData.push(t);
@@ -223,7 +225,9 @@ class DictionaryView extends Component {
                     okText="OK">
                         <div key={modalData.lemmaRef}>
                             <span className="deva-font" style={{color:"#000"}}>{modalData.graDeva}</span><br/>
-                            <p className="text-font">{modalData.graTxt}</p>
+                            <div
+                            className="text-font"
+                            dangerouslySetInnerHTML={{__html: modalData.graHtml}}></div>
                         </div>
                     </Modal>
                 }
