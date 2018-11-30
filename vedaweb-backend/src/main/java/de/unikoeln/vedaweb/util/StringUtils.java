@@ -28,18 +28,31 @@ public class StringUtils {
 	
 	
 	public static boolean containsAccents(String text) {
-	    return text == null ? false :
-	        normalizeNFD(text).matches(".*(\\u0301|\\u0300).*");
+		if (text == null) return false;
+		text = normalizeNFC(text);
+		
+		for (int i = 0; i < text.length(); i++) {
+			String c = normalizeNFD(text.substring(i, i + 1));
+			if (c.matches("[aeiouAEIOU].*") && c.matches(".*(\\u0301|\\u0300).*")) {
+				return true;
+			}
+		}
+	    return false;
 	}
 	
 	
-	public static String removeUnicodeAccents(String text, boolean nfc) {
-	    text = text == null ? "" :
-        		normalizeNFD(text)
-		        .replaceAll("\\u0301", "")
-		        .replaceAll("\\u0300", "");
-	    if (nfc) return normalizeNFC(text);
-	    else	 return text;
+	public static String removeVowelAccents(String text) {
+		if (text == null) return text;
+		text = normalizeNFC(text);
+		StringBuilder out = new StringBuilder();
+		
+		for (int i = 0; i < text.length(); i++) {
+			String c = normalizeNFD(text.substring(i, i + 1));
+			if (c.matches("[aeiouAEIOU].*")) c = c.replaceAll("[\\u0301\\u0300]", "");
+			out.append(normalizeNFC(c));
+		}
+	    
+		return out.toString();
 	}
 	
 
