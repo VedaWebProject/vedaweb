@@ -31,14 +31,12 @@
 				"hymnAddressee":	{ "type": "keyword" },
 				"hymnGroup":		{ "type": "keyword" },
 				"strata":			{ "type": "keyword" },
-				"form": 			{ "type": "text", "similarity": "boolean" },
-				"form_raw": 		{ "type": "text", "similarity": "boolean" },
-				"lemmata": 			{ "type": "text", "similarity": "boolean" },
-				"lemmata_raw": 		{ "type": "text", "similarity": "boolean" },
-				"translation": {
+				"versions": {
 					"type": "nested",
 					"properties": {
+						"id": {"type": "keyword"},
 						"form": {"type": "text", "analyzer": "custom_german", "similarity": "boolean" },
+						"form_raw": {"type": "text", "analyzer": "custom_german", "similarity": "boolean" },
 						"source": {"type": "keyword"}
 					}
 		        },
@@ -47,7 +45,9 @@
 					"properties": {
 						"index":		{ "type": "short" },
 						"form":			{ "type": "keyword" },
-						"lemma":		{ "type": "text"}
+						"form_raw":		{ "type": "keyword" },
+						"lemma":		{ "type": "text" },
+						"lemma_raw":	{ "type": "text" }
 					}
 				}
 			},

@@ -14,6 +14,9 @@ public class SearchData {
 	@JsonProperty("mode")
 	private String mode;
 	
+	@JsonProperty("accents")
+	private boolean accents;
+	
 	@JsonProperty("input")
 	private String input;
 	
@@ -52,6 +55,16 @@ public class SearchData {
 	}
 	
 	
+	public boolean isAccents() {
+		return accents;
+	}
+
+
+	public void setAccents(boolean accents) {
+		this.accents = accents;
+	}
+
+
 	public String getInput() {
 		return input;
 	}

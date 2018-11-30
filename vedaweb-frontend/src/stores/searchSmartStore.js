@@ -5,7 +5,8 @@ const searchSmartStore = store({
 
     data: {
         input: '',
-        field: 'form'
+        field: 'version_lubotskyzurich',
+        accents: false
     },
 
     setInput(input){
@@ -14,6 +15,10 @@ const searchSmartStore = store({
 
     setField(field){
         searchSmartStore.data.field = field;
+    },
+
+    setAccents(accents){
+        searchSmartStore.data.accents = accents;
     }
 
 })

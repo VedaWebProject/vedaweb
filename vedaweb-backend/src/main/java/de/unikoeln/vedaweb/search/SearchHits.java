@@ -52,6 +52,7 @@ public class SearchHits {
 	 * object to display in frontend...
 	 */
 	private void processSearchResponse(SearchResponse response) {
+		System.out.println(response);
 		this.hits = new ArrayList<SearchHit>();
 		setTotal(response.getHits().getTotalHits());
 		setTook(response.getTook().getMillis());
@@ -83,14 +84,16 @@ public class SearchHits {
 						concatText(esHit.getHighlightFields().get(field).fragments())
 					);
 				}
-			} else if (innerHits.containsKey("translation")) {
+			} else if (innerHits.containsKey("versions")) {
 				//with inner hits
-				for (org.elasticsearch.search.SearchHit innerHit : innerHits.get("translation").getHits()) {
+				for (org.elasticsearch.search.SearchHit innerHit : innerHits.get("versions").getHits()) {
 					try {
-						hit.addHighlight(
-							innerHit.getSourceAsMap().get("source").toString(),
-							concatText(innerHit.getHighlightFields().get("translation.form").fragments())
-						);
+						for (String hKey : innerHit.getHighlightFields().keySet()) {
+							hit.addHighlight(
+								innerHit.getSourceAsMap().get("source").toString(),
+								concatText(innerHit.getHighlightFields().get(hKey).fragments())
+							);
+						}
 					} catch (Exception e) {
 						continue;
 					}

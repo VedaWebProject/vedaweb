@@ -2,7 +2,6 @@ package de.unikoeln.vedaweb.data;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -24,7 +23,6 @@ public class Verse implements Comparable<Verse> {
 	private String strata;
 	
 	private List<Pada> padas;
-	
 	private List<VerseVersion> versions;
 	
 	
@@ -114,14 +112,6 @@ public class Verse implements Comparable<Verse> {
 				translations.add(vv);
 		return translations;
 	}
-
-	public List<Pada> getPadas() {
-		return padas;
-	}
-
-	public void addPada(Pada pada) {
-		padas.add(pada);
-	}
 	
 	public List<VerseVersion> getVersions() {
 		return versions;
@@ -130,13 +120,23 @@ public class Verse implements Comparable<Verse> {
 	public void addVersion(VerseVersion version) {
 		versions.add(version);
 	}
+	
+	public List<Pada> getPadas() {
+		return padas;
+	}
+
+	public void setPadas(List<Pada> padas) {
+		this.padas = padas;
+	}
+	
+	public void addPada(Pada pada) {
+		padas.add(pada);
+	}
 
 	@Override
 	public String toString() {
 		return index + ";" + id + ";" + book + "." + hymn + "." + verse + ":\t" +
-				"(" + hymnAddressee + " / " + hymnGroup + ")\t" +
-				padas + "\t" +
-				versions;
+				"(" + hymnAddressee + " / " + hymnGroup + ")\t" + versions;
 	}
 
 	@Override

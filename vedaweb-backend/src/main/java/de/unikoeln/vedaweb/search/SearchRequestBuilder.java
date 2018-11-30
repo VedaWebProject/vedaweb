@@ -24,7 +24,7 @@ public class SearchRequestBuilder {
 	
 	private static final FetchSourceContext FETCH_SOURCE_CONTEXT = new FetchSourceContext(
 			true,
-			new String[]{"book", "hymn", "form_raw", "verse", "hymnAddressee", "hymnGroup", "strata"},
+			new String[]{"book", "hymn", "verse", "hymnAddressee", "hymnGroup", "strata"},
 			Strings.EMPTY_ARRAY);
 	
 	private static final FetchSourceContext FETCH_SOURCE_CONTEXT_GRAMMAR = new FetchSourceContext(
@@ -32,57 +32,64 @@ public class SearchRequestBuilder {
 			new String[]{"book", "hymn", "form_raw", "verse", "hymnAddressee", "hymnGroup", "strata", "tokens"},
 			Strings.EMPTY_ARRAY);
 	
-	private static final String[] HIGHLIGHT_SMART = {"form", "lemmata", "form_raw", "lemmata_raw"};
-	private static final String[] HIGHLIGHT_SMART_TRANSLATIONS = {"translation.form"};
+	private static final String[] HIGHLIGHT_SMART = {"versions.form", "versions.form_raw"};
 	
 	
-	public static SearchRequest buildSmartQuery(SearchData searchData){
-		if (searchData.getField().equals("translation")) {
-			return buildTranslationQuery(searchData);
-		}
+//	public static SearchRequest buildSmartQuery(SearchData searchData){
+//		if (searchData.getField().equals("translation")) {
+//			return buildTranslationQuery(searchData);
+//		}
+//		SearchSourceBuilder source = getCommonSearchSource(searchData);
+//		
+//		String searchTerm = StringUtils.normalizeNFC(searchData.getInput());
+//		String field = searchData.getField();
+//		String lemmataField = "lemmata";
+//		
+//		if (StringUtils.containsAccents(searchTerm)) {
+//			field += "_raw";
+//			lemmataField += "_raw";
+//		}
+//		
+//		//query string query (using lucene query language)
+//		source.query(
+//			QueryBuilders.queryStringQuery(searchTerm)
+//				.field(field, 1.2f)
+//				.field(lemmataField)
+//		);
+//
+//		//Highlighting
+//		source.highlighter(getHighlighting(HIGHLIGHT_SMART));
+//		//set _source fields
+//		source.fetchSource(FETCH_SOURCE_CONTEXT);
+//		
+//		return getCommonSearchRequest().source(source);
+//	}
+	
+	
+	public static SearchRequest buildSmartQuery(SearchData searchData) {
 		SearchSourceBuilder source = getCommonSearchSource(searchData);
 		
-		String searchTerm = StringUtils.normalizeNFC(searchData.getInput());
-		String field = searchData.getField();
-		String lemmataField = "lemmata";
-		
-		if (StringUtils.containsAccents(searchTerm)) {
-			field += "_raw";
-			lemmataField += "_raw";
-		}
-		
-		//query string query (using lucene query language)
-		source.query(
-			QueryBuilders.queryStringQuery(searchTerm)
-				.field(field, 1.2f)
-				.field(lemmataField)
-		);
-
-		//Highlighting
-		source.highlighter(getHighlighting(HIGHLIGHT_SMART));
-		//set _source fields
-		source.fetchSource(FETCH_SOURCE_CONTEXT);
-		
-		return getCommonSearchRequest().source(source);
-	}
-	
-	
-	private static SearchRequest buildTranslationQuery(SearchData searchData) {
-		SearchSourceBuilder source = getCommonSearchSource(searchData);
-		String searchTerm = StringUtils.normalizeNFC(searchData.getInput());
+		String searchTerm = StringUtils.normalizeNFC(
+				searchData.isAccents() ? searchData.getInput()
+						: StringUtils.removeVowelAccents(searchData.getInput()));
+		String searchField = "versions.form" + (searchData.isAccents() ? "_raw" : "");
 			
 		source.query(
 			QueryBuilders.nestedQuery(
-				"translation",
-				QueryBuilders.queryStringQuery(searchTerm).field("translation.form"),
+				"versions",
+				QueryBuilders.boolQuery()
+					.must(QueryBuilders.matchQuery("versions.id", searchData.getField()))
+					.must(QueryBuilders.queryStringQuery(searchTerm).field(searchField)),
 				ScoreMode.Max
 			).innerHit(
 				new InnerHitBuilder()
-					.setHighlightBuilder(getHighlighting(HIGHLIGHT_SMART_TRANSLATIONS)))
+					.setHighlightBuilder(getHighlighting(HIGHLIGHT_SMART)))
 		);
 		
 		//set _source fields
 		source.fetchSource(FETCH_SOURCE_CONTEXT);
+		
+		System.out.println(source);
 		
 		return getCommonSearchRequest().source(source);
 	}
@@ -147,7 +154,7 @@ public class SearchRequestBuilder {
 				//if fields="form", also search in "lemma"-field
 				if (key.equals("form")) {
 					bool.must(getMultiFieldBoolQuery(
-							StringUtils.removeUnicodeAccents((String)block.get(key), true),
+							StringUtils.removeVowelAccents((String)block.get(key)),
 							false,
 							"tokens.form",
 							"tokens.lemma"

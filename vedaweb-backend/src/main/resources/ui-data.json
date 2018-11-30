@@ -19,14 +19,7 @@
 					"values": ["VALUE_1", "VALUE_2"]
 				}
 			]
-	    },
-	    
-	    "smart": {
-	        "fields": [
-				{"field": "form", "ui": "Rigveda"},
-				{"field": "translation", "ui": "Translations"}
-			]
-		}
+	    }
 	},
 	
 	"abbreviations" : {
@@ -71,8 +64,9 @@
 	"meta": {},
 	
 	"layers": [
-		{ "id": "version_", "label": "Text Versions", "show": false },
-		{ "id": "version_detlef", "label": "Detlef (Deva.)", "show": false },
+		{ "id": "version_", "label": "Text Versions", "show": true },
+		{ "id": "version_lubotskyzurich", "label": "Lubotsky (Zurich)", "show": true },
+		{ "id": "version_detlef", "label": "Detlef (Deva.)", "show": true },
 		{ "id": "version_vannootenholland", "label": "Van Nooten, Holland", "show": false },
 		{ "id": "version_aufrecht", "label": "Aufrecht", "show": false },
 		{ "id": "version_padapatha", "label": "Padapatha", "show": false },
@@ -81,7 +75,7 @@
 	
 		{ "id": "translation_", "label": "Translations", "show": true },
 		{ "id": "translation_griffith", "label": "Griffith (EN)", "show": true },
-		{ "id": "translation_macdonell", "label": "MacDonell (EN)", "show": true },
+		{ "id": "translation_macdonell", "label": "MacDonell (EN)", "show": false },
 		{ "id": "translation_renou", "label": "Renou (FR)", "show": true },
 		{ "id": "translation_geldner", "label": "Geldner (DE)", "show": true },
 		{ "id": "translation_grassmann", "label": "Graßmann (DE)", "show": false },

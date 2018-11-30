@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Input, Tooltip, Select } from 'antd';
+import { Input, Tooltip, Select, Checkbox } from 'antd';
 
 import searchSmartStore from "./stores/searchSmartStore";
 import searchMetaStore from "./stores/searchMetaStore";
@@ -15,7 +15,7 @@ import "./css/SearchSmart.css";
 import SanscriptAccents from "./SanscriptAccents";
 
 
-const Option = Select.Option;
+const { Option, OptGroup } = Select;
 const Search = Input.Search;
 
 class SearchSmart extends Component {
@@ -31,8 +31,9 @@ class SearchSmart extends Component {
         } else {
             let jsonData = {
                 mode: "smart",
-                input: searchSmartStore.data.field === "form" ? SanscriptAccents.t(input, "hk", "iso") : input,
-                field: searchSmartStore.data.field
+                input: searchSmartStore.data.field.startsWith('version_') ? SanscriptAccents.t(input, "hk", "iso") : input,
+                field: searchSmartStore.data.field,
+                accents: searchSmartStore.data.accents
             };
             this.props.history.push("/results/" + Base64.encodeURI(JSON.stringify(jsonData)));
         }
@@ -45,21 +46,37 @@ class SearchSmart extends Component {
             defaultValue="form"
             value={searchSmartStore.data.field}
             onSelect={(value, option) => searchSmartStore.setField(value)}
-            style={{ width: 125 }}
+            style={{ width: 200 }}
             className="secondary-font">
-                {uiDataStore.search.smart.fields.map(field => (
-                    <Option
-                    key={'simple_field_' + field.field}
-                    value={field.field}
-                    className="secondary-font">
-                        {field.ui}
-                    </Option>
-                ))}
+                <OptGroup label="Text Versions">
+                    {uiDataStore.layers
+                    .filter(l => l.id.startsWith('version_') && l.id !== 'version_')
+                    .map(v => (
+                        <Option
+                        key={'quick_field_' + v.id}
+                        value={v.id}
+                        className="secondary-font">
+                            {v.label}
+                        </Option>
+                    ))}
+                </OptGroup>
+                <OptGroup label="Translations">
+                    {uiDataStore.layers
+                    .filter(l => l.id.startsWith('translation_') && l.id !== 'translation_')
+                    .map(v => (
+                        <Option
+                        key={'quick_field_' + v.id}
+                        value={v.id}
+                        className="secondary-font">
+                            {v.label}
+                        </Option>
+                    ))}
+                </OptGroup>
             </Select>
         );
 
         const transliteration = (
-            searchSmartStore.data.field === "form"
+            searchSmartStore.data.field.startsWith('version_')
             ? <TransliterationPreview input={searchSmartStore.data.input} transliteration="hk" />
             : null
         );
@@ -79,12 +96,18 @@ class SearchSmart extends Component {
                     onSearch={this.handleSearch}
                     addonBefore={selectBefore}
                     placeholder={"Quick search: " + 
-                        (searchSmartStore.data.field === "form"
+                        (searchSmartStore.data.field.startsWith('version_')
                         ? searchMetaStore.transliteration.toUpperCase() + " or verse no."
                         : "Translation or verse no.")
                     } />
-
                 </Tooltip>
+
+                <Checkbox
+                onChange={e => searchSmartStore.setAccents(e.target.checked)}
+                checked={searchSmartStore.data.accents}>
+                    accent sensitive
+                </Checkbox>
+
             </div>
         );
 

@@ -10,6 +10,10 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
+
 import de.unikoeln.vedaweb.data.Verse;
 import de.unikoeln.vedaweb.data.VerseRepository;
 import de.unikoeln.vedaweb.util.Timer;
@@ -79,6 +83,13 @@ public class DataImportService {
 		//dry run?
 		if (dryRun){
 			System.out.println("[DataImport] dry run: Read " + verses.size() + " verses from XML.");
+			if (verses.size() > 0) {
+				try {
+					System.out.println("[DataImport] SAMPLE:\n" + new ObjectMapper().configure(SerializationFeature.FAIL_ON_EMPTY_BEANS, false).writeValueAsString(verses.get(0)));
+				} catch (JsonProcessingException e) {
+					e.printStackTrace();
+				}
+			}
 			return verses.size();
 		}
 		

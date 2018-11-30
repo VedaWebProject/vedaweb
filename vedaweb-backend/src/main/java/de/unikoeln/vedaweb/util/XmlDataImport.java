@@ -1,6 +1,7 @@
 package de.unikoeln.vedaweb.util;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.xml.transform.stream.StreamSource;
@@ -55,50 +56,32 @@ public class XmlDataImport {
 				verseObj.setHymnGroup(hymnGroup);
 				verseObj.setStrata(compiler.evaluate("*:lg[@*:source='gunkel_ryan']/*:lg/*:fs/*:f[@*:name='strata']/text()", verse).itemAt(0).getStringValue());
 				
+				//zurich morph glossing and pada labels (by gunkel/ryan)
 				//iterate: padas
-				int padaIndex = 0;
 				XdmValue padaForms = compiler.evaluate("*:lg[@*:source='zurich']/*:l[@*:n]", verse);
 				
-				for (XdmItem padaForm : padaForms){
-					String padaId = compiler.evaluate("@*:n", padaForm).itemAt(0).getStringValue();
-					String padaXmlId = compiler.evaluate("@*:id", padaForm).itemAt(0).getStringValue().replaceFirst("_zur$", "_tokens_zur");
-					XdmValue padaTokens = compiler.evaluate("*:lg[@*:source='zurich']/*:l[@*:id='" + padaXmlId + "']/*:fs", verse);
-					verseObj.addPada(generatePadaObject(
-						verse,
-						padaIndex,
-						padaId,
-						padaForm.getStringValue(),
-						padaTokens,
-						compiler
-					));
-					padaIndex++;
-				}
-				
-				//set token indices
-				int tokenIndex = 0;
-				for (Pada p : verseObj.getPadas()){
-					for (Token t : p.getTokens()){
-						t.setIndex(tokenIndex++);
-					}
-				}
+				//generate and add pada objects
+				verseObj.setPadas(generatePadaObjects(verse, padaForms, compiler));
 				
 				
-				//// verse versions (translations etc.) ////
+				//// verse versions (text versions & translations) ////
+				
 				XdmValue temp;
 				XdmItem versionNode;
 				VerseVersion version;
 				String[] versionForm;
 				
-				// SAMITHA / gunkel_ryan
-				temp = compiler.evaluate("*:l[@*:source='grassmann']", verse);
+				// Zurich ISO / zurich
+				temp = compiler.evaluate("*:lg[@*:source='zurich']", verse);
 				if (temp.size() > 0) {
 					versionNode = temp.itemAt(0);
-					versionForm = concatTextContents(compiler.evaluate(".//*:l[@*:ana='samitha']", versionNode));
+					versionForm = concatTextContents(compiler.evaluate(".//*:l[@*:n]", versionNode));
 					version = new VerseVersion(
-						"Samitha (Gunkel, Ryan)",
+						"Lubotsky (Zurich)",
 						compiler.evaluate("@*:lang", versionNode).itemAt(0).getStringValue(),
 						versionForm,
-						"version"
+						"version",
+						true
 					);
 					verseObj.addVersion(version);
 				}
@@ -113,7 +96,8 @@ public class XmlDataImport {
 						"Gunkel, Ryan",
 						compiler.evaluate("@*:lang", versionNode).itemAt(0).getStringValue(),
 						versionForm,
-						"version"
+						"version",
+						true
 					);
 					verseObj.addVersion(version);
 				}
@@ -128,7 +112,8 @@ public class XmlDataImport {
 						"Lubotsky",
 						compiler.evaluate("@*:lang", versionNode).itemAt(0).getStringValue(),
 						versionForm,
-						"version"
+						"version",
+						true
 					);
 					verseObj.addVersion(version);
 				}
@@ -144,7 +129,8 @@ public class XmlDataImport {
 						"Van Nooten, Holland",
 						compiler.evaluate("@*:lang", versionNode).itemAt(0).getStringValue(),
 						versionForm,
-						"version"
+						"version",
+						true
 					);
 					verseObj.addVersion(version);
 				}
@@ -158,7 +144,8 @@ public class XmlDataImport {
 						"Aufrecht",
 						compiler.evaluate("@*:lang", versionNode).itemAt(0).getStringValue(),
 						versionForm,
-						"version"
+						"version",
+						false
 					);
 					verseObj.addVersion(version);
 				}
@@ -172,7 +159,8 @@ public class XmlDataImport {
 						"Padapatha",
 						compiler.evaluate("@*:lang", versionNode).itemAt(0).getStringValue(),
 						versionForm,
-						"version"
+						"version",
+						false
 					);
 					verseObj.addVersion(version);
 				}
@@ -186,7 +174,8 @@ public class XmlDataImport {
 						"Detlef",
 						compiler.evaluate("@*:lang", versionNode).itemAt(0).getStringValue(),
 						versionForm,
-						"version"
+						"version",
+						false
 					);
 					verseObj.addVersion(version);
 				}
@@ -200,7 +189,8 @@ public class XmlDataImport {
 						"Geldner",
 						"de",
 						versionForm,
-						"translation"
+						"translation",
+						false
 					);
 					verseObj.addVersion(version);
 				}
@@ -214,7 +204,8 @@ public class XmlDataImport {
 						"Graßmann",
 						"de",
 						versionForm,
-						"translation"
+						"translation",
+						false
 					);
 					verseObj.addVersion(version);
 				}
@@ -228,7 +219,8 @@ public class XmlDataImport {
 						"Otto",
 						"de",
 						versionForm,
-						"translation"
+						"translation",
+						false
 					);
 					verseObj.addVersion(version);
 				}
@@ -242,7 +234,8 @@ public class XmlDataImport {
 						"Griffith",
 						"en",
 						versionForm,
-						"translation"
+						"translation",
+						false
 					);
 					verseObj.addVersion(version);
 				}
@@ -256,7 +249,8 @@ public class XmlDataImport {
 						"MacDonell",
 						"en",
 						versionForm,
-						"translation"
+						"translation",
+						false
 					);
 					verseObj.addVersion(version);
 				}
@@ -270,7 +264,8 @@ public class XmlDataImport {
 						"Renou",
 						"fr",
 						versionForm,
-						"translation"
+						"translation",
+						false
 					);
 					verseObj.addVersion(version);
 				}
@@ -282,56 +277,72 @@ public class XmlDataImport {
 	}
 	
 	
-	private static Pada generatePadaObject(
+	private static List<Pada> generatePadaObjects(
 			XdmItem verse,
-			int padaIndex,
-			String padaId,
-			String padaForm,
-			XdmValue padaTokens,
+			XdmValue padaForms,
 			XPathCompiler compiler)
 					throws IndexOutOfBoundsException, SaxonApiUncheckedException, SaxonApiException{
 		
-		Pada pada = new Pada();
-		pada.setForm(padaForm);
-		pada.setIndex(padaIndex);
-		pada.setLine(padaId.charAt(padaId.length() - 1));
+		List<Pada> padas = new ArrayList<Pada>();
+		int padaIndex = 0;
+		int tokenIndex = 0;
+		int tokensTotal = compiler.evaluate("*:lg[@*:source='zurich']/*:l[not(@*:n)]/*:fs", verse).size();
 		
-		//label (by gunkel/ryan)
-		String padaXmlId = compiler.evaluate("@*:id", padaTokens.itemAt(0))
-				.itemAt(0).getStringValue().replaceFirst("_\\d\\d_zur$", "_gunkel_ryan");
-		XdmValue strataNode = compiler.evaluate("*:lg[@*:source='gunkel_ryan']/*:lg[@*:id='" + padaXmlId + "']/*:fs/*:f[@*:name='label']/text()", verse);
-
-		if (strataNode.size() > 0)
-			pada.setLabel(strataNode.itemAt(0).getStringValue());
-		
-		for (XdmItem token : padaTokens){
-			Token tokenObj = new Token();
-			XdmValue graLemmaNode = compiler.evaluate("*:f[@*:name='gra_lemma']/*:string", token);
-			XdmValue graGrammNode = compiler.evaluate("*:f[@*:name='gra_gramm']/*:symbol/@*:value", token);
-			XdmValue formNode = compiler.evaluate("*:f[@*:name='surface']/*:string", token).itemAt(0);
-			XdmValue tokenAttributes = compiler.evaluate("*:f[@*:name='morphosyntax']/*:fs/*:f", token);
-			if (graLemmaNode.size() > 0) {
-				tokenObj.setLemma(((XdmNode)graLemmaNode.itemAt(0)).getStringValue());
-				tokenObj.setLemmaRef(extractLemmaRefs((XdmNode)graLemmaNode));
+		for (XdmItem padaForm : padaForms){
+			Pada padaObj = new Pada(); //new pada object
+			String padaId = compiler.evaluate("@*:n", padaForm).itemAt(0).getStringValue();
+			String tokensXmlId = compiler.evaluate("@*:id", padaForm).itemAt(0).getStringValue().replaceFirst("_zur$", "_tokens_zur");
+			XdmValue padaTokens = compiler.evaluate("*:lg[@*:source='zurich']/*:l[@*:id='" + tokensXmlId + "']/*:fs", verse);
+			
+			//index, id
+			padaObj.setIndex(padaIndex++); //pada index
+			padaObj.setId(padaId.charAt(padaId.length() - 1) + ""); //pada id (in verse context, single letter)
+			
+			//pada label (by gunkel/ryan)
+			String labelXmlId = compiler.evaluate("@*:id", padaTokens.itemAt(0))
+					.itemAt(0).getStringValue().replaceFirst("_\\d\\d_zur$", "_gunkel_ryan");
+			XdmValue labelNode = compiler.evaluate("*:lg[@*:source='gunkel_ryan']/*:lg[@*:id='" + labelXmlId + "']/*:fs/*:f[@*:name='label']/text()", verse);
+			if (labelNode.size() > 0) padaObj.setLabel(labelNode.itemAt(0).getStringValue());
+			
+			//tokens
+			for (XdmItem token : padaTokens){
+				Token tokenObj = new Token();
+				XdmValue graLemmaNode = compiler.evaluate("*:f[@*:name='gra_lemma']/*:string", token);
+				XdmValue graGrammNode = compiler.evaluate("*:f[@*:name='gra_gramm']/*:symbol/@*:value", token);
+				XdmValue formNode = compiler.evaluate("*:f[@*:name='surface']/*:string", token).itemAt(0);
+				XdmValue tokenAttributes = compiler.evaluate("*:f[@*:name='morphosyntax']/*:fs/*:f", token);
+				if (graLemmaNode.size() > 0) {
+					tokenObj.setLemma(((XdmNode)graLemmaNode.itemAt(0)).getStringValue());
+					tokenObj.setLemmaRefs(extractLemmaRefs((XdmNode)graLemmaNode));
+				}
+				tokenObj.setForm(((XdmNode)formNode).getStringValue().trim());
+				//iterate token attributes
+				
+				for (XdmItem tokenAttribute : tokenAttributes){
+					String attName = compiler.evaluate("@*:name", tokenAttribute).itemAt(0).getStringValue();
+					String attValue = compiler.evaluate("*:symbol/@*:value", tokenAttribute).itemAt(0).getStringValue();
+					tokenObj.addProp(attName, attValue);
+				}
+				
+				//lemma-type
+				if (graGrammNode.size() > 0)
+					tokenObj.addProp("lemma type", ((XdmNode)graGrammNode.itemAt(0)).getStringValue());
+				
+				//position
+				tokenObj.addProp("position",
+						tokenIndex == 0 ? "verse initial"
+							: tokenIndex == tokensTotal - 1 ? "verse final" 
+									: "other");
+				
+				//index
+				tokenObj.setIndex(tokenIndex++);
+				
+				//add to tokens
+				padaObj.addGrammarData(tokenObj);
 			}
-			tokenObj.setForm(((XdmNode)formNode).getStringValue().trim());
-			//iterate token attributes
-			
-			for (XdmItem tokenAttribute : tokenAttributes){
-				String attName = compiler.evaluate("@*:name", tokenAttribute).itemAt(0).getStringValue();
-				String attValue = compiler.evaluate("*:symbol/@*:value", tokenAttribute).itemAt(0).getStringValue();
-				tokenObj.addGrammarAttribute(attName, attValue);
-			}
-			
-			//lemma-type
-			if (graGrammNode.size() > 0)
-				tokenObj.addGrammarAttribute("lemma type", ((XdmNode)graGrammNode.itemAt(0)).getStringValue());
-			
-			//add to tokens
-			pada.addToken(tokenObj);
+			padas.add(padaObj);
 		}
-		
-		return pada;
+		return padas;
 	}
 	
 	

@@ -106,11 +106,9 @@ public class ElasticIndexService {
 				indexDoc.put("hymnAddressee", dbDoc.getHymnAddressee());
 				indexDoc.put("hymnGroup", dbDoc.getHymnGroup());
 				indexDoc.put("strata", dbDoc.getStrata());
-				indexDoc.put("translation", buildTranslationsList(dbDoc));
-				indexDoc.put("form", concatPadaForms(dbDoc, true));
-				indexDoc.put("form_raw", concatPadaForms(dbDoc, false));
-				indexDoc.put("lemmata", StringUtils.removeUnicodeAccents(concatTokenLemmata(dbDoc), true));
-				indexDoc.put("lemmata_raw", StringUtils.normalizeNFC(concatTokenLemmata(dbDoc)));
+				indexDoc.put("versions", buildVersionsList(dbDoc));
+//				indexDoc.put("lemmata", StringUtils.removeVowelAccents(concatTokenLemmata(dbDoc)));
+//				indexDoc.put("lemmata_raw", StringUtils.normalizeNFC(concatTokenLemmata(dbDoc)));
 				indexDoc.put("tokens", buildTokensList(dbDoc));
 			} catch (JSONException e) {
 				e.printStackTrace();
@@ -149,25 +147,21 @@ public class ElasticIndexService {
 	
 
 	private List<JSONObject> buildTokensList(Verse doc) throws JSONException{
-		List<Pada> padas = doc.getPadas();
 		List<JSONObject> tokens = new ArrayList<JSONObject>();
 
-		for (Pada pada : padas) {
-			for (Token token : pada.getTokens()) {
+		for (Pada pada : doc.getPadas()) {
+			for (Token token : pada.getGrammarData()) {
 				JSONObject indexToken = new JSONObject();
 				indexToken.put("index", token.getIndex());
-				indexToken.put("form", StringUtils.removeUnicodeAccents(token.getForm(), true));
-				indexToken.put("lemma", StringUtils.removeUnicodeAccents(token.getLemma(), true));
-				//grammar
-//				JSONArray indexTokenGrammar = new JSONArray();
+				indexToken.put("form", StringUtils.removeVowelAccents(token.getForm()));
+				indexToken.put("form_raw", StringUtils.normalizeNFC(token.getForm()));
+				indexToken.put("lemma", StringUtils.removeVowelAccents(token.getLemma()));
+				indexToken.put("lemma_raw", StringUtils.normalizeNFC(token.getLemma()));
+				
+				//grammar props
 				JSONObject indexTokenGrammar = new JSONObject();
-//				JSONObject currGrammarAttribute;
-				for (String attr : token.getGrammarAttributes().keySet()) {
-//					currGrammarAttribute = new JSONObject();
-//					currGrammarAttribute.put("tag", attr);
-//					currGrammarAttribute.put("value", token.getGrammarAttribute(attr));
-//					indexTokenGrammar.put(currGrammarAttribute);
-					String values = token.getGrammarAttribute(attr);
+				for (String attr : token.getProps().keySet()) {
+					String values = token.getProp(attr);
 					if (values.split("\\/").length > 1) {
 						JSONArray tagValues = new JSONArray();
 						for (String tv : values.split("\\/")) {
@@ -175,7 +169,7 @@ public class ElasticIndexService {
 						}
 						indexTokenGrammar.put(attr, tagValues);
 					} else {
-						indexTokenGrammar.put(attr, token.getGrammarAttribute(attr));
+						indexTokenGrammar.put(attr, token.getProp(attr));
 					}
 				}
 				indexToken.put("grammar", indexTokenGrammar);
@@ -447,44 +441,44 @@ public class ElasticIndexService {
 	}
 	
 	
-	private JSONArray concatPadaForms(Verse doc, boolean removeAccents) {
-		JSONArray padaForms = new JSONArray();
-		for (Pada pada : doc.getPadas()) {
-			padaForms.put(
+	private JSONArray concatForms(VerseVersion version, boolean removeAccents) {
+		JSONArray forms = new JSONArray();
+		for (String form : version.getForm()) {
+			forms.put(
 				removeAccents
-					? StringUtils.removeUnicodeAccents(pada.getForm(), true)
-					: pada.getForm()
+					? StringUtils.removeVowelAccents(form)
+					: form
 			);
 		}
-		return padaForms;
+		return forms;
 	}
 	
 	
-	private String concatTokenLemmata(Verse doc) {
-		StringBuilder sb = new StringBuilder();
-		for (Pada pada : doc.getPadas()) {
-			for (Token token : pada.getTokens()){
-				sb.append(token.getLemma().replaceAll("\u221a", ""));
-				sb.append(", ");
-			}
-		}
-		return sb.substring(0, sb.length() - 2).toString().trim();
-	}
+//	private String concatTokenLemmata(Verse doc) {
+//		StringBuilder sb = new StringBuilder();
+//		for (Token token : doc.getGrammarData()){
+//			sb.append(token.getLemma().replaceAll("\u221a", ""));
+//			sb.append(", ");
+//		}
+//		return sb.substring(0, sb.length() - 2).toString().trim();
+//	}
 	
 	
-	private List<JSONObject> buildTranslationsList(Verse doc) {
-		List<JSONObject> translations = new ArrayList<JSONObject>();
-		for (VerseVersion t : doc.getTranslations()) {
-			JSONObject translation = new JSONObject();
+	private List<JSONObject> buildVersionsList(Verse doc) {
+		List<JSONObject> versions = new ArrayList<JSONObject>();
+		for (VerseVersion v : doc.getVersions()) {
+			JSONObject version = new JSONObject();
 			StringBuilder form = new StringBuilder();
-			for (String line : t.getForm()) {
+			for (String line : v.getForm()) {
 				form.append(line + "\n");
 			}
-			translation.put("form", form);
-			translation.put("source", t.getSource());
-			translations.add(translation);
+			version.put("id", v.getId());
+			version.put("form", concatForms(v, true));
+			version.put("form_raw", concatForms(v, false));
+			version.put("source", v.getSource());
+			versions.add(version);
 		}
-		return translations;
+		return versions;
 	}
 	
 }

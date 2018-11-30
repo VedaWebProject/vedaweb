@@ -11,12 +11,12 @@ public class Token {
 	private int index;
 	private String form;
 	private String lemma;
-	private String[] lemmaRef;
-	private Map<String, String> grammar;
+	private String[] lemmaRefs;
+	private LinkedHashMap<String, String> props;
 	
 	
 	public Token(){
-		grammar = new LinkedHashMap<String, String>();
+		props = new LinkedHashMap<String, String>();
 		form = "";
 		lemma = "";
 	}
@@ -45,41 +45,41 @@ public class Token {
 		this.lemma = lemma;
 	}
 	
-	@JsonProperty("lemmaRef")
-	public String[] getLemmaRef() {
-		return lemmaRef;
+	@JsonProperty("lemmaRefs")
+	public String[] getLemmaRefs() {
+		return lemmaRefs;
 	}
 	
-	public void setLemmaRef(String[] lemmaRef) {
-		this.lemmaRef = lemmaRef;
+	public void setLemmaRefs(String[] lemmaRefs) {
+		this.lemmaRefs = lemmaRefs;
 	}
 
 	public void addLemmaRef(String lemmaRef) {
-		this.lemmaRef = Arrays.copyOf(this.lemmaRef, this.lemmaRef.length + 1);
-		this.lemmaRef[this.lemmaRef.length - 1] = lemmaRef;
+		this.lemmaRefs = Arrays.copyOf(this.lemmaRefs, this.lemmaRefs.length + 1);
+		this.lemmaRefs[this.lemmaRefs.length - 1] = lemmaRef;
 	}
 
-	@JsonProperty("grammar")
-	public Map<String, String> getGrammarAttributes(){
-		return grammar;
+	@JsonProperty("props")
+	public Map<String, String> getProps(){
+		return props;
 	}
 	
-	public String getGrammarAttribute(String key) {
-		return grammar.get(key);
+	public String getProp(String key) {
+		return props.get(key);
 	}
 	
-	public void addGrammarAttribute(String key, String value) {
-		if (grammar.containsKey(key)){
-			if (!grammar.get(key).contains(value)){
-				grammar.put(key, grammar.get(key) + "/" + value);
+	public void addProp(String key, String value) {
+		if (props.containsKey(key)){
+			if (!props.get(key).contains(value)){
+				props.put(key, props.get(key) + "/" + value);
 			}
 		} else {
-			grammar.put(key, value);
+			props.put(key, value);
 		}
 	}
 	
 	@Override
 	public String toString() {
-		return index + ":" + form + "(" + lemma + ", " + Arrays.toString(lemmaRef) + ")" + grammar;
+		return index + ":" + form + "(" + lemma + ", " + Arrays.toString(lemmaRefs) + ")" + props;
 	}
 }

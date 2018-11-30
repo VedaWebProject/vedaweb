@@ -1,6 +1,5 @@
 package de.unikoeln.vedaweb.data;
 
-
 public class VerseVersion {
 	
 	private String id;
@@ -8,17 +7,20 @@ public class VerseVersion {
 	private String language;
 	private String[] form;
 	private String type;
+	private boolean applyKeys;
 	
 	public VerseVersion(
 			String source,
 			String language,
 			String[] form,
-			String type) {
+			String type,
+			boolean applyKeys) {
 		super();
 		this.source = source;
 		this.language = language;
 		this.form = form;
 		this.type = type;
+		this.applyKeys = applyKeys;
 		generateId();
 	}
 	
@@ -60,6 +62,14 @@ public class VerseVersion {
 
 	public void setType(String type) {
 		this.type = type;
+	}
+	
+	public boolean isApplyKeys() {
+		return applyKeys;
+	}
+
+	public void setApplyKeys(boolean applyKeys) {
+		this.applyKeys = applyKeys;
 	}
 
 	@Override

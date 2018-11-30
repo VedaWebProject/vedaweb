@@ -5,32 +5,22 @@ import java.util.List;
 
 public class Pada {
 	
-	private int index;
-	private char line;
+	private String id;
 	private String label;
-	private String form;
-	private List<Token> tokens;
+	private int index;
+	private List<Token> grammarData;
 	
 	
-	public Pada(){
-		tokens = new ArrayList<Token>();
-		form = "";
+	public Pada() {
+		grammarData = new ArrayList<Token>();
 	}
 	
-	public int getIndex(){
-		return index;
+	public String getId() {
+		return id;
 	}
 	
-	public void setIndex(int index){
-		this.index = index;
-	}
-	
-	public char getLine() {
-		return line;
-	}
-
-	public void setLine(char line) {
-		this.line = line;
+	public void setId(String id) {
+		this.id = id;
 	}
 	
 	public String getLabel() {
@@ -40,30 +30,25 @@ public class Pada {
 	public void setLabel(String label) {
 		this.label = label;
 	}
+	
+	public int getIndex() {
+		return index;
+	}
 
-	public String getForm() {
-		return form;
+	public void setIndex(int index) {
+		this.index = index;
+	}
+
+	public List<Token> getGrammarData() {
+		return grammarData;
 	}
 	
-	public void setForm(String form) {
-		this.form = form;
+	public void setGrammarData(List<Token> grammarData) {
+		this.grammarData = grammarData;
 	}
-	
-	public List<Token> getTokens() {
-		return tokens;
-	}
-	
-	public void setTokens(List<Token> tokens) {
-		this.tokens = tokens;
-	}
-	
-	public void addToken(Token token) {
-		tokens.add(token);
-	}
-	
-	@Override
-	public String toString() {
-		return index + ":(" + line + ")" + form + " " + tokens;
+
+	public void addGrammarData(Token token) {
+		grammarData.add(token);
 	}
 
 }

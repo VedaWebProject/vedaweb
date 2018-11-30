@@ -94,10 +94,10 @@ class SearchResults extends Component {
         queryJSON.from = ((searchResultsStore.page - 1) * searchResultsStore.size);
         queryJSON.size = searchResultsStore.size;
 
+        console.log(JSON.stringify(queryJSON));
         //request search api data
         axios.post(process.env.PUBLIC_URL + "/api/search", queryJSON)
             .then((response) => {
-                //console.log(JSON.stringify(response.data));
                 searchResultsStore.resultsData = response.data;
                 searchResultsStore.total = response.data.total;
                 this.setState({
@@ -141,7 +141,8 @@ class SearchResults extends Component {
                 + ")"
             );
         } else {
-            html += hit.source.form_raw.join(" / ");
+            //html += hit.source.form_raw.join(" / ");
+            html += "NO HIGHLIGHT";
         }
 
         return {__html: html};

@@ -31,9 +31,9 @@ class DictionaryView extends Component {
         let lemmaRefs = [];
         for (let i = 0; i < lemmaData.length; i++) {
             const token = lemmaData[i];
-            if (token.lemmaRef !== undefined && token.lemmaRef !== null){
-                for (let j = 0; j < token.lemmaRef.length; j++) {
-                    lemmaRefs.push(token.lemmaRef[j]);
+            if (token.lemmaRefs !== undefined && token.lemmaRefs !== null){
+                for (let j = 0; j < token.lemmaRefs.length; j++) {
+                    lemmaRefs.push(token.lemmaRefs[j]);
                 }
             }
         }
@@ -56,7 +56,7 @@ class DictionaryView extends Component {
                 const entries = response.data.data.ids;
                 for (let i = 0; i < lemmaData.length; i++) {
                     let t = lemmaData[i];
-                    t["dict"] = t.lemmaRef.map(ref => {
+                    t["dict"] = t.lemmaRefs.map(ref => {
                         let entry = entries.find(e => e.id === ref);
                         return entry === undefined ? {} : {
                             graRef: ref,
@@ -88,12 +88,12 @@ class DictionaryView extends Component {
 
         for (let i = 0; i < padas.length; i++) {
             const pada = padas[i];
-            for (let j = 0; j < pada.tokens.length; j++) {
-                const token = pada.tokens[j];
+            for (let j = 0; j < pada.grammarData.length; j++) {
+                const token = pada.grammarData[j];
                 if (done.indexOf(token.lemma) === -1){
                     out.push({
                         lemma: token.lemma,
-                        lemmaRef: token.lemmaRef,
+                        lemmaRefs: token.lemmaRefs,
                         tokens: [token.form]
                     });
                     done.push(token.lemma);
@@ -195,7 +195,7 @@ class DictionaryView extends Component {
                                 {token.dict !== undefined && token.dict[0].graTxt}
                             </td>
                             <td className="non-expanding">
-                                {token.lemmaRef !== undefined && token.lemmaRef !== null && token.lemmaRef.map((ref, i) => {
+                                {token.lemmaRefs !== undefined && token.lemmaRefs !== null && token.lemmaRefs.map((ref, i) => {
                                     let entry = token.dict === undefined ? undefined
                                         : token.dict.find(d => d.graRef === ref);
                                     return  <Button

@@ -40,8 +40,6 @@ class NavBar extends Component {
 
     render() {
 
-        console.log(JSON.stringify(this.state.current))
-
         const menuStyle = {
             backgroundColor: "transparent",
             borderBottom: "none",
@@ -69,7 +67,7 @@ class NavBar extends Component {
                     <SearchSmart /> 
                 </div>
 
-                <HelpButton type="quickSearch" style={{paddingLeft:'1rem'}} />
+                <HelpButton type="quickSearch" align="left" style={{paddingLeft:'1rem', verticalAlign:'top'}} />
 
                 <div className="flex-grow-2">
                     <Menu

@@ -177,9 +177,9 @@ class ContentView extends Component {
                                         }
                                     </div>
 
-                                    { data.padas !== undefined &&
+                                    { data.versions !== undefined &&
                                         <div>
-                                            <div className="content-plain content-block card">
+                                            {/* <div className="content-plain content-block card">
                                                 <h4 title={"Rigveda, book " + data.book + ", hymn " + data.hymn + ", verse " + data.verse}>
                                                     {('0' + data.book).slice(-2)}.
                                                     {('00' + data.hymn).slice(-3)}.
@@ -192,7 +192,7 @@ class ContentView extends Component {
                                                         <span key={"p_plain_form" + pada.index} className="pada-form text-font">{pada.form}</span><br/>
                                                     </div>
                                                 ))}
-                                            </div>
+                                            </div> */}
 
                                             {uiDataStore.isLayerVisible('version_') &&
                                                 <div
@@ -211,7 +211,13 @@ class ContentView extends Component {
                                                                 <HelpButton inline type={v.id}/>
                                                                 <div className="text-font gap-left">
                                                                     {v.form.map((line, i) => (
-                                                                        <div key={"trans_" + i}>{line}</div>
+                                                                        <div key={"trans_" + i}>
+                                                                            {v.applyKeys ?
+                                                                                <span className="red gap-right">{String.fromCharCode(i + 97)} </span>
+                                                                                : ''
+                                                                            }
+                                                                            {line}
+                                                                        </div>
                                                                     ))}
                                                                 </div>
                                                             </div>
@@ -268,7 +274,7 @@ class ContentView extends Component {
                                                                 {pada.line}
                                                             </span>
 
-                                                            {pada.tokens.map(token => (
+                                                            {pada.grammarData.map(token => (
                                                                 <div
                                                                 className="glossing-token text-font"
                                                                 key={"t_" + token.index}>
@@ -277,10 +283,10 @@ class ContentView extends Component {
                                                                     <div className="glossing-annotation">
                                                                         {this.cleanLemmaString(token.lemma)}
                                                                         {
-                                                                            Object.keys(token.grammar).map(key => (
+                                                                            Object.keys(token.props).map(key => (
                                                                                 key !== "lemma type" &&
                                                                                 <span key={"t_" + token.index + "_" + key}>
-                                                                                    .{token.grammar[key]}
+                                                                                    .{token.props[key]}
                                                                                 </span>
                                                                             ))
                                                                         }
@@ -347,7 +353,7 @@ class ContentView extends Component {
                                                             <td>
                                                                 {data.padas.map(pada => (
                                                                     <div key={pada.index}>
-                                                                        <div style={{display:"inline-block", verticalAlign:"top"}} className="bold red gap-right">{pada.line}:</div>
+                                                                        <div style={{display:"inline-block", verticalAlign:"top"}} className="bold red gap-right">{pada.id}:</div>
                                                                         <div style={{display:"inline-block", verticalAlign:"top"}} className="text-font">
                                                                             {this.resolveAbbrevationToHTML(pada.label, "label")}
                                                                         </div>
