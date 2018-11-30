@@ -52,6 +52,9 @@ public class SearchHits {
 	 * object to display in frontend...
 	 */
 	private void processSearchResponse(SearchResponse response) {
+		
+		System.out.println(response);
+		
 		this.hits = new ArrayList<SearchHit>();
 		setTotal(response.getHits().getTotalHits());
 		setTook(response.getTook().getMillis());
@@ -97,6 +100,21 @@ public class SearchHits {
 						continue;
 					}
 				}
+			} else if (innerHits.containsKey("tokens")) {
+				//with inner hits
+//				int hitCount = 1;
+//				for (org.elasticsearch.search.SearchHit innerHit : innerHits.get("tokens").getHits()) {
+//					try {
+//						StringBuilder sb = new StringBuilder();
+//						for (String hKey : innerHit.getHighlightFields().keySet()) {
+//							sb.append(concatText(innerHit.getHighlightFields().get(hKey).fragments()));
+//							sb.append(".");
+//						}
+//						hit.addHighlight("Grammar entity #" + hitCount++, sb.substring(0, sb.length()-1));
+//					} catch (Exception e) {
+//						continue;
+//					}
+//				}
 			}
 			
 			this.hits.add(hit);

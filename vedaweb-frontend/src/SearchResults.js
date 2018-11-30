@@ -13,6 +13,7 @@ import axios from 'axios';
 import { Base64 } from 'js-base64';
 
 import searchResultsStore from "./stores/searchResultsStore";
+import uiDataStore from "./stores/uiDataStore";
 
 const fieldDisplayMapping = {
     "form": "Verse text",
@@ -80,9 +81,18 @@ class SearchResults extends Component {
     }
 
     loadData = (queryJSON) => {
-        //console.log("QUERY: " + JSON.stringify(queryJSON));
-        let queryDisplay = queryJSON.mode === "grammar" ? "grammar search" : queryJSON.input;
 
+        //construct "Search Results for ..." data
+        let queryDisplay = {
+            query: queryJSON.mode === "grammar"
+                ? queryJSON.blocks.map(b => Object.keys(b).filter(k => k !== 'distance')
+                    .map(k => k + ': ' + b[k]).join(', ')).join(' + ')
+                : queryJSON.input,
+            field:  queryJSON.mode === "grammar"
+                ? "Grammar Data"
+                : uiDataStore.layers.find(l => l.id === queryJSON.field).label
+        };
+            
         this.setState({
             isLoaded: false,
             error: undefined,
@@ -94,12 +104,14 @@ class SearchResults extends Component {
         queryJSON.from = ((searchResultsStore.page - 1) * searchResultsStore.size);
         queryJSON.size = searchResultsStore.size;
 
-        console.log(JSON.stringify(queryJSON));
+        //console.log(JSON.stringify(queryJSON));
         //request search api data
         axios.post(process.env.PUBLIC_URL + "/api/search", queryJSON)
             .then((response) => {
+                console.log(JSON.stringify(response.data));
                 searchResultsStore.resultsData = response.data;
                 searchResultsStore.total = response.data.total;
+                
                 this.setState({
                     isLoaded: true,
                     tableData: response.data.hits === undefined ? {} :
@@ -142,7 +154,7 @@ class SearchResults extends Component {
             );
         } else {
             //html += hit.source.form_raw.join(" / ");
-            html += "NO HIGHLIGHT";
+            html += "...";
         }
 
         return {__html: html};
@@ -162,7 +174,7 @@ class SearchResults extends Component {
             className: 'loc-col',
             render: loc => <Link to={"/view/id/" + loc}>{loc}</Link>,
           }, {
-            title: 'Text',
+            title: 'Search Hit Context',
             dataIndex: 'text',
             key: 'text',
             render: content => <span className="text-font">{content}</span>
@@ -196,9 +208,13 @@ class SearchResults extends Component {
 
                         <div id="search-results" className="card">
 
-                            <h4>
-                                Search Results for <span className="text-font grey">"{this.state.queryDisplay}"</span>
-                            </h4>
+                            { this.state.queryDisplay !== undefined &&
+                                <h4>
+                                    Search Results for
+                                    <span className="text-font grey"> "{this.state.queryDisplay.query}" </span>
+                                    in<span className="text-font grey"> "{this.state.queryDisplay.field}"</span>
+                                </h4>
+                            }
 
                             {/** SEARCH STATS **/}
                             

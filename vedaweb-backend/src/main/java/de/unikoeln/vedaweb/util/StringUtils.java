@@ -48,5 +48,10 @@ public class StringUtils {
 		return form.replaceAll("[\\/\\_\\+\\}\\=\\{\\-\\\\]", "");
 	}
 	
+	
+	public static String cleanLemma(String in) {
+		return in.replaceAll("\\u221A", "");
+	}
+	
 
 }

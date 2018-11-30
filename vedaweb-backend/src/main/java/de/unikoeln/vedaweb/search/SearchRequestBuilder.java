@@ -29,10 +29,11 @@ public class SearchRequestBuilder {
 	
 	private static final FetchSourceContext FETCH_SOURCE_CONTEXT_GRAMMAR = new FetchSourceContext(
 			true,
-			new String[]{"book", "hymn", "form_raw", "verse", "hymnAddressee", "hymnGroup", "strata", "tokens"},
+			new String[]{"book", "hymn", "verse", "hymnAddressee", "hymnGroup", "strata", "tokens"},
 			Strings.EMPTY_ARRAY);
 	
 	private static final String[] HIGHLIGHT_SMART = {"versions.form", "versions.form_raw"};
+	private static final String[] HIGHLIGHT_GRAMMAR = {"tokens.form*", "tokens.lemma*", "tokens.grammar.*"};
 	
 	
 //	public static SearchRequest buildSmartQuery(SearchData searchData){
@@ -73,12 +74,13 @@ public class SearchRequestBuilder {
 				searchData.isAccents() ? searchData.getInput()
 						: StringUtils.removeVowelAccents(searchData.getInput()));
 		String searchField = "versions.form" + (searchData.isAccents() ? "_raw" : "");
+		String targetVersionId = searchData.getField().endsWith("_") ? searchData.getField() + "*" : searchData.getField();
 			
 		source.query(
 			QueryBuilders.nestedQuery(
 				"versions",
 				QueryBuilders.boolQuery()
-					.must(QueryBuilders.matchQuery("versions.id", searchData.getField()))
+					.must(QueryBuilders.queryStringQuery(targetVersionId).field("versions.id"))
 					.must(QueryBuilders.queryStringQuery(searchTerm).field(searchField)),
 				ScoreMode.Max
 			).innerHit(
@@ -110,7 +112,9 @@ public class SearchRequestBuilder {
 		if (searchData.getMeta().size() > 0)
 			bool.must(getSearchMetaQuery(searchData));
 		
-		return req.source(source.query(bool).fetchSource(FETCH_SOURCE_CONTEXT_GRAMMAR));
+		source = source.query(bool).fetchSource(FETCH_SOURCE_CONTEXT_GRAMMAR);
+		System.out.println(source);
+		return req.source(source);
 	}
 	
 	
@@ -150,12 +154,16 @@ public class SearchRequestBuilder {
 				
 				//if fields="form", also search in "lemma"-field
 				if (key.equals("form")) {
-					bool.must(getMultiFieldBoolQuery(
-							StringUtils.removeVowelAccents((String)block.get(key)),
-							false,
-							"tokens.form",
-							"tokens.lemma"
-					));
+					
+					String query = StringUtils.normalizeNFC((String) block.get(key));
+					String field = "tokens.form";
+					
+					if (searchData.isAccents())
+						field += "_raw";
+					else
+						query = StringUtils.removeVowelAccents(query);
+					
+					bool.must(QueryBuilders.matchQuery(field, query));
 				} else {
 					//...otherwise, add a simple term query
 					bool.must(QueryBuilders.termQuery("tokens.grammar." + key, block.get(key)));
@@ -163,7 +171,12 @@ public class SearchRequestBuilder {
 			}
 			
 			//wrap in nested query, add to root query
-			rootQuery.must(QueryBuilders.nestedQuery("tokens", bool, ScoreMode.Max));
+			rootQuery.must(
+				QueryBuilders.nestedQuery("tokens", bool, ScoreMode.Max)
+					.innerHit(
+							new InnerHitBuilder()
+								.setHighlightBuilder(getHighlighting(HIGHLIGHT_GRAMMAR)))
+			);
 		}
 	}
 	
@@ -196,7 +209,7 @@ public class SearchRequestBuilder {
 		
 		//disable highlight fragmentation
 		highlightBuilder.numOfFragments(0);
-		  
+		
 		return(highlightBuilder);
 	}
 	

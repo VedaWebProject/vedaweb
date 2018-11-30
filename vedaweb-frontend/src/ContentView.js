@@ -284,7 +284,7 @@ class ContentView extends Component {
                                                                         {this.cleanLemmaString(token.lemma)}
                                                                         {
                                                                             Object.keys(token.props).map(key => (
-                                                                                key !== "lemma type" &&
+                                                                                key !== "lemma type" && key !== "position" &&
                                                                                 <span key={"t_" + token.index + "_" + key}>
                                                                                     .{token.props[key]}
                                                                                 </span>

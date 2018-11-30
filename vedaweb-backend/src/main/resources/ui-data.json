@@ -64,7 +64,7 @@
 	"meta": {},
 	
 	"layers": [
-		{ "id": "version_", "label": "Text Versions", "show": true },
+		{ "id": "version_", "label": "All Text Versions", "show": true },
 		{ "id": "version_lubotskyzurich", "label": "Lubotsky (Zurich)", "show": true },
 		{ "id": "version_detlef", "label": "Detlef (Deva.)", "show": true },
 		{ "id": "version_vannootenholland", "label": "Van Nooten, Holland", "show": false },
@@ -73,7 +73,7 @@
 		{ "id": "version_gunkelryan", "label": "Gunkel/Ryan", "show": false },
 		{ "id": "version_lubotsky", "label": "Lubotsky", "show": false },
 	
-		{ "id": "translation_", "label": "Translations", "show": true },
+		{ "id": "translation_", "label": "All Translations", "show": true },
 		{ "id": "translation_griffith", "label": "Griffith (EN)", "show": true },
 		{ "id": "translation_macdonell", "label": "MacDonell (EN)", "show": false },
 		{ "id": "translation_renou", "label": "Renou (FR)", "show": true },

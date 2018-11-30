@@ -42,7 +42,8 @@ class SearchView extends Component {
         let jsonData = {
             mode: searchMetaStore.mode,
             scopes: searchMetaStore.scopes,
-            meta: searchMetaStore.meta
+            meta: searchMetaStore.meta,
+            accents: searchMetaStore.accents
         };
         
         if (searchMetaStore.mode === "grammar"){

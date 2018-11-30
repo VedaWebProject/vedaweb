@@ -33,7 +33,7 @@ class SearchSmart extends Component {
                 mode: "smart",
                 input: searchSmartStore.data.field.startsWith('version_') ? SanscriptAccents.t(input, "hk", "iso") : input,
                 field: searchSmartStore.data.field,
-                accents: searchSmartStore.data.accents
+                accents: searchMetaStore.accents
             };
             this.props.history.push("/results/" + Base64.encodeURI(JSON.stringify(jsonData)));
         }
@@ -49,26 +49,28 @@ class SearchSmart extends Component {
             style={{ width: 200 }}
             className="secondary-font">
                 <OptGroup label="Text Versions">
+                    {/* text versions */}
                     {uiDataStore.layers
-                    .filter(l => l.id.startsWith('version_') && l.id !== 'version_')
+                    .filter(l => l.id.startsWith('version_') && l.id !== 'version_detlef')
                     .map(v => (
                         <Option
                         key={'quick_field_' + v.id}
                         value={v.id}
                         className="secondary-font">
-                            {v.label}
+                            {v.id.endsWith('_') ? <i>{v.label}</i> : v.label}
                         </Option>
                     ))}
                 </OptGroup>
                 <OptGroup label="Translations">
+                    {/* translations */}
                     {uiDataStore.layers
-                    .filter(l => l.id.startsWith('translation_') && l.id !== 'translation_')
+                    .filter(l => l.id.startsWith('translation_'))
                     .map(v => (
                         <Option
                         key={'quick_field_' + v.id}
                         value={v.id}
                         className="secondary-font">
-                            {v.label}
+                            {v.id.endsWith('_') ? <i>{v.label}</i> : v.label}
                         </Option>
                     ))}
                 </OptGroup>
@@ -103,8 +105,8 @@ class SearchSmart extends Component {
                 </Tooltip>
 
                 <Checkbox
-                onChange={e => searchSmartStore.setAccents(e.target.checked)}
-                checked={searchSmartStore.data.accents}>
+                onChange={e => searchMetaStore.setAccents(e.target.checked)}
+                checked={searchMetaStore.accents}>
                     accent sensitive
                 </Checkbox>
 

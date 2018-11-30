@@ -19,10 +19,16 @@ const searchMetaStore = store({
 
     transliteration: "hk",
 
+    accents: false,
+
     meta: {
         hymnAddressee: [],
         hymnGroup: [],
         strata: []
+    },
+
+    setAccents(accents){
+        searchMetaStore.accents = accents;
     },
 
     hasMetas(){

@@ -155,8 +155,12 @@ public class ElasticIndexService {
 				indexToken.put("index", token.getIndex());
 				indexToken.put("form", StringUtils.removeVowelAccents(token.getForm()));
 				indexToken.put("form_raw", StringUtils.normalizeNFC(token.getForm()));
-				indexToken.put("lemma", StringUtils.removeVowelAccents(token.getLemma()));
-				indexToken.put("lemma_raw", StringUtils.normalizeNFC(token.getLemma()));
+				indexToken.put("lemma",
+						StringUtils.removeVowelAccents(
+								StringUtils.cleanLemma(token.getLemma())));
+				indexToken.put("lemma_raw",
+						StringUtils.normalizeNFC(
+								StringUtils.cleanLemma(token.getLemma())));
 				
 				//grammar props
 				JSONObject indexTokenGrammar = new JSONObject();
