@@ -180,7 +180,7 @@ class DictionaryView extends Component {
                             <th>Lemma</th>
                             <th>Full Forms</th>
                             <th>Excerpt</th>
-                            <th>Grassmann</th>
+                            <th>Graßmann</th>
                             <th>Others</th>
                         </tr>
                     </thead>

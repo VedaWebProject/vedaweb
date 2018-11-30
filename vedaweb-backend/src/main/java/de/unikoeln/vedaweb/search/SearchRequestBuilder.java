@@ -88,9 +88,6 @@ public class SearchRequestBuilder {
 		
 		//set _source fields
 		source.fetchSource(FETCH_SOURCE_CONTEXT);
-		
-		System.out.println(source);
-		
 		return getCommonSearchRequest().source(source);
 	}
 	

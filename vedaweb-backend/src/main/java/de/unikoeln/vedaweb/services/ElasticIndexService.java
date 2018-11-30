@@ -444,6 +444,7 @@ public class ElasticIndexService {
 	private JSONArray concatForms(VerseVersion version, boolean removeAccents) {
 		JSONArray forms = new JSONArray();
 		for (String form : version.getForm()) {
+			form = StringUtils.removeMetaChars(form);
 			forms.put(
 				removeAccents
 					? StringUtils.removeVowelAccents(form)

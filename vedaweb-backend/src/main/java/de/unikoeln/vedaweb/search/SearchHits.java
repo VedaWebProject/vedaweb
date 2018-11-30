@@ -52,7 +52,6 @@ public class SearchHits {
 	 * object to display in frontend...
 	 */
 	private void processSearchResponse(SearchResponse response) {
-		System.out.println(response);
 		this.hits = new ArrayList<SearchHit>();
 		setTotal(response.getHits().getTotalHits());
 		setTook(response.getTook().getMillis());

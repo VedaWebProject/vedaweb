@@ -320,8 +320,9 @@ public class XmlDataImport {
 				
 				for (XdmItem tokenAttribute : tokenAttributes){
 					String attName = compiler.evaluate("@*:name", tokenAttribute).itemAt(0).getStringValue();
-					String attValue = compiler.evaluate("*:symbol/@*:value", tokenAttribute).itemAt(0).getStringValue();
-					tokenObj.addProp(attName, attValue);
+					XdmValue attValues = compiler.evaluate(".//*:symbol/@*:value", tokenAttribute);
+					for (XdmItem attValue : attValues)
+						tokenObj.addProp(attName, attValue.getStringValue());
 				}
 				
 				//lemma-type

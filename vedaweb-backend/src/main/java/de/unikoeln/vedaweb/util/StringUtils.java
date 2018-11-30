@@ -42,6 +42,11 @@ public class StringUtils {
 		return s == null ? "" :
 			Normalizer.normalize(s, Form.NFD);
 	}
+
+
+	public static String removeMetaChars(String form) {
+		return form.replaceAll("[\\/\\_\\+\\}\\=\\{\\-\\\\]", "");
+	}
 	
 
 }
