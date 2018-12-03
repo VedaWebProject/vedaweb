@@ -86,7 +86,7 @@ class SearchResults extends Component {
         let queryDisplay = {
             query: queryJSON.mode === "grammar"
                 ? queryJSON.blocks.map(b => Object.keys(b).filter(k => k !== 'distance')
-                    .map(k => k + ': ' + b[k]).join(', ')).join(' + ')
+                    .map(k => k + ': ' + b[k]).join(', ')).join('; ')
                 : queryJSON.input,
             field:  queryJSON.mode === "grammar"
                 ? "Grammar Data"
@@ -99,7 +99,8 @@ class SearchResults extends Component {
             queryDisplay: queryDisplay
         });
 
-        document.title = "VedaWeb | Search Results for '" + queryDisplay + "'";
+        //set page title
+        document.title = "VedaWeb | Search Results for '" + queryDisplay.query + "'";
 
         queryJSON.from = ((searchResultsStore.page - 1) * searchResultsStore.size);
         queryJSON.size = searchResultsStore.size;

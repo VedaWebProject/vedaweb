@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import de.unikoeln.vedaweb.search.SearchData;
-import de.unikoeln.vedaweb.search.SearchHits;
+import de.unikoeln.vedaweb.search.SearchHitsConverter;
 import de.unikoeln.vedaweb.services.ElasticSearchService;
 import de.unikoeln.vedaweb.services.MappingService;
 
@@ -27,8 +27,9 @@ public class SearchController {
 	@PostMapping(value = "/search", produces = {"application/json"})
     public String searchView(@RequestBody SearchData searchData) {
 		
-		SearchHits hits = new SearchHits(search.search(searchData));
-		return mappingService.mapObjectToJSON(hits);
+		return mappingService.mapObjectToJSON(
+				SearchHitsConverter.processSearchResponse(
+						search.search(searchData)));
     }
 	
 }

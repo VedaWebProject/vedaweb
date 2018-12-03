@@ -27,13 +27,8 @@ public class SearchRequestBuilder {
 			new String[]{"book", "hymn", "verse", "hymnAddressee", "hymnGroup", "strata"},
 			Strings.EMPTY_ARRAY);
 	
-	private static final FetchSourceContext FETCH_SOURCE_CONTEXT_GRAMMAR = new FetchSourceContext(
-			true,
-			new String[]{"book", "hymn", "verse", "hymnAddressee", "hymnGroup", "strata", "tokens"},
-			Strings.EMPTY_ARRAY);
-	
-	private static final String[] HIGHLIGHT_SMART = {"versions.form", "versions.form_raw"};
-	private static final String[] HIGHLIGHT_GRAMMAR = {"tokens.form*", "tokens.lemma*", "tokens.grammar.*"};
+	private static final String[] HIGHLIGHT_SMART = {"versions.form*"};
+//	private static final String[] HIGHLIGHT_GRAMMAR = {"tokens.form*", "tokens.lemma*", "tokens.grammar.*"};
 	
 	
 //	public static SearchRequest buildSmartQuery(SearchData searchData){
@@ -112,7 +107,7 @@ public class SearchRequestBuilder {
 		if (searchData.getMeta().size() > 0)
 			bool.must(getSearchMetaQuery(searchData));
 		
-		source = source.query(bool).fetchSource(FETCH_SOURCE_CONTEXT_GRAMMAR);
+		source = source.query(bool).fetchSource(FETCH_SOURCE_CONTEXT);
 		System.out.println(source);
 		return req.source(source);
 	}
@@ -173,38 +168,35 @@ public class SearchRequestBuilder {
 			//wrap in nested query, add to root query
 			rootQuery.must(
 				QueryBuilders.nestedQuery("tokens", bool, ScoreMode.Max)
-					.innerHit(
-							new InnerHitBuilder()
-								.setHighlightBuilder(getHighlighting(HIGHLIGHT_GRAMMAR)))
+					.innerHit(new InnerHitBuilder()
+//								.setHighlightBuilder(getHighlighting(HIGHLIGHT_GRAMMAR))
+								.setName("tokens." + block.hashCode()))
 			);
 		}
 	}
 	
 	
-	private static BoolQueryBuilder getMultiFieldBoolQuery(String query, boolean must, String ... fields) {
-		BoolQueryBuilder bool = QueryBuilders.boolQuery();
-		
-		//TODO: fuzzy or nah?
-		for (String field : fields) {
-			if (must) {
-				bool.must(QueryBuilders.matchQuery(field, query));
-			} else {
-				bool.should(QueryBuilders.matchQuery(field, query));
-			}
-		}
-		
-		return bool;
-	}
+//	private static BoolQueryBuilder getMultiFieldBoolQuery(String query, boolean must, String ... fields) {
+//		BoolQueryBuilder bool = QueryBuilders.boolQuery();
+//		
+//		//TODO: fuzzy or nah?
+//		for (String field : fields) {
+//			if (must) {
+//				bool.must(QueryBuilders.matchQuery(field, query));
+//			} else {
+//				bool.should(QueryBuilders.matchQuery(field, query));
+//			}
+//		}
+//		
+//		return bool;
+//	}
 	
 	
 	private static HighlightBuilder getHighlighting(String... fields){
 		HighlightBuilder highlightBuilder = new HighlightBuilder(); 
 		
 		for (String field : fields){
-			HighlightBuilder.Field highlightField =
-			        new HighlightBuilder.Field(field); 
-			highlightField.highlighterType("unified");  
-			highlightBuilder.field(highlightField);
+			highlightBuilder.field(new HighlightBuilder.Field(field));
 		}
 		
 		//disable highlight fragmentation
