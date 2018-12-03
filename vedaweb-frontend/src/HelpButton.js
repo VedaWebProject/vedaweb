@@ -29,16 +29,14 @@ const helpTexts = {
         content:
             <div>
                 <p>
-                    Using the grammar search, you can find verses containing terms with certain grammatical properties.
+                    Using the grammar search, you can find verses containing lemmas or word forms with certain grammatical properties.
                 </p>
                 <p>
-                    Define a search term (optional) and select an attribute (like case, number, person, etc.)
-                     and the value you are looking for (optional). This will also search for matching lemmata.
-                     You may add more properties to your search term by clicking the plus-button to the right.
+                    Define a word form or lemma (optional) and select a property (like case, number, person, etc.)
+                    and the value you are looking for (optional). You may add more properties to your search term by clicking the plus-button to the right.
                 </p>
                 <p>
-                    To add more than one term to find in a verse, click on the plus-button below. This will display 
-                    another block which lets you define the additional term.
+                    To add more than one word form or lemma to find in a verse, click on the plus-button below.
                 </p>
             </div>
     },
