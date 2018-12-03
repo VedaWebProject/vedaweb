@@ -26,7 +26,7 @@ class ContentViewFilterSwitch extends Component {
                 disabled={this.props.disabled}
                 checked={this.props.checked}
                 size={this.props.size} />
-                    {this.props.label + (this.props.disabled ? ' - missing' : '')}
+                    {this.props.label + (this.props.disabled ? ' - n/a for this verse' : '')}
             </div>
         );
     }

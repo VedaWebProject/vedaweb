@@ -421,7 +421,7 @@ class ContentView extends Component {
                     <Drawer
                     title={<h4 style={{marginBottom:'0'}}><Icon type="filter" className="gap-right"/> View Filters</h4>}
                     placement="right"
-                    width="400"
+                    width="480"
                     closable={true}
                     onClose={() => this.setState({filtersVisible: false})}
                     visible={this.state.filtersVisible}
