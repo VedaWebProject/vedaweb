@@ -156,7 +156,7 @@ class ContentView extends Component {
                                 <Col span={24}>
                                     <div className="card-nobox">
                                         { data.book !== undefined &&
-                                            <div>
+                                            <div className="v-middle">
                                                 <ContentLocation
                                                 key={'loc_' + data.id}
                                                 currIndex={data.index}

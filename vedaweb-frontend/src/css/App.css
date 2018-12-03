@@ -146,7 +146,7 @@ hr {
 }
 
 .gap-right {
-    margin-right: .5rem;
+    margin-right: .5rem !important;
 }
 
 .gap-right-big {

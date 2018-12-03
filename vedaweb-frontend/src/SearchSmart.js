@@ -46,7 +46,7 @@ class SearchSmart extends Component {
             defaultValue="form"
             value={searchSmartStore.data.field}
             onSelect={(value, option) => searchSmartStore.setField(value)}
-            style={{ width: 200 }}
+            style={{ width: '180px' }}
             className="secondary-font">
                 <OptGroup label="Text Versions">
                     {/* text versions */}
@@ -85,18 +85,20 @@ class SearchSmart extends Component {
 
         return (
 
-            <div id="search-smart">
+            <div className="content-right v-middle" style={{display: 'inline'}}>
                 <Tooltip
                 title={transliteration}
                 trigger="focus"
                 placement="top"
-                overlayClassName="transliteration-tooltip">
+                overlayClassName="transliteration-tooltip"
+                style={{display: 'inline'}}>
 
                     <Search
                     value={searchSmartStore.data.input}
                     onChange={e => searchSmartStore.setInput(e.target.value)}
                     onSearch={this.handleSearch}
                     addonBefore={selectBefore}
+                    style={{maxWidth: '420px'}}
                     placeholder={"Quick search: " + 
                         (searchSmartStore.data.field.startsWith('version_')
                         ? searchMetaStore.transliteration.toUpperCase() + " or verse no."
@@ -106,7 +108,8 @@ class SearchSmart extends Component {
 
                 <Checkbox
                 onChange={e => searchMetaStore.setAccents(e.target.checked)}
-                checked={searchMetaStore.accents}>
+                checked={searchMetaStore.accents}
+                style={{marginLeft: '1rem'}}>
                     accent sensitive
                 </Checkbox>
 

@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Row, Icon, Menu } from 'antd';
+import { Icon, Menu } from 'antd';
 
 import HelpButton from "./HelpButton";
 import SearchSmart from "./SearchSmart";
@@ -20,40 +20,21 @@ class NavBar extends Component {
     constructor(props){
         super(props);
         this.state = {
-            showFeedbackModal: false,
-            //current: ''
+            showFeedbackModal: false
         }
     }
-
-
-    // componentWillMount(){
-    //     this.props.history.listen((event)=>{
-    //         let pathname = event.pathname.split("/");
-    //         if (pathname !== null) {
-    //             this.setState({
-    //                 current: pathname[1].replace(/:.*/g, "")
-    //             });
-    //         }
-    //     });
-    // }
 
 
     render() {
 
         const menuStyle = {
             backgroundColor: "transparent",
-            borderBottom: "none",
-            textAlign: "right",
-            width: "99%"
+            borderBottom: "none"
         };
 
         return (
             
-            <Row
-            type="flex"
-            align="middle"
-            id="navbar"
-            className="box-shadow">
+            <div id="navbar" className="box-shadow" >
 
                 <NavLink to={"/home"} className="v-middle">
                     <img src={logo} className="navbar-logo" alt="" />
@@ -63,52 +44,48 @@ class NavBar extends Component {
                     </div>
                 </NavLink>
 
-                <div className="flex-grow-1">
+                <div style={{flex: '2', textAlign: 'center'}}>
+                    <HelpButton inline type="quickSearch" style={{paddingRight: '1rem'}}/>
                     <SearchSmart /> 
                 </div>
 
-                <HelpButton type="quickSearch" align="left" style={{paddingLeft:'1rem', verticalAlign:'top'}} />
+                <Menu
+                selectedKeys={[]}
+                mode="horizontal"
+                style={menuStyle}
+                onClick={() => {this.setState({showFeedbackModal: true})}}>
 
-                <div className="flex-grow-2">
-                    <Menu
-                    //selectedKeys={[this.state.current]}
-                    selectedKeys={[]}
-                    mode="horizontal"
-                    style={menuStyle}
-                    onClick={() => {this.setState({showFeedbackModal: true})}}>
+                    <SubMenu
+                    title={<div className="content-center submenu-title-wrapper"><Icon type="book"/><br/>Browse Rigveda</div>}
+                    className="right">
+                        {searchMetaStore.scopeDataRaw.map((hymns, i) => (
+                            <Menu.Item key={'view:' + i}>
+                                <NavLink to={"/view/id/" + (i+1) + ".1.1"} activeClassName="selected">
+                                    Book {('0' + (i+1)).slice(-2)} ({hymns} Hymns)
+                                </NavLink>
+                            </Menu.Item>
+                        ))}
+                    </SubMenu>
 
-                        <SubMenu
-                        title={<div className="content-center submenu-title-wrapper"><Icon type="book"/><br/>Browse Rigveda</div>}
-                        className="right">
-                            {searchMetaStore.scopeDataRaw.map((hymns, i) => (
-                                <Menu.Item key={'view:' + i}>
-                                    <NavLink to={"/view/id/" + (i+1) + ".1.1"} activeClassName="selected">
-                                        Book {('0' + (i+1)).slice(-2)} ({hymns} Hymns)
-                                    </NavLink>
-                                </Menu.Item>
-                            ))}
-                        </SubMenu>
+                    <Menu.Item key="search">
+                        <NavLink to={"/search"} className="content-center" activeClassName="selected">
+                            <Icon type="zoom-in"/><br/>Advanced Search
+                        </NavLink>
+                    </Menu.Item>
 
-                        <Menu.Item key="search">
-                            <NavLink to={"/search"} className="content-center" activeClassName="selected">
-                                <Icon type="zoom-in"/><br/>Advanced Search
-                            </NavLink>
-                        </Menu.Item>
+                    <Menu.Item key="home">
+                        <NavLink to={"/home"} className="content-center" activeClassName="selected">
+                            <Icon type="message"/><br/>Beta Feedback
+                        </NavLink>
+                    </Menu.Item>
 
-                        <Menu.Item key="home">
-                            <NavLink to={"/home"} className="content-center" activeClassName="selected">
-                                <Icon type="message"/><br/>Beta Feedback
-                            </NavLink>
-                        </Menu.Item>
-
-                    </Menu>
-                </div>
+                </Menu>
 
                 {/* <FeedbackModal
                 visible={this.state.showFeedbackModal}
                 onCancel={() => this.setState({showFeedbackModal: false})} /> */}
 
-            </Row>
+            </div>
             
         );
     }
