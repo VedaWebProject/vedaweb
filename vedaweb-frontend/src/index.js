@@ -11,14 +11,12 @@ import { BrowserRouter as Router } from 'react-router-dom'
 import Browserizr from 'browserizr';
 
 
-
 //just alert if IE or mobile
-if (Browserizr.is_ie) {
-    alert("We suspect you are using the Internet Explorer.\nUnfortunately, VedaWeb only works with modern web browsers.\nYou will need to use Firefox, Chrome or something similar instead.");
+if (Browserizr.is_ie || Browserizr.is_edge) {
+    alert("We suspect you are using the Internet Explorer or Microsoft Edge.\nUnfortunately, VedaWeb only works with modern web browsers.\nYou will need to use Firefox, Chrome or something similar instead.");
 } else if (Browserizr.is_mobile) {
     alert("We suspect you are using a mobile device.\nUnfortunately, VedaWeb is not designed to work on mobile devices. You will need to try to use a desktop browser instead.");
-} else{
-
+} else {
 
     //render app
     ReactDOM.render(
@@ -28,7 +26,6 @@ if (Browserizr.is_ie) {
         , document.getElementById('root')
     );
     registerServiceWorker();
-
 
 }
 
