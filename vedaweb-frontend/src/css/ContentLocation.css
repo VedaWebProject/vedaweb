@@ -14,8 +14,8 @@
 }
 
 .location-display {
-    text-align: center;
     padding-left: 1rem;
     padding-right: 1rem;
-    font-size: 130%;
+    font-size: 26px;
+    color: #931111;
 }

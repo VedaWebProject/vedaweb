@@ -86,65 +86,67 @@ class ContentLocation extends Component {
         const verseCount = this.state.verseCount;
 
         const selectStyle = {
-            fontSize: '18px',
-            fontWeight: 'bold',
-            width: '80px'
+            fontSize: '26px',
+            width: '82px',
+            color: '#931111',
+            textAlign: 'center'
         }
 
         return (
             this.props.book !== undefined && this.props.hymn !== undefined &&
-            <div className="inline-block">
-                <Link to={"/view/index/" + (this.props.currIndex - 1)} className="location-controls">
+            <div className="inline-block location-display">
+
+                <Link
+                to={"/view/index/" + (this.props.currIndex - 1)}
+                className="location-controls gap-right">
                     <Icon type="left"/>
                 </Link>
 
-                <span className="location-display">
-
-                    <Select
-                    style={selectStyle}
-                    showSearch
-                    value={book}
-                    onSelect={(v) => this.handleSelect("book", v)} >
-                        {Array(bookCount).fill(0).map((n, i) => (
-                            <Option
-                            key={'book_' + i+1}
-                            value={i+1}>
-                                {('0' + (i+1)).slice(-2)}
-                            </Option>
-                        ))}
-                    </Select>
-                    .
-                    <Select
-                    style={selectStyle}
-                    showSearch
-                    value={hymn}
-                    onSelect={(v) => this.handleSelect("hymn", v)} >
-                        {Array(hymnCount).fill(0).map((n, i) => (
-                            <Option
-                            key={'hymn_' + i+1}
-                            value={i+1}>
-                                {('00' + (i+1)).slice(-3)}
-                            </Option>
-                        ))}
-                    </Select>
-                    .
-                    <Select
-                    style={selectStyle}
-                    showSearch
-                    value={verse}
-                    onSelect={(v) => this.handleSelect("verse", v)} >
-                        {Array(verseCount).fill(0).map((n, i) => (
-                            <Option
-                            key={'verse_' + i+1}
-                            value={i+1}>
-                                {('0' + (i+1)).slice(-2)}
-                            </Option>
-                        ))}
-                    </Select>
+                <Select
+                style={selectStyle}
+                showSearch
+                value={book}
+                onSelect={(v) => this.handleSelect("book", v)} >
+                    {Array(bookCount).fill(0).map((n, i) => (
+                        <Option
+                        key={'book_' + i+1}
+                        value={i+1}>
+                            {('0' + (i+1)).slice(-2)}
+                        </Option>
+                    ))}
+                </Select>
+                .
+                <Select
+                style={selectStyle}
+                showSearch
+                value={hymn}
+                onSelect={(v) => this.handleSelect("hymn", v)} >
+                    {Array(hymnCount).fill(0).map((n, i) => (
+                        <Option
+                        key={'hymn_' + i+1}
+                        value={i+1}>
+                            {('00' + (i+1)).slice(-3)}
+                        </Option>
+                    ))}
+                </Select>
+                .
+                <Select
+                style={selectStyle}
+                showSearch
+                value={verse}
+                onSelect={(v) => this.handleSelect("verse", v)} >
+                    {Array(verseCount).fill(0).map((n, i) => (
+                        <Option
+                        key={'verse_' + i+1}
+                        value={i+1}>
+                            {('0' + (i+1)).slice(-2)}
+                        </Option>
+                    ))}
+                </Select>
                 
-                </span>
-
-                <Link to={"/view/index/" + (this.props.currIndex + 1)} className="location-controls">
+                <Link
+                to={"/view/index/" + (this.props.currIndex + 1)}
+                className="location-controls gap-left">
                     <Icon type="right"/>
                 </Link>
             </div>

@@ -153,10 +153,8 @@ class ContentView extends Component {
                         <div>
                             <Row>
 
-                                {/** CONTENT **/}
-                                <Col span={21}>
-
-                                    <div className="card">
+                                <Col span={24}>
+                                    <div className="card-nobox">
                                         { data.book !== undefined &&
                                             <div>
                                                 <ContentLocation
@@ -176,6 +174,10 @@ class ContentView extends Component {
                                             </div>
                                         }
                                     </div>
+                                </Col>
+
+                                {/** CONTENT **/}
+                                <Col span={21}>
 
                                     { data.versions !== undefined &&
                                         <div>
