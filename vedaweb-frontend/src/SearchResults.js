@@ -18,14 +18,11 @@ import uiDataStore from "./stores/uiDataStore";
 const fieldDisplayMapping = {
     "form": "Verse text",
     "form_raw": "Verse text",
-    "translation": "Translation",
-    "lemmata": "Lemmata",
-    "lemmata_raw": "Lemmata"
+    "translation": "Translation"
 }
 
 
 class SearchResults extends Component {
-
 
     constructor(props) {
         super(props)
