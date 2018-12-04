@@ -1,5 +1,7 @@
 package de.unikoeln.vedaweb.data;
 
+import de.unikoeln.vedaweb.util.StringUtils;
+
 public class VerseVersion {
 	
 	private String id;
@@ -28,8 +30,11 @@ public class VerseVersion {
 		return this.id;
 	}
 	
-	public void generateId() {
-		this.id = (type + "_" + source.replaceAll("\\P{L}", "")).toLowerCase();
+	private void generateId() {
+		this.id = (type + "_" +
+				StringUtils.retainLatinBaseChars(
+						source.toLowerCase().replaceAll("ß", "ss")
+					));
 	}
 
 	public String getSource() {

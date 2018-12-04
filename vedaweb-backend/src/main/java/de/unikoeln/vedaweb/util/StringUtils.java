@@ -53,5 +53,12 @@ public class StringUtils {
 		return in.replaceAll("\\u221A", "");
 	}
 	
+	public static String retainLatinBaseChars(String in) {
+		return normalizeNFC(
+				normalizeNFD(in)
+				.replaceAll("[^a-zA-Z]", "")
+			);
+	}
+	
 
 }
