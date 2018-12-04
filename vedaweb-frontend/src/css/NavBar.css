@@ -6,7 +6,10 @@
     justify-content: center;
     align-items: center;
     
+    /* for box shadow to display in front of following dom element */
+    position: relative;
     z-index: 9;
+    
     background-color: #fff;
     padding: .5rem;
     padding-left: 2rem;
