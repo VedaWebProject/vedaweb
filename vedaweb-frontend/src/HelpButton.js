@@ -45,11 +45,11 @@ const helpTexts = {
             </div>
     },
     searchScope : {
-        title: "Search Range",
+        title: "Search Range Filter",
         content:
             <div>
                 <p>
-                    The search range setting lets you specify ranges of books (and hymns) to limit the search to. 
+                    The search range filter lets you specify ranges of books (and hymns) to limit your search to. 
                     You may add more ranges by clicking the plus-button to the right of each line.
                 </p>
             </div>
@@ -63,7 +63,7 @@ const helpTexts = {
                 </p>
                 <p>
                     It is possible to select multiple values per property. The results will only contain verses 
-                    that match one of the selected values of each property specified!
+                    that match at least one of the selected values for each property you specified!
                 </p>
             </div>
     },
@@ -77,7 +77,7 @@ const helpTexts = {
             </div>
     },
     zurichGlossing : {
-        title: "Morphological glossings from Zurich",
+        title: "Morphological Glossings from Zurich",
         content:
             <div>
                 <p>

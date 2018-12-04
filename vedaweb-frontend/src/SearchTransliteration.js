@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Radio } from 'antd';
+import { Select } from 'antd';
 
 import './css/SearchTransliteration.css';
 
@@ -7,7 +7,7 @@ import searchMetaStore from "./stores/searchMetaStore";
 import uiDataStore from "./stores/uiDataStore";
 import { view } from 'react-easy-state';
 
-const RadioGroup = Radio.Group;
+const Option = Select.Option;
 
 
 class SearchTransliteration extends Component {
@@ -15,26 +15,22 @@ class SearchTransliteration extends Component {
 
     render() {
 
-        const radioStyle = {
-            display: 'block',
-            height: '30px',
-            lineHeight: '30px',
-        };
-
         return (
 
-            <RadioGroup
-            onChange={e => searchMetaStore.setTransliteration(e.target.value)}
-            value={searchMetaStore.transliteration}>
+            <Select
+            value={searchMetaStore.transliteration}
+            onSelect={(v, o) => searchMetaStore.setTransliteration(v)}
+            className="secondary-font"
+            style={{width: '400px', maxWidth: '90%'}}>
                 {uiDataStore.search.meta.transliterations.map(option => (
-                    <Radio
+                    <Option
                     key={option.name}
                     value={option.id}
-                    style={radioStyle}>
+                    className="secondary-font">
                         {option.name}
-                    </Radio>
+                    </Option>
                 ))}
-            </RadioGroup>
+            </Select>
 
         );
 

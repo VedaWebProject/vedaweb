@@ -20,7 +20,7 @@ class SearchMetaFilterList extends Component {
                     mode="multiple"
                     allowClear={true}
                     value={this.props.selected}
-                    style={{ width: '100%', margin: '0.5rem 0'}}
+                    style={{ width: '860px', maxWidth: '90%', margin: '0.5rem 0'}}
                     placeholder={"Select or leave blank for " + this.props.placeholder}
                     onChange={this.props.handleChange}>
                         {this.props.items.map((item, i) => (

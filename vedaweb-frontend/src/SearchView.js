@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Row, Col, Button, Icon, Tabs, Collapse } from 'antd';
+import { Row, Col, Button, Icon, Tabs, Collapse, Checkbox } from 'antd';
 
 import SearchGrammar from "./SearchGrammar";
 import SearchScopeContainer from "./SearchScopeContainer";
@@ -75,7 +75,6 @@ class SearchView extends Component {
 
     render() {
 
-        //TEMP DEV
         const customPanelStyle = {
             background: '#fafafa',
             borderRadius: 2,
@@ -84,15 +83,6 @@ class SearchView extends Component {
             overflow: 'hidden',
             fontSize: '18px'
         };
-
-        const searchTransliterationPanelHeader =
-            <div>
-                {"Selected Transliteration: "}
-                <span className="red">
-                    {uiDataStore.search.meta.transliterations
-                        .filter(t => t.id === searchMetaStore.transliteration)[0].name}
-                </span>
-            </div>
 
         const searchScopePanelHeader =
             <div>
@@ -128,19 +118,34 @@ class SearchView extends Component {
                     <div className="card">
                         <h4>Advanced Search</h4>
 
-                        <h3><Icon type="edit" className="gap-right"/>Input Transliteration</h3>
-                        <Collapse bordered={false}>
-                            <Panel
-                            header={searchTransliterationPanelHeader}
-                            key={"transliteration"}
-                            style={customPanelStyle}
-                            forceRender={true}>
-                                <HelpButton type="transliteration" />
+                        <h3 className="top-gap-big">
+                            <Icon type="tool" className="gap-right"/>
+                            General settings (apply to all searches)
+                        </h3>
+                        <Row className="bottom-gap">
+                            <Col span={6}>
+                                Input transliteration:
+                                <HelpButton inline type="transliteration" style={{marginLeft: '1rem'}} />
+                            </Col>
+                            <Col span={18}>
                                 <SearchTransliteration/>
-                            </Panel>
-                        </Collapse> 
+                            </Col>
+                        </Row>
+                        <Row className="bottom-gap">
+                            <Col span={6}>
+                                Accent sensitive search:
+                                <HelpButton inline type="accentSensitive" style={{marginLeft: '1rem'}} />
+                            </Col>
+                            <Col span={18}>
+                                <Checkbox
+                                onChange={e => searchMetaStore.setAccents(e.target.checked)}
+                                checked={searchMetaStore.accents} >
+                                    Accent sensitive
+                                </Checkbox>
+                            </Col>
+                        </Row>
                         
-                        <h3><Icon type="search" className="gap-right"/>What are you searching for?</h3>
+                        <h3 className="top-gap-big"><Icon type="search" className="gap-right"/>What are you searching for?</h3>
                         <Tabs
                         onChange={this.switchMode}
                         type="card"
@@ -160,14 +165,14 @@ class SearchView extends Component {
                             </TabPane>
                         </Tabs>
 
-                        <h3><Icon type="tool" className="gap-right"/>Additional Search Settings</h3>
+                        <h3 className="top-gap"><Icon type="filter" className="gap-right"/>Additional search filters</h3>
                         <Collapse bordered={false}>
                             <Panel
                             header={searchScopePanelHeader}
                             key="scope"
                             style={customPanelStyle}
                             forceRender={true}>
-                                <HelpButton type="searchScope" />
+                                <HelpButton align="left" type="searchScope" />
                                 <SearchScopeContainer/>
                             </Panel>
 
@@ -175,7 +180,7 @@ class SearchView extends Component {
                             header={customMetaFilterPanelHeader}
                             key="metafilters"
                             style={customPanelStyle} >
-                                <HelpButton type="searchMetaFilters" />
+                                <HelpButton align="left" type="searchMetaFilters" />
                                 <SearchMetaFilterList
                                 label="Hymn Addressees"
                                 placeholder="all Addressees"
