@@ -1,6 +1,7 @@
 package de.unikoeln.vedaweb.search;
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.Map;
 
 import org.elasticsearch.action.search.SearchResponse;
@@ -12,6 +13,7 @@ public class SearchHitsConverter {
 	 * Process Elasticsearch SearchResponse to prepare SearchHits
 	 * object to display in frontend...
 	 */
+	@SuppressWarnings("unchecked")
 	public static SearchHits processSearchResponse(SearchResponse response) {
 		SearchHits targetHits = new SearchHits();
 		
@@ -52,15 +54,22 @@ public class SearchHitsConverter {
 						// versions
 						org.elasticsearch.search.SearchHits hits = innerHits.get(innerHitKey);
 						for (org.elasticsearch.search.SearchHit innerHit : hits) {
-							try {
-								for (String hKey : innerHit.getHighlightFields().keySet()) {
-									hit.addHighlight(
-										innerHit.getSourceAsMap().get("source").toString(),
-										concatText(innerHit.getHighlightFields().get(hKey).fragments())
-									);
+							if (innerHit.getHighlightFields().size() > 0) {
+								try {
+									for (String hKey : innerHit.getHighlightFields().keySet()) {
+										hit.addHighlight(
+											innerHit.getSourceAsMap().get("source").toString(),
+											concatText(innerHit.getHighlightFields().get(hKey).fragments())
+										);
+									}
+								} catch (Exception e) {
+									continue;
 								}
-							} catch (Exception e) {
-								continue;
+							} else {
+								hit.addHighlight(
+									innerHit.getSourceAsMap().get("source").toString(),
+									String.join(" / ", (List<String>)innerHit.getSourceAsMap().get("form_raw"))
+								);
 							}
 						}
 					} else if (innerHitKey.startsWith("tokens")) {

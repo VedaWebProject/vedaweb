@@ -103,10 +103,10 @@ class SearchResults extends Component {
         queryJSON.size = searchResultsStore.size;
 
         //console.log(JSON.stringify(queryJSON));
+
         //request search api data
         axios.post(process.env.PUBLIC_URL + "/api/search", queryJSON)
             .then((response) => {
-                console.log(JSON.stringify(response.data));
                 searchResultsStore.resultsData = response.data;
                 searchResultsStore.total = response.data.total;
                 
@@ -144,15 +144,8 @@ class SearchResults extends Component {
                     hit.highlight[highlightField]
                     + "<br/>";
             });
-        } else if (hit.source.tokens !== undefined){
-            html += hit.source.tokens.map(t => (
-                " " + t.form + " (" + 
-                Object.keys(t.grammar).filter(k => k !== "lemma type").map(key => t.grammar[key]))
-                + ")"
-            );
         } else {
-            //html += hit.source.form_raw.join(" / ");
-            html += "...";
+            html += "<i>no preview available</i>";
         }
 
         return {__html: html};

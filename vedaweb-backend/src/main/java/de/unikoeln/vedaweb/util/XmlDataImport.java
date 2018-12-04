@@ -201,7 +201,7 @@ public class XmlDataImport {
 					versionNode = temp.itemAt(0);
 					versionForm = new String[]{versionNode.getStringValue()};
 					version = new VerseVersion(
-						"Graßmann",
+						"grassmann",
 						"de",
 						versionForm,
 						"translation",
