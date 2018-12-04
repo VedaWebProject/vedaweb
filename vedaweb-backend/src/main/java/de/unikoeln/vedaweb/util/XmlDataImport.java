@@ -165,13 +165,13 @@ public class XmlDataImport {
 					verseObj.addVersion(version);
 				}
 				
-				// Devanagari / detlef
+				// Devanagari / detlef eichler
 				temp = compiler.evaluate("*:lg[@*:source='detlef']", verse);
 				if (temp.size() > 0) {
 					versionNode = temp.itemAt(0);
 					versionForm = concatTextContents(compiler.evaluate(".//*:l", versionNode));
 					version = new VerseVersion(
-						"Detlef",
+						"Devanagari",
 						compiler.evaluate("@*:lang", versionNode).itemAt(0).getStringValue(),
 						versionForm,
 						"version",

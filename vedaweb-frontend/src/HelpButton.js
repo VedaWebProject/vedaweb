@@ -169,12 +169,12 @@ const helpTexts = {
                 </p>
             </div>
     },
-    version_detlef : {
-        title: "Detlef",
+    version_devanagari : {
+        title: "Devanagari",
         content:
             <div>
                 <p>
-                    Devanagari version provided by Detlef Eichler.<br/>
+                    Devanagari version based on the Samhita-text by Aufrecht and Van Nooten / Holland, provided by Detlef Eichler.<br/>
                     <a href="http://www.detlef108.de/Rigveda.htm" target="_blank" rel="noopener noreferrer">http://www.detlef108.de/Rigveda.htm</a>
                 </p>
             </div>

@@ -66,7 +66,7 @@
 	"layers": [
 		{ "id": "version_", "label": "All Text Versions", "show": true },
 		{ "id": "version_lubotskyzurich", "label": "Lubotsky (Zurich)", "show": true },
-		{ "id": "version_detlef", "label": "Detlef (Deva.)", "show": true },
+		{ "id": "version_devanagari", "label": "Devanagari", "show": true },
 		{ "id": "version_vannootenholland", "label": "Van Nooten, Holland", "show": false },
 		{ "id": "version_aufrecht", "label": "Aufrecht", "show": false },
 		{ "id": "version_padapatha", "label": "Padapatha", "show": false },
