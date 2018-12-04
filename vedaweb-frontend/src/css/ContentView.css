@@ -55,3 +55,7 @@ table td {
 .ant-popover .ant-btn-primary {
     display: none;
 }
+
+.btn-aside {
+    border: 1px solid #931111 !important;
+}

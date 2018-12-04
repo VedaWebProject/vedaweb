@@ -376,7 +376,7 @@ class ContentView extends Component {
 
                                     <Affix offsetTop={10}>
                                         <div
-                                        className="card red flex-center"
+                                        className="card red flex-center btn-aside"
                                         title="Show view filters"
                                         onClick={() => this.setState({filtersVisible: true})}
                                         style={{
@@ -397,7 +397,7 @@ class ContentView extends Component {
                                         </div>
 
                                         <div
-                                        className="card red flex-center"
+                                        className="card red flex-center btn-aside"
                                         title="Show export options"
                                         onClick={() => this.setState({exportVisible: true})}
                                         style={{
