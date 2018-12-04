@@ -108,7 +108,6 @@ public class SearchRequestBuilder {
 			bool.must(getSearchMetaQuery(searchData));
 		
 		source = source.query(bool).fetchSource(FETCH_SOURCE_CONTEXT);
-		System.out.println(source);
 		return req.source(source);
 	}
 	

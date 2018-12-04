@@ -14,7 +14,6 @@ public class SearchHitsConverter {
 	 */
 	public static SearchHits processSearchResponse(SearchResponse response) {
 		SearchHits targetHits = new SearchHits();
-		System.out.println(response);
 		
 		targetHits.setTotal(response.getHits().getTotalHits());
 		targetHits.setTook(response.getTook().getMillis());
