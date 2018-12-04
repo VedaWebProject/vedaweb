@@ -28,6 +28,7 @@
 				"book": 			{ "type": "short" },
 				"hymn": 			{ "type": "short" },
 				"verse":			{ "type": "short" },
+				"hymnAbs":			{ "type": "short" },
 				"hymnAddressee":	{ "type": "keyword" },
 				"hymnGroup":		{ "type": "keyword" },
 				"strata":			{ "type": "keyword" },

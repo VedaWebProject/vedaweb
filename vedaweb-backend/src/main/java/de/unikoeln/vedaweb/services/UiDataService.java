@@ -74,6 +74,10 @@ public class UiDataService {
 		((JSONObject)uiData.query("/search/meta"))
 			.put("scopes", indexService.getUIBooksData());
 		
+		//get absolute hymn count data from index and add to uiData JSONObject
+		((JSONObject)uiData.query("/search/meta"))
+			.put("hymnAbs", indexService.getHymnAbsValues());
+		
 		//get addressees data from index and add to uiData JSONObject
 		((JSONObject)uiData.query("/meta"))
 			.put("hymnAddressee", indexService.getVersesMetaData("hymnAddressee"));

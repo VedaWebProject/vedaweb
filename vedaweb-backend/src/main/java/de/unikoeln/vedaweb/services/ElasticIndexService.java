@@ -105,6 +105,7 @@ public class ElasticIndexService {
 				indexDoc.put("verse", dbDoc.getVerse());
 				indexDoc.put("hymnAddressee", dbDoc.getHymnAddressee());
 				indexDoc.put("hymnGroup", dbDoc.getHymnGroup());
+				indexDoc.put("hymnAbs", dbDoc.getHymnAbs());
 				indexDoc.put("strata", dbDoc.getStrata());
 				indexDoc.put("versions", buildVersionsList(dbDoc));
 //				indexDoc.put("lemmata", StringUtils.removeVowelAccents(concatTokenLemmata(dbDoc)));
@@ -290,6 +291,12 @@ public class ElasticIndexService {
 			}
 		}
 		return books;
+	}
+	
+	
+	public int[] getHymnAbsValues() {
+		//TODO
+		return new int[]{1,2,3,4,5,6,7,8};
 	}
 	
 	

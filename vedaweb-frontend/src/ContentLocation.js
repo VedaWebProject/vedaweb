@@ -71,6 +71,9 @@ class ContentLocation extends Component {
             case "verse":
                 id = this.props.book + "." + this.props.hymn + "." + value;
                 break;
+            case "hymnAbs":
+                id = "hymnAbs_" + value;
+                break;
             default:
                 break;
         }
@@ -80,10 +83,11 @@ class ContentLocation extends Component {
 
     render() {
 
-        const {book, hymn, verse} = this.props;
+        const {book, hymn, verse, hymnAbs} = this.props;
         const bookCount = uiDataStore.search.meta.scopes.length;
         const hymnCount = uiDataStore.search.meta.scopes[book-1];
         const verseCount = this.state.verseCount;
+        const hymnAbsValues = uiDataStore.search.meta.hymnAbs;
 
         const selectStyle = {
             fontSize: '26px',
@@ -148,6 +152,23 @@ class ContentLocation extends Component {
                     className="location-controls gap-left">
                         <Icon type="right"/>
                     </Link>
+                    
+                    {/*
+                    <Select
+                    style={selectStyle}
+                    showSearch
+                    value={hymnAbs}
+                    onSelect={(v) => this.handleSelect("hymnAbs", v)} >
+                        {hymnAbsValues.map(v => (
+                            <Option
+                            key={'hymnAbs_' + v}
+                            value={v}>
+                                {v}
+                            </Option>
+                        ))}
+                    </Select>
+                    */}
+
                 </div>
             
         );

@@ -28,6 +28,13 @@ public class DocumentController {
 	@RequestMapping(value = "/id/{id}", produces = {"application/json"})
     public String verseById(
     		@PathVariable("id") String id) {
+		
+		//request for absolute hymn number?
+		if (id.startsWith("hymnAbs_")) {
+			return mappingService.mapObjectToJSON(
+					verseRepo.findByHymnAbs(Integer.parseInt(id.replaceAll("\\D", ""))).get().get(0));
+		}
+		
 		VerseLocation loc = new VerseLocation(id);
 		Optional<Verse> v;
 		

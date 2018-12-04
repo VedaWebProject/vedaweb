@@ -165,7 +165,8 @@ class ContentView extends Component {
                                                 currId={data.id}
                                                 book={data.book}
                                                 hymn={data.hymn}
-                                                verse={data.verse} />
+                                                verse={data.verse}
+                                                hymnAbs={data.hymnAbs} />
                                         
                                                 <span className="bold gap-left-big">Hymn addressee: </span>
                                                 <span className="text-font">{data.hymnAddressee}</span>

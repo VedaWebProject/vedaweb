@@ -3,6 +3,7 @@
 	"search": {
 	    "meta": {
 	        "scopes": [0, 1, 2, 2, 4, 3, 2, 1],
+	        "hymnAbs": [],
 	        "transliterations": [
 				{"id": "hk", "name": "HK (Harvard-Kyoto)"},
 				{"id": "slp1", "name": "SLP1 (Sanskrit Library Phonetic Basic)"},
