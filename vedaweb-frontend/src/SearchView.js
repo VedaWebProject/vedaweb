@@ -120,7 +120,7 @@ class SearchView extends Component {
 
                         <h3 className="top-gap-big">
                             <Icon type="tool" className="gap-right"/>
-                            General settings (apply to all searches)
+                            General settings (applies to all searches)
                         </h3>
                         <Row className="bottom-gap">
                             <Col span={6}>
