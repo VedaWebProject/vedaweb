@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Row, Col, Icon, Input, Tooltip, Select } from 'antd';
+import { Row, Col, Icon, Input, Tooltip, Select, Checkbox } from 'antd';
 
 import searchGrammarStore from "./stores/searchGrammarStore";
 import searchMetaStore from "./stores/searchMetaStore";
@@ -45,10 +45,10 @@ class SearchBlock extends Component {
                         <Row
                         type="flex"
                         align="middle"
-                        justify="center">
+                        justify="start">
 
                             <Col span={9} className="search-input-label content-right">
-                                <span className="secondary-font font-18">Search term:</span>
+                                Word form / lemma:
                             </Col>
 
                             <Col span={9}>
@@ -59,14 +59,18 @@ class SearchBlock extends Component {
                                 placement="bottom">
                                     <Input
                                     value={this.props.form}
-                                    onChange={e => searchGrammarStore.updateForm(this.props.id, e.target.value)}
+                                    onChange={e => searchGrammarStore.setForm(this.props.id, e.target.value)}
                                     placeholder="(optional)"
                                     className="search-block-input" />
                                 </Tooltip>
                             </Col>
 
-                            <Col span={4}>
-                                {/* ??? */}
+                            <Col span={4} offset={1}>
+                                <Checkbox
+                                onChange={e => searchGrammarStore.setLemma(this.props.id, e.target.checked)}
+                                checked={this.props.lemma} >
+                                    Lemma
+                                </Checkbox>
                             </Col>
 
                         </Row>
@@ -74,7 +78,7 @@ class SearchBlock extends Component {
                         <Row
                         type="flex"
                         align="middle"
-                        justify="center"
+                        justify="start"
                         className={true || this.props.isFirstBlock ? "hidden" : ""}>
                             <Col span={9} className="search-input-label content-right">
                                 <span className="secondary-font">Maximum distance to previous term:</span>

@@ -47,6 +47,7 @@ class SearchGrammar extends Component {
                         key={block.id}
                         id={block.id}
                         form={block.form}
+                        lemma={block.lemma}
                         distance={block.distance}
                         isFirstBlock={i === 0}
                         fields={block.fields}

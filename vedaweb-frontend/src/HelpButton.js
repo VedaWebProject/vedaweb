@@ -36,6 +36,10 @@ const helpTexts = {
                     and the value you are looking for (optional). You may add more properties to your search term by clicking the plus-button to the right.
                 </p>
                 <p>
+                    It's also possible to use <strong>wildcards</strong> (just like in the <i>Quick search</i> at the top of the page),
+                    i.e. searching for <i>agn*</i> would match all word forms or lemmas starting with <i>agn</i>.
+                </p>
+                <p>
                     To add more than one word form or lemma to find in a verse, click on the plus-button below.
                 </p>
             </div>

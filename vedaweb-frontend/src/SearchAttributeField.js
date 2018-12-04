@@ -21,7 +21,7 @@ class SearchAttributeField extends Component {
             <Row
             type="flex"
             align="middle"
-            justify="center"
+            justify="start"
             className="search-field">
 
                 <Col span={9}>
@@ -70,14 +70,14 @@ class SearchAttributeField extends Component {
                     </Select>
                 </Col>
 
-                <Col span={2} className="content-right">
+                <Col span={2} offset={1}>
                     <Button
                     disabled={!this.props.isRemovable}
                     onClick={() => searchGrammarStore.removeFieldFromBlock(this.props.parentBlockId, this.props.id)}
                     icon="minus" />
                 </Col>
 
-                <Col span={2} className="content-right">
+                <Col span={2}>
                     <Button
                     onClick={() => searchGrammarStore.addFieldToBlock(this.props.parentBlockId)}
                     disabled={!this.props.isLastField}

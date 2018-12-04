@@ -12,6 +12,7 @@ const searchGrammarStore = store({
         searchGrammarStore.data.blocks = searchGrammarStore.data.blocks.concat({
             id: blockId,
             form: '',
+            lemma: false,
             distance: 0,
             fields: []
         });
@@ -65,10 +66,19 @@ const searchGrammarStore = store({
         }
     },
 
-    updateForm(blockId, form){
+    setForm(blockId, form){
         for (let i = 0; i < searchGrammarStore.data.blocks.length; i++){
             if (searchGrammarStore.data.blocks[i].id === blockId){
                 searchGrammarStore.data.blocks[i].form = form;
+                break;
+            }
+        }
+    },
+
+    setLemma(blockId, lemma){
+        for (let i = 0; i < searchGrammarStore.data.blocks.length; i++){
+            if (searchGrammarStore.data.blocks[i].id === blockId){
+                searchGrammarStore.data.blocks[i].lemma = lemma;
                 break;
             }
         }

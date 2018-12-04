@@ -147,18 +147,26 @@ public class SearchRequestBuilder {
 				if (key.equalsIgnoreCase("distance"))
 					continue; //TEMP DEV
 				
+				//can be ignored, here
+				if (key.equalsIgnoreCase("lemma"))
+					continue; //TEMP DEV
+				
 				//if fields="form", also search in "lemma"-field
 				if (key.equals("form")) {
 					
+					//set query string and target field
 					String query = StringUtils.normalizeNFC((String) block.get(key));
-					String field = "tokens.form";
+					String field = block.get("lemma") != null && ((boolean)block.get("lemma")) == true
+							? "tokens.lemma" : "tokens.form";
 					
+					//set accent sensitive search
 					if (searchData.isAccents())
 						field += "_raw";
 					else
 						query = StringUtils.removeVowelAccents(query);
 					
-					bool.must(QueryBuilders.matchQuery(field, query));
+					//add this query to bool query
+					bool.must(QueryBuilders.queryStringQuery(query).field(field));
 				} else {
 					//...otherwise, add a simple term query
 					bool.must(QueryBuilders.termQuery("tokens.grammar." + key, block.get(key)));
