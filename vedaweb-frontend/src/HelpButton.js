@@ -173,6 +173,16 @@ const helpTexts = {
                 </p>
             </div>
     },
+    accentSensitive : {
+        title: "Accent Sensitive Search",
+        content:
+            <div>
+                <p>
+                    If you use accent sensitive search, you will only find verses matching your exact use of accented vowels,
+                    whereas if you disable accent sensitive search, accents will be ignored, <i>even if you use them</i>.
+                </p>
+            </div>
+    },
     version_devanagari : {
         title: "Devanagari",
         content:

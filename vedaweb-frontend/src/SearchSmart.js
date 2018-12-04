@@ -79,7 +79,10 @@ class SearchSmart extends Component {
 
         const transliteration = (
             searchSmartStore.data.field.startsWith('version_')
-            ? <TransliterationPreview input={searchSmartStore.data.input} transliteration="hk" />
+            && searchMetaStore.transliteration !== "iso"
+            ? <TransliterationPreview
+                input={searchSmartStore.data.input}
+                transliteration={searchMetaStore.transliteration} />
             : null
         );
 

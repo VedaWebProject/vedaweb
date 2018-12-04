@@ -5,6 +5,8 @@ class SanscriptAccents {
     static excludes = ["OR", "AND"];
 
     static t(input, from, to){
+        if (from === to) return input;
+
         input = input.normalize("NFD");
         let noAcc = "";
         let accents = [];

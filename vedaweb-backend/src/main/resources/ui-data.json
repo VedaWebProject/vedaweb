@@ -7,7 +7,8 @@
 				{"id": "hk", "name": "HK (Harvard-Kyoto)"},
 				{"id": "slp1", "name": "SLP1 (Sanskrit Library Phonetic Basic)"},
 				{"id": "iast", "name": "IAST (International Alphabet of Sanskrit Transliteration)"},
-				{"id": "itrans", "name": "ITRANS (Indian Languages Transliteration)"}
+				{"id": "itrans", "name": "ITRANS (Indian Languages Transliteration)"},
+				{"id": "iso", "name": "ISO-15919 (no transliteration, as our data is in ISO-15919)"}
 			]
 	    },
 	    
