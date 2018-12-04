@@ -123,7 +123,9 @@ class ContentView extends Component {
                 content: (
                 <div>
                     By clicking this button on the right side of the screen, you can choose what you want to see (Translations, Glossings, etc.).<br/><br/>
-                    <div style={{textAlign: 'center'}}><img src={layersInfoImg} alt=""/></div>
+                    <div style={{textAlign: 'center'}}>
+                        <img src={layersInfoImg} alt="" style={{border:'1px solid #aaa'}}/>
+                    </div>
                 </div>
                 ),
                 onOk() {uiDataStore.firstTime = false},
@@ -272,8 +274,8 @@ class ContentView extends Component {
                                                         className="glossing-line"
                                                         key={"p_" + pada.index}>
 
-                                                            <span key={"p_gloss_line" + pada.index} className="pada-line">
-                                                                {pada.line}
+                                                            <span key={"p_gloss_line" + pada.index} className="pada-line text-font">
+                                                                {pada.id}
                                                             </span>
 
                                                             {pada.grammarData.map(token => (
