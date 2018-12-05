@@ -30,8 +30,11 @@ const helpTexts = {
             <div>
                 <p>
                     Using the grammar search, you can find verses containing lemmas or word forms with certain grammatical properties.
+                    The underlying data for this search are the morphological glossings (and other annotations),
+                    composed at the University of Zurich on the basis of the Rigveda version by Lubotsky (see "Morphological Glossing" view in the verses data).
                 </p>
                 <p>
+                    <h2>Usage</h2>
                     Define a word form or lemma (optional) and select a property (like case, number, person, etc.)
                     and the value you are looking for (optional). You may add more properties to your search term by clicking the plus-button to the right.
                 </p>
@@ -64,15 +67,6 @@ const helpTexts = {
                 <p>
                     It is possible to select multiple values per property. The results will only contain verses 
                     that match at least one of the selected values for each property you specified!
-                </p>
-            </div>
-    },
-    zurichIso : {
-        title: "Rigveda version in ISO-15919",
-        content:
-            <div>
-                <p>
-                    The Rigveda data from the University of Zurich is the basis of VedaWeb's grammar and full text search tools.
                 </p>
             </div>
     },
@@ -135,7 +129,7 @@ const helpTexts = {
                     You can search for several things in several ways:
                 </p>
                 <p>
-                    <h2>Verse location:</h2>
+                    <h2>Verse location</h2>
                     Just type a Rigveda verse location in the form of <strong>1.2.3</strong> or <strong>01.002.03</strong> or 
                     even <strong>0100203</strong> to be redirected to this verse's page without further detours.
                 </p>
@@ -184,6 +178,15 @@ const helpTexts = {
                 <p>
                     If you use accent sensitive search, you will only find verses matching your exact use of accented vowels,
                     whereas if you disable accent sensitive search, accents will be ignored, <i>even if you use them</i>.
+                </p>
+            </div>
+    },
+    version_lubotskyzurich : {
+        title: "Rigveda version in ISO-15919",
+        content:
+            <div>
+                <p>
+                    A version of the Rigveda Text by Lubotsky, edited at the University of Zurich.
                 </p>
             </div>
     },
