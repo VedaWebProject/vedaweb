@@ -89,6 +89,9 @@ class SearchResults extends Component {
                 ? "Grammar Data"
                 : uiDataStore.layers.find(l => l.id === queryJSON.field).label
         };
+
+        //enable view for searched field automatically
+        uiDataStore.toggleLayer(queryJSON.field, true);
             
         this.setState({
             isLoaded: false,
