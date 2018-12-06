@@ -82,7 +82,7 @@ class SearchResults extends Component {
         //construct "Search Results for ..." data
         let queryDisplay = {
             query: queryJSON.mode === "grammar"
-                ? queryJSON.blocks.map(b => Object.keys(b).filter(k => k !== 'distance')
+                ? queryJSON.blocks.map(b => Object.keys(b).filter(k => k !== 'distance' && k !== 'lemma')
                     .map(k => k + ': ' + b[k]).join(', ')).join('; ')
                 : queryJSON.input,
             field:  queryJSON.mode === "grammar"
@@ -91,7 +91,10 @@ class SearchResults extends Component {
         };
 
         //enable view for searched field automatically
-        uiDataStore.toggleLayer(queryJSON.field, true);
+        if (queryJSON.mode === "smart")
+            uiDataStore.toggleLayer(queryJSON.field, true);
+        else if (queryJSON.mode === "grammar")
+            uiDataStore.toggleLayer("glossing_", true);
             
         this.setState({
             isLoaded: false,
