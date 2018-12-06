@@ -123,20 +123,20 @@ class SearchView extends Component {
                             General settings (applies to all searches)
                         </h3>
                         <Row className="bottom-gap">
-                            <Col span={6}>
+                            <Col span={8}>
                                 Input transliteration:
                                 <HelpButton inline type="transliteration" style={{marginLeft: '1rem'}} />
                             </Col>
-                            <Col span={18}>
+                            <Col span={16}>
                                 <SearchTransliteration/>
                             </Col>
                         </Row>
                         <Row className="bottom-gap">
-                            <Col span={6}>
+                            <Col span={8}>
                                 Accent sensitive search:
                                 <HelpButton inline type="accentSensitive" style={{marginLeft: '1rem'}} />
                             </Col>
-                            <Col span={18}>
+                            <Col span={16}>
                                 <Checkbox
                                 onChange={e => searchMetaStore.setAccents(e.target.checked)}
                                 checked={searchMetaStore.accents} >
