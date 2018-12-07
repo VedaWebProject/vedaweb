@@ -212,7 +212,7 @@ class ContentView extends Component {
                                                                     key={"v_" + v.id}
                                                                     className="translation"
                                                                     ref={this.scrollTo}>
-                                                                        <span className="bold gap-right">{v.source}</span>
+                                                                        <span className="bold gap-right">{version.label}</span>
                                                                         <HelpButton inline type={v.id}/>
                                                                         <div
                                                                         className={"gap-left " + (v.language === "deva" ? "deva-font" : "text-font")}>
