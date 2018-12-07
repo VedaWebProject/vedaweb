@@ -51,7 +51,7 @@ class SearchSmart extends Component {
                 <OptGroup label="Text Versions">
                     {/* text versions */}
                     {uiDataStore.layers
-                    .filter(l => l.id.startsWith('version_') && l.id !== 'version_detlef')
+                    .filter(l => l.id.startsWith('version_') && l.id !== 'version_devanagari')
                     .map(v => (
                         <Option
                         key={'quick_field_' + v.id}
