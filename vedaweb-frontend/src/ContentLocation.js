@@ -91,7 +91,7 @@ class ContentLocation extends Component {
 
         const selectStyle = {
             fontSize: '26px',
-            width: '82px',
+            width: '90px',
             color: '#931111',
             textAlign: 'center'
         }
