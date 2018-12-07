@@ -16,7 +16,7 @@ class Footer extends Component {
     render() {
         return (
 
-            <div id="footer" className="box-shadow">
+            <div id="footer">
             
                 <Row
                 type="flex"
