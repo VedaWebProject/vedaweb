@@ -48,6 +48,10 @@ h2 {
     font-size: 18px;
 }
 
+.font-small {
+    font-size: 14px;
+}
+
 .red {
     color: #931111;
 }

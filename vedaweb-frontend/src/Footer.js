@@ -80,6 +80,16 @@ class Footer extends Component {
                     </Col>
                 </Row>
 
+                <Row>
+                    <Col span={24} className="content-center">
+                        <p className="top-gap content-center font-small grey">
+                            VedaWeb, ed. by Daniel Kölligan and Uta Reinöhl,<br/>
+                            in collaboration with Jakob Halfmann, Börge Kiss, Natalie Korobzow, Francisco Mondaca, Claes Neuefeind, Felix Rau and Patrick Sahle,<br/>
+                            with material provided by Paul Widmer et al. Cologne: University of Cologne 2018.
+                        </p>
+                    </Col>
+                </Row>
+
             </div>
         );
     }
