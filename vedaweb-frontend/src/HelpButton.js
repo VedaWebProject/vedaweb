@@ -146,9 +146,9 @@ const helpTexts = {
                     The <strong>default setting is Harvard-Kyoto (HK)</strong>, but you can change this in the <strong>Advanced Search Settings</strong>.
                 </p>
                 <p>
-                    <h2>Accent sensitive search</h2>
-                    If you use accent sensitive search, you will only find verses matching your exact use of accented vowels,
-                    whereas if you disable accent sensitive search, accents will be ignored, <i>even if you use them</i>.
+                    <h2>Accent-sensitive search</h2>
+                    If you use accent-sensitive search, you will only find verses matching your exact use of accented vowels,
+                    whereas if you disable accent-sensitive search, accents will be ignored, <i>even if you use them</i>.
                 </p>
                 <p>
                     <h2>Wildcards</h2>
@@ -172,12 +172,12 @@ const helpTexts = {
             </div>
     },
     accentSensitive : {
-        title: "Accent Sensitive Search",
+        title: "Accent-sensitive search",
         content:
             <div>
                 <p>
-                    If you use accent sensitive search, you will only find verses matching your exact use of accented vowels,
-                    whereas if you disable accent sensitive search, accents will be ignored, <i>even if you use them</i>.
+                    If you use accent-sensitive search, you will only find verses matching your exact use of accented vowels,
+                    whereas if you disable accent-sensitive search, accents will be ignored, <i>even if you use them</i>.
                 </p>
             </div>
     },

@@ -113,7 +113,7 @@ class SearchSmart extends Component {
                 onChange={e => searchMetaStore.setAccents(e.target.checked)}
                 checked={searchMetaStore.accents}
                 style={{marginLeft: '1rem'}}>
-                    Accent sensitive
+                    Accent-sensitive
                 </Checkbox>
 
             </div>

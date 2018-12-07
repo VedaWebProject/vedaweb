@@ -133,14 +133,14 @@ class SearchView extends Component {
                         </Row>
                         <Row className="bottom-gap">
                             <Col span={8}>
-                                Accent sensitive search:
+                                Accent-sensitive search:
                                 <HelpButton inline type="accentSensitive" style={{marginLeft: '1rem'}} />
                             </Col>
                             <Col span={16}>
                                 <Checkbox
                                 onChange={e => searchMetaStore.setAccents(e.target.checked)}
                                 checked={searchMetaStore.accents} >
-                                    Accent sensitive
+                                    Accent-sensitive
                                 </Checkbox>
                             </Col>
                         </Row>
