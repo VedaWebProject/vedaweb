@@ -337,7 +337,7 @@ public class XmlDataImport {
 				tokenObj.addProp("position",
 						tokenIndex == 0 ? "verse initial"
 							: tokenIndex == tokensTotal - 1 ? "verse final" 
-									: "other");
+									: "intermediate");
 				
 				//index
 				tokenObj.setIndex(tokenIndex++);
