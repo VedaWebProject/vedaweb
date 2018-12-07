@@ -3,6 +3,7 @@
 #navbar {
     display: flex;
     flex-flow: row;
+    flex: 1 0 auto;
     justify-content: center;
     align-items: center;
     
