@@ -186,7 +186,8 @@ const helpTexts = {
         content:
             <div>
                 <p>
-                    A version of the Rigveda Text by Lubotsky, edited at the University of Zurich.
+                    A version of the Rigveda text based on Lubotsky's concordance,
+                    used as the reference text for the annotations added at the University of Zurich
                 </p>
             </div>
     },
