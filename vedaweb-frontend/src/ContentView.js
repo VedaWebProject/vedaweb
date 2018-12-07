@@ -209,23 +209,24 @@ class ContentView extends Component {
                                                         && l.id !== 'version_' && l.show).map(version => {
                                                             let v = data.versions.find(x => x.id === version.id);
                                                             return <div
-                                                            key={"v_" + v.id}
-                                                            className="translation"
-                                                            ref={this.scrollTo}>
-                                                                <span className="bold gap-right">{v.source}</span>
-                                                                <HelpButton inline type={v.id}/>
-                                                                <div className="text-font gap-left">
-                                                                    {v.form.map((line, i) => (
-                                                                        <div key={"trans_" + i}>
-                                                                            {v.applyKeys ?
-                                                                                <span className="red gap-right">{String.fromCharCode(i + 97)} </span>
-                                                                                : ''
-                                                                            }
-                                                                            {line}
+                                                                    key={"v_" + v.id}
+                                                                    className="translation"
+                                                                    ref={this.scrollTo}>
+                                                                        <span className="bold gap-right">{v.source}</span>
+                                                                        <HelpButton inline type={v.id}/>
+                                                                        <div
+                                                                        className={"gap-left " + (v.language === "deva" ? "deva-font" : "text-font")}>
+                                                                            {v.form.map((line, i) => (
+                                                                                <div key={"trans_" + i}>
+                                                                                    {v.applyKeys ?
+                                                                                        <span className="red gap-right">{String.fromCharCode(i + 97)} </span>
+                                                                                        : ''
+                                                                                    }
+                                                                                    {line}
+                                                                                </div>
+                                                                            ))}
                                                                         </div>
-                                                                    ))}
-                                                                </div>
-                                                            </div>
+                                                                    </div>
                                                     })}
                                                 </div>
                                             }

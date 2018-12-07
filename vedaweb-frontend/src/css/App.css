@@ -32,15 +32,15 @@ h2 {
 }
 
 .main-font {
-    font-family: "Assistant", "Tahoma", "Arial", sans-serif;
+    font-family: "Assistant", sans-serif;
 }
 
 .text-font {
-    font-family: "Gentium", "Tahoma", "Arial", sans-serif;
+    font-family: "Gentium", "Tahoma", "Arial", serif;
 }
 
 .deva-font {
-    font-family: "NotoDeva", "Gentium", "Tahoma", "Arial", sans-serif;
+    font-family: "NotoDeva", sans-serif;
     font-size: 1.6rem;
 }
 

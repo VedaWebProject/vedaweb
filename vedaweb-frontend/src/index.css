@@ -13,7 +13,7 @@
 
 @font-face {
     font-family: 'NotoDeva';
-    src: local('NotoSerifDevanagari'), url(./fonts/NotoSerifDevanagari.ttf) format('truetype');
+    src: local('NotoDeva'), url(./fonts/NotoSerifDevanagari.ttf) format('truetype');
 }
 
 
