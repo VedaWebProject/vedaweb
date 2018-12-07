@@ -172,7 +172,7 @@ const helpTexts = {
             </div>
     },
     accentSensitive : {
-        title: "Accent-sensitive search",
+        title: "Accent-sensitive Search",
         content:
             <div>
                 <p>
@@ -182,7 +182,7 @@ const helpTexts = {
             </div>
     },
     version_lubotskyzurich : {
-        title: "Rigveda version in ISO-15919",
+        title: "Rigveda Version in ISO-15919",
         content:
             <div>
                 <p>
