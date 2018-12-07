@@ -238,7 +238,7 @@ const helpTexts = {
             </div>
     },
     version_lubotsky : {
-        title: "Sasa Patha (Lubotsky)",
+        title: "Lubotsky",
         content:
             <div>
                 <p>
