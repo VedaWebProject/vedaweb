@@ -39,7 +39,8 @@ class NavBar extends Component {
                 <NavLink to={"/home"} className="v-middle">
                     <img src={logo} className="navbar-logo" alt="" />
                     <div className="navbar-app-title">
-                        <span className="bold">VedaWeb</span><br/>
+                        <span className="bold">VedaWeb</span>
+                        <span className="bold grey" style={{fontSize: '12px'}}> BETA</span><br/>
                         Rigveda online
                     </div>
                 </NavLink>
