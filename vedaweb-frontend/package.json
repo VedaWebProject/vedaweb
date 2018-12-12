@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "proxy": "http://localhost:8080",
-  "homepage": "/beta/",
+  "homepage": "/rigveda/",
   "dependencies": {
     "antd": "^3.10.2",
     "axios": "^0.18.0",
