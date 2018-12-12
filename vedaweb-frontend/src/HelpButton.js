@@ -167,7 +167,7 @@ const helpTexts = {
                     <h2>Required and prohibited terms</h2>
                     With <strong>+</strong> and <strong>-</strong>, you can specify terms that <strong>must</strong> or <strong>must not</strong> occur in a verse to be found.
                     So, for example, <strong>agnim -indra</strong> finds verses containing <strong>agnim</strong> and not containing <strong>indra</strong>,
-                    while <strong>agnim +indra</strong> finds verses that <i>might</i> contain <strong>agnim</strong> but defenitely contain <strong>indra</strong>.
+                    while <strong>agnim +indra</strong> finds verses that <i>might</i> contain <strong>agnim</strong> but definitely contain <strong>indra</strong>.
                 </p>
             </div>
     },
