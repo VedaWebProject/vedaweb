@@ -7,7 +7,10 @@ class SanscriptAccents {
     static t(input, from, to){
         if (from === to) return input;
 
-        input = input.normalize("NFD");
+        input = input
+            .replace(/"/g,"§")  //replace quotes to preserve them (are re-added later on)
+            .normalize("NFD");
+
         let noAcc = "";
         let accents = [];
 
@@ -36,8 +39,7 @@ class SanscriptAccents {
                 continue;
             }
         }
-        
-        return noAcc;
+        return noAcc.replace(/§/g, "\""); //re-add quotes, return
     }
 
 }
