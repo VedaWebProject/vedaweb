@@ -3,7 +3,7 @@ import { Icon, Menu } from 'antd';
 
 import HelpButton from "./HelpButton";
 import SearchSmart from "./SearchSmart";
-import logo from "./img/logo.png";
+import logo from "./img/logo_beta.png";
 import "./css/NavBar.css";
 
 import searchMetaStore from "./stores/searchMetaStore";
@@ -17,12 +17,12 @@ const SubMenu = Menu.SubMenu;
 
 class NavBar extends Component {
 
-    constructor(props){
-        super(props);
-        this.state = {
-            showFeedbackModal: false
-        }
-    }
+    // constructor(props){
+    //     super(props);
+    //     this.state = {
+    //         showFeedbackModal: false
+    //     }
+    // }
 
 
     render() {
@@ -36,13 +36,13 @@ class NavBar extends Component {
             
             <div id="navbar" className="box-shadow" >
 
-                <NavLink to={"/home"} className="v-middle">
+                <NavLink to={"/about"} className="v-middle">
                     <img src={logo} className="navbar-logo" alt="" />
-                    <div className="navbar-app-title">
+                    {/* <div className="navbar-app-title">
                         <span className="bold">VedaWeb</span>
-                        <span className="bold grey" style={{fontSize: '12px'}}> BETA</span><br/>
+                        <span className="bold grey" style={{fontSize: '12px'}}> beta</span><br/>
                         Rigveda online
-                    </div>
+                    </div> */}
                 </NavLink>
 
                 <div style={{flex: '2', textAlign: 'center'}}>
@@ -54,10 +54,11 @@ class NavBar extends Component {
                 selectedKeys={[]}
                 mode="horizontal"
                 style={menuStyle}
-                onClick={() => {this.setState({showFeedbackModal: true})}}>
+                //onClick={() => {this.setState({showFeedbackModal: true})}}
+                >
 
                     <SubMenu
-                    title={<div className="content-center submenu-title-wrapper"><Icon type="book"/><br/>Browse Rigveda</div>}
+                    title={<div className="content-center submenu-title-wrapper"><Icon type="book"/><br/>Browse<br/>Rigveda</div>}
                     className="right">
                         {searchMetaStore.scopeDataRaw.map((hymns, i) => (
                             <Menu.Item key={'view:' + i}>
@@ -70,13 +71,19 @@ class NavBar extends Component {
 
                     <Menu.Item key="search">
                         <NavLink to={"/search"} className="content-center" activeClassName="selected">
-                            <Icon type="zoom-in"/><br/>Advanced Search
+                            <Icon type="zoom-in"/><br/>Advanced<br/>Search
+                        </NavLink>
+                    </Menu.Item>
+
+                    <Menu.Item key="about">
+                        <NavLink to={"/about"} className="content-center" activeClassName="selected">
+                            <Icon type="info-circle"/><br/>About<br/>VedaWeb
                         </NavLink>
                     </Menu.Item>
 
                     <Menu.Item key="home">
-                        <NavLink to={"/home"} className="content-center" activeClassName="selected">
-                            <Icon type="message"/><br/>Beta Feedback
+                        <NavLink to={"/betafeedback"} className="content-center" activeClassName="selected">
+                            <Icon type="experiment"/><br/>Beta<br/>Feedback
                         </NavLink>
                     </Menu.Item>
 

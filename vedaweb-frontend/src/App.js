@@ -4,7 +4,7 @@ import { BackTop, Spin, Icon } from 'antd';
 import NavBar from './NavBar';
 import SearchView from './SearchView';
 import ContentView from './ContentView';
-import Start from './Start';
+import About from './About';
 import NotFound from './NotFound';
 import Footer from './Footer';
 import System from './System';
@@ -110,8 +110,10 @@ class App extends Component {
                                 <Route path="/system/:auth" component={System} />
                                 <Route path="/legal" component={LegalNotice} />
                                 <Route path="/privacy" component={PrivacyNotice} />
-                                <Route path="/home" component={Start} />
-                                <Route path="/" exact={true} component={Start} />
+                                <Route path="/betafeedback" component={About} />
+                                <Route path="/home" component={About} />
+                                <Route path="/about" component={About} />
+                                <Route path="/" exact={true} component={About} />
                                 <Route component={NotFound} />
                             </Switch>
                             <Footer/>

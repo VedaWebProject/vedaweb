@@ -28,20 +28,18 @@
 }
 
 img.navbar-logo {
-    height: 50px;
+    height: 56px;
     margin: .8rem;
     margin-left: 0px;
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: crisp-edges;
 }
 
 .ant-menu-item,
 .ant-menu-submenu-title {
     color: rgba(0,0,0,0.65);
     border-color: rgba(0,0,0,0.5);
-    font-size: 16px;
-}
-
-.ant-menu-horizontal {
-    line-height: 22px;
+    line-height: 1.2;
 }
 
 .ant-menu-horizontal > .ant-menu-item:hover,
