@@ -77,8 +77,7 @@ class SearchResults extends Component {
         this.loadData(queryJSON);
     }
 
-    loadData = (queryJSON) => {
-
+    loadData(queryJSON) {
         //construct "Search Results for ..." data
         let queryDisplay = {
             query: queryJSON.mode === "grammar"
@@ -105,6 +104,7 @@ class SearchResults extends Component {
         //set page title
         document.title = "VedaWeb | Search Results for '" + queryDisplay.query + "'";
 
+        //pagination and request size
         queryJSON.from = ((searchResultsStore.page - 1) * searchResultsStore.size);
         queryJSON.size = searchResultsStore.size;
 
