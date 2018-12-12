@@ -40,7 +40,7 @@ class SearchBlock extends Component {
                         </div>
                     </Col>
 
-                    <Col span={23}>
+                    <Col span={22} offset={1}>
 
                         <Row
                         type="flex"
