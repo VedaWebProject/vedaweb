@@ -74,7 +74,7 @@ class Footer extends Component {
                     <Col span={24} className="content-center">
                         <div style={{padding: '3rem 0'}}>
                             <Link to="/legal">Legal Notice</Link>
-                            <span className="gap-left-big gap-right-big">&#8213;</span>
+                            <span className="gap-left-big gap-right-big light-grey">&#8213;</span>
                             <Link to="/privacy">Privacy Notice</Link>
                         </div>
                     </Col>

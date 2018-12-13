@@ -57,11 +57,11 @@ h2 {
 }
 
 .grey {
-    color: #514545;
+    color: rgba(0, 0, 0, 0.6);
 }
 
 .light-grey {
-    color: #8f8181;
+    color: rgba(0, 0, 0, 0.5);
 }
 
 .page-content {
