@@ -194,7 +194,7 @@ class SearchView extends Component {
                                 selected={searchMetaStore.meta.hymnGroup}
                                 handleChange={v => {searchMetaStore.meta.hymnGroup = v}}/>
                                 <SearchMetaFilterList
-                                label="Verse Strata"
+                                label="Stanza Strata"
                                 placeholder="all Strata"
                                 items={uiDataStore.meta.strata}
                                 selected={searchMetaStore.meta.strata}

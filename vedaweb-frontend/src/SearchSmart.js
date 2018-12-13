@@ -109,8 +109,8 @@ class SearchSmart extends Component {
                     style={{maxWidth: '420px'}}
                     placeholder={
                         (searchSmartStore.data.field.startsWith('version_')
-                        ? searchMetaStore.transliteration.toUpperCase() + " or verse no."
-                        : "Translation or verse no.")
+                        ? searchMetaStore.transliteration.toUpperCase() + " or stanza no."
+                        : "Translation or stanza no.")
                     } />
                 </Tooltip>
 

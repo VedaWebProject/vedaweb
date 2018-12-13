@@ -71,7 +71,7 @@ class ContentView extends Component {
                 //set page title
                 document.title = "VedaWeb | " +
                     ((response.data.id !== undefined)
-                        ? "Verse " + response.data.book + "." + response.data.hymn + "." + response.data.verse
+                        ? "Stanza " + response.data.book + "." + response.data.hymn + "." + response.data.verse
                             + " | " + response.data.hymnGroup
                         : " Rigveda online");
             })
@@ -320,7 +320,7 @@ class ContentView extends Component {
                                                 <div
                                                 className="glossing content-block card"
                                                 ref={this.scrollTo}>
-                                                    <h4>Meta Info</h4>
+                                                    <h4>Stanza Meta</h4>
 
                                                     <table style={{width:'auto'}}>
                                                         <tbody>

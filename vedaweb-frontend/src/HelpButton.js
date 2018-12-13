@@ -29,9 +29,9 @@ const helpTexts = {
         content:
             <div>
                 <p>
-                    Using the grammar search, you can find verses containing lemmas or word forms with certain grammatical properties.
+                    Using the grammar search, you can find stanzas containing lemmas or word forms with certain grammatical properties.
                     The underlying data for this search are the morphological glossings (and other annotations),
-                    composed at the University of Zurich on the basis of the Rigveda version by Lubotsky (see "Morphological Glossing" view in the verses data).
+                    composed at the University of Zurich on the basis of the Rigveda version by Lubotsky (see "Morphological Glossing" view in the stanza data).
                 </p>
                 <p>
                     <h2>Usage</h2>
@@ -43,7 +43,7 @@ const helpTexts = {
                     i.e. searching for <i>agn*</i> would match all word forms or lemmas starting with <i>agn</i>.
                 </p>
                 <p>
-                    To add more than one word form or lemma to find in a verse, click on the plus-button below.
+                    To add more than one word form or lemma to find in a stanza, click on the plus-button below.
                 </p>
             </div>
     },
@@ -62,10 +62,10 @@ const helpTexts = {
         content:
             <div>
                 <p>
-                    By setting up meta filters, you can limit your search to verses matching the specified meta properties.
+                    By setting up meta filters, you can limit your search to stanzas matching the specified meta properties.
                 </p>
                 <p>
-                    It is possible to select multiple values per property. The results will only contain verses 
+                    It is possible to select multiple values per property. The results will only contain stanzas 
                     that match at least one of the selected values for each property you specified!
                 </p>
             </div>
@@ -129,25 +129,25 @@ const helpTexts = {
                     You can search for several things in several ways:
                 </p>
                 <p>
-                    <h2>Verse location</h2>
-                    Just type a Rigveda verse location in the form of <strong>1.2.3</strong> or <strong>01.002.03</strong> or 
-                    even <strong>0100203</strong> to be redirected to this verse's page without further detours.
+                    <h2>Stanza location</h2>
+                    Just type a Rigveda stanza location in the form of <strong>1.2.3</strong> or <strong>01.002.03</strong> or 
+                    even <strong>0100203</strong> to be redirected to this stanza's page without further detours.
                 </p>
                 <p>
                     <h2>Simple text search:</h2>
                     First, choose <i>where</i> you want to search - either in certain text version (or in all of them) or in a certain translation (or all of them).
-                    Then, type the word form(s) you want to search for. It's also possible to search for <strong>multiple words</strong> at once, in which case the <strong>verses containing the most</strong> of what you are looking
+                    Then, type the word form(s) you want to search for. It's also possible to search for <strong>multiple words</strong> at once, in which case the <strong>stanzas containing the most</strong> of what you are looking
                     for will be <strong>ranked higher</strong> in the search results.
                 </p>
                 <p>
                     <h2>Transliteration</h2>
-                    If you search for terms in the Rigveda verses, you can <strong>use a transliteration method of your choice</strong>.
+                    If you search for terms in the Rigveda stanzas, you can <strong>use a transliteration method of your choice</strong>.
                     Our data is in ISO-15919 (so if you want to type in ISO-15919 you can just do that), but your search input can be transliterated from several other standards to ISO-15919.
                     The <strong>default setting is Harvard-Kyoto (HK)</strong>, but you can change this in the <strong>Advanced Search Settings</strong>.
                 </p>
                 <p>
                     <h2>Accent-sensitive search</h2>
-                    If you use accent-sensitive search, you will only find verses matching your exact use of accented vowels,
+                    If you use accent-sensitive search, you will only find stanzas matching your exact use of accented vowels,
                     whereas if you disable accent-sensitive search, accents will be ignored, <i>even if you use them</i>.
                 </p>
                 <p>
@@ -160,14 +160,14 @@ const helpTexts = {
                 <p>
                     <h2>Logical operators</h2>
                     Using the <strong>AND</strong> and <strong>OR</strong> operators, you can construct little logical statements.
-                    Searching for <strong>agnim OR indra</strong>, you'll find every verse containing one of the words <strong>agnim</strong> or <strong>indra</strong>.
-                    The same works for the <strong>AND</strong> operator: <strong>agnim AND indra</strong> will give you the verses containing both words.
+                    Searching for <strong>agnim OR indra</strong>, you'll find every stanza containing one of the words <strong>agnim</strong> or <strong>indra</strong>.
+                    The same works for the <strong>AND</strong> operator: <strong>agnim AND indra</strong> will give you the stanzas containing both words.
                 </p>
                 <p>
                     <h2>Required and prohibited terms</h2>
-                    With <strong>+</strong> and <strong>-</strong>, you can specify terms that <strong>must</strong> or <strong>must not</strong> occur in a verse to be found.
-                    So, for example, <strong>agnim -indra</strong> finds verses containing <strong>agnim</strong> and not containing <strong>indra</strong>,
-                    while <strong>agnim +indra</strong> finds verses that <i>might</i> contain <strong>agnim</strong> but definitely contain <strong>indra</strong>.
+                    With <strong>+</strong> and <strong>-</strong>, you can specify terms that <strong>must</strong> or <strong>must not</strong> occur in a stanza to be found.
+                    So, for example, <strong>agnim -indra</strong> finds stanzas containing <strong>agnim</strong> and not containing <strong>indra</strong>,
+                    while <strong>agnim +indra</strong> finds stanzas that <i>might</i> contain <strong>agnim</strong> but definitely contain <strong>indra</strong>.
                 </p>
             </div>
     },
@@ -176,7 +176,7 @@ const helpTexts = {
         content:
             <div>
                 <p>
-                    If you use accent-sensitive search, you will only find verses matching your exact use of accented vowels,
+                    If you use accent-sensitive search, you will only find stanzas matching your exact use of accented vowels,
                     whereas if you disable accent-sensitive search, accents will be ignored, <i>even if you use them</i>.
                 </p>
             </div>
@@ -333,7 +333,7 @@ const helpTexts = {
             </div>
     },
     metaStrata : {
-        title: "Verse Strata",
+        title: "Stanza Strata",
         content:
             <div>
                 <p>

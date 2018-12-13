@@ -16,8 +16,8 @@ import searchResultsStore from "./stores/searchResultsStore";
 import uiDataStore from "./stores/uiDataStore";
 
 const fieldDisplayMapping = {
-    "form": "Verse text",
-    "form_raw": "Verse text",
+    "form": "Stanza text",
+    "form_raw": "Stanza text",
     "translation": "Translation"
 }
 
@@ -218,7 +218,7 @@ class SearchResults extends Component {
                             <div className="search-stats secondary-font">
                                 { isLoaded && data.hits !== undefined ?
                                     data.total > 0 ?
-                                        <span>Found { data.total } matching verses in { data.took } ms</span>
+                                        <span>Found { data.total } matching stanzas in { data.took } ms</span>
                                         : ""
                                      : <span>Searching ...</span>
                                 }
