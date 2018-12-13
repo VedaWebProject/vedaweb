@@ -122,10 +122,11 @@ class ContentView extends Component {
                 centered: true,
                 content: (
                 <div>
-                    By clicking this button on the right side of the screen, you can choose what you want to see (Translations, Glossings, etc.).<br/><br/>
+                    By clicking this button on the right side of the screen, you can choose what you want to see (text versions, translations, morphological glossings, etc.).<br/><br/>
                     <div style={{textAlign: 'center'}}>
                         <img src={layersInfoImg} alt="" style={{border:'1px solid #aaa'}}/>
-                    </div>
+                    </div><br/>
+                    <span className="light-grey">By the way, you will see this message only once per visit.</span>
                 </div>
                 ),
                 onOk() {uiDataStore.firstTime = false},
@@ -381,7 +382,7 @@ class ContentView extends Component {
                                     <Affix offsetTop={10}>
                                         <div
                                         className="card red flex-center btn-aside"
-                                        title="Show view filters"
+                                        title="Show view selectors"
                                         onClick={() => this.setState({filtersVisible: true})}
                                         style={{
                                             cursor:'pointer',
@@ -394,8 +395,8 @@ class ContentView extends Component {
                                             style={{backgroundColor:'#931111'}}
                                             count={uiDataStore.layers.filter(l => l.id.endsWith('_') && l.show).length}>
                                                 <div style={{textAlign:'center', fontSize:'20px', lineHeight: '1.2',}}>
-                                                    <Icon type="filter" style={{fontSize:'24px'}}/><br/>
-                                                    View Filters
+                                                    <Icon type="eye" style={{fontSize:'24px'}}/><br/>
+                                                    Select Views
                                                 </div>
                                             </Badge>
                                         </div>
@@ -423,7 +424,7 @@ class ContentView extends Component {
                     }
 
                     <Drawer
-                    title={<h4 style={{marginBottom:'0'}}><Icon type="filter" className="gap-right"/> View Filters</h4>}
+                    title={<h4 style={{marginBottom:'0'}}><Icon type="eye" className="gap-right"/> Select Views</h4>}
                     placement="right"
                     width="480"
                     closable={true}
