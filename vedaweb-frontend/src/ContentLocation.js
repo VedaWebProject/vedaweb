@@ -83,11 +83,13 @@ class ContentLocation extends Component {
 
     render() {
 
-        const {book, hymn, verse, hymnAbs} = this.props;
+        const {book, hymn, verse} = this.props;
         const bookCount = uiDataStore.search.meta.scopes.length;
         const hymnCount = uiDataStore.search.meta.scopes[book-1];
         const verseCount = this.state.verseCount;
-        const hymnAbsValues = uiDataStore.search.meta.hymnAbs;
+
+        //const { hymnAbs } = this.props;
+        //const hymnAbsValues = uiDataStore.search.meta.hymnAbs;
 
         const selectStyle = {
             fontSize: '26px',
