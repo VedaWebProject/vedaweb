@@ -7,6 +7,7 @@ import uiDataStore from "./stores/uiDataStore";
 import { view } from 'react-easy-state';
 
 import TransliterationPreview from "./TransliterationPreview";
+import HelpButton from "./HelpButton";
 
 import { withRouter } from 'react-router-dom';
 import { Base64 } from 'js-base64';
@@ -86,9 +87,11 @@ class SearchSmart extends Component {
             : null
         );
 
+        const helpAfter = <HelpButton inline type="quickSearch"/>;
+
         return (
 
-            <div className="content-right v-middle" style={{display: 'inline'}}>
+            <div className="v-middle">
                 <Tooltip
                 title={transliteration}
                 trigger="focus"
@@ -101,8 +104,10 @@ class SearchSmart extends Component {
                     onChange={e => searchSmartStore.setInput(e.target.value)}
                     onSearch={this.handleSearch}
                     addonBefore={selectBefore}
+                    addonAfter={helpAfter}
+                    size="large"
                     style={{maxWidth: '420px'}}
-                    placeholder={"Quick search: " + 
+                    placeholder={
                         (searchSmartStore.data.field.startsWith('version_')
                         ? searchMetaStore.transliteration.toUpperCase() + " or verse no."
                         : "Translation or verse no.")
@@ -112,7 +117,7 @@ class SearchSmart extends Component {
                 <Checkbox
                 onChange={e => searchMetaStore.setAccents(e.target.checked)}
                 checked={searchMetaStore.accents}
-                style={{marginLeft: '1rem'}}>
+                style={{marginLeft:'1rem'}}>
                     Accent-sensitive
                 </Checkbox>
 
