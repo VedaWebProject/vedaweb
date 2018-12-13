@@ -179,8 +179,8 @@ class DictionaryView extends Component {
                         <tr>
                             <th>Lemma</th>
                             <th>Full Forms</th>
-                            <th>Excerpt</th>
-                            <th>Graßmann</th>
+                            <th>Excerpt (Graßmann)</th>
+                            <th>Entries (Graßmann)</th>
                             <th>Others</th>
                         </tr>
                     </thead>
@@ -205,7 +205,7 @@ class DictionaryView extends Component {
                                             title={"Show full entry for \"" + token.lemma + "\": #" + (i+1)}
                                             key={"lemma_" + i}>
                                                 <Icon type="book"/>
-                                                {" " + (i+1)}
+                                                {"#" + (i+1)}
                                             </Button>;
                                 })}
                             </td>

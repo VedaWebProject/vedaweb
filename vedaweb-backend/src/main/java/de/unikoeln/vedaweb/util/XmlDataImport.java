@@ -285,14 +285,14 @@ public class XmlDataImport {
 		
 		List<Pada> padas = new ArrayList<Pada>();
 		int padaIndex = 0;
-		int tokenIndex = 0;
-		int tokensTotal = compiler.evaluate("*:lg[@*:source='zurich']/*:l[not(@*:n)]/*:fs", verse).size();
 		
 		for (XdmItem padaForm : padaForms){
 			Pada padaObj = new Pada(); //new pada object
 			String padaId = compiler.evaluate("@*:n", padaForm).itemAt(0).getStringValue();
 			String tokensXmlId = compiler.evaluate("@*:id", padaForm).itemAt(0).getStringValue().replaceFirst("_zur$", "_tokens_zur");
 			XdmValue padaTokens = compiler.evaluate("*:lg[@*:source='zurich']/*:l[@*:id='" + tokensXmlId + "']/*:fs", verse);
+			int tokensTotal = padaTokens.size();
+			int tokenIndex = 0;
 			
 			//index, id
 			padaObj.setIndex(padaIndex++); //pada index
@@ -334,11 +334,13 @@ public class XmlDataImport {
 					tokenObj.addProp("lemma type", ((XdmNode)graGrammNode.itemAt(0)).getStringValue());
 				
 				//position
-				tokenObj.addProp("position",
-						tokenIndex == 0 ? "verse initial"
-							: tokenIndex == tokensTotal - 1 ? "verse final" 
-									: "intermediate");
-				
+				if (tokenIndex == 0)
+					tokenObj.addProp("position", "verse initial");
+				if (tokenIndex == tokensTotal - 1)
+					tokenObj.addProp("position", "verse final");
+				if (tokenIndex > 0 && tokenIndex < tokensTotal - 1)
+					tokenObj.addProp("position", "intermediate");
+
 				//index
 				tokenObj.setIndex(tokenIndex++);
 				

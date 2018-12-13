@@ -20,7 +20,8 @@
 					"field": "sample",
 					"values": ["VALUE_1", "VALUE_2"]
 				}
-			]
+			],
+			"tagsOrder": [ "person", "number", "gender", "tense", "case" ]
 	    }
 	},
 	
