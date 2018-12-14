@@ -22,7 +22,7 @@ class ContentView extends Component {
                         <h4>About VedaWeb</h4>
                         <span className="secondary-font red">Project time frame: July 2017 - June 2020</span><br/>
                         <p>
-                            The project provides a web-based, open-access platform in order to facilitate linguistic research on Old Indic texts.<br/>
+                            This DFG-funded project provides a web-based, open-access platform in order to facilitate linguistic research on Old Indic texts.<br/>
                             The text corpus is made available in a digitally accessible as well as morphologically and metrically annotated form,
                             searchable for lexicographic and corpus-linguistic criteria. The pilot text is the Rigveda,
                             linked to the dictionaries available at Cologne Digital Sanskrit Dictionaries via the C-SALT APIs for Sanskrit Dictionaries.
