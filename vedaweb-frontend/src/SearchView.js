@@ -52,7 +52,7 @@ class SearchView extends Component {
             for (let block of jsonData.blocks){
                 block.form = SanscriptAccents.t(block.form, searchMetaStore.transliteration, "iso");
                 for (let field of block.fields){
-                    if (field.value.length > 0)
+                    if (field.value !== undefined && field.value.length > 0)
                         block[field.name] = field.value
                 }
                 delete block.fields;

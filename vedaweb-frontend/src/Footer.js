@@ -25,7 +25,7 @@ class Footer extends Component {
 
                 <Row
                 type="flex"
-                justify="center"
+                justify="space-around"
                 align="middle">
 
                     <Col span={3} className="footer-box">

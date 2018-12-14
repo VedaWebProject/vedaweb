@@ -1,7 +1,7 @@
 package de.unikoeln.vedaweb.search;
 
 import java.util.ArrayList;
-import java.util.Collections;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -146,13 +146,26 @@ public class SearchData {
 	}
 	
 	public void cleanAndFormatFields(){
-		//clean search blocks
-		for (Map<String, Object> block : blocks){
-			block.values().removeAll(Collections.singleton(""));
-			for (String field : block.keySet()){
-				if (block.get(field) instanceof String
-						&& ((String)block.get(field)).matches("-?\\d+")){
-					block.put(field, Integer.parseInt(((String)block.get(field))));
+		
+		if (blocks != null) {
+			//clean search blocks
+			Iterator<Map<String, Object>> blockIter = blocks.iterator();
+			while (blockIter.hasNext()) {
+				Map<String, Object> block = blockIter.next();
+				if (block.size() <= 3 && (block.get("form") == null || block.get("form").equals("") )) {
+					blockIter.remove();
+				}
+			}
+			
+			for (Map<String, Object> block : blocks){
+				//remove empty values
+	//			block.values().removeAll(Collections.singleton(""));
+				//numbers to integers
+				for (String field : block.keySet()){
+					if (block.get(field) instanceof String
+							&& ((String)block.get(field)).matches("-?\\d+")){
+						block.put(field, Integer.parseInt(((String)block.get(field))));
+					}
 				}
 			}
 		}
