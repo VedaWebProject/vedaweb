@@ -52,6 +52,9 @@ class SearchResults extends Component {
     }
 
     handleNewQuery(queryData) {
+        //scroll to top
+        window.scrollTo(0, 0);
+
         this.setState({
             isLoaded: false
         });
