@@ -79,7 +79,7 @@ public class SearchHitsConverter {
 							try {
 								hit.addHighlight(
 									innerHit.getSourceAsMap().get("form_raw").toString(),
-									buildGrammarHighlightString(innerHit.getSourceAsMap())
+									buildGrammarHighlightHTML(innerHit.getSourceAsMap())
 								);
 							} catch (Exception e) {
 								continue;
@@ -134,15 +134,12 @@ public class SearchHitsConverter {
 	
 	
 	@SuppressWarnings("unchecked")
-	private static String buildGrammarHighlightString(Map<String, Object> grammarHitSource) {
+	private static String buildGrammarHighlightHTML(Map<String, Object> grammarHitSource) {
 		StringBuilder sb = new StringBuilder();
-		sb.append(grammarHitSource.get("lemma_raw"));
+		sb.append("lemma: <em>" + grammarHitSource.get("lemma_raw") + "</em>");
 		
 		((Map<String, Object>)grammarHitSource.get("grammar")).forEach((k,v) -> {
-			if (!k.equals("lemma type")
-					&& !k.equals("position")) {
-				sb.append("." + v);
-			}
+			sb.append("; " + k + ": <em>" + v + "</em>");
 		});
 		
 		return sb.toString();

@@ -16,12 +16,12 @@
 	    "grammar": {
 	        "tags": [
 				{
-					"ui": "Sample",
-					"field": "sample",
-					"values": ["VALUE_1", "VALUE_2"]
+					"ui": "Sample (gets filled dynamically!)",
+					"field": "sample (gets filled dynamically!)",
+					"values": ["VALUE_1 (gets filled dynamically!)", "VALUE_2 (gets filled dynamically!)"]
 				}
 			],
-			"tagsOrder": [ "person", "number", "gender", "tense", "case" ]
+			"tagsOrder": [ "person", "number", "gender", "tense", "case", "mood", "voice", "position", "lemma type" ]
 	    }
 	},
 	

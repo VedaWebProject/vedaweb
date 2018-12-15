@@ -290,12 +290,14 @@ class ContentView extends Component {
                                                                     <div className="glossing-annotation">
                                                                         {this.cleanLemmaString(token.lemma)}
                                                                         {
-                                                                            Object.keys(token.props).map(key => (
-                                                                                key !== "lemma type" && key !== "position" &&
-                                                                                <span key={"t_" + token.index + "_" + key}>
-                                                                                    .{token.props[key]}
-                                                                                </span>
-                                                                            ))
+                                                                            uiDataStore.search.grammar.tagsOrder
+                                                                                .filter(tag => token.props[tag] !== undefined)
+                                                                                .map(tag => (
+                                                                                    tag !== "lemma type" && tag !== "position" &&
+                                                                                    <span key={"t_" + token.index + "_" + tag}>
+                                                                                        .{token.props[tag]}
+                                                                                    </span>
+                                                                                ))
                                                                         }
                                                                     </div>
                                                                 </div>

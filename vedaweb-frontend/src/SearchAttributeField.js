@@ -38,14 +38,16 @@ class SearchAttributeField extends Component {
                             className="secondary-font">
                                 {'Select attribute (optional)'}
                         </Option>
-                        {uiDataStore.search.grammar.tags.map((option, i) => (
-                            (usedFieldNames.indexOf(option.field) === -1 || option.field === this.props.fieldName) &&
-                            <Option
-                                key={'fValOpt_' + option.field}
-                                value={option.field}
-                                className="secondary-font">
-                                    {option.ui}
-                            </Option>
+                        {uiDataStore.search.grammar.tags
+                            .sort((a,b) => uiDataStore.search.grammar.tagsOrder.indexOf(a.field) - uiDataStore.search.grammar.tagsOrder.indexOf(b.field))
+                            .map(option => (
+                                (usedFieldNames.indexOf(option.field) === -1 || option.field === this.props.fieldName) &&
+                                <Option
+                                    key={'fValOpt_' + option.field}
+                                    value={option.field}
+                                    className="secondary-font">
+                                        {option.ui}
+                                </Option>
                         ))}
                     </Select>
                 </Col>
