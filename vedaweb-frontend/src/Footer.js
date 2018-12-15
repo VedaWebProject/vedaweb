@@ -25,28 +25,28 @@ class Footer extends Component {
 
                 <Row
                 type="flex"
-                justify="space-around"
+                justify="center"
                 align="middle">
 
-                    <Col span={3} className="footer-box">
+                    <Col span={5} className="footer-box">
                         <a href="http://www.dfg.de/en" className="bw" target="_blank" rel="noopener noreferrer">
                             <img src={logoDFG} alt="Gefördert durch die DFG"/>
                         </a>
                     </Col>
 
-                    <Col span={3} className="footer-box">
+                    <Col span={5} className="footer-box">
                         <a href="http://dh.uni-koeln.de/" className="bw" target="_blank" rel="noopener noreferrer">
                             <img src={logoIDH} alt="IDH"/>
                         </a>
                     </Col>
 
-                    <Col span={3} className="footer-box">
+                    <Col span={5} className="footer-box">
                         <a href="http://cceh.uni-koeln.de/" className="bw" target="_blank" rel="noopener noreferrer">
                             <img src={logoCCEH} alt="CCEH"/>
                         </a>
                     </Col>
 
-                    <Col span={3} className="footer-box">
+                    <Col span={5} className="footer-box">
                         <a href="http://dch.phil-fak.uni-koeln.de/" className="bw" target="_blank" rel="noopener noreferrer">
                             <img src={logoDCH} alt="DCH"/>
                         </a>

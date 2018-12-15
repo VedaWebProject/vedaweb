@@ -396,7 +396,7 @@ class ContentView extends Component {
                                             count={uiDataStore.layers.filter(l => l.id.endsWith('_') && l.show).length}>
                                                 <div style={{textAlign:'center', fontSize:'20px', lineHeight: '1.2',}}>
                                                     <Icon type="eye" style={{fontSize:'24px'}}/><br/>
-                                                    Select Views
+                                                    Toggle Content
                                                 </div>
                                             </Badge>
                                         </div>
@@ -424,7 +424,7 @@ class ContentView extends Component {
                     }
 
                     <Drawer
-                    title={<h4 style={{marginBottom:'0'}}><Icon type="eye" className="gap-right"/> Select Views</h4>}
+                    title={<h4 style={{marginBottom:'0'}}><Icon type="eye" className="gap-right"/> Toggle Content</h4>}
                     placement="right"
                     width="480"
                     closable={true}
