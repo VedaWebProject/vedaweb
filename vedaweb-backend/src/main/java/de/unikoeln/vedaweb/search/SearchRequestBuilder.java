@@ -133,8 +133,8 @@ public class SearchRequestBuilder {
 			//construct bool query for each block
 			BoolQueryBuilder bool = QueryBuilders.boolQuery();
 			
-			//remove empty fields
-			block.values().stream().filter(v -> v != null && v.toString().length() > 0);
+			//remove empty fields (already happens client-side)
+			//block.values().stream().filter(v -> v != null && v.toString().length() > 0);
 			
 			//trim values
 			block.values().forEach(v -> v = v.toString().trim());
@@ -153,8 +153,11 @@ public class SearchRequestBuilder {
 				//if fields="form", also search in "lemma"-field
 				if (key.equals("form")) {
 					
-					//set query string and target field
+					//set query string
 					String query = StringUtils.normalizeNFC((String) block.get(key));
+					//if no search term: skip
+					if (query.length() == 0) continue;
+					//set target field
 					String field = block.get("lemma") != null && ((boolean)block.get("lemma")) == true
 							? "tokens.lemma" : "tokens.form";
 					

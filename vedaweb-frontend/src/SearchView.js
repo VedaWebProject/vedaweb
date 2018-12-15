@@ -48,13 +48,19 @@ class SearchView extends Component {
         
         if (searchMetaStore.mode === "grammar"){
             jsonData["blocks"] = JSON.parse(JSON.stringify(searchGrammarStore.data.blocks));
+            
+            //remove empty blocks
+            jsonData.blocks = jsonData.blocks.filter(block => !this.isBlockEmpty(block));
+            
 
             for (let block of jsonData.blocks){
                 block.form = SanscriptAccents.t(block.form, searchMetaStore.transliteration, "iso");
+                //make fields direct props of block
                 for (let field of block.fields){
                     if (field.value !== undefined && field.value.length > 0)
-                        block[field.name] = field.value
+                        block[field.name] = field.value;
                 }
+                //cleanup
                 delete block.fields;
                 delete block.id;
             }
@@ -65,6 +71,11 @@ class SearchView extends Component {
         ));
 
         this.props.history.push("/results/" + Base64.encodeURI(JSON.stringify(jsonData)));
+    }
+
+    isBlockEmpty(block){
+        return (block.form === undefined || block.form.length === 0)
+            && block.fields.filter(field => field.value.length > 0).length === 0;
     }
 
     handleReset(e){

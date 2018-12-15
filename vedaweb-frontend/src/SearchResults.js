@@ -81,11 +81,12 @@ class SearchResults extends Component {
         //construct "Search Results for ..." data
         let queryDisplay = {
             query: queryJSON.mode === "grammar"
-                ? queryJSON.blocks.map(b => Object.keys(b).filter(k => k !== 'distance' && k !== 'lemma')
-                    .map(k => k + ': ' + b[k]).join(', ')).join('; ')
+                ? "[" + queryJSON.blocks.map(b =>
+                    Object.keys(b).filter(k => k !== 'distance' && k !== 'lemma' && b[k] !== undefined && b[k] !== '')
+                        .map(k => k + ': ' + b[k]).join(', ')).join('] & [') + "]"
                 : queryJSON.input,
             field:  queryJSON.mode === "grammar"
-                ? "Grammar Data"
+                ? "grammar data"
                 : uiDataStore.layers.find(l => l.id === queryJSON.field).label
         };
 
