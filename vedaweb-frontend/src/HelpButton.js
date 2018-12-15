@@ -128,43 +128,43 @@ const helpTexts = {
                     It is why it is present at the top of each page at all time.
                     You can search for several things in several ways:
                 </p>
+                <h2>Stanza location</h2>
                 <p>
-                    <h2>Stanza location</h2>
                     Just type a Rigveda stanza location in the form of <strong>1.2.3</strong> or <strong>01.002.03</strong> or 
                     even <strong>0100203</strong> to be redirected to this stanza's page without further detours.
                 </p>
+                <h2>Simple text search:</h2>
                 <p>
-                    <h2>Simple text search:</h2>
                     First, choose <i>where</i> you want to search - either in certain text version (or in all of them) or in a certain translation (or all of them).
                     Then, type the word form(s) you want to search for. It's also possible to search for <strong>multiple words</strong> at once, in which case the <strong>stanzas containing the most</strong> of what you are looking
                     for will be <strong>ranked higher</strong> in the search results.
                 </p>
+                <h2>Transliteration</h2>
                 <p>
-                    <h2>Transliteration</h2>
                     If you search for terms in the Rigveda stanzas, you can <strong>use a transliteration method of your choice</strong>.
                     Our data is in ISO-15919 (so if you want to type in ISO-15919 you can just do that), but your search input can be transliterated from several other standards to ISO-15919.
                     The <strong>default setting is Harvard-Kyoto (HK)</strong>, but you can change this in the <strong>Advanced Search Settings</strong>.
                 </p>
+                <h2>Accent-sensitive search</h2>
                 <p>
-                    <h2>Accent-sensitive search</h2>
                     If you use accent-sensitive search, you will only find stanzas matching your exact use of accented vowels,
                     whereas if you disable accent-sensitive search, accents will be ignored, <i>even if you use them</i>.
                 </p>
+                <h2>Wildcards</h2>
                 <p>
-                    <h2>Wildcards</h2>
                     It is possible to search for words starting or ending with a certain substring.
                     Searching for <strong>agni*</strong> will find agnim, agniḥ, agnināgniḥ, and so on - so the Asterisk (<strong>*</strong>)
                     works as a simple placeholder. You can use this in the beginning (<strong>*dāḥ</strong>), the end (<strong>agni*</strong>)
                     or both (<strong>*dak*</strong>).
                 </p>
+                <h2>Logical operators</h2>
                 <p>
-                    <h2>Logical operators</h2>
                     Using the <strong>AND</strong> and <strong>OR</strong> operators, you can construct little logical statements.
                     Searching for <strong>agnim OR indra</strong>, you'll find every stanza containing one of the words <strong>agnim</strong> or <strong>indra</strong>.
                     The same works for the <strong>AND</strong> operator: <strong>agnim AND indra</strong> will give you the stanzas containing both words.
                 </p>
+                <h2>Required and prohibited terms</h2>
                 <p>
-                    <h2>Required and prohibited terms</h2>
                     With <strong>+</strong> and <strong>-</strong>, you can specify terms that <strong>must</strong> or <strong>must not</strong> occur in a stanza to be found.
                     So, for example, <strong>agnim -indra</strong> finds stanzas containing <strong>agnim</strong> and not containing <strong>indra</strong>,
                     while <strong>agnim +indra</strong> finds stanzas that <i>might</i> contain <strong>agnim</strong> but definitely contain <strong>indra</strong>.
