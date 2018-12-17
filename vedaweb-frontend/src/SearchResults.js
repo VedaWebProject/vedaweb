@@ -66,6 +66,7 @@ class SearchResults extends Component {
 
         try {
             queryJSON = JSON.parse(Base64.decode(queryData));
+            //console.log(JSON.stringify(queryJSON)); //TEMP DEV
             queryJSON.from = 0;
             queryJSON.size = searchResultsStore.size;
             searchResultsStore.queryJSON = queryJSON;

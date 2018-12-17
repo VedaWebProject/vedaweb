@@ -5,8 +5,7 @@ import java.text.Normalizer.Form;
 
 public class StringUtils {
 	
-	private static final String REGEX_VOWEL_W_ACCENT = "([aeiouAEIOU][^aeiouAEIOU]*?)[\\u0301\\u0300]";
-	
+	private static final String REGEX_VOWEL_W_ACCENT = "([aeiouAEIOU]\\P{L}*?)[\\u0301\\u0300]";
 	
 	public static int normalizeIndex(int index, int docCount){
 		if (index < 0)

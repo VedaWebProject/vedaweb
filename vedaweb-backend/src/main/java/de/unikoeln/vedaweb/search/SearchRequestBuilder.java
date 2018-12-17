@@ -70,7 +70,10 @@ public class SearchRequestBuilder {
 						: StringUtils.removeVowelAccents(searchData.getInput()));
 		String searchField = "versions.form" + (searchData.isAccents() ? "_raw" : "");
 		String targetVersionId = searchData.getField().endsWith("_") ? searchData.getField() + "*" : searchData.getField();
-			
+		
+		//TEMP DEV
+		//System.out.println("SEARCH TERM: " + searchTerm + " (accents: " + searchData.isAccents() + ")");
+		
 		source.query(
 			QueryBuilders.nestedQuery(
 				"versions",

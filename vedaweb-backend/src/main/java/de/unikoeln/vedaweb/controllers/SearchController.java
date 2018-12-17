@@ -26,6 +26,7 @@ public class SearchController {
 	
 	@PostMapping(value = "/search", produces = {"application/json"})
     public String searchView(@RequestBody SearchData searchData) {
+		//System.out.println(mappingService.mapObjectToJSON(searchData));
 		return mappingService.mapObjectToJSON(
 				SearchHitsConverter.processSearchResponse(
 						search.search(searchData)));
