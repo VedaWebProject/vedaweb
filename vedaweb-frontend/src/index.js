@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 
 import App from './App';
-//import registerServiceWorker from './registerServiceWorker';
+import {unregister} from './registerServiceWorker';
 
 import './index.css';
 
@@ -25,7 +25,7 @@ if (Browserizr.is_ie || Browserizr.is_edge) {
         </Router>
         , document.getElementById('root')
     );
-    //registerServiceWorker();
+    unregister(); //unregister existing service worker
 
 }
 
