@@ -404,7 +404,7 @@ class HelpButton extends Component {
         const containerStyle = {
             textAlign: this.props.align ? this.props.align : "right",
             float: this.props.float ? (this.props.align === undefined ? "right" : this.props.align) : "none",
-            display: this.props.inline ? "inline-block" : "block"
+            display: this.props.inline ? "inline" : "block"
         }
 
         //apply styles from props
@@ -412,7 +412,7 @@ class HelpButton extends Component {
 
         return (
             
-            <div style={containerStyle}>
+            <span style={containerStyle}>
                 <Icon
                 type="question-circle"
                 theme="outlined"
@@ -432,7 +432,7 @@ class HelpButton extends Component {
                         {helpTexts[this.props.type].content}
                     </Modal>
                 }
-            </div>
+            </span>
         );
 
     }
