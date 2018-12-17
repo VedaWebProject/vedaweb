@@ -105,6 +105,7 @@ class App extends Component {
                             <NavBar />
                             <Switch>
                                 <Route path="/view/:by/:value" component={ContentView} />
+                                <Route path="/view" component={ContentView} />
                                 <Route path="/results/:querydata" component={SearchResults} />
                                 <Route path="/search" component={SearchView} />
                                 <Route path="/system/:auth" component={System} />
