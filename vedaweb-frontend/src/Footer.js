@@ -29,7 +29,7 @@ class Footer extends Component {
                 align="middle">
 
                     <Col span={5} className="footer-box">
-                        <a href="http://www.dfg.de/en" className="bw" target="_blank" rel="noopener noreferrer">
+                        <a href="http://gepris.dfg.de/gepris/projekt/329358806" className="bw" target="_blank" rel="noopener noreferrer">
                             <img src={logoDFG} alt="Gefördert durch die DFG"/>
                         </a>
                     </Col>
