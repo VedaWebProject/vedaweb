@@ -7,7 +7,10 @@ import logoCSALTAPI from "./img/logo_csalt_api.png";
 import logoCSL from "./img/logo_csl.png";
 import logoTCSL from "./img/logo_tcsl.png";
 
-import logoDFG from "./img/logo_dfg.gif";
+import logoASW from "./img/logo_ifl_asw.jpg";
+import logoHVS from "./img/logo_ifl_hvs.jpg";
+
+import logoDFG from "./img/logo_dfg.png";
 import logoDCH from "./img/logo_dch.jpg";
 import logoIDH from "./img/logo_idh.png";
 import logoCCEH from "./img/logo_cceh.png";
@@ -26,29 +29,41 @@ class Footer extends Component {
                 <Row
                 type="flex"
                 justify="center"
-                align="middle">
+                align="center">
 
-                    <Col span={5} className="footer-box">
-                        <a href="http://gepris.dfg.de/gepris/projekt/329358806" className="bw" target="_blank" rel="noopener noreferrer">
-                            <img src={logoDFG} alt="Gefördert durch die DFG"/>
+                    <Col span={3} className="footer-box">
+                        <a href="http://ifl.phil-fak.uni-koeln.de/asw2.html" className="bw" target="_blank" rel="noopener noreferrer">
+                            <img src={logoASW} alt="Allgemeine Sprachwissenschaft (IfL) der Universität zu Köln"/>
                         </a>
                     </Col>
 
-                    <Col span={5} className="footer-box">
+                    <Col span={3} className="footer-box">
+                        <a href="http://ifl.phil-fak.uni-koeln.de/hvs2.html" className="bw" target="_blank" rel="noopener noreferrer">
+                            <img src={logoHVS} alt="Historisch-Vergleichende Sprachwissenschaft (IfL) der Universität zu Köln"/>
+                        </a>
+                    </Col>
+
+                    <Col span={3} className="footer-box">
                         <a href="http://dh.uni-koeln.de/" className="bw" target="_blank" rel="noopener noreferrer">
                             <img src={logoIDH} alt="IDH"/>
                         </a>
                     </Col>
 
-                    <Col span={5} className="footer-box">
+                    <Col span={3} className="footer-box">
                         <a href="http://cceh.uni-koeln.de/" className="bw" target="_blank" rel="noopener noreferrer">
                             <img src={logoCCEH} alt="CCEH"/>
                         </a>
                     </Col>
 
-                    <Col span={5} className="footer-box">
+                    <Col span={3} className="footer-box">
                         <a href="http://dch.phil-fak.uni-koeln.de/" className="bw" target="_blank" rel="noopener noreferrer">
                             <img src={logoDCH} alt="DCH"/>
+                        </a>
+                    </Col>
+
+                    <Col span={3} className="footer-box">
+                        <a href="http://gepris.dfg.de/gepris/projekt/329358806" className="bw" target="_blank" rel="noopener noreferrer">
+                            <img src={logoDFG} alt="Gefördert durch die DFG"/>
                         </a>
                     </Col>
                 </Row>
@@ -58,7 +73,7 @@ class Footer extends Component {
                 justify="center"
                 align="top"
                 className="bottom-gap"
-                style={{marginTop:'3rem'}}>
+                style={{"marginTop": "5rem"}}>
 
                     <Col span={3} className="footer-box">
                         <a href="http://c-salt.uni-koeln.de" target="_blank" rel="noopener noreferrer">
