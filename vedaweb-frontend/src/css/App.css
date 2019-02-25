@@ -4,25 +4,25 @@
     font-size: 18px;
 }
 
-h5 {
+h3, h4, h5 {
+    color: #931111;
     font-family: "Assistant", "Tahoma", "Arial", sans-serif;
+
+}
+
+h5 {
     margin-top: .5rem;
     margin-bottom: .3rem;
-    color: #931111;
     font-size: 20px;
 }
 
 h4 {
-    font-family: "Assistant", "Tahoma", "Arial", sans-serif;
     margin-bottom: 1rem;
-    color: #931111;
     font-size: 24px;
 }
 
 h3 {
-    font-family: "Assistant", "Tahoma", "Arial", sans-serif;
     margin-bottom: 1rem;
-    color: #931111;
     font-size: 20px;
 }
 
@@ -37,6 +37,10 @@ h2 {
 
 .text-font {
     font-family: "Gentium", "Tahoma", "Arial", serif;
+}
+
+.text-font-i {
+    font-family: "Gentium-I", "Tahoma", "Arial", serif;
 }
 
 .deva-font {

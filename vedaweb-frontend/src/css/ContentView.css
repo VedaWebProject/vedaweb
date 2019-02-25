@@ -30,13 +30,15 @@
     font-weight: bold;
     display: inline-block;
     margin-right: .5rem;
-    
-    font-style: italic;
 }
 
 .glossing-annotation {
     font-weight: normal;
     font-style: normal;
+}
+
+.glossing-annotation-tags {
+    font-variant: small-caps;
 }
 
 a.dict-link {

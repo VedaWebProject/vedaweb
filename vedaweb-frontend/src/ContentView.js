@@ -114,6 +114,11 @@ class ContentView extends Component {
         return lemma.trim();
     }
 
+    capitalize(string) {
+        string = string.toLowerCase();
+        return string.charAt(0).toUpperCase() + string.slice(1);
+    }
+
     infoModal(){
         if (uiDataStore.firstTime){
             Modal.info({
@@ -283,19 +288,19 @@ class ContentView extends Component {
 
                                                             {pada.grammarData.map(token => (
                                                                 <div
-                                                                className="glossing-token text-font"
+                                                                className="glossing-token"
                                                                 key={"t_" + token.index}>
-                                                                    {token.form}
+                                                                    <span className="text-font-i">{token.form}</span>
                                                                     <br/>
-                                                                    <div className="glossing-annotation">
+                                                                    <div className="glossing-annotation text-font">
                                                                         {this.cleanLemmaString(token.lemma)}
                                                                         {
                                                                             uiDataStore.search.grammar.tagsOrder
                                                                                 .filter(tag => token.props[tag] !== undefined)
                                                                                 .map(tag => (
                                                                                     tag !== "lemma type" && tag !== "position" &&
-                                                                                    <span key={"t_" + token.index + "_" + tag}>
-                                                                                        .{token.props[tag]}
+                                                                                    <span key={"t_" + token.index + "_" + tag} className="glossing-annotation-tags">
+                                                                                        .{this.capitalize(token.props[tag])}
                                                                                     </span>
                                                                                 ))
                                                                         }

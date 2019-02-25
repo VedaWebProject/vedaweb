@@ -3,7 +3,12 @@
 
 @font-face {
     font-family: 'Gentium';
-    src: local('Gentium'), url(./fonts/GentiumPlus-R.woff) format('woff');
+    src: local('GentiumPlus-R'), url(./fonts/GentiumPlus-R.woff) format('woff');
+}
+
+@font-face {
+    font-family: 'Gentium-I';
+    src: local('GentiumPlus-I'), url(./fonts/GentiumPlus-I.woff) format('woff');
 }
 
 @font-face {
