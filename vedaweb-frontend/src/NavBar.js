@@ -2,7 +2,8 @@ import React, { Component } from "react";
 import { Icon, Menu } from 'antd';
 
 import SearchSmart from "./SearchSmart";
-import logo from "./img/logo_beta.png";
+//import logo from "./img/logo_beta.png";
+import logo from "./img/logo.svg";
 import "./css/NavBar.css";
 
 import searchMetaStore from "./stores/searchMetaStore";
