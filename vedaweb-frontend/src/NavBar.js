@@ -38,14 +38,12 @@ class NavBar extends Component {
             <div id="navbar" className="box-shadow" style={{}}>
 
                 <div style={{flexBasis:'content'}}>
-                    <NavLink to={"/about"}>
-                        <img src={logo} className="navbar-logo" alt="" />
-                        {/* <div className="navbar-app-title">
-                            <span className="bold">VedaWeb</span>
-                            <span className="bold grey" style={{fontSize: '12px'}}> beta</span><br/>
-                            Rigveda online
-                        </div> */}
-                    </NavLink>
+                    <img src={logo} className="navbar-logo" alt="" />
+                    {/* <div className="navbar-app-title">
+                        <span className="bold">VedaWeb</span>
+                        <span className="bold grey" style={{fontSize: '12px'}}> beta</span><br/>
+                        Rigveda online
+                    </div> */}
                 </div>
 
                 <div style={{flexGrow:'1', textAlign:'center'}}>
@@ -78,9 +76,9 @@ class NavBar extends Component {
                         </Menu.Item>
 
                         <Menu.Item key="about">
-                            <NavLink to={"/about"} className="content-center" activeClassName="selected">
+                            <a href="https://vedaweb.uni-koeln.de" className="content-center" target="_blank" rel="noopener noreferrer">
                                 <Icon type="info-circle"/><br/>About<br/>VedaWeb
-                            </NavLink>
+                            </a>
                         </Menu.Item>
 
                         <Menu.Item key="home">

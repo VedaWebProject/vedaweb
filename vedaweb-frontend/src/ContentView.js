@@ -38,7 +38,6 @@ class ContentView extends Component {
     componentDidMount() {
         if (this.props.match.params.by === undefined
             || this.props.match.params.value === undefined){
-                console.log("ÄTSCH");
             this.props.history.replace("/view/index/0");
         } else {
             this.loadData(this.props.match.params.by, this.props.match.params.value);
