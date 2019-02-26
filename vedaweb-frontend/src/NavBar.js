@@ -35,11 +35,11 @@ class NavBar extends Component {
 
         return (
             
-            <div id="navbar" className="box-shadow" style={{}}>
+            <header className="box-shadow">
 
                 <div style={{flexBasis:'content'}}>
-                    <img src={logo} className="navbar-logo" alt="" />
-                    {/* <div className="navbar-app-title">
+                    <img src={logo} id="header-logo" alt="" />
+                    {/* <div className="header-app-title">
                         <span className="bold">VedaWeb</span>
                         <span className="bold grey" style={{fontSize: '12px'}}> beta</span><br/>
                         Rigveda online
@@ -50,7 +50,7 @@ class NavBar extends Component {
                     <SearchSmart /> 
                 </div>
 
-                <div style={{flexBasis:'content', minWidth:'440px', textAlign:'right'}}>
+                <nav>
                     <Menu
                     selectedKeys={[]}
                     mode="horizontal"
@@ -98,13 +98,13 @@ class NavBar extends Component {
                         </Menu.Item>
 
                     </Menu>
-                </div>
+                </nav>
 
                 {/* <FeedbackModal
                 visible={this.state.showFeedbackModal}
                 onCancel={() => this.setState({showFeedbackModal: false})} /> */}
 
-            </div>
+            </header>
             
         );
     }

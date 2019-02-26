@@ -24,7 +24,7 @@ class Footer extends Component {
     render() {
         return (
 
-            <div id="footer">
+            <footer>
 
                 <Row
                 type="flex"
@@ -155,7 +155,7 @@ class Footer extends Component {
                     </Col>
                 </Row>
 
-            </div>
+            </footer>
         );
     }
 }

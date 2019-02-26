@@ -1,6 +1,6 @@
 
 
-#navbar {
+header {
     display: flex;
     flex-flow: row;
     flex-wrap: nowrap;
@@ -18,7 +18,7 @@
     border-bottom: 1px solid #b4b1ae;
 }
 
-.navbar-app-title {
+.header-app-title {
     display: inline-block;
     font-size: 18px;
     line-height: 18px;
@@ -26,12 +26,18 @@
     padding-right: 2rem;
 }
 
-img.navbar-logo {
+#header-logo {
     height: 56px;
     margin: .8rem;
     margin-left: 0px;
     image-rendering: -webkit-optimize-contrast;
     image-rendering: crisp-edges;
+}
+
+nav {
+    flex-basis: content;
+    min-width: 440px;
+    text-align: right;
 }
 
 .ant-menu-item,
