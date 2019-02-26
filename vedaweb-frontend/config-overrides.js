@@ -12,7 +12,7 @@ module.exports = override(
             '@primary-color': '#931111',
             '@font-size-base': '16px',
             '@font-size-sm' : '14px',
-            '@animation-duration-slow': '.2s',
+            '@animation-duration-slow': '0.2s',
             '@border-radius-base': '3px',
             '@border-radius-sm': '2px',
             '@font-family' : 'Assistant, sans-serif',

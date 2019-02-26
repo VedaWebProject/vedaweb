@@ -73,6 +73,11 @@ h2 {
     padding-left: 1rem;
     padding-right: 1rem;
     background-color: #f3f3f3;
+
+    /* Background pattern (modified) from Toptal Subtle Patterns
+    (https://www.toptal.com/designers/subtlepatterns/groovepaper/) */
+    background-image: url('../img/bg.png');
+    background-repeat: repeat;
 }
 
 .card {
