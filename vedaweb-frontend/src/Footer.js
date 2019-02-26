@@ -32,37 +32,61 @@ class Footer extends Component {
                 align="center">
 
                     <Col span={3} className="footer-box">
-                        <a href="http://ifl.phil-fak.uni-koeln.de/asw2.html" className="bw" target="_blank" rel="noopener noreferrer">
-                            <img src={logoASW} alt="Allgemeine Sprachwissenschaft (IfL) der Universität zu Köln"/>
+                        <a href="http://ifl.phil-fak.uni-koeln.de/asw2.html"
+                        title="Allgemeine Sprachwissenschaft (IfL), University of Cologne"
+                        className="bw"
+                        target="_blank"
+                        rel="noopener noreferrer">
+                            <img src={logoASW} alt="Allgemeine Sprachwissenschaft (IfL), University of Cologne"/>
                         </a>
                     </Col>
 
                     <Col span={3} className="footer-box">
-                        <a href="http://ifl.phil-fak.uni-koeln.de/hvs2.html" className="bw" target="_blank" rel="noopener noreferrer">
-                            <img src={logoHVS} alt="Historisch-Vergleichende Sprachwissenschaft (IfL) der Universität zu Köln"/>
+                        <a href="http://ifl.phil-fak.uni-koeln.de/hvs2.html"
+                        title="Historisch-Vergleichende Sprachwissenschaft (IfL), University of Cologne"
+                        className="bw"
+                        target="_blank"
+                        rel="noopener noreferrer">
+                            <img src={logoHVS} alt="Historisch-Vergleichende Sprachwissenschaft (IfL), University of Cologne"/>
                         </a>
                     </Col>
 
                     <Col span={3} className="footer-box">
-                        <a href="http://dh.uni-koeln.de/" className="bw" target="_blank" rel="noopener noreferrer">
+                        <a href="http://dh.uni-koeln.de/"
+                        title="Institut für Digital Humanities, University of Cologne"
+                        className="bw"
+                        target="_blank"
+                        rel="noopener noreferrer">
                             <img src={logoIDH} alt="IDH"/>
                         </a>
                     </Col>
 
                     <Col span={3} className="footer-box">
-                        <a href="http://cceh.uni-koeln.de/" className="bw" target="_blank" rel="noopener noreferrer">
+                        <a href="http://cceh.uni-koeln.de/"
+                        title="Cologne Center for eHumanities, University of Cologne"
+                        className="bw"
+                        target="_blank"
+                        rel="noopener noreferrer">
                             <img src={logoCCEH} alt="CCEH"/>
                         </a>
                     </Col>
 
                     <Col span={3} className="footer-box">
-                        <a href="http://dch.phil-fak.uni-koeln.de/" className="bw" target="_blank" rel="noopener noreferrer">
+                        <a href="http://dch.phil-fak.uni-koeln.de/"
+                        title="Data Center for the Humanities, University of Cologne"
+                        className="bw"
+                        target="_blank"
+                        rel="noopener noreferrer">
                             <img src={logoDCH} alt="DCH"/>
                         </a>
                     </Col>
 
                     <Col span={3} className="footer-box">
-                        <a href="http://gepris.dfg.de/gepris/projekt/329358806" className="bw" target="_blank" rel="noopener noreferrer">
+                        <a href="http://gepris.dfg.de/gepris/projekt/329358806"
+                        title="DFG Project Page"
+                        className="bw"
+                        target="_blank"
+                        rel="noopener noreferrer">
                             <img src={logoDFG} alt="Gefördert durch die DFG"/>
                         </a>
                     </Col>
