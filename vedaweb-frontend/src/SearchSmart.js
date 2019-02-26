@@ -27,7 +27,7 @@ class SearchSmart extends Component {
     }
 
     handleSearch(input){
-        if (/\d/.test(input)){
+        if (/[^~\d]\d+/.test(input)){
             this.props.history.push("/view/id/" + input);
         } else {
             let jsonData = {
