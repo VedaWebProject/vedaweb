@@ -70,21 +70,31 @@ class NavBar extends Component {
                         </SubMenu>
 
                         <Menu.Item key="search">
-                            <NavLink to={"/search"} className="content-center" activeClassName="selected">
+                            <NavLink to={"/search"}
+                            title="Grammar search and more..."
+                            className="content-center"
+                            activeClassName="selected">
                                 <Icon type="zoom-in"/><br/>Advanced<br/>Search
                             </NavLink>
                         </Menu.Item>
 
-                        <Menu.Item key="about">
-                            <a href="https://vedaweb.uni-koeln.de" className="content-center" target="_blank" rel="noopener noreferrer">
-                                <Icon type="info-circle"/><br/>About<br/>VedaWeb
-                            </a>
-                        </Menu.Item>
-
                         <Menu.Item key="home">
-                            <NavLink to={"/betafeedback"} className="content-center" activeClassName="selected">
+                            <NavLink to={"/betafeedback"}
+                            title="Information on this beta version of VedaWeb"
+                            className="content-center"
+                            activeClassName="selected">
                                 <Icon type="experiment"/><br/>Beta<br/>Feedback
                             </NavLink>
+                        </Menu.Item>
+
+                        <Menu.Item key="about">
+                            <a href="https://vedaweb.uni-koeln.de"
+                            title="Open the VedaWeb project website"
+                            className="content-center"
+                            target="_blank"
+                            rel="noopener noreferrer">
+                                <Icon type="info-circle"/><br/>About<br/>VedaWeb
+                            </a>
                         </Menu.Item>
 
                     </Menu>
