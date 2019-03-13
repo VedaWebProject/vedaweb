@@ -24,12 +24,12 @@ class Footer extends Component {
     render() {
         return (
 
-            <footer class="box-shadow">
+            <footer className="box-shadow">
 
                 <Row
                 type="flex"
                 justify="center"
-                align="center">
+                align="middle">
 
                     <Col span={3} className="footer-box">
                         <a href="http://ifl.phil-fak.uni-koeln.de/asw2.html"
