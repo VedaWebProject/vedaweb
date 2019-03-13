@@ -122,7 +122,7 @@ class ContentView extends Component {
     infoModal(){
         if (uiDataStore.firstTime){
             Modal.info({
-                icon: <Icon type="export"/>,
+                icon: <Icon type="no-icon" />,
                 title: 'Please Note:',
                 centered: true,
                 content: (
