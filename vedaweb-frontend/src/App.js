@@ -6,6 +6,7 @@ import SearchView from './SearchView';
 import ContentView from './ContentView';
 import BetaInfo from './BetaInfo';
 import NotFound from './NotFound';
+import ErrorBoundary from './ErrorBoundary';
 import Footer from './Footer';
 import System from './System';
 import LegalNotice from './LegalNotice';
@@ -101,7 +102,7 @@ class App extends Component {
                     }
 
                     { isLoaded && error === undefined &&
-                        <div>
+                        <ErrorBoundary>
                             <NavBar />
                             <Switch>
                                 <Route path="/view/:by/:value" component={ContentView} />
@@ -118,7 +119,7 @@ class App extends Component {
                             </Switch>
                             <Footer/>
                             <BackTop />
-                        </div>
+                        </ErrorBoundary>
                     }
 
                 </div>

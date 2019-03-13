@@ -21,11 +21,13 @@ class ErrorMessage extends Component {
                     <br/>
 
                     <ul style={{"marginTop":"1rem"}}>
-                        <li>You requested a document that simply doesn't exist</li>
+                        <li>You requested a document that doesn't exist</li>
                         <li>Someone gave you the URL to this page and you missed a few characters copying it</li>
                         <li>The syntax of your search request was invalid</li>
                         <li>There is some technical problem with our server</li>
                     </ul>
+
+                    If this was an application error on our side, the problem will be reported automatically.
                 </div>
             </div>
 
