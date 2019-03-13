@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { Row, Col, Icon, Button } from 'antd';
-import feedbackMailAddress from "./feedbackMailAddress.js";
 import HelpButton from "./HelpButton";
 
 
@@ -41,9 +40,9 @@ class BetaInfo extends Component {
                             <br/><br/>
                             <Button
                             type="primary"
-                            href={"mailto:" + feedbackMailAddress.mail + "?subject=VedaWeb beta feedback"}
+                            href={"mailto:veda-web@uni-koeln.de?subject=VedaWeb beta feedback"}
                             className="secondary-font">
-                                <Icon type="mail" /> {feedbackMailAddress.mail}
+                                <Icon type="mail" /> veda-web@uni-koeln.de
                             </Button>
                             <br/><br/>
                             Thank you for testing the <span className="secondary-font red bold">VedaWeb</span> beta!
