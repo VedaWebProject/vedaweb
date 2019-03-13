@@ -214,25 +214,26 @@ class ContentView extends Component {
                                                     {uiDataStore.layers.filter(l => l.id.startsWith('version_')
                                                         && l.id !== 'version_' && l.show).map(version => {
                                                             let v = data.versions.find(x => x.id === version.id);
-                                                            return <div
-                                                                    key={"v_" + v.id}
-                                                                    className="translation"
-                                                                    ref={this.scrollTo}>
-                                                                        <span className="bold gap-right">{version.label}</span>
-                                                                        <HelpButton inline type={v.id}/>
-                                                                        <div
-                                                                        className={"gap-left " + (v.language === "deva" ? "deva-font" : "text-font")}>
-                                                                            {v.form.map((line, i) => (
-                                                                                <div key={"trans_" + i}>
-                                                                                    {v.applyKeys ?
-                                                                                        <span className="red gap-right">{String.fromCharCode(i + 97)} </span>
-                                                                                        : ''
-                                                                                    }
-                                                                                    {line}
-                                                                                </div>
-                                                                            ))}
-                                                                        </div>
+                                                            return v === undefined ? "" :
+                                                                <div
+                                                                key={"v_" + v.id}
+                                                                className="translation"
+                                                                ref={this.scrollTo}>
+                                                                    <span className="bold gap-right">{version.label}</span>
+                                                                    <HelpButton inline type={v.id}/>
+                                                                    <div
+                                                                    className={"gap-left " + (v.language === "deva" ? "deva-font" : "text-font")}>
+                                                                        {v.form.map((line, i) => (
+                                                                            <div key={"trans_" + i}>
+                                                                                {v.applyKeys ?
+                                                                                    <span className="red gap-right">{String.fromCharCode(i + 97)} </span>
+                                                                                    : ''
+                                                                                }
+                                                                                {line}
+                                                                            </div>
+                                                                        ))}
                                                                     </div>
+                                                                </div>
                                                     })}
                                                 </div>
                                             }
