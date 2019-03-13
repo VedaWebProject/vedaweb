@@ -3,22 +3,22 @@
 
 @font-face {
     font-family: 'Gentium';
-    src: local('GentiumPlus-R'), url(./fonts/GentiumPlus-R.woff) format('woff');
+    src: local('GentiumPlus-R'), url(./fonts/GentiumPlus/GentiumPlus-R.woff) format('woff');
 }
 
 @font-face {
     font-family: 'Gentium-I';
-    src: local('GentiumPlus-I'), url(./fonts/GentiumPlus-I.woff) format('woff');
+    src: local('GentiumPlus-I'), url(./fonts/GentiumPlus/GentiumPlus-I.woff) format('woff');
 }
 
 @font-face {
     font-family: 'Assistant';
-    src: local('Assistant'), url(./fonts/Assistant-Regular.ttf) format('truetype');
+    src: local('Assistant'), url(./fonts/Assistant/Assistant-Regular.ttf) format('truetype');
 }
 
 @font-face {
     font-family: 'NotoDeva';
-    src: local('NotoDeva'), url(./fonts/NotoSerifDevanagari.ttf) format('truetype');
+    src: local('NotoDeva'), url(./fonts/NotoSerifDevanagari/NotoSerifDevanagari.ttf) format('truetype');
 }
 
 

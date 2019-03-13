@@ -10,7 +10,7 @@
 /build
 
 # fonts
-/src/fonts
+# /src/fonts
 
 # misc
 .DS_Store
