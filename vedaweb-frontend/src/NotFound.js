@@ -10,7 +10,7 @@ class ContentView extends Component {
             <Row className="page-content">
                 <Col span={8} offset={8}>
                     <div className="card">
-                        404
+                        This page could not be found.
                     </div>
                 </Col>
             </Row>
