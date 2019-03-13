@@ -10,7 +10,7 @@ class ErrorMessage extends Component {
             <div className="card-nobox content-center secondary-font">
                 <div className="inline-block content-left">
                     <Icon type="meh-o" className="gap-right" />
-                    <b>There was an error requesting the data.</b>
+                    <b>We're sorry. Something went wrong here.</b>
 
                     <br/>
                     <br/>
@@ -24,7 +24,7 @@ class ErrorMessage extends Component {
                         <li>You requested a document that doesn't exist</li>
                         <li>Someone gave you the URL to this page and you missed a few characters copying it</li>
                         <li>The syntax of your search request was invalid</li>
-                        <li>There is some technical problem with our server</li>
+                        <li>There is some technical problem with the application</li>
                     </ul>
 
                     If this was an application error on our side, the problem will be reported automatically.
