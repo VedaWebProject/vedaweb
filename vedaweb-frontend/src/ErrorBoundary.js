@@ -4,26 +4,29 @@ import ErrorMessage from "./ErrorMessage";
 class ErrorBoundary extends Component {
 
     constructor(props) {
-      super(props);
-      this.state = { hasError: false };
+        super(props);
+        this.state = { hasError: false };
     }
-  
+
     static getDerivedStateFromError(error) {
-      return { hasError: true };
+        return { hasError: true };
     }
   
     componentDidCatch(error, info) {
-        console.log(JSON.stringify(error));
-        console.log(JSON.stringify(info));
-      //logErrorToMyService(error, info);
+        //console.log(JSON.stringify(error));
+        //console.log(info.componentStack);
+        //logErrorToMyService(error, info);
+        this.setState({ hasError: true });
     }
   
     render() {
-      if (this.state.hasError) {
-        return <div className="page-content"><ErrorMessage/></div>;
-      }
-  
-      return this.props.children; 
+        if (this.state.hasError) {
+            return <div style={{maxWidth:"1024px", margin:"auto auto"}}>
+                        <ErrorMessage/>
+                   </div>;
+        }
+
+        return this.props.children; 
     }
 
 }
