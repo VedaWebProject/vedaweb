@@ -136,23 +136,6 @@
 						</configuration>
 					</execution>
 					
-					<!-- COPY RESOURCES: CONFIG FILES -->
-					<execution>
-						<id>copy-config</id>
-						<phase>validate</phase>
-						<goals>
-							<goal>copy-resources</goal>
-						</goals>
-						<configuration>
-							<outputDirectory>${basedir}/src/main/resources</outputDirectory>
-							<resources>
-								<resource>
-									<directory>../vedaweb-config</directory>
-								</resource>
-							</resources>
-						</configuration>
-					</execution>
-					
 					<!-- COPY RESOURCES: IMPORT DATA (only needed for dev!) -->
 					<execution>
 						<id>copy-data</id>

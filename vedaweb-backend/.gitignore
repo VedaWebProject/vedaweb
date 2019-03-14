@@ -15,6 +15,3 @@ src/main/resources/templates/
 
 ### IMPORT DATA ###
 tei/
-
-### CONFIG FILES ###
-src/main/resources/*.properties

@@ -39,7 +39,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Service;
 
@@ -53,7 +52,6 @@ import de.unikoeln.vedaweb.util.StringUtils;
 
 
 @Service
-@PropertySource(value = "classpath:application.properties")
 public class ElasticIndexService {
 	
 	@Autowired
@@ -65,7 +63,7 @@ public class ElasticIndexService {
 	@Value("${es.index.name}")
 	private String indexName;
 	
-	@Value("classpath:es-index.json")
+	@Value("${classpath:es-index.json")
 	private Resource indexDef;
 
 	
