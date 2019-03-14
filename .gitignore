@@ -1,1 +1,4 @@
 /script-*
+/*.properties
+/vedaweb-config/*.properties
+/vedaweb-data/*.xml

@@ -66,15 +66,13 @@
 			<groupId>net.sourceforge.nekohtml</groupId>
 			<artifactId>nekohtml</artifactId>
 		</dependency>
-
-		<!-- elasticsearch -->
+	
 		<dependency>
 			<groupId>org.elasticsearch</groupId>
 			<artifactId>elasticsearch</artifactId>
-			<version>6.2.0</version>
+			<version>6.2.0</version><!--$NO-MVN-MAN-VER$-->
 		</dependency>
-
-		<!-- elasticsearch high level REST client -->
+		
 		<dependency>
 			<groupId>org.elasticsearch.client</groupId>
 			<artifactId>elasticsearch-rest-high-level-client</artifactId>
@@ -107,11 +105,23 @@
 			</plugin>
 			
 			<plugin>
+			    <artifactId>maven-clean-plugin</artifactId>
+			    <configuration>
+			        <filesets>
+			            <fileset>
+			                <directory>${basedir}/src/main/resources/static</directory>
+			            </fileset>
+			        </filesets>
+			    </configuration>
+			</plugin>
+			
+			<plugin>
 				<artifactId>maven-resources-plugin</artifactId>
-				<version>3.0.2</version>
 				<executions>
+					
+					<!-- COPY RESOURCES: CLIENT/FRONTEND APP -->
 					<execution>
-						<id>copy-resources</id>
+						<id>copy-client-app</id>
 						<phase>validate</phase>
 						<goals>
 							<goal>copy-resources</goal>
@@ -125,6 +135,41 @@
 							</resources>
 						</configuration>
 					</execution>
+					
+					<!-- COPY RESOURCES: CONFIG FILES -->
+					<execution>
+						<id>copy-config</id>
+						<phase>validate</phase>
+						<goals>
+							<goal>copy-resources</goal>
+						</goals>
+						<configuration>
+							<outputDirectory>${basedir}/src/main/resources</outputDirectory>
+							<resources>
+								<resource>
+									<directory>../vedaweb-config</directory>
+								</resource>
+							</resources>
+						</configuration>
+					</execution>
+					
+					<!-- COPY RESOURCES: IMPORT DATA (only needed for dev!) -->
+					<execution>
+						<id>copy-data</id>
+						<phase>validate</phase>
+						<goals>
+							<goal>copy-resources</goal>
+						</goals>
+						<configuration>
+							<outputDirectory>${basedir}/tei</outputDirectory>
+							<resources>
+								<resource>
+									<directory>../vedaweb-data</directory>
+								</resource>
+							</resources>
+						</configuration>
+					</execution>
+					
 				</executions>
 			</plugin>
 

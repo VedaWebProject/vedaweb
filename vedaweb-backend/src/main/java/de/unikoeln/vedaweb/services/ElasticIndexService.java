@@ -53,7 +53,7 @@ import de.unikoeln.vedaweb.util.StringUtils;
 
 
 @Service
-@PropertySource(value = "classpath:es.properties")
+@PropertySource(value = "classpath:application.properties")
 public class ElasticIndexService {
 	
 	@Autowired
