@@ -11,7 +11,7 @@ const searchGrammarStore = store({
         let blockId = 'block_' + Date.now()
         searchGrammarStore.data.blocks = searchGrammarStore.data.blocks.concat({
             id: blockId,
-            form: '',
+            term: '',
             lemma: false,
             distance: 0,
             fields: []
@@ -66,10 +66,10 @@ const searchGrammarStore = store({
         }
     },
 
-    setForm(blockId, form){
+    setTerm(blockId, term){
         for (let i = 0; i < searchGrammarStore.data.blocks.length; i++){
             if (searchGrammarStore.data.blocks[i].id === blockId){
-                searchGrammarStore.data.blocks[i].form = form;
+                searchGrammarStore.data.blocks[i].term = term;
                 break;
             }
         }

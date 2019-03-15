@@ -142,33 +142,4 @@ public class SearchData {
 		return "mode:" + mode + (input != null ? " input:" + input : "");
 	}
 	
-//	public void cleanAndFormatFields(){
-//		
-//		if (blocks != null) {
-//			//clean search blocks
-//			Iterator<Map<String, Object>> blockIter = blocks.iterator();
-//			while (blockIter.hasNext()) {
-//				Map<String, Object> block = blockIter.next();
-//				if (block.size() <= 3 && (block.get("form") == null || block.get("form").equals("") )) {
-//					blockIter.remove();
-//				}
-//			}
-//			
-//			for (Map<String, Object> block : blocks){
-//				for (String field : block.keySet()){
-//					if (block.get(field) instanceof String
-//							&& ((String)block.get(field)).matches("-?\\d+")){
-//						block.put(field, Integer.parseInt(((String)block.get(field))));
-//					}
-//				}
-//			}
-//		}
-//		
-//		//clean search scopes
-//		if (scopes != null)
-//			scopes.stream()
-//			.filter(scope -> !scope.isEmpty())
-//			.collect(Collectors.toList());
-//	}
-	
 }

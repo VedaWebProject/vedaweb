@@ -54,7 +54,7 @@ class SearchView extends Component {
             
 
             for (let block of jsonData.blocks){
-                block.form = SanscriptAccents.t(block.form, searchMetaStore.transliteration, "iso");
+                block.term = SanscriptAccents.t(block.term, searchMetaStore.transliteration, "iso");
                 //make fields direct props of block
                 for (let field of block.fields){
                     if (field.value !== undefined && field.value.length > 0)
@@ -74,7 +74,7 @@ class SearchView extends Component {
     }
 
     isBlockEmpty(block){
-        return (block.form === undefined || block.form.length === 0)
+        return (block.term === undefined || block.term.length === 0)
             && block.fields.filter(field => field.value.length > 0).length === 0;
     }
 

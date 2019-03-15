@@ -153,8 +153,8 @@ public class SearchRequestBuilder {
 				if (key.equalsIgnoreCase("lemma"))
 					continue; //TEMP DEV
 				
-				//if fields="form", also search in "lemma"-field
-				if (key.equals("form")) {
+				//if fields="term", also search in "lemma"-field
+				if (key.equals("term")) {
 					
 					//set query string
 					String query = StringUtils.normalizeNFC((String) block.get(key));
