@@ -20,7 +20,7 @@ public class StringUtils {
 	public static boolean containsAccents(String text) {
 		if (text == null) return false;
 		text = normalizeNFC(text);
-		for (String va : IsoChars.VOWELS_WITH_TO_NO_ACCENTS.keySet()) {
+		for (String va : IsoChars.VOWELS_WITH_TO_NO_ACCENTS_NFC.keySet()) {
 			if (text.contains(normalizeNFC(va))) return true;
 		}
 	    return false;
@@ -30,8 +30,8 @@ public class StringUtils {
 	public static String removeVowelAccents(String text) {
 		if (text == null) return text;
 		text = normalizeNFC(text);
-		for (String va : IsoChars.VOWELS_WITH_TO_NO_ACCENTS.keySet()) {
-			text = text.replaceAll(normalizeNFC(va), IsoChars.VOWELS_WITH_TO_NO_ACCENTS.get(va));
+		for (String va : IsoChars.VOWELS_WITH_TO_NO_ACCENTS_NFC.keySet()) {
+			text = text.replaceAll(va, IsoChars.VOWELS_WITH_TO_NO_ACCENTS_NFC.get(va));
 		}
 		return normalizeNFC(text);
 	}

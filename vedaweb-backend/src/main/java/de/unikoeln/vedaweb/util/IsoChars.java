@@ -23,21 +23,21 @@ public class IsoChars {
 		{"0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "oṃ", "", "।", "॥"}
 	);
 	
-	public static final Map<String, String> VOWELS_WITH_TO_NO_ACCENTS;
+	public static final Map<String, String> VOWELS_WITH_TO_NO_ACCENTS_NFC;
 	
 	static {
 		Map<String, String> vmap = new HashMap<>();
-		vmap.put("á", "a");
-		vmap.put("ā́", "ā");
-		vmap.put("í", "i");
-		vmap.put("ī́", "ī");
-		vmap.put("ú", "u");
-		vmap.put("ū́", "ū");
-		vmap.put("ŕ̥", "r̥");
-		vmap.put("ĺ̥", "l̥");
-		vmap.put("é", "e");
-		vmap.put("ó", "o");
-		VOWELS_WITH_TO_NO_ACCENTS = vmap;
+		vmap.put(StringUtils.normalizeNFC("á"), StringUtils.normalizeNFC("a"));
+		vmap.put(StringUtils.normalizeNFC("ā́"), StringUtils.normalizeNFC("ā"));
+		vmap.put(StringUtils.normalizeNFC("í"), StringUtils.normalizeNFC("i"));
+		vmap.put(StringUtils.normalizeNFC("ī́"), StringUtils.normalizeNFC("ī"));
+		vmap.put(StringUtils.normalizeNFC("ú"), StringUtils.normalizeNFC("u"));
+		vmap.put(StringUtils.normalizeNFC("ū́"), StringUtils.normalizeNFC("ū"));
+		vmap.put(StringUtils.normalizeNFC("ŕ̥"), StringUtils.normalizeNFC("r̥"));
+		vmap.put(StringUtils.normalizeNFC("ĺ̥"), StringUtils.normalizeNFC("l̥"));
+		vmap.put(StringUtils.normalizeNFC("é"), StringUtils.normalizeNFC("e"));
+		vmap.put(StringUtils.normalizeNFC("ó"), StringUtils.normalizeNFC("o"));
+		VOWELS_WITH_TO_NO_ACCENTS_NFC = vmap;
 	}
 
 }
