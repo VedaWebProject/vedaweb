@@ -63,7 +63,7 @@ public class ElasticIndexService {
 	@Value("${es.index.name}")
 	private String indexName;
 	
-	@Value("${classpath:es-index.json")
+	@Value("classpath:es-index.json")
 	private Resource indexDef;
 
 	
