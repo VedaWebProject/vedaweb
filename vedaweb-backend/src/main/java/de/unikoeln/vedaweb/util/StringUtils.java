@@ -5,7 +5,8 @@ import java.text.Normalizer.Form;
 
 public class StringUtils {
 	
-	private static final String REGEX_VOWEL_W_ACCENT = "([aeiourAEIOUR]\\P{L}*?)[\\u0301\\u0300]";
+//	private static final String REGEX_VOWEL_W_ACCENT =
+//			"([aeiourAEIOUR]\\P{L}*?)[\\u0301\\u0300]";
 	
 	public static int normalizeIndex(int index, int docCount){
 		if (index < 0)
@@ -18,17 +19,37 @@ public class StringUtils {
 	
 	public static boolean containsAccents(String text) {
 		if (text == null) return false;
-	    return normalizeNFD(text).matches(".*" + REGEX_VOWEL_W_ACCENT + ".*");
+		text = normalizeNFC(text);
+		for (String va : IsoChars.VOWELS_WITH_TO_NO_ACCENTS.keySet()) {
+			if (text.contains(normalizeNFC(va))) return true;
+		}
+	    return false;
 	}
 	
 	
 	public static String removeVowelAccents(String text) {
 		if (text == null) return text;
-		return normalizeNFC(
-			normalizeNFD(text)
-				.replaceAll(REGEX_VOWEL_W_ACCENT, "$1")
-		);
+		text = normalizeNFC(text);
+		for (String va : IsoChars.VOWELS_WITH_TO_NO_ACCENTS.keySet()) {
+			text = text.replaceAll(normalizeNFC(va), IsoChars.VOWELS_WITH_TO_NO_ACCENTS.get(va));
+		}
+		return normalizeNFC(text);
 	}
+	
+	
+//	public static boolean containsAccents(String text) {
+//		if (text == null) return false;
+//	    return normalizeNFD(text).matches(".*" + REGEX_VOWEL_W_ACCENT + ".*");
+//	}
+//	
+//	
+//	public static String removeVowelAccents(String text) {
+//		if (text == null) return text;
+//		return normalizeNFC(
+//			normalizeNFD(text)
+//				.replaceAll(REGEX_VOWEL_W_ACCENT, "$1")
+//		);
+//	}
 	
 	
 	public static String normalizeNFC(String s){
