@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Row, Col, Icon, Input, Tooltip, Select, Checkbox } from 'antd';
+import { Row, Col, Icon, Input, Tooltip, Checkbox } from 'antd';
 
 import searchGrammarStore from "./stores/searchGrammarStore";
 import searchMetaStore from "./stores/searchMetaStore";
@@ -10,11 +10,11 @@ import TransliterationPreview from "./TransliterationPreview";
 
 import './css/SearchBlock.css';
 
-const Option = Select.Option;
+//const Option = Select.Option;
 
-const distanceOptions = Array(10).fill(0).map((e, i) => (
-    i === 0 ? "none" : i + " token" + (i > 1 ? "s" : "")
-));
+// const distanceOptions = Array(10).fill(0).map((e, i) => (
+//     i === 0 ? "none" : i + " token" + (i > 1 ? "s" : "")
+// ));
 
 
 class SearchBlock extends Component {
@@ -47,10 +47,6 @@ class SearchBlock extends Component {
                         align="middle"
                         justify="start">
 
-                            <Col span={9} className="search-input-label content-right">
-                                Word form / lemma:
-                            </Col>
-
                             <Col span={9}>
                                 <Tooltip
                                 title={transliteration}
@@ -60,12 +56,13 @@ class SearchBlock extends Component {
                                     <Input
                                     value={this.props.term}
                                     onChange={e => searchGrammarStore.setTerm(this.props.id, e.target.value)}
-                                    placeholder="(optional)"
-                                    className="search-block-input" />
+                                    placeholder="word form / lemma (optional)"
+                                    className="search-block-input"
+                                    style={{ width: '98%' }} />
                                 </Tooltip>
                             </Col>
 
-                            <Col span={4} offset={1}>
+                            <Col span={10}>
                                 <Checkbox
                                 onChange={e => searchGrammarStore.setLemma(this.props.id, e.target.checked)}
                                 checked={this.props.lemma} >
@@ -73,14 +70,23 @@ class SearchBlock extends Component {
                                 </Checkbox>
                             </Col>
 
+                            <Col span={5}>
+                                <Checkbox
+                                onChange={e => searchGrammarStore.setRequired(this.props.id, e.target.checked)}
+                                checked={this.props.required} >
+                                    required
+                                </Checkbox>
+                            </Col>
+
                         </Row>
 
+                        {/**
                         <Row
                         type="flex"
                         align="middle"
                         justify="start"
-                        className={true || this.props.isFirstBlock ? "hidden" : ""}>
-                            <Col span={9} className="search-input-label content-right">
+                        className={this.props.isFirstBlock ? "hidden" : ""}>
+                            <Col span={9} className="content-right">
                                 <span className="secondary-font">Maximum distance to previous term:</span>
                             </Col>
                             <Col span={9} className="search-block-input">
@@ -97,7 +103,9 @@ class SearchBlock extends Component {
                                 </Select>
                             </Col>
                             <Col span={4}></Col>
-                        </Row>
+                        </Row> */}
+
+                        <div style={{marginTop:".2rem", color:"#b4b1ae"}}>Grammar:</div>
 
                         {this.props.fields.map((field, i) => (
                             <SearchAttributeField

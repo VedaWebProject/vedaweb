@@ -8,6 +8,7 @@ import org.elasticsearch.common.Strings;
 import org.elasticsearch.index.query.BoolQueryBuilder;
 import org.elasticsearch.index.query.InnerHitBuilder;
 import org.elasticsearch.index.query.MatchAllQueryBuilder;
+import org.elasticsearch.index.query.NestedQueryBuilder;
 import org.elasticsearch.index.query.QueryBuilders;
 import org.elasticsearch.index.query.RangeQueryBuilder;
 import org.elasticsearch.search.aggregations.AggregationBuilders;
@@ -153,6 +154,10 @@ public class SearchRequestBuilder {
 				if (key.equalsIgnoreCase("lemma"))
 					continue; //TEMP DEV
 				
+				//can be ignored, here
+				if (key.equalsIgnoreCase("required"))
+					continue; //TEMP DEV
+				
 				//if fields="term", also search in "lemma"-field
 				if (key.equals("term")) {
 					
@@ -178,13 +183,17 @@ public class SearchRequestBuilder {
 				}
 			}
 			
-			//wrap in nested query, add to root query
-			rootQuery.must(
-				QueryBuilders.nestedQuery("tokens", bool, ScoreMode.Max)
-					.innerHit(new InnerHitBuilder()
-//								.setHighlightBuilder(getHighlighting(HIGHLIGHT_GRAMMAR))
-								.setName("tokens." + block.hashCode()))
-			);
+			//wrap block query in nested query
+			NestedQueryBuilder blockQuery = QueryBuilders.nestedQuery("tokens", bool, ScoreMode.Max)
+				.innerHit(new InnerHitBuilder().setName("tokens." + block.hashCode()));
+			
+			//add to root query
+			if ((boolean)block.get("required")) {
+				rootQuery.must(blockQuery);
+			} else {
+				rootQuery.should(blockQuery);
+			}
+			
 		}
 	}
 	

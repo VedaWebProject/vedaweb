@@ -13,6 +13,7 @@ const searchGrammarStore = store({
             id: blockId,
             term: '',
             lemma: false,
+            required: true,
             distance: 0,
             fields: []
         });
@@ -79,6 +80,15 @@ const searchGrammarStore = store({
         for (let i = 0; i < searchGrammarStore.data.blocks.length; i++){
             if (searchGrammarStore.data.blocks[i].id === blockId){
                 searchGrammarStore.data.blocks[i].lemma = lemma;
+                break;
+            }
+        }
+    },
+
+    setRequired(blockId, required){
+        for (let i = 0; i < searchGrammarStore.data.blocks.length; i++){
+            if (searchGrammarStore.data.blocks[i].id === blockId){
+                searchGrammarStore.data.blocks[i].required = required;
                 break;
             }
         }
