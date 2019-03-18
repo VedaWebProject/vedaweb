@@ -437,8 +437,7 @@ class ContentView extends Component {
                     width="480"
                     closable={true}
                     onClose={() => this.setState({filtersVisible: false})}
-                    visible={this.state.filtersVisible}
-                    style={{padding:'.5rem 1.5rem'}}>
+                    visible={this.state.filtersVisible} >
 
                         {/* LAYER SWITCHES */}
                         { data.versions !== undefined && uiDataStore.layers.map(l => (
