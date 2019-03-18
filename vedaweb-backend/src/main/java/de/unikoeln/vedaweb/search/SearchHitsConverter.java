@@ -28,13 +28,13 @@ public class SearchHitsConverter {
 			hit.setScore(esHit.getScore());
 			hit.setHymnAddressee(source.get("hymnAddressee").toString());
 			hit.setHymnGroup(source.get("hymnGroup").toString());
-			hit.setVerseStrata(source.get("strata").toString());
+			hit.setStanzaStrata(source.get("strata").toString());
 			hit.setSource(source);
 			
 			hit.setDocId(
 				(int)source.get("book"),
 				(int)source.get("hymn"),
-				(int)source.get("verse")
+				(int)source.get("stanza")
 			);
 			
 			//highlighting

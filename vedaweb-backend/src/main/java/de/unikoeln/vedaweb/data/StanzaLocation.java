@@ -1,29 +1,29 @@
 package de.unikoeln.vedaweb.data;
 
-public class VerseLocation {
+public class StanzaLocation {
 	
 	private int book;
 	private int hymn;
-	private int verse;
+	private int stanza;
 	
 	
-	public VerseLocation(int book, int hymn, int verse) {
+	public StanzaLocation(int book, int hymn, int stanza) {
 		super();
 		this.book = book;
 		this.hymn = hymn;
-		this.verse = verse;
+		this.stanza = stanza;
 	}
 	
-	public VerseLocation(String locationString) {
+	public StanzaLocation(String locationString) {
 		locationString = normalizeId(locationString);
 		if (locationString == null) {
 			this.book = 1;
 			this.hymn = 1;
-			this.verse = 1;
+			this.stanza = 1;
 		} else {
 			this.book = Integer.parseInt(locationString.substring(0, 2));
 			this.hymn = Integer.parseInt(locationString.substring(2, 5));
-			this.verse = Integer.parseInt(locationString.substring(5));
+			this.stanza = Integer.parseInt(locationString.substring(5));
 		}
 	}
 	
@@ -35,13 +35,13 @@ public class VerseLocation {
 		return hymn;
 	}
 	
-	public int getVerse() {
-		return verse;
+	public int getStanza() {
+		return stanza;
 	}
 	
 	public void setNextFallbackLocation() {
-		if (verse > 1)
-			verse = 1;
+		if (stanza > 1)
+			stanza = 1;
 		else if (hymn > 1)
 			hymn = 1;
 		else
@@ -73,7 +73,7 @@ public class VerseLocation {
 	
 	@Override
 	public String toString() {
-		return book + "." + hymn + "." + verse;
+		return book + "." + hymn + "." + stanza;
 	}
 	
 }

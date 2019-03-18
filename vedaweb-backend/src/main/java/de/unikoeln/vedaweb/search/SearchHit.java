@@ -12,7 +12,7 @@ public class SearchHit implements Comparable<SearchHit>{
 	private Map<String, String> highlight;
 	private String hymnAddressee;
 	private String hymnGroup;
-	private String verseStrata;
+	private String stanzaStrata;
 	private Map<String, Object> source;
 	
 	public SearchHit() {
@@ -33,11 +33,11 @@ public class SearchHit implements Comparable<SearchHit>{
 		return docId;
 	}
 	
-	public void setDocId(int book, int hymn, int verse) {
+	public void setDocId(int book, int hymn, int stanza) {
 		this.docId =
 			String.format("%02d", book) + "." +
 			String.format("%03d", hymn) + "." +
-			String.format("%02d", verse);
+			String.format("%02d", stanza);
 	}
 	
 	@JsonProperty("highlight")
@@ -67,13 +67,13 @@ public class SearchHit implements Comparable<SearchHit>{
 		this.hymnGroup = hymnGroup;
 	}
 
-	@JsonProperty("verseStrata")
-	public String getVerseStrata() {
-		return verseStrata;
+	@JsonProperty("stanzaStrata")
+	public String getStanzaStrata() {
+		return stanzaStrata;
 	}
 
-	public void setVerseStrata(String verseStrata) {
-		this.verseStrata = verseStrata;
+	public void setStanzaStrata(String stanzaStrata) {
+		this.stanzaStrata = stanzaStrata;
 	}
 	
 	@JsonProperty("source")

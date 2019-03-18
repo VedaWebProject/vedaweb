@@ -130,7 +130,7 @@ class SearchResults extends Component {
                             text: <div dangerouslySetInnerHTML={this.createHighlightHTML(hit)}></div>,
                             addressee: hit.hymnAddressee,
                             group: hit.hymnGroup,
-                            strata: hit.verseStrata
+                            strata: hit.stanzaStrata
                         }))
                 });
             })

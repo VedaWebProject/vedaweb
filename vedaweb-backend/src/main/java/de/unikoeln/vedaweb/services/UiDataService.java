@@ -10,7 +10,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Service;
 
-import de.unikoeln.vedaweb.data.VerseRepository;
+import de.unikoeln.vedaweb.data.StanzaRepository;
 import de.unikoeln.vedaweb.util.IOUtils;
 
 @Service
@@ -20,7 +20,7 @@ public class UiDataService {
 	private ElasticIndexService indexService;
 	
 	@Autowired
-	private VerseRepository verseRepo;
+	private StanzaRepository stanzaRepo;
 	
 	@Autowired
 	private DataImportService importService;
@@ -35,7 +35,7 @@ public class UiDataService {
 	public JSONObject init() {
 		JSONObject response = new JSONObject();
 		//force data import if db empty
-		if (verseRepo.count() == 0) {
+		if (stanzaRepo.count() == 0) {
 			System.out.println("[UiDataService] WARNING: DB collection seems to be empty. Trying to import data from XML...");
 			response.put("importedXmlData", importService.importXMLData(DataImportService.LOCAL_XML_DIR, false));
 		}
@@ -80,15 +80,15 @@ public class UiDataService {
 		
 		//get addressees data from index and add to uiData JSONObject
 		((JSONObject)uiData.query("/meta"))
-			.put("hymnAddressee", indexService.getVersesMetaData("hymnAddressee"));
+			.put("hymnAddressee", indexService.getStanzasMetaData("hymnAddressee"));
 		
 		//get group data from index and add to uiData JSONObject
 		((JSONObject)uiData.query("/meta"))
-			.put("hymnGroup", indexService.getVersesMetaData("hymnGroup"));
+			.put("hymnGroup", indexService.getStanzasMetaData("hymnGroup"));
 		
 		//get strata data from index and add to uiData JSONObject
 		((JSONObject)uiData.query("/meta"))
-			.put("strata", indexService.getVersesMetaData("strata"));
+			.put("strata", indexService.getStanzasMetaData("strata"));
 		
 		System.out.println("[UiDataService] Successfully initialized UI data object for frontend requests.");
 		return "[UiDataService] Successfully initialized UI data object for frontend requests.";

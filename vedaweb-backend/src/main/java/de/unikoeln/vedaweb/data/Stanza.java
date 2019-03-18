@@ -5,8 +5,8 @@ import java.util.List;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-@Document(collection="verses")
-public class Verse implements Comparable<Verse> {
+@Document(collection="stanzas")
+public class Stanza implements Comparable<Stanza> {
 	
 	@Id
 	private String id;
@@ -14,7 +14,7 @@ public class Verse implements Comparable<Verse> {
 	
 	private int book;
 	private int hymn;
-	private int verse;
+	private int stanza;
 	
 	private int hymnAbs;
 	
@@ -23,11 +23,11 @@ public class Verse implements Comparable<Verse> {
 	private String strata;
 	
 	private List<Pada> padas;
-	private List<VerseVersion> versions;
+	private List<StanzaVersion> versions;
 	
 	
-	public Verse(){
-		versions = new ArrayList<VerseVersion>();
+	public Stanza(){
+		versions = new ArrayList<StanzaVersion>();
 		padas = new ArrayList<Pada>();
 	}
 	
@@ -64,12 +64,12 @@ public class Verse implements Comparable<Verse> {
 		this.hymn = hymn;
 	}
 
-	public int getVerse() {
-		return verse;
+	public int getStanza() {
+		return stanza;
 	}
 
-	public void setVerse(int verse) {
-		this.verse = verse;
+	public void setStanza(int stanza) {
+		this.stanza = stanza;
 	}
 	
 	public int getHymnAbs() {
@@ -105,19 +105,19 @@ public class Verse implements Comparable<Verse> {
 		this.strata = strata;
 	}
 
-	public List<VerseVersion> getTranslations(){
-		List<VerseVersion> translations = new ArrayList<VerseVersion>();
-		for (VerseVersion vv : versions)
+	public List<StanzaVersion> getTranslations(){
+		List<StanzaVersion> translations = new ArrayList<StanzaVersion>();
+		for (StanzaVersion vv : versions)
 			if (vv.getType().equals("translation"))
 				translations.add(vv);
 		return translations;
 	}
 	
-	public List<VerseVersion> getVersions() {
+	public List<StanzaVersion> getVersions() {
 		return versions;
 	}
 	
-	public void addVersion(VerseVersion version) {
+	public void addVersion(StanzaVersion version) {
 		versions.add(version);
 	}
 	
@@ -135,12 +135,12 @@ public class Verse implements Comparable<Verse> {
 
 	@Override
 	public String toString() {
-		return index + ";" + id + ";" + book + "." + hymn + "." + verse + ":\t" +
+		return index + ";" + id + ";" + book + "." + hymn + "." + stanza + ":\t" +
 				"(" + hymnAddressee + " / " + hymnGroup + ")\t" + versions;
 	}
 
 	@Override
-	public int compareTo(Verse o) {
+	public int compareTo(Stanza o) {
 		return id.compareTo(o.getId());
 	}
 	

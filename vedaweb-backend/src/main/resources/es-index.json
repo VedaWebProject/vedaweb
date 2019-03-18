@@ -27,7 +27,7 @@
 				"index":			{ "type": "short" },
 				"book": 			{ "type": "short" },
 				"hymn": 			{ "type": "short" },
-				"verse":			{ "type": "short" },
+				"stanza":			{ "type": "short" },
 				"hymnAbs":			{ "type": "short" },
 				"hymnAddressee":	{ "type": "keyword" },
 				"hymnGroup":		{ "type": "keyword" },

@@ -14,8 +14,8 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 
-import de.unikoeln.vedaweb.data.Verse;
-import de.unikoeln.vedaweb.data.VerseRepository;
+import de.unikoeln.vedaweb.data.Stanza;
+import de.unikoeln.vedaweb.data.StanzaRepository;
 import de.unikoeln.vedaweb.util.Timer;
 import de.unikoeln.vedaweb.util.XmlDataImport;
 import net.sf.saxon.s9api.SaxonApiException;
@@ -27,7 +27,7 @@ public class DataImportService {
 	
 	
 	@Autowired
-	private VerseRepository verseRepo;
+	private StanzaRepository stanzaRepo;
 	
 
 	/*
@@ -40,7 +40,7 @@ public class DataImportService {
 	
 	
 	public int importXMLData(String xmlDirPath, boolean dryRun){
-		List<Verse> verses = new ArrayList<Verse>();
+		List<Stanza> stanzas = new ArrayList<Stanza>();
 		
 		//check import directory path
 		System.out.println("[DataImport] looking for XML files to import ...");
@@ -63,7 +63,7 @@ public class DataImportService {
 		for (File xmlFile : files) {
 			timer.start();
 			try {
-				XmlDataImport.collectVersesFromXML(xmlFile, verses);
+				XmlDataImport.collectStanzasFromXML(xmlFile, stanzas);
 			} catch (SaxonApiException e) {
 				System.err.println("[DataImport] error reading XML data.");
 				e.printStackTrace();
@@ -75,36 +75,36 @@ public class DataImportService {
 		
 		//sort and apply indices
 		System.out.println("[DataImport] sorting documents, applying global indices ...");
-		Collections.sort(verses);
-		for (int i = 0; i < verses.size(); i++) {
-			verses.get(i).setIndex(i);
+		Collections.sort(stanzas);
+		for (int i = 0; i < stanzas.size(); i++) {
+			stanzas.get(i).setIndex(i);
 		}
 		
 		//dry run?
 		if (dryRun){
-			System.out.println("[DataImport] dry run: Read " + verses.size() + " verses from XML.");
-			if (verses.size() > 0) {
+			System.out.println("[DataImport] dry run: Read " + stanzas.size() + " stanzas from XML.");
+			if (stanzas.size() > 0) {
 				try {
-					System.out.println("[DataImport] SAMPLE:\n" + new ObjectMapper().configure(SerializationFeature.FAIL_ON_EMPTY_BEANS, false).writeValueAsString(verses.get(0)));
+					System.out.println("[DataImport] SAMPLE:\n" + new ObjectMapper().configure(SerializationFeature.FAIL_ON_EMPTY_BEANS, false).writeValueAsString(stanzas.get(0)));
 				} catch (JsonProcessingException e) {
 					e.printStackTrace();
 				}
 			}
-			return verses.size();
+			return stanzas.size();
 		}
 		
 		//write to DB
-		if (verses != null && !verses.isEmpty()){
+		if (stanzas != null && !stanzas.isEmpty()){
 			System.out.println("[DataImport] deleting old DB documents...");
-			verseRepo.deleteAll();
+			stanzaRepo.deleteAll();
 			System.out.println("[DataImport] importing new data into DB...");
-			verseRepo.insert(verses);
+			stanzaRepo.insert(stanzas);
 		} else {
 			System.err.println("[DataImport] error: data import failed. nothing read from XML.");
 		}
 		
 		System.out.println("[DataImport] DONE. data import finished.");
-		return verses.size();
+		return stanzas.size();
 	}
 	
 	

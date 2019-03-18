@@ -44,9 +44,9 @@ import org.springframework.stereotype.Service;
 
 import de.unikoeln.vedaweb.data.Pada;
 import de.unikoeln.vedaweb.data.Token;
-import de.unikoeln.vedaweb.data.Verse;
-import de.unikoeln.vedaweb.data.VerseRepository;
-import de.unikoeln.vedaweb.data.VerseVersion;
+import de.unikoeln.vedaweb.data.Stanza;
+import de.unikoeln.vedaweb.data.StanzaRepository;
+import de.unikoeln.vedaweb.data.StanzaVersion;
 import de.unikoeln.vedaweb.util.IOUtils;
 import de.unikoeln.vedaweb.util.StringUtils;
 
@@ -55,7 +55,7 @@ import de.unikoeln.vedaweb.util.StringUtils;
 public class ElasticIndexService {
 	
 	@Autowired
-	private VerseRepository verseRepo;
+	private StanzaRepository stanzaRepo;
 	
 	@Autowired
 	private ElasticService elastic;
@@ -86,13 +86,13 @@ public class ElasticIndexService {
 	public JSONObject indexDbDocuments(){
 		System.out.println("[INFO] creating and inserting new index documents...");
 		JSONObject jsonResponse = new JSONObject();
-		Iterator<Verse> dbIter = verseRepo.findAll().iterator();
+		Iterator<Stanza> dbIter = stanzaRepo.findAll().iterator();
 		// create es bulk request
 		BulkRequest bulkRequest = new BulkRequest();
 
 		// process docs
 		while (dbIter.hasNext()) {
-			Verse dbDoc = dbIter.next();
+			Stanza dbDoc = dbIter.next();
 			JSONObject indexDoc = new JSONObject();
 
 			try {
@@ -100,7 +100,7 @@ public class ElasticIndexService {
 				indexDoc.put("index", dbDoc.getIndex());
 				indexDoc.put("book", dbDoc.getBook());
 				indexDoc.put("hymn", dbDoc.getHymn());
-				indexDoc.put("verse", dbDoc.getVerse());
+				indexDoc.put("stanza", dbDoc.getStanza());
 				indexDoc.put("hymnAddressee", dbDoc.getHymnAddressee());
 				indexDoc.put("hymnGroup", dbDoc.getHymnGroup());
 				indexDoc.put("hymnAbs", dbDoc.getHymnAbs());
@@ -145,7 +145,7 @@ public class ElasticIndexService {
 	}
 	
 
-	private List<JSONObject> buildTokensList(Verse doc) throws JSONException{
+	private List<JSONObject> buildTokensList(Stanza doc) throws JSONException{
 		List<JSONObject> tokens = new ArrayList<JSONObject>();
 
 		for (Pada pada : doc.getPadas()) {
@@ -298,7 +298,7 @@ public class ElasticIndexService {
 	}
 	
 	
-	public JSONArray getVersesMetaData(String field) {
+	public JSONArray getStanzasMetaData(String field) {
 		List<String> addressees = new ArrayList<String>();
 		
 		//aggregation for distinct hymn addressee values
@@ -334,7 +334,7 @@ public class ElasticIndexService {
 	}
 	
 
-	public int countVerses(int book, int hymn) {
+	public int countStanzas(int book, int hymn) {
 		MatchQueryBuilder matchBook = QueryBuilders.matchQuery("book", book);
 		MatchQueryBuilder matchHymn = QueryBuilders.matchQuery("hymn", hymn);
 		BoolQueryBuilder bool = QueryBuilders.boolQuery();
@@ -343,7 +343,7 @@ public class ElasticIndexService {
 		
 		//aggregation for distinct hymn number values
 		CardinalityAggregationBuilder agg = 
-				AggregationBuilders.cardinality("verses").field("verse");
+				AggregationBuilders.cardinality("stanzas").field("stanza");
 		//compose request source
 		SearchSourceBuilder searchSourceBuilder = 
 				new SearchSourceBuilder().query(bool).aggregation(agg);
@@ -351,7 +351,7 @@ public class ElasticIndexService {
 		SearchRequest req = new SearchRequest("vedaweb").types("doc").source(searchSourceBuilder);
 		try {
 			SearchResponse response = elastic.client().search(req);
-			return (int)((Cardinality)response.getAggregations().get("verses")).getValue();
+			return (int)((Cardinality)response.getAggregations().get("stanzas")).getValue();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -450,7 +450,7 @@ public class ElasticIndexService {
 	}
 	
 	
-	private JSONArray concatForms(VerseVersion version, boolean removeAccents) {
+	private JSONArray concatForms(StanzaVersion version, boolean removeAccents) {
 		JSONArray forms = new JSONArray();
 		for (String form : version.getForm()) {
 			form = StringUtils.removeMetaChars(form);
@@ -464,7 +464,7 @@ public class ElasticIndexService {
 	}
 	
 	
-//	private String concatTokenLemmata(Verse doc) {
+//	private String concatTokenLemmata(Stanza doc) {
 //		StringBuilder sb = new StringBuilder();
 //		for (Token token : doc.getGrammarData()){
 //			sb.append(token.getLemma().replaceAll("\u221a", ""));
@@ -474,9 +474,9 @@ public class ElasticIndexService {
 //	}
 	
 	
-	private List<JSONObject> buildVersionsList(Verse doc) {
+	private List<JSONObject> buildVersionsList(Stanza doc) {
 		List<JSONObject> versions = new ArrayList<JSONObject>();
-		for (VerseVersion v : doc.getVersions()) {
+		for (StanzaVersion v : doc.getVersions()) {
 			JSONObject version = new JSONObject();
 			StringBuilder form = new StringBuilder();
 			for (String line : v.getForm()) {

@@ -35,7 +35,7 @@ public class SystemController {
 	
 	
 	@GetMapping(value = {"/index/{action}"}, produces = {"application/json"})
-    public String verseById(
+    public String stanzaById(
     		@PathVariable(name = "action") String action,
     		@RequestParam(name = "auth", required = false) String auth) {
 		

@@ -71,7 +71,7 @@ class ContentView extends Component {
                 //set page title
                 document.title = "VedaWeb | " +
                     ((response.data.id !== undefined)
-                        ? "Stanza " + response.data.book + "." + response.data.hymn + "." + response.data.verse
+                        ? "Stanza " + response.data.book + "." + response.data.hymn + "." + response.data.stanza
                             + " | " + response.data.hymnGroup
                         : " Rigveda online");
             })
@@ -171,7 +171,7 @@ class ContentView extends Component {
                                                 currId={data.id}
                                                 book={data.book}
                                                 hymn={data.hymn}
-                                                verse={data.verse}
+                                                stanza={data.stanza}
                                                 hymnAbs={data.hymnAbs} />
                                         
                                                 <span className="bold gap-left-big">Hymn addressee: </span>
@@ -191,10 +191,10 @@ class ContentView extends Component {
                                     { data.versions !== undefined &&
                                         <div>
                                             {/* <div className="content-plain content-block card">
-                                                <h4 title={"Rigveda, book " + data.book + ", hymn " + data.hymn + ", verse " + data.verse}>
+                                                <h4 title={"Rigveda, book " + data.book + ", hymn " + data.hymn + ", stanza " + data.stanza}>
                                                     {('0' + data.book).slice(-2)}.
                                                     {('00' + data.hymn).slice(-3)}.
-                                                    {('0' + data.verse).slice(-2)}
+                                                    {('0' + data.stanza).slice(-2)}
                                                     <HelpButton type="zurichIso" inline style={{marginLeft:'.5rem'}}/>
                                                 </h4>
                                                 {data.padas.map(pada => (

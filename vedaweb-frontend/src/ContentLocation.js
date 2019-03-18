@@ -15,7 +15,7 @@ class ContentLocation extends Component {
 
     constructor(props){
         super(props);
-        this.state = {verseCount: 0, isLoaded: false, error: undefined};
+        this.state = {stanzaCount: 0, isLoaded: false, error: undefined};
         this.browseNext = this.browseNext.bind(this);
         this.browsePrevious = this.browsePrevious.bind(this);
     }
@@ -32,17 +32,17 @@ class ContentLocation extends Component {
         this.props.bindShortcut('left', this.browsePrevious);
 
         if (this.props.book !== undefined && this.props.hymn !== undefined){
-            axios.get(process.env.PUBLIC_URL + "/api/uidata/count/verses/" + this.props.book + "/" + this.props.hymn)
+            axios.get(process.env.PUBLIC_URL + "/api/uidata/count/stanzas/" + this.props.book + "/" + this.props.hymn)
             .then((response) => {
                 this.setState({
-                    verseCount: response.data.count,
+                    stanzaCount: response.data.count,
                     isLoaded: true,
                     error: undefined
                 });
             })
             .catch((error) => {
                 this.setState({
-                    verseCount: 0,
+                    stanzaCount: 0,
                     isLoaded: true,
                     error: error
                 });
@@ -68,7 +68,7 @@ class ContentLocation extends Component {
             case "hymn":
                 id = this.props.book + "." + value + ".1";
                 break;
-            case "verse":
+            case "stanza":
                 id = this.props.book + "." + this.props.hymn + "." + value;
                 break;
             case "hymnAbs":
@@ -83,10 +83,10 @@ class ContentLocation extends Component {
 
     render() {
 
-        const {book, hymn, verse} = this.props;
+        const {book, hymn, stanza} = this.props;
         const bookCount = uiDataStore.search.meta.scopes.length;
         const hymnCount = uiDataStore.search.meta.scopes[book-1];
-        const verseCount = this.state.verseCount;
+        const stanzaCount = this.state.stanzaCount;
 
         //const { hymnAbs } = this.props;
         //const hymnAbsValues = uiDataStore.search.meta.hymnAbs;
@@ -138,11 +138,11 @@ class ContentLocation extends Component {
                     <Select
                     style={selectStyle}
                     showSearch
-                    value={verse}
-                    onSelect={(v) => this.handleSelect("verse", v)} >
-                        {Array(verseCount).fill(0).map((n, i) => (
+                    value={stanza}
+                    onSelect={(v) => this.handleSelect("stanza", v)} >
+                        {Array(stanzaCount).fill(0).map((n, i) => (
                             <Option
-                            key={'verse_' + i+1}
+                            key={'stanza_' + i+1}
                             value={i+1}>
                                 {('0' + (i+1)).slice(-2)}
                             </Option>

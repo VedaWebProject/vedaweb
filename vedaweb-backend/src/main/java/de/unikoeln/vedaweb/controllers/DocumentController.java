@@ -7,9 +7,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import de.unikoeln.vedaweb.data.Verse;
-import de.unikoeln.vedaweb.data.VerseLocation;
-import de.unikoeln.vedaweb.data.VerseRepository;
+import de.unikoeln.vedaweb.data.Stanza;
+import de.unikoeln.vedaweb.data.StanzaLocation;
+import de.unikoeln.vedaweb.data.StanzaRepository;
 import de.unikoeln.vedaweb.services.MappingService;
 import de.unikoeln.vedaweb.util.StringUtils;
 
@@ -19,27 +19,27 @@ import de.unikoeln.vedaweb.util.StringUtils;
 public class DocumentController {
 	
 	@Autowired
-	private VerseRepository verseRepo;
+	private StanzaRepository stanzaRepo;
 	
 	@Autowired
 	private MappingService mappingService;
 	
 	
 	@RequestMapping(value = "/id/{id}", produces = {"application/json"})
-    public String verseById(
+    public String stanzaById(
     		@PathVariable("id") String id) {
 		
 		//request for absolute hymn number?
 		if (id.startsWith("hymnAbs_")) {
 			return mappingService.mapObjectToJSON(
-					verseRepo.findByHymnAbs(Integer.parseInt(id.replaceAll("\\D", ""))).get().get(0));
+					stanzaRepo.findByHymnAbs(Integer.parseInt(id.replaceAll("\\D", ""))).get().get(0));
 		}
 		
-		VerseLocation loc = new VerseLocation(id);
-		Optional<Verse> v;
+		StanzaLocation loc = new StanzaLocation(id);
+		Optional<Stanza> v;
 		
-		while (!(v = verseRepo.findByBookAndHymnAndVerse(
-				loc.getBook(), loc.getHymn(), loc.getVerse())).isPresent()) {
+		while (!(v = stanzaRepo.findByBookAndHymnAndStanza(
+				loc.getBook(), loc.getHymn(), loc.getStanza())).isPresent()) {
 			loc.setNextFallbackLocation();
 		}
 		
@@ -48,9 +48,9 @@ public class DocumentController {
 	
 	
 	@RequestMapping(value = "/index/{index}", produces = {"application/json"})
-    public String verseByLocation(@PathVariable int index) {
+    public String stanzaByLocation(@PathVariable int index) {
 		return mappingService.mapOptionalToJSON(
-				verseRepo.findByIndex( StringUtils.normalizeIndex(index, (int)verseRepo.count()) ));
+				stanzaRepo.findByIndex( StringUtils.normalizeIndex(index, (int)stanzaRepo.count()) ));
     }
 	
 }

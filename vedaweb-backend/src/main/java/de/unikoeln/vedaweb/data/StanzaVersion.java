@@ -2,7 +2,7 @@ package de.unikoeln.vedaweb.data;
 
 import de.unikoeln.vedaweb.util.StringUtils;
 
-public class VerseVersion {
+public class StanzaVersion {
 	
 	private String id;
 	private String source;
@@ -11,7 +11,7 @@ public class VerseVersion {
 	private String type;
 	private boolean applyKeys;
 	
-	public VerseVersion(
+	public StanzaVersion(
 			String source,
 			String language,
 			String[] form,

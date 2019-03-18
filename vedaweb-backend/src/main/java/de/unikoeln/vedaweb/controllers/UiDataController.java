@@ -26,10 +26,10 @@ public class UiDataController {
 		return uiDataService.getUiDataJSON().toString();
     }
 
-	@RequestMapping(value = "/uidata/count/verses/{book}/{hymn}", produces = {"application/json"})
+	@RequestMapping(value = "/uidata/count/stanzas/{book}/{hymn}", produces = {"application/json"})
     public String getHymnCountJSON(@PathVariable("book") int book, @PathVariable("hymn") int hymn) {
 		JSONObject response = new JSONObject();
-		response.put("count", indexService.countVerses(book, hymn));
+		response.put("count", indexService.countStanzas(book, hymn));
 		return response.toString();
     }
 	
