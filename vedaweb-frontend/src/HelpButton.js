@@ -31,7 +31,8 @@ const helpTexts = {
                 <p>
                     Using the grammar search, you can find stanzas containing lemmas or word forms with certain grammatical properties.
                     The underlying data for this search are the morphological glossings (and other annotations),
-                    composed at the University of Zurich on the basis of the Rigveda version by Lubotsky (see "Morphological Glossing" view in the stanza data).
+                    composed at the University of Zurich on the basis of the Rigveda version by Lubotsky (see "Morphological Glossing" view in the stanza data).<br/>
+                    <strong>Please note: </strong>This means that this feature searches a different data set (single tokens, lemmas, grammar annotations) than the quick search in the header of the page (full-text search)!
                 </p>
                 <p>
                     <h2>Usage</h2>
