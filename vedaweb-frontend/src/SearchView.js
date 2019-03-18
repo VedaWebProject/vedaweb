@@ -208,6 +208,7 @@ class SearchView extends Component {
                                 label="Stanza Strata"
                                 placeholder="all Strata"
                                 items={uiDataStore.meta.strata}
+                                itemLabels={uiDataStore.abbreviations.strata}
                                 selected={searchMetaStore.meta.strata}
                                 handleChange={v => {searchMetaStore.meta.strata = v}}/>
                             </Panel>

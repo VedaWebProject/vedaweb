@@ -24,7 +24,12 @@ class SearchMetaFilterList extends Component {
                     placeholder={"Select or leave blank for " + this.props.placeholder}
                     onChange={this.props.handleChange}>
                         {this.props.items.map((item, i) => (
-                            <Option key={item + i} value={item}>{item}</Option>
+                            <Option key={item + i} value={item}>
+                                {this.props.itemLabels !== undefined && this.props.itemLabels[item] !== undefined
+                                    ? item + " - " + this.props.itemLabels[item]
+                                    : item
+                                }
+                            </Option>
                         ))}
                     </Select>
                 </Col>
