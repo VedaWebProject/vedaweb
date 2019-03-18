@@ -555,8 +555,7 @@ class ContentView extends Component {
                     width="400"
                     closable={true}
                     onClose={() => this.setState({exportVisible: false})}
-                    visible={this.state.exportVisible}
-                    style={{padding:'.5rem 1.5rem'}}>
+                    visible={this.state.exportVisible} >
                         
                         <RadioGroup
                         onChange={(e) => console.log("Export format selected: " + e.target.value)}
