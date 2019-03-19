@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import ErrorMessage from "./ErrorMessage";
+import axios from 'axios';
 
 class ErrorBoundary extends Component {
 
@@ -13,9 +14,10 @@ class ErrorBoundary extends Component {
     }
   
     componentDidCatch(error, info) {
-        //console.log(JSON.stringify(error));
-        //console.log(info.componentStack);
-        //logErrorToMyService(error, info);
+        axios.post(
+            process.env.PUBLIC_URL + "/system/error",
+            {error: error, info: info}
+        );
         this.setState({ hasError: true });
     }
   

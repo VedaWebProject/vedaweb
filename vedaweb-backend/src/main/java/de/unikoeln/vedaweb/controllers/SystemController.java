@@ -3,13 +3,16 @@ package de.unikoeln.vedaweb.controllers;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.PropertySource;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import de.unikoeln.vedaweb.logging.ClientError;
+import de.unikoeln.vedaweb.logging.ClientErrorRepository;
 import de.unikoeln.vedaweb.services.DataImportService;
 import de.unikoeln.vedaweb.services.ElasticIndexService;
 import de.unikoeln.vedaweb.services.UiDataService;
@@ -18,7 +21,6 @@ import de.unikoeln.vedaweb.services.UiDataService;
 
 @RestController
 @RequestMapping("system")
-@PropertySource(value = "classpath:application.properties")
 public class SystemController {
 	
 	@Value("${vw.system.auth}")
@@ -32,6 +34,9 @@ public class SystemController {
 	
 	@Autowired
 	private UiDataService uiDataService;
+	
+	@Autowired
+	private ClientErrorRepository clientErrorRepo;
 	
 	
 	@GetMapping(value = {"/index/{action}"}, produces = {"application/json"})
@@ -66,6 +71,7 @@ public class SystemController {
 		return response.toString();
     }
 	
+	
 	@GetMapping(value = {"/import/{dryRun}", "/import"}, produces = {"application/json"})
     public String importData(
     		@PathVariable(name = "dryRun", required = false) String dryRun,
@@ -83,6 +89,7 @@ public class SystemController {
 		return response.toString();
     }
 	
+	
 	@GetMapping(value = {"/uidata/refresh"}, produces = {"application/json"})
     public String importData(
     		@RequestParam(name = "auth", required = false) String auth) {
@@ -92,6 +99,13 @@ public class SystemController {
 		
 		return uiDataService.init().toString();
     }
+	
+	
+	@PostMapping(value = {"/error"}, produces = {"application/json"})
+    public ClientError reportClientError(@RequestBody ClientError errorData) {
+		return clientErrorRepo.insert(errorData);
+    }
+	
 	
 	private boolean auth(String auth) {
 		return auth != null && auth.equals(this.auth);
