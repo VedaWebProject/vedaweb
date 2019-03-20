@@ -1,38 +1,33 @@
 {
-  "name": "vedaweb-ui",
+  "name": "vedaweb-frontend",
   "version": "0.1.0",
   "private": true,
   "proxy": "http://localhost:8080",
   "homepage": "/rigveda/",
   "dependencies": {
-    "antd": "^3.10.2",
+    "@craco/craco": "^3.6.0",
+    "antd": "^3.15.1",
     "axios": "^0.18.0",
-    "browserizr": "^2.1.1",
-    "immutability-helper": "^2.7.0",
-    "js-base64": "^2.4.3",
-    "react": "^16.3.2",
-    "react-dom": "^16.3.2",
-    "react-easy-state": "^5.0.1",
+    "browserizr": "^3.2.1",
+    "craco-antd": "^1.10.0",
+    "js-base64": "^2.5.1",
+    "react": "^16.8.4",
+    "react-dom": "^16.8.4",
+    "react-easy-state": "^6.1.1",
     "react-mousetrap": "^0.2.0",
-    "react-polyfills": "^0.0.1",
-    "react-router-dom": "^4.3.1",
-    "react-rte": "^0.16.1",
-    "react-scripts": "^2.1.1",
+    "react-router-dom": "^5.0.0",
+    "react-scripts": "2.1.8",
     "react-scroll-to-component": "^1.0.2",
     "sanscript": "0.0.2"
   },
   "scripts": {
-    "start": "react-app-rewired start",
-    "build": "react-app-rewired build",
-    "test": "react-app-rewired test --env=jsdom",
+    "start": "craco start",
+    "build": "craco build",
+    "test": "craco test",
     "eject": "react-scripts eject"
   },
-  "devDependencies": {
-    "babel-plugin-import": "^1.10.0",
-    "customize-cra": "^0.2.11",
-    "less-vars-to-js": "^1.3.0",
-    "react-app-rewire-less": "^2.1.3",
-    "react-app-rewired": "^2.1.0"
+  "eslintConfig": {
+    "extends": "react-app"
   },
   "browserslist": [
     ">0.2%",
