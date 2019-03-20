@@ -46,6 +46,7 @@ class DictionaryView extends Component {
                 headwordIso
                 senseTxtIso
                 senseHtmlIso
+                pageUri
             }
         }`;
 
@@ -63,7 +64,8 @@ class DictionaryView extends Component {
                             graDeva: entry.headwordDeva,
                             graTxt: entry.senseTxtIso,
                             graLemma: entry.headwordIso,
-                            graHtml: entry.senseHtmlIso
+                            graHtml: entry.senseHtmlIso,
+                            graPageUri : entry.pageUri
                         };
                     });
                     dictData.push(t);
@@ -224,6 +226,9 @@ class DictionaryView extends Component {
                     onCancel={this.closeDict}
                     okText="OK">
                         <div key={modalData.lemmaRef}>
+                            <div style={{textAlign:"right"}}>
+                                <a href={modalData.graPageUri} target="_blank" rel="noopener noreferrer"><Icon type="eye"/> View original scan of this entry</a>
+                            </div>
                             <span className="deva-font" style={{color:"#000"}}>{modalData.graDeva}</span><br/>
                             <div
                             className="text-font"
