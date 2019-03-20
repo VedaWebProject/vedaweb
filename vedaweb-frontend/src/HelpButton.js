@@ -197,17 +197,17 @@ const helpTexts = {
         content:
             <div>
                 <p>
-                    Devanagari version based on the Samhita-text by Aufrecht and Van Nooten / Holland, provided by Detlef Eichler.<br/>
+                    Devanagari version based on the Samhita-text by Aufrecht and Van Nooten &amp; Holland, provided by Detlef Eichler.<br/>
                     <a href="http://www.detlef108.de/Rigveda.htm" target="_blank" rel="noopener noreferrer">http://www.detlef108.de/Rigveda.htm</a>
                 </p>
             </div>
     },
     version_vannootenholland : {
-        title: "Van Nooten, Holland",
+        title: "Van Nooten & Holland",
         content:
             <div>
                 <p>
-                    Nooten, Barend A. van & Gary Holland (eds.). 1994. Rig Veda: a metrically restored text with an introduction and notes. Cambridge, Mass. [u.a.]: Harvard University Press.
+                    Nooten, Barend A. van &amp; Gary Holland (eds.). 1994. Rig Veda: a metrically restored text with an introduction and notes. Cambridge, Mass. [u.a.]: Harvard University Press.
                 </p>
             </div>
     },
@@ -230,7 +230,7 @@ const helpTexts = {
             </div>
     },
     version_gunkelryan : {
-        title: "Samitha (Gunkel/Ryan)",
+        title: "Samitha (Gunkel & Ryan)",
         content:
             <div>
                 <p>

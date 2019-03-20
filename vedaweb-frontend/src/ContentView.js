@@ -478,7 +478,7 @@ class ContentView extends Component {
                         onChange={(e) => this.filterChange("sasapatha", e)} />
 
                         <ContentFilterSwitch
-                        label="Van Nooten, Holland"
+                        label="Van Nooten & Holland"
                         size="small"
                         disabled={!isLoaded || error !== undefined}
                         checked={uiDataStore.viewFilter.vnh}

@@ -70,10 +70,10 @@
 		{ "id": "version_", "label": "All Text Versions", "show": true },
 		{ "id": "version_lubotskyzurich", "label": "Lubotsky (Zurich)", "show": true },
 		{ "id": "version_devanagari", "label": "Devanagari (Eichler)", "show": true },
-		{ "id": "version_vannootenholland", "label": "Van Nooten, Holland", "show": false },
+		{ "id": "version_vannootenholland", "label": "Van Nooten & Holland", "show": false },
 		{ "id": "version_aufrecht", "label": "Aufrecht", "show": false },
 		{ "id": "version_padapatha", "label": "Padapatha", "show": false },
-		{ "id": "version_gunkelryan", "label": "Gunkel/Ryan", "show": false },
+		{ "id": "version_gunkelryan", "label": "Gunkel & Ryan", "show": false },
 		{ "id": "version_lubotsky", "label": "Lubotsky", "show": false },
 	
 		{ "id": "translation_", "label": "All Translations", "show": true },

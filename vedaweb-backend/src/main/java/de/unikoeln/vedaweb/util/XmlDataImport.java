@@ -93,7 +93,7 @@ public class XmlDataImport {
 					versionNode = temp.itemAt(0);
 					versionForm = concatTextContents(compiler.evaluate(".//*:l[@*:ana='samhita']", versionNode));
 					version = new StanzaVersion(
-						"Gunkel, Ryan",
+						"Gunkel & Ryan",
 						compiler.evaluate("@*:lang", versionNode).itemAt(0).getStringValue(),
 						versionForm,
 						"version",
@@ -120,13 +120,13 @@ public class XmlDataImport {
 				
 				
 				
-				// Van Nooten, Holland / vnh
+				// Van Nooten & Holland / vnh
 				temp = compiler.evaluate("*:lg[@*:source='vnh']", stanza);
 				if (temp.size() > 0) {
 					versionNode = temp.itemAt(0);
 					versionForm = concatTextContents(compiler.evaluate(".//*:l", versionNode));
 					version = new StanzaVersion(
-						"Van Nooten, Holland",
+						"Van Nooten & Holland",
 						compiler.evaluate("@*:lang", versionNode).itemAt(0).getStringValue(),
 						versionForm,
 						"version",
