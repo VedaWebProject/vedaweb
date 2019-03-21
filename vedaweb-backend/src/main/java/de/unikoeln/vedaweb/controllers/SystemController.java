@@ -1,6 +1,5 @@
 package de.unikoeln.vedaweb.controllers;
 
-import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,10 +10,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.fasterxml.jackson.databind.node.ObjectNode;
+
 import de.unikoeln.vedaweb.logging.ClientError;
 import de.unikoeln.vedaweb.logging.ClientErrorRepository;
 import de.unikoeln.vedaweb.services.DataImportService;
 import de.unikoeln.vedaweb.services.ElasticIndexService;
+import de.unikoeln.vedaweb.services.JsonUtilService;
 import de.unikoeln.vedaweb.services.UiDataService;
 
 
@@ -36,6 +38,9 @@ public class SystemController {
 	private UiDataService uiDataService;
 	
 	@Autowired
+	private JsonUtilService json;
+	
+	@Autowired
 	private ClientErrorRepository clientErrorRepo;
 	
 	
@@ -44,7 +49,7 @@ public class SystemController {
     		@PathVariable(name = "action") String action,
     		@RequestParam(name = "auth", required = false) String auth) {
 		
-		JSONObject response = new JSONObject();
+		ObjectNode response = json.newNode();
 		
 		if (!auth(auth)) {
 			response.put("error", "authentication failed");
@@ -53,16 +58,16 @@ public class SystemController {
 					
 		switch (action){
 		case "delete":
-			response.put("indexDelete", indexService.deleteIndex());
+			response.set("indexDelete", indexService.deleteIndex());
 			break;
 		case "create":
-			response.put("indexCreate", indexService.createIndex());
+			response.set("indexCreate", indexService.createIndex());
 			break;
 		case "fill":
-			response.put("indexFill", indexService.indexDbDocuments());
+			response.set("indexFill", indexService.indexDbDocuments());
 			break;
 		case "rebuild":
-			response.put("indexRebuild", indexService.rebuildIndex());
+			response.set("indexRebuild", indexService.rebuildIndex());
 			break;
 		default:
 			response.put("error", "unknown command");
@@ -82,7 +87,7 @@ public class SystemController {
 		
 		boolean dry = dryRun != null;
 		int docCount = dataImportService.importXMLData(DataImportService.LOCAL_XML_DIR, dry);
-		JSONObject response = new JSONObject();
+		ObjectNode response = json.newNode();
 		response.put("dryRun", dry);
 		response.put("importedDocsCount", docCount);
 		//if (!dry) response.put("indexActions", indexService.rebuildIndex());

@@ -34,13 +34,13 @@ import org.elasticsearch.search.aggregations.bucket.terms.TermsAggregationBuilde
 import org.elasticsearch.search.aggregations.metrics.cardinality.Cardinality;
 import org.elasticsearch.search.aggregations.metrics.cardinality.CardinalityAggregationBuilder;
 import org.elasticsearch.search.builder.SearchSourceBuilder;
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Service;
+
+import com.fasterxml.jackson.databind.node.ArrayNode;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 
 import de.unikoeln.vedaweb.data.Pada;
 import de.unikoeln.vedaweb.data.Token;
@@ -60,6 +60,9 @@ public class ElasticIndexService {
 	@Autowired
 	private ElasticService elastic;
 	
+	@Autowired
+	private JsonUtilService json;
+	
 	@Value("${es.index.name}")
 	private String indexName;
 	
@@ -67,25 +70,21 @@ public class ElasticIndexService {
 	private Resource indexDef;
 
 	
-	public JSONObject rebuildIndex(){
-		JSONObject response = new JSONObject();
-		try {
-			//delete old index
-			response.put("deleteIndex", deleteIndex().getString("response"));
-			//create new Index
-			response.put("createIndex", createIndex().getString("response"));
-			// get all documents from db
-			response.put("fillIndex", indexDbDocuments().getString("response"));
-		} catch (JSONException e) {
-			e.printStackTrace();
-		}
+	public ObjectNode rebuildIndex(){
+		ObjectNode response = json.newNode();
+		//delete old index
+		response.put("deleteIndex", deleteIndex().findValue("response").asText());
+		//create new Index
+		response.put("createIndex", createIndex().findValue("response").asText());
+		// get all documents from db
+		response.put("fillIndex", indexDbDocuments().findValue("response").asText());
 		return response;
 	}
 	
 	
-	public JSONObject indexDbDocuments(){
+	public ObjectNode indexDbDocuments(){
 		System.out.println("[INFO] creating and inserting new index documents...");
-		JSONObject jsonResponse = new JSONObject();
+		ObjectNode jsonResponse = json.newNode();
 		Iterator<Stanza> dbIter = stanzaRepo.findAll().iterator();
 		// create es bulk request
 		BulkRequest bulkRequest = new BulkRequest();
@@ -93,25 +92,21 @@ public class ElasticIndexService {
 		// process docs
 		while (dbIter.hasNext()) {
 			Stanza dbDoc = dbIter.next();
-			JSONObject indexDoc = new JSONObject();
+			ObjectNode indexDoc = json.newNode();
 
-			try {
-				indexDoc.put("id", dbDoc.getId());
-				indexDoc.put("index", dbDoc.getIndex());
-				indexDoc.put("book", dbDoc.getBook());
-				indexDoc.put("hymn", dbDoc.getHymn());
-				indexDoc.put("stanza", dbDoc.getStanza());
-				indexDoc.put("hymnAddressee", dbDoc.getHymnAddressee());
-				indexDoc.put("hymnGroup", dbDoc.getHymnGroup());
-				indexDoc.put("hymnAbs", dbDoc.getHymnAbs());
-				indexDoc.put("strata", dbDoc.getStrata());
-				indexDoc.put("versions", buildVersionsList(dbDoc));
+			indexDoc.put("id", dbDoc.getId());
+			indexDoc.put("index", dbDoc.getIndex());
+			indexDoc.put("book", dbDoc.getBook());
+			indexDoc.put("hymn", dbDoc.getHymn());
+			indexDoc.put("stanza", dbDoc.getStanza());
+			indexDoc.put("hymnAddressee", dbDoc.getHymnAddressee());
+			indexDoc.put("hymnGroup", dbDoc.getHymnGroup());
+			indexDoc.put("hymnAbs", dbDoc.getHymnAbs());
+			indexDoc.put("strata", dbDoc.getStrata());
+			indexDoc.set("versions", json.getMapper().valueToTree(buildVersionsList(dbDoc)));
 //				indexDoc.put("lemmata", StringUtils.removeVowelAccents(concatTokenLemmata(dbDoc)));
 //				indexDoc.put("lemmata_raw", StringUtils.normalizeNFC(concatTokenLemmata(dbDoc)));
-				indexDoc.put("tokens", buildTokensList(dbDoc));
-			} catch (JSONException e) {
-				e.printStackTrace();
-			}
+			indexDoc.set("tokens", json.getMapper().valueToTree(buildTokensList(dbDoc)));
 			
 			// create index request
 			IndexRequest request = new IndexRequest("vedaweb", "doc", dbDoc.getId());
@@ -132,25 +127,21 @@ public class ElasticIndexService {
 		}
 		
 		//create response object
-		try {
-			jsonResponse.put("response",
-					bulkResponse != null && !bulkResponse.hasFailures()
-					? "OK"
-					: "error");
-		} catch (JSONException e) {
-			e.printStackTrace();
-		}
+		jsonResponse.put("response",
+				bulkResponse != null && !bulkResponse.hasFailures()
+				? "OK"
+				: "error");
 
 		return jsonResponse;
 	}
 	
 
-	private List<JSONObject> buildTokensList(Stanza doc) throws JSONException{
-		List<JSONObject> tokens = new ArrayList<JSONObject>();
+	private List<ObjectNode> buildTokensList(Stanza doc) {
+		List<ObjectNode> tokens = new ArrayList<ObjectNode>();
 
 		for (Pada pada : doc.getPadas()) {
 			for (Token token : pada.getGrammarData()) {
-				JSONObject indexToken = new JSONObject();
+				ObjectNode indexToken = json.newNode();
 				indexToken.put("index", token.getIndex());
 				indexToken.put("form", StringUtils.removeVowelAccents(token.getForm()));
 				indexToken.put("form_raw", StringUtils.normalizeNFC(token.getForm()));
@@ -162,20 +153,20 @@ public class ElasticIndexService {
 								StringUtils.cleanLemma(token.getLemma())));
 				
 				//grammar props
-				JSONObject indexTokenGrammar = new JSONObject();
+				ObjectNode indexTokenGrammar = json.newNode();
 				for (String attr : token.getProps().keySet()) {
 					String values = token.getProp(attr);
 					if (values.split("\\/").length > 1) {
-						JSONArray tagValues = new JSONArray();
+						ArrayNode tagValues = json.newArray();
 						for (String tv : values.split("\\/")) {
-							tagValues.put(tv);
+							tagValues.add(tv);
 						}
-						indexTokenGrammar.put(attr, tagValues);
+						indexTokenGrammar.set(attr, tagValues);
 					} else {
 						indexTokenGrammar.put(attr, token.getProp(attr));
 					}
 				}
-				indexToken.put("grammar", indexTokenGrammar);
+				indexToken.set("grammar", indexTokenGrammar);
 				tokens.add(indexToken);
 			}
 		}
@@ -184,9 +175,9 @@ public class ElasticIndexService {
 	}
 	
 
-	public JSONObject deleteIndex(){
+	public ObjectNode deleteIndex(){
 		System.out.println("[INFO] deleting old index...");
-		JSONObject jsonResponse = new JSONObject();
+		ObjectNode jsonResponse = json.newNode();
 		DeleteIndexRequest deleteRequest = new DeleteIndexRequest(indexName);
 		DeleteIndexResponse deleteResponse = null;
 		try {
@@ -196,22 +187,18 @@ public class ElasticIndexService {
 		}
 		
 		//create response object
-		try {
-			jsonResponse.put("response",
-					deleteResponse != null && deleteResponse.isAcknowledged()
-					? "OK"
-					: "error");
-		} catch (JSONException e) {
-			e.printStackTrace();
-		}
+		jsonResponse.put("response",
+				deleteResponse != null && deleteResponse.isAcknowledged()
+				? "OK"
+				: "error");
 
 		return jsonResponse;
 	}
 	
 	
-	public JSONObject createIndex(){
+	public ObjectNode createIndex(){
 		System.out.println("[INFO] creating new index...");
-		JSONObject jsonResponse = new JSONObject();
+		ObjectNode jsonResponse = json.newNode();
 		CreateIndexRequest createRequest = new CreateIndexRequest(indexName);
 		byte[] json = null;
 		
@@ -231,34 +218,31 @@ public class ElasticIndexService {
 		}
 		
 		//create response object
-		try {
-			jsonResponse.put("response",
-					createResponse != null && createResponse.isAcknowledged()
-					? "OK"
-					: "error");
-		} catch (JSONException e) {
-			e.printStackTrace();
-		}
+		jsonResponse.put("response",
+				createResponse != null && createResponse.isAcknowledged()
+				? "OK"
+				: "error");
 
 		return jsonResponse;
 	}
 	
 	
-	public JSONArray getUIGrammarData() {
+	public ArrayNode getUIGrammarData() {
 		List<String> grammarFields = new ArrayList<>();
 		
-		JSONObject response = (JSONObject) urlRequest(
+		ObjectNode response = urlRequest(
 				"get",
 				"vedaweb/_mapping/doc/field/tokens.grammar.*",
 				"/vedaweb/mappings/doc");
 		
 		if (response == null) {
 			System.err.println("[ERROR] Could'nt find index grammar mapping");
-			return new JSONArray();
+			return json.newArray();
 		}
 		
-		for (String prop : response.keySet()) {
-			grammarFields.add(prop.replaceAll("^(\\w+\\.)+", ""));
+		Iterator<String> iter = response.fieldNames();
+		while (iter.hasNext()) {
+			grammarFields.add(iter.next().replaceAll("^(\\w+\\.)+", ""));
 		}
 		
 		Collections.sort(grammarFields);
@@ -266,8 +250,8 @@ public class ElasticIndexService {
 	}
 	
 	
-	public JSONArray getUIBooksData() {
-		JSONArray books = new JSONArray();
+	public ArrayNode getUIBooksData() {
+		ArrayNode books = json.newArray();
 		int booksCount = (int) distinct("book");
 		
 		for (int i = 1; i <= booksCount; i++) {
@@ -283,7 +267,7 @@ public class ElasticIndexService {
 			SearchRequest req = new SearchRequest("vedaweb").types("doc").source(searchSourceBuilder);
 			try {
 				SearchResponse response = elastic.client().search(req);
-				books.put(((Cardinality)response.getAggregations().get("hymns")).getValue());
+				books.add(((Cardinality)response.getAggregations().get("hymns")).getValue());
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
@@ -298,7 +282,7 @@ public class ElasticIndexService {
 	}
 	
 	
-	public JSONArray getStanzasMetaData(String field) {
+	public ArrayNode getStanzasMetaData(String field) {
 		List<String> addressees = new ArrayList<String>();
 		
 		//aggregation for distinct hymn addressee values
@@ -318,7 +302,7 @@ public class ElasticIndexService {
 			e.printStackTrace();
 		}
 		Collections.sort(addressees);
-		return new JSONArray(addressees);
+		return json.getMapper().valueToTree(addressees);
 	}
 	
 	
@@ -359,15 +343,15 @@ public class ElasticIndexService {
 	}
 	
 	
-	private JSONObject urlRequest(String method, String url) {
-		JSONObject response = null;
+	private ObjectNode urlRequest(String method, String url) {
+		ObjectNode response = null;
 		try {
 			HttpEntity http =
 					elastic.client()
 					.getLowLevelClient()
 					.performRequest(method, url)
 					.getEntity();
-			response = new JSONObject(EntityUtils.toString(http));
+			response = json.parse(EntityUtils.toString(http));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -375,10 +359,10 @@ public class ElasticIndexService {
 	}
 	
 	
-	private Object urlRequest(String method, String url, String jsonQuery) {
-		JSONObject response = urlRequest(method, url);
+	private ObjectNode urlRequest(String method, String url, String jsonQuery) {
+		ObjectNode response = urlRequest(method, url);
 		if (response == null) return null;
-		return response.query(jsonQuery);
+		return (ObjectNode) response.at(jsonQuery);
 	}
 	
 	
@@ -435,26 +419,26 @@ public class ElasticIndexService {
 	}
 	
 	
-	private JSONArray convertGrammarAggregationsToJSON(Map<String, List<String>> aggs) {
-		JSONArray tagsArray = new JSONArray();
+	private ArrayNode convertGrammarAggregationsToJSON(Map<String, List<String>> aggs) {
+		ArrayNode tagsArray = json.newArray();
 		
 		for (String grammarField : aggs.keySet()) {
-			JSONObject tagData = new JSONObject();
+			ObjectNode tagData = json.newNode();
 			tagData.put("field", grammarField);
 			tagData.put("ui", grammarField.toLowerCase());
-			tagData.put("values", new JSONArray(aggs.get(grammarField)));
-			tagsArray.put(tagData);
+			tagData.set("values", json.getMapper().valueToTree(aggs.get(grammarField)));
+			tagsArray.add(tagData);
 		}
 		
 		return tagsArray;
 	}
 	
 	
-	private JSONArray concatForms(StanzaVersion version, boolean removeAccents) {
-		JSONArray forms = new JSONArray();
+	private ArrayNode concatForms(StanzaVersion version, boolean removeAccents) {
+		ArrayNode forms = json.newArray();
 		for (String form : version.getForm()) {
 			form = StringUtils.removeMetaChars(form);
-			forms.put(
+			forms.add(
 				removeAccents
 					? StringUtils.removeVowelAccents(form)
 					: form
@@ -474,17 +458,17 @@ public class ElasticIndexService {
 //	}
 	
 	
-	private List<JSONObject> buildVersionsList(Stanza doc) {
-		List<JSONObject> versions = new ArrayList<JSONObject>();
+	private List<ObjectNode> buildVersionsList(Stanza doc) {
+		List<ObjectNode> versions = new ArrayList<ObjectNode>();
 		for (StanzaVersion v : doc.getVersions()) {
-			JSONObject version = new JSONObject();
+			ObjectNode version = json.newNode();
 			StringBuilder form = new StringBuilder();
 			for (String line : v.getForm()) {
 				form.append(line + "\n");
 			}
 			version.put("id", v.getId());
-			version.put("form", concatForms(v, true));
-			version.put("form_raw", concatForms(v, false));
+			version.set("form", concatForms(v, true));
+			version.set("form_raw", concatForms(v, false));
 			version.put("source", v.getSource());
 			versions.add(version);
 		}

@@ -79,19 +79,18 @@
 			<version>6.2.0</version>
 		</dependency>
 
-		<!-- https://mvnrepository.com/artifact/org.json/json -->
+		<!-- https://mvnrepository.com/artifact/org.json/json
 		<dependency>
 			<groupId>org.json</groupId>
 			<artifactId>json</artifactId>
 			<version>20171018</version>
-		</dependency>
+		</dependency> -->
 		
 		<dependency>
 		    <groupId>net.sf.saxon</groupId>
 		    <artifactId>Saxon-HE</artifactId>
 		    <version>9.8.0-8</version>
 		</dependency>
-		
 
 	</dependencies>
 
