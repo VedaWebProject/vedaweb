@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 import de.unikoeln.vedaweb.data.Stanza;
 import de.unikoeln.vedaweb.data.StanzaLocation;
 import de.unikoeln.vedaweb.data.StanzaRepository;
-import de.unikoeln.vedaweb.services.MappingService;
+import de.unikoeln.vedaweb.services.JsonUtilService;
 import de.unikoeln.vedaweb.util.StringUtils;
 
 
@@ -22,7 +22,7 @@ public class DocumentController {
 	private StanzaRepository stanzaRepo;
 	
 	@Autowired
-	private MappingService mappingService;
+	private JsonUtilService mappingService;
 	
 	
 	@RequestMapping(value = "/id/{id}", produces = {"application/json"})
@@ -31,7 +31,7 @@ public class DocumentController {
 		
 		//request for absolute hymn number?
 		if (id.startsWith("hymnAbs_")) {
-			return mappingService.mapObjectToJSON(
+			return mappingService.mapObjectToJson(
 					stanzaRepo.findByHymnAbs(Integer.parseInt(id.replaceAll("\\D", ""))).get().get(0));
 		}
 		
@@ -43,13 +43,13 @@ public class DocumentController {
 			loc.setNextFallbackLocation();
 		}
 		
-		return mappingService.mapOptionalToJSON(v);
+		return mappingService.mapOptionalToJson(v);
     }
 	
 	
 	@RequestMapping(value = "/index/{index}", produces = {"application/json"})
     public String stanzaByLocation(@PathVariable int index) {
-		return mappingService.mapOptionalToJSON(
+		return mappingService.mapOptionalToJson(
 				stanzaRepo.findByIndex( StringUtils.normalizeIndex(index, (int)stanzaRepo.count()) ));
     }
 	
