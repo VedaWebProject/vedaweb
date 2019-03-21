@@ -34,6 +34,7 @@ public class IsoChars {
 		vmap.put(StringUtils.normalizeNFC("ú"), StringUtils.normalizeNFC("u"));
 		vmap.put(StringUtils.normalizeNFC("ū́"), StringUtils.normalizeNFC("ū"));
 		vmap.put(StringUtils.normalizeNFC("ŕ̥"), StringUtils.normalizeNFC("r̥"));
+		vmap.put(StringUtils.normalizeNFC("r̥̄́"), StringUtils.normalizeNFC("r̥̄"));
 		vmap.put(StringUtils.normalizeNFC("ĺ̥"), StringUtils.normalizeNFC("l̥"));
 		vmap.put(StringUtils.normalizeNFC("é"), StringUtils.normalizeNFC("e"));
 		vmap.put(StringUtils.normalizeNFC("ó"), StringUtils.normalizeNFC("o"));
