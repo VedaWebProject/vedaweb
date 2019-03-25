@@ -84,6 +84,7 @@ public class SearchRequestBuilder {
 				ScoreMode.Total
 			).innerHit(
 				new InnerHitBuilder()
+					.setSize(10)
 					.setHighlightBuilder(getHighlighting(HIGHLIGHT_SMART)))
 		);
 		
@@ -185,7 +186,11 @@ public class SearchRequestBuilder {
 			
 			//wrap block query in nested query
 			NestedQueryBuilder blockQuery = QueryBuilders.nestedQuery("tokens", bool, ScoreMode.Total)
-				.innerHit(new InnerHitBuilder().setName("tokens." + block.hashCode()));
+				.innerHit(
+						new InnerHitBuilder()
+							.setName("tokens." + block.hashCode())
+							.setSize(10)
+						);
 			
 			//add to root query
 			if ((boolean)block.get("required")) {
