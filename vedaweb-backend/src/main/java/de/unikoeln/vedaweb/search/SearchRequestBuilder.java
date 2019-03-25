@@ -81,7 +81,7 @@ public class SearchRequestBuilder {
 				QueryBuilders.boolQuery()
 					.must(QueryBuilders.queryStringQuery(targetVersionId).field("versions.id"))
 					.must(QueryBuilders.queryStringQuery(searchTerm).field(searchField)),
-				ScoreMode.Max
+				ScoreMode.Total
 			).innerHit(
 				new InnerHitBuilder()
 					.setHighlightBuilder(getHighlighting(HIGHLIGHT_SMART)))
@@ -184,7 +184,7 @@ public class SearchRequestBuilder {
 			}
 			
 			//wrap block query in nested query
-			NestedQueryBuilder blockQuery = QueryBuilders.nestedQuery("tokens", bool, ScoreMode.Max)
+			NestedQueryBuilder blockQuery = QueryBuilders.nestedQuery("tokens", bool, ScoreMode.Total)
 				.innerHit(new InnerHitBuilder().setName("tokens." + block.hashCode()));
 			
 			//add to root query
