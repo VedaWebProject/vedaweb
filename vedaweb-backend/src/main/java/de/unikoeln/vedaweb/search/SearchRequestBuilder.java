@@ -25,7 +25,7 @@ public class SearchRequestBuilder {
 	
 	private static final FetchSourceContext FETCH_SOURCE_CONTEXT = new FetchSourceContext(
 			true,
-			new String[]{"book", "hymn", "stanza", "hymnAddressee", "hymnGroup", "strata", "versions.form*"},
+			new String[]{"book", "hymn", "stanza", "hymnAddressee", "hymnGroup", "strata"},
 			Strings.EMPTY_ARRAY);
 	
 	private static final String[] HIGHLIGHT_SMART = {"versions.form*"};
