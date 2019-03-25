@@ -15,6 +15,7 @@ public class SearchHitsConverter {
 	 */
 	@SuppressWarnings("unchecked")
 	public static SearchHits processSearchResponse(SearchResponse response) {
+		//System.out.println(response);
 		SearchHits targetHits = new SearchHits();
 		
 		targetHits.setTotal(response.getHits().getTotalHits());
