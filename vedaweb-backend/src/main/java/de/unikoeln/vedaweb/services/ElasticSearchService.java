@@ -36,6 +36,7 @@ public class ElasticSearchService {
 	
 	
 	private SearchResponse submitSearch(SearchRequest searchRequest){
+		//System.out.println(searchRequest.source().toString());
 		try {
 			return elastic.client().search(searchRequest);
 		} catch (Exception e) {
