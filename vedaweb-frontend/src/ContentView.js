@@ -13,12 +13,13 @@ import { withRouter } from 'react-router-dom';
 import { view } from 'react-easy-state';
 
 import scrollToComponent from 'react-scroll-to-component';
+//import layersInfoImg from "./img/layersInfo.png";
 
 import axios from 'axios';
 import uiDataStore from "./stores/uiDataStore";
 import DictionaryView from "./DictionaryView";
 import HelpButton from "./HelpButton";
-import layersInfoImg from "./img/layersInfo.png";
+import BetaInfoContent from "./BetaInfoContent";
 
 const RadioGroup = Radio.Group;
 
@@ -42,7 +43,6 @@ class ContentView extends Component {
         } else {
             this.loadData(this.props.match.params.by, this.props.match.params.value);
         }
-        this.infoModal();
     }
 
     componentDidUpdate(prevProps, prevState) {
@@ -119,25 +119,25 @@ class ContentView extends Component {
         return string.charAt(0).toUpperCase() + string.slice(1);
     }
 
-    infoModal(){
-        if (uiDataStore.firstTime){
-            Modal.info({
-                icon: <Icon type="no-icon" />,
-                title: 'Please Note:',
-                centered: true,
-                content: (
-                <div>
-                    By clicking this button on the right side of the screen, you can choose what you want to see (text versions, translations, morphological glossings, etc.).<br/><br/>
-                    <div style={{textAlign: 'center'}}>
-                        <img src={layersInfoImg} alt="" style={{border:'1px solid #aaa'}}/>
-                    </div><br/>
-                    <span className="light-grey">By the way, you will see this message only once per visit.</span>
-                </div>
-                ),
-                onOk() {uiDataStore.firstTime = false},
-            });
-        }
-    }
+    // infoModal(){
+    //     if (uiDataStore.firstTime){
+    //         Modal.info({
+    //             icon: <Icon type="no-icon" />,
+    //             title: 'Please Note:',
+    //             centered: true,
+    //             content: (
+    //             <div>
+    //                 By clicking this button on the right side of the screen, you can choose what you want to see (text versions, translations, morphological glossings, etc.).<br/><br/>
+    //                 <div style={{textAlign: 'center'}}>
+    //                     <img src={layersInfoImg} alt="" style={{border:'1px solid #aaa'}}/>
+    //                 </div><br/>
+    //                 <span className="light-grey">By the way, you will see this message only once per visit.</span>
+    //             </div>
+    //             ),
+    //             onOk() {uiDataStore.firstTime = false},
+    //         });
+    //     }
+    // }
 
     render() {
         const { error, isLoaded, data } = this.state;
@@ -582,6 +582,17 @@ class ContentView extends Component {
                     </Drawer>
 
                 </div>
+
+
+                {/** BETA INFO MODAL */}
+                <Modal
+                visible={uiDataStore.firstTime}
+                title={null}
+                onOk={this.handleOk}
+                onCancel={this.handleCancel}
+                footer={[<Button type="primary" key="betaModalOk" onClick={() => uiDataStore.firstTime = false}>OK</Button>]}>
+                    <BetaInfoContent/>
+                </Modal>
                 
             </Spin>
         );

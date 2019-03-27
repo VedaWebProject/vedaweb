@@ -87,7 +87,7 @@ class NavBar extends Component {
                             </NavLink>
                         </Menu.Item>
 
-                        <Menu.Item key="about">
+                        {/* <Menu.Item key="about">
                             <a href="https://vedaweb.uni-koeln.de"
                             title="Open the VedaWeb project website"
                             className="content-center"
@@ -95,7 +95,7 @@ class NavBar extends Component {
                             rel="noopener noreferrer">
                                 <Icon type="info-circle"/><br/>About<br/>VedaWeb
                             </a>
-                        </Menu.Item>
+                        </Menu.Item> */}
 
                     </Menu>
                 </nav>
