@@ -588,8 +588,9 @@ class ContentView extends Component {
                 <Modal
                 visible={uiDataStore.firstTime}
                 title={null}
-                onOk={this.handleOk}
-                onCancel={this.handleCancel}
+                closable={false}
+                maskClosable={true}
+                afterClose={() => uiDataStore.firstTime = false}
                 footer={[<Button type="primary" key="betaModalOk" onClick={() => uiDataStore.firstTime = false}>OK</Button>]}>
                     <BetaInfoContent/>
                 </Modal>
