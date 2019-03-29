@@ -61,11 +61,9 @@ class OSK extends Component {
         const title =
             <div style={{textAlign:"center"}}>
                 {this.props.value
-                    ? <strong className="text-font">{this.props.value}</strong>
+                    ? <strong className="text-font">{this.props.value}<span className="light-grey blink">_</span></strong>
                     : <strong className="red">ISO-15919 keyboard</strong>
                 }
-                
-                
             </div>
 
         return (
@@ -94,8 +92,8 @@ class OSK extends Component {
                             className="osk-key"
                             key={"osk_key_" + i}
                             onClick={() => this.append(key[0])}>
-                                <div className="osk-key-label-primary text-font">{key[0]}</div>
-                                <div className="osk-key-label-secondary deva-font">{key[1]}</div>
+                                <div className="text-font osk-key-label-primary">{key[0]}</div>
+                                <div className="deva-font osk-key-label-secondary">{key[1]}</div>
                             </button>
                         ))}
                     </div>

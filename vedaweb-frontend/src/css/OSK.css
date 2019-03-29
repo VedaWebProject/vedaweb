@@ -4,30 +4,40 @@
 }
 
 .osk-key {
-    min-width: 52px;
+    min-width: 40px;
     background-color: #fff;
     border: 1px solid #b4b1ae;
     border-radius: 3px;
     margin: .2rem;
     padding: .5rem;
     padding-bottom: .2rem;
-    line-height: 1;
+    line-height: 0.8;
     cursor: pointer;
 }
 
 .osk-key:hover {
-    background-color: #c9c7c6;
+    background-color: #d4d3d3;
 }
 
 .osk-key-label-primary {
+    font-size: 110%;
     text-align: left;
-    font-size: 120%;
     font-weight: bold;
     margin-bottom: 0.5rem;
 }
 
 .osk-key-label-secondary {
+    font-size: 90% !important;
     text-align: right;
-    font-size: 100% !important;
     font-weight: normal !important;
+}
+
+.blink {
+    animation: blinker 1s step-start infinite;
+}
+
+@keyframes blinker {
+    50% {
+        opacity: 0;
+    }
 }

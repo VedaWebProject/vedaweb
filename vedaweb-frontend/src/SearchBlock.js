@@ -8,6 +8,8 @@ import { view } from 'react-easy-state';
 import SearchAttributeField from "./SearchAttributeField";
 import TransliterationPreview from "./TransliterationPreview";
 
+import OSK from "./OSK";
+
 import './css/SearchBlock.css';
 
 //const Option = Select.Option;
@@ -58,6 +60,7 @@ class SearchBlock extends Component {
                                     onChange={e => searchGrammarStore.setTerm(this.props.id, e.target.value)}
                                     placeholder="word form / lemma (optional)"
                                     className="search-block-input"
+                                    prefix={<OSK value={this.props.term} updateInput={v => searchGrammarStore.setTerm(this.props.id, v)}/>}
                                     style={{ width: '98%' }} />
                                 </Tooltip>
                             </Col>
