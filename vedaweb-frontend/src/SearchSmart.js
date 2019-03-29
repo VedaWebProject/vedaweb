@@ -14,6 +14,7 @@ import { Base64 } from 'js-base64';
 
 import "./css/SearchSmart.css";
 import SanscriptAccents from "./SanscriptAccents";
+import OSK from "./OSK";
 
 
 const { Option, OptGroup } = Select;
@@ -106,6 +107,7 @@ class SearchSmart extends Component {
                     addonBefore={selectBefore}
                     addonAfter={helpAfter}
                     size="large"
+                    prefix={<OSK value={searchSmartStore.data.input} updateInput={searchSmartStore.setInput}/>}
                     style={{maxWidth: '420px'}}
                     placeholder={
                         (searchSmartStore.data.field.startsWith('version_')
