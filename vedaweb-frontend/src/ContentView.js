@@ -339,7 +339,12 @@ class ContentView extends Component {
                                                         <tr>
                                                             <td><HelpButton inline float align="right" type="metaStrata"/></td>
                                                             <td>
-                                                                <span className="bold gap-right">Strata (Arnold):</span>
+                                                                <span
+                                                                className="bold gap-right"
+                                                                title="Arnold, Edward Vernon. 'Sketch of the Historical Grammar of the Rig and Atharva Vedas'.
+                                                                Journal of the American Oriental Society 18 (1897): 203–352.">
+                                                                    Strata (Arnold):
+                                                                </span>
                                                             </td>
                                                             <td className="text-font">
                                                                 {this.resolveAbbrevationToHTML(data.strata, "strata")}
@@ -348,7 +353,11 @@ class ContentView extends Component {
                                                         <tr>
                                                             <td><HelpButton inline float align="right" type="metaLabels"/></td>
                                                             <td>
-                                                                <span className="bold gap-right">Pada Labels</span>
+                                                                <span
+                                                                title="provided by D. Gunkel and K. Ryan"
+                                                                className="bold gap-right">
+                                                                    Pada Labels
+                                                                </span>
                                                             </td>
                                                             <td>
                                                                 {data.padas.map(pada => (
