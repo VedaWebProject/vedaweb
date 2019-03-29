@@ -20,6 +20,7 @@ class BetaInfo extends Component {
                         <BetaInfoContent/>
                     </div>
                 </Col>
+
             </Row>
             
         );

@@ -103,7 +103,9 @@ class App extends Component {
 
                     { isLoaded && error === undefined &&
                         <ErrorBoundary>
+
                             <NavBar />
+
                             <Switch>
                                 <Route path="/view/:by/:value" component={ContentView} />
                                 <Route path="/view" component={ContentView} />
@@ -117,8 +119,11 @@ class App extends Component {
                                 <Route path="/" exact={true} component={ContentView} />
                                 <Route component={NotFound} />
                             </Switch>
+
                             <Footer/>
+
                             <BackTop />
+
                         </ErrorBoundary>
                     }
 

@@ -421,18 +421,17 @@ class HelpButton extends Component {
                 onClick={this.showModal}
                 title={helpTexts[this.props.type] !== undefined ? "Show help: \"" + helpTexts[this.props.type].title + "\"" : undefined} />
                 
-                {this.state.visible &&
-                    <Modal
-                    title={modalHeader}
-                    centered
-                    footer={null}
-                    visible={this.state.visible}
-                    onOk={this.hideModal}
-                    onCancel={this.hideModal}
-                    okText="OK">
-                        {helpTexts[this.props.type].content}
-                    </Modal>
-                }
+                <Modal
+                title={modalHeader}
+                centered
+                footer={null}
+                maskClosable={true}
+                visible={this.state.visible}
+                onOk={this.hideModal}
+                onCancel={this.hideModal}
+                okText="OK">
+                    {helpTexts[this.props.type].content}
+                </Modal>
             </span>
         );
 

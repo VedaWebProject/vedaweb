@@ -160,7 +160,6 @@ class ContentView extends Component {
                     { error === undefined &&
                         <div>
                             <Row>
-
                                 <Col span={24}>
                                     <div className="card-nobox">
                                         { data.book !== undefined &&
@@ -190,20 +189,6 @@ class ContentView extends Component {
 
                                     { data.versions !== undefined &&
                                         <div>
-                                            {/* <div className="content-plain content-block card">
-                                                <h4 title={"Rigveda, book " + data.book + ", hymn " + data.hymn + ", stanza " + data.stanza}>
-                                                    {('0' + data.book).slice(-2)}.
-                                                    {('00' + data.hymn).slice(-3)}.
-                                                    {('0' + data.stanza).slice(-2)}
-                                                    <HelpButton type="zurichIso" inline style={{marginLeft:'.5rem'}}/>
-                                                </h4>
-                                                {data.padas.map(pada => (
-                                                    <div className="bottom-gap-small" key={"p_plain_" + pada.index}>
-                                                        <span key={"p_plain_line" + pada.index} className="pada-line">{pada.line}</span>
-                                                        <span key={"p_plain_form" + pada.index} className="pada-form text-font">{pada.form}</span><br/>
-                                                    </div>
-                                                ))}
-                                            </div> */}
 
                                             {uiDataStore.isLayerVisible('version_') &&
                                                 <div
@@ -425,7 +410,6 @@ class ContentView extends Component {
                                             </div>
                                         </div>
                                     </Affix>
-
                                 </Col>
                             </Row>
                         </div>
@@ -450,102 +434,6 @@ class ContentView extends Component {
                             onChange={(e) => this.filterChange(l.id, e)} />
                         )) }
 
-                        {/* 
-                        <ContentFilterSwitch
-                        label="Text Versions"
-                        checked={true}
-                        onChange={(e) => this.filterChange("text_versions", e)} />
-
-                        <ContentFilterSwitch
-                        label="Devanagari"
-                        size="small"
-                        disabled={!isLoaded || error !== undefined}
-                        checked={uiDataStore.viewFilter.devanagari}
-                        onChange={(e) => this.filterChange("devanagari", e)} />
-
-                        <ContentFilterSwitch
-                        label="Padapatha"
-                        size="small"
-                        disabled={!isLoaded || error !== undefined}
-                        checked={uiDataStore.viewFilter.padapatha}
-                        onChange={(e) => this.filterChange("padapatha", e)} />
-
-                        <ContentFilterSwitch
-                        label="Sasa Patha"
-                        size="small"
-                        disabled={!isLoaded || error !== undefined}
-                        checked={uiDataStore.viewFilter.sasapatha}
-                        onChange={(e) => this.filterChange("sasapatha", e)} />
-
-                        <ContentFilterSwitch
-                        label="Van Nooten & Holland"
-                        size="small"
-                        disabled={!isLoaded || error !== undefined}
-                        checked={uiDataStore.viewFilter.vnh}
-                        onChange={(e) => this.filterChange("vnh", e)} />
-
-                        <ContentFilterSwitch
-                        label="Aufrecht"
-                        size="small"
-                        disabled={!isLoaded || error !== undefined}
-                        checked={uiDataStore.viewFilter.aufrecht}
-                        onChange={(e) => this.filterChange("aufrecht", e)} />
-
-                        
-
-                        <ContentFilterSwitch
-                        label="Translations"
-                        disabled={uiDataStore.areTranslationsVisible()}
-                        checked={uiDataStore.areTranslationsVisible()}
-                        onChange={() => this.filterChange("translations_", false)} />
-
-                        <ContentFilterSwitch
-                        label="EN (Griffith)"
-                        size="small"
-                        disabled={!isLoaded || error !== undefined}
-                        checked={uiDataStore.viewFilter.griffith}
-                        onChange={(e) => this.filterChange("griffith", e)} />
-
-                        <ContentFilterSwitch
-                        label="FR (Renou)"
-                        size="small"
-                        disabled={!isLoaded || error !== undefined}
-                        checked={uiDataStore.viewFilter.renou}
-                        onChange={(e) => this.filterChange("renou", e)} />
-
-                        <ContentFilterSwitch
-                        label="DE (Geldner)"
-                        size="small"
-                        disabled={!isLoaded || error !== undefined}
-                        checked={uiDataStore.viewFilter.geldner}
-                        onChange={(e) => this.filterChange("geldner", e)} />
-
-                        <ContentFilterSwitch
-                        label="DE (Grassmann)"
-                        size="small"
-                        disabled={!isLoaded || error !== undefined}
-                        checked={uiDataStore.viewFilter.grassmann}
-                        onChange={(e) => this.filterChange("grassmann", e)} />
-
-                        
-                        
-                        <ContentFilterSwitch
-                        label="Morphological Glossing"
-                        disabled={!isLoaded || error !== undefined}
-                        checked={uiDataStore.viewFilter.glossing}
-                        onChange={(e) => this.filterChange("glossing", e)} />
-
-                        <ContentFilterSwitch
-                        label="Dictionary"
-                        disabled={!isLoaded || error !== undefined}
-                        checked={uiDataStore.viewFilter.dictionary}
-                        onChange={(e) => this.filterChange("dictionary", e)} />
-
-                        <ContentFilterSwitch
-                        label="Meta Tags"
-                        disabled={!isLoaded || error !== undefined}
-                        checked={uiDataStore.viewFilter.metaInfo}
-                        onChange={(e) => this.filterChange("metaInfo", e)} /> */}
                     </Drawer>
 
 
@@ -580,21 +468,20 @@ class ContentView extends Component {
                         </Button>
                             
                     </Drawer>
-
                 </div>
-
 
                 {/** BETA INFO MODAL */}
                 <Modal
                 visible={uiDataStore.firstTime}
                 title={null}
-                closable={false}
+                centered
                 maskClosable={true}
-                afterClose={() => uiDataStore.firstTime = false}
-                footer={[<Button type="primary" key="betaModalOk" onClick={() => uiDataStore.firstTime = false}>OK</Button>]}>
+                onCancel={() => uiDataStore.firstTime = false}
+                onOk={() => uiDataStore.firstTime = false}
+                footer={null}>
                     <BetaInfoContent/>
                 </Modal>
-                
+
             </Spin>
         );
     }
