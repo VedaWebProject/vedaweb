@@ -5,6 +5,10 @@ import BetaInfoContent from "./BetaInfoContent";
 
 class BetaInfo extends Component {
 
+    componentDidMount() {
+        window.scrollTo(0, 0);
+    }
+
     render() {
         document.title = "VedaWeb | Rigveda online";
 

@@ -4,6 +4,10 @@ import { Row, Col, Icon } from 'antd';
 
 class ContentView extends Component {
 
+    componentDidMount() {
+        window.scrollTo(0, 0);
+    }
+
     render() {
         document.title = "VedaWeb | Privacy Notice";
 
