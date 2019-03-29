@@ -17,13 +17,6 @@ const SubMenu = Menu.SubMenu;
 
 class NavBar extends Component {
 
-    // constructor(props){
-    //     super(props);
-    //     this.state = {
-    //         showFeedbackModal: false
-    //     }
-    // }
-
 
     render() {
 
@@ -54,7 +47,6 @@ class NavBar extends Component {
                     <Menu
                     selectedKeys={[]}
                     mode="horizontal"
-                    //onClick={() => {this.setState({showFeedbackModal: true})}}
                     style={menuStyle}>
 
                         <SubMenu
@@ -99,10 +91,6 @@ class NavBar extends Component {
 
                     </Menu>
                 </nav>
-
-                {/* <FeedbackModal
-                visible={this.state.showFeedbackModal}
-                onCancel={() => this.setState({showFeedbackModal: false})} /> */}
 
             </header>
             

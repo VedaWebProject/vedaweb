@@ -26,9 +26,7 @@ class SearchResults extends Component {
 
     constructor(props) {
         super(props)
-        this.state = {
-            isLoaded: false
-        }
+        this.state = { isLoaded: false }
         document.title = "VedaWeb | Search Results";
         this.loadData = this.loadData.bind(this);
         this.handleTableChange = this.handleTableChange.bind(this);
@@ -36,14 +34,17 @@ class SearchResults extends Component {
         this.handleNewQuery = this.handleNewQuery.bind(this);
     }
 
+
     componentDidMount(){
         this.handleNewQuery(this.props.match.params.querydata);
     }
+
 
     componentDidUpdate(){
         if (searchResultsStore.queryEncoded !== this.props.match.params.querydata)
             this.handleNewQuery(this.props.match.params.querydata);
     }
+
 
     handleTableChange(pagination) {
         searchResultsStore.page = pagination.current;
@@ -51,13 +52,12 @@ class SearchResults extends Component {
         this.loadData(searchResultsStore.queryJSON);
     }
 
+
     handleNewQuery(queryData) {
         //scroll to top
         window.scrollTo(0, 0);
 
-        this.setState({
-            isLoaded: false
-        });
+        this.setState({ isLoaded: false });
 
         searchResultsStore.queryEncoded = queryData;
         searchResultsStore.page = 1;
@@ -80,6 +80,7 @@ class SearchResults extends Component {
 
         this.loadData(queryJSON);
     }
+
 
     loadData(queryJSON) {
         //construct "Search Results for ..." data
