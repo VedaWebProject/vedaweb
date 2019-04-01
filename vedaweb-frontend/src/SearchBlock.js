@@ -58,7 +58,7 @@ class SearchBlock extends Component {
                                     <Input
                                     value={this.props.term}
                                     onChange={e => searchGrammarStore.setTerm(this.props.id, e.target.value)}
-                                    placeholder="word form / lemma (optional)"
+                                    placeholder={(this.props.lemma ? "lemma" : "word form") + " (optional)"}
                                     className="search-block-input"
                                     prefix={<OSK value={this.props.term} updateInput={v => searchGrammarStore.setTerm(this.props.id, v)}/>}
                                     style={{ width: '98%' }} />
