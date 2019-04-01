@@ -12,7 +12,8 @@ class ContentViewFilterSwitch extends Component {
             paddingTop: this.props.size === 'small' ? '0.2rem' : '0.5rem',
             paddingBottom: this.props.size === 'small' ? '0.2rem' : '0.5rem',
             paddingLeft: this.props.size === 'small' ? '1.05rem' : '0',
-            filter:'opacity(' + (this.props.disabled ? '0.7' : '1') + ')'
+            filter:'opacity(' + (this.props.disabled ? '0.7' : '1') + ')',
+            whiteSpace: 'nowrap'
         };
 
         return (

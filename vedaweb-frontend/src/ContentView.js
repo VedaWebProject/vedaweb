@@ -427,7 +427,7 @@ class ContentView extends Component {
                     <Drawer
                     title={<h4 style={{marginBottom:'0'}}><Icon type="eye" className="gap-right"/> Toggle Content</h4>}
                     placement="right"
-                    width="480"
+                    width="auto"
                     closable={true}
                     onClose={() => this.setState({filtersVisible: false})}
                     visible={this.state.filtersVisible} >
@@ -449,7 +449,7 @@ class ContentView extends Component {
                     <Drawer
                     title={<h4 style={{marginBottom:'0'}}><Icon type="export" className="gap-right"/>Export</h4>}
                     placement="right"
-                    width="400"
+                    width="auto"
                     closable={true}
                     onClose={() => this.setState({exportVisible: false})}
                     visible={this.state.exportVisible} >
