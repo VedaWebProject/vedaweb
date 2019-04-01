@@ -33,7 +33,7 @@ class SearchSmart extends Component {
         } else {
             let jsonData = {
                 mode: "smart",
-                input: searchSmartStore.data.field.startsWith('version_') ? SanscriptAccents.t(input, "hk", "iso") : input,
+                input: searchSmartStore.data.field.startsWith('version_') ? SanscriptAccents.t(input, searchMetaStore.transliteration, "iso") : input,
                 field: searchSmartStore.data.field,
                 accents: searchMetaStore.accents
             };
