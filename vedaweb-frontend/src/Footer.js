@@ -103,8 +103,7 @@ class Footer extends Component {
                 justify="center"
                 align="top"
                 className="bottom-gap"
-                style={{"marginTop": "5rem"}}
-                gutter={40}>
+                style={{"marginTop": "5rem"}}>
 
                     <Col span={3} className="footer-box">
                         <a href="http://c-salt.uni-koeln.de" target="_blank" rel="noopener noreferrer">
