@@ -237,12 +237,12 @@ hr {
 
 .transliteration-tooltip > .ant-tooltip-content > .ant-tooltip-inner {
     background-color: #fff;
-    border: 1px solid #beae97;
+    border: 1px solid #b4b1ae;
     color: rgba(0, 0, 0, 0.6);
 }
 
 .transliteration-tooltip > .ant-tooltip-content > .ant-tooltip-arrow {
-    border-bottom-color: #beae97;
+    border-bottom-color: #b4b1ae;
 }
 
 .flex-grow-1 {

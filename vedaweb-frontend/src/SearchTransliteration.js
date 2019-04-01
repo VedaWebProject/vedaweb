@@ -18,9 +18,11 @@ class SearchTransliteration extends Component {
         return (
 
             <Select
+            size={this.props.size || "default"}
             value={searchMetaStore.transliteration}
             onSelect={(v, o) => searchMetaStore.setTransliteration(v)}
             className="secondary-font"
+            dropdownMatchSelectWidth={false}
             style={{width: '480px', maxWidth: '90%'}}>
                 {uiDataStore.search.meta.transliterations.map(option => (
                     <Option

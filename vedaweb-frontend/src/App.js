@@ -40,6 +40,7 @@ class App extends Component {
         //configure iso scheme for sanscript.js
         let iso = JSON.parse(JSON.stringify(Sanscript.schemes.iast));
         iso.vowels = 'a ā i ī u ū r̥ r̥̄ l̥ l̥̄ ē e ai ō o au'.split(' ');
+        iso.consonants = 'k kh g gh ṅ c ch j jh ñ ṭ ṭh ḍ ḍh ṇ t th d dh n p ph b bh m y r l v ś ṣ s h ḷ kṣ jñ'.split(' ');
         iso.other_marks = ['ṁ', 'ḥ', '~'];
         Sanscript.addRomanScheme('iso', iso);
 
