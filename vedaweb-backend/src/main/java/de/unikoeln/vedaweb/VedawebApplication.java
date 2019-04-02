@@ -7,8 +7,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 @EnableAutoConfiguration
 public class VedawebApplication {
-
+	
 	public static void main(String[] args) {
+		VedaWebBanner.printBanner();
 		SpringApplication.run(VedawebApplication.class, args);
 	}
 	
