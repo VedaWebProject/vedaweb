@@ -29,21 +29,24 @@ public class DocumentController {
     public String stanzaById(
     		@PathVariable("id") String id) {
 		
-		//request for absolute hymn number?
-		if (id.startsWith("hymnAbs_")) {
-			return mappingService.mapObjectToJson(
-					stanzaRepo.findByHymnAbs(Integer.parseInt(id.replaceAll("\\D", ""))).get().get(0));
+		//id matches form of <hymnAbs, stanza>
+		if (id.matches("\\d+\\,\\d+")) {
+			String[] i = id.split("\\,");
+			Optional<Stanza> stanza = stanzaRepo.findByHymnAbsAndStanza(Integer.parseInt(i[0]), Integer.parseInt(i[1]));
+			return mappingService.mapOptionalToJson(stanza);
 		}
 		
-		StanzaLocation loc = new StanzaLocation(id);
-		Optional<Stanza> v;
+		//else...
 		
-		while (!(v = stanzaRepo.findByBookAndHymnAndStanza(
+		StanzaLocation loc = new StanzaLocation(id);
+		Optional<Stanza> stanza;
+		
+		while (!(stanza = stanzaRepo.findByBookAndHymnAndStanza(
 				loc.getBook(), loc.getHymn(), loc.getStanza())).isPresent()) {
 			loc.setNextFallbackLocation();
 		}
 		
-		return mappingService.mapOptionalToJson(v);
+		return mappingService.mapOptionalToJson(stanza);
     }
 	
 	

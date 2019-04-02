@@ -132,7 +132,8 @@ const helpTexts = {
                 <h2>Stanza location</h2>
                 <p>
                     Just type a Rigveda stanza location in the form of <strong>1.2.3</strong> or <strong>01.002.03</strong> or 
-                    even <strong>0100203</strong> to be redirected to this stanza's page without further detours.
+                    even <strong>0100203</strong> to be redirected to this stanza's page without further detours.<br/>
+                    You can also use an absolute hymn- and stanza number in the form <strong>517,3</strong>.
                 </p>
                 <h2>Simple text search:</h2>
                 <p>

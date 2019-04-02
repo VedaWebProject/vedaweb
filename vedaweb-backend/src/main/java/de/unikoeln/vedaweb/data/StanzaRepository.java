@@ -9,5 +9,6 @@ public interface StanzaRepository extends MongoRepository<Stanza, String> {
     public Optional<Stanza> findByIndex(int index);
     public Optional<Stanza> findByBookAndHymnAndStanza(Integer book, Integer Hymn, Integer stanza);
     public Optional<List<Stanza>> findByHymnAbs(Integer hymnAbs);
+    public Optional<Stanza> findByHymnAbsAndStanza(Integer hymnAbs, Integer stanza);
 }
  
