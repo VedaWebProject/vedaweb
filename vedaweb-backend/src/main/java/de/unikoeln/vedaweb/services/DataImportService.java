@@ -7,12 +7,10 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.SerializationFeature;
 
 import de.unikoeln.vedaweb.data.Stanza;
 import de.unikoeln.vedaweb.data.StanzaRepository;
@@ -23,6 +21,7 @@ import net.sf.saxon.s9api.SaxonApiException;
 @Service
 public class DataImportService {
 	
+	private final Logger log = LoggerFactory.getLogger(this.getClass());
 	public static final String LOCAL_XML_DIR = "tei";
 	
 	
@@ -43,13 +42,13 @@ public class DataImportService {
 		List<Stanza> stanzas = new ArrayList<Stanza>();
 		
 		//check import directory path
-		System.out.println("[DataImport] looking for XML files to import ...");
+		log.info((dryRun ? "(DRY RUN) " : "") + "Looking for XML files to import");
 		File dir = new File(xmlDirPath);
 		if (!dir.exists()) {
-			System.err.println("[DataImport] error: '" + xmlDirPath + "' could not be found.");
+			log.error((dryRun ? "(DRY RUN) " : "") + "\"" + xmlDirPath + "\" could not be found.");
 			return -1;
 		} else if (!dir.isDirectory()) {
-			System.err.println("[DataImport] error: '" + xmlDirPath + "' is not a directory.");
+			log.error((dryRun ? "(DRY RUN) " : "") + "\"" + xmlDirPath + "\" is not a directory.");
 			return -1;
 		}
 		
@@ -58,52 +57,48 @@ public class DataImportService {
 		Arrays.sort(files);
 		
 		//start importing
-		System.out.println("[DataImport] starting data import from XML ...");
+		log.info((dryRun ? "(DRY RUN) " : "") + "Starting data import from XML");
 		Timer timer = new Timer();
 		for (File xmlFile : files) {
 			timer.start();
 			try {
 				XmlDataImport.collectStanzasFromXML(xmlFile, stanzas);
 			} catch (SaxonApiException e) {
-				System.err.println("[DataImport] error reading XML data.");
+				log.error((dryRun ? "(DRY RUN) " : "") + "Could not read XML data. Malformed?");
 				e.printStackTrace();
 				return -1;
 			}
-			System.out.println("[DataImport]   > finished reading '" 
-					+ xmlFile.getName() + "' in " + timer.stop("s", true) + " seconds.");
+			log.info((dryRun ? "(DRY RUN) " : "") + "Finished reading \"" 
+					+ xmlFile.getName() + "\" in " + timer.stop("s", true) + " seconds");
 		}
 		
 		//sort and apply indices
-		System.out.println("[DataImport] sorting documents, applying global indices ...");
+		log.info((dryRun ? "(DRY RUN) " : "") + "Sorting documents, applying global indices");
 		Collections.sort(stanzas);
 		for (int i = 0; i < stanzas.size(); i++) {
 			stanzas.get(i).setIndex(i);
 		}
 		
+		//log read stanzas count
+		if (stanzas.size() > 0)
+			log.info((dryRun ? "(DRY RUN) " : "") + "Read " + stanzas.size() + " stanzas from XML");
+		else
+			log.warn((dryRun ? "(DRY RUN) " : "") + "Zero (in numbers: 0) stanzas read from XML!");
+		
 		//dry run?
-		if (dryRun){
-			System.out.println("[DataImport] dry run: Read " + stanzas.size() + " stanzas from XML.");
-			if (stanzas.size() > 0) {
-				try {
-					System.out.println("[DataImport] SAMPLE:\n" + new ObjectMapper().configure(SerializationFeature.FAIL_ON_EMPTY_BEANS, false).writeValueAsString(stanzas.get(0)));
-				} catch (JsonProcessingException e) {
-					e.printStackTrace();
-				}
-			}
-			return stanzas.size();
-		}
+		if (dryRun) return stanzas.size();
 		
 		//write to DB
 		if (stanzas != null && !stanzas.isEmpty()){
-			System.out.println("[DataImport] deleting old DB documents...");
+			log.info("Deleting old DB documents");
 			stanzaRepo.deleteAll();
-			System.out.println("[DataImport] importing new data into DB...");
+			log.info("Importing new data into DB");
 			stanzaRepo.insert(stanzas);
 		} else {
-			System.err.println("[DataImport] error: data import failed. nothing read from XML.");
+			log.error("Data import failed. nothing read from XML?");
 		}
 		
-		System.out.println("[DataImport] DONE. data import finished.");
+		log.info("Data import finished.");
 		return stanzas.size();
 	}
 	

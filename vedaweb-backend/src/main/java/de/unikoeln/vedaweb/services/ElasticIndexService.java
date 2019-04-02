@@ -34,6 +34,8 @@ import org.elasticsearch.search.aggregations.bucket.terms.TermsAggregationBuilde
 import org.elasticsearch.search.aggregations.metrics.cardinality.Cardinality;
 import org.elasticsearch.search.aggregations.metrics.cardinality.CardinalityAggregationBuilder;
 import org.elasticsearch.search.builder.SearchSourceBuilder;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.Resource;
@@ -53,6 +55,8 @@ import de.unikoeln.vedaweb.util.StringUtils;
 
 @Service
 public class ElasticIndexService {
+	
+	private final Logger log = LoggerFactory.getLogger(this.getClass());
 	
 	@Autowired
 	private StanzaRepository stanzaRepo;
@@ -83,7 +87,7 @@ public class ElasticIndexService {
 	
 	
 	public ObjectNode indexDbDocuments(){
-		System.out.println("[INFO] creating and inserting new index documents...");
+		log.info("Creating and inserting new index documents");
 		ObjectNode jsonResponse = json.newNode();
 		Iterator<Stanza> dbIter = stanzaRepo.findAll().iterator();
 		// create es bulk request
@@ -176,7 +180,7 @@ public class ElasticIndexService {
 	
 
 	public ObjectNode deleteIndex(){
-		System.out.println("[INFO] deleting old index...");
+		log.info("Deleting old index");
 		ObjectNode jsonResponse = json.newNode();
 		DeleteIndexRequest deleteRequest = new DeleteIndexRequest(indexName);
 		DeleteIndexResponse deleteResponse = null;
@@ -197,7 +201,7 @@ public class ElasticIndexService {
 	
 	
 	public ObjectNode createIndex(){
-		System.out.println("[INFO] creating new index...");
+		log.info("Creating new index from mapping definition");
 		ObjectNode jsonResponse = json.newNode();
 		CreateIndexRequest createRequest = new CreateIndexRequest(indexName);
 		byte[] json = null;
@@ -236,7 +240,7 @@ public class ElasticIndexService {
 				"/vedaweb/mappings/doc");
 		
 		if (response == null) {
-			System.err.println("[ERROR] Could'nt find index grammar mapping");
+			log.error("Couldn't find index grammar mapping");
 			return json.newArray();
 		}
 		
@@ -311,7 +315,7 @@ public class ElasticIndexService {
 		try {
 			response = elastic.client().getLowLevelClient().performRequest("HEAD", "/" + indexName);
 		} catch (IOException e) {
-			System.err.println("[IndexService] Error: Could not check if index exists. Request failed.");
+			log.error("Could not check if index exists. Request failed.");
 			e.printStackTrace();
 		}
         return response != null && response.getStatusLine().getStatusCode() != 404;

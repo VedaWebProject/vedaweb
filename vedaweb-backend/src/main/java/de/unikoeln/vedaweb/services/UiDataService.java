@@ -4,6 +4,8 @@ import java.io.IOException;
 
 import javax.annotation.PostConstruct;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.Resource;
@@ -16,6 +18,8 @@ import de.unikoeln.vedaweb.util.IOUtils;
 
 @Service
 public class UiDataService {
+	
+	private final Logger log = LoggerFactory.getLogger(this.getClass());
 	
 	@Autowired
 	private ElasticIndexService indexService;
@@ -39,13 +43,13 @@ public class UiDataService {
 		ObjectNode response = json.newNode();
 		//force data import if db empty
 		if (stanzaRepo.count() == 0) {
-			System.out.println("[UiDataService] WARNING: DB collection seems to be empty. Trying to import data from XML...");
+			log.warn("DB collection seems to be empty. Trying to import data from XML");
 			response.put("importedXmlData", importService.importXMLData(DataImportService.LOCAL_XML_DIR, false));
 		}
 		//force index creation if index doesn't exist
 		if (!indexService.indexExists()) {
-			System.out.println("[UiDataService] WARNING: Could not request UI data. Search index doesn't seem to exist.");
-			System.out.println("[UiDataService] Creating and filling new index...");
+			log.warn("Could not request UI data. Search index doesn't seem to exist.");
+			log.warn("Creating and filling new index");
 			response.set("indexCreated", indexService.createIndex());
 			response.set("indexFilled", indexService.indexDbDocuments());
 		}
@@ -65,7 +69,7 @@ public class UiDataService {
 		try {
 			uiData = json.parse(IOUtils.convertStreamToString(uiDataTemplate.getInputStream()));
 		} catch (IOException e) {
-			System.err.println("[ERROR] UI data template JSON could not be loaded. (UiDataService)");
+			log.error("UI data template JSON could not be loaded");
 			return "[ERROR] UI data template JSON could not be loaded. (UiDataService)";
 		}
 		
@@ -93,8 +97,8 @@ public class UiDataService {
 		((ObjectNode)uiData.findPath("meta"))
 			.set("strata", indexService.getStanzasMetaData("strata"));
 		
-		System.out.println("[UiDataService] Successfully initialized UI data object for frontend requests.");
-		return "[UiDataService] Successfully initialized UI data object for frontend requests.";
+		log.info("Successfully initialized frontend UI data object");
+		return "[UiDataService] Successfully initialized frontend UI data object";
 	}
 
 }
