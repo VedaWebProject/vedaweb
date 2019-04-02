@@ -1,7 +1,9 @@
 import React, { Component } from "react";
-import { Icon, Modal } from 'antd';
+import { Icon, Modal, Typography } from 'antd';
 import help from "./img/help.png";
 import "./css/HelpButton.css";
+
+const { Text } = Typography;
 
 const helpTexts = {
     transliteration: {
@@ -37,14 +39,14 @@ const helpTexts = {
                 <p>
                     <h2>Usage</h2>
                     Define a word form or lemma (optional) and select a property (like case, number, person, etc.)
-                    and the value you are looking for (optional). You may add more properties to your search term by clicking the plus-button to the right.
+                    and the value you are looking for (optional). You may add more properties to your search term by clicking the <Text code>+</Text> button to the right.
                 </p>
                 <p>
                     It's also possible to use <strong>wildcards</strong> (just like in the <i>Quick search</i> at the top of the page),
-                    i.e. searching for <i>agn*</i> would match all word forms or lemmas starting with <i>agn</i>.
+                    i.e. searching for <Text code>agn*</Text> would match all word forms or lemmas starting with <i>agn</i>.
                 </p>
                 <p>
-                    To add more than one word form or lemma to find in a stanza, click on the plus-button below.
+                    To add more than one word form or lemma to find in a stanza, click on the <Text code>+</Text> button below.
                 </p>
             </div>
     },
@@ -54,7 +56,7 @@ const helpTexts = {
             <div>
                 <p>
                     The search range filter lets you specify ranges of books (and hymns) to limit your search to. 
-                    You may add more ranges by clicking the plus-button to the right of each line.
+                    You may add more ranges by clicking the <Text code>+</Text> button to the right of each line.
                 </p>
             </div>
     },
@@ -131,9 +133,9 @@ const helpTexts = {
                 </p>
                 <h2>Stanza location</h2>
                 <p>
-                    Just type a Rigveda stanza location in the form of <strong>1.2.3</strong> or <strong>01.002.03</strong> or 
-                    even <strong>0100203</strong> to be redirected to this stanza's page without further detours.<br/>
-                    You can also use an absolute hymn- and stanza number in the form <strong>517,3</strong>.
+                    Just type a Rigveda stanza location in the form of <Text code>2.1.3</Text> or <Text code>02.001.03</Text> or 
+                    even <Text code>0200103</Text> to be redirected to this stanza's page without further detours.<br/>
+                    You can also use an absolute hymn- and stanza number in the following form: <Text code>517,3</Text>
                 </p>
                 <h2>Simple text search:</h2>
                 <p>
@@ -144,7 +146,8 @@ const helpTexts = {
                 <h2>Transliteration</h2>
                 <p>
                     If you search for terms in the Rigveda stanzas, you can <strong>use a transliteration method of your choice</strong>.
-                    Our data is in ISO-15919 (so if you want to type in ISO-15919 you can just do that), but your search input can be transliterated from several other standards to ISO-15919.
+                    Our data is in ISO-15919, so if you want to type in ISO-15919 you can just do that (or why not try the on-screen keyboard with the button at the beginning of the search input field?).
+                    But your search input can also be transliterated from several other standards to ISO-15919.
                     The <strong>default setting is Harvard-Kyoto (HK)</strong>, but you can change this in the <strong>Advanced Search Settings</strong>.
                 </p>
                 <h2>Accent-sensitive search</h2>
@@ -155,21 +158,21 @@ const helpTexts = {
                 <h2>Wildcards</h2>
                 <p>
                     It is possible to search for words starting or ending with a certain substring.
-                    Searching for <strong>agni*</strong> will find agnim, agniḥ, agnināgniḥ, and so on - so the Asterisk (<strong>*</strong>)
-                    works as a simple placeholder. You can use this in the beginning (<strong>*dāḥ</strong>), the end (<strong>agni*</strong>)
-                    or both (<strong>*dak*</strong>).
+                    Searching for <Text code>agni*</Text> will find <Text code>agnim</Text>, <Text code>agniḥ</Text>, <Text code>agnināgniḥ</Text>, and so on - so the Asterisk (<Text code>*</Text>)
+                    works as a simple placeholder. You can use this in the beginning (<Text code>*dāḥ</Text>), the end (<Text code>agni*</Text>)
+                    or both (<Text code>*dak*</Text>).
                 </p>
                 <h2>Logical operators</h2>
                 <p>
-                    Using the <strong>AND</strong> and <strong>OR</strong> operators, you can construct little logical statements.
-                    Searching for <strong>agnim OR indra</strong>, you'll find every stanza containing one of the words <strong>agnim</strong> or <strong>indra</strong>.
-                    The same works for the <strong>AND</strong> operator: <strong>agnim AND indra</strong> will give you the stanzas containing both words.
+                    Using the <Text code>AND</Text> and <Text code>OR</Text> operators, you can construct little logical statements.
+                    Searching for <Text code>agnim OR indra</Text>, you'll find every stanza containing one of the words <strong>agnim</strong> or <strong>indra</strong>.
+                    The same works for the <Text code>AND</Text> operator: <Text code>agnim AND indra</Text> will give you the stanzas containing both words.
                 </p>
                 <h2>Required and prohibited terms</h2>
                 <p>
-                    With <strong>+</strong> and <strong>-</strong>, you can specify terms that <strong>must</strong> or <strong>must not</strong> occur in a stanza to be found.
-                    So, for example, <strong>agnim -indra</strong> finds stanzas containing <strong>agnim</strong> and not containing <strong>indra</strong>,
-                    while <strong>agnim +indra</strong> finds stanzas that <i>might</i> contain <strong>agnim</strong> but definitely contain <strong>indra</strong>.
+                    With <Text code>+</Text> and <Text code>-</Text>, you can specify terms that <strong>must</strong> or <strong>must not</strong> occur in a stanza to be found.
+                    So, for example, <Text code>agnim -indra</Text> finds stanzas containing <strong>agnim</strong> and not containing <strong>indra</strong>,
+                    while <Text code>agnim +indra</Text> finds stanzas that <i>might</i> contain <strong>agnim</strong> but definitely contain <strong>indra</strong>.
                 </p>
             </div>
     },
