@@ -86,15 +86,15 @@ public class UiDataService {
 			.set("hymnAbs", json.getMapper().valueToTree(indexService.getHymnAbsValues()));
 		
 		//get addressees data from index and add to uiData JSONObject
-		((ObjectNode)uiData.findPath("meta"))
+		((ObjectNode)uiData.at("/meta"))
 			.set("hymnAddressee", indexService.getStanzasMetaData("hymnAddressee"));
 		
 		//get group data from index and add to uiData JSONObject
-		((ObjectNode)uiData.findPath("meta"))
+		((ObjectNode)uiData.at("/meta"))
 			.set("hymnGroup", indexService.getStanzasMetaData("hymnGroup"));
 		
 		//get strata data from index and add to uiData JSONObject
-		((ObjectNode)uiData.findPath("meta"))
+		((ObjectNode)uiData.at("/meta"))
 			.set("strata", indexService.getStanzasMetaData("strata"));
 		
 		log.info("Successfully initialized frontend UI data object");
