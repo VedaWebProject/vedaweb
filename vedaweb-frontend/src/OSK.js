@@ -87,7 +87,8 @@ class OSK extends Component {
                 
                 <Icon
                 type="edit" onClick={this.open}
-                style={{color:"rgba(0,0,0,0.2)"}} />
+                style={{color:"rgba(0,0,0,0.2)"}}
+                title="open ISO-15919 on-screen keyboard" />
 
                 <Drawer
                 title={title}
@@ -96,7 +97,6 @@ class OSK extends Component {
                 closable={true}
                 mask={true}
                 maskClosable={true}
-                maskStyle={{backgroundColor:"transparent"}}
                 onClose={this.close}
                 visible={this.state.visible}
                 bodyStyle={{backgroundColor: "#e0e0e0", padding:".5rem"}}>
