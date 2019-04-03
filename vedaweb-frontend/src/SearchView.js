@@ -115,8 +115,6 @@ class SearchView extends Component {
                 }
             </div>
 
-        console.log(JSON.stringify(uiDataStore.meta));
-
         return (
 
             <Row
