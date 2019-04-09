@@ -12,10 +12,13 @@ import System from './System';
 import LegalNotice from './LegalNotice';
 import PrivacyNotice from './PrivacyNotice';
 
+import GuidedTour from './GuidedTour';
+
 import "./css/App.css";
 
 import uiDataStore from "./stores/uiDataStore";
 import searchMetaStore from "./stores/searchMetaStore";
+import appStateStore from "./stores/appStateStore";
 import { view } from 'react-easy-state';
 
 import { Route, Switch, withRouter } from 'react-router-dom';
@@ -27,6 +30,7 @@ import axios from 'axios';
 import "./polyfills";
 
 
+
 class App extends Component {
 
     constructor(props){
@@ -34,7 +38,8 @@ class App extends Component {
 
         this.state = {
             isLoaded: false,
-            error: undefined
+            error: undefined,
+            tour: false
         }
 
         //configure iso scheme for sanscript.js
@@ -127,6 +132,10 @@ class App extends Component {
 
                         </ErrorBoundary>
                     }
+
+                    <GuidedTour
+                    enabled={appStateStore.tour}
+                    onCloseTour={() => appStateStore.tour = false}/>
 
                 </div>
 

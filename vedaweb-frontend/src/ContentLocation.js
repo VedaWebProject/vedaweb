@@ -100,7 +100,7 @@ class ContentLocation extends Component {
 
         return (
             this.props.book !== undefined && this.props.hymn !== undefined &&
-                <div className="inline-block location-display">
+                <div className="inline-block location-display" data-tour-id="content-location">
                     <Link
                     to={"/view/index/" + (this.props.currIndex - 1)}
                     className="location-controls gap-right">

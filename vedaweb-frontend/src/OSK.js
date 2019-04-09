@@ -86,6 +86,7 @@ class OSK extends Component {
             <div style={{display:"inline"}}>
                 
                 <Icon
+                data-tour-id="quick-search-osk"
                 type="edit" onClick={this.open}
                 style={{color:"rgba(0,0,0,0.2)"}}
                 title="open ISO-15919 on-screen keyboard" />

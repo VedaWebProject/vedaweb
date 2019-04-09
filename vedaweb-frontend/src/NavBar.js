@@ -11,6 +11,7 @@ import searchMetaStore from "./stores/searchMetaStore";
 import { view } from 'react-easy-state';
 
 import { NavLink, withRouter } from 'react-router-dom';
+import appStateStore from "./stores/appStateStore";
 
 const SubMenu = Menu.SubMenu;
 
@@ -39,7 +40,9 @@ class NavBar extends Component {
                     </div> */}
                 </div>
 
-                <div style={{flexGrow:'1', textAlign:'center'}}>
+                <div
+                style={{flexGrow:'1', textAlign:'center'}}
+                data-tour-id="quick-search">
                     <SearchSmart /> 
                 </div>
 
@@ -50,6 +53,7 @@ class NavBar extends Component {
                     style={menuStyle}>
 
                         <SubMenu
+                        data-tour-id="nav-browse"
                         title={<div className="content-center submenu-title-wrapper"><Icon type="book"/><br/>Browse<br/>Rigveda</div>}
                         className="right">
                             {searchMetaStore.scopeDataRaw.map((hymns, i) => (
@@ -61,7 +65,9 @@ class NavBar extends Component {
                             ))}
                         </SubMenu>
 
-                        <Menu.Item key="search">
+                        <Menu.Item
+                        data-tour-id="nav-search"
+                        key="search">
                             <NavLink to={"/search"}
                             title="Grammar search and more..."
                             className="content-center"
@@ -70,13 +76,22 @@ class NavBar extends Component {
                             </NavLink>
                         </Menu.Item>
 
-                        <Menu.Item key="home">
+                        <Menu.Item
+                        key="betafeedback">
                             <NavLink to={"/betafeedback"}
                             title="Information on this beta version of VedaWeb"
                             className="content-center"
                             activeClassName="selected">
                                 <Icon type="experiment"/><br/>Beta<br/>Feedback
                             </NavLink>
+                        </Menu.Item>
+
+                        <Menu.Item
+                        data-tour-id="nav-tour"
+                        key="tour"
+                        className="content-center"
+                        onClick={() => appStateStore.tour = true}>
+                            <Icon type="notification"/><br/>Guided<br/>Tour
                         </Menu.Item>
 
                         {/* <Menu.Item key="about">

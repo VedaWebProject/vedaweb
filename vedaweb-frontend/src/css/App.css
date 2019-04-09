@@ -2,6 +2,7 @@
     min-width: 1024px;
     font-family: "Assistant", "Tahoma", "Arial", sans-serif;
     font-size: 18px;
+    position: relative;
 }
 
 h3, h4, h5 {

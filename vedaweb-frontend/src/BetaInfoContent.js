@@ -8,8 +8,9 @@ class BetaInfoContent extends Component {
     render() {
 
         return (
-
+            
             <div>
+
                 <h4><Icon type="experiment"/> VedaWeb beta</h4>
                 <p>
                     This is a <strong>beta version</strong> for testing some of our planned concepts and getting feedback from potential users.<br/>
@@ -39,8 +40,9 @@ class BetaInfoContent extends Component {
                     <br/><br/>
                     Thank you for testing the <span className="secondary-font red bold">VedaWeb</span> beta!
                 </p>
+                
             </div>
-            
+
         );
     }
 }

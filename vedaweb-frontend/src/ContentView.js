@@ -386,6 +386,7 @@ class ContentView extends Component {
                                         className="card red flex-center btn-aside"
                                         title="Show view selectors"
                                         onClick={() => this.setState({filtersVisible: true})}
+                                        data-tour-id="toggle-content"
                                         style={{
                                             cursor:'pointer',
                                             textAlign:'center',
@@ -407,6 +408,7 @@ class ContentView extends Component {
                                         className="card red flex-center btn-aside"
                                         title="Show export options"
                                         onClick={() => this.setState({exportVisible: true})}
+                                        data-tour-id="toggle-export"
                                         style={{
                                             cursor:'pointer',
                                             fontSize:'20px',
