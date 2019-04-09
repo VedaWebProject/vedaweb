@@ -230,7 +230,10 @@ class Tour extends Component {
 
         //target display:fixed ???
         if (!this.state.target.fixed){
-            window.scrollTo(this.state.pos.left - (window.innerWidth/2), this.state.pos.top - (window.innerHeight/2));
+            window.scrollTo(
+                this.state.pos.left - (window.innerWidth/2),
+                this.state.pos.top - (window.innerHeight/2)
+            );
         } else {
             holeStyle.position = "fixed";
         }
