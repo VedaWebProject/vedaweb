@@ -86,7 +86,7 @@ class SearchQuick extends Component {
             : null
         );
 
-        const helpAfter = <HelpButton inline type="quickSearch"/>;
+        const helpAfter = <div data-tour-id="help-buttons"><HelpButton inline type="quickSearch" /></div>;
 
         return (
 

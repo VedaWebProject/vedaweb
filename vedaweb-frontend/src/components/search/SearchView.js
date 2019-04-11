@@ -126,35 +126,39 @@ class SearchView extends Component {
                     <div className="card">
                         <h1>Advanced Search</h1>
 
-                        <h3 className="top-gap-big">
-                            <Icon type="tool" className="gap-right"/>
-                            General settings (applies to all searches)
-                        </h3>
-                        <Row className="bottom-gap">
-                            <Col span={8}>
-                                Input transliteration:
-                                <HelpButton inline type="transliteration" style={{marginLeft: '1rem'}} />
-                            </Col>
-                            <Col span={16}>
-                                <SearchTransliteration/>
-                            </Col>
-                        </Row>
-                        <Row className="bottom-gap">
-                            <Col span={8}>
-                                Accent-sensitive search:
-                                <HelpButton inline type="accentSensitive" style={{marginLeft: '1rem'}} />
-                            </Col>
-                            <Col span={16}>
-                                <Checkbox
-                                onChange={e => stateStore.settings.accents = e.target.checked}
-                                checked={stateStore.settings.accents} >
-                                    Accent-sensitive
-                                </Checkbox>
-                            </Col>
-                        </Row>
-                        
+                        <div data-tour-id="search-settings">
+                            <h3 className="top-gap-big">
+                                <Icon type="tool" className="gap-right"/>
+                                General settings (applies to all searches)
+                            </h3>
+                            <Row className="bottom-gap">
+                                <Col span={8}>
+                                    Input transliteration:
+                                    <HelpButton inline type="transliteration" style={{marginLeft: '1rem'}} />
+                                </Col>
+                                <Col span={16}>
+                                    <SearchTransliteration/>
+                                </Col>
+                            </Row>
+                            <Row className="bottom-gap">
+                                <Col span={8}>
+                                    Accent-sensitive search:
+                                    <HelpButton inline type="accentSensitive" style={{marginLeft: '1rem'}} />
+                                </Col>
+                                <Col span={16}>
+                                    <Checkbox
+                                    onChange={e => stateStore.settings.accents = e.target.checked}
+                                    checked={stateStore.settings.accents} >
+                                        Accent-sensitive
+                                    </Checkbox>
+                                </Col>
+                            </Row>
+                        </div>
+
                         <h3 className="top-gap-big"><Icon type="search" className="gap-right"/>What are you searching for?</h3>
+
                         <Tabs
+                        data-tour-id="search-modes"
                         onChange={this.switchMode}
                         type="card"
                         id="search-mode-selector"
@@ -175,43 +179,45 @@ class SearchView extends Component {
 
                         <h3 className="top-gap"><Icon type="filter" className="gap-right"/>Additional search filters</h3>
 
-                        <Collapse
-                        bordered={false}>
-                            <Panel
-                            header={searchScopePanelHeader}
-                            key="scope"
-                            style={customPanelStyle}
-                            forceRender={true}>
-                                <HelpButton align="left" type="searchScope" />
-                                <SearchScopeContainer/>
-                            </Panel>
+                        <div data-tour-id="search-filters">
+                            <Collapse
+                            bordered={false}>
+                                <Panel
+                                header={searchScopePanelHeader}
+                                key="scope"
+                                style={customPanelStyle}
+                                forceRender={true}>
+                                    <HelpButton align="left" type="searchScope" />
+                                    <SearchScopeContainer/>
+                                </Panel>
 
-                            <Panel
-                            header={customMetaFilterPanelHeader}
-                            key="metafilters"
-                            style={customPanelStyle} >
-                                <HelpButton align="left" type="searchMetaFilters" />
-                                <SearchMetaFilterList
-                                label="Hymn Addressees"
-                                placeholder="all Addressees"
-                                items={stateStore.ui.meta.hymnAddressee}
-                                selected={stateStore.search.meta.meta.hymnAddressee}
-                                handleChange={v => {stateStore.search.meta.meta.hymnAddressee = v}}/>
-                                <SearchMetaFilterList
-                                label="Hymn Groups"
-                                placeholder="all Groups"
-                                items={stateStore.ui.meta.hymnGroup}
-                                selected={stateStore.search.meta.meta.hymnGroup}
-                                handleChange={v => {stateStore.search.meta.meta.hymnGroup = v}}/>
-                                <SearchMetaFilterList
-                                label="Stanza Strata"
-                                placeholder="all Strata"
-                                items={stateStore.ui.meta.strata}
-                                itemLabels={stateStore.ui.abbreviations.strata}
-                                selected={stateStore.search.meta.meta.strata}
-                                handleChange={v => {stateStore.search.meta.meta.strata = v}}/>
-                            </Panel>
-                        </Collapse>
+                                <Panel
+                                header={customMetaFilterPanelHeader}
+                                key="metafilters"
+                                style={customPanelStyle} >
+                                    <HelpButton align="left" type="searchMetaFilters" />
+                                    <SearchMetaFilterList
+                                    label="Hymn Addressees"
+                                    placeholder="all Addressees"
+                                    items={stateStore.ui.meta.hymnAddressee}
+                                    selected={stateStore.search.meta.meta.hymnAddressee}
+                                    handleChange={v => {stateStore.search.meta.meta.hymnAddressee = v}}/>
+                                    <SearchMetaFilterList
+                                    label="Hymn Groups"
+                                    placeholder="all Groups"
+                                    items={stateStore.ui.meta.hymnGroup}
+                                    selected={stateStore.search.meta.meta.hymnGroup}
+                                    handleChange={v => {stateStore.search.meta.meta.hymnGroup = v}}/>
+                                    <SearchMetaFilterList
+                                    label="Stanza Strata"
+                                    placeholder="all Strata"
+                                    items={stateStore.ui.meta.strata}
+                                    itemLabels={stateStore.ui.abbreviations.strata}
+                                    selected={stateStore.search.meta.meta.strata}
+                                    handleChange={v => {stateStore.search.meta.meta.strata = v}}/>
+                                </Panel>
+                            </Collapse>
+                        </div>
 
                         <Row>
                             <Col span={24} className="content-right">
