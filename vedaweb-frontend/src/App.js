@@ -16,9 +16,7 @@ import GuidedTour from './GuidedTour';
 
 import "./css/App.css";
 
-import uiDataStore from "./stores/uiDataStore";
-import searchMetaStore from "./stores/searchMetaStore";
-import appStateStore from "./stores/appStateStore";
+import stateStore from "./stores/stateStore";
 import { view } from 'react-easy-state';
 
 import { Route, Switch, withRouter } from 'react-router-dom';
@@ -56,16 +54,30 @@ class App extends Component {
         this.loadUiData();
     }
 
+    componentCleanup(){
+        stateStore.save(stateStore);
+    }
+
+    componentDidMount(){
+        stateStore.load(stateStore);
+        window.addEventListener('beforeunload', this.componentCleanup);
+    }
+  
+    componentWillUnmount() {
+        this.componentCleanup();
+        window.removeEventListener('beforeunload', this.componentCleanup);
+    }
+
 
     loadUiData(){
         axios.get(process.env.PUBLIC_URL + "/api/uidata")
         .then((response) => {
-            uiDataStore.search = response.data.search;
-            uiDataStore.meta = response.data.meta;
-            uiDataStore.abbreviations = response.data.abbreviations;
-            uiDataStore.layers = response.data.layers;
-            searchMetaStore.scopeDataRaw = uiDataStore.search.meta.scopes;
-            searchMetaStore.transliteration = uiDataStore.search.meta.transliterations[0].id;
+            stateStore.ui.search = response.data.search;
+            stateStore.ui.meta = response.data.meta;
+            stateStore.ui.abbreviations = response.data.abbreviations;
+            stateStore.ui.layers = response.data.layers;
+            //stateStore.search.meta.scopeDataRaw = stateStore.ui.search.meta.scopes;
+            //stateStore.settings.transliteration = stateStore.ui.search.meta.transliterations[0].id;
             this.setState({
                 isLoaded: true,
                 error: undefined
@@ -134,8 +146,8 @@ class App extends Component {
                     }
 
                     <GuidedTour
-                    enabled={appStateStore.tour}
-                    onCloseTour={() => appStateStore.tour = false}/>
+                    enabled={stateStore.settings.tour}
+                    onCloseTour={() => stateStore.settings.tour = false}/>
 
                 </div>
 

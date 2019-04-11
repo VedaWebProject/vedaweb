@@ -3,7 +3,7 @@ import { Drawer, Icon, message } from 'antd';
 
 import { view } from 'react-easy-state';
 import mouseTrap from 'react-mousetrap';
-import searchMetaStore from "./stores/searchMetaStore";
+import stateStore from "./stores/stateStore";
 
 import "./css/OSK.css";
 
@@ -37,7 +37,7 @@ class OSK extends Component {
     open(){
         this.setState({ visible: true });
         //globally set iso translit
-        searchMetaStore.setTransliteration("iso");
+        stateStore.search.meta.transliteration = "iso";
         message.open({
             content: <span className="red">Transliteration scheme has been set to <strong>ISO-15919</strong></span>,
             duration: 3,

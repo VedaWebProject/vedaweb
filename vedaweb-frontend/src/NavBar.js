@@ -1,17 +1,16 @@
 import React, { Component } from "react";
 import { Icon, Menu } from 'antd';
 
-import SearchSmart from "./SearchSmart";
+import SearchQuick from "./SearchQuick";
 //import logo from "./img/logo_beta.png";
 import logo from "./img/logo.svg";
 import "./css/NavBar.css";
 
-import searchMetaStore from "./stores/searchMetaStore";
+import stateStore from "./stores/stateStore";
 
 import { view } from 'react-easy-state';
 
 import { NavLink, withRouter } from 'react-router-dom';
-import appStateStore from "./stores/appStateStore";
 
 const SubMenu = Menu.SubMenu;
 
@@ -43,7 +42,7 @@ class NavBar extends Component {
                 <div
                 style={{flexGrow:'1', textAlign:'center'}}
                 data-tour-id="quick-search">
-                    <SearchSmart /> 
+                    <SearchQuick /> 
                 </div>
 
                 <nav>
@@ -56,7 +55,7 @@ class NavBar extends Component {
                         data-tour-id="nav-browse"
                         title={<div className="content-center submenu-title-wrapper"><Icon type="book"/><br/>Browse<br/>Rigveda</div>}
                         className="right">
-                            {searchMetaStore.scopeDataRaw.map((hymns, i) => (
+                            {stateStore.ui.search.meta.scopes.map((hymns, i) => (
                                 <Menu.Item key={'view:' + i}>
                                     <NavLink to={"/view/id/" + (i+1) + ".1.1"} activeClassName="selected">
                                         Book {('0' + (i+1)).slice(-2)} ({hymns} Hymns)
@@ -90,7 +89,7 @@ class NavBar extends Component {
                         data-tour-id="nav-tour"
                         key="tour"
                         className="content-center"
-                        onClick={() => appStateStore.tour = true}>
+                        onClick={() => stateStore.settings.tour = true}>
                             <Icon type="notification"/><br/>Guided<br/>Tour
                         </Menu.Item>
 

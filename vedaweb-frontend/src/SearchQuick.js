@@ -1,9 +1,7 @@
 import React, { Component } from "react";
 import { Input, Tooltip, Select, Checkbox } from 'antd';
 
-import searchSmartStore from "./stores/searchSmartStore";
-import searchMetaStore from "./stores/searchMetaStore";
-import uiDataStore from "./stores/uiDataStore";
+import stateStore from "./stores/stateStore";
 import { view } from 'react-easy-state';
 
 import TransliterationPreview from "./TransliterationPreview";
@@ -12,7 +10,7 @@ import HelpButton from "./HelpButton";
 import { withRouter } from 'react-router-dom';
 import { Base64 } from 'js-base64';
 
-import "./css/SearchSmart.css";
+import "./css/SearchQuick.css";
 import SanscriptAccents from "./SanscriptAccents";
 import OSK from "./OSK";
 
@@ -20,7 +18,7 @@ import OSK from "./OSK";
 const { Option, OptGroup } = Select;
 const Search = Input.Search;
 
-class SearchSmart extends Component {
+class SearchQuick extends Component {
 
     constructor(props){
         super(props);
@@ -33,9 +31,9 @@ class SearchSmart extends Component {
         } else {
             let jsonData = {
                 mode: "smart",
-                input: searchSmartStore.data.field.startsWith('version_') ? SanscriptAccents.t(input, searchMetaStore.transliteration, "iso") : input,
-                field: searchSmartStore.data.field,
-                accents: searchMetaStore.accents
+                input: stateStore.search.quick.field.startsWith('version_') ? SanscriptAccents.t(input, stateStore.settings.transliteration, "iso") : input,
+                field: stateStore.search.quick.field,
+                accents: stateStore.settings.accents
             };
             this.props.history.push("/results/" + Base64.encodeURI(JSON.stringify(jsonData)));
         }
@@ -46,13 +44,13 @@ class SearchSmart extends Component {
         const selectBefore = (
             <Select
             defaultValue="version_lubotskyzurich"
-            value={searchSmartStore.data.field}
-            onSelect={(value, option) => searchSmartStore.setField(value)}
+            value={stateStore.search.quick.field}
+            onSelect={(value, option) => stateStore.search.quick.field = value}
             style={{ width: '180px' }}
             className="secondary-font">
                 <OptGroup label="Text Versions">
                     {/* text versions */}
-                    {uiDataStore.layers
+                    {stateStore.ui.layers
                     .filter(l => l.id.startsWith('version_') && l.id !== 'version_devanagari')
                     .map(v => (
                         <Option
@@ -65,7 +63,7 @@ class SearchSmart extends Component {
                 </OptGroup>
                 <OptGroup label="Translations">
                     {/* translations */}
-                    {uiDataStore.layers
+                    {stateStore.ui.layers
                     .filter(l => l.id.startsWith('translation_'))
                     .map(v => (
                         <Option
@@ -80,11 +78,11 @@ class SearchSmart extends Component {
         );
 
         const transliteration = (
-            searchSmartStore.data.field.startsWith('version_')
-            && searchMetaStore.transliteration !== "iso"
+            stateStore.search.quick.field.startsWith('version_')
+            && stateStore.settings.transliteration !== "iso"
             ? <TransliterationPreview
-                input={searchSmartStore.data.input}
-                transliteration={searchMetaStore.transliteration} />
+                input={stateStore.search.quick.input}
+                transliteration={stateStore.settings.transliteration} />
             : null
         );
 
@@ -101,24 +99,24 @@ class SearchSmart extends Component {
                 style={{display: 'inline'}}>
 
                     <Search
-                    value={searchSmartStore.data.input}
-                    onChange={e => searchSmartStore.setInput(e.target.value)}
+                    value={stateStore.search.quick.input}
+                    onChange={e => stateStore.search.quick.input = e.target.value}
                     onSearch={this.handleSearch}
                     addonBefore={selectBefore}
                     addonAfter={helpAfter}
                     size="large"
-                    prefix={<OSK value={searchSmartStore.data.input} updateInput={searchSmartStore.setInput}/>}
+                    prefix={<OSK value={stateStore.search.quick.input} updateInput={v => stateStore.search.quick.input = v}/>}
                     style={{maxWidth: '420px'}}
                     placeholder={
-                        (searchSmartStore.data.field.startsWith('version_')
-                        ? searchMetaStore.transliteration.toUpperCase() + " or stanza no."
+                        (stateStore.search.quick.field.startsWith('version_')
+                        ? stateStore.settings.transliteration.toUpperCase() + " or stanza no."
                         : "Translation or stanza no.")
                     } />
                 </Tooltip>
 
                 <Checkbox
-                onChange={e => searchMetaStore.setAccents(e.target.checked)}
-                checked={searchMetaStore.accents}
+                onChange={e => stateStore.settings.accents = e.target.checked}
+                checked={stateStore.settings.accents}
                 style={{marginLeft:'1rem'}}>
                     Accent-sensitive
                 </Checkbox>
@@ -130,4 +128,4 @@ class SearchSmart extends Component {
 
 }
 
-export default withRouter(view(SearchSmart));
+export default withRouter(view(SearchQuick));

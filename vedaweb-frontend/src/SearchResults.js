@@ -12,8 +12,7 @@ import { view } from 'react-easy-state';
 import axios from 'axios';
 import { Base64 } from 'js-base64';
 
-import searchResultsStore from "./stores/searchResultsStore";
-import uiDataStore from "./stores/uiDataStore";
+import stateStore from "./stores/stateStore";
 
 const fieldDisplayMapping = {
     "form": "Stanza text",
@@ -41,15 +40,15 @@ class SearchResults extends Component {
 
 
     componentDidUpdate(){
-        if (searchResultsStore.queryEncoded !== this.props.match.params.querydata)
+        if (stateStore.results.queryEncoded !== this.props.match.params.querydata)
             this.handleNewQuery(this.props.match.params.querydata);
     }
 
 
     handleTableChange(pagination) {
-        searchResultsStore.page = pagination.current;
-        searchResultsStore.size = pagination.pageSize;
-        this.loadData(searchResultsStore.queryJSON);
+        stateStore.results.page = pagination.current;
+        stateStore.results.size = pagination.pageSize;
+        this.loadData(stateStore.results.queryJSON);
     }
 
 
@@ -59,8 +58,8 @@ class SearchResults extends Component {
 
         this.setState({ isLoaded: false });
 
-        searchResultsStore.queryEncoded = queryData;
-        searchResultsStore.page = 1;
+        stateStore.results.queryEncoded = queryData;
+        stateStore.results.page = 1;
 
         let queryJSON = {};
 
@@ -68,8 +67,8 @@ class SearchResults extends Component {
             queryJSON = JSON.parse(Base64.decode(queryData));
             //console.log(JSON.stringify(queryJSON)); //TEMP DEV
             queryJSON.from = 0;
-            queryJSON.size = searchResultsStore.size;
-            searchResultsStore.queryJSON = queryJSON;
+            queryJSON.size = stateStore.results.size;
+            stateStore.results.queryJSON = queryJSON;
         } catch (e) {
             this.setState({
                 isLoaded: true,
@@ -92,14 +91,14 @@ class SearchResults extends Component {
                 : queryJSON.input,
             field:  queryJSON.mode === "grammar"
                 ? "grammar data"
-                : uiDataStore.layers.find(l => l.id === queryJSON.field).label
+                : stateStore.ui.layers.find(l => l.id === queryJSON.field).label
         };
 
         //enable view for searched field automatically
         if (queryJSON.mode === "smart")
-            uiDataStore.toggleLayer(queryJSON.field, true);
+            stateStore.ui.toggleLayer(queryJSON.field, true);
         else if (queryJSON.mode === "grammar")
-            uiDataStore.toggleLayer("glossing_", true);
+            stateStore.ui.toggleLayer("glossing_", true);
             
         this.setState({
             isLoaded: false,
@@ -111,8 +110,8 @@ class SearchResults extends Component {
         document.title = "VedaWeb | Search Results for '" + queryDisplay.query + "'";
 
         //pagination and request size
-        queryJSON.from = ((searchResultsStore.page - 1) * searchResultsStore.size);
-        queryJSON.size = searchResultsStore.size;
+        queryJSON.from = ((stateStore.results.page - 1) * stateStore.results.size);
+        queryJSON.size = stateStore.results.size;
 
         //console.log(JSON.stringify(queryJSON));
 
@@ -120,8 +119,8 @@ class SearchResults extends Component {
         axios.post(process.env.PUBLIC_URL + "/api/search", queryJSON)
             .then((response) => {
                 //console.log(JSON.stringify(response.data));
-                searchResultsStore.resultsData = response.data;
-                searchResultsStore.total = response.data.total;
+                stateStore.results.resultsData = response.data;
+                stateStore.results.total = response.data.total;
                 
                 this.setState({
                     isLoaded: true,
@@ -168,7 +167,7 @@ class SearchResults extends Component {
     render() {
 
         const { error, isLoaded } = this.state;
-        const data = searchResultsStore.resultsData;
+        const data = stateStore.results.resultsData;
 
         //define table columns
         const columns = [{
@@ -238,9 +237,9 @@ class SearchResults extends Component {
                             loading={!this.state.isLoaded}
                             locale={{emptyText: 'There are no results for this search.'}}
                             pagination={{
-                                pageSize: searchResultsStore.size,
-                                current: searchResultsStore.page,
-                                total: searchResultsStore.total,
+                                pageSize: stateStore.results.size,
+                                current: stateStore.results.page,
+                                total: stateStore.results.total,
                                 position: 'both',
                                 showSizeChanger: true,
                                 pageSizeOptions: ['10','25','50','100']

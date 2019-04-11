@@ -17,9 +17,7 @@ import { view } from 'react-easy-state';
 import { withRouter } from 'react-router-dom';
 import { Base64 } from 'js-base64';
 
-import searchMetaStore from "./stores/searchMetaStore";
-import uiDataStore from "./stores/uiDataStore";
-import searchGrammarStore from "./stores/searchGrammarStore";
+import stateStore from "./stores/stateStore";
 
 const TabPane = Tabs.TabPane;
 const Panel = Collapse.Panel;
@@ -35,26 +33,26 @@ class SearchView extends Component {
 
     switchMode(key){
         if (key !== "help")
-            searchMetaStore.mode = key;
+            stateStore.search.meta.mode = key;
     }
 
     handleSubmit(e){
         let jsonData = {
-            mode: searchMetaStore.mode,
-            scopes: searchMetaStore.scopes,
-            meta: searchMetaStore.meta,
-            accents: searchMetaStore.accents
+            mode: stateStore.search.meta.mode,
+            scopes: stateStore.search.meta.scopes,
+            meta: stateStore.search.meta.meta,
+            accents: stateStore.settings.accents
         };
         
-        if (searchMetaStore.mode === "grammar"){
-            jsonData["blocks"] = JSON.parse(JSON.stringify(searchGrammarStore.data.blocks));
+        if (stateStore.search.meta.mode === "grammar"){
+            jsonData["blocks"] = JSON.parse(JSON.stringify(stateStore.search.grammar.blocks));
             
             //remove empty blocks
             jsonData.blocks = jsonData.blocks.filter(block => !this.isBlockEmpty(block));
             
 
             for (let block of jsonData.blocks){
-                block.term = SanscriptAccents.t(block.term, searchMetaStore.transliteration, "iso");
+                block.term = SanscriptAccents.t(block.term, stateStore.settings.transliteration, "iso");
                 //make fields direct props of block
                 for (let field of block.fields){
                     if (field.value !== undefined && field.value.length > 0)
@@ -79,8 +77,8 @@ class SearchView extends Component {
     }
 
     handleReset(e){
-        searchMetaStore.reset();
-        searchGrammarStore.reset();
+        stateStore.search.meta.reset();
+        stateStore.search.grammar.reset();
     }
 
 
@@ -106,10 +104,10 @@ class SearchView extends Component {
         const customMetaFilterPanelHeader =
             <div>
                 Meta Filters: 
-                {searchMetaStore.hasMetas() ?
-                    <span className="red"> Adressee ({searchMetaStore.meta.hymnAddressee.length}),
-                        Group ({searchMetaStore.meta.hymnGroup.length}),
-                        Strata ({searchMetaStore.meta.strata.length})
+                {stateStore.search.meta.hasMetas() ?
+                    <span className="red"> Adressee ({stateStore.search.meta.meta.hymnAddressee.length}),
+                        Group ({stateStore.search.meta.meta.hymnGroup.length}),
+                        Strata ({stateStore.search.meta.meta.strata.length})
                     </span>
                     : <span className="red"> none</span>
                 }
@@ -148,8 +146,8 @@ class SearchView extends Component {
                             </Col>
                             <Col span={16}>
                                 <Checkbox
-                                onChange={e => searchMetaStore.setAccents(e.target.checked)}
-                                checked={searchMetaStore.accents} >
+                                onChange={e => stateStore.settings.accents = e.target.checked}
+                                checked={stateStore.settings.accents} >
                                     Accent-sensitive
                                 </Checkbox>
                             </Col>
@@ -176,7 +174,9 @@ class SearchView extends Component {
                         </Tabs>
 
                         <h3 className="top-gap"><Icon type="filter" className="gap-right"/>Additional search filters</h3>
-                        <Collapse bordered={false}>
+
+                        <Collapse
+                        bordered={false}>
                             <Panel
                             header={searchScopePanelHeader}
                             key="scope"
@@ -194,22 +194,22 @@ class SearchView extends Component {
                                 <SearchMetaFilterList
                                 label="Hymn Addressees"
                                 placeholder="all Addressees"
-                                items={uiDataStore.meta.hymnAddressee}
-                                selected={searchMetaStore.meta.hymnAddressee}
-                                handleChange={v => {searchMetaStore.meta.hymnAddressee = v}}/>
+                                items={stateStore.ui.meta.hymnAddressee}
+                                selected={stateStore.search.meta.meta.hymnAddressee}
+                                handleChange={v => {stateStore.search.meta.meta.hymnAddressee = v}}/>
                                 <SearchMetaFilterList
                                 label="Hymn Groups"
                                 placeholder="all Groups"
-                                items={uiDataStore.meta.hymnGroup}
-                                selected={searchMetaStore.meta.hymnGroup}
-                                handleChange={v => {searchMetaStore.meta.hymnGroup = v}}/>
+                                items={stateStore.ui.meta.hymnGroup}
+                                selected={stateStore.search.meta.meta.hymnGroup}
+                                handleChange={v => {stateStore.search.meta.meta.hymnGroup = v}}/>
                                 <SearchMetaFilterList
                                 label="Stanza Strata"
                                 placeholder="all Strata"
-                                items={uiDataStore.meta.strata}
-                                itemLabels={uiDataStore.abbreviations.strata}
-                                selected={searchMetaStore.meta.strata}
-                                handleChange={v => {searchMetaStore.meta.strata = v}}/>
+                                items={stateStore.ui.meta.strata}
+                                itemLabels={stateStore.ui.abbreviations.strata}
+                                selected={stateStore.search.meta.meta.strata}
+                                handleChange={v => {stateStore.search.meta.meta.strata = v}}/>
                             </Panel>
                         </Collapse>
 

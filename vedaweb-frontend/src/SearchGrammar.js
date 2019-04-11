@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Row, Col, Icon } from 'antd';
 
 import { view } from 'react-easy-state';
-import searchGrammarStore from "./stores/searchGrammarStore";
+import stateStore from "./stores/stateStore";
 
 import SearchBlock from "./SearchBlock";
 import HelpButton from "./HelpButton";
@@ -20,29 +20,29 @@ class SearchGrammar extends Component {
     }
 
     componentDidMount(){
-        if (searchGrammarStore.data.blocks.length === 0)
+        if (stateStore.search.grammar.blocks.length === 0)
             this.addBlock();
     }
 
     addBlock(){
-        searchGrammarStore.addBlock();
+        stateStore.search.grammar.addBlock();
     }
 
     removeBlock(blockId){
-        searchGrammarStore.removeBlock(blockId);
+        stateStore.search.grammar.removeBlock(blockId);
     }
 
 
     render() {
 
-        const {data} = searchGrammarStore;
+        const {blocks} = stateStore.search.grammar;
 
         return (
             <div className="search-container">
                 <HelpButton type="grammarSearch" />
                 <div className="search-block-list top-gap">
 
-                    {data.blocks.map((block, i) => (
+                    {blocks.map((block, i) => (
                         <SearchBlock
                         key={block.id}
                         id={block.id}
@@ -52,12 +52,12 @@ class SearchGrammar extends Component {
                         distance={block.distance}
                         isFirstBlock={i === 0}
                         fields={block.fields}
-                        showRemoveButton={data.blocks.length > 1}
+                        showRemoveButton={blocks.length > 1}
                         onRemoveBlock={this.removeBlock} />
                     ))}
 
                     <Row
-                    className={"search-block-list-controls" + (data.blocks.length >= 4 ? " hidden" : "")}
+                    className={"search-block-list-controls" + (blocks.length >= 4 ? " hidden" : "")}
                     type="flex"
                     align="middle">
                         <Col span={1}>

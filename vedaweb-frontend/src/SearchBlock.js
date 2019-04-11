@@ -1,8 +1,7 @@
 import React, { Component } from "react";
 import { Row, Col, Icon, Input, Tooltip, Checkbox } from 'antd';
 
-import searchGrammarStore from "./stores/searchGrammarStore";
-import searchMetaStore from "./stores/searchMetaStore";
+import stateStore from "./stores/stateStore";
 import { view } from 'react-easy-state';
 
 import SearchAttributeField from "./SearchAttributeField";
@@ -27,7 +26,7 @@ class SearchBlock extends Component {
         const transliteration = (
             <TransliterationPreview
             input={this.props.term}
-            transliteration={searchMetaStore.transliteration}/>
+            transliteration={stateStore.settings.transliteration}/>
         );
 
         return (
@@ -57,17 +56,17 @@ class SearchBlock extends Component {
                                 placement="bottom">
                                     <Input
                                     value={this.props.term}
-                                    onChange={e => searchGrammarStore.setTerm(this.props.id, e.target.value)}
+                                    onChange={e => stateStore.search.grammar.setTerm(this.props.id, e.target.value)}
                                     placeholder={(this.props.lemma ? "lemma" : "word form") + " (optional)"}
                                     className="search-block-input"
-                                    prefix={<OSK value={this.props.term} updateInput={v => searchGrammarStore.setTerm(this.props.id, v)}/>}
+                                    prefix={<OSK value={this.props.term} updateInput={v => stateStore.search.grammar.setTerm(this.props.id, v)}/>}
                                     style={{ width: '98%' }} />
                                 </Tooltip>
                             </Col>
 
                             <Col span={10}>
                                 <Checkbox
-                                onChange={e => searchGrammarStore.setLemma(this.props.id, e.target.checked)}
+                                onChange={e => stateStore.search.grammar.setLemma(this.props.id, e.target.checked)}
                                 checked={this.props.lemma} >
                                     Lemma
                                 </Checkbox>
@@ -75,7 +74,7 @@ class SearchBlock extends Component {
 
                             <Col span={5}>
                                 <Checkbox
-                                onChange={e => searchGrammarStore.setRequired(this.props.id, e.target.checked)}
+                                onChange={e => stateStore.search.grammar.setRequired(this.props.id, e.target.checked)}
                                 checked={this.props.required} >
                                     required
                                 </Checkbox>
@@ -95,7 +94,7 @@ class SearchBlock extends Component {
                             <Col span={9} className="search-block-input">
                                 <Select
                                 value={this.props.distance}
-                                onSelect={(value, o) => searchGrammarStore.updateDistance(this.props.id, value)}
+                                onSelect={(value, o) => stateStore.search.grammar.updateDistance(this.props.id, value)}
                                 disabled={this.props.isFirstBlock}
                                 style={{ width: '100%' }} >
                                     {distanceOptions.map((e, i) => (

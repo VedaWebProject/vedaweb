@@ -1,8 +1,7 @@
 import React, { Component } from "react";
 import { Row, Col, Button, Select } from 'antd';
 
-import uiDataStore from "./stores/uiDataStore";
-import searchGrammarStore from "./stores/searchGrammarStore";
+import stateStore from "./stores/stateStore";
 
 import './css/SearchAttributeField.css';
 
@@ -13,8 +12,8 @@ class SearchAttributeField extends Component {
 
     render() {
 
-        let usedFieldNames = searchGrammarStore.getUsedFieldNamesForBlock(this.props.parentBlockId);
-        let valueOptions = searchGrammarStore.getValueOptionsForFieldName(this.props.fieldName);
+        let usedFieldNames = stateStore.search.grammar.getUsedFieldNamesForBlock(this.props.parentBlockId);
+        let valueOptions = stateStore.search.grammar.getValueOptionsForFieldName(this.props.fieldName);
 
         return (
             
@@ -28,7 +27,7 @@ class SearchAttributeField extends Component {
                     <Select
                     showSearch
                     value={this.props.fieldName}
-                    onSelect={(value, option) => searchGrammarStore.updateField(
+                    onSelect={(value, option) => stateStore.search.grammar.updateField(
                         this.props.parentBlockId, this.props.id, "name", value)}
                     style={{ width: '98%' }}
                     className="secondary-font" >
@@ -38,8 +37,8 @@ class SearchAttributeField extends Component {
                             className="secondary-font">
                                 {'Select attribute (optional)'}
                         </Option>
-                        {uiDataStore.search.grammar.tags
-                            .sort((a,b) => uiDataStore.search.grammar.tagsOrder.indexOf(a.field) - uiDataStore.search.grammar.tagsOrder.indexOf(b.field))
+                        {stateStore.ui.search.grammar.tags
+                            .sort((a,b) => stateStore.ui.search.grammar.tagsOrder.indexOf(a.field) - stateStore.ui.search.grammar.tagsOrder.indexOf(b.field))
                             .map(option => (
                                 (usedFieldNames.indexOf(option.field) === -1 || option.field === this.props.fieldName) &&
                                 <Option
@@ -57,7 +56,7 @@ class SearchAttributeField extends Component {
                     showSearch
                     key={'fieldValue_of_' + this.props.id}
                     value={this.props.fieldValue.length > 0 ? this.props.fieldValue : valueOptions[0]}
-                    onSelect={(value, option) => searchGrammarStore.updateField(
+                    onSelect={(value, option) => stateStore.search.grammar.updateField(
                         this.props.parentBlockId, this.props.id, "value", value)}
                     disabled = {this.props.fieldName.length === 0}
                     style={{ width: '100%' }} >
@@ -75,13 +74,13 @@ class SearchAttributeField extends Component {
                 <Col span={2} offset={1}>
                     <Button
                     disabled={!this.props.isRemovable}
-                    onClick={() => searchGrammarStore.removeFieldFromBlock(this.props.parentBlockId, this.props.id)}
+                    onClick={() => stateStore.search.grammar.removeFieldFromBlock(this.props.parentBlockId, this.props.id)}
                     icon="minus" />
                 </Col>
 
                 <Col span={2}>
                     <Button
-                    onClick={() => searchGrammarStore.addFieldToBlock(this.props.parentBlockId)}
+                    onClick={() => stateStore.search.grammar.addFieldToBlock(this.props.parentBlockId)}
                     disabled={!this.props.isLastField}
                     className={!this.props.isLastField ? "hidden-button" : ""}
                     icon="plus" />

@@ -1,14 +1,14 @@
 import React, { Component } from "react";
 
 import { view } from 'react-easy-state';
-import searchMetaStore from "./stores/searchMetaStore";
+import stateStore from "./stores/stateStore";
 
 
 class SearchScopeIndicator extends Component {
 
     render() {
 
-        const scopes = searchMetaStore.scopes;
+        const scopes = stateStore.search.meta.scopes;
 
         return (
             <span>

@@ -16,7 +16,7 @@ import scrollToComponent from 'react-scroll-to-component';
 //import layersInfoImg from "./img/layersInfo.png";
 
 import axios from 'axios';
-import uiDataStore from "./stores/uiDataStore";
+import stateStore from "./stores/stateStore";
 import DictionaryView from "./DictionaryView";
 import HelpButton from "./HelpButton";
 import BetaInfoContent from "./BetaInfoContent";
@@ -43,6 +43,7 @@ class ContentView extends Component {
         } else {
             this.loadData(this.props.match.params.by, this.props.match.params.value);
         }
+        window.scrollTo(0, 0);
     }
 
     componentDidUpdate(prevProps, prevState) {
@@ -84,14 +85,14 @@ class ContentView extends Component {
     }
 
     filterChange(target, show){
-        if (show) uiDataStore.viewScrollTo = true;
-        uiDataStore.toggleLayer(target, show);
+        if (show) stateStore.ui.viewScrollTo = true;
+        stateStore.ui.toggleLayer(target, show);
     }
 
     scrollTo(component){
-        if (uiDataStore.viewScrollTo){
+        if (stateStore.ui.viewScrollTo){
             scrollToComponent(component, {align:'middle'});
-            uiDataStore.viewScrollTo = false;
+            stateStore.ui.viewScrollTo = false;
         }
     }
 
@@ -99,7 +100,7 @@ class ContentView extends Component {
         return abb.split('').map((key, i) => (
             <span key={"abb_" + i}>
                 <span className="bold secondary-font">{key}</span>
-                <span> - {uiDataStore.abbreviations[cat][key]}</span><br/>
+                <span> - {stateStore.ui.abbreviations[cat][key]}</span><br/>
             </span>
         ));
     }
@@ -118,26 +119,7 @@ class ContentView extends Component {
         string = string.toLowerCase();
         return string.charAt(0).toUpperCase() + string.slice(1);
     }
-
-    // infoModal(){
-    //     if (uiDataStore.firstTime){
-    //         Modal.info({
-    //             icon: <Icon type="no-icon" />,
-    //             title: 'Please Note:',
-    //             centered: true,
-    //             content: (
-    //             <div>
-    //                 By clicking this button on the right side of the screen, you can choose what you want to see (text versions, translations, morphological glossings, etc.).<br/><br/>
-    //                 <div style={{textAlign: 'center'}}>
-    //                     <img src={layersInfoImg} alt="" style={{border:'1px solid #aaa'}}/>
-    //                 </div><br/>
-    //                 <span className="light-grey">By the way, you will see this message only once per visit.</span>
-    //             </div>
-    //             ),
-    //             onOk() {uiDataStore.firstTime = false},
-    //         });
-    //     }
-    // }
+    
 
     render() {
         const { error, isLoaded, data } = this.state;
@@ -190,13 +172,13 @@ class ContentView extends Component {
                                     { data.versions !== undefined &&
                                         <div>
 
-                                            {uiDataStore.isLayerVisible('version_') &&
+                                            {stateStore.ui.isLayerVisible('version_') &&
                                                 <div
                                                 className="content-plain content-block card"
                                                 ref={this.scrollTo}>
                                                     <h4 className="inline-block">Text Versions</h4>
 
-                                                    {uiDataStore.layers.filter(l => l.id.startsWith('version_')
+                                                    {stateStore.ui.layers.filter(l => l.id.startsWith('version_')
                                                         && l.id !== 'version_' && l.show).map(version => {
                                                             let v = data.versions.find(x => x.id === version.id);
                                                             return v === undefined ? "" :
@@ -223,9 +205,9 @@ class ContentView extends Component {
                                                 </div>
                                             }
 
-                                            {uiDataStore.isLayerVisible('translation_')
+                                            {stateStore.ui.isLayerVisible('translation_')
                                                 && data.versions.filter(v => (
-                                                    v.id.startsWith('translation_') && uiDataStore.isLayerVisible(v.id))
+                                                    v.id.startsWith('translation_') && stateStore.ui.isLayerVisible(v.id))
                                                 ).length > 0 &&
 
                                                 <div
@@ -233,10 +215,10 @@ class ContentView extends Component {
                                                 ref={this.scrollTo}>
                                                     <h4 className="inline-block">Translations</h4>
 
-                                                    {uiDataStore.layers.filter(
+                                                    {stateStore.ui.layers.filter(
                                                         l => l.id.startsWith('translation_')
                                                         && l.id !== 'translation_'
-                                                        && uiDataStore.isLayerVisible(l.id)).map(l => {
+                                                        && stateStore.ui.isLayerVisible(l.id)).map(l => {
                                                             let translation = data.versions.find(v => v.id === l.id);
                                                             return translation === undefined ? "" :
                                                             <div
@@ -255,7 +237,7 @@ class ContentView extends Component {
                                                 </div>
                                             }
 
-                                            {uiDataStore.isLayerVisible('glossing_') &&
+                                            {stateStore.ui.isLayerVisible('glossing_') &&
                                                 <div
                                                 className="glossing content-block card"
                                                 ref={this.scrollTo}>
@@ -281,7 +263,7 @@ class ContentView extends Component {
                                                                     <div className="glossing-annotation text-font">
                                                                         {this.cleanLemmaString(token.lemma)}
                                                                         {
-                                                                            uiDataStore.search.grammar.tagsOrder
+                                                                            stateStore.ui.search.grammar.tagsOrder
                                                                                 .filter(tag => token.props[tag] !== undefined)
                                                                                 .map(tag => (
                                                                                     tag !== "lemma type" && tag !== "position" &&
@@ -299,7 +281,7 @@ class ContentView extends Component {
                                                 </div>
                                             }
 
-                                            {uiDataStore.isLayerVisible('dictionaries_') &&
+                                            {stateStore.ui.isLayerVisible('dictionaries_') &&
                                                 <div
                                                 className="glossing content-block card"
                                                 ref={this.scrollTo}>
@@ -310,7 +292,7 @@ class ContentView extends Component {
                                                 </div>
                                             }
 
-                                            {uiDataStore.isLayerVisible('metaInfo_') &&
+                                            {stateStore.ui.isLayerVisible('metaInfo_') &&
                                                 <div
                                                 className="glossing content-block card"
                                                 ref={this.scrollTo}>
@@ -396,7 +378,7 @@ class ContentView extends Component {
                                             <Badge
                                             showZero
                                             style={{backgroundColor:'#931111'}}
-                                            count={uiDataStore.layers.filter(l => l.id.endsWith('_') && l.show).length}>
+                                            count={stateStore.ui.layers.filter(l => l.id.endsWith('_') && l.show).length}>
                                                 <div style={{textAlign:'center', fontSize:'20px', lineHeight: '1.2',}}>
                                                     <Icon type="eye" style={{fontSize:'24px'}}/><br/>
                                                     Toggle Content
@@ -435,7 +417,7 @@ class ContentView extends Component {
                     visible={this.state.filtersVisible} >
 
                         {/* LAYER SWITCHES */}
-                        { data.versions !== undefined && uiDataStore.layers.map(l => (
+                        { data.versions !== undefined && stateStore.ui.layers.map(l => (
                             <ContentFilterSwitch
                             key={'switch_' + l.id}
                             label={l.label}
@@ -483,12 +465,12 @@ class ContentView extends Component {
 
                 {/** BETA INFO MODAL */}
                 <Modal
-                visible={uiDataStore.firstTime}
+                visible={stateStore.settings.firstVisit}
                 title={null}
                 centered
                 maskClosable={true}
-                onCancel={() => uiDataStore.firstTime = false}
-                onOk={() => uiDataStore.firstTime = false}
+                onCancel={() => stateStore.settings.firstVisit = false}
+                onOk={() => stateStore.settings.firstVisit = false}
                 footer={null}>
                     <BetaInfoContent/>
                 </Modal>

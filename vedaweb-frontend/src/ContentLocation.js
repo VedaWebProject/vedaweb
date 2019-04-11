@@ -7,7 +7,7 @@ import "./css/ContentLocation.css";
 import mouseTrap from 'react-mousetrap';
 
 import axios from 'axios';
-import uiDataStore from "./stores/uiDataStore";
+import stateStore from "./stores/stateStore";
 
 const Option = Select.Option;
 
@@ -84,12 +84,12 @@ class ContentLocation extends Component {
     render() {
 
         const {book, hymn, stanza} = this.props;
-        const bookCount = uiDataStore.search.meta.scopes.length;
-        const hymnCount = uiDataStore.search.meta.scopes[book-1];
+        const bookCount = stateStore.ui.search.meta.scopes.length;
+        const hymnCount = stateStore.ui.search.meta.scopes[book-1];
         const stanzaCount = this.state.stanzaCount;
 
         //const { hymnAbs } = this.props;
-        //const hymnAbsValues = uiDataStore.search.meta.hymnAbs;
+        //const hymnAbsValues = stateStore.ui.search.meta.hymnAbs;
 
         const selectStyle = {
             fontSize: '26px',

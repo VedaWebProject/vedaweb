@@ -4,7 +4,7 @@ import { Row, Col } from 'antd';
 import SearchScope from './SearchScope';
 
 import { view } from 'react-easy-state';
-import searchMetaStore from "./stores/searchMetaStore";
+import stateStore from "./stores/stateStore";
 
 
 
@@ -22,12 +22,12 @@ class SearchScopeContainer extends Component {
                     <Col span={4}>Hymn</Col>
                 </Row>
            
-                {searchMetaStore.scopes.map((scope, i) => (
+                {stateStore.search.meta.scopes.map((scope, i) => (
                     <SearchScope
                     key={'scope_' + scope.id}
                     scopeId={scope.id}
-                    isRemovable={searchMetaStore.scopes.length > 1}
-                    isLastScope={searchMetaStore.scopes.length < 4 && searchMetaStore.scopes.length === i + 1} />
+                    isRemovable={stateStore.search.meta.scopes.length > 1}
+                    isLastScope={stateStore.search.meta.scopes.length < 4 && stateStore.search.meta.scopes.length === i + 1} />
                 ))}
 
             </div>
