@@ -9,8 +9,8 @@ import NotFound from './errors/NotFound';
 import ErrorBoundary from './errors/ErrorBoundary';
 import Footer from './general/Footer';
 import System from './utils/System';
-import LegalNotice from './static/LegalNotice';
-import PrivacyNotice from './static/PrivacyNotice';
+import SiteNotice from './static/SiteNotice';
+import PrivacyPolicy from './static/PrivacyPolicy';
 
 import GuidedTour from './widgets/GuidedTour';
 
@@ -130,8 +130,8 @@ class App extends Component {
                                 <Route path="/results/:querydata" component={SearchResults} />
                                 <Route path="/search" component={SearchView} />
                                 <Route path="/system/:auth" component={System} />
-                                <Route path="/legal" component={LegalNotice} />
-                                <Route path="/privacy" component={PrivacyNotice} />
+                                <Route path="/sitenotice" component={SiteNotice} />
+                                <Route path="/privacypolicy" component={PrivacyPolicy} />
                                 <Route path="/betafeedback" component={BetaInfo} />
                                 <Route path="/home" component={ContentView} />
                                 <Route path="/" exact={true} component={ContentView} />

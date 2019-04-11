@@ -37,7 +37,7 @@ const helpTexts = {
                     <strong>Please note: </strong>This means that this feature searches a different data set (single tokens, lemmas, grammar annotations) than the quick search in the header of the page (full-text search)!
                 </p>
                 <p>
-                    <h2>Usage</h2>
+                    <h4>Usage</h4>
                     Define a word form or lemma (optional) and select a property (like case, number, person, etc.)
                     and the value you are looking for (optional). You may add more properties to your search term by clicking the <Text code>+</Text> button to the right.
                 </p>
@@ -131,44 +131,44 @@ const helpTexts = {
                     It is why it is present at the top of each page at all time.
                     You can search for several things in several ways:
                 </p>
-                <h2>Stanza location</h2>
+                <h4>Stanza location</h4>
                 <p>
                     Just type a Rigveda stanza location in the form of <Text code>2.1.3</Text> or <Text code>02.001.03</Text> or 
                     even <Text code>0200103</Text> to be redirected to this stanza's page without further detours.<br/>
                     You can also use an absolute hymn- and stanza number in the following form: <Text code>517,3</Text>
                 </p>
-                <h2>Simple text search:</h2>
+                <h4>Simple text search:</h4>
                 <p>
                     First, choose <i>where</i> you want to search - either in certain text version (or in all of them) or in a certain translation (or all of them).
                     Then, type the word form(s) you want to search for. It's also possible to search for <strong>multiple words</strong> at once, in which case the <strong>stanzas containing the most</strong> of what you are looking
                     for will be <strong>ranked higher</strong> in the search results.
                 </p>
-                <h2>Transliteration</h2>
+                <h4>Transliteration</h4>
                 <p>
                     If you search for terms in the Rigveda stanzas, you can <strong>use a transliteration method of your choice</strong>.
                     Our data is in ISO-15919, so if you want to type in ISO-15919 you can just do that (or why not try the on-screen keyboard with the button at the beginning of the search input field?).
                     But your search input can also be transliterated from several other standards to ISO-15919.
                     The <strong>default setting is Harvard-Kyoto (HK)</strong>, but you can change this in the <strong>Advanced Search Settings</strong>.
                 </p>
-                <h2>Accent-sensitive search</h2>
+                <h4>Accent-sensitive search</h4>
                 <p>
                     If you use accent-sensitive search, you will only find stanzas matching your exact use of accented vowels,
                     whereas if you disable accent-sensitive search, accents will be ignored, <i>even if you use them</i>.
                 </p>
-                <h2>Wildcards</h2>
+                <h4>Wildcards</h4>
                 <p>
                     It is possible to search for words starting or ending with a certain substring.
                     Searching for <Text code>agni*</Text> will find <Text code>agnim</Text>, <Text code>agniḥ</Text>, <Text code>agnināgniḥ</Text>, and so on - so the Asterisk (<Text code>*</Text>)
                     works as a simple placeholder. You can use this in the beginning (<Text code>*dāḥ</Text>), the end (<Text code>agni*</Text>)
                     or both (<Text code>*dak*</Text>).
                 </p>
-                <h2>Logical operators</h2>
+                <h4>Logical operators</h4>
                 <p>
                     Using the <Text code>AND</Text> and <Text code>OR</Text> operators, you can construct little logical statements.
                     Searching for <Text code>agnim OR indra</Text>, you'll find every stanza containing one of the words <strong>agnim</strong> or <strong>indra</strong>.
                     The same works for the <Text code>AND</Text> operator: <Text code>agnim AND indra</Text> will give you the stanzas containing both words.
                 </p>
-                <h2>Required and prohibited terms</h2>
+                <h4>Required and prohibited terms</h4>
                 <p>
                     With <Text code>+</Text> and <Text code>-</Text>, you can specify terms that <strong>must</strong> or <strong>must not</strong> occur in a stanza to be found.
                     So, for example, <Text code>agnim -indra</Text> finds stanzas containing <strong>agnim</strong> and not containing <strong>indra</strong>,

@@ -93,7 +93,7 @@ class Footer extends Component {
                         target="_blank"
                         rel="noopener noreferrer">
                             <img src={logoDFG} alt="Gefördert durch die DFG"/><br/>
-                            VedaWeb DFG-Projekt
+                            VedaWeb<br/>DFG-Projekt
                         </a>
                     </Col>
                 </Row>
@@ -108,7 +108,7 @@ class Footer extends Component {
                     <Col span={3} className="footer-box">
                         <a href="http://c-salt.uni-koeln.de" target="_blank" rel="noopener noreferrer">
                             <img className="bottom-gap" src={logoCSALT} alt="" /><br/>
-                            C-SALT
+                            C-SALT<br/>Portal
                         </a>
                     </Col>
 
@@ -144,9 +144,9 @@ class Footer extends Component {
                 <Row className="top-gap">
                     <Col span={24} className="content-center">
                         <div style={{padding: '3rem 0'}}>
-                            <Link to="/legal"><Icon type="paper-clip"/>Legal Notice</Link>
+                            <Link to="/sitenotice"><Icon type="paper-clip"/> Site Notice</Link>
                             <span className="gap-left-big gap-right-big"></span>
-                            <Link to="/privacy"><Icon type="paper-clip"/>Privacy Notice</Link>
+                            <Link to="/privacypolicy"><Icon type="paper-clip"/> Privacy Policy</Link>
                         </div>
                     </Col>
                 </Row>

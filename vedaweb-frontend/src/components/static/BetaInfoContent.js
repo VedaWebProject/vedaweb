@@ -11,7 +11,7 @@ class BetaInfoContent extends Component {
             
             <div>
 
-                <h4><Icon type="experiment"/> VedaWeb beta</h4>
+                <h1><Icon type="experiment"/> VedaWeb beta</h1>
                 <p>
                     This is a <strong>beta version</strong> for testing some of our planned concepts and getting feedback from potential users.<br/>
                     There are numerous things yet to be implemented, some of which are:
@@ -27,7 +27,7 @@ class BetaInfoContent extends Component {
                     Look out for the <HelpButton type="start" inline/> buttons to get explanations of the different features.
                 </p>
 
-                <h3><Icon type="message"/> Feedback</h3>
+                <h2><Icon type="message"/> Feedback</h2>
                 <p>
                     Feel free to send us your <strong>feedback on functionality, usability and data correctness:</strong>
                     <br/><br/>

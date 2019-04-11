@@ -70,7 +70,7 @@ class ContentView extends Component {
 
                 <Col xl={16} md={20} sm={24}>
                     <div className="card">
-                        <h4><Icon type="tool"/> VedaWeb System Maintenance</h4>
+                        <h1><Icon type="tool"/> VedaWeb System Maintenance</h1>
                         <table className="secondary-font">
                             <thead className="bold red">
                                 <tr>

@@ -9,8 +9,8 @@ footer {
 .footer-box {
     padding-top: 1rem;
     text-align: center;
-    line-height: 1;
-    font-size: 80%;
+    line-height: 1.2;
+    font-size: 14px;
 }
 
 .footer-box img {

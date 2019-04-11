@@ -5,29 +5,25 @@
     position: relative;
 }
 
-h3, h4, h5 {
+h1 {
     color: #931111;
-    font-family: "Assistant", "Tahoma", "Arial", sans-serif;
-
-}
-
-h5 {
-    margin-top: .5rem;
-    margin-bottom: .3rem;
-    font-size: 20px;
-}
-
-h4 {
     margin-bottom: 1rem;
     font-size: 24px;
 }
 
+h2 {
+    color: #931111;
+    margin-bottom: 1rem;
+    font-size: 22px;
+}
+
 h3 {
+    color: #931111;
     margin-bottom: 1rem;
     font-size: 20px;
 }
 
-h2 {
+h4 {
     font-size: 20px;
     margin-bottom: .2rem;
 }
@@ -49,8 +45,8 @@ h2 {
     font-size: 1.6rem;
 }
 
-.font-18 {
-    font-size: 18px;
+.font-big {
+    font-size: 20px;
 }
 
 .font-small {

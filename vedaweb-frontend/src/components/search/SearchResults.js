@@ -212,11 +212,11 @@ class SearchResults extends Component {
                         <div id="search-results" className="card">
 
                             { this.state.queryDisplay !== undefined &&
-                                <h4>
+                                <h1>
                                     Search Results for
                                     <span className="text-font grey"> "{this.state.queryDisplay.query}" </span>
                                     in<span className="text-font grey"> "{this.state.queryDisplay.field}"</span>
-                                </h4>
+                                </h1>
                             }
 
                             {/** SEARCH STATS **/}

@@ -124,7 +124,7 @@ class SearchView extends Component {
 
                 <Col xl={14} lg={18} md={20} sm={24}>
                     <div className="card">
-                        <h4>Advanced Search</h4>
+                        <h1>Advanced Search</h1>
 
                         <h3 className="top-gap-big">
                             <Icon type="tool" className="gap-right"/>

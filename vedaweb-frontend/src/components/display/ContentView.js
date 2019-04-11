@@ -176,7 +176,7 @@ class ContentView extends Component {
                                                 <div
                                                 className="content-plain content-block card"
                                                 ref={this.scrollTo}>
-                                                    <h4 className="inline-block">Text Versions</h4>
+                                                    <h1 className="inline-block">Text Versions</h1>
 
                                                     {stateStore.ui.layers.filter(l => l.id.startsWith('version_')
                                                         && l.id !== 'version_' && l.show).map(version => {
@@ -213,7 +213,7 @@ class ContentView extends Component {
                                                 <div
                                                 className="content-plain content-block card"
                                                 ref={this.scrollTo}>
-                                                    <h4 className="inline-block">Translations</h4>
+                                                    <h1 className="inline-block">Translations</h1>
 
                                                     {stateStore.ui.layers.filter(
                                                         l => l.id.startsWith('translation_')
@@ -241,10 +241,10 @@ class ContentView extends Component {
                                                 <div
                                                 className="glossing content-block card"
                                                 ref={this.scrollTo}>
-                                                    <h4>
+                                                    <h1>
                                                         Morphological Glossing
                                                         <HelpButton type="zurichGlossing" inline style={{marginLeft:'.5rem'}}/>
-                                                    </h4>
+                                                    </h1>
                                                     {data.padas.map(pada => (
                                                         <div
                                                         className="glossing-line"
@@ -285,7 +285,7 @@ class ContentView extends Component {
                                                 <div
                                                 className="glossing content-block card"
                                                 ref={this.scrollTo}>
-                                                    <h4>Dictionaries</h4>
+                                                    <h1>Dictionaries</h1>
                                                     <DictionaryView
                                                     key={'dict_' + data.id}
                                                     data={data.padas}/>
@@ -296,7 +296,7 @@ class ContentView extends Component {
                                                 <div
                                                 className="glossing content-block card"
                                                 ref={this.scrollTo}>
-                                                    <h4>Stanza Meta</h4>
+                                                    <h1>Stanza Meta</h1>
 
                                                     <table style={{width:'auto'}}>
                                                         <tbody>
@@ -409,7 +409,7 @@ class ContentView extends Component {
                     }
 
                     <Drawer
-                    title={<h4 style={{marginBottom:'0'}}><Icon type="eye" className="gap-right"/> Toggle Content</h4>}
+                    title={<h1 style={{marginBottom:'0'}}><Icon type="eye" className="gap-right"/> Toggle Content</h1>}
                     placement="right"
                     width="auto"
                     closable={true}
@@ -431,7 +431,7 @@ class ContentView extends Component {
 
 
                     <Drawer
-                    title={<h4 style={{marginBottom:'0'}}><Icon type="export" className="gap-right"/>Export</h4>}
+                    title={<h1 style={{marginBottom:'0'}}><Icon type="export" className="gap-right"/>Export</h1>}
                     placement="right"
                     width="auto"
                     closable={true}
