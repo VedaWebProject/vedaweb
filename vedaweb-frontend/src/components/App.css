@@ -108,13 +108,6 @@ hr {
     margin-bottom: 1rem;
 }
 
-.spinner-loading {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translateX(-50%) translateY(-50%);
-}
-
 .content-left {
     text-align: left;
 }

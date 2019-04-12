@@ -104,10 +104,11 @@ class App extends Component {
                 <div id="app">
 
                     { !isLoaded &&
-                        <Spin
-                        size="large"
-                        spinning={!isLoaded}
-                        className="spinner-loading"/>
+                        <div style={{display:"flex", justifyContent:"center", alignItems:"center", height:"100vh", width:"100%"}}>
+                            <Spin
+                            size="large"
+                            spinning={!isLoaded} />
+                        </div>
                     }
 
                     {/* ERROR MESSAGE: FRONTEND UI DATA COULD NOT BE LOADED */}
