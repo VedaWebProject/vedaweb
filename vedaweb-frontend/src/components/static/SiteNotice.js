@@ -22,8 +22,8 @@ class ContentView extends Component {
                     <div className="card">
                         <h1><Icon type="paper-clip"/> Site Notice</h1>
                         <p>
-                            Generally, the <a href="https://www.portal.uni-koeln.de/impressum.html?L=1" target="_blank" rel="noopener noreferrer">site notice of the University of Cologne</a> (also 
-                            available in <a href="https://www.portal.uni-koeln.de/impressum.html?L=0" target="_blank" rel="noopener noreferrer">German</a>)<br/>
+                            Generally, the <a href="https://www.portal.uni-koeln.de/impressum.html?L=1" target="_blank" rel="noopener noreferrer">site notice of the University of Cologne <Icon type="link"/></a> (also 
+                            available in <a href="https://www.portal.uni-koeln.de/impressum.html?L=0" target="_blank" rel="noopener noreferrer">German <Icon type="link"/></a>)<br/>
                             applies to this project; with the specific additions stated below:
                         </p>
 
