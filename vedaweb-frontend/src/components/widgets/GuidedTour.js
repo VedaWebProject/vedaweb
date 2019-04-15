@@ -43,14 +43,16 @@ class GuidedTour extends Component {
                 title: "Select what you want to see",
                 text: "By clicking here here, you can toggle on/off all the different kinds of data views for the current stanza!",
                 icon: <Icon type="eye-o"/>,
-                execBefore: () => this.props.history.replace("/view/index/0")
+                execBefore: () => this.props.history.replace("/view/index/0"),
+                noScroll: true
             },
             {
                 id: "toggle-export",
                 title: "Export stanza data",
                 text: "Click here to choose an export format and download the currently selected data!",
                 icon: <Icon type="export"/>,
-                execBefore: () => this.props.history.replace("/view/index/0")
+                execBefore: () => this.props.history.replace("/view/index/0"),
+                noScroll: true
             },
             {
                 id: "nav-search",

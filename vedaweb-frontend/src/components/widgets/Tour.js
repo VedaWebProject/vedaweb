@@ -92,7 +92,8 @@ class Tour extends Component {
                 target.fixed = comp.isFixed(element);
                 comp.setState({
                     target: target || null,
-                    pos: element ? element.getBoundingClientRect() : null
+                    pos: element ? element.getBoundingClientRect() : null,
+                    targetElement: element
                 });
             } else if (lookupDuration >= config.targetLookupTimeout){
                 clearInterval(lookup);
@@ -230,10 +231,12 @@ class Tour extends Component {
 
         //target display:fixed ???
         if (!this.state.target.fixed){
-            window.scrollTo(
-                this.state.pos.left - (window.innerWidth/2),
-                this.state.pos.top - (window.innerHeight/2)
-            );
+            if (!this.state.target.noScroll){
+                window.scrollTo(
+                    holeStyle.left - 50,
+                    holeStyle.top - 50
+                );
+            }
         } else {
             holeStyle.position = "fixed";
         }
