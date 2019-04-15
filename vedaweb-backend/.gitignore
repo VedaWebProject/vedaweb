@@ -15,4 +15,8 @@ src/main/resources/templates/
 
 ### IMPORT DATA ###
 tei/
+
+### ARBITRARY DATA TO KEEP OUT OF REPO ###
+data/
+
 /.apt_generated_tests/
