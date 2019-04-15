@@ -11,6 +11,7 @@ const stateStore = store({
         tour: false,
         transliteration: "hk",
         accents: false,
+        acceptedPrivacyHint: false,
     },
 
     //// SEARCH RESULTS ////
@@ -389,6 +390,10 @@ const stateStore = store({
                 stateStore.load(obj[key]);
             }
         }
+    },
+
+    clearStorage(){
+        ls.clear();
     }
 
 })

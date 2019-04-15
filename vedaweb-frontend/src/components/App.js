@@ -26,7 +26,7 @@ import Sanscript from 'sanscript';
 import axios from 'axios';
 
 import "./utils/polyfills";
-
+import PrivacyHint from "./widgets/PrivacyHint";
 
 
 class App extends Component {
@@ -36,8 +36,7 @@ class App extends Component {
 
         this.state = {
             isLoaded: false,
-            error: undefined,
-            tour: false
+            error: undefined
         }
 
         //configure iso scheme for sanscript.js
@@ -55,6 +54,8 @@ class App extends Component {
     }
 
     componentCleanup(){
+        stateStore.clearStorage();
+        if (!stateStore.settings.acceptedPrivacyHint) return;
         stateStore.save(stateStore);
     }
 
@@ -149,6 +150,8 @@ class App extends Component {
                     <GuidedTour
                     enabled={stateStore.settings.tour}
                     onCloseTour={() => stateStore.settings.tour = false}/>
+
+                    <PrivacyHint />
 
                 </div>
 

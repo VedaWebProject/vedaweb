@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Row, Col, Icon } from 'antd';
+import { Row, Col, Icon, Button } from 'antd';
 
 import logoCPDO from "../../img/logo_cpdo.png";
 import logoCSALT from "../../img/logo_csalt.png";
@@ -19,6 +19,7 @@ import { Link } from 'react-router-dom';
 
 import "./Footer.css";
 import LoadHtml from "../utils/LoadHtml";
+import stateStore from "../../state/stateStore";
 
 class Footer extends Component {
 
@@ -155,6 +156,20 @@ class Footer extends Component {
                 <Row>
                     <Col span={24} className="content-center">
                         <LoadHtml uri="/api/data/footercredits"/>
+                    </Col>
+                </Row>
+
+                <Row>
+                    <Col span={24} className="content-center">
+                        <Button
+                        href="/"
+                        onClick={() => {
+                            stateStore.clearStorage();
+                            stateStore.settings.acceptedPrivacyHint = false;
+                            alert("Local storage cleared!\n\nThe page will now reload with reset settings.");
+                        }}>
+                            <Icon type="delete"/> Delete locally saved settings
+                        </Button>
                     </Col>
                 </Row>
 
