@@ -29,8 +29,8 @@ class ContentView extends Component {
 
                         <h2>Storage of application settings</h2>
                         <p>
-                            The client application (or website) of VedaWeb saves various settings you make in the local storage of your browser.
-                            This ensures you will find the same settings again when you use the application the next time and won't be presented with 
+                            The client application (or website) of VedaWeb saves part of your application settings in the local storage of your browser.
+                            This ensures that you will find the same settings again when you use the application the next time and won't be presented with 
                             any kind of welcome message for first time visitors over and over again.<br/>
                             The data stored this way is no personal data and will not be stored on 
                             our servers but only on the device you use to visit this website.
