@@ -24,6 +24,8 @@ h3 {
 }
 
 h4 {
+    color: rgba(0, 0, 0, 0.65);
+    font-weight: bold;
     font-size: 20px;
     margin-bottom: .2rem;
 }
