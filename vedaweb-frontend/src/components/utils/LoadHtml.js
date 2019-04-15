@@ -33,7 +33,7 @@ class LoadHtml extends Component {
             data: null
         });
         
-        axios.get(uri)
+        axios.get(process.env.PUBLIC_URL + uri)
             .then((response) => {
                 this.setState({
                     isLoaded: true,
