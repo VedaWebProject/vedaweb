@@ -18,6 +18,7 @@ import logoCCEH from "../../img/logo_cceh.png";
 import { Link } from 'react-router-dom';
 
 import "./Footer.css";
+import LoadHtml from "../utils/LoadHtml";
 
 class Footer extends Component {
 
@@ -153,11 +154,7 @@ class Footer extends Component {
 
                 <Row>
                     <Col span={24} className="content-center">
-                        <p className="content-center font-small light-grey">
-                            VedaWeb, ed. by Daniel Kölligan and Uta Reinöhl,<br/>
-                            in collaboration with Jakob Halfmann, Börge Kiss, Natalie Korobzow,<br/>Francisco Mondaca, Claes Neuefeind, Felix Rau and Patrick Sahle,<br/>
-                            with material provided by Paul Widmer et al. Cologne: University of Cologne 2018.
-                        </p>
+                        <LoadHtml uri="/api/data/footercredits"/>
                     </Col>
                 </Row>
 
