@@ -401,7 +401,7 @@ class HelpButton extends Component {
                 src={help}
                 alt=""
                 style={{height:"32px", paddingRight:"1rem"}}/>
-                <span style={{verticalAlign:"middle"}}>
+                <span className="font-big" style={{verticalAlign:"middle"}}>
                     {helpTexts[this.props.type].title}
                 </span>
             </div>;
