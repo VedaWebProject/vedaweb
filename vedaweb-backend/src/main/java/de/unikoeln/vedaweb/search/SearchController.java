@@ -1,4 +1,4 @@
-package de.unikoeln.vedaweb.controllers;
+package de.unikoeln.vedaweb.search;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -6,10 +6,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import de.unikoeln.vedaweb.search.SearchData;
-import de.unikoeln.vedaweb.search.SearchHitsConverter;
-import de.unikoeln.vedaweb.services.ElasticSearchService;
-import de.unikoeln.vedaweb.services.JsonUtilService;
+import de.unikoeln.vedaweb.util.JsonUtilService;
 
 
 

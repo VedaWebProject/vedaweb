@@ -1,4 +1,4 @@
-package de.unikoeln.vedaweb.controllers;
+package de.unikoeln.vedaweb.util;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -14,10 +14,9 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
 
 import de.unikoeln.vedaweb.logging.ClientError;
 import de.unikoeln.vedaweb.logging.ClientErrorRepository;
-import de.unikoeln.vedaweb.services.DataImportService;
-import de.unikoeln.vedaweb.services.ElasticIndexService;
-import de.unikoeln.vedaweb.services.JsonUtilService;
-import de.unikoeln.vedaweb.services.UiDataService;
+import de.unikoeln.vedaweb.search.ElasticIndexService;
+import de.unikoeln.vedaweb.uidata.UiDataService;
+import de.unikoeln.vedaweb.xmlimport.DataImportService;
 
 
 

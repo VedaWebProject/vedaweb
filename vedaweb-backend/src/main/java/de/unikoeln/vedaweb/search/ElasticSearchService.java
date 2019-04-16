@@ -1,12 +1,9 @@
-package de.unikoeln.vedaweb.services;
+package de.unikoeln.vedaweb.search;
 
 import org.elasticsearch.action.search.SearchRequest;
 import org.elasticsearch.action.search.SearchResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import de.unikoeln.vedaweb.search.SearchData;
-import de.unikoeln.vedaweb.search.SearchRequestBuilder;
 
 @Service
 public class ElasticSearchService {

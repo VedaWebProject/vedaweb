@@ -1,4 +1,4 @@
-package de.unikoeln.vedaweb.data;
+package de.unikoeln.vedaweb.document;
 
 public class StanzaLocation {
 	

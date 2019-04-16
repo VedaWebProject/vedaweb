@@ -1,4 +1,4 @@
-package de.unikoeln.vedaweb.util;
+package de.unikoeln.vedaweb.xmlimport;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -6,10 +6,10 @@ import java.util.List;
 
 import javax.xml.transform.stream.StreamSource;
 
-import de.unikoeln.vedaweb.data.Pada;
-import de.unikoeln.vedaweb.data.Token;
-import de.unikoeln.vedaweb.data.Stanza;
-import de.unikoeln.vedaweb.data.StanzaVersion;
+import de.unikoeln.vedaweb.document.Pada;
+import de.unikoeln.vedaweb.document.Stanza;
+import de.unikoeln.vedaweb.document.StanzaVersion;
+import de.unikoeln.vedaweb.document.Token;
 import net.sf.saxon.s9api.Processor;
 import net.sf.saxon.s9api.QName;
 import net.sf.saxon.s9api.SaxonApiException;

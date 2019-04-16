@@ -1,4 +1,4 @@
-package de.unikoeln.vedaweb.services;
+package de.unikoeln.vedaweb.search;
 
 import java.io.IOException;
 

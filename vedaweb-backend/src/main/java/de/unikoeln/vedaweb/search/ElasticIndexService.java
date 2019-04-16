@@ -1,4 +1,4 @@
-package de.unikoeln.vedaweb.services;
+package de.unikoeln.vedaweb.search;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -44,12 +44,13 @@ import org.springframework.stereotype.Service;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 
-import de.unikoeln.vedaweb.data.Pada;
-import de.unikoeln.vedaweb.data.Token;
-import de.unikoeln.vedaweb.data.Stanza;
-import de.unikoeln.vedaweb.data.StanzaRepository;
-import de.unikoeln.vedaweb.data.StanzaVersion;
+import de.unikoeln.vedaweb.document.Pada;
+import de.unikoeln.vedaweb.document.Stanza;
+import de.unikoeln.vedaweb.document.StanzaRepository;
+import de.unikoeln.vedaweb.document.StanzaVersion;
+import de.unikoeln.vedaweb.document.Token;
 import de.unikoeln.vedaweb.util.IOUtils;
+import de.unikoeln.vedaweb.util.JsonUtilService;
 import de.unikoeln.vedaweb.util.StringUtils;
 
 

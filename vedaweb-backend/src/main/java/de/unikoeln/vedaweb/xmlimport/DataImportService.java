@@ -1,4 +1,4 @@
-package de.unikoeln.vedaweb.services;
+package de.unikoeln.vedaweb.xmlimport;
 import java.io.File;
 import java.io.FilenameFilter;
 import java.io.IOException;
@@ -12,10 +12,9 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import de.unikoeln.vedaweb.data.Stanza;
-import de.unikoeln.vedaweb.data.StanzaRepository;
+import de.unikoeln.vedaweb.document.Stanza;
+import de.unikoeln.vedaweb.document.StanzaRepository;
 import de.unikoeln.vedaweb.util.Timer;
-import de.unikoeln.vedaweb.util.XmlDataImport;
 import net.sf.saxon.s9api.SaxonApiException;
 
 @Service

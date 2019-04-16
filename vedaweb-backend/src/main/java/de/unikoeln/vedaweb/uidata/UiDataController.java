@@ -1,4 +1,4 @@
-package de.unikoeln.vedaweb.controllers;
+package de.unikoeln.vedaweb.uidata;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -7,9 +7,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.fasterxml.jackson.databind.node.ObjectNode;
 
-import de.unikoeln.vedaweb.services.ElasticIndexService;
-import de.unikoeln.vedaweb.services.JsonUtilService;
-import de.unikoeln.vedaweb.services.UiDataService;
+import de.unikoeln.vedaweb.search.ElasticIndexService;
+import de.unikoeln.vedaweb.util.JsonUtilService;
 
 
 

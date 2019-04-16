@@ -1,4 +1,4 @@
-package de.unikoeln.vedaweb.controllers;
+package de.unikoeln.vedaweb.document;
 
 import java.util.Optional;
 
@@ -7,10 +7,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import de.unikoeln.vedaweb.data.Stanza;
-import de.unikoeln.vedaweb.data.StanzaLocation;
-import de.unikoeln.vedaweb.data.StanzaRepository;
-import de.unikoeln.vedaweb.services.JsonUtilService;
+import de.unikoeln.vedaweb.util.JsonUtilService;
 import de.unikoeln.vedaweb.util.StringUtils;
 
 

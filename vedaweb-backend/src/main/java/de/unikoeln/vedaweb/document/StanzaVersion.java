@@ -1,4 +1,4 @@
-package de.unikoeln.vedaweb.data;
+package de.unikoeln.vedaweb.document;
 
 import de.unikoeln.vedaweb.util.StringUtils;
 
