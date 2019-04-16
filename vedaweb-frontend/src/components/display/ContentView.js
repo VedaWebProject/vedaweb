@@ -37,8 +37,7 @@ class ContentView extends Component {
     }
 
     componentDidMount() {
-        if (this.props.match.params.by === undefined
-            || this.props.match.params.value === undefined){
+        if (!this.props.match.params.by || !this.props.match.params.value){
             this.props.history.replace("/view/index/0");
         } else {
             this.loadData(this.props.match.params.by, this.props.match.params.value);
@@ -47,8 +46,9 @@ class ContentView extends Component {
     }
 
     componentDidUpdate(prevProps, prevState) {
-        if (this.props.match.params.by !== prevProps.match.params.by
-                || this.props.match.params.value !== prevProps.match.params.value){
+        if (!this.props.match.params.by) {
+            this.props.history.replace("/view/index/0");
+        } else if (JSON.stringify(this.props.match.params) !== JSON.stringify(prevProps.match.params)){
             this.loadData(this.props.match.params.by, this.props.match.params.value);
         }
     }

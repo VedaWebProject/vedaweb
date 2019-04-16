@@ -31,7 +31,9 @@ class NavBar extends Component {
             <header className="box-shadow">
 
                 <div style={{flexBasis:'content'}}>
-                    <img src={logo} id="header-logo" alt="" />
+                    <a href="/">
+                        <img src={logo} id="header-logo" alt="" />
+                    </a>
                     {/* <div className="header-app-title">
                         <span className="bold">VedaWeb</span>
                         <span className="bold grey" style={{fontSize: '12px'}}> beta</span><br/>

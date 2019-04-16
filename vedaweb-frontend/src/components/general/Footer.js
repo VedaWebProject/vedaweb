@@ -162,13 +162,13 @@ class Footer extends Component {
                 <Row>
                     <Col span={24} className="content-center">
                         <Button
-                        href="/"
+                        href={process.env.PUBLIC_URL + "/"}
                         onClick={() => {
                             stateStore.clearStorage();
                             stateStore.settings.acceptedPrivacyHint = false;
                             alert("Local storage cleared!\n\nThe page will now reload with reset settings.");
                         }}>
-                            <Icon type="delete"/> Delete locally saved settings
+                            <Icon type="delete"/> Delete locally stored settings
                         </Button>
                     </Col>
                 </Row>
