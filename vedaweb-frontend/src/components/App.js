@@ -54,7 +54,6 @@ class App extends Component {
     }
 
     componentCleanup(){
-        stateStore.clearStorage();
         if (!stateStore.settings.acceptedPrivacyHint) return;
         stateStore.save(stateStore);
     }

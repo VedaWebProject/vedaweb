@@ -9,8 +9,7 @@ class PrivacyHint extends Component {
 
     constructor(props){
         super(props);
-        this.state = {sawPrivacyHint: stateStore.settings.acceptedPrivacyHint};
-        this.decide = this.decide.bind(this);
+        this.state = {sawPrivacyHint: false};
     }
 
     decide(accepted){
@@ -20,7 +19,6 @@ class PrivacyHint extends Component {
     }
 
     render() {
-
         if (this.state.sawPrivacyHint || stateStore.settings.acceptedPrivacyHint) return null;
 
         return (
