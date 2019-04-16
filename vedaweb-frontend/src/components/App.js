@@ -16,7 +16,7 @@ import GuidedTour from './widgets/GuidedTour';
 
 import "./App.css";
 
-import stateStore from "../state/stateStore";
+import stateStore from "../stateStore";
 import { view } from 'react-easy-state';
 
 import { Route, Switch, withRouter } from 'react-router-dom';

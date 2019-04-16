@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Row, Col, Icon } from 'antd';
 
 import { view } from 'react-easy-state';
-import stateStore from "../../../state/stateStore";
+import stateStore from "../../../stateStore";
 
 import SearchBlock from "./SearchBlock";
 import HelpButton from "../../widgets/HelpButton";

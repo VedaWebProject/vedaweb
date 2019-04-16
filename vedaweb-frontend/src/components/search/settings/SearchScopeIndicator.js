@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 
 import { view } from 'react-easy-state';
-import stateStore from "../../../state/stateStore";
+import stateStore from "../../../stateStore";
 
 
 class SearchScopeIndicator extends Component {

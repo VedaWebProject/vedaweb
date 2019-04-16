@@ -3,7 +3,7 @@ import { Drawer, Icon, message } from 'antd';
 
 import { view } from 'react-easy-state';
 import mouseTrap from 'react-mousetrap';
-import stateStore from "../../state/stateStore";
+import stateStore from "../../stateStore";
 
 import "./OSK.css";
 

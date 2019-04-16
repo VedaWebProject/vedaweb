@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Row, Col, Icon, Input, Tooltip, Checkbox } from 'antd';
 
-import stateStore from "../../../state/stateStore";
+import stateStore from "../../../stateStore";
 import { view } from 'react-easy-state';
 
 import SearchAttributeField from "./SearchAttributeField";

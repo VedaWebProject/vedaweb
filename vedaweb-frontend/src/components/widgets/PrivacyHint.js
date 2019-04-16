@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Icon, Button } from 'antd';
 
-import stateStore from "../../state/stateStore";
+import stateStore from "../../stateStore";
 import { view } from 'react-easy-state';
 import { Link } from 'react-router-dom';
 

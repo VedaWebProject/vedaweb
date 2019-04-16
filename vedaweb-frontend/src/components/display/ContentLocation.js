@@ -7,7 +7,7 @@ import "./ContentLocation.css";
 import mouseTrap from 'react-mousetrap';
 
 import axios from 'axios';
-import stateStore from "../../state/stateStore";
+import stateStore from "../../stateStore";
 
 const Option = Select.Option;
 

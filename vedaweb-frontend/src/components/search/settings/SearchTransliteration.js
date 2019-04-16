@@ -3,7 +3,7 @@ import { Select } from 'antd';
 
 import './SearchTransliteration.css';
 
-import stateStore from "../../../state/stateStore";
+import stateStore from "../../../stateStore";
 import { view } from 'react-easy-state';
 
 const Option = Select.Option;

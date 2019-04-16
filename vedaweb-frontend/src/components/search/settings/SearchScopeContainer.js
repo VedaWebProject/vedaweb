@@ -4,7 +4,7 @@ import { Row, Col } from 'antd';
 import SearchScope from './SearchScope';
 
 import { view } from 'react-easy-state';
-import stateStore from "../../../state/stateStore";
+import stateStore from "../../../stateStore";
 
 
 

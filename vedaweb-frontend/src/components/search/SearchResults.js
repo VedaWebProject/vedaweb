@@ -12,7 +12,7 @@ import { view } from 'react-easy-state';
 import axios from 'axios';
 import { Base64 } from 'js-base64';
 
-import stateStore from "../../state/stateStore";
+import stateStore from "../../stateStore";
 
 const fieldDisplayMapping = {
     "form": "Stanza text",

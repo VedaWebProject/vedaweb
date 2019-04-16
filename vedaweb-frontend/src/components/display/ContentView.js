@@ -16,7 +16,7 @@ import scrollToComponent from 'react-scroll-to-component';
 //import layersInfoImg from "./img/layersInfo.png";
 
 import axios from 'axios';
-import stateStore from "../../state/stateStore";
+import stateStore from "../../stateStore";
 import DictionaryView from "./DictionaryView";
 import HelpButton from "../widgets/HelpButton";
 import BetaInfoContent from "../static/BetaInfoContent";

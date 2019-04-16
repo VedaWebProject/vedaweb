@@ -4,7 +4,7 @@ import { Row, Col, Select, Button } from 'antd';
 import './SearchScope.css';
 
 import { view } from 'react-easy-state';
-import stateStore from "../../../state/stateStore";
+import stateStore from "../../../stateStore";
 
 const Option = Select.Option;
 

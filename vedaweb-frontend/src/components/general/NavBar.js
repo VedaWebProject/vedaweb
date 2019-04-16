@@ -6,7 +6,7 @@ import SearchQuick from "../search/quick/SearchQuick";
 import logo from "../../img/logo.svg";
 import "./NavBar.css";
 
-import stateStore from "../../state/stateStore";
+import stateStore from "../../stateStore";
 
 import { view } from 'react-easy-state';
 

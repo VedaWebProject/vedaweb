@@ -17,7 +17,7 @@ import { view } from 'react-easy-state';
 import { withRouter } from 'react-router-dom';
 import { Base64 } from 'js-base64';
 
-import stateStore from "../../state/stateStore";
+import stateStore from "../../stateStore";
 
 const TabPane = Tabs.TabPane;
 const Panel = Collapse.Panel;

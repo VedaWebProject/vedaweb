@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Row, Col, Button, Select } from 'antd';
 
-import stateStore from "../../../state/stateStore";
+import stateStore from "../../../stateStore";
 
 import './SearchAttributeField.css';
 

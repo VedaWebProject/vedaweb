@@ -19,7 +19,7 @@ import { Link } from 'react-router-dom';
 
 import "./Footer.css";
 import LoadHtml from "../utils/LoadHtml";
-import stateStore from "../../state/stateStore";
+import stateStore from "../../stateStore";
 
 class Footer extends Component {
 
