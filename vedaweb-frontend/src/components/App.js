@@ -27,6 +27,7 @@ import axios from 'axios';
 
 import "./utils/polyfills";
 import PrivacyHint from "./widgets/PrivacyHint";
+import usageStats from "./utils/usageStats";
 
 
 class App extends Component {
@@ -54,18 +55,30 @@ class App extends Component {
     }
 
     componentCleanup(){
-        if (!stateStore.settings.acceptedPrivacyHint) return;
+        //save settings from state store (if accepted privacy hint)
         stateStore.save(stateStore);
     }
 
     componentDidMount(){
+        //load local storage data (if any)
         stateStore.load(stateStore);
+        //add listener to call cleanup before site closes
         window.addEventListener('beforeunload', this.componentCleanup);
+        
+        //exec usage stats once (if accepted privacy hint)
+        usageStats.load(stateStore.settings.acceptedPrivacyHint);
+        //add listener for location changes to track consecutive calls
+        this.props.history.listen((location, action) => { usageStats.track(stateStore.settings.acceptedPrivacyHint); });
     }
   
     componentWillUnmount() {
+        //exec cleanup
         this.componentCleanup();
+        //remove listener for cleanup
         window.removeEventListener('beforeunload', this.componentCleanup);
+
+        //remove listener for location changes
+        this.props.history.unlisten();
     }
 
 
