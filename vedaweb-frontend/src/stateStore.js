@@ -369,6 +369,7 @@ const stateStore = store({
     //// SAVE/LOAD TO/FROM LOCAL STORAGE ////
 
     save(obj){
+        if (!stateStore.settings.acceptedPrivacyHint) return;
         for (var key in obj) {
             if (!obj.hasOwnProperty(key) || typeof obj[key] !== "object"){
                 continue;
