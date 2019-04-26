@@ -4,6 +4,7 @@ import { Icon, Button } from 'antd';
 import stateStore from "../../stateStore";
 import { view } from 'react-easy-state';
 import { Link } from 'react-router-dom';
+import usageStats from "../utils/usageStats";
 
 class PrivacyHint extends Component {
 
@@ -14,7 +15,13 @@ class PrivacyHint extends Component {
 
     decide(accepted){
         stateStore.settings.acceptedPrivacyHint = accepted;
-        if (!accepted) stateStore.clearStorage();
+        if (accepted){
+            //init usage stats
+            usageStats.load(accepted);
+        } else {
+            //clear local storage
+            stateStore.clearStorage();
+        }
         this.setState({ sawPrivacyHint: true });
     }
 
