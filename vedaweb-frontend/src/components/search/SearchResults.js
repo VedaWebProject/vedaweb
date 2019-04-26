@@ -150,7 +150,7 @@ class SearchResults extends Component {
         if (hit.highlight !== undefined && Object.keys(hit.highlight).length > 0){
             Object.keys(hit.highlight).forEach(highlightField => {
                 html +=
-                    "<span class='red main-font'>" +
+                    "<span class='red text-font bold'>" +
                     (fieldDisplayMapping[highlightField] !== undefined ? fieldDisplayMapping[highlightField] : highlightField) +
                     ":</span> " +
                     hit.highlight[highlightField]
