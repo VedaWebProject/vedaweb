@@ -1,6 +1,6 @@
 # VedaWeb <!-- omit in toc -->
 
-**This project is currently in a kind of 'proof of concept' phase. It is not yet documented and many parts are still implemented in a quick and dirty way. In the future there will be a lot of refactoring and documentation to be done.**
+**This project is currently in a proof-of-concept phase. It is not yet documented and many parts are still implemented in a quick and dirty way. In the future there will be a lot of refactoring and documentation to be done.**
 
 *This is the code repository for the VedaWeb application, which is being developed as part of the [VedaWeb project](https://vedaweb.uni-koeln.de/).*
 
