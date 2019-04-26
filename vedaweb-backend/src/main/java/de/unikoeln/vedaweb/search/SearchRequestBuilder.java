@@ -63,7 +63,7 @@ public class SearchRequestBuilder {
 //	}
 	
 	
-	public static SearchRequest buildSmartQuery(SearchData searchData) {
+	public static SearchRequest buildQuickQuery(SearchData searchData) {
 		SearchSourceBuilder source = getCommonSearchSource(searchData);
 		
 		String searchTerm = StringUtils.normalizeNFC(

@@ -16,8 +16,8 @@ public class ElasticSearchService {
 		//searchData.cleanAndFormatFields();
 		
 		switch (searchData.getMode()){
-		case "smart":
-			return submitSearch(SearchRequestBuilder.buildSmartQuery(searchData));
+		case "quick":
+			return submitSearch(SearchRequestBuilder.buildQuickQuery(searchData));
 		case "grammar":
 			return submitSearch(SearchRequestBuilder.buildGrammarQuery(searchData));
 		default: return null;

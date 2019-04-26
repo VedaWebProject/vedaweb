@@ -11,6 +11,7 @@
     "browserizr": "^3.2.1",
     "craco-antd": "^1.10.0",
     "js-base64": "^2.5.1",
+    "js-file-download": "^0.4.5",
     "local-storage": "^1.4.2",
     "react": "^16.8.4",
     "react-dom": "^16.8.4",

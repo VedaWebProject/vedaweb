@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Table } from 'antd';
+import { Table, Button } from 'antd';
 
 import { Link, withRouter } from 'react-router-dom';
 
@@ -14,6 +14,9 @@ import { Base64 } from 'js-base64';
 
 import stateStore from "../../stateStore";
 
+import fileDownload from "js-file-download";
+
+
 const fieldDisplayMapping = {
     "form": "Stanza text",
     "form_raw": "Stanza text",
@@ -25,12 +28,13 @@ class SearchResults extends Component {
 
     constructor(props) {
         super(props)
-        this.state = { isLoaded: false }
+        this.state = { isLoaded: false, isExportLoaded: true }
         document.title = "VedaWeb | Search Results";
         this.loadData = this.loadData.bind(this);
         this.handleTableChange = this.handleTableChange.bind(this);
         this.handleTableChange = this.handleTableChange.bind(this);
         this.handleNewQuery = this.handleNewQuery.bind(this);
+        this.export = this.export.bind(this);
     }
 
 
@@ -95,7 +99,7 @@ class SearchResults extends Component {
         };
 
         //enable view for searched field automatically
-        if (queryJSON.mode === "smart")
+        if (queryJSON.mode === "quick")
             stateStore.ui.toggleLayer(queryJSON.field, true);
         else if (queryJSON.mode === "grammar")
             stateStore.ui.toggleLayer("glossing_", true);
@@ -134,6 +138,8 @@ class SearchResults extends Component {
                             strata: hit.stanzaStrata
                         }))
                 });
+
+                stateStore.results.queryJSON = queryJSON;
             })
             .catch((error) => {
                 this.setState({
@@ -161,6 +167,25 @@ class SearchResults extends Component {
         }
 
         return {__html: html};
+    }
+
+
+    export(){
+        this.setState({ isExportLoaded: false });
+
+        axios.post(process.env.PUBLIC_URL + "/api/export/search", stateStore.results.queryJSON)
+            .then((response) => {
+                this.setState({
+                    isExportLoaded: true
+                });
+                fileDownload(response.data, "vedaweb-search-results.csv");
+            })
+            .catch((error) => {
+                this.setState({
+                    isExportLoaded: true
+                });
+                alert("There was an error generating the data.");
+            });
     }
 
 
@@ -216,6 +241,7 @@ class SearchResults extends Component {
                                     Search Results for
                                     <span className="text-font grey"> "{this.state.queryDisplay.query}" </span>
                                     in<span className="text-font grey"> "{this.state.queryDisplay.field}"</span>
+                                    <Button type="secondary" icon={this.state.isExportLoaded ? "export" : "loading"} onClick={this.export} title="Export CSV" style={{marginLeft:"1rem"}}/>
                                 </h1>
                             }
 
@@ -224,8 +250,9 @@ class SearchResults extends Component {
                             <div className="search-stats secondary-font">
                                 { isLoaded && data.hits !== undefined ?
                                     data.total > 0 ?
-                                        <span>Found { data.total } matching stanzas in { data.took } ms</span>
-                                        : ""
+                                        <span>
+                                            Found { data.total } matching stanzas in { data.took } ms
+                                        </span> : ""
                                      : <span>Searching ...</span>
                                 }
                             </div>

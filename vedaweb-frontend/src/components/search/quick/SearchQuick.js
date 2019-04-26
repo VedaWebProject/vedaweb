@@ -30,7 +30,7 @@ class SearchQuick extends Component {
             this.props.history.push("/view/id/" + input);
         } else {
             let jsonData = {
-                mode: "smart",
+                mode: "quick",
                 input: stateStore.search.quick.field.startsWith('version_') ? SanscriptAccents.t(input, stateStore.settings.transliteration, "iso") : input,
                 field: stateStore.search.quick.field,
                 accents: stateStore.settings.accents
