@@ -8,11 +8,13 @@ const exportOptions = ["XML"];
 
 class ExportDrawer extends Component {
 
+
     constructor(props){
         super(props);
         this.state = { format: exportOptions[0], isExportLoaded: true };
         this.export = this.export.bind(this);
     }
+
 
     export() {
         this.setState({ isExportLoaded: false });
@@ -23,12 +25,12 @@ class ExportDrawer extends Component {
         //     layers: this.props.layers
         // }
 
-        axios.get(process.env.PUBLIC_URL + "/api/export/doc/" + this.props.docId + "/" + this.state.format.toLowerCase)
+        axios.get(process.env.PUBLIC_URL + "/api/export/doc/" + this.props.docId + "/" + this.state.format.toLowerCase())
             .then((response) => {
                 this.setState({
                     isExportLoaded: true
                 });
-                fileDownload(response.data, "vedaweb-" + this.props.docId + "." + this.state.format.toLowerCase);
+                fileDownload(response.data, ("vedaweb-" + this.props.docId + "." + this.state.format.toLowerCase()));
             })
             .catch((error) => {
                 this.setState({
@@ -37,6 +39,7 @@ class ExportDrawer extends Component {
                 alert("There was an error generating the data.");
             });
     }
+
 
     render() {
         

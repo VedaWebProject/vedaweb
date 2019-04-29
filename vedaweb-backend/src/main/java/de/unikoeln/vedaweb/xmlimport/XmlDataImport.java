@@ -9,6 +9,8 @@ import javax.xml.transform.stream.StreamSource;
 import de.unikoeln.vedaweb.document.Pada;
 import de.unikoeln.vedaweb.document.Stanza;
 import de.unikoeln.vedaweb.document.StanzaVersion;
+import de.unikoeln.vedaweb.document.StanzaXml;
+import de.unikoeln.vedaweb.document.StanzaXmlRepository;
 import de.unikoeln.vedaweb.document.Token;
 import net.sf.saxon.s9api.Processor;
 import net.sf.saxon.s9api.QName;
@@ -274,6 +276,8 @@ public class XmlDataImport {
 				stanzasList.add(stanzaObj);
 			}
 		}
+		//kindly ask to collect some garbage
+		System.gc();
 	}
 	
 	
@@ -371,5 +375,31 @@ public class XmlDataImport {
 		return lines;
 	}
 	
+	
+	public static void readRawStanzaXml(
+			File xmlFile,
+			StanzaXmlRepository stanzaXmlRepo,
+			boolean dryRun) throws SaxonApiException {
+		
+		//xml parsing prep
+		Processor processor = new Processor(false);
+		XdmNode xmlDoc = processor.newDocumentBuilder().build(new StreamSource(xmlFile));
+		XPathCompiler compiler = processor.newXPathCompiler();
+		
+		//iterate: stanzas
+		XdmValue stanzas = compiler.evaluate(".//*:div[@type='verse']", xmlDoc);
+		for(XdmItem stanza : stanzas){
+			String[] stanzaLocationData = compiler.evaluate("@*:n", stanza).itemAt(0).getStringValue().split("\\.");
+			if (!dryRun) {
+				stanzaXmlRepo.insert(new StanzaXml(
+					stanzaLocationData[0] + stanzaLocationData[1] + stanzaLocationData[2],
+					stanza.toString()
+				));
+			}
+		}
+		
+		//kindly ask to collect some garbage
+		System.gc();
+	}
 
 }

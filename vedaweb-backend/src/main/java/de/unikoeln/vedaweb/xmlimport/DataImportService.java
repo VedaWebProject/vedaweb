@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 
 import de.unikoeln.vedaweb.document.Stanza;
 import de.unikoeln.vedaweb.document.StanzaRepository;
+import de.unikoeln.vedaweb.document.StanzaXmlRepository;
 import de.unikoeln.vedaweb.util.Timer;
 import net.sf.saxon.s9api.SaxonApiException;
 
@@ -26,6 +27,9 @@ public class DataImportService {
 	
 	@Autowired
 	private StanzaRepository stanzaRepo;
+	
+	@Autowired
+	private StanzaXmlRepository stanzaXmlRepo;
 	
 
 	/*
@@ -55,9 +59,27 @@ public class DataImportService {
 		File[] files = dir.listFiles(getFileFilter());
 		Arrays.sort(files);
 		
-		//start importing
-		log.info((dryRun ? "(DRY RUN) " : "") + "Starting data import from XML");
+		//init timer
 		Timer timer = new Timer();
+		
+		//import raw stanza xml data for export
+		log.info((dryRun ? "(DRY RUN) " : "") + "Starting raw XML data import from XML files");
+		if (!dryRun) stanzaXmlRepo.deleteAll();
+		for (File xmlFile : files) {
+			timer.start();
+			try {
+				XmlDataImport.readRawStanzaXml(xmlFile, stanzaXmlRepo, dryRun);
+			} catch (SaxonApiException e) {
+				log.error((dryRun ? "(DRY RUN) " : "") + "Could not read XML data. Malformed?");
+				e.printStackTrace();
+				return -1;
+			}
+			log.info((dryRun ? "(DRY RUN) " : "") + "Finished reading raw data from \"" 
+					+ xmlFile.getName() + "\" in " + timer.stop("s", true) + " seconds");
+		}
+		
+		//start importing stanza object data
+		log.info((dryRun ? "(DRY RUN) " : "") + "Starting data import from XML");
 		for (File xmlFile : files) {
 			timer.start();
 			try {
