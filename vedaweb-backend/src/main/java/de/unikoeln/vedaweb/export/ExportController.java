@@ -33,9 +33,8 @@ public class ExportController {
 						search.search(searchData)));
     }
 	
-	@GetMapping(value = "/doc/{docId}/xml", produces = MediaType.APPLICATION_XML_VALUE)
+	@GetMapping(value = "/doc/{docId}/xml", produces = MediaType.TEXT_XML_VALUE)
     public String exportDoc(@PathVariable("docId") String docId) {
-		System.out.println(repo.findById(docId).get().getXml());
 		return repo.findById(docId).get().getXml();
     }
 
