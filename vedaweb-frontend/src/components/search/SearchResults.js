@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Table, Button } from 'antd';
 
-import { Link, withRouter } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 
 import ErrorMessage from "../errors/ErrorMessage";
 
@@ -170,6 +170,11 @@ class SearchResults extends Component {
     }
 
 
+    onResultClick(location){
+        this.props.history.push("/view/id/" + location);
+    }
+
+
     export(){
         this.setState({ isExportLoaded: false });
 
@@ -200,7 +205,8 @@ class SearchResults extends Component {
             dataIndex: 'location',
             key: 'location',
             className: 'loc-col',
-            render: loc => <Link to={"/view/id/" + loc}>{loc}</Link>,
+            render: loc => <span className="primary-font bold red">{loc}</span>,
+            //render: loc => <Link to={"/view/id/" + loc}>{loc}</Link>,
           }, {
             title: 'Search Hit Context',
             dataIndex: 'text',
@@ -251,7 +257,7 @@ class SearchResults extends Component {
                                 { isLoaded && data.hits !== undefined ?
                                     data.total > 0 ?
                                         <span>
-                                            Found { data.total } matching stanzas in { data.took } ms
+                                            Found <span className="bold">{data.total}</span> matching stanzas in { data.took } ms
                                         </span> : ""
                                      : <span>Searching ...</span>
                                 }
@@ -263,6 +269,7 @@ class SearchResults extends Component {
                             dataSource={this.state.tableData}
                             loading={!this.state.isLoaded}
                             locale={{emptyText: 'There are no results for this search.'}}
+                            onRow={(record) => ({ onClick: () => { this.onResultClick(record.location) } })}
                             pagination={{
                                 pageSize: stateStore.results.size,
                                 current: stateStore.results.page,

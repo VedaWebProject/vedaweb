@@ -17,6 +17,15 @@
     background: transparent;
 }
 
+#search-results .ant-table-tbody > tr {
+    cursor: pointer;
+    transition: .2s;
+}
+
+#search-results .ant-table-tbody > tr:hover {
+    background-color: #eee;
+}
+
 #search-results table td {
     vertical-align: middle;
 }
