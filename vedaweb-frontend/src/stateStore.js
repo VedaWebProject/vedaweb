@@ -20,6 +20,7 @@ const stateStore = store({
         page: 1,
         size: 10,
         total: 0,
+        sortBy: "relevance",
         resultsData: {},
         queryJSON: {},
         queryEncoded: ''

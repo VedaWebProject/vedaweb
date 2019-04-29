@@ -35,6 +35,9 @@ public class SearchData {
 	@JsonProperty("size")
 	private int size;
 	
+	@JsonProperty("sortBy")
+	private String sortBy;
+	
 
 	
 	public SearchData(){
@@ -134,6 +137,16 @@ public class SearchData {
 
 	public void setSize(int size) {
 		this.size = size;
+	}
+	
+	
+	public String getSortBy() {
+		return sortBy;
+	}
+
+
+	public void setSortBy(String sortBy) {
+		this.sortBy = sortBy;
 	}
 
 

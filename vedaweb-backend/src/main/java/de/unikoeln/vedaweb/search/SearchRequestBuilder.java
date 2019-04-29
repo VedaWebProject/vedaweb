@@ -293,9 +293,14 @@ public class SearchRequestBuilder {
 	
 	
 	private static SearchSourceBuilder getCommonSearchSource(SearchData searchData) {
-		return new SearchSourceBuilder()
-			.from(searchData.getFrom() >= 0 ? searchData.getFrom() : 0)
-			.size(searchData.getSize() >= 0 ? searchData.getSize() : 0);
+		SearchSourceBuilder source = new SearchSourceBuilder()
+				.from(searchData.getFrom() >= 0 ? searchData.getFrom() : 0)
+				.size(searchData.getSize() >= 0 ? searchData.getSize() : 0);
+		
+		if (searchData.getSortBy().equals("relevance"))
+			return source;
+		else
+			return source.sort(searchData.getSortBy());
 	}
 	
 	

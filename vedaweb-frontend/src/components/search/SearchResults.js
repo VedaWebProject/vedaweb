@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Table, Button } from 'antd';
+import { Table, Button, Select } from 'antd';
 
 import { withRouter } from 'react-router-dom';
 
@@ -16,6 +16,7 @@ import stateStore from "../../stateStore";
 
 import fileDownload from "js-file-download";
 
+const Option = Select.Option;
 
 const fieldDisplayMapping = {
     "form": "Stanza text",
@@ -72,6 +73,7 @@ class SearchResults extends Component {
             //console.log(JSON.stringify(queryJSON)); //TEMP DEV
             queryJSON.from = 0;
             queryJSON.size = stateStore.results.size;
+            queryJSON.sortById = stateStore.results.sortById;
             stateStore.results.queryJSON = queryJSON;
         } catch (e) {
             this.setState({
@@ -86,6 +88,8 @@ class SearchResults extends Component {
 
 
     loadData(queryJSON) {
+        if (!queryJSON) queryJSON = stateStore.results.queryJSON;
+
         //construct "Search Results for ..." data
         let queryDisplay = {
             query: queryJSON.mode === "grammar"
@@ -116,6 +120,9 @@ class SearchResults extends Component {
         //pagination and request size
         queryJSON.from = ((stateStore.results.page - 1) * stateStore.results.size);
         queryJSON.size = stateStore.results.size;
+
+        //sorting
+        queryJSON.sortBy = stateStore.results.sortBy;
 
         //console.log(JSON.stringify(queryJSON));
 
@@ -247,13 +254,13 @@ class SearchResults extends Component {
                                     Search Results for
                                     <span className="text-font grey"> "{this.state.queryDisplay.query}" </span>
                                     in<span className="text-font grey"> "{this.state.queryDisplay.field}"</span>
-                                    <Button type="secondary" icon={this.state.isExportLoaded ? "export" : "loading"} onClick={this.export} title="Export CSV" style={{marginLeft:"1rem"}}/>
+                                    <Button type="secondary" icon={this.state.isExportLoaded ? "export" : "loading"} onClick={this.export} title="Export results as CSV" style={{marginLeft:"1rem"}}/>
                                 </h1>
                             }
 
                             {/** SEARCH STATS **/}
                             
-                            <div className="search-stats secondary-font">
+                            <div className="search-stats secondary-font bottom-gap">
                                 { isLoaded && data.hits !== undefined ?
                                     data.total > 0 ?
                                         <span>
@@ -262,6 +269,29 @@ class SearchResults extends Component {
                                      : <span>Searching ...</span>
                                 }
                             </div>
+
+                            Sort results by: 
+                            <Select
+                            size={"default"}
+                            value={stateStore.results.sortBy}
+                            defaultValue={stateStore.results.sortBy}
+                            onSelect={(v) => {stateStore.results.sortBy = v; this.loadData();}}
+                            className="secondary-font"
+                            style={{marginLeft: "1rem"}}
+                            dropdownMatchSelectWidth={false}>
+                                <Option
+                                key={"res_sort_natural"}
+                                value={"relevance"}
+                                className="secondary-font">
+                                    Relevance
+                                </Option>
+                                <Option
+                                key={"res_sort_id"}
+                                value={"id"}
+                                className="secondary-font">
+                                    Natural order
+                                </Option>
+                            </Select>
                             
                             {/** RESULTS **/}
                             <Table
