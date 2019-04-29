@@ -15,7 +15,6 @@ public class CsvExport {
 	private static final String PATTERN_TAGS = "\\<[^\\>]+\\>";
 	
 	
-	
 	public static String searchHitsAsCsv(SearchHits searchHits) {
 		StringBuilder csv = new StringBuilder();
 		csv.append(CSV_HEADER_SEARCH_HITS + "\n");
@@ -35,11 +34,13 @@ public class CsvExport {
 		return csv.toString();
 	}
 	
+	
 	/*
 	 * Quote string
 	 */
 	private static String q(String s) {
 		return "\"" + s.replaceAll("\\\"", "\\\\\"") + "\"";
 	}
+	
 
 }

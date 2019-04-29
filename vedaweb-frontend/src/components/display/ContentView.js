@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Row, Col, Affix, Spin, Button, Icon, Drawer, Badge, Radio, Modal } from 'antd';
+import { Row, Col, Affix, Spin, Icon, Drawer, Badge, Modal } from 'antd';
 
 import ContentLocation from "./ContentLocation";
 import ContentFilterSwitch from "./ContentFilterSwitch";
@@ -13,15 +13,15 @@ import { withRouter } from 'react-router-dom';
 import { view } from 'react-easy-state';
 
 import scrollToComponent from 'react-scroll-to-component';
-//import layersInfoImg from "./img/layersInfo.png";
 
 import axios from 'axios';
 import stateStore from "../../stateStore";
 import DictionaryView from "./DictionaryView";
 import HelpButton from "../widgets/HelpButton";
 import BetaInfoContent from "../static/BetaInfoContent";
+import ExportDrawer from "../widgets/ExportDrawer";
 
-const RadioGroup = Radio.Group;
+
 
 
 class ContentView extends Component {
@@ -123,7 +123,6 @@ class ContentView extends Component {
 
     render() {
         const { error, isLoaded, data } = this.state;
-        const exportOptions = ["PDF","XML","TEI-XML","Text"];
 
         return (
             <Spin
@@ -429,38 +428,17 @@ class ContentView extends Component {
 
                     </Drawer>
 
-
-                    <Drawer
-                    title={<h1 style={{marginBottom:'0'}}><Icon type="export" className="gap-right"/>Export</h1>}
-                    placement="right"
-                    width="auto"
-                    closable={true}
+                    {/** EXPORT */}
+                    <ExportDrawer
+                    docId={this.state.data.id}
                     onClose={() => this.setState({exportVisible: false})}
-                    visible={this.state.exportVisible} >
-                        
-                        <RadioGroup
-                        onChange={(e) => console.log("Export format selected: " + e.target.value)}
-                        defaultValue={"PDF"}>
-                            {exportOptions.map((eOpt, i) => (
-                                <Radio
-                                key={'eOpt_' + i}
-                                value={eOpt}
-                                style={{ display: 'block', height: '30px', lineHeight: '30px' }}>
-                                    {eOpt}
-                                </Radio>
-                            ))}
-                        </RadioGroup>
-                    
-                        <Button
-                        block
-                        type="primary"
-                        icon="download"
-                        style={{marginTop:'2rem'}}
-                        onClick={() => {alert("Export functionality doesn't exist, yet.")}}>
-                            Export
-                        </Button>
-                            
-                    </Drawer>
+                    visible={this.state.exportVisible}
+                    layers={[
+                        stateStore.ui.layers
+                            .filter(l => l.show && !l.id.endsWith("_"))
+                            .map(l => ( {id: l.id, label: l.label} ))
+                    ]} />
+
                 </div>
 
                 {/** BETA INFO MODAL */}
