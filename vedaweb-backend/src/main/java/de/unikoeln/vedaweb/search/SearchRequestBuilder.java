@@ -297,7 +297,7 @@ public class SearchRequestBuilder {
 				.from(searchData.getFrom() >= 0 ? searchData.getFrom() : 0)
 				.size(searchData.getSize() >= 0 ? searchData.getSize() : 0);
 		
-		if (searchData.getSortBy().equals("relevance"))
+		if (searchData.getSortBy() == null || searchData.getSortBy().equals("relevance"))
 			return source;
 		else
 			return source.sort(searchData.getSortBy());
