@@ -24,7 +24,12 @@ import net.sf.saxon.s9api.XdmValue;
 public class XmlDataImport {
 	
 	
-	public static void collectStanzasFromXML(File xmlFile, List<Stanza> stanzasList) throws SaxonApiException{
+	public static void collectStanzasFromXML(
+			File xmlFile,
+			List<Stanza> stanzasList) throws SaxonApiException {
+
+		System.gc(); //kindly ask to collect some garbage
+		
 		//xml parsing prep
 		Processor processor = new Processor(false);
 		XdmNode xmlDoc = processor.newDocumentBuilder().build(new StreamSource(xmlFile));
@@ -276,8 +281,6 @@ public class XmlDataImport {
 				stanzasList.add(stanzaObj);
 			}
 		}
-		//kindly ask to collect some garbage
-		System.gc();
 	}
 	
 	
@@ -381,6 +384,8 @@ public class XmlDataImport {
 			StanzaXmlRepository stanzaXmlRepo,
 			boolean dryRun) throws SaxonApiException {
 		
+		System.gc(); //kindly ask to collect some garbage
+		
 		//xml parsing prep
 		Processor processor = new Processor(false);
 		XdmNode xmlDoc = processor.newDocumentBuilder().build(new StreamSource(xmlFile));
@@ -397,9 +402,6 @@ public class XmlDataImport {
 				));
 			}
 		}
-		
-		//kindly ask to collect some garbage
-		System.gc();
 	}
 
 }
