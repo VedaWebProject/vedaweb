@@ -3,6 +3,7 @@ package de.unikoeln.vedaweb.document;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -22,7 +23,7 @@ public class DocumentController {
 	private JsonUtilService mappingService;
 	
 	
-	@RequestMapping(value = "/id/{id}", produces = {"application/json"})
+	@RequestMapping(value = "/id/{id}", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public String stanzaById(
     		@PathVariable("id") String id) {
 		
@@ -47,7 +48,7 @@ public class DocumentController {
     }
 	
 	
-	@RequestMapping(value = "/index/{index}", produces = {"application/json"})
+	@RequestMapping(value = "/index/{index}", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public String stanzaByLocation(@PathVariable int index) {
 		return mappingService.mapOptionalToJson(
 				stanzaRepo.findByIndex( StringUtils.normalizeIndex(index, (int)stanzaRepo.count()) ));
