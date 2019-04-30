@@ -88,7 +88,6 @@ class SearchResults extends Component {
 
 
     loadData(queryJSON) {
-        console.log(stateStore.ui.layers);
         if (!queryJSON) queryJSON = stateStore.results.queryJSON;
 
         //construct "Search Results for ..." data
