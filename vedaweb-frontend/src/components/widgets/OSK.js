@@ -37,7 +37,7 @@ class OSK extends Component {
     open(){
         this.setState({ visible: true });
         //globally set iso translit
-        stateStore.search.meta.transliteration = "iso";
+        stateStore.settings.transliteration = "iso";
         message.open({
             content: <span className="red">Transliteration scheme has been set to <strong>ISO-15919</strong></span>,
             duration: 3,
