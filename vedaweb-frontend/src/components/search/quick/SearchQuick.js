@@ -33,7 +33,8 @@ class SearchQuick extends Component {
                 mode: "quick",
                 input: stateStore.search.quick.field.startsWith('version_') ? SanscriptAccents.t(input, stateStore.settings.transliteration, "iso") : input,
                 field: stateStore.search.quick.field,
-                accents: stateStore.settings.accents
+                accents: stateStore.settings.accents,
+                regex: stateStore.search.quick.regex
             };
             this.props.history.push("/results/" + Base64.encodeURI(JSON.stringify(jsonData)));
         }
@@ -114,12 +115,31 @@ class SearchQuick extends Component {
                     } />
                 </Tooltip>
 
-                <Checkbox
-                onChange={e => stateStore.settings.accents = e.target.checked}
-                checked={stateStore.settings.accents}
-                style={{marginLeft:'1rem'}}>
-                    Accent-sensitive
-                </Checkbox>
+                <div style={{display:"inline-block", textAlign:"left"}}>
+                    <Checkbox
+                    onChange={e => stateStore.settings.accents = e.target.checked}
+                    checked={stateStore.settings.accents}
+                    style={{marginLeft:'1rem'}}>
+                        Accent-sensitive
+                    </Checkbox>
+                    <HelpButton
+                    type="accentSensitive"
+                    inline
+                    iconStyle={{fontSize:"90%"}}
+                    style={{paddingLeft:"0"}} />
+                    <br/>
+                    <Checkbox
+                    onChange={e => stateStore.search.quick.regex = e.target.checked}
+                    checked={stateStore.search.quick.regex}
+                    style={{marginLeft:'1rem'}}>
+                        RegEx
+                    </Checkbox>
+                    <HelpButton
+                    type="quickSearchRegex"
+                    inline
+                    iconStyle={{fontSize:"90%"}}
+                    style={{paddingLeft:"0"}} />
+                </div>
 
             </div>
         );

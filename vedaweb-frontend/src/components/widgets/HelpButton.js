@@ -176,8 +176,26 @@ const helpTexts = {
                 </p>
             </div>
     },
+    quickSearchRegex : {
+        title: "Quick Search: Regular Expressions (RegEx)",
+        content:
+            <div>
+                <p>You can enable Regular Expressions (RegEx) for the Quick Search.</p>
+                <p>
+                    <strong><Icon type="exclamation-circle"/> ATTENTION:</strong>
+                    <ul>
+                        <li>RegEx are matched against single terms <strong>only</strong> (not a whole line or stanza!)</li>    
+                        <li>
+                            RegEx are always anchored by default. There is no reason to
+                            use <Text code>^</Text> or <Text code>$</Text> to match the 
+                            beginning or end of a term, because your RegEx <i>always must match the whole term</i>!
+                        </li>    
+                    </ul>
+                </p>
+            </div>
+    },
     accentSensitive : {
-        title: "Accent-sensitive Search",
+        title: "Accent-sensitive search",
         content:
             <div>
                 <p>
@@ -406,14 +424,11 @@ class HelpButton extends Component {
                 </span>
             </div>;
 
-        const containerStyle = {
+        const containerStyle = Object.assign({
             textAlign: this.props.align ? this.props.align : "right",
             float: this.props.float ? (this.props.align === undefined ? "right" : this.props.align) : "none",
             display: this.props.inline ? "inline" : "block"
-        }
-
-        //apply styles from props
-        for(var style in this.props.style) containerStyle[style] = this.props.style[style];
+        }, this.props.style);
 
         return (
             
@@ -423,6 +438,7 @@ class HelpButton extends Component {
                 theme="outlined"
                 className="help-button-icon"
                 onClick={this.showModal}
+                style={this.props.iconStyle || {}}
                 title={helpTexts[this.props.type] !== undefined ? "Show help: \"" + helpTexts[this.props.type].title + "\"" : undefined} />
                 
                 <Modal
@@ -434,7 +450,7 @@ class HelpButton extends Component {
                 onOk={this.hideModal}
                 onCancel={this.hideModal}
                 okText="OK">
-                    {helpTexts[this.props.type].content}
+                    {helpTexts[this.props.type] ? helpTexts[this.props.type].content : ""}
                 </Modal>
             </span>
         );

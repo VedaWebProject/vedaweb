@@ -9,6 +9,7 @@ import org.elasticsearch.index.query.BoolQueryBuilder;
 import org.elasticsearch.index.query.InnerHitBuilder;
 import org.elasticsearch.index.query.MatchAllQueryBuilder;
 import org.elasticsearch.index.query.NestedQueryBuilder;
+import org.elasticsearch.index.query.QueryBuilder;
 import org.elasticsearch.index.query.QueryBuilders;
 import org.elasticsearch.index.query.RangeQueryBuilder;
 import org.elasticsearch.search.aggregations.AggregationBuilders;
@@ -72,15 +73,20 @@ public class SearchRequestBuilder {
 		String searchField = "versions.form" + (searchData.isAccents() ? "_raw" : "");
 		String targetVersionId = searchData.getField().endsWith("_") ? searchData.getField() + "*" : searchData.getField();
 		
-		//TEMP DEV
-		//System.out.println("SEARCH TERM: " + searchTerm + " (accents: " + searchData.isAccents() + ")");
+		//QueryString query or Regex qery?
+		QueryBuilder query;
+		if (searchData.isRegex()) {
+			query = QueryBuilders.regexpQuery(searchField, searchTerm);
+		} else {
+			query = QueryBuilders.queryStringQuery(searchTerm).field(searchField);
+		}
 		
 		source.query(
 			QueryBuilders.nestedQuery(
 				"versions",
 				QueryBuilders.boolQuery()
 					.must(QueryBuilders.queryStringQuery(targetVersionId).field("versions.id"))
-					.must(QueryBuilders.queryStringQuery(searchTerm).field(searchField)),
+					.must(query),
 				ScoreMode.Total
 			).innerHit(
 				new InnerHitBuilder()

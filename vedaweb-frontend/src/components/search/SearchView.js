@@ -26,14 +26,8 @@ class SearchView extends Component {
 
     constructor(props){
         super(props);
-        this.switchMode = this.switchMode.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
         document.title = "VedaWeb | Advanced Search";
-    }
-
-    switchMode(key){
-        if (key !== "help")
-            stateStore.search.meta.mode = key;
     }
 
     handleSubmit(e){
@@ -49,7 +43,6 @@ class SearchView extends Component {
             
             //remove empty blocks
             jsonData.blocks = jsonData.blocks.filter(block => !this.isBlockEmpty(block));
-            
 
             for (let block of jsonData.blocks){
                 block.term = SanscriptAccents.t(block.term, stateStore.settings.transliteration, "iso");
@@ -159,21 +152,14 @@ class SearchView extends Component {
 
                         <Tabs
                         data-tour-id="search-modes"
-                        onChange={this.switchMode}
+                        onChange={(key) => stateStore.search.meta.mode = key}
+                        activeKey={stateStore.search.meta.mode}
                         type="card"
                         id="search-mode-selector"
                         tabBarGutter={8}
                         className="bottom-gap">
                             <TabPane tab="Grammar Search" key="grammar">
                                 <SearchGrammar />
-                            </TabPane>
-                            {/* <TabPane tab="Simple Search" key="simple">
-                                <SearchSimple/>
-                            </TabPane> */}
-                            <TabPane tab="Other Search" key="somemode">
-                                <div className="search-container">
-                                    More search modes will follow ...
-                                </div>
                             </TabPane>
                         </Tabs>
 

@@ -36,6 +36,7 @@ const stateStore = store({
             store: "search.quick",
             input: "",
             field: "version_lubotskyzurich",
+            regex: false
         },
 
         //// SEARCH: GRAMMAR SEARCH ////

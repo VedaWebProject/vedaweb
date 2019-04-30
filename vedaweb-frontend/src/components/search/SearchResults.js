@@ -73,7 +73,7 @@ class SearchResults extends Component {
             //console.log(JSON.stringify(queryJSON)); //TEMP DEV
             queryJSON.from = 0;
             queryJSON.size = stateStore.results.size;
-            queryJSON.sortById = stateStore.results.sortById;
+            queryJSON.sortBy = stateStore.results.sortBy;
             stateStore.results.queryJSON = queryJSON;
         } catch (e) {
             this.setState({
@@ -88,6 +88,7 @@ class SearchResults extends Component {
 
 
     loadData(queryJSON) {
+        console.log(stateStore.ui.layers);
         if (!queryJSON) queryJSON = stateStore.results.queryJSON;
 
         //construct "Search Results for ..." data
@@ -97,8 +98,7 @@ class SearchResults extends Component {
                     Object.keys(b).filter(k => k !== 'distance' && k !== 'lemma' && b[k] !== undefined && b[k] !== '')
                         .map(k => k + ': ' + b[k]).join(', ')).join('] & [') + "]"
                 : queryJSON.input,
-            field:  queryJSON.mode === "grammar"
-                ? "grammar data"
+            field:  queryJSON.mode === "grammar" ? "grammar data"
                 : stateStore.ui.layers.find(l => l.id === queryJSON.field).label
         };
 
