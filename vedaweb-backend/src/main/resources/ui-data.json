@@ -83,8 +83,7 @@
 		{ "id": "translation_otto", "label": "Otto (DE)", "show": false },
 		
 		{ "id": "glossing_", "label": "Morphological Glossing", "show": true },
-		{ "id": "dictionaries_", "label": "Dictionaries", "show": true },
-		{ "id": "metaInfo_", "label": "Meta Info", "show": true }
+		{ "id": "dictionaries_", "label": "Dictionaries", "show": true }
 	]
 	
 }
