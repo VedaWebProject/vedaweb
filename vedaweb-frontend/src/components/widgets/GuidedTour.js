@@ -71,7 +71,7 @@ class GuidedTour extends Component {
             {
                 id: "search-modes",
                 title: "The search modes",
-                text: "Here you can choose which one of the \"advanced\" search modes you want to use. The Grammar Search, for example, let's you define multiple word forms or lemmas with associated grammatical features to search for.",
+                text: "Here you can choose which one of the \"advanced\" search modes you want to use. The Grammar Search, for example, lets you define multiple word forms or lemmas with associated grammatical features to search for.",
                 icon: <Icon type="search"/>,
                 execBefore: () => this.props.history.replace("/search")
             },
