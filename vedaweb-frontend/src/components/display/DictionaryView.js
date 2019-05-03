@@ -5,7 +5,7 @@ import axios from 'axios';
 import "./DictionaryView.css";
 
 const alphabet = ["a", "ā", "i", "ī", "u", "ū", "r̥", "r̥̄", "l̥", "l̥̄", "ē", "e", "ai", "ō", "o", "au", "k", "kh", "g", "gh", "ṅ", "c", "ch", "j", "jh", "ñ", "ṭ", "ṭh", "ḍ", "ḍh", "ṇ", "t", "th", "d", "dh", "n", "p", "ph", "b", "bh", "m", "y", "r", "l", "v", "ś", "ṣ", "s", "h", "ḻ", "kṣ", "jñ"];
-
+const parser = new DOMParser();
 
 class DictionaryView extends Component {
 
@@ -18,6 +18,7 @@ class DictionaryView extends Component {
             dictData: [],
             error: undefined
         }
+        this.handleRefClicked = this.handleRefClicked.bind(this);
     }
 
     componentDidMount(){
@@ -44,9 +45,7 @@ class DictionaryView extends Component {
                 id
                 headwordDeva
                 headwordIso
-                senseTxtIso
-                senseHtmlIso
-                pageUri
+                entryTeiIso
             }
         }`;
 
@@ -59,14 +58,7 @@ class DictionaryView extends Component {
                     let t = lemmaData[i];
                     t["dict"] = t.lemmaRefs.map(ref => {
                         let entry = entries.find(e => e.id === ref);
-                        return entry === undefined ? {} : {
-                            graRef: ref,
-                            graDeva: entry.headwordDeva,
-                            graTxt: entry.senseTxtIso,
-                            graLemma: entry.headwordIso,
-                            graHtml: entry.senseHtmlIso,
-                            graPageUri : entry.pageUri
-                        };
+                        return entry === undefined ? {} : this.parseEntry(entry, parser);
                     });
                     dictData.push(t);
                 }
@@ -82,6 +74,45 @@ class DictionaryView extends Component {
                     error: !Object.isEmpty(error) ? error : undefined
                 });
             });
+        //lord, forgive me
+        window.handleRefClicked = this.handleRefClicked;
+    }
+
+    parseEntry(entry, parser){
+        //no parsing needed:
+        let e = {
+            graRef: entry.id,
+            graDeva: entry.headwordDeva,
+            graLemma: entry.headwordIso,
+            entryTeiIso: entry.entryTeiIso
+        };
+        //replace xml self closing tags to prevent paring errors
+        entry.entryTeiIso = entry.entryTeiIso.replace(/<(\w+?)\s?\/>/gi, "<$1></$1>");
+        //create xmlDOM
+        let xDoc = parser.parseFromString(entry.entryTeiIso, "text/html");
+        //parse graTxt
+        e.graTxt = xDoc.getElementsByTagName("sense")[0].innerText || "no preview available";
+        //parse graPageUri
+        e.graPageUri = xDoc.getElementsByTagName("note")[0]
+                             .getElementsByTagName("ref")[0]
+                             .getAttribute("target") || null;
+        //get entry markup
+        e.graHtml = xDoc.getElementsByTagName("sense")[0].innerHTML || "entry text could not be loaded";
+        
+        return e;
+    }
+
+    generateDictHTML(tei){
+        //create DOM
+        let xDoc = parser.parseFromString(tei, "text/html");
+        //set onClick handlers for dict refs
+        let stanzaRefs = xDoc.querySelectorAll("ref[target]");
+        //yes, i know. i don't want to do this, either.
+        for (let i = 0; i < stanzaRefs.length; i++) {
+            let refId = stanzaRefs[i].getAttribute("target").replace(/#/g,"");
+            stanzaRefs[i].setAttribute("onClick", "window.handleRefClicked('" + refId + "');");
+        }
+        return new XMLSerializer().serializeToString(xDoc);
     }
 
     transform(padas){
@@ -168,6 +199,10 @@ class DictionaryView extends Component {
         });
     }
 
+    handleRefClicked(id){
+        this.props.history.push("/view/id/" + id);
+    }
+
 
     render() {
 
@@ -181,7 +216,7 @@ class DictionaryView extends Component {
                         <tr>
                             <th>Lemma</th>
                             <th>Full Forms</th>
-                            <th>Excerpt (Graßmann)</th>
+                            <th>Preview (Graßmann)</th>
                             <th>Entries (Graßmann)</th>
                             <th>Others</th>
                         </tr>
@@ -231,8 +266,8 @@ class DictionaryView extends Component {
                             </div>
                             <span className="deva-font" style={{color:"#000"}}>{modalData.graDeva}</span><br/>
                             <div
-                            className="text-font"
-                            dangerouslySetInnerHTML={{__html: modalData.graHtml}}></div>
+                            className="dict-tei-render text-font"
+                            dangerouslySetInnerHTML={{__html: this.generateDictHTML(modalData.graHtml)}}></div>
                         </div>
                     </Modal>
                 }

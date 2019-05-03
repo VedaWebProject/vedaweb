@@ -315,7 +315,8 @@ class ContentView extends Component {
                                                     <h1>Dictionaries</h1>
                                                     <DictionaryView
                                                     key={'dict_' + data.id}
-                                                    data={data.padas}/>
+                                                    data={data.padas}
+                                                    history={this.props.history}/>
                                                 </div>
                                             }
 

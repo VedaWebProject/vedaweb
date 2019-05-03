@@ -18,3 +18,23 @@ table.teaser .non-expanding {
     white-space: nowrap;
     width: 1px;
 }
+
+
+/* TEI XML STYLING (UGLY) */
+
+.dict-tei-render > hi[rendition='#i'] {
+    font-style: italic;
+}
+
+.dict-tei-render > hi[rendition='#b'] {
+    font-weight: bold;
+}
+
+.dict-tei-render > ref {
+    color: #931111;
+    cursor: pointer;
+}
+
+.dict-tei-render > ref:hover {
+    text-decoration: underline;
+}
