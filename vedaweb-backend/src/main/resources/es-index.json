@@ -7,17 +7,15 @@
         },
 		"analysis": {
 			"analyzer": {
-		        "custom_german": {
-		          "tokenizer":  "standard",
+				"default": {
+				  "tokenizer":  "whitespace",
+		          "filter": ["lowercase"]
+				},
+		        "custom_translation": {
+		          "tokenizer":  "whitespace",
 		          "filter": ["lowercase", "german_normalization"]
 		       	}
-		    },
-            "filter" : {
-                "ascii_folding" : {
-                    "type" : "asciifolding",
-                    "preserve_original" : true
-                }
-            }
+		    }
 		}
 	},
 	"mappings": {
@@ -36,8 +34,8 @@
 					"type": "nested",
 					"properties": {
 						"id": {"type": "keyword"},
-						"form": {"type": "text", "analyzer": "custom_german", "similarity": "boolean" },
-						"form_raw": {"type": "text", "analyzer": "custom_german", "similarity": "boolean" },
+						"form": {"type": "text", "analyzer": "custom_translation", "similarity": "boolean" },
+						"form_raw": {"type": "text", "analyzer": "custom_translation", "similarity": "boolean" },
 						"source": {"type": "keyword"}
 					}
 		        },

@@ -442,7 +442,7 @@ public class ElasticIndexService {
 	private ArrayNode concatForms(StanzaVersion version, boolean removeAccents) {
 		ArrayNode forms = json.newArray();
 		for (String form : version.getForm()) {
-			form = StringUtils.removeMetaChars(form);
+			//form = StringUtils.removeMetaChars(form);
 			forms.add(
 				removeAccents
 					? StringUtils.removeVowelAccents(form)
