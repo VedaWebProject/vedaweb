@@ -22,19 +22,19 @@ table.teaser .non-expanding {
 
 /* TEI XML STYLING (UGLY) */
 
-.dict-tei-render > hi[rendition='#i'] {
+.dict-tei-render > sense > hi[rendition='#i'] {
     font-style: italic;
 }
 
-.dict-tei-render > hi[rendition='#b'] {
+.dict-tei-render > sense > hi[rendition='#b'] {
     font-weight: bold;
 }
 
-.dict-tei-render > ref {
+.dict-tei-render > sense > ref {
     color: #931111;
     cursor: pointer;
 }
 
-.dict-tei-render > ref:hover {
+.dict-tei-render > sense > ref:hover {
     text-decoration: underline;
 }

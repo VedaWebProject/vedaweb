@@ -18,7 +18,7 @@ class DictionaryView extends Component {
             dictData: [],
             error: undefined
         }
-        this.handleRefClicked = this.handleRefClicked.bind(this);
+        this.setDictContentRef = this.setDictContentRef.bind(this);
     }
 
     componentDidMount(){
@@ -74,8 +74,13 @@ class DictionaryView extends Component {
                     error: !Object.isEmpty(error) ? error : undefined
                 });
             });
-        //lord, forgive me
-        window.handleRefClicked = this.handleRefClicked;
+    }
+
+    setDictContentRef(ref, htmlNode){
+        this.dictContentRef = ref;
+        if (this.dictContentRef){
+            this.dictContentRef.appendChild(htmlNode);
+        }
     }
 
     parseEntry(entry, parser){
@@ -87,32 +92,31 @@ class DictionaryView extends Component {
             entryTeiIso: entry.entryTeiIso
         };
         //replace xml self closing tags to prevent paring errors
-        entry.entryTeiIso = entry.entryTeiIso.replace(/<(\w+?)\s?\/>/gi, "<$1></$1>");
+        e.entryTeiIso = entry.entryTeiIso.replace(/<(\w+?)\s?\/>/gi, "<$1></$1>");
         //create xmlDOM
-        let xDoc = parser.parseFromString(entry.entryTeiIso, "text/html");
+        let xDoc = parser.parseFromString(e.entryTeiIso, "text/html");
         //parse graTxt
         e.graTxt = xDoc.getElementsByTagName("sense")[0].innerText || "no preview available";
         //parse graPageUri
         e.graPageUri = xDoc.getElementsByTagName("note")[0]
                              .getElementsByTagName("ref")[0]
                              .getAttribute("target") || null;
-        //get entry markup
-        e.graHtml = xDoc.getElementsByTagName("sense")[0].innerHTML || "entry text could not be loaded";
-        
         return e;
     }
 
     generateDictHTML(tei){
         //create DOM
-        let xDoc = parser.parseFromString(tei, "text/html");
+        let xDoc = parser.parseFromString(tei, "text/html").getElementsByTagName("sense")[0];
         //set onClick handlers for dict refs
         let stanzaRefs = xDoc.querySelectorAll("ref[target]");
         //yes, i know. i don't want to do this, either.
         for (let i = 0; i < stanzaRefs.length; i++) {
             let refId = stanzaRefs[i].getAttribute("target").replace(/#/g,"");
-            stanzaRefs[i].setAttribute("onClick", "window.handleRefClicked('" + refId + "');");
+            stanzaRefs[i].addEventListener("click", () => {
+                this.props.history.push("/view/id/" + refId);
+            });
         }
-        return new XMLSerializer().serializeToString(xDoc);
+        return xDoc;
     }
 
     transform(padas){
@@ -185,7 +189,7 @@ class DictionaryView extends Component {
     }
 
     openDict(modalData){
-        if (modalData === undefined) return;
+        if (!modalData) return;
         this.setState({
             modalVisible: true,
             modalData: modalData
@@ -198,11 +202,6 @@ class DictionaryView extends Component {
             modalData: {}
         });
     }
-
-    handleRefClicked(id){
-        this.props.history.push("/view/id/" + id);
-    }
-
 
     render() {
 
@@ -238,7 +237,7 @@ class DictionaryView extends Component {
                                     return  <Button
                                             disabled={!isLoaded || error !== undefined}
                                             className="dict-link gap-right"
-                                            onClick={e => this.openDict(entry)}
+                                            onClick={() => {this.openDict(entry);}}
                                             title={"Show full entry for \"" + token.lemma + "\": #" + (i+1)}
                                             key={"lemma_" + i}>
                                                 <Icon type="book"/>
@@ -267,7 +266,9 @@ class DictionaryView extends Component {
                             <span className="deva-font" style={{color:"#000"}}>{modalData.graDeva}</span><br/>
                             <div
                             className="dict-tei-render text-font"
-                            dangerouslySetInnerHTML={{__html: this.generateDictHTML(modalData.graHtml)}}></div>
+                            //dangerouslySetInnerHTML={{__html: this.generateDictHTML(modalData.graHtml)}}
+                            ref={(ref) => this.setDictContentRef(ref, this.generateDictHTML(modalData.entryTeiIso))}>
+                            </div>
                         </div>
                     </Modal>
                 }
