@@ -6,7 +6,7 @@
   "homepage": "/rigveda/",
   "dependencies": {
     "@craco/craco": "^3.6.0",
-    "antd": "^3.15.1",
+    "antd": "^3.17.0",
     "axios": "^0.18.0",
     "browserizr": "^3.2.1",
     "craco-antd": "^1.10.0",
