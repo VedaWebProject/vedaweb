@@ -41,10 +41,14 @@ public class SearchData {
 	@JsonProperty("sortBy")
 	private String sortBy;
 	
-
+	@JsonProperty("sortOrder")
+	private String sortOrder;
+	
 	
 	public SearchData(){
 		blocks = new ArrayList<Map<String, Object>>();
+		sortBy = "_score";
+		sortOrder = "descend";
 	}
 	
 	
@@ -160,6 +164,16 @@ public class SearchData {
 
 	public void setSortBy(String sortBy) {
 		this.sortBy = sortBy;
+	}
+	
+	
+	public String getSortOrder() {
+		return sortOrder;
+	}
+
+
+	public void setSortOrder(String sortOrder) {
+		this.sortOrder = sortOrder;
 	}
 
 

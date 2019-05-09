@@ -20,7 +20,8 @@ const stateStore = store({
         page: 1,
         size: 10,
         total: 0,
-        sortBy: "relevance",
+        sortBy: null,
+        sortOrder: null,
         resultsData: {},
         queryJSON: {},
         queryEncoded: ''
@@ -373,7 +374,7 @@ const stateStore = store({
     save(obj){
         if (!stateStore.settings.acceptedPrivacyHint) return;
         for (var key in obj) {
-            if (!obj.hasOwnProperty(key) || typeof obj[key] !== "object"){
+            if (!obj.hasOwnProperty(key) || obj[key] === null || typeof obj[key] !== "object"){
                 continue;
             } else if (obj[key].store){
                 ls(obj[key].store, obj[key]);
@@ -385,7 +386,7 @@ const stateStore = store({
 
     load(obj){
         for (var key in obj) {
-            if (!obj.hasOwnProperty(key) || typeof obj[key] !== "object"){
+            if (!obj.hasOwnProperty(key) || obj[key] === null || typeof obj[key] !== "object"){
                 continue;
             } else if (obj[key].store){
                 obj[key] = ls(obj[key].store) ? Object.assign(obj[key], ls(obj[key].store)) : obj[key];

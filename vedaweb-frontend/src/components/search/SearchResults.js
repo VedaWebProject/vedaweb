@@ -51,7 +51,9 @@ class SearchResults extends Component {
     }
 
 
-    handleTableChange(pagination) {
+    handleTableChange(pagination, filters, sorter) {
+        stateStore.results.sortBy = sorter.field ? sorter.field : null;
+        stateStore.results.sortOrder = sorter.order ? sorter.order : null;
         stateStore.results.page = pagination.current;
         stateStore.results.size = pagination.pageSize;
         this.loadData(stateStore.results.queryJSON);
@@ -123,8 +125,9 @@ class SearchResults extends Component {
 
         //sorting
         queryJSON.sortBy = stateStore.results.sortBy;
+        queryJSON.sortOrder = stateStore.results.sortOrder;
 
-        //console.log(JSON.stringify(queryJSON));
+        //console.log(queryJSON);
 
         //request search api data
         axios.post(process.env.PUBLIC_URL + "/api/search", queryJSON)
@@ -133,20 +136,18 @@ class SearchResults extends Component {
                 stateStore.results.resultsData = response.data;
                 stateStore.results.total = response.data.total;
                 stateStore.results.maxScore = response.data.maxScore;
-
-                console.log(response.data.hits[0])
                 
                 this.setState({
                     isLoaded: true,
                     tableData: response.data.hits === undefined ? {} :
                         response.data.hits.map( (hit, i) => ({
                             key: 'result_' + i,
-                            location: hit.docId,
-                            text: <div dangerouslySetInnerHTML={this.createHighlightHTML(hit)}></div>,
-                            addressee: hit.hymnAddressee,
-                            group: hit.hymnGroup,
+                            _doc: hit.docId,
+                            context: <div dangerouslySetInnerHTML={this.createHighlightHTML(hit)}></div>,
+                            hymnAddressee: hit.hymnAddressee,
+                            hymnGroup: hit.hymnGroup,
                             strata: hit.stanzaStrata,
-                            relevance: hit.score
+                            _score: hit.score
                         }))
                 });
 
@@ -213,34 +214,39 @@ class SearchResults extends Component {
         //define table columns
         const columns = [{
             title: 'Location',
-            dataIndex: 'location',
-            key: 'location',
+            dataIndex: '_doc',
+            key: '_doc',
             className: 'loc-col',
+            sorter: true,
             render: loc => <span className="primary-font bold red">{loc}</span>,
             //render: loc => <Link to={"/view/id/" + loc}>{loc}</Link>,
           }, {
-            title: 'Search Hit Context',
-            dataIndex: 'text',
-            key: 'text',
+            title: 'Context',
+            dataIndex: 'context',
+            key: 'context',
             render: content => <span className="text-font">{content}</span>
           }, {
             title: 'Addressee',
-            dataIndex: 'addressee',
-            key: 'addressee',
+            dataIndex: 'hymnAddressee',
+            key: 'hymnAddressee',
+            sorter: true,
             render: content => <span className="text-font">{content}</span>
           }, {
             title: 'Group',
-            dataIndex: 'group',
-            key: 'group',
+            dataIndex: 'hymnGroup',
+            key: 'hymnGroup',
+            sorter: true,
             render: content => <span className="text-font">{content}</span>
           }, {
             title: 'Strata',
             dataIndex: 'strata',
             key: 'strata',
+            sorter: true,
+            
           }, {
             title: 'Relevance',
-            dataIndex: 'relevance',
-            key: 'relevance',
+            dataIndex: '_score',
+            key: '_score',
             render: content => <RelevanceMeter max={stateStore.results.maxScore} value={content}/>
           }];
           
@@ -279,7 +285,7 @@ class SearchResults extends Component {
                                 }
                             </div>
 
-                            Sort results by: 
+                            {/* Sort results by: 
                             <Select
                             size={"default"}
                             value={stateStore.results.sortBy}
@@ -300,7 +306,7 @@ class SearchResults extends Component {
                                 className="secondary-font">
                                     Natural order
                                 </Option>
-                            </Select>
+                            </Select> */}
                             
                             {/** RESULTS **/}
                             <Table
@@ -309,6 +315,7 @@ class SearchResults extends Component {
                             loading={!this.state.isLoaded}
                             locale={{emptyText: 'There are no results for this search.'}}
                             onRow={(record) => ({ onClick: () => { this.onResultClick(record.location) } })}
+                            sortDirections={['ascend', 'descend']}
                             pagination={{
                                 pageSize: stateStore.results.size,
                                 current: stateStore.results.page,

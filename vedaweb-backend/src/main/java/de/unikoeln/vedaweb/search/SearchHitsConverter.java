@@ -6,8 +6,12 @@ import java.util.Map;
 
 import org.elasticsearch.action.search.SearchResponse;
 import org.elasticsearch.common.text.Text;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class SearchHitsConverter {
+	
+	private static final Logger log = LoggerFactory.getLogger(SearchHitsConverter.class);
 	
 	/*
 	 * Process Elasticsearch SearchResponse to prepare SearchHits
@@ -17,6 +21,12 @@ public class SearchHitsConverter {
 	public static SearchHits processSearchResponse(SearchResponse response) {
 		//System.out.println(response);
 		SearchHits targetHits = new SearchHits();
+		
+		if (response == null) {
+			log.error("No search response from ES (null). Something went wrong.");
+			return targetHits;
+		}
+			
 		
 		targetHits.setTotal(response.getHits().getTotalHits());
 		targetHits.setTook(response.getTook().getMillis());

@@ -18,6 +18,7 @@ import org.elasticsearch.search.aggregations.bucket.terms.TermsAggregationBuilde
 import org.elasticsearch.search.builder.SearchSourceBuilder;
 import org.elasticsearch.search.fetch.subphase.FetchSourceContext;
 import org.elasticsearch.search.fetch.subphase.highlight.HighlightBuilder;
+import org.elasticsearch.search.sort.SortOrder;
 
 import de.unikoeln.vedaweb.util.StringUtils;
 
@@ -303,10 +304,14 @@ public class SearchRequestBuilder {
 				.from(searchData.getFrom() >= 0 ? searchData.getFrom() : 0)
 				.size(searchData.getSize() >= 0 ? searchData.getSize() : 0);
 		
-		if (searchData.getSortBy() == null || searchData.getSortBy().equals("relevance"))
+		if (searchData.getSortBy() == null) {
 			return source;
-		else
-			return source.sort(searchData.getSortBy());
+		} else {
+			return source.sort(
+				searchData.getSortBy(),
+				searchData.getSortOrder().equals("ascend") ? SortOrder.ASC : SortOrder.DESC
+			);
+		}
 	}
 	
 	
