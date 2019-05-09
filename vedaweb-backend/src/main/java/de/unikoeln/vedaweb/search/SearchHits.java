@@ -15,6 +15,9 @@ public class SearchHits {
 	@JsonProperty("took")
 	private long took;
 	
+	@JsonProperty("maxScore")
+	private float maxScore;
+	
 	
 	public SearchHits() {
 		this.hits = new ArrayList<SearchHit>();
@@ -36,6 +39,14 @@ public class SearchHits {
 		this.took = took;
 	}
 	
+	public float getMaxScore() {
+		return maxScore;
+	}
+
+	public void setMaxScore(float maxScore) {
+		this.maxScore = maxScore;
+	}
+
 	public List<SearchHit> getHits(){
 		return this.hits;
 	}

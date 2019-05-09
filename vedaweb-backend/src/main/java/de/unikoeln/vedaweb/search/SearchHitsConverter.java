@@ -20,6 +20,7 @@ public class SearchHitsConverter {
 		
 		targetHits.setTotal(response.getHits().getTotalHits());
 		targetHits.setTook(response.getTook().getMillis());
+		targetHits.setMaxScore(response.getHits().getMaxScore());
 		
 		//TODO process hits
 		response.getHits().forEach(esHit -> {

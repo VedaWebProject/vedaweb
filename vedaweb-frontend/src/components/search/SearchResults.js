@@ -15,6 +15,7 @@ import { Base64 } from 'js-base64';
 import stateStore from "../../stateStore";
 
 import fileDownload from "js-file-download";
+import RelevanceMeter from "./RelevanceMeter";
 
 const Option = Select.Option;
 
@@ -131,6 +132,9 @@ class SearchResults extends Component {
                 //console.log(JSON.stringify(response.data));
                 stateStore.results.resultsData = response.data;
                 stateStore.results.total = response.data.total;
+                stateStore.results.maxScore = response.data.maxScore;
+
+                console.log(response.data.hits[0])
                 
                 this.setState({
                     isLoaded: true,
@@ -141,7 +145,8 @@ class SearchResults extends Component {
                             text: <div dangerouslySetInnerHTML={this.createHighlightHTML(hit)}></div>,
                             addressee: hit.hymnAddressee,
                             group: hit.hymnGroup,
-                            strata: hit.stanzaStrata
+                            strata: hit.stanzaStrata,
+                            relevance: hit.score
                         }))
                 });
 
@@ -232,6 +237,11 @@ class SearchResults extends Component {
             title: 'Strata',
             dataIndex: 'strata',
             key: 'strata',
+          }, {
+            title: 'Relevance',
+            dataIndex: 'relevance',
+            key: 'relevance',
+            render: content => <RelevanceMeter max={stateStore.results.maxScore} value={content}/>
           }];
           
         return (
