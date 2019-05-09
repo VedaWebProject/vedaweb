@@ -12,6 +12,7 @@ class RelevanceMeter extends Component {
         return (
 
             <div
+            title={(value * 100).toFixed(2) + " %"}
             style={{
                 position: "relative",
                 display: "inline-block",
