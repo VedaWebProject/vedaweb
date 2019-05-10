@@ -6,8 +6,12 @@ class RelevanceMeter extends Component {
 
         if (!this.props.value || !this.props.max) return null;
 
-        const value = (this.props.value / this.props.max);
+        const value = Math.min((this.props.value / this.props.max), 1);
         const hue = ((value)*120).toString(10);
+
+        console.log(
+            "p.val: " + this.props.value + "   p.max: " + this.props.max + "   value: " + value + "   hue: " + hue
+        )
 
         return (
 
