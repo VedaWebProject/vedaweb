@@ -246,6 +246,7 @@ class SearchResults extends Component {
             key: '_doc',
             className: 'loc-col',
             sorter: true,
+            sortOrder: stateStore.results.query.sortBy === "_doc" ? stateStore.results.query.sortOrder : false,
             render: loc => <span className="primary-font bold red">{loc}</span>,
           }, {
             title: 'Context',
@@ -257,18 +258,21 @@ class SearchResults extends Component {
             dataIndex: 'hymnAddressee',
             key: 'hymnAddressee',
             sorter: true,
+            sortOrder: stateStore.results.query.sortBy === "hymnAddressee" ? stateStore.results.query.sortOrder : false,
             render: content => <span className="text-font">{content}</span>
           }, {
             title: 'Group',
             dataIndex: 'hymnGroup',
             key: 'hymnGroup',
             sorter: true,
+            sortOrder: stateStore.results.query.sortBy === "hymnGroup" ? stateStore.results.query.sortOrder : false,
             render: content => <span className="text-font">{content}</span>
           }, {
             title: 'Strata',
             dataIndex: 'strata',
             key: 'strata',
             sorter: true,
+            sortOrder: stateStore.results.query.sortBy === "strata" ? stateStore.results.query.sortOrder : false,
             render: content => <div style={{textAlign:"center"}}>{content}</div>
           }, {
             title: 'Relevance',
