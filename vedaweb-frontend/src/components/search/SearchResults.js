@@ -345,7 +345,7 @@ class SearchResults extends Component {
                             dataSource={this.state.tableData}
                             loading={!this.state.isLoaded}
                             locale={{emptyText: 'There are no results for this search.'}}
-                            onRow={(record) => ({ onClick: () => { this.onResultClick(record.location) } })}
+                            onRow={(record) => ({ onClick: () => { this.onResultClick(record._doc) } })}
                             sortDirections={['ascend', 'descend']}
                             pagination={{
                                 pageSize: stateStore.results.query.size,
