@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Table, Button, Select } from 'antd';
+import { Table, Button } from 'antd';
 
 import { withRouter } from 'react-router-dom';
 
@@ -16,8 +16,6 @@ import stateStore from "../../stateStore";
 
 import fileDownload from "js-file-download";
 import RelevanceMeter from "./RelevanceMeter";
-
-const Option = Select.Option;
 
 const fieldDisplayMapping = {
     "form": "Stanza text",
@@ -285,29 +283,6 @@ class SearchResults extends Component {
                                 }
                             </div>
 
-                            {/* Sort results by: 
-                            <Select
-                            size={"default"}
-                            value={stateStore.results.sortBy}
-                            defaultValue={stateStore.results.sortBy}
-                            onSelect={(v) => {stateStore.results.sortBy = v; this.loadData();}}
-                            className="secondary-font"
-                            style={{marginLeft: "1rem"}}
-                            dropdownMatchSelectWidth={false}>
-                                <Option
-                                key={"res_sort_natural"}
-                                value={"relevance"}
-                                className="secondary-font">
-                                    Relevance
-                                </Option>
-                                <Option
-                                key={"res_sort_id"}
-                                value={"id"}
-                                className="secondary-font">
-                                    Natural order
-                                </Option>
-                            </Select> */}
-                            
                             {/** RESULTS **/}
                             <Table
                             columns={columns}
