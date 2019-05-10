@@ -34,40 +34,7 @@ public class SearchRequestBuilder {
 //	private static final String[] HIGHLIGHT_GRAMMAR = {"tokens.form*", "tokens.lemma*", "tokens.grammar.*"};
 	
 	
-//	public static SearchRequest buildSmartQuery(SearchData searchData){
-//		if (searchData.getField().equals("translation")) {
-//			return buildTranslationQuery(searchData);
-//		}
-//		SearchSourceBuilder source = getCommonSearchSource(searchData);
-//		
-//		String searchTerm = StringUtils.normalizeNFC(searchData.getInput());
-//		String field = searchData.getField();
-//		String lemmataField = "lemmata";
-//		
-//		if (StringUtils.containsAccents(searchTerm)) {
-//			field += "_raw";
-//			lemmataField += "_raw";
-//		}
-//		
-//		//query string query (using lucene query language)
-//		source.query(
-//			QueryBuilders.queryStringQuery(searchTerm)
-//				.field(field, 1.2f)
-//				.field(lemmataField)
-//		);
-//
-//		//Highlighting
-//		source.highlighter(getHighlighting(HIGHLIGHT_SMART));
-//		//set _source fields
-//		source.fetchSource(FETCH_SOURCE_CONTEXT);
-//		
-//		return getCommonSearchRequest().source(source);
-//	}
-	
-	
 	public static SearchRequest buildQuickQuery(SearchData searchData) {
-		SearchSourceBuilder source = getCommonSearchSource(searchData);
-		
 		String searchTerm = StringUtils.normalizeNFC(
 				searchData.isAccents() ? searchData.getInput()
 						: StringUtils.removeVowelAccents(searchData.getInput()));
@@ -82,29 +49,26 @@ public class SearchRequestBuilder {
 			query = QueryBuilders.queryStringQuery(searchTerm).field(searchField);
 		}
 		
-		source.query(
-			QueryBuilders.nestedQuery(
-				"versions",
-				QueryBuilders.boolQuery()
-					.must(QueryBuilders.queryStringQuery(targetVersionId).field("versions.id"))
-					.must(query),
-				ScoreMode.Total
-			).innerHit(
-				new InnerHitBuilder()
-					.setSize(10)
-					.setHighlightBuilder(getHighlighting(HIGHLIGHT_SMART)))
-		);
+		SearchSourceBuilder source = getCommonSearchSource(searchData)
+			.query(
+				QueryBuilders.nestedQuery(
+					"versions",
+					QueryBuilders.boolQuery()
+						.must(QueryBuilders.queryStringQuery(targetVersionId).field("versions.id"))
+						.must(query),
+					ScoreMode.Total
+				).innerHit(
+					new InnerHitBuilder()
+						.setSize(10)
+						.setHighlightBuilder(getHighlighting(HIGHLIGHT_SMART)))
+			)
+			.fetchSource(FETCH_SOURCE_CONTEXT); //set _source fields
 		
-		//set _source fields
-		source.fetchSource(FETCH_SOURCE_CONTEXT);
 		return getCommonSearchRequest().source(source);
 	}
 	
 	
 	public static SearchRequest buildGrammarQuery(SearchData searchData){
-		SearchRequest req = getCommonSearchRequest();
-		SearchSourceBuilder source = getCommonSearchSource(searchData);
-		
 		//root bool query
 		BoolQueryBuilder bool = QueryBuilders.boolQuery();
 		
@@ -119,8 +83,11 @@ public class SearchRequestBuilder {
 		if (searchData.getMeta().size() > 0)
 			bool.must(getSearchMetaQuery(searchData));
 		
-		source = source.query(bool).fetchSource(FETCH_SOURCE_CONTEXT);
-		return req.source(source);
+		return getCommonSearchRequest().source(
+			getCommonSearchSource(searchData)
+				.query(bool)
+				.fetchSource(FETCH_SOURCE_CONTEXT)
+		);
 	}
 	
 	
