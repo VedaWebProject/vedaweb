@@ -30,4 +30,14 @@ public class SearchController {
 						search.search(searchData)));
     }
 	
+	
+	@PostMapping(value = "/search/occ", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    public String searchOccView(@RequestBody SearchData searchData) {
+		//System.out.println(mappingService.mapObjectToJson(searchData));
+		return mappingService.mapObjectToJson(
+				new GrammarSearchOccurrences(
+						SearchHitsConverter.processSearchResponse(
+								search.searchOcc(searchData))));
+    }
+	
 }

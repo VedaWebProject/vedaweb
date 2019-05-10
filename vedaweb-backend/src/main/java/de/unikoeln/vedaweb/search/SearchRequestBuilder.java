@@ -210,20 +210,11 @@ public class SearchRequestBuilder {
 	}
 	
 	
-//	private static BoolQueryBuilder getMultiFieldBoolQuery(String query, boolean must, String ... fields) {
-//		BoolQueryBuilder bool = QueryBuilders.boolQuery();
-//		
-//		//TODO: fuzzy or nah?
-//		for (String field : fields) {
-//			if (must) {
-//				bool.must(QueryBuilders.matchQuery(field, query));
-//			} else {
-//				bool.should(QueryBuilders.matchQuery(field, query));
-//			}
-//		}
-//		
-//		return bool;
-//	}
+	public static SearchRequest buildOccurrencesQuery(SearchData searchData) {
+		SearchRequest req = buildGrammarQuery(searchData);
+		req.source(req.source().size(20000));
+		return req;
+	}
 	
 	
 	private static HighlightBuilder getHighlighting(String... fields){

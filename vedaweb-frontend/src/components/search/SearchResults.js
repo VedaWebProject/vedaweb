@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Table, Button } from 'antd';
+import { Table, Button, Modal } from 'antd';
 
 import { withRouter } from 'react-router-dom';
 
@@ -28,13 +28,19 @@ class SearchResults extends Component {
 
     constructor(props) {
         super(props)
-        this.state = { isLoaded: false, isExportLoaded: true }
+        this.state = {
+            isLoaded: false,
+            isExportLoaded: true,
+            isOccCountLoaded: true,
+            occCount: null
+        }
         document.title = "VedaWeb | Search Results";
         this.loadData = this.loadData.bind(this);
         this.handleTableChange = this.handleTableChange.bind(this);
         this.handleTableChange = this.handleTableChange.bind(this);
         this.handleNewQuery = this.handleNewQuery.bind(this);
         this.export = this.export.bind(this);
+        this.occCount = this.occCount.bind(this);
     }
 
 
@@ -150,6 +156,7 @@ class SearchResults extends Component {
                 });
 
                 stateStore.results.queryJSON = queryJSON;
+                window.scrollTo(0, 0);
             })
             .catch((error) => {
                 this.setState({
@@ -199,8 +206,34 @@ class SearchResults extends Component {
                 this.setState({
                     isExportLoaded: true
                 });
-                alert("There was an error generating the data.");
+                Modal.error({ title: 'Error', content: 'There was an error generating the data', okText: 'OK' });
             });
+    }
+
+
+    occCount(){
+        this.setState({ isOccCountLoaded: false });
+
+        axios.post(process.env.PUBLIC_URL + "/api/search/occ", stateStore.results.queryJSON)
+            .then((response) => {
+                this.setState({
+                    isOccCountLoaded: true,
+                    occCount: response.data.count
+                });
+            })
+            .catch((error) => {
+                this.setState({
+                    isOccCountLoaded: true,
+                    occCount: null
+                });
+                Modal.error({ title: "Error", content: 'There was an error generating the data', okText: 'OK' });
+            });
+    }
+
+
+    occCountAvailable(){
+        return stateStore.results.queryJSON.mode === "grammar"
+            && stateStore.results.queryJSON.blocks.length === 1;
     }
 
 
@@ -217,7 +250,6 @@ class SearchResults extends Component {
             className: 'loc-col',
             sorter: true,
             render: loc => <span className="primary-font bold red">{loc}</span>,
-            //render: loc => <Link to={"/view/id/" + loc}>{loc}</Link>,
           }, {
             title: 'Context',
             dataIndex: 'context',
@@ -262,18 +294,38 @@ class SearchResults extends Component {
 
                         <div id="search-results" className="card">
 
+                            {/** SEARCH RESULTS HEADING **/}
+
                             { this.state.queryDisplay !== undefined &&
                                 <h1>
                                     Search Results for
                                     <span className="text-font grey"> "{this.state.queryDisplay.query}" </span>
                                     in<span className="text-font grey"> "{this.state.queryDisplay.field}"</span>
-                                    <Button type="secondary" icon={this.state.isExportLoaded ? "export" : "loading"} onClick={this.export} title="Export results as CSV" style={{marginLeft:"1rem"}}/>
+
+                                    {/** EXPORT AND OCCURRENCES FUNCTIONS **/}
+                                    <Button
+                                    type="secondary"
+                                    icon={this.state.isExportLoaded ? "export" : "loading"}
+                                    onClick={this.export}
+                                    title="Export results as CSV"
+                                    style={{marginLeft:"1rem", float:"right"}}/>
+                                    {this.occCountAvailable() &&
+                                        <Button
+                                        type="secondary"
+                                        icon={!this.state.isOccCountLoaded ? "loading" : !this.state.occCount ? "bar-chart" : null}
+                                        children={this.state.occCount}
+                                        disabled={this.state.isOccCountLoaded && this.state.occCount}
+                                        onClick={this.occCount}
+                                        title="Request occurrences info for this search"
+                                        style={{marginLeft:"1rem", float:"right"}}/>
+                                    }
                                 </h1>
                             }
 
-                            {/** SEARCH STATS **/}
+
+                            {/** SEARCH META INFO **/}
                             
-                            <div className="search-stats secondary-font bottom-gap">
+                            <div className="search-stats secondary-font bottom-gap top-gap">
                                 { isLoaded && data.hits !== undefined ?
                                     data.total > 0 ?
                                         <span>
@@ -283,7 +335,9 @@ class SearchResults extends Component {
                                 }
                             </div>
 
-                            {/** RESULTS **/}
+
+                            {/** DISPLAY SEARCH RESULTS TABLE **/}
+
                             <Table
                             columns={columns}
                             dataSource={this.state.tableData}
@@ -304,8 +358,6 @@ class SearchResults extends Component {
                         </div>
                     }
                 </div>
-
-            // </Spin>
         );
     }
 

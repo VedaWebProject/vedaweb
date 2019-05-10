@@ -17,15 +17,19 @@ public class ElasticSearchService {
 	
 	
 	public SearchResponse search(SearchData searchData){
-		//searchData.cleanAndFormatFields();
-		
 		switch (searchData.getMode()){
 		case "quick":
 			return submitSearch(SearchRequestBuilder.buildQuickQuery(searchData));
 		case "grammar":
 			return submitSearch(SearchRequestBuilder.buildGrammarQuery(searchData));
-		default: return null;
+		default:
+			return null;
 		}
+	}
+	
+	
+	public SearchResponse searchOcc(SearchData searchData){
+		return submitSearch(SearchRequestBuilder.buildOccurrencesQuery(searchData));
 	}
 	
 	
