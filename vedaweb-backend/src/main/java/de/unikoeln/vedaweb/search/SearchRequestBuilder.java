@@ -212,7 +212,7 @@ public class SearchRequestBuilder {
 	
 	public static SearchRequest buildOccurrencesQuery(SearchData searchData) {
 		SearchRequest req = buildGrammarQuery(searchData);
-		req.source(req.source().size(20000)); //get ALL results
+		req.source(req.source().size(19999).from(0)); //get ALL results always from 0
 		return req;
 	}
 	

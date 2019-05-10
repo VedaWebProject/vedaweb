@@ -31,20 +31,21 @@ class SearchView extends Component {
     }
 
     handleSubmit(e){
-        let jsonData = {
-            mode: stateStore.search.meta.mode,
-            scopes: stateStore.search.meta.scopes,
-            meta: stateStore.search.meta.meta,
-            accents: stateStore.settings.accents
-        };
+
+        stateStore.results.resetQuery();
+        let query = stateStore.results.query;
+        query.mode = stateStore.search.meta.mode;
+        query.scopes = stateStore.search.meta.scopes;
+        query.meta = stateStore.search.meta.meta;
+        query.accents = stateStore.settings.accents;
         
         if (stateStore.search.meta.mode === "grammar"){
-            jsonData["blocks"] = JSON.parse(JSON.stringify(stateStore.search.grammar.blocks));
+            query["blocks"] = JSON.parse(JSON.stringify(stateStore.search.grammar.blocks));
             
             //remove empty blocks
-            jsonData.blocks = jsonData.blocks.filter(block => !this.isBlockEmpty(block));
+            query.blocks = query.blocks.filter(block => !this.isBlockEmpty(block));
 
-            for (let block of jsonData.blocks){
+            for (let block of query.blocks){
                 block.term = SanscriptAccents.t(block.term, stateStore.settings.transliteration, "iso");
                 //make fields direct props of block
                 for (let field of block.fields){
@@ -57,11 +58,11 @@ class SearchView extends Component {
             }
         }
 
-        jsonData.scopes = jsonData.scopes.filter(scope => (
+        query.scopes = query.scopes.filter(scope => (
             (scope.fromBook + scope.toBook + scope.fromHymn + scope.toHymn) > 0
         ));
 
-        this.props.history.push("/results/" + Base64.encodeURI(JSON.stringify(jsonData)));
+        this.props.history.push("/results/" + Base64.encodeURI(JSON.stringify(query)));
     }
 
     isBlockEmpty(block){

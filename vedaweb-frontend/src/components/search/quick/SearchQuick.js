@@ -29,14 +29,25 @@ class SearchQuick extends Component {
         if (/[^~\d]\d+/.test(input)){
             this.props.history.push("/view/id/" + input);
         } else {
-            let jsonData = {
-                mode: "quick",
-                input: stateStore.search.quick.field.startsWith('version_') ? SanscriptAccents.t(input, stateStore.settings.transliteration, "iso") : input,
-                field: stateStore.search.quick.field,
-                accents: stateStore.settings.accents,
-                regex: stateStore.search.quick.regex
-            };
-            this.props.history.push("/results/" + Base64.encodeURI(JSON.stringify(jsonData)));
+            stateStore.results.resetQuery();
+            let query = stateStore.results.query;
+            query.mode = "quick";
+            query.input = stateStore.search.quick.field.startsWith('version_')
+                          ? SanscriptAccents.t(input, stateStore.settings.transliteration, "iso")
+                          : input;
+            query.field = stateStore.search.quick.field;
+            query.accents = stateStore.settings.accents;
+            query.regex = stateStore.search.quick.regex;
+
+            // let jsonData = {
+            //     mode: "quick",
+            //     input: stateStore.search.quick.field.startsWith('version_') ? SanscriptAccents.t(input, stateStore.settings.transliteration, "iso") : input,
+            //     field: stateStore.search.quick.field,
+            //     accents: stateStore.settings.accents,
+            //     regex: stateStore.search.quick.regex
+            // };
+
+            this.props.history.push("/results/" + Base64.encodeURI(JSON.stringify(query)));
         }
     }
 

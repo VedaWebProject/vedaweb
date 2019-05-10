@@ -45,6 +45,7 @@ class SearchResults extends Component {
 
 
     componentDidMount(){
+        window.scrollTo(0, 0);
         this.handleNewQuery(this.props.match.params.querydata);
     }
 
@@ -56,32 +57,29 @@ class SearchResults extends Component {
 
 
     handleTableChange(pagination, filters, sorter) {
-        stateStore.results.sortBy = sorter.field ? sorter.field : null;
-        stateStore.results.sortOrder = sorter.order ? sorter.order : null;
-        stateStore.results.page = pagination.current;
-        stateStore.results.size = pagination.pageSize;
-        this.loadData(stateStore.results.queryJSON);
+        this.setState({ isLoaded: false });
+
+        stateStore.results.query.from = ((pagination.current - 1) * pagination.pageSize);
+        stateStore.results.query.page = pagination.current;
+        stateStore.results.query.size = pagination.pageSize;
+
+        stateStore.results.query.sortBy = sorter.field ? sorter.field : null;
+        stateStore.results.query.sortOrder = sorter.order ? sorter.order : null;
+        
+        this.props.history.push("/results/" + Base64.encodeURI(JSON.stringify(stateStore.results.query)));
+        //this.loadData(stateStore.results.query);
     }
 
 
     handleNewQuery(queryData) {
-        //scroll to top
-        window.scrollTo(0, 0);
-
         this.setState({ isLoaded: false });
 
+        //store base64 encoded query
         stateStore.results.queryEncoded = queryData;
-        stateStore.results.page = 1;
 
-        let queryJSON = {};
-
+        //decode base64 encoded query
         try {
-            queryJSON = JSON.parse(Base64.decode(queryData));
-            //console.log(JSON.stringify(queryJSON)); //TEMP DEV
-            queryJSON.from = 0;
-            queryJSON.size = stateStore.results.size;
-            queryJSON.sortBy = stateStore.results.sortBy;
-            stateStore.results.queryJSON = queryJSON;
+            stateStore.results.query = JSON.parse(Base64.decode(queryData));
         } catch (e) {
             this.setState({
                 isLoaded: true,
@@ -90,12 +88,11 @@ class SearchResults extends Component {
             return;
         }
 
-        this.loadData(queryJSON);
+        this.loadData(stateStore.results.query);
     }
 
 
     loadData(queryJSON) {
-        if (!queryJSON) queryJSON = stateStore.results.queryJSON;
 
         //construct "Search Results for ..." data
         let queryDisplay = {
@@ -124,12 +121,12 @@ class SearchResults extends Component {
         document.title = "VedaWeb | Search Results for '" + queryDisplay.query + "'";
 
         //pagination and request size
-        queryJSON.from = ((stateStore.results.page - 1) * stateStore.results.size);
-        queryJSON.size = stateStore.results.size;
+        //queryJSON.from = ((stateStore.results.page - 1) * stateStore.results.size);
+        //queryJSON.size = stateStore.results.size;
 
         //sorting
-        queryJSON.sortBy = stateStore.results.sortBy;
-        queryJSON.sortOrder = stateStore.results.sortOrder;
+        //queryJSON.sortBy = stateStore.results.sortBy;
+        //queryJSON.sortOrder = stateStore.results.sortOrder;
 
         //console.log(queryJSON);
 
@@ -138,8 +135,6 @@ class SearchResults extends Component {
             .then((response) => {
                 //console.log(JSON.stringify(response.data));
                 stateStore.results.resultsData = response.data;
-                stateStore.results.total = response.data.total;
-                stateStore.results.maxScore = response.data.maxScore;
                 
                 this.setState({
                     isLoaded: true,
@@ -155,7 +150,9 @@ class SearchResults extends Component {
                         }))
                 });
 
-                stateStore.results.queryJSON = queryJSON;
+                //stateStore.results.queryJSON = queryJSON;
+
+                //scroll to top after loading new data
                 window.scrollTo(0, 0);
             })
             .catch((error) => {
@@ -195,7 +192,7 @@ class SearchResults extends Component {
     export(){
         this.setState({ isExportLoaded: false });
 
-        axios.post(process.env.PUBLIC_URL + "/api/export/search", stateStore.results.queryJSON)
+        axios.post(process.env.PUBLIC_URL + "/api/export/search", stateStore.results.query)
             .then((response) => {
                 this.setState({
                     isExportLoaded: true
@@ -214,7 +211,7 @@ class SearchResults extends Component {
     occCount(){
         this.setState({ isOccCountLoaded: false });
 
-        axios.post(process.env.PUBLIC_URL + "/api/search/occ", stateStore.results.queryJSON)
+        axios.post(process.env.PUBLIC_URL + "/api/search/occ", stateStore.results.query)
             .then((response) => {
                 this.setState({
                     isOccCountLoaded: true,
@@ -232,8 +229,8 @@ class SearchResults extends Component {
 
 
     occCountAvailable(){
-        return stateStore.results.queryJSON.mode === "grammar"
-            && stateStore.results.queryJSON.blocks.length === 1;
+        return stateStore.results.query.mode === "grammar"
+            && stateStore.results.query.blocks.length === 1;
     }
 
 
@@ -277,7 +274,7 @@ class SearchResults extends Component {
             title: 'Relevance',
             dataIndex: '_score',
             key: '_score',
-            render: content => <div style={{textAlign:"center"}}><RelevanceMeter max={stateStore.results.maxScore} value={content}/></div>
+            render: content => <div style={{textAlign:"center"}}><RelevanceMeter max={stateStore.results.resultsData.maxScore} value={content}/></div>
           }];
           
         return (
@@ -347,9 +344,9 @@ class SearchResults extends Component {
                             onRow={(record) => ({ onClick: () => { this.onResultClick(record.location) } })}
                             sortDirections={['ascend', 'descend']}
                             pagination={{
-                                pageSize: stateStore.results.size,
-                                current: stateStore.results.page,
-                                total: stateStore.results.total,
+                                pageSize: stateStore.results.query.size,
+                                current: stateStore.results.query.page,
+                                total: stateStore.results.resultsData.total,
                                 position: 'both',
                                 showSizeChanger: true,
                                 pageSizeOptions: ['10','25','50','100']

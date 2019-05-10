@@ -17,14 +17,18 @@ const stateStore = store({
     //// SEARCH RESULTS ////
 
     results: {
-        page: 1,
-        size: 10,
-        total: 0,
-        sortBy: null,
-        sortOrder: null,
         resultsData: {},
-        queryJSON: {},
-        queryEncoded: ''
+        query: {},
+        queryEncoded: '',
+        
+        resetQuery(){
+            stateStore.results.query = {
+                sortBy: null,
+                sortOrder: null,
+                size: 10,
+                from: 0
+            };
+        }
     },
 
     //// SEARCH ////
