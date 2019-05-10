@@ -272,12 +272,12 @@ class SearchResults extends Component {
             dataIndex: 'strata',
             key: 'strata',
             sorter: true,
-            
+            render: content => <div style={{textAlign:"center"}}>{content}</div>
           }, {
             title: 'Relevance',
             dataIndex: '_score',
             key: '_score',
-            render: content => <RelevanceMeter max={stateStore.results.maxScore} value={content}/>
+            render: content => <div style={{textAlign:"center"}}><RelevanceMeter max={stateStore.results.maxScore} value={content}/></div>
           }];
           
         return (
@@ -306,6 +306,7 @@ class SearchResults extends Component {
                                     <Button
                                     type="secondary"
                                     icon={this.state.isExportLoaded ? "export" : "loading"}
+                                    children={"Export as CSV"}
                                     onClick={this.export}
                                     title="Export results as CSV"
                                     style={{marginLeft:"1rem", float:"right"}}/>
@@ -313,7 +314,7 @@ class SearchResults extends Component {
                                         <Button
                                         type="secondary"
                                         icon={!this.state.isOccCountLoaded ? "loading" : !this.state.occCount ? "bar-chart" : null}
-                                        children={this.state.occCount && (this.state.occCount + " total occurrences")}
+                                        children={this.state.occCount ? (this.state.occCount + " total occurrences") : "Total occurrences"}
                                         disabled={this.state.isOccCountLoaded && this.state.occCount}
                                         onClick={this.occCount}
                                         title="Request occurrences info for this search"

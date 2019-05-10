@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import de.unikoeln.vedaweb.document.StanzaRepository;
 import de.unikoeln.vedaweb.document.StanzaXmlRepository;
 import de.unikoeln.vedaweb.search.ElasticSearchService;
 import de.unikoeln.vedaweb.search.SearchData;
@@ -22,12 +23,15 @@ public class ExportController {
 	private ElasticSearchService search;
 	
 	@Autowired
-	private StanzaXmlRepository repo;
+	private StanzaXmlRepository stanzaXmlRepo;
+	
+	@Autowired
+	private StanzaRepository stanzaRepo;
 	
 	
 	@PostMapping(value = "/search", produces = MediaType.TEXT_PLAIN_VALUE)
     public String exportSearchCSV(@RequestBody SearchData searchData) {
-		searchData.setSize(20000);	//get ALL results
+		searchData.setSize((int)stanzaRepo.count());	//get ALL results
 		return CsvExport.searchHitsAsCsv(
 				SearchHitsConverter.processSearchResponse(
 						search.search(searchData)));
@@ -35,7 +39,7 @@ public class ExportController {
 	
 	@GetMapping(value = "/doc/{docId}/xml", produces = MediaType.TEXT_XML_VALUE)
     public String exportDoc(@PathVariable("docId") String docId) {
-		return repo.findById(docId).get().getXml();
+		return stanzaXmlRepo.findById(docId).get().getXml();
     }
 
 }
