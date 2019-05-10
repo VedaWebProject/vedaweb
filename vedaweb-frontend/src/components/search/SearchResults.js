@@ -224,9 +224,9 @@ class SearchResults extends Component {
             .catch((error) => {
                 this.setState({
                     isOccCountLoaded: true,
-                    occCount: null
+                    occCount: "Error retrieving"
                 });
-                Modal.error({ title: "Error", content: 'There was an error generating the data', okText: 'OK' });
+                Modal.error({ title: "Error", content: 'There was an error retrieving the data', okText: 'OK' });
             });
     }
 
@@ -313,7 +313,7 @@ class SearchResults extends Component {
                                         <Button
                                         type="secondary"
                                         icon={!this.state.isOccCountLoaded ? "loading" : !this.state.occCount ? "bar-chart" : null}
-                                        children={this.state.occCount}
+                                        children={this.state.occCount && (this.state.occCount + " total occurrences")}
                                         disabled={this.state.isOccCountLoaded && this.state.occCount}
                                         onClick={this.occCount}
                                         title="Request occurrences info for this search"
