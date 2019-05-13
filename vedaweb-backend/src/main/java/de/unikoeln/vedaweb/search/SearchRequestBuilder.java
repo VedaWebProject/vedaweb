@@ -54,7 +54,7 @@ public class SearchRequestBuilder {
 				QueryBuilders.nestedQuery(
 					"versions",
 					QueryBuilders.boolQuery()
-						.must(QueryBuilders.queryStringQuery(targetVersionId).field("versions.id"))
+						.filter(QueryBuilders.queryStringQuery(targetVersionId).field("versions.id"))
 						.must(query),
 					ScoreMode.Total
 				).innerHit(
@@ -75,13 +75,13 @@ public class SearchRequestBuilder {
 		//add search block queries
 		addGrammarBlockQueries(bool, searchData);
 		
-		//add search scope queries
+		//add search scope filters
 		if (searchData.getScopes().size() > 0)
-			bool.must(getSearchScopesQuery(searchData));
+			bool.filter(getSearchScopesQuery(searchData));
 		
-		//add search meta queries
+		//add search meta filters
 		if (searchData.getMeta().size() > 0)
-			bool.must(getSearchMetaQuery(searchData));
+			bool.filter(getSearchMetaQuery(searchData));
 		
 		return getCommonSearchRequest().source(
 			getCommonSearchSource(searchData)
