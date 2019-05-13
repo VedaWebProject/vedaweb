@@ -27,8 +27,8 @@ public class CsvExport {
 			for (String contextKey : hit.getHighlight().keySet()) {
 				csv.append(common + DLMT + q(contextKey) + DLMT
 						+ q(hit.getHighlight().get(contextKey).replaceAll(PATTERN_TAGS, "")));
+				csv.append("\n");
 			}
-			csv.append("\n");
 		}
 		
 		return csv.toString();
@@ -39,8 +39,7 @@ public class CsvExport {
 	 * Quote string
 	 */
 	private static String q(String s) {
-		return "\"" + s.replaceAll("\\\"", "\\\\\"") + "\"";
+		return "\"" + s.replaceAll("\\\"", "") + "\"";
 	}
-	
 
 }
