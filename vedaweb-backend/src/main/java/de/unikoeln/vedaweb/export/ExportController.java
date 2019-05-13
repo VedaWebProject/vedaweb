@@ -32,6 +32,7 @@ public class ExportController {
 	@PostMapping(value = "/search", produces = MediaType.TEXT_PLAIN_VALUE)
     public String exportSearchCSV(@RequestBody SearchData searchData) {
 		searchData.setSize((int)stanzaRepo.count());	//get ALL results
+		searchData.setFrom(0);	//export from result 0
 		return CsvExport.searchHitsAsCsv(
 				SearchHitsConverter.processSearchResponse(
 						search.search(searchData)));
