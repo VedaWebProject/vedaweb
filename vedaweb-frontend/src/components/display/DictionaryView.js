@@ -3,6 +3,7 @@ import { Icon, Modal, Button } from 'antd';
 import axios from 'axios';
 
 import "./DictionaryView.css";
+import DictCorrection from "../widgets/DictCorrection";
 
 const alphabet = ["a", "ā", "i", "ī", "u", "ū", "r̥", "r̥̄", "l̥", "l̥̄", "ē", "e", "ai", "ō", "o", "au", "k", "kh", "g", "gh", "ṅ", "c", "ch", "j", "jh", "ñ", "ṭ", "ṭh", "ḍ", "ḍh", "ṇ", "t", "th", "d", "dh", "n", "p", "ph", "b", "bh", "m", "y", "r", "l", "v", "ś", "ṣ", "s", "h", "ḻ", "kṣ", "jñ"];
 const parser = new DOMParser();
@@ -16,7 +17,8 @@ class DictionaryView extends Component {
             modalVisible: false,
             modalData: undefined,
             dictData: [],
-            error: undefined
+            error: undefined,
+            correctionVisible: false
         }
         this.setDictContentRef = this.setDictContentRef.bind(this);
     }
@@ -218,6 +220,7 @@ class DictionaryView extends Component {
                             <th>Preview (Graßmann)</th>
                             <th>Entries (Graßmann)</th>
                             <th>Others</th>
+                            <th>Correction</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -246,6 +249,9 @@ class DictionaryView extends Component {
                                 })}
                             </td>
                             <td>n/a</td>
+                            <td>
+                                <DictCorrection lemma={token.lemma} />
+                            </td>
                         </tr>))}
                     </tbody>
                 </table>
@@ -272,6 +278,7 @@ class DictionaryView extends Component {
                         </div>
                     </Modal>
                 }
+
 
                 {isLoaded && error !== undefined &&
                     <span className="red secondary-font">
