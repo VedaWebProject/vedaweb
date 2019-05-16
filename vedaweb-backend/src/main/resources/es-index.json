@@ -45,8 +45,8 @@
 						"index":		{ "type": "short" },
 						"form":			{ "type": "keyword" },
 						"form_raw":		{ "type": "keyword" },
-						"lemma":		{ "type": "text" },
-						"lemma_raw":	{ "type": "text" }
+						"lemma":		{ "type": "keyword" },
+						"lemma_raw":	{ "type": "keyword" }
 					}
 				}
 			},
