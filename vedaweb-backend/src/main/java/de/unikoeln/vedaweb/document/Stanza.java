@@ -105,13 +105,13 @@ public class Stanza implements Comparable<Stanza> {
 		this.strata = strata;
 	}
 
-	public List<StanzaVersion> getTranslations(){
-		List<StanzaVersion> translations = new ArrayList<StanzaVersion>();
-		for (StanzaVersion vv : versions)
-			if (vv.getType().equals("translation"))
-				translations.add(vv);
-		return translations;
-	}
+//	public List<StanzaVersion> getTranslations(){
+//		List<StanzaVersion> translations = new ArrayList<StanzaVersion>();
+//		for (StanzaVersion vv : versions)
+//			if (vv.getType().equals("translation"))
+//				translations.add(vv);
+//		return translations;
+//	}
 	
 	public List<StanzaVersion> getVersions() {
 		return versions;
