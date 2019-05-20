@@ -26,34 +26,35 @@ class DictCorrection extends Component {
         this.onChange = this.onChange.bind(this);
         this.submit = this.submit.bind(this);
         this.onSelect = this.onSelect.bind(this);
+        this.loadCorrections = this.loadCorrections.bind(this);
     }
 
 
-    // componentDidMount(){
-    //     this.setState({ isLoaded: false });
+    loadCorrections(){
+        this.setState({ isLoaded: false });
 
-    //     axios.get(process.env.PUBLIC_URL + "/api/corrections/lemma/" + this.props.lemma)
-    //         .then((response) => {
-    //             this.setState({
-    //                 isLoaded: true,
-    //                 error: null,
-    //                 corrections: response.data
-    //             });
-    //         })
-    //         .catch((error) => {
-    //             this.setState({
-    //                 isLoaded: true,
-    //                 error: error,
-    //                 corrections: []
-    //             });
-    //             alert("There was an error retrieving previous corrections.");
-    //         });
-    // }
+        axios.post(process.env.PUBLIC_URL + "/api/corrections/lemma", { lemma: this.props.lemma } )
+            .then((response) => {
+                this.setState({
+                    isLoaded: true,
+                    error: null,
+                    corrections: response.data
+                });
+            })
+            .catch((error) => {
+                this.setState({
+                    isLoaded: true,
+                    error: error,
+                    corrections: []
+                });
+                alert("There was an error retrieving previous corrections.");
+            });
+    }
 
 
     componentDidUpdate(prevProps, prevState){
         if (!prevState.visible && this.state.visible){
-            this.onChange(this.props.lemma);
+            this.loadCorrections();
         }
     }
 
@@ -163,7 +164,7 @@ class DictCorrection extends Component {
                     onClose={() => this.setState({visible: false})}
                     okText="Save Correction">
 
-                            {/** PREVIOUS CORRECTIONS 
+                            {/** PREVIOUS CORRECTIONS */}
                             { this.state.corrections && this.state.corrections.length > 0 &&
                                 <div style={{marginBottom: "1rem"}}>
                                     <h3>Previous corrections</h3>
@@ -179,11 +180,13 @@ class DictCorrection extends Component {
                                     )}
                                 </div>
                             }
-                            */}
+                            
 
                             {/** DICT ENTRY SEARCH */}
                             <h3>Suggest new correction</h3>
+                            Search for dictionary lemma: 
                             <Select
+                            placeholder="Search for dictionary lemma"
                             showSearch
                             defaultActiveFirstOption={false}
                             showArrow={false}

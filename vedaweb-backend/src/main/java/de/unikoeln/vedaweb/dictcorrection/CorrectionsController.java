@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.fasterxml.jackson.databind.JsonNode;
+
 @RestController
 @RequestMapping("api/corrections")
 public class CorrectionsController {
@@ -23,9 +25,10 @@ public class CorrectionsController {
 		return correctionsRepo.save(correction).toString();
     }
 	
-	@GetMapping(value = "/lemma/{lemma}", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-    public List<Correction> getCorrections(@PathVariable("lemma") String lemma) {
-		return correctionsRepo.findAllByLemma(lemma);
+	@PostMapping(value = "/lemma", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    public List<Correction> getCorrections(@RequestBody JsonNode lemma) {
+		System.out.println(lemma.get("lemma").textValue());
+		return correctionsRepo.findAllByLemma(lemma.get("lemma").textValue());
     }
 
 }
