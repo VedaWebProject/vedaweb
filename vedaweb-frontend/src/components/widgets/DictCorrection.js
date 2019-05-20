@@ -29,26 +29,26 @@ class DictCorrection extends Component {
     }
 
 
-    componentDidMount(){
-        this.setState({ isLoaded: false });
+    // componentDidMount(){
+    //     this.setState({ isLoaded: false });
 
-        axios.get(process.env.PUBLIC_URL + "/api/corrections/lemma/" + this.props.lemma)
-            .then((response) => {
-                this.setState({
-                    isLoaded: true,
-                    error: null,
-                    corrections: response.data
-                });
-            })
-            .catch((error) => {
-                this.setState({
-                    isLoaded: true,
-                    error: error,
-                    corrections: []
-                });
-                alert("There was an error retrieving previous corrections.");
-            });
-    }
+    //     axios.get(process.env.PUBLIC_URL + "/api/corrections/lemma/" + this.props.lemma)
+    //         .then((response) => {
+    //             this.setState({
+    //                 isLoaded: true,
+    //                 error: null,
+    //                 corrections: response.data
+    //             });
+    //         })
+    //         .catch((error) => {
+    //             this.setState({
+    //                 isLoaded: true,
+    //                 error: error,
+    //                 corrections: []
+    //             });
+    //             alert("There was an error retrieving previous corrections.");
+    //         });
+    // }
 
 
     componentDidUpdate(prevProps, prevState){
@@ -163,7 +163,7 @@ class DictCorrection extends Component {
                     onClose={() => this.setState({visible: false})}
                     okText="Save Correction">
 
-                            {/** PREVIOUS CORRECTIONS */}
+                            {/** PREVIOUS CORRECTIONS 
                             { this.state.corrections && this.state.corrections.length > 0 &&
                                 <div style={{marginBottom: "1rem"}}>
                                     <h3>Previous corrections</h3>
@@ -179,6 +179,7 @@ class DictCorrection extends Component {
                                     )}
                                 </div>
                             }
+                            */}
 
                             {/** DICT ENTRY SEARCH */}
                             <h3>Suggest new correction</h3>
