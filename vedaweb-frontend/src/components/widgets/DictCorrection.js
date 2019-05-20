@@ -152,10 +152,10 @@ class DictCorrection extends Component {
         
         return (
             <div style={{display:"inline-block"}}>
-                <Button icon="edit" onClick={() => this.setState({visible: true})}/>
+                <Button icon="api" onClick={() => this.setState({visible: true})}/>
                 { this.state.visible &&
                     <Modal
-                    title={<div>Propose dict. relation for: <strong className="text-font">{this.props.lemma}</strong></div>}
+                    title={<div>Correct dict. relation for: <strong className="text-font">{this.props.lemma}</strong></div>}
                     centered
                     destroyOnClose={true}
                     visible={this.state.visible}
@@ -183,7 +183,7 @@ class DictCorrection extends Component {
                             
 
                             {/** DICT ENTRY SEARCH */}
-                            <h3>Suggest new correction</h3>
+                            <h3>Propose new correction</h3>
                             Search for dictionary lemma: 
                             <Select
                             placeholder="Search for dictionary lemma"
