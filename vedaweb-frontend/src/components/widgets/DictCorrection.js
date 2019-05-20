@@ -18,13 +18,36 @@ class DictCorrection extends Component {
             input: "",
             value: null,
             visible: false,
-            comment: ""
+            comment: "",
+            corrections: []
         }
 
         this.suggest = this.suggest.bind(this);
         this.onChange = this.onChange.bind(this);
         this.submit = this.submit.bind(this);
         this.onSelect = this.onSelect.bind(this);
+    }
+
+
+    componentDidMount(){
+        this.setState({ isLoaded: false });
+
+        axios.get(process.env.PUBLIC_URL + "/api/corrections/lemma/" + this.props.lemma)
+            .then((response) => {
+                this.setState({
+                    isLoaded: true,
+                    error: null,
+                    corrections: response.data
+                });
+            })
+            .catch((error) => {
+                this.setState({
+                    isLoaded: true,
+                    error: error,
+                    corrections: []
+                });
+                alert("There was an error retrieving previous corrections.");
+            });
     }
 
 
@@ -69,8 +92,12 @@ class DictCorrection extends Component {
 
     onChange(input){
         this.setState({ input: input });
+        if (this.timeout) clearTimeout(this.timeout);
         if (input && input.length > 0){
-            this.suggest(input);
+            this.setState({ isLoaded: false });
+            this.timeout = setTimeout(() => {
+                this.suggest(input);
+            }, 500);
         }
     }
 
@@ -136,6 +163,25 @@ class DictCorrection extends Component {
                     onClose={() => this.setState({visible: false})}
                     okText="Save Correction">
 
+                            {/** PREVIOUS CORRECTIONS */}
+                            { this.state.corrections && this.state.corrections.length > 0 &&
+                                <div style={{marginBottom: "1rem"}}>
+                                    <h3>Previous corrections</h3>
+                                    {this.state.corrections.map((c, i) =>
+                                        <div
+                                        style={{marginBottom: "1rem"}}
+                                        className="text-font"
+                                        key={"corr_" + i}>
+                                            <strong>headword: </strong>{c.headwordIso}<br/>
+                                            <strong>dict.id: </strong>{c.dictId}<br/>
+                                            <strong>comment: </strong>{c.comment}
+                                        </div>
+                                    )}
+                                </div>
+                            }
+
+                            {/** DICT ENTRY SEARCH */}
+                            <h3>Suggest new correction</h3>
                             <Select
                             showSearch
                             defaultActiveFirstOption={false}
@@ -157,14 +203,16 @@ class DictCorrection extends Component {
 
                             </Select>
                             
+                            {/** SELECTED DICT ENTRY */}
                             { this.state.value &&
-                                <div>
+                                <div className="text-font">
+                                    <strong>headword: </strong>{this.state.value.headwordIso}<br/>
+                                    <strong>headword Deva: </strong>{this.state.value.headwordDeva}<br/>
                                     <strong>id: </strong>{this.state.value.id}<br/>
-                                    <strong>headwordIso: </strong>{this.state.value.headwordIso}<br/>
-                                    <strong>headwordDeva: </strong>{this.state.value.headwordDeva}<br/>
                                 </div>
                             }
 
+                            {/** COMMENT */}
                             <TextArea
                             placeholder="Comment (optional)"
                             value={this.state.comment}
