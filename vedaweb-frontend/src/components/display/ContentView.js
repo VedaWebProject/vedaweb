@@ -268,7 +268,7 @@ class ContentView extends Component {
                                                                         <div
                                                                         key={"trans_" + i}
                                                                         style={{display: condensedView ? "inline-block" : "block"}}>
-                                                                            {line}
+                                                                            {line}&nbsp;
                                                                         </div>
                                                                     ))}
                                                                 </div>
