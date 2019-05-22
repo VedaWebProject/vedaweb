@@ -18,6 +18,8 @@ The pilot text is the Rigveda, linked to the dictionaries available at Cologne D
     - [Search API endpoints](#search-api-endpoints)
       - [Quick Search](#quick-search)
       - [Grammar Search](#grammar-search)
+    - [Data Export Endpoints](#data-export-endpoints)
+      - [TEI-XML of a single stanza](#tei-xml-of-a-single-stanza)
 
 
 # VedaWeb API
@@ -32,7 +34,7 @@ The VedaWeb application exposes some API endpoints which are (at the time) limit
 
 
 ## Documentation of existing API endpoints
-> *April 2019* (!)
+> *May 2019* (!)
 
 ### Direct Document Access via Index Numbers
 The endpoints used for direct access to the documents managed by the application are accessible via simple `GET` requests of the following form:
@@ -145,4 +147,18 @@ The following is a sample request body for the *grammar search*. Please see the 
   "size": 50,           // (max.) number of search results to retrieve
   "from": 0             // index of the first search result to retrieve
 }
+```
+
+### Data Export Endpoints
+
+#### TEI-XML of a single stanza
+The following API endpoint returns the complete TEI-XML of a stanza (currently without a valid header, so this is **not** a valid TEI-encoded document but just the XML node of the stanza itself!):
+
+```
+vedaweb.uni-koeln.de/rigveda/api/export/doc/{docId}/xml
+```
+...where `docId` is the ID of the stanza to export. The form of the ID is the stanza number with trailing zeroes and without the dots. For book `2` (`02`), hymn `5` (`005`), stanza `1` (`01`), the ID would be `0200501`, so the full API call would be
+
+```
+vedaweb.uni-koeln.de/rigveda/api/export/doc/0200501/xml
 ```
