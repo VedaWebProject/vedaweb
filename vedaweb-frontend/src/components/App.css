@@ -194,12 +194,6 @@ hr {
     vertical-align: middle;
 }
 
-.flex-center {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
 .inline-block {
     display: inline-block;
 }

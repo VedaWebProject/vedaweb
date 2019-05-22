@@ -32,7 +32,8 @@ class ContentView extends Component {
             data: {},
             isLoaded: false,
             filtersVisible: false,
-            exportVisible: false
+            exportVisible: false,
+            condensedView: false
         }
     }
 
@@ -122,7 +123,7 @@ class ContentView extends Component {
     
 
     render() {
-        const { error, isLoaded, data } = this.state;
+        const { error, isLoaded, data, condensedView } = this.state;
 
         return (
             <Spin
@@ -199,6 +200,7 @@ class ContentView extends Component {
                                     { data.versions !== undefined &&
                                         <div>
 
+                                            {/** TEXT VERSIONS **/}
                                             {stateStore.ui.isLayerVisible('version_') &&
                                                 <div
                                                 className="content-plain content-block card"
@@ -216,10 +218,13 @@ class ContentView extends Component {
                                                                     <span className="bold gap-right">{version.label}</span>
                                                                     <HelpButton inline type={v.id}/>
                                                                     <div
-                                                                    className={"gap-left " + (v.language === "deva" ? "deva-font" : "text-font")}>
+                                                                    className={"gap-left " + (v.language === "deva" ? "deva-font" : "text-font")}
+                                                                    style={{display: condensedView ? "inline-block" : "block"}}>
                                                                         {v.form.map((line, i) => (
-                                                                            <div key={"trans_" + i}>
-                                                                                {v.applyKeys ?
+                                                                            <div
+                                                                            key={"trans_" + i}
+                                                                            style={{display: condensedView ? "inline-block" : "block"}}>
+                                                                                {v.applyKeys && !condensedView ?
                                                                                     <span className="red gap-right">{String.fromCharCode(i + 97)} </span>
                                                                                     : ''
                                                                                 }
@@ -232,6 +237,7 @@ class ContentView extends Component {
                                                 </div>
                                             }
 
+                                            {/** TRANSLATIONS **/}
                                             {stateStore.ui.isLayerVisible('translation_')
                                                 && data.versions.filter(v => (
                                                     v.id.startsWith('translation_') && stateStore.ui.isLayerVisible(v.id))
@@ -240,7 +246,7 @@ class ContentView extends Component {
                                                 <div
                                                 className="content-plain content-block card"
                                                 ref={this.scrollTo}>
-                                                    <h1 className="inline-block">Translations</h1>
+                                                    <h1>Translations</h1>
 
                                                     {stateStore.ui.layers.filter(
                                                         l => l.id.startsWith('translation_')
@@ -251,12 +257,19 @@ class ContentView extends Component {
                                                             <div
                                                             key={"t_" + translation.source}
                                                             className="translation"
-                                                            ref={this.scrollTo}>
+                                                            ref={this.scrollTo}
+                                                            style={{display: condensedView ? "inline-block" : "block"}}>
                                                                 <span className="bold">{translation.source} </span>({translation.language})
                                                                 <HelpButton inline type={l.id} style={{marginLeft:'.5rem'}}/>
-                                                                <div className="text-font gap-left">
+                                                                <div
+                                                                className="text-font gap-left"
+                                                                style={{display: condensedView ? "inline-block" : "block"}}>
                                                                     {translation.form.map((line, i) => (
-                                                                        <div key={"trans_" + i}>{line}</div>
+                                                                        <div
+                                                                        key={"trans_" + i}
+                                                                        style={{display: condensedView ? "inline-block" : "block"}}>
+                                                                            {line}
+                                                                        </div>
                                                                     ))}
                                                                 </div>
                                                             </div>
@@ -264,6 +277,7 @@ class ContentView extends Component {
                                                 </div>
                                             }
 
+                                            {/** GLOSSINGS **/}
                                             {stateStore.ui.isLayerVisible('glossing_') &&
                                                 <div
                                                 className="glossing content-block card"
@@ -275,9 +289,13 @@ class ContentView extends Component {
                                                     {data.padas.map(pada => (
                                                         <div
                                                         className="glossing-line"
-                                                        key={"p_" + pada.index}>
+                                                        key={"p_" + pada.index}
+                                                        style={{display: condensedView ? "inline-block" : "block"}}>
 
-                                                            <span key={"p_gloss_line" + pada.index} className="pada-line text-font">
+                                                            <span
+                                                            key={"p_gloss_line" + pada.index}
+                                                            className="pada-line text-font"
+                                                            style={{display: condensedView ? "none" : "inlie-block"}}>
                                                                 {pada.id}
                                                             </span>
 
@@ -308,6 +326,7 @@ class ContentView extends Component {
                                                 </div>
                                             }
 
+                                            {/** DICTIONARIES **/}
                                             {stateStore.ui.isLayerVisible('dictionaries_') &&
                                                 <div
                                                 className="glossing content-block card"
@@ -394,40 +413,45 @@ class ContentView extends Component {
                                 <Col span={3}>
 
                                     <Affix offsetTop={10}>
+                                        {/** SIDE BUTTON: TOGGLE CONTENT */}
                                         <div
                                         className="card red flex-center btn-aside"
                                         title="Show view selectors"
                                         onClick={() => this.setState({filtersVisible: true})}
-                                        data-tour-id="toggle-content"
-                                        style={{
-                                            cursor:'pointer',
-                                            textAlign:'center',
-                                            padding:'1rem .5rem',
-                                            minHeight: '100px'
-                                        }}>
+                                        data-tour-id="toggle-content">
                                             <Badge
                                             showZero
                                             style={{backgroundColor:'#931111'}}
                                             count={stateStore.ui.layers.filter(l => l.id.endsWith('_') && l.show).length}>
-                                                <div style={{textAlign:'center', fontSize:'20px', lineHeight: '1.2',}}>
+                                                <div style={{textAlign:'center', lineHeight: '1.5', fontSize:'18px'}}>
                                                     <Icon type="eye" style={{fontSize:'24px'}}/><br/>
                                                     Toggle Content
                                                 </div>
                                             </Badge>
                                         </div>
 
+                                        {/** SIDE BUTTON: TOGGLE CONDENSED VIEW */}
+                                        <div
+                                        className={"card red flex-center btn-aside" + (condensedView ? " btn-aside-active" : "")}
+                                        title="Toggle condensed reading view"
+                                        onClick={() => this.setState({condensedView: !condensedView})}
+                                        data-tour-id="toggle-condensed-view">
+                                            <div style={{textAlign:'center', lineHeight: '1.5',}}>
+                                                <Icon
+                                                type={condensedView ? "colum-height" : "vertical-align-middle"}
+                                                style={{fontSize:'24px'}}/>
+                                                <br/>
+                                                {condensedView ? "Full Size View" : "Condensed View"}
+                                            </div>
+                                        </div>
+
+                                        {/** SIDE BUTTON: EXPORT */}
                                         <div
                                         className="card red flex-center btn-aside"
                                         title="Show export options"
                                         onClick={() => this.setState({exportVisible: true})}
-                                        data-tour-id="toggle-export"
-                                        style={{
-                                            cursor:'pointer',
-                                            fontSize:'20px',
-                                            padding:'1rem .5rem',
-                                            minHeight: '100px'
-                                        }}>
-                                            <div style={{textAlign:'center', fontSize:'20px', lineHeight: '1.2',}}>
+                                        data-tour-id="toggle-export">
+                                            <div style={{textAlign:'center', lineHeight: '1.5',}}>
                                                 <Icon type="export" style={{fontSize:'24px'}}/><br/>
                                                 Export
                                             </div>

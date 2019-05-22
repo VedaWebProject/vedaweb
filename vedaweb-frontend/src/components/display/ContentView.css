@@ -59,5 +59,26 @@ table td {
 }
 
 .btn-aside {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    font-size: 18px !important;
+    line-height: 1.5;
     border: 1px solid #931111 !important;
+    cursor: pointer !important;
+    padding: .8rem .5rem !important;
+
+    margin: .2rem;
+    background-color: #fff;
+    border-radius: 3px;
+
+    -webkit-box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.15);
+	-moz-box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.15);
+    box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.15);
+}
+
+.btn-aside-active {
+    background-color: #931111 !important;
+    color: #fff !important;
 }
