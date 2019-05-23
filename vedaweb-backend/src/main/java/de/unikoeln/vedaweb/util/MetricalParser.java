@@ -50,6 +50,8 @@ public class MetricalParser {
 			.replaceAll(SPC, SPC_MARK) 
 			// mark short vowels at line end as SHORT
 			.replaceAll(VK + "$", S_SHORT) 
+			// mark short vowels at word end as SHORT
+			.replaceAll(VK + "(?=" + SPC_MARK + ")", S_SHORT)
 			// mark short vowels in last syllable of line as LONG
 			.replaceAll(VK + C_MARK + "+$", S_LONG) 
 			// mark short vowels followed by two consonants as LONG

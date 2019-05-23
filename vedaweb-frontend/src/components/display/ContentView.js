@@ -284,7 +284,7 @@ class ContentView extends Component {
                                                 className="content-plain content-block card"
                                                 ref={this.scrollTo}>
                                                     <h1>
-                                                        Metrical Data&#12288;
+                                                        Metrical Data (experimental)&#12288;
                                                         <span className="font-small grey">
                                                             — long &#12288; ◡ short { !condensedView && "\u3000 (n) syllables" }
                                                         </span>
