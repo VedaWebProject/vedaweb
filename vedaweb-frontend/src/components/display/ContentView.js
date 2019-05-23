@@ -228,7 +228,7 @@ class ContentView extends Component {
                                                                                     <span className="red gap-right">{String.fromCharCode(i + 97)} </span>
                                                                                     : ''
                                                                                 }
-                                                                                {line}
+                                                                                {line}&nbsp;
                                                                             </div>
                                                                         ))}
                                                                     </div>
