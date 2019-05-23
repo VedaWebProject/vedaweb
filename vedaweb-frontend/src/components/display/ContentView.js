@@ -277,6 +277,30 @@ class ContentView extends Component {
                                                 </div>
                                             }
 
+                                            {/** METRICAL DATA **/}
+                                            {stateStore.ui.isLayerVisible('metricaldata_')
+                                                && data.metricalData &&
+                                                <div
+                                                className="content-plain content-block card"
+                                                ref={this.scrollTo}>
+                                                    <h1>
+                                                        Metrical Data&#12288;
+                                                        <span className="font-small grey">
+                                                            — long &#12288; ◡ short { !condensedView && "\u3000 (n) syllables" }
+                                                        </span>
+                                                    </h1>
+
+                                                    {data.metricalData.map((line, i) => (
+                                                        <div
+                                                        key={"metricalData_" + i}
+                                                        style={{display: condensedView ? "inline-block" : "block"}}>
+                                                            {line.replace(/L/ig,"—").replace(/S/ig,"◡").replace(/ /ig,"\u3000") + "\u3000"}
+                                                            {!condensedView && "(" + line.replace(/ /ig,"").length + ")"}
+                                                        </div>
+                                                    ))}
+                                                </div>
+                                            }
+
                                             {/** GLOSSINGS **/}
                                             {stateStore.ui.isLayerVisible('glossing_') &&
                                                 <div

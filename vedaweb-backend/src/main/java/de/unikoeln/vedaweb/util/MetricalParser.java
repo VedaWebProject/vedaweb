@@ -12,7 +12,7 @@ import java.text.Normalizer.Form;
 public class MetricalParser {
 	
 	//default long/short marks
-	private static final String S_LONG = "~";
+	private static final String S_LONG = "—";
 	private static final String S_SHORT = "◡";
 	
 	//whitespace supplements
@@ -74,6 +74,38 @@ public class MetricalParser {
 		return parse(iso)
 			.replaceAll(S_LONG, longMark)
 			.replaceAll(S_SHORT, shortMark);
+	}
+	
+	/**
+	 * Parses an ISO-15919-transliterated Sanskrit string
+	 * into a metrical notation with long/short syllable markers.
+	 * Multiline strings will be parsed line by line
+	 * and returned in an array of lines.
+	 * @param iso The ISO-15919 string
+	 * @return The metre data
+	 */
+	public static String[] parseMultiline(String iso) {
+		String[] lines = iso.split("\n");
+		for (int i = 0; i < lines.length; i++)
+			lines[i] = parse(lines[i]);
+		return lines;
+	}
+	
+	/**
+	 * Parses an ISO-15919-transliterated Sanskrit string
+	 * into a metrical notation with custom long/short syllable markers.
+	 * Multiline strings will be parsed line by line
+	 * and returned in an array of lines.
+	 * @param iso The ISO-15919 string
+	 * @param longMark Custom mark for long syllables
+	 * @param shortMark Custom mark for short syllables
+	 * @return The metre data
+	 */
+	public static String[] parseMultiline(String iso, String longMark, String shortMark) {
+		String[] lines = iso.split("\n");
+		for (int i = 0; i < lines.length; i++)
+			lines[i] = parse(lines[i], longMark, shortMark);
+		return lines;
 	}
 	
 	/*

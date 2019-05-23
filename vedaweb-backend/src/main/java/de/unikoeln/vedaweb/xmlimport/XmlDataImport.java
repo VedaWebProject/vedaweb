@@ -12,6 +12,7 @@ import de.unikoeln.vedaweb.document.StanzaVersion;
 import de.unikoeln.vedaweb.document.StanzaXml;
 import de.unikoeln.vedaweb.document.StanzaXmlRepository;
 import de.unikoeln.vedaweb.document.Token;
+import de.unikoeln.vedaweb.util.MetricalParser;
 import net.sf.saxon.s9api.Processor;
 import net.sf.saxon.s9api.QName;
 import net.sf.saxon.s9api.SaxonApiException;
@@ -76,7 +77,8 @@ public class XmlDataImport {
 				XdmValue temp;
 				XdmItem versionNode;
 				StanzaVersion version;
-				String[] versionForm;
+				String[] versionForm = null;
+				
 				
 				// Zurich ISO / zurich
 				temp = compiler.evaluate("*:lg[@*:source='zurich']", stanza);
@@ -92,6 +94,14 @@ public class XmlDataImport {
 					);
 					stanzaObj.addVersion(version);
 				}
+				
+				
+				// metrical data generated from Lubotsky (Zurich)
+				// !!! MUST be executed right after Lubotsky (Zurich) !!!
+				if (versionForm != null)
+					stanzaObj.setMetricalData(
+						MetricalParser.parseMultiline(
+							String.join("\n", versionForm), "L", "S"));
 				
 				
 				// Samitha / gunkel_ryan

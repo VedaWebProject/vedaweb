@@ -22,6 +22,8 @@ public class Stanza implements Comparable<Stanza> {
 	private String hymnGroup;
 	private String strata;
 	
+	private String[] metricalData;
+	
 	private List<Pada> padas;
 	private List<StanzaVersion> versions;
 	
@@ -113,6 +115,16 @@ public class Stanza implements Comparable<Stanza> {
 //		return translations;
 //	}
 	
+	public String[] getMetricalData() {
+		return metricalData;
+	}
+
+
+	public void setMetricalData(String[] metricalData) {
+		this.metricalData = metricalData;
+	}
+
+
 	public List<StanzaVersion> getVersions() {
 		return versions;
 	}
