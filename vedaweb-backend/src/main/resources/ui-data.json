@@ -19,7 +19,7 @@
 					"values": ["VALUE_1 (gets filled dynamically!)", "VALUE_2 (gets filled dynamically!)"]
 				}
 			],
-			"tagsOrder": [ "person", "number", "gender", "tense", "case", "mood", "voice", "position", "lemma type" ]
+			"tagsOrder": [ "case", "person", "number", "gender", "tense", "mood", "voice", "position", "lemma type" ]
 	    }
 	},
 	
