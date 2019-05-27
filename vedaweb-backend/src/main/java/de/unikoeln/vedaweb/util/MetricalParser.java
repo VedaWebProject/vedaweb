@@ -22,12 +22,21 @@ public class MetricalParser {
 	
 	//matching and marking consonants
 	private static final String C = "(?!(a|i|u|r̥|l̥|\\s|" + S_SHORT + "|" + S_LONG + ")).";
-	private static final String C_DOUBLE = "(ph|th|kh|bh|dh|gh|jh|ch)";
+	private static final String C_DOUBLE = "(ph|th|kh|bh|dh|gh|jh)";
 	private static final String C_MARK = "#";
 	
 	//matching vowels
 	private static final String VL = "(ā|ī|ū|o|e|ai|au)";
 	private static final String VK = "[aiur̥l̥]";
+	
+	
+//	/*
+//	 * just for dev testing
+//	 */
+//	public static void main(String[] args) {
+//		String test = "yahvā́ iva prá vayā́m ujjíhānāḥ";
+//		System.out.println(parse(test));
+//	}
 	
 
 	/**
@@ -40,26 +49,37 @@ public class MetricalParser {
 		return
 			// clean string from unwanted chars and diacritics
 			cleanString(iso)
+			
 			// mark long vowels as LONG
 			.replaceAll(VL, S_LONG)
+			
 			// mark consonants with double char notation
 			.replaceAll(C_DOUBLE, C_MARK) 
+			
 			// mark remaining consonants
 			.replaceAll(C, C_MARK) 
+			
 			// mark whitespaces
 			.replaceAll(SPC, SPC_MARK) 
+			
 			// mark short vowels at line end as SHORT
 			.replaceAll(VK + "$", S_SHORT) 
-			// mark short vowels at word end as SHORT
-			.replaceAll(VK + "(?=" + SPC_MARK + ")", S_SHORT)
+			
+			// mark short vowels at word end followed by vowel as SHORT
+			.replaceAll(VK + "(?=" + SPC_MARK + "[^" + C_MARK + "]" + ")", S_SHORT)
+			
 			// mark short vowels in last syllable of line as LONG
 			.replaceAll(VK + C_MARK + "+$", S_LONG) 
+			
 			// mark short vowels followed by two consonants as LONG
 			.replaceAll(VK + "(?=" + SPC_MARK_OPT + C_MARK + SPC_MARK_OPT + C_MARK + ")", S_LONG) 
+			
 			// mark short vowels followed by one consonant as SHORT
 			.replaceAll(VK + "(?=" + SPC_MARK_OPT + C_MARK + ")(?!=" + SPC_MARK_OPT + C_MARK + ")", S_SHORT) 
+			
 			// remove all but metrical and and whitespace marks
 			.replaceAll("[^" + S_LONG + S_SHORT + SPC_MARK + "]", "") 
+			
 			// replace whitespace marks by actual whitespaces
 			.replaceAll(SPC_MARK, " "); 
 	}
