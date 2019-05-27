@@ -81,7 +81,7 @@ public class MetricalParser {
 			.replaceAll("[^" + S_LONG + S_SHORT + SPC_MARK + "]", "") 
 			
 			// replace whitespace marks by actual whitespaces
-			.replaceAll(SPC_MARK, " "); 
+			.replaceAll(SPC_MARK + "+", " "); 
 	}
 	
 	/**
