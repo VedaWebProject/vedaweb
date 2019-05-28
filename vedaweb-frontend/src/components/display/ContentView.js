@@ -1,10 +1,9 @@
 import React, { Component } from "react";
-import { Row, Col, Affix, Spin, Icon, Drawer, Badge, Modal, Button } from 'antd';
+import { Row, Col, Affix, Spin, Icon, Drawer, Badge, Modal } from 'antd';
 
 import ContentLocation from "./ContentLocation";
 import ContentFilterSwitch from "./ContentFilterSwitch";
 import ErrorMessage from "../errors/ErrorMessage";
-import fileDownload from "js-file-download";
 
 import "./ContentView.css";
 
@@ -20,6 +19,7 @@ import DictionaryView from "./DictionaryView";
 import HelpButton from "../widgets/HelpButton";
 import BetaInfoContent from "../static/BetaInfoContent";
 import ExportDrawer from "../widgets/ExportDrawer";
+import ExportButton from "../widgets/ExportButton";
 
 
 
@@ -33,10 +33,8 @@ class ContentView extends Component {
             isLoaded: false,
             filtersVisible: false,
             exportVisible: false,
-            condensedView: false,
-            isExportLoaded: true
+            condensedView: false
         }
-        this.exportGlossings = this.exportGlossings.bind(this);
     }
 
     componentDidMount() {
@@ -123,23 +121,6 @@ class ContentView extends Component {
         return string.charAt(0).toUpperCase() + string.slice(1);
     }
 
-    exportGlossings(format){
-        this.setState({ isExportLoaded: false });
-        axios.get(process.env.PUBLIC_URL + "/api/export/glossings/" + this.state.data.id + "/" + format)
-            .then((response) => {
-                this.setState({
-                    isExportLoaded: true
-                });
-                fileDownload(response.data, ("vedaweb-" + this.state.data.id + "-glossings." + format));
-            })
-            .catch((error) => {
-                this.setState({
-                    isExportLoaded: true
-                });
-                alert("There was an error generating the data.");
-            });
-    }
-    
 
     render() {
         const { error, isLoaded, data, condensedView } = this.state;
@@ -330,22 +311,22 @@ class ContentView extends Component {
                                                         <HelpButton type="zurichGlossing" inline style={{marginLeft:'.5rem'}}/>
 
                                                         {/** GLOSSINGS EXPORT HTML TABLE **/}
-                                                        <Button
-                                                        type="secondary"
-                                                        icon={this.state.isExportLoaded ? "export" : "loading"}
-                                                        children={"Export HTML"}
-                                                        onClick={() => this.exportGlossings("html")}
+                                                        <ExportButton
+                                                        buttonType="secondary"
+                                                        text="Export HTML table"
                                                         title="Export glossings as HTML table"
-                                                        style={{marginLeft:"1rem", float:"right"}}/>
+                                                        reqUrl={process.env.PUBLIC_URL + "/api/export/glossings/" + this.state.data.id + "/html"}
+                                                        fileName={"VedaWeb-" + this.state.data.id + "-glossings.html"}
+                                                        style={{marginLeft:"1rem", float:"right"}} />
 
                                                         {/** GLOSSINGS EXPORT ALIGNED **/}
-                                                        <Button
-                                                        type="secondary"
-                                                        icon={this.state.isExportLoaded ? "export" : "loading"}
-                                                        children={"Export tab-aligned"}
-                                                        onClick={() => this.exportGlossings("txt")}
+                                                        <ExportButton
+                                                        buttonType="secondary"
+                                                        text="Export tab-aligned"
                                                         title="Export glossings in tab-aligned format"
-                                                        style={{marginLeft:"1rem", float:"right"}}/>
+                                                        reqUrl={process.env.PUBLIC_URL + "/api/export/glossings/" + this.state.data.id + "/txt"}
+                                                        fileName={"VedaWeb-" + this.state.data.id + "-glossings.txt"}
+                                                        style={{marginLeft:"1rem", float:"right"}} />
                                                     </h1>
 
                                                     {data.padas.map(pada => (

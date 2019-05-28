@@ -14,7 +14,7 @@ import { Base64 } from 'js-base64';
 
 import stateStore from "../../stateStore";
 
-import fileDownload from "js-file-download";
+import ExportButton from "../widgets/ExportButton";
 import RelevanceMeter from "./RelevanceMeter";
 
 const fieldDisplayMapping = {
@@ -30,7 +30,6 @@ class SearchResults extends Component {
         super(props)
         this.state = {
             isLoaded: false,
-            isExportLoaded: true,
             isOccCountLoaded: true,
             occCount: null
         }
@@ -39,7 +38,6 @@ class SearchResults extends Component {
         this.handleTableChange = this.handleTableChange.bind(this);
         this.handleTableChange = this.handleTableChange.bind(this);
         this.handleNewQuery = this.handleNewQuery.bind(this);
-        this.export = this.export.bind(this);
         this.occCount = this.occCount.bind(this);
     }
 
@@ -189,25 +187,6 @@ class SearchResults extends Component {
     }
 
 
-    export(){
-        this.setState({ isExportLoaded: false });
-
-        axios.post(process.env.PUBLIC_URL + "/api/export/search", stateStore.results.query)
-            .then((response) => {
-                this.setState({
-                    isExportLoaded: true
-                });
-                fileDownload(response.data, "vedaweb-search-results.csv");
-            })
-            .catch((error) => {
-                this.setState({
-                    isExportLoaded: true
-                });
-                Modal.error({ title: 'Error', content: 'There was an error generating the data', okText: 'OK' });
-            });
-    }
-
-
     occCount(){
         this.setState({ isOccCountLoaded: false });
 
@@ -304,13 +283,17 @@ class SearchResults extends Component {
                                     in<span className="text-font grey"> "{this.state.queryDisplay.field}"</span>
 
                                     {/** EXPORT AND OCCURRENCES FUNCTIONS **/}
-                                    <Button
-                                    type="secondary"
-                                    icon={this.state.isExportLoaded ? "export" : "loading"}
-                                    children={"Export as CSV"}
-                                    onClick={this.export}
-                                    title="Export results as CSV"
-                                    style={{marginLeft:"1rem", float:"right"}}/>
+
+                                    <ExportButton
+                                    buttonType="secondary"
+                                    text="Export as CSV"
+                                    title="Export results as CSV file"
+                                    reqMethod="post"
+                                    reqUrl={process.env.PUBLIC_URL + "/api/export/search"}
+                                    reqData={stateStore.results.query}
+                                    fileName={"VedaWeb-search-results.csv"}
+                                    style={{marginLeft:"1rem", float:"right"}} />
+
                                     {this.occCountAvailable() &&
                                         <Button
                                         type="secondary"
