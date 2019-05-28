@@ -1,10 +1,10 @@
 import React, { Component } from "react";
-import { Row, Col, Affix, Spin, Icon, Drawer, Badge, Modal } from 'antd';
+import { Row, Col, Affix, Spin, Icon, Drawer, Badge, Modal, Button } from 'antd';
 
 import ContentLocation from "./ContentLocation";
 import ContentFilterSwitch from "./ContentFilterSwitch";
 import ErrorMessage from "../errors/ErrorMessage";
-
+import fileDownload from "js-file-download";
 
 import "./ContentView.css";
 
@@ -33,8 +33,10 @@ class ContentView extends Component {
             isLoaded: false,
             filtersVisible: false,
             exportVisible: false,
-            condensedView: false
+            condensedView: false,
+            isExportLoaded: true
         }
+        this.exportGlossings = this.exportGlossings.bind(this);
     }
 
     componentDidMount() {
@@ -119,6 +121,23 @@ class ContentView extends Component {
     capitalize(string) {
         string = string.toLowerCase();
         return string.charAt(0).toUpperCase() + string.slice(1);
+    }
+
+    exportGlossings(format){
+        this.setState({ isExportLoaded: false });
+        axios.get(process.env.PUBLIC_URL + "/api/export/glossings/" + this.state.data.id + "/" + format)
+            .then((response) => {
+                this.setState({
+                    isExportLoaded: true
+                });
+                fileDownload(response.data, ("vedaweb-" + this.state.data.id + "-glossings." + format));
+            })
+            .catch((error) => {
+                this.setState({
+                    isExportLoaded: true
+                });
+                alert("There was an error generating the data.");
+            });
     }
     
 
@@ -309,7 +328,26 @@ class ContentView extends Component {
                                                     <h1>
                                                         Morphological Glossing
                                                         <HelpButton type="zurichGlossing" inline style={{marginLeft:'.5rem'}}/>
+
+                                                        {/** GLOSSINGS EXPORT HTML TABLE **/}
+                                                        <Button
+                                                        type="secondary"
+                                                        icon={this.state.isExportLoaded ? "export" : "loading"}
+                                                        children={"Export HTML"}
+                                                        onClick={() => this.exportGlossings("html")}
+                                                        title="Export glossings as HTML table"
+                                                        style={{marginLeft:"1rem", float:"right"}}/>
+
+                                                        {/** GLOSSINGS EXPORT ALIGNED **/}
+                                                        <Button
+                                                        type="secondary"
+                                                        icon={this.state.isExportLoaded ? "export" : "loading"}
+                                                        children={"Export tab-aligned"}
+                                                        onClick={() => this.exportGlossings("txt")}
+                                                        title="Export glossings in tab-aligned format"
+                                                        style={{marginLeft:"1rem", float:"right"}}/>
                                                     </h1>
+
                                                     {data.padas.map(pada => (
                                                         <div
                                                         className="glossing-line"
