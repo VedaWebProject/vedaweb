@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Row, Col, Icon } from 'antd';
-import LoadHtml from "../utils/LoadHtml";
+import HtmlSnippet from "../utils/HtmlSnippet";
 
 
 class ContentView extends Component {
@@ -22,7 +22,7 @@ class ContentView extends Component {
                 <Col xl={14} lg={18} md={20} sm={24}>
                     <div className="card">
                         <h1><Icon type="paper-clip"/> Site Notice</h1>
-                        <LoadHtml uri="/api/data/sitenotice"/>
+                        <HtmlSnippet id="siteNotice"/>
                     </div>
                 </Col>
 

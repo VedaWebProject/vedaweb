@@ -18,8 +18,8 @@ import logoCCEH from "../../img/logo_cceh.png";
 import { Link } from 'react-router-dom';
 
 import "./Footer.css";
-import LoadHtml from "../utils/LoadHtml";
 import stateStore from "../../stateStore";
+import HtmlSnippet from "../utils/HtmlSnippet";
 
 class Footer extends Component {
 
@@ -155,7 +155,7 @@ class Footer extends Component {
 
                 <Row>
                     <Col span={24} className="content-center">
-                        <LoadHtml uri="/api/data/footercredits"/>
+                        <HtmlSnippet id="footerCredits"/>
                     </Col>
                 </Row>
 

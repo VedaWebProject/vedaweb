@@ -91,6 +91,7 @@ class App extends Component {
             stateStore.ui.meta = response.data.meta;
             stateStore.ui.abbreviations = response.data.abbreviations;
             stateStore.ui.layers = response.data.layers;
+            stateStore.ui.snippets = response.data.snippets;
             //stateStore.search.meta.scopeDataRaw = stateStore.ui.search.meta.scopes;
             //stateStore.settings.transliteration = stateStore.ui.search.meta.transliterations[0].id;
             this.setState({

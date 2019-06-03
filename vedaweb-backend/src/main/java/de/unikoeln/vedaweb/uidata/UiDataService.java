@@ -15,6 +15,7 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
 
 import de.unikoeln.vedaweb.document.StanzaRepository;
 import de.unikoeln.vedaweb.search.ElasticIndexService;
+import de.unikoeln.vedaweb.util.HtmlSnippetsLoader;
 import de.unikoeln.vedaweb.util.IOUtils;
 import de.unikoeln.vedaweb.util.JsonUtilService;
 import de.unikoeln.vedaweb.xmlimport.DataImportService;
@@ -100,8 +101,17 @@ public class UiDataService {
 		((ObjectNode)uiData.at("/meta"))
 			.set("strata", indexService.getStanzasMetaData("strata"));
 		
+		//load arbitrary HTML snippets
+		try {
+			((ObjectNode)uiData)
+				.set("snippets", HtmlSnippetsLoader.loadHtmlSnippets());
+		} catch (IOException e) {
+			log.error("Cannot load HTML snippets: " + e.getMessage().replaceAll("\n", ""));
+		}
+		
 		log.info("Successfully initialized frontend UI data object");
 		return "[UiDataService] Successfully initialized frontend UI data object";
 	}
+	
 
 }
