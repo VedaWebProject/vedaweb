@@ -7,8 +7,8 @@ import stateStore from "../../stateStore";
 const RadioGroup = Radio.Group;
 
 const exportOptions = [
-    { id: "XML", label: "TEI-XML" },
-    { id: "TXT", label: "Plain Text"}
+    { id: "XML", label: "TEI-XML (full stanza data)" },
+    { id: "TXT", label: "Plain Text (selected stanza data)"}
 ];
 
 class ExportDrawer extends Component {
