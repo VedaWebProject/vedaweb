@@ -54,7 +54,7 @@ class ExportDrawer extends Component {
         return (
             
             <Drawer
-            title={<h1 style={{marginBottom:'0'}}><Icon type="export" className="gap-right"/>Export</h1>}
+            title={<h1 style={{marginBottom:'0'}}><Icon type="export" className="gap-right"/>Export Stanza</h1>}
             placement="right"
             width="auto"
             closable={true}
