@@ -1,7 +1,7 @@
 package de.unikoeln.vedaweb.export;
 
 
-public class XmlExport {
+public class StanzaXmlExport {
 	
 	public static String export(String docId) {
 		//TODO

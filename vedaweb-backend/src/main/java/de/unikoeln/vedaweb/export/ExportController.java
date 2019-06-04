@@ -37,7 +37,7 @@ public class ExportController {
     public String exportSearchCSV(@RequestBody SearchData searchData) {
 		searchData.setSize((int)stanzaRepo.count());	//get ALL results
 		searchData.setFrom(0);	//export from result 0
-		return CsvExport.searchHitsAsCsv(
+		return SearchResultsCsvExport.searchHitsAsCsv(
 				SearchHitsConverter.processSearchResponse(
 						search.search(searchData)));
     }
@@ -51,13 +51,13 @@ public class ExportController {
 	@GetMapping(value = "/glossings/{docId}/txt", produces = MediaType.TEXT_PLAIN_VALUE)
     public String exportGlossingsTxt(@PathVariable("docId") String docId) {
 		Optional<Stanza> stanza = stanzaRepo.findById(docId);
-		return stanza.isPresent() ? GlossingsExport.glossingsTxt(stanza.get()) : "";
+		return stanza.isPresent() ? GlossingsTxtExport.glossingsTxt(stanza.get()) : "";
     }
 	
 	@GetMapping(value = "/glossings/{docId}/html", produces = MediaType.TEXT_PLAIN_VALUE)
     public String exportGlossingsHtml(@PathVariable("docId") String docId) {
 		Optional<Stanza> stanza = stanzaRepo.findById(docId);
-		return stanza.isPresent() ? GlossingsExport.glossingsHtml(stanza.get()) : "";
+		return stanza.isPresent() ? GlossingsHtmlExport.glossingsHtml(stanza.get()) : "";
     }
 
 }

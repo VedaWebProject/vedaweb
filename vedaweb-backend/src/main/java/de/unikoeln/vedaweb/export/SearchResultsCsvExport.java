@@ -3,7 +3,7 @@ package de.unikoeln.vedaweb.export;
 import de.unikoeln.vedaweb.search.SearchHit;
 import de.unikoeln.vedaweb.search.SearchHits;
 
-public class CsvExport {
+public class SearchResultsCsvExport {
 	
 	private static final String DLMT = ";";
 	
