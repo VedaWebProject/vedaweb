@@ -12,8 +12,12 @@ import java.text.Normalizer.Form;
 public class MetricalParser {
 	
 	//default long/short marks
-	private static final String S_LONG = "—";
-	private static final String S_SHORT = "◡";
+	public static final String S_LONG = "—";
+	public static final String S_SHORT = "◡";
+	
+	//letter-based long/short marks
+	public static final String S_LONG_LETTER = "L";
+	public static final String S_SHORT_LETTER = "S";
 	
 	//whitespace supplements
 	private static final String SPC = "\\s+";

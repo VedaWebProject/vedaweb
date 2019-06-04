@@ -101,7 +101,9 @@ public class XmlDataImport {
 				if (versionForm != null)
 					stanzaObj.setMetricalData(
 						MetricalParser.parseMultiline(
-							String.join("\n", versionForm), "L", "S"));
+							String.join("\n", versionForm),
+							MetricalParser.S_LONG_LETTER,
+							MetricalParser.S_SHORT_LETTER));
 				
 				
 				// Samitha / gunkel_ryan

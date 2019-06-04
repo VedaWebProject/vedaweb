@@ -2,9 +2,14 @@ import React, { Component } from "react";
 import { Drawer, Icon, Button, Radio } from 'antd';
 import axios from 'axios';
 import fileDownload from "js-file-download";
+import stateStore from "../../stateStore";
 
 const RadioGroup = Radio.Group;
-const exportOptions = ["XML"];
+
+const exportOptions = [
+    { id: "XML", label: "TEI-XML" },
+    { id: "TXT", label: "Plain Text"}
+];
 
 class ExportDrawer extends Component {
 
@@ -25,7 +30,10 @@ class ExportDrawer extends Component {
         //     layers: this.props.layers
         // }
 
-        axios.get(process.env.PUBLIC_URL + "/api/export/doc/" + this.props.docId + "/" + this.state.format.toLowerCase())
+        axios.post(
+                process.env.PUBLIC_URL + "/api/export/doc/" + this.props.docId + "/" + this.state.format.toLowerCase(),
+                stateStore.ui.layers.filter(l => l.show)
+            )
             .then((response) => {
                 this.setState({
                     isExportLoaded: true
@@ -56,12 +64,12 @@ class ExportDrawer extends Component {
                 <RadioGroup
                 onChange={(e) => this.setState({ format: e.target.value }) }
                 defaultValue={this.state.format}>
-                    {exportOptions.map((eOpt, i) => (
+                    {exportOptions.map((eOpt) => (
                         <Radio
-                        key={'eOpt_' + i}
-                        value={eOpt}
+                        key={'eOpt_' + eOpt.id}
+                        value={eOpt.id}
                         style={{ display: 'block', height: '30px', lineHeight: '30px' }}>
-                            {eOpt}
+                            {eOpt.label}
                         </Radio>
                     ))}
                 </RadioGroup>

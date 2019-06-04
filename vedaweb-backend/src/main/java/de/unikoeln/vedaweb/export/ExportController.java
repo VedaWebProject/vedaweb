@@ -1,5 +1,7 @@
 package de.unikoeln.vedaweb.export;
 
+import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,10 +44,20 @@ public class ExportController {
 						search.search(searchData)));
     }
 	
-	@GetMapping(value = "/doc/{docId}/xml", produces = MediaType.TEXT_XML_VALUE)
-    public String exportDoc(@PathVariable("docId") String docId) {
+	@PostMapping(value = "/doc/{docId}/xml", produces = MediaType.TEXT_XML_VALUE)
+    public String exportDocXml(
+    		@PathVariable("docId") String docId,
+    		@RequestBody(required = false) List<Map<String, String>> layers) {
 		Optional<StanzaXml> xml = stanzaXmlRepo.findById(docId);
 		return xml.isPresent() ? xml.get().getXml() : "";
+    }
+	
+	@PostMapping(value = "/doc/{docId}/txt", produces = MediaType.TEXT_XML_VALUE)
+    public String exportDocTxt(
+    		@PathVariable("docId") String docId,
+    		@RequestBody(required = false) List<Map<String, String>> layers) {
+		Optional<Stanza> stanza = stanzaRepo.findById(docId);
+		return stanza.isPresent() ? StanzaTxtExport.stanzaTxt(stanza.get(), layers) : "";
     }
 	
 	@GetMapping(value = "/glossings/{docId}/txt", produces = MediaType.TEXT_PLAIN_VALUE)

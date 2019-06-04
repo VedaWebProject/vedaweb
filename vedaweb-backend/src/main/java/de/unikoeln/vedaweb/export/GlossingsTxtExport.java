@@ -7,7 +7,14 @@ import de.unikoeln.vedaweb.util.LingConventions;
 
 public class GlossingsTxtExport {
 	
+	
 	public static String glossingsTxt(Stanza stanza) {
+		return glossingsTxtNoMeta(stanza) + "\n\n(" + 
+				LingConventions.getSourceNotation(stanza) + ")";
+	}
+	
+	
+	public static String glossingsTxtNoMeta(Stanza stanza) {
 		StringBuilder sb = new StringBuilder();
 		char padaIndex = 'a';
 		
@@ -31,8 +38,7 @@ public class GlossingsTxtExport {
 			}
 			sb.append("\n\n");
 		}
-		sb.append("(" + LingConventions.getSourceNotation(stanza) + ")");
-		return sb.toString();
+		return sb.delete(sb.length() - 2, sb.length()).toString();
 	}
 	
 

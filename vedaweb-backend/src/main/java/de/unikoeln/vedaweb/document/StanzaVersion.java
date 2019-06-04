@@ -10,6 +10,7 @@ public class StanzaVersion {
 	private String[] form;
 	private String type;
 	private boolean applyKeys;
+
 	
 	public StanzaVersion(
 			String source,
@@ -26,6 +27,11 @@ public class StanzaVersion {
 		generateId();
 	}
 	
+	private StanzaVersion setId(String id) {
+		this.id = id;
+		return this;
+	}
+	
 	public String getId() {
 		return this.id;
 	}
@@ -33,7 +39,11 @@ public class StanzaVersion {
 	private void generateId() {
 		this.id = (type + "_" +
 				StringUtils.retainLatinBaseChars(
-						source.toLowerCase().replaceAll("ß", "ss")
+						source.toLowerCase()
+						.replaceAll("ß", "ss")
+						.replaceAll("ä", "ae")
+						.replaceAll("ö", "oe")
+						.replaceAll("ü", "ue")
 					));
 	}
 
@@ -80,6 +90,21 @@ public class StanzaVersion {
 	@Override
 	public String toString() {
 		return source + " (" + language + ")";
+	}
+	
+	@Override
+	public boolean equals(Object obj) {
+		if (!(obj instanceof StanzaVersion)) return false;
+		return ((StanzaVersion)obj).getId().equals(id);
+	}
+	
+	@Override
+	public int hashCode() {
+		return id.hashCode();
+	}
+	
+	public static StanzaVersion getDummy(String id) {
+		return new StanzaVersion("", "", null, "", false).setId(id);
 	}
 	
 }
