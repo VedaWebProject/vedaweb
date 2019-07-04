@@ -1,25 +1,28 @@
 
 /* Object.keys */
-if (!Object.keys) Object.keys = function(o) {
-    if (o !== Object(o))
-        throw new TypeError('Object.keys called on a non-object');
-    var k=[],p;
-    for (p in o) if (Object.prototype.hasOwnProperty.call(o,p)) k.push(p);
-    return k;
-}
+(function() {
+	if (!Object.keys) Object.keys = function(o) {
+		if (o !== Object(o))
+			throw new TypeError('Object.keys called on a non-object');
+		var k=[],p;
+		for (p in o) if (Object.prototype.hasOwnProperty.call(o,p)) k.push(p);
+		return k;
+	}
+})();
 
 
 /* Object.isEmpty - not really a polyfill */
-if (!Object.isEmpty) Object.isEmpty = function(o) {
-    for(var k in o) {
-        if(o.hasOwnProperty(k))
-            break;
-        else
-            return false;
-    }
-    return true;
-}
-
+(function() {
+	if (!Object.isEmpty) Object.isEmpty = function(o) {
+		for(var k in o) {
+			if(o.hasOwnProperty(k))
+				break;
+			else
+				return false;
+		}
+		return true;
+	}
+})();
 
 
 
