@@ -43,24 +43,25 @@ class DictionaryView extends Component {
 
         //construct GraphQL query
         const GQLQ = `{
-            ids(dictId:"gra", lemmaId: ` + JSON.stringify(lemmaRefs) + `, size: 30) {
+            ids(ids: ` + JSON.stringify(lemmaRefs) + `) {
                 id
                 headwordDeva
                 headwordIso
-                entryTeiIso
+                xml
             }
         }`;
 
         //request API data
-        axios.post("https://api.c-salt.uni-koeln.de/dicts/sa/graphql", {query: GQLQ})
+        axios.post("https://api.c-salt.uni-koeln.de/gra/graphql", {query: GQLQ})
             .then((response) => {
                 var dictData = [];
                 const entries = response.data.data.ids;
+
                 for (let i = 0; i < lemmaData.length; i++) {
                     let t = lemmaData[i];
                     t["dict"] = t.lemmaRefs.map(ref => {
                         let entry = entries.find(e => e.id === ref);
-                        return entry === undefined ? {} : this.parseEntry(entry, parser);
+                        return !entry ? {} : this.parseEntry(entry, parser);
                     });
                     dictData.push(t);
                 }
@@ -90,11 +91,10 @@ class DictionaryView extends Component {
         let e = {
             graRef: entry.id,
             graDeva: entry.headwordDeva,
-            graLemma: entry.headwordIso,
-            entryTeiIso: entry.entryTeiIso
+            graLemma: entry.headwordIso
         };
         //replace xml self closing tags to prevent paring errors
-        e.entryTeiIso = entry.entryTeiIso.replace(/<(\w+?)\s?\/>/gi, "<$1></$1>");
+        e.entryTeiIso = entry.xml.replace(/<(\w+?)\s?\/>/gi, "<$1></$1>");
         //create xmlDOM
         let xDoc = parser.parseFromString(e.entryTeiIso, "text/html");
         //parse graTxt
