@@ -144,7 +144,7 @@ class SearchBlock extends Component {
                             fieldName={field.name}
                             fieldValue={field.value}
                             isRemovable={this.props.fields.length > 1}
-                            isLastField={this.props.fields.length < 4 && this.props.fields.length === i + 1}
+                            isLastField={this.props.fields.length < 6 && this.props.fields.length === i + 1}
                             grammarData={this.props.grammarData} />
                         ))}
 
