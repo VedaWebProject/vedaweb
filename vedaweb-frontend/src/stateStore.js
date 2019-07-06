@@ -40,7 +40,7 @@ const stateStore = store({
         quick: {
             store: "search.quick",
             input: "",
-            field: "version_lubotskyzurich",
+            field: "version_",
             regex: false
         },
 
@@ -54,7 +54,7 @@ const stateStore = store({
                 stateStore.search.grammar.blocks = stateStore.search.grammar.blocks.concat({
                     id: blockId,
                     term: '',
-                    lemma: false,
+                    lemma: '',
                     required: true,
                     distance: 0,
                     fields: []

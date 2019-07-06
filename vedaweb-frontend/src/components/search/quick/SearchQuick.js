@@ -55,7 +55,7 @@ class SearchQuick extends Component {
 
         const selectBefore = (
             <Select
-            defaultValue="version_lubotskyzurich"
+            defaultValue="version_"
             value={stateStore.search.quick.field}
             onSelect={(value, option) => stateStore.search.quick.field = value}
             style={{ width: '180px' }}
@@ -69,7 +69,7 @@ class SearchQuick extends Component {
                         key={'quick_field_' + v.id}
                         value={v.id}
                         className="secondary-font">
-                            {v.id.endsWith('_') ? <i>{v.label}</i> : v.label}
+                            {v.label}
                         </Option>
                     ))}
                 </OptGroup>
@@ -82,7 +82,7 @@ class SearchQuick extends Component {
                         key={'quick_field_' + v.id}
                         value={v.id}
                         className="secondary-font">
-                            {v.id.endsWith('_') ? <i>{v.label}</i> : v.label}
+                            {v.label}
                         </Option>
                     ))}
                 </OptGroup>

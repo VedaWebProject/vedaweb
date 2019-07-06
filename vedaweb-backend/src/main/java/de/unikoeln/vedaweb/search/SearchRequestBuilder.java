@@ -126,32 +126,27 @@ public class SearchRequestBuilder {
 					continue; //TEMP DEV
 				
 				//can be ignored, here
-				if (key.equalsIgnoreCase("lemma"))
-					continue; //TEMP DEV
-				
-				//can be ignored, here
 				if (key.equalsIgnoreCase("required"))
 					continue; //TEMP DEV
 				
 				//if fields="term", also search in "lemma"-field
-				if (key.equals("term")) {
+				if (key.equals("term") || key.equals("lemma")) {
 					
 					//set query string
-					String query = StringUtils.normalizeNFC((String) block.get(key));
+					String termOrLemma = StringUtils.normalizeNFC((String) block.get(key));
 					//if no search term: skip
-					if (query.length() == 0) continue;
+					if (termOrLemma.length() == 0) continue;
 					//set target field
-					String field = block.get("lemma") != null && ((boolean)block.get("lemma")) == true
-							? "tokens.lemma" : "tokens.form";
+					String field = "tokens." + (key.equals("lemma") ? "lemma" : "form");
 					
 					//set accent sensitive search
 					if (searchData.isAccents())
 						field += "_raw";
 					else
-						query = StringUtils.removeVowelAccents(query);
+						termOrLemma = StringUtils.removeVowelAccents(termOrLemma);
 					
 					//add this query to bool query
-					bool.must(QueryBuilders.queryStringQuery(query).field(field));
+					bool.must(QueryBuilders.queryStringQuery(termOrLemma).field(field));
 				} else {
 					//...otherwise, add a simple term query
 					bool.must(QueryBuilders.termQuery("tokens.grammar." + key, block.get(key)));

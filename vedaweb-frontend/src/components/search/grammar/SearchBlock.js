@@ -23,9 +23,15 @@ class SearchBlock extends Component {
 
     render() {
 
-        const transliteration = (
+        const transliterationTerm = (
             <TransliterationPreview
             input={this.props.term}
+            transliteration={stateStore.settings.transliteration}/>
+        );
+
+        const transliterationLemma = (
+            <TransliterationPreview
+            input={this.props.lemma}
             transliteration={stateStore.settings.transliteration}/>
         );
 
@@ -47,32 +53,48 @@ class SearchBlock extends Component {
                         type="flex"
                         align="middle"
                         justify="start">
+                            <Col span={9}>Word Form (optional):</Col>
+                            <Col span={9}>Lemma (optional):</Col>
+                        </Row>
+
+                        <Row
+                        type="flex"
+                        align="middle"
+                        justify="start">
 
                             <Col span={9}>
                                 <Tooltip
-                                title={transliteration}
+                                title={transliterationTerm}
                                 overlayClassName="transliteration-tooltip"
                                 trigger="focus"
                                 placement="bottom">
                                     <Input
                                     value={this.props.term}
                                     onChange={e => stateStore.search.grammar.setTerm(this.props.id, e.target.value)}
-                                    placeholder={(this.props.lemma ? "lemma" : "word form") + " (optional)"}
+                                    placeholder={"word form (optional)"}
                                     className="search-block-input"
                                     prefix={<OSK value={this.props.term} updateInput={v => stateStore.search.grammar.setTerm(this.props.id, v)}/>}
                                     style={{ width: '98%' }} />
                                 </Tooltip>
                             </Col>
 
-                            <Col span={10}>
-                                <Checkbox
-                                onChange={e => stateStore.search.grammar.setLemma(this.props.id, e.target.checked)}
-                                checked={this.props.lemma} >
-                                    Lemma
-                                </Checkbox>
+                            <Col span={9}>
+                                <Tooltip
+                                title={transliterationLemma}
+                                overlayClassName="transliteration-tooltip"
+                                trigger="focus"
+                                placement="bottom">
+                                    <Input
+                                    value={this.props.lemma}
+                                    onChange={e => stateStore.search.grammar.setLemma(this.props.id, e.target.value)}
+                                    placeholder={"lemma (optional)"}
+                                    className="search-block-input"
+                                    prefix={<OSK value={this.props.lemma} updateInput={v => stateStore.search.grammar.setLemma(this.props.id, v)}/>}
+                                    style={{ width: '98%' }} />
+                                </Tooltip>
                             </Col>
 
-                            <Col span={5}>
+                            <Col span={5} offset={1}>
                                 <Checkbox
                                 onChange={e => stateStore.search.grammar.setRequired(this.props.id, e.target.checked)}
                                 checked={this.props.required} >
@@ -107,7 +129,12 @@ class SearchBlock extends Component {
                             <Col span={4}></Col>
                         </Row> */}
 
-                        <div style={{marginTop:".2rem", color:"#b4b1ae"}}>Grammar:</div>
+                        <Row
+                        type="flex"
+                        align="middle"
+                        justify="start">
+                            <Col span={9}>Grammar:</Col>
+                        </Row>
 
                         {this.props.fields.map((field, i) => (
                             <SearchAttributeField
