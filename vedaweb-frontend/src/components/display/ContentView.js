@@ -200,12 +200,15 @@ class ContentView extends Component {
                                     { data.versions !== undefined &&
                                         <div>
 
-                                            {/** TEXT VERSIONS **/}
-                                            {stateStore.ui.isLayerVisible('version_') &&
+                                            {/** TEXT VERSIONS & TRANSLATIONS **/}
+                                            {(stateStore.ui.isLayerVisible('version_') || stateStore.ui.isLayerVisible('translation_')) &&
                                                 <div
                                                 className="content-plain content-block card"
                                                 ref={this.scrollTo}>
-                                                    <h1 className="inline-block">Text Versions</h1>
+
+                                                    <h1 className="inline-block">
+                                                        Text Versions &amp; Translations
+                                                    </h1>
 
                                                     {stateStore.ui.layers.filter(l => l.id.startsWith('version_')
                                                         && l.id !== 'version_' && l.show).map(version => {
@@ -215,10 +218,16 @@ class ContentView extends Component {
                                                                 key={"v_" + v.id}
                                                                 className="translation"
                                                                 ref={this.scrollTo}>
-                                                                    <span className="bold gap-right">{version.label}</span>
-                                                                    <HelpButton inline type={v.id}/>
+
+                                                                    <span
+                                                                    className="bold gap-right"
+                                                                    style={{display: condensedView ? "none" : "inline"}}>
+                                                                        {version.label}
+                                                                        <HelpButton inline iconStyle={{marginLeft: ".5rem"}} type={v.id}/>
+                                                                    </span>
+
                                                                     <div
-                                                                    className={"gap-left " + (v.language === "deva" ? "deva-font" : "text-font")}
+                                                                    className={(v.language === "deva" ? "deva-font" : "text-font")}
                                                                     style={{display: condensedView ? "inline-block" : "block"}}>
                                                                         {v.form.map((line, i) => (
                                                                             <div
@@ -232,12 +241,59 @@ class ContentView extends Component {
                                                                             </div>
                                                                         ))}
                                                                     </div>
+
+                                                                    <div
+                                                                    className="gap-left font-small text-font-i light-grey"
+                                                                    style={{display: condensedView ? "block" : "none"}}>
+                                                                        &mdash;&nbsp;{version.label}
+                                                                    </div>
+                                                                </div>
+                                                    })}
+
+                                                    {stateStore.ui.layers.filter(l => l.id.startsWith('translation_')
+                                                        && l.id !== 'translation_'
+                                                        && stateStore.ui.isLayerVisible(l.id)).map(l => {
+                                                            let t = data.versions.find(x => x.id === l.id);
+                                                            return t === undefined ? "" :
+                                                                <div
+                                                                key={"t_" + t.source}
+                                                                className="translation"
+                                                                ref={this.scrollTo}
+                                                                style={{display: condensedView ? "inline-block" : "block"}}>
+
+                                                                    <span
+                                                                    style={{display: condensedView ? "none" : "inline"}}>
+                                                                        <span className="bold">{t.source}</span>
+                                                                        ({t.language})
+                                                                        <HelpButton inline iconStyle={{marginLeft: ".5rem"}} type={t.id}/>
+                                                                    </span>
+
+                                                                    {/* <span className="bold">{t.source} </span>({t.language})
+                                                                    <HelpButton inline type={l.id} style={{marginLeft:'.5rem'}}/> */}
+
+                                                                    <div
+                                                                    className="text-font"
+                                                                    style={{display: condensedView ? "inline-block" : "block"}}>
+                                                                        {t.form.map((line, i) => (
+                                                                            <div
+                                                                            key={"trans_" + i}
+                                                                            style={{display: condensedView ? "inline-block" : "block"}}>
+                                                                                {line}&nbsp;
+                                                                            </div>
+                                                                        ))}
+                                                                    </div>
+
+                                                                    <div
+                                                                    className="gap-left font-small text-font-i light-grey"
+                                                                    style={{display: condensedView ? "block" : "none"}}>
+                                                                        &mdash;&nbsp;{t.source} ({t.language})
+                                                                    </div>
                                                                 </div>
                                                     })}
                                                 </div>
                                             }
 
-                                            {/** TRANSLATIONS **/}
+                                            {/** TRANSLATIONS
                                             {stateStore.ui.isLayerVisible('translation_')
                                                 && data.versions.filter(v => (
                                                     v.id.startsWith('translation_') && stateStore.ui.isLayerVisible(v.id))
@@ -276,6 +332,7 @@ class ContentView extends Component {
                                                     })}
                                                 </div>
                                             }
+                                            **/}
 
                                             {/** METRICAL DATA **/}
                                             {stateStore.ui.isLayerVisible('metricaldata_')
