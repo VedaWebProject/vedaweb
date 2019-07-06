@@ -64,7 +64,7 @@ class DictCorrection extends Component {
 
         let query = `
             {
-                entries(dictId: "gra", queryType: "prefix", field: "headword_iso", query: "` + input + `") {
+                entries(queryType: prefix, field: headword_iso, query: "` + input + `") {
                     id
                     headwordDeva
                     headwordIso
@@ -72,7 +72,7 @@ class DictCorrection extends Component {
             }
         `;
 
-        axios.post("https://api.c-salt.uni-koeln.de/dicts/sa/graphql", {query: query})
+        axios.post("https://api.c-salt.uni-koeln.de/dicts/gra/graphql", {query: query})
             .then((response) => {
                 this.setState({
                     isLoaded: true,
