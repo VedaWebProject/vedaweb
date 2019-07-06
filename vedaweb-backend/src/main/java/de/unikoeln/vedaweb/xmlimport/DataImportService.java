@@ -89,7 +89,7 @@ public class DataImportService {
 				e.printStackTrace();
 				return -1;
 			}
-			log.info((dryRun ? "(DRY RUN) " : "") + "Finished reading \"" 
+			log.info((dryRun ? "(DRY RUN) " : "") + "Finished processing \"" 
 					+ xmlFile.getName() + "\" in " + timer.stop("s", true) + " seconds");
 		}
 		

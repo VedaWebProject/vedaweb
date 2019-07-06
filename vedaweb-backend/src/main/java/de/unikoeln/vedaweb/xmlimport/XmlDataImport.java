@@ -170,7 +170,7 @@ public class XmlDataImport {
 				}
 				
 				// Padapatha / padapatha
-				temp = compiler.evaluate("*:l[@*:source='padapatha']", stanza);
+				temp = compiler.evaluate("*:lg[@*:source='padapatha']", stanza);
 				if (temp.size() > 0) {
 					versionNode = temp.itemAt(0);
 					versionForm = new String[]{versionNode.getStringValue().replaceAll("\\s+", " ").trim()};
@@ -200,10 +200,10 @@ public class XmlDataImport {
 				}
 				
 				// Translation (de) / geldner
-				temp = compiler.evaluate("*:l[@*:source='geldner']", stanza);
+				temp = compiler.evaluate("*:lg[@*:source='geldner']", stanza);
 				if (temp.size() > 0) {
 					versionNode = temp.itemAt(0);
-					versionForm = new String[]{versionNode.getStringValue()};
+					versionForm = concatTextContents(compiler.evaluate(".//*:l", versionNode));
 					version = new StanzaVersion(
 						"Geldner",
 						"de",
@@ -215,10 +215,10 @@ public class XmlDataImport {
 				}
 				
 				// Translation (de) / grassmann
-				temp = compiler.evaluate("*:l[@*:source='grassmann']", stanza);
+				temp = compiler.evaluate("*:lg[@*:source='grassmann']", stanza);
 				if (temp.size() > 0) {
 					versionNode = temp.itemAt(0);
-					versionForm = new String[]{versionNode.getStringValue()};
+					versionForm = concatTextContents(compiler.evaluate(".//*:l", versionNode));
 					version = new StanzaVersion(
 						"Graßmann",
 						"de",
@@ -230,10 +230,10 @@ public class XmlDataImport {
 				}
 				
 				// Translation (de) / otto
-				temp = compiler.evaluate("*:l[@*:source='otto']", stanza);
+				temp = compiler.evaluate("*:lg[@*:source='otto']", stanza);
 				if (temp.size() > 0) {
 					versionNode = temp.itemAt(0);
-					versionForm = new String[]{versionNode.getStringValue()};
+					versionForm = concatTextContents(compiler.evaluate(".//*:l", versionNode));
 					version = new StanzaVersion(
 						"Otto",
 						"de",
@@ -260,10 +260,10 @@ public class XmlDataImport {
 				}
 				
 				// Translation (de) / mac donell
-				temp = compiler.evaluate("*:l[@*:source='macdonell']", stanza);
+				temp = compiler.evaluate("*:lg[@*:source='macdonell']", stanza);
 				if (temp.size() > 0) {
 					versionNode = temp.itemAt(0);
-					versionForm = new String[]{versionNode.getStringValue()};
+					versionForm = concatTextContents(compiler.evaluate(".//*:l", versionNode));
 					version = new StanzaVersion(
 						"MacDonell",
 						"en",
@@ -275,10 +275,10 @@ public class XmlDataImport {
 				}
 				
 				// Translation (fr) / renou
-				temp = compiler.evaluate("*:l[@*:source='renou']", stanza);
+				temp = compiler.evaluate("*:lg[@*:source='renou']", stanza);
 				if (temp.size() > 0) {
 					versionNode = temp.itemAt(0);
-					versionForm = new String[]{versionNode.getStringValue()};
+					versionForm = concatTextContents(compiler.evaluate(".//*:l", versionNode));
 					version = new StanzaVersion(
 						"Renou",
 						"fr",
