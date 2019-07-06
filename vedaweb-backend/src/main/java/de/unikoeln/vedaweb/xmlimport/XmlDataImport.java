@@ -49,7 +49,7 @@ public class XmlDataImport {
 					.itemAt(0).getStringValue());
 		
 			//iterate: stanzas
-			XdmValue stanzas = compiler.evaluate("*:div[@type='verse']", hymn);
+			XdmValue stanzas = compiler.evaluate("*:div[@type='stanza']", hymn);
 			for(XdmItem stanza : stanzas){
 				String[] stanzaLocationData = compiler.evaluate("@*:n", stanza).itemAt(0).getStringValue().split("\\.");
 				
@@ -308,7 +308,7 @@ public class XmlDataImport {
 		for (XdmItem padaForm : padaForms){
 			Pada padaObj = new Pada(); //new pada object
 			String padaId = compiler.evaluate("@*:n", padaForm).itemAt(0).getStringValue();
-			String tokensXmlId = compiler.evaluate("@*:id", padaForm).itemAt(0).getStringValue().replaceFirst("_zur$", "_tokens_zur");
+			String tokensXmlId = compiler.evaluate("@*:id", padaForm).itemAt(0).getStringValue().replaceFirst("_zur$", "_zur_tokens");
 			XdmValue padaTokens = compiler.evaluate("*:lg[@*:source='zurich']/*:l[@*:id='" + tokensXmlId + "']/*:fs", stanza);
 			int tokensTotal = padaTokens.size();
 			int tokenIndex = 0;
@@ -404,7 +404,7 @@ public class XmlDataImport {
 		XPathCompiler compiler = processor.newXPathCompiler();
 		
 		//iterate: stanzas
-		XdmValue stanzas = compiler.evaluate(".//*:div[@type='verse']", xmlDoc);
+		XdmValue stanzas = compiler.evaluate(".//*:div[@type='stanza']", xmlDoc);
 		for(XdmItem stanza : stanzas){
 			String[] stanzaLocationData = compiler.evaluate("@*:n", stanza).itemAt(0).getStringValue().split("\\.");
 			if (!dryRun) {

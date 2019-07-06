@@ -127,7 +127,8 @@ public class DataImportService {
 	private FilenameFilter getFileFilter() {
 		return new FilenameFilter() {
 		    public boolean accept(File dir, String name) {
-		        return name.toLowerCase().endsWith(".xml");
+		        return name.toLowerCase().endsWith(".xml")
+		        		|| name.toLowerCase().endsWith(".tei");
 		    }
 		};
 	}
