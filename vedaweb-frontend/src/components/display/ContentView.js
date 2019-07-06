@@ -207,7 +207,9 @@ class ContentView extends Component {
                                                 ref={this.scrollTo}>
 
                                                     <h1 className="inline-block">
-                                                        Text Versions &amp; Translations
+                                                        {stateStore.ui.isLayerVisible('version_') && "Text Versions"}
+                                                        {stateStore.ui.isLayerVisible('version_') && stateStore.ui.isLayerVisible('translation_') && " & "}
+                                                        {stateStore.ui.isLayerVisible('translation_') && "Translations"}
                                                     </h1>
 
                                                     {stateStore.ui.layers.filter(l => l.id.startsWith('version_')
