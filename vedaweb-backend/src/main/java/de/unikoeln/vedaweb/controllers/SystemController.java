@@ -1,4 +1,4 @@
-package de.unikoeln.vedaweb.util;
+package de.unikoeln.vedaweb.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -17,12 +17,15 @@ import de.unikoeln.vedaweb.logging.ClientError;
 import de.unikoeln.vedaweb.logging.ClientErrorRepository;
 import de.unikoeln.vedaweb.search.ElasticIndexService;
 import de.unikoeln.vedaweb.uidata.UiDataService;
+import de.unikoeln.vedaweb.util.JsonUtilService;
 import de.unikoeln.vedaweb.xmlimport.DataImportService;
+import springfox.documentation.annotations.ApiIgnore;
 
 
 
 @RestController
 @RequestMapping("system")
+@ApiIgnore
 public class SystemController {
 	
 	@Value("${vw.system.auth}")

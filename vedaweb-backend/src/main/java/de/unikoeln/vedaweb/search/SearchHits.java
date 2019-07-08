@@ -4,18 +4,24 @@ import java.util.ArrayList;
 import java.util.List;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import io.swagger.annotations.ApiModelProperty;
+
 public class SearchHits {
 	
 	@JsonProperty("hits")
+	@ApiModelProperty(notes = "List of search results")
 	private List<SearchHit> hits;
 	
 	@JsonProperty("total")
+	@ApiModelProperty(notes = "Total number of search results")
 	private long total;
 	
 	@JsonProperty("took")
+	@ApiModelProperty(notes = "Runtime of this search in milliseconds")
 	private long took;
 	
 	@JsonProperty("maxScore")
+	@ApiModelProperty(notes = "Maximum score withing these search results")
 	private float maxScore;
 	
 	

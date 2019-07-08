@@ -1,4 +1,4 @@
-package de.unikoeln.vedaweb.dictcorrection;
+package de.unikoeln.vedaweb.controllers;
 
 import java.util.List;
 
@@ -11,8 +11,13 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.fasterxml.jackson.databind.JsonNode;
 
+import de.unikoeln.vedaweb.dictcorrection.Correction;
+import de.unikoeln.vedaweb.dictcorrection.CorrectionsRepository;
+import springfox.documentation.annotations.ApiIgnore;
+
 @RestController
 @RequestMapping("api/corrections")
+@ApiIgnore
 public class CorrectionsController {
 	
 	@Autowired

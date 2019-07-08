@@ -35,6 +35,7 @@ public class RequestResolverConfig implements WebMvcConfigurer {
 			.resourceChain(false)
 			.addResolver(new PushStateResourceResolver());
 	}
+	
 
 	private class PushStateResourceResolver implements ResourceResolver {
 		private Resource index = new ClassPathResource("/static/index.html");

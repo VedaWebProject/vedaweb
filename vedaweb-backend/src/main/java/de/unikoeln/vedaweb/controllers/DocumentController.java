@@ -1,15 +1,20 @@
-package de.unikoeln.vedaweb.document;
+package de.unikoeln.vedaweb.controllers;
 
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import de.unikoeln.vedaweb.document.Stanza;
+import de.unikoeln.vedaweb.document.StanzaLocation;
+import de.unikoeln.vedaweb.document.StanzaRepository;
 import de.unikoeln.vedaweb.util.JsonUtilService;
 import de.unikoeln.vedaweb.util.StringUtils;
+import io.swagger.annotations.ApiOperation;
 
 
 @RestController
@@ -23,7 +28,12 @@ public class DocumentController {
 	private JsonUtilService mappingService;
 	
 	
-	@RequestMapping(value = "/id/{id}", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	@ApiOperation(
+			value = "Get a stanza by ID (e.g. 0100306 for 01.0031.061)",
+			response = Stanza.class)
+	@GetMapping(
+			value = "/id/{id}",
+			produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public String stanzaById(
     		@PathVariable("id") String id) {
 		
@@ -48,7 +58,12 @@ public class DocumentController {
     }
 	
 	
-	@RequestMapping(value = "/index/{index}", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	@ApiOperation(
+			value = "Get a stanza by index (e.g. 0 for first stanza, 1 for second stanza and so on)",
+			response = Stanza.class)
+	@GetMapping(
+			value = "/index/{index}",
+			produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public String stanzaByLocation(@PathVariable int index) {
 		return mappingService.mapOptionalToJson(
 				stanzaRepo.findByIndex( StringUtils.normalizeIndex(index, (int)stanzaRepo.count()) ));

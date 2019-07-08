@@ -6,12 +6,23 @@ import java.util.Map;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import io.swagger.annotations.ApiModelProperty;
+
 public class Token {
 	
+	@ApiModelProperty(notes = "Index value of this token (relative to pada)")
 	private int index;
+	
+	@ApiModelProperty(notes = "Full form of this token")
 	private String form;
+	
+	@ApiModelProperty(notes = "Lemma of this token")
 	private String lemma;
+	
+	@ApiModelProperty(notes = "Lemma reference IDs for the Graßmann dictionary")
 	private String[] lemmaRefs;
+	
+	@ApiModelProperty(notes = "Grammar properties of this token")
 	private LinkedHashMap<String, String> props;
 	
 	

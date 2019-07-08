@@ -2,18 +2,24 @@ package de.unikoeln.vedaweb.search;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import io.swagger.annotations.ApiModelProperty;
+
 public class SearchScope {
 	
 	@JsonProperty("fromBook")
+	@ApiModelProperty(notes = "Scope starting from book")
 	private int fromBook;
 	
 	@JsonProperty("fromHymn")
+	@ApiModelProperty(notes = "Scope starting from hymn")
 	private int fromHymn;
 	
 	@JsonProperty("toBook")
+	@ApiModelProperty(notes = "Scope ending at book")
 	private int toBook;
 	
 	@JsonProperty("toHymn")
+	@ApiModelProperty(notes = "Scope ending at hymn")
 	private int toHymn;
 	
 	

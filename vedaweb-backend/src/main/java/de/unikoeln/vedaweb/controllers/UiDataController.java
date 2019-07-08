@@ -1,4 +1,4 @@
-package de.unikoeln.vedaweb.uidata;
+package de.unikoeln.vedaweb.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -9,12 +9,15 @@ import org.springframework.web.bind.annotation.RestController;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 
 import de.unikoeln.vedaweb.search.ElasticIndexService;
+import de.unikoeln.vedaweb.uidata.UiDataService;
 import de.unikoeln.vedaweb.util.JsonUtilService;
+import springfox.documentation.annotations.ApiIgnore;
 
 
 
 @RestController
 @RequestMapping("api")
+@ApiIgnore
 public class UiDataController {
 	
 	@Autowired

@@ -5,43 +5,61 @@ import java.util.List;
 import java.util.Map;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import io.swagger.annotations.ApiModelProperty;
+
 
 public class SearchData {
 	
 	@JsonProperty("mode")
+	@ApiModelProperty(notes = "Used search mode", required = true, example = "'smart' or 'grammar'")
 	private String mode;
 	
 	@JsonProperty("accents")
+	@ApiModelProperty(notes = "Is this search accent-sensitive? (default: false)")
 	private boolean accents;
 	
 	@JsonProperty("regex")
+	@ApiModelProperty(notes = "For smart search mode: Parse RegEx (default: false)")
 	private boolean regex;
 	
 	@JsonProperty("input")
+	@ApiModelProperty(notes = "For smart search mode: Search input value")
 	private String input;
 	
 	@JsonProperty("field")
+	@ApiModelProperty(notes = "For smart search mode: Version field to search",
+		example = "'version_' for all versions, 'translation_' for all translations")
 	private String field;
 	
 	@JsonProperty("scopes")
+	@ApiModelProperty(notes = "For advanced (e.g. grammar) search modes:"
+			+ "List of search scopes to limit search to")
 	private List<SearchScope> scopes;
 	
 	@JsonProperty("meta")
+	@ApiModelProperty(notes = "For advanced (e.g. grammar) search modes:"
+			+ "List of meta properties to filter for")
 	private Map<String, String[]> meta;
 	
 	@JsonProperty("blocks")
+	@ApiModelProperty(notes = "For grammar search: List of search blocks")
 	private List<Map<String, Object>> blocks;
 	
 	@JsonProperty("from")
+	@ApiModelProperty(notes = "Search result pagination: Offset of results window")
 	private int from;
 	
 	@JsonProperty("size")
+	@ApiModelProperty(notes = "Search result pagination: Size of results window")
 	private int size;
 	
 	@JsonProperty("sortBy")
+	@ApiModelProperty(notes = "Search result sorting: Property to sort by",
+		example = "'_doc' for location, '_score' for relevance, 'hymnAddressee', 'hymnGroup', 'strata'")
 	private String sortBy;
 	
 	@JsonProperty("sortOrder")
+	@ApiModelProperty(notes = "Search result sorting", example = "'ascend' or 'descend'")
 	private String sortOrder;
 	
 	

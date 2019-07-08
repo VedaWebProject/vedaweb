@@ -1,14 +1,26 @@
 package de.unikoeln.vedaweb.document;
 
 import de.unikoeln.vedaweb.util.StringUtils;
+import io.swagger.annotations.ApiModelProperty;
 
 public class StanzaVersion {
 	
+	@ApiModelProperty(notes = "ID of this stanza version")
 	private String id;
+	
+	@ApiModelProperty(notes = "Source (author)")
 	private String source;
+	
+	@ApiModelProperty(notes = "Language / transliteration standard")
 	private String language;
+	
+	@ApiModelProperty(notes = "The lines of this stanza version")
 	private String[] form;
+	
+	@ApiModelProperty(notes = "Type of this version ('version' or 'translation')")
 	private String type;
+	
+	@ApiModelProperty(notes = "True if this version has one pada per line")
 	private boolean applyKeys;
 
 	

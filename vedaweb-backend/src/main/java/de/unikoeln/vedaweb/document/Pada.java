@@ -3,11 +3,20 @@ package de.unikoeln.vedaweb.document;
 import java.util.ArrayList;
 import java.util.List;
 
+import io.swagger.annotations.ApiModelProperty;
+
 public class Pada {
 	
+	@ApiModelProperty(notes = "ID of this pada")
 	private String id;
+	
+	@ApiModelProperty(notes = "Pada label prop")
 	private String label;
+	
+	@ApiModelProperty(notes = "Index value of this pada (relative to stanza)")
 	private int index;
+	
+	@ApiModelProperty(notes = "List of tokens of this pada")
 	private List<Token> grammarData;
 	
 	

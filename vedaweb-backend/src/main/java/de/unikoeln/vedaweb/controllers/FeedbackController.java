@@ -1,4 +1,4 @@
-package de.unikoeln.vedaweb.feedback;
+package de.unikoeln.vedaweb.controllers;
 
 import org.springframework.http.MediaType;
 
