@@ -8,7 +8,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 @SpringBootApplication
 @EnableAutoConfiguration
-@EnableSwagger2
+//@EnableSwagger2
 public class VedawebApplication {
 	
 	public static void main(String[] args) {
