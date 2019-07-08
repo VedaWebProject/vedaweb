@@ -19,7 +19,7 @@ import io.swagger.annotations.ApiOperation;
 
 
 @RestController
-@RequestMapping("api")
+@RequestMapping("api/search")
 @Api(consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
 public class SearchController {
 	
@@ -34,7 +34,7 @@ public class SearchController {
 			value = "Search for stanzas",
 			response = SearchHits.class)
 	@PostMapping(
-			value = "/search",
+			value = "",
 			produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public String search(@RequestBody SearchData searchData) {
 		//System.out.println(mappingService.mapObjectToJson(searchData));
@@ -48,7 +48,7 @@ public class SearchController {
 			value = "Get the total occurrences count of a single block grammar search query",
 			response = GrammarSearchOccurrences.class)
 	@PostMapping(
-			value = "/search/occ",
+			value = "/occ",
 			produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public String searchOcc(@RequestBody SearchData searchData) {
 		//System.out.println(mappingService.mapObjectToJson(searchData));

@@ -129,7 +129,7 @@ class SearchResults extends Component {
         //console.log(queryJSON);
 
         //request search api data
-        axios.post(process.env.PUBLIC_URL + "/api/search/", queryJSON)
+        axios.post(process.env.PUBLIC_URL + "/api/search", queryJSON)
             .then((response) => {
                 //console.log(JSON.stringify(response.data));
                 stateStore.results.resultsData = response.data;

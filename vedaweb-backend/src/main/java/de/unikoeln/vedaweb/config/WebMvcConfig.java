@@ -33,18 +33,6 @@ import springfox.documentation.spring.web.plugins.Docket;
 public class WebMvcConfig extends WebMvcConfigurationSupport {
 	
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
-	
-
-	@Override
-	public void configureContentNegotiation(ContentNegotiationConfigurer configurer) {
-	    configurer.favorPathExtension(false);
-	}
-
-	
-	@Override
-	public void configurePathMatch(PathMatchConfigurer matcher) {
-	    matcher.setUseSuffixPatternMatch(false);
-	}
 
 	
     @Override
@@ -140,14 +128,14 @@ public class WebMvcConfig extends WebMvcConfigurationSupport {
     
     private ApiInfo metaData() {
         return new ApiInfoBuilder()
-                .title("VedaWeb REST API")
-                .description("REST API for the VedaWeb Application")
-                //.version("1.0.0")
-                //.license("Apache License Version 2.0")
-                //.licenseUrl("https://www.apache.org/licenses/LICENSE-2.0\"")
-                //.contact(new Contact("The VedaWeb Project Team", "https://vedaweb.uni-koeln.de", "veda-web@uni-koeln.de"))
-                .build();
+            .title("VedaWeb REST API")
+            .description("REST API for the VedaWeb Application")
+            //.version("1.0.0")
+            //.license("Apache License Version 2.0")
+            //.licenseUrl("https://www.apache.org/licenses/LICENSE-2.0\"")
+            //.contact(new Contact("The VedaWeb Project Team", "https://vedaweb.uni-koeln.de", "veda-web@uni-koeln.de"))
+            .build();
     }
-    
+
 
 }
