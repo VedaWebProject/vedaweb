@@ -35,7 +35,7 @@ public class UiDataController {
     }
 
 	@RequestMapping(value = "/uidata/count/stanzas/{book}/{hymn}", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-    public String getHymnCountJSON(@PathVariable("book") int book, @PathVariable("hymn") int hymn) {
+    public String getStanzaCountJSON(@PathVariable("book") int book, @PathVariable("hymn") int hymn) {
 		ObjectNode response = json.newNode();
 		response.put("count", indexService.countStanzas(book, hymn));
 		return response.toString();

@@ -330,17 +330,16 @@ public class ElasticIndexService {
 		bool.must(matchBook);
 		bool.must(matchHymn);
 		
-		//aggregation for distinct hymn number values
-		CardinalityAggregationBuilder agg = 
-				AggregationBuilders.cardinality("stanzas").field("stanza");
 		//compose request source
 		SearchSourceBuilder searchSourceBuilder = 
-				new SearchSourceBuilder().query(bool).aggregation(agg);
+				new SearchSourceBuilder().query(bool).size(0);
 		//create request
-		SearchRequest req = new SearchRequest("vedaweb").types("doc").source(searchSourceBuilder);
+		SearchRequest req = new SearchRequest("vedaweb")
+				.types("doc")
+				.source(searchSourceBuilder);
 		try {
 			SearchResponse response = elastic.client().search(req);
-			return (int)((Cardinality)response.getAggregations().get("stanzas")).getValue();
+			return (int) response.getHits().totalHits;
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
