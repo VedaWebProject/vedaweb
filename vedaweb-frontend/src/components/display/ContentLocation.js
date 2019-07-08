@@ -58,27 +58,8 @@ class ContentLocation extends Component {
         this.props.history.push("/view/index/" + (this.props.currIndex - 1));
     }
 
-    handleSelect(changed, value){
-        let id;
-
-        switch(changed){
-            case "book":
-                id = value + ".1.1";
-                break;
-            case "hymn":
-                id = this.props.book + "." + value + ".1";
-                break;
-            case "stanza":
-                id = this.props.book + "." + this.props.hymn + "." + value;
-                break;
-            case "hymnAbs":
-                id = "hymnAbs_" + value;
-                break;
-            default:
-                break;
-        }
-
-        this.props.history.push("/view/id/" + id);
+    handleSelect(book, hymn, stanza){
+        this.props.history.push("/view/id/" + book + "." + hymn + "." + stanza);
     }
 
     render() {
@@ -111,7 +92,7 @@ class ContentLocation extends Component {
                     style={selectStyle}
                     showSearch
                     value={book}
-                    onSelect={(v) => this.handleSelect("book", v)} >
+                    onSelect={(v) => this.handleSelect(v, 1, 1)} >
                         {Array(bookCount).fill(0).map((n, i) => (
                             <Option
                             key={'book_' + i+1}
@@ -125,7 +106,7 @@ class ContentLocation extends Component {
                     style={selectStyle}
                     showSearch
                     value={hymn}
-                    onSelect={(v) => this.handleSelect("hymn", v)} >
+                    onSelect={(v) => this.handleSelect(this.props.book, v, 1)} >
                         {Array(hymnCount).fill(0).map((n, i) => (
                             <Option
                             key={'hymn_' + i+1}
@@ -139,7 +120,7 @@ class ContentLocation extends Component {
                     style={selectStyle}
                     showSearch
                     value={stanza}
-                    onSelect={(v) => this.handleSelect("stanza", v)} >
+                    onSelect={(v) => this.handleSelect(this.props.book, this.props.hymn, v)} >
                         {Array(stanzaCount).fill(0).map((n, i) => (
                             <Option
                             key={'stanza_' + i+1}

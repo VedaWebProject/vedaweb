@@ -34,7 +34,7 @@ public class SearchController {
 			value = "Search for stanzas",
 			response = SearchHits.class)
 	@PostMapping(
-			value = "/",
+			value = "",
 			produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public String search(@RequestBody SearchData searchData) {
 		//System.out.println(mappingService.mapObjectToJson(searchData));

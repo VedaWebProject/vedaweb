@@ -49,12 +49,15 @@ public class StanzaLocation {
 	}
 	
 	public static String normalizeId(String id){
-		if (id.matches("\\d{7}"))
+		if (id.matches("\\d{7}")) {
 			return id;
-		else if (id.matches("\\D*\\d{2}\\D\\d{3}\\D\\d{2}\\D*"))
+		} else if (id.matches("\\D*\\d{2}\\D\\d{3}\\D\\d{2}\\D*")) {
 			id = id.replaceAll("\\D", "");
-		else
+		} else if (id.matches("\\d+\\D\\d+\\D\\d+")) {
 			id = constructId(id);
+		} else {
+			id = "0100101";
+		}
 		return id;
 	}
 	

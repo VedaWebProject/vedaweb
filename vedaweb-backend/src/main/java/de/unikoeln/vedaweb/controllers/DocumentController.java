@@ -28,11 +28,9 @@ public class DocumentController {
 	private JsonUtilService mappingService;
 	
 	
-	@ApiOperation(
-			value = "Get a stanza by ID (e.g. 0100306 for 01.0031.061)",
+	@ApiOperation(value = "Get a stanza by ID (e.g. 0100306 for 01.0031.061)",
 			response = Stanza.class)
-	@GetMapping(
-			value = "/id/{id}",
+	@GetMapping(value = "/id/{id:.+}",
 			produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public String stanzaById(
     		@PathVariable("id") String id) {
