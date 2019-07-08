@@ -37,7 +37,7 @@ public class WebMvcConfig extends WebMvcConfigurationSupport {
     protected void addResourceHandlers(ResourceHandlerRegistry registry) {
     	// general
     	registry
-			.addResourceHandler("/**")
+			.addResourceHandler("*")
 			.addResourceLocations("classpath:/static/")
 			.setCacheControl(CacheControl.maxAge(10 , TimeUnit.HOURS).mustRevalidate()) //set cache-control in header
 			.resourceChain(false)
