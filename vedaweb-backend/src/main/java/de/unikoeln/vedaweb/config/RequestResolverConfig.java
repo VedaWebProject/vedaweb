@@ -1,30 +1,55 @@
-package de.unikoeln.vedaweb.config;
-
-import java.util.concurrent.TimeUnit;
-
-import org.springframework.context.annotation.Configuration;
-import org.springframework.http.CacheControl;
-import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
-
-
-@Configuration
-public class RequestResolverConfig implements WebMvcConfigurer {
-
+//package de.unikoeln.vedaweb.config;
+//
+//import java.io.IOException;
+//import java.util.Arrays;
+//import java.util.List;
+//import java.util.concurrent.TimeUnit;
+//
+//import javax.servlet.http.HttpServletRequest;
+//
+//import org.slf4j.Logger;
+//import org.slf4j.LoggerFactory;
+//import org.springframework.context.annotation.Configuration;
+//import org.springframework.core.io.ClassPathResource;
+//import org.springframework.core.io.Resource;
+//import org.springframework.http.CacheControl;
+//import org.springframework.util.StringUtils;
+//import org.springframework.web.servlet.config.annotation.ContentNegotiationConfigurer;
+//import org.springframework.web.servlet.config.annotation.PathMatchConfigurer;
+//import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
+//import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+//import org.springframework.web.servlet.resource.ResourceResolver;
+//import org.springframework.web.servlet.resource.ResourceResolverChain;
+//
+//
+//@Configuration
+//public class RequestResolverConfig implements WebMvcConfigurer {
+//
 //	private Logger logger = LoggerFactory.getLogger(this.getClass());
-	
-
-	@Override
-	public void addResourceHandlers(ResourceHandlerRegistry registry) {
-		registry
-			.addResourceHandler("/**")
-			.addResourceLocations("classpath:/static/")
-			.setCacheControl(CacheControl.maxAge(10 , TimeUnit.HOURS).mustRevalidate()) //set cache-control in header
-			.resourceChain(false);
+//	
+//
+//	@Override
+//	public void addResourceHandlers(ResourceHandlerRegistry registry) {
+//		registry
+//			.addResourceHandler("/**")
+//			.addResourceLocations("classpath:/static/")
+//			.setCacheControl(CacheControl.maxAge(10 , TimeUnit.HOURS).mustRevalidate()) //set cache-control in header
+//			.resourceChain(false)
 //			.addResolver(new PushStateResourceResolver());
-	}
-	
-	
+//	}
+//	
+//	
+//	@Override
+//	public void configureContentNegotiation(ContentNegotiationConfigurer configurer) {
+//	    configurer.favorPathExtension(false);
+//	}
+//
+//	@Override
+//	public void configurePathMatch(PathMatchConfigurer matcher) {
+//	    matcher.setUseSuffixPatternMatch(false);
+//	}
+//	
+//	
 //	private class PushStateResourceResolver implements ResourceResolver {
 //		private Resource index = new ClassPathResource("/static/index.html");
 //		private List<String> handledExtensions = Arrays.asList("html", "htm", "js", "map", "json", "csv", "css", "png", "svg",
@@ -81,4 +106,4 @@ public class RequestResolverConfig implements WebMvcConfigurer {
 //			return handledExtensions.stream().anyMatch(ext -> ext.equals(extension));
 //		}
 //	}
-}
+//}

@@ -1,10 +1,14 @@
 package de.unikoeln.vedaweb.config;
 
+import java.util.concurrent.TimeUnit;
+
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.CacheControl;
+import org.springframework.web.servlet.config.annotation.ContentNegotiationConfigurer;
+import org.springframework.web.servlet.config.annotation.PathMatchConfigurer;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurationSupport;
-import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping;
 
 import springfox.documentation.builders.ApiInfoBuilder;
 import springfox.documentation.builders.PathSelectors;
@@ -12,12 +16,43 @@ import springfox.documentation.builders.RequestHandlerSelectors;
 import springfox.documentation.service.ApiInfo;
 import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spring.web.plugins.Docket;
-import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 @Configuration
-@EnableSwagger2
-public class SwaggerConfig extends WebMvcConfigurationSupport {
+public class WebMvcConfig extends WebMvcConfigurationSupport {
 	
+	@Override
+	public void configureContentNegotiation(ContentNegotiationConfigurer configurer) {
+	    configurer.favorPathExtension(false);
+	}
+
+	
+	@Override
+	public void configurePathMatch(PathMatchConfigurer matcher) {
+	    matcher.setUseSuffixPatternMatch(false);
+	}
+
+	
+    @Override
+    protected void addResourceHandlers(ResourceHandlerRegistry registry) {
+    	// general
+    	registry
+			.addResourceHandler("/**")
+			.addResourceLocations("classpath:/static/")
+			.setCacheControl(CacheControl.maxAge(10 , TimeUnit.HOURS).mustRevalidate()) //set cache-control in header
+			.resourceChain(false);
+    	// for swagger
+    	registry
+	        .addResourceHandler("swagger-ui.html")
+	        .addResourceLocations("classpath:/META-INF/resources/");
+    	// for swagger
+	    registry
+	        .addResourceHandler("/webjars/**")
+	        .addResourceLocations("classpath:/META-INF/resources/webjars/");
+    }
+    
+    
+    //// SWAGGER SPECIFIC CONFIG ////
+    
     @Bean
     public Docket api() { 
         return new Docket(DocumentationType.SWAGGER_2)  
@@ -40,24 +75,5 @@ public class SwaggerConfig extends WebMvcConfigurationSupport {
                 .build();
     }
     
-    
-    @Override
-    protected void addResourceHandlers(ResourceHandlerRegistry registry) {
-    	registry
-	        .addResourceHandler("swagger-ui.html")
-	        .addResourceLocations("classpath:/META-INF/resources/");
-	    registry
-	        .addResourceHandler("/webjars/**")
-	        .addResourceLocations("classpath:/META-INF/resources/webjars/");
-    }
-    
-
-    @Bean
-    public RequestMappingHandlerMapping requestMappingHandlerMapping() {
-        RequestMappingHandlerMapping handlerMapping = super.requestMappingHandlerMapping();
-//        handlerMapping.setUseSuffixPatternMatch(true); // Doesn't seem to have the desired effect, anyway. Keeping it for reference, though.
-        handlerMapping.setUseTrailingSlashMatch(true);
-        return handlerMapping;
-    }
 
 }
