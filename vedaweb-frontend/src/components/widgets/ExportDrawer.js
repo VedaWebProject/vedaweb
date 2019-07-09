@@ -7,8 +7,8 @@ import stateStore from "../../stateStore";
 const RadioGroup = Radio.Group;
 
 const exportOptions = [
-    { id: "XML", label: "TEI-XML (full stanza data)" },
-    { id: "TXT", label: "Plain Text (selected stanza data)"}
+    { id: "xml", label: "TEI-XML (full stanza data)" },
+    { id: "txt", label: "Plain Text (selected stanza data)"}
 ];
 
 class ExportDrawer extends Component {
@@ -16,7 +16,7 @@ class ExportDrawer extends Component {
 
     constructor(props){
         super(props);
-        this.state = { format: exportOptions[0], isExportLoaded: true };
+        this.state = { format: exportOptions[0].id, isExportLoaded: true };
         this.export = this.export.bind(this);
     }
 
@@ -24,21 +24,15 @@ class ExportDrawer extends Component {
     export() {
         this.setState({ isExportLoaded: false });
 
-        // let query = {
-        //     docId: this.props.docId,
-        //     format: this.state.format,
-        //     layers: this.props.layers
-        // }
-
         axios.post(
-                process.env.PUBLIC_URL + "/api/export/doc/" + this.props.docId + "/" + this.state.format.toLowerCase(),
+                process.env.PUBLIC_URL + "/api/export/doc/" + this.props.docId + "/" + this.state.format,
                 {layers: stateStore.ui.layers.filter(l => l.show)}
             )
             .then((response) => {
                 this.setState({
                     isExportLoaded: true
                 });
-                fileDownload(response.data, ("vedaweb-" + this.props.docId + "." + this.state.format.toLowerCase()));
+                fileDownload(response.data, ("vedaweb-" + this.props.docId + "." + this.state.format));
             })
             .catch((error) => {
                 this.setState({
