@@ -24,6 +24,7 @@ import de.unikoeln.vedaweb.search.ElasticSearchService;
 import de.unikoeln.vedaweb.search.SearchData;
 import de.unikoeln.vedaweb.search.SearchHitsConverter;
 import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 
 @RestController
 @RequestMapping("api/export")
@@ -64,6 +65,7 @@ public class ExportController {
 			//consumes = MediaType.APPLICATION_JSON_VALUE,
 			produces = "text/xml;charset=UTF-8")
     public String exportDocXml(
+    		@ApiParam(example = "0300201")
     		@PathVariable("docId") String docId) {
 		
 		Optional<StanzaXml> xml = stanzaXmlRepo.findById(docId);
@@ -78,6 +80,7 @@ public class ExportController {
 			consumes = MediaType.APPLICATION_JSON_VALUE,
 			produces = "text/plain;charset=UTF-8")
     public String exportDocTxt(
+    		@ApiParam(example = "0300201")
     		@PathVariable("docId") String docId,
     		@RequestBody ExportLayers exportLayers) {
 		
@@ -95,7 +98,9 @@ public class ExportController {
 	@GetMapping(
 			value = "/glossings/{docId}/txt",
 			produces = "text/plain;charset=UTF-8")
-    public String exportGlossingsTxt(@PathVariable("docId") String docId) {
+    public String exportGlossingsTxt(
+    		@ApiParam(example = "0300201")
+    		@PathVariable("docId") String docId) {
 		
 		Optional<Stanza> stanza = stanzaRepo.findById(docId);
 		return stanza.isPresent() ? GlossingsTxtExport.glossingsTxt(stanza.get()) : "";
@@ -107,7 +112,9 @@ public class ExportController {
 	@GetMapping(
 			value = "/glossings/{docId}/html",
 			produces = "text/plain;charset=UTF-8")
-    public String exportGlossingsHtml(@PathVariable("docId") String docId) {
+    public String exportGlossingsHtml(
+    		@ApiParam(example = "0300201")
+    		@PathVariable("docId") String docId) {
 		
 		Optional<Stanza> stanza = stanzaRepo.findById(docId);
 		return stanza.isPresent() ? GlossingsHtmlExport.glossingsHtml(stanza.get()) : "";

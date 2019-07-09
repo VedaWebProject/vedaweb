@@ -15,6 +15,7 @@ import de.unikoeln.vedaweb.document.StanzaRepository;
 import de.unikoeln.vedaweb.util.JsonUtilService;
 import de.unikoeln.vedaweb.util.StringUtils;
 import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 
 
 @RestController
@@ -33,6 +34,7 @@ public class DocumentController {
 	@GetMapping(value = "/id/{id:.+}",
 			produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public String stanzaById(
+    		@ApiParam(example = "0300201")
     		@PathVariable("id") String id) {
 		
 		//id matches form of <hymnAbs, stanza>
@@ -62,7 +64,9 @@ public class DocumentController {
 	@GetMapping(
 			value = "/index/{index}",
 			produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-    public String stanzaByLocation(@PathVariable int index) {
+    public String stanzaByLocation(
+    		@ApiParam(example = "123")
+    		@PathVariable int index) {
 		return mappingService.mapOptionalToJson(
 				stanzaRepo.findByIndex( StringUtils.normalizeIndex(index, (int)stanzaRepo.count()) ));
     }
