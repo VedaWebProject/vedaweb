@@ -1,7 +1,5 @@
 package de.unikoeln.vedaweb.controllers;
 
-import java.util.List;
-import java.util.Map;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,8 +44,9 @@ public class ExportController {
 	@PostMapping(
 			value = "/search",
 			consumes = MediaType.APPLICATION_JSON_VALUE,
-			produces = MediaType.TEXT_PLAIN_VALUE)
+			produces = "text/plain;charset=UTF-8")
     public String exportSearchCSV(@RequestBody SearchData searchData) {
+		
 		searchData.setSize((int)stanzaRepo.count());	//get ALL results
 		searchData.setFrom(0);	//export from result 0
 		return SearchResultsCsvExport.searchHitsAsCsv(
@@ -63,9 +62,10 @@ public class ExportController {
 	@PostMapping(
 			value = "/doc/{docId}/xml",
 			//consumes = MediaType.APPLICATION_JSON_VALUE,
-			produces = MediaType.TEXT_XML_VALUE)
+			produces = "text/xml;charset=UTF-8")
     public String exportDocXml(
     		@PathVariable("docId") String docId) {
+		
 		Optional<StanzaXml> xml = stanzaXmlRepo.findById(docId);
 		return xml.isPresent() ? xml.get().getXml() : "";
     }
@@ -76,12 +76,15 @@ public class ExportController {
 	@PostMapping(
 			value = "/doc/{docId}/txt",
 			consumes = MediaType.APPLICATION_JSON_VALUE,
-			produces = MediaType.TEXT_PLAIN_VALUE)
+			produces = "text/plain;charset=UTF-8")
     public String exportDocTxt(
     		@PathVariable("docId") String docId,
     		@RequestBody ExportLayers exportLayers) {
+		
 		Optional<Stanza> stanza = stanzaRepo.findById(docId);
-		return stanza.isPresent() ? StanzaTxtExport.stanzaTxt(stanza.get(), exportLayers) : "";
+		return stanza.isPresent()
+				? StanzaTxtExport.stanzaTxt(stanza.get(), exportLayers)
+				: "";
     }
 	
 	
@@ -91,8 +94,9 @@ public class ExportController {
 			value = "Export a specific stanza's morphological glossing as plain text")
 	@GetMapping(
 			value = "/glossings/{docId}/txt",
-			produces = MediaType.TEXT_PLAIN_VALUE)
+			produces = "text/plain;charset=UTF-8")
     public String exportGlossingsTxt(@PathVariable("docId") String docId) {
+		
 		Optional<Stanza> stanza = stanzaRepo.findById(docId);
 		return stanza.isPresent() ? GlossingsTxtExport.glossingsTxt(stanza.get()) : "";
     }
@@ -102,8 +106,9 @@ public class ExportController {
 			value = "Export a specific stanza's morphological glossing as HTML table")
 	@GetMapping(
 			value = "/glossings/{docId}/html",
-			produces = MediaType.TEXT_PLAIN_VALUE)
+			produces = "text/plain;charset=UTF-8")
     public String exportGlossingsHtml(@PathVariable("docId") String docId) {
+		
 		Optional<Stanza> stanza = stanzaRepo.findById(docId);
 		return stanza.isPresent() ? GlossingsHtmlExport.glossingsHtml(stanza.get()) : "";
     }
