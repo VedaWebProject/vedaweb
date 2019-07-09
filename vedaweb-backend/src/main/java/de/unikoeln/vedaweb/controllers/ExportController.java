@@ -17,6 +17,7 @@ import de.unikoeln.vedaweb.document.Stanza;
 import de.unikoeln.vedaweb.document.StanzaRepository;
 import de.unikoeln.vedaweb.document.StanzaXml;
 import de.unikoeln.vedaweb.document.StanzaXmlRepository;
+import de.unikoeln.vedaweb.export.ExportLayers;
 import de.unikoeln.vedaweb.export.GlossingsHtmlExport;
 import de.unikoeln.vedaweb.export.GlossingsTxtExport;
 import de.unikoeln.vedaweb.export.SearchResultsCsvExport;
@@ -44,6 +45,7 @@ public class ExportController {
 			value = "Export results of the given search as CSV")
 	@PostMapping(
 			value = "/search",
+			consumes = MediaType.APPLICATION_JSON_VALUE,
 			produces = MediaType.TEXT_PLAIN_VALUE)
     public String exportSearchCSV(@RequestBody SearchData searchData) {
 		searchData.setSize((int)stanzaRepo.count());	//get ALL results
@@ -55,30 +57,34 @@ public class ExportController {
 	
 	
 	@ApiOperation(
-			value = "Export a specific stanza as TEI XML")
+			httpMethod = "POST",
+			value = "Export a specific stanza as TEI XML (this is a POST endpoint, "
+					+ "because layer selection via request body will be implemented in the future)")
 	@PostMapping(
 			value = "/doc/{docId}/xml",
+			//consumes = MediaType.APPLICATION_JSON_VALUE,
 			produces = MediaType.TEXT_XML_VALUE)
     public String exportDocXml(
-    		@PathVariable("docId") String docId,
-    		@RequestBody(required = false) List<Map<String, String>> layers) {
+    		@PathVariable("docId") String docId) {
 		Optional<StanzaXml> xml = stanzaXmlRepo.findById(docId);
 		return xml.isPresent() ? xml.get().getXml() : "";
     }
-	
 	
 
 	@ApiOperation(
 			value = "Export a specific stanza's data as plain text")
 	@PostMapping(
 			value = "/doc/{docId}/txt",
+			consumes = MediaType.APPLICATION_JSON_VALUE,
 			produces = MediaType.TEXT_PLAIN_VALUE)
     public String exportDocTxt(
     		@PathVariable("docId") String docId,
-    		@RequestBody(required = false) List<Map<String, String>> layers) {
+    		@RequestBody ExportLayers exportLayers) {
 		Optional<Stanza> stanza = stanzaRepo.findById(docId);
-		return stanza.isPresent() ? StanzaTxtExport.stanzaTxt(stanza.get(), layers) : "";
+		return stanza.isPresent() ? StanzaTxtExport.stanzaTxt(stanza.get(), exportLayers) : "";
     }
+	
+	
 	
 
 	@ApiOperation(
@@ -101,5 +107,6 @@ public class ExportController {
 		Optional<Stanza> stanza = stanzaRepo.findById(docId);
 		return stanza.isPresent() ? GlossingsHtmlExport.glossingsHtml(stanza.get()) : "";
     }
-
+	
+	
 }

@@ -32,7 +32,7 @@ class ExportDrawer extends Component {
 
         axios.post(
                 process.env.PUBLIC_URL + "/api/export/doc/" + this.props.docId + "/" + this.state.format.toLowerCase(),
-                stateStore.ui.layers.filter(l => l.show)
+                {layers: stateStore.ui.layers.filter(l => l.show)}
             )
             .then((response) => {
                 this.setState({
@@ -50,7 +50,6 @@ class ExportDrawer extends Component {
 
 
     render() {
-        
         return (
             
             <Drawer
