@@ -1,4 +1,4 @@
-package de.unikoeln.vedaweb.errors;
+package de.unikoeln.vedaweb.controllers;
 
 import java.util.Map;
 
