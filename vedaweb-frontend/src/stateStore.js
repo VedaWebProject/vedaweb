@@ -351,7 +351,7 @@ const stateStore = store({
                 if (id.endsWith('_') && l.id.startsWith(id)){
                     l.show = show;
                 }
-                if (id.startsWith(l.id) && show){
+                if (id.startsWith(l.id) && l.id.endsWith('_') && show){
                     l.show = true;
                 }
             }
