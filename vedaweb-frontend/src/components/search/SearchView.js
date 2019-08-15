@@ -44,9 +44,10 @@ class SearchView extends Component {
             
             //remove empty blocks
             query.blocks = query.blocks.filter(block => !this.isBlockEmpty(block));
-
+            
             for (let block of query.blocks){
                 block.term = SanscriptAccents.t(block.term, stateStore.settings.transliteration, "iso");
+                block.lemma = SanscriptAccents.t(block.lemma, stateStore.settings.transliteration, "iso");
                 //make fields direct props of block
                 for (let field of block.fields){
                     if (field.value !== undefined && field.value.length > 0)
@@ -61,12 +62,13 @@ class SearchView extends Component {
         query.scopes = query.scopes.filter(scope => (
             (scope.fromBook + scope.toBook + scope.fromHymn + scope.toHymn) > 0
         ));
-
+        
         this.props.history.push("/results/" + Base64.encodeURI(JSON.stringify(query)));
     }
 
     isBlockEmpty(block){
         return (block.term === undefined || block.term.length === 0)
+            && (block.lemma === undefined || block.lemma.length === 0)
             && block.fields.filter(field => field.value.length > 0).length === 0;
     }
 

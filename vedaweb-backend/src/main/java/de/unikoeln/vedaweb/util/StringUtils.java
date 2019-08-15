@@ -70,7 +70,10 @@ public class StringUtils {
 	
 	
 	public static String cleanLemma(String in) {
-		return in.replaceAll("\\u221A", "");
+		return in
+			.replaceAll("\\u221A", "") // √ square root symbol
+			.replaceAll("\\-$", "")
+			;
 	}
 	
 	public static String retainLatinBaseChars(String in) {
