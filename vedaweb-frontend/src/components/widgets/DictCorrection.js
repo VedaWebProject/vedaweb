@@ -64,9 +64,8 @@ class DictCorrection extends Component {
 
         let query = `
             {
-                entries(queryType: prefix, field: headword_iso, query: "` + input + `") {
+                entries(queryType: fuzzy, field: headword_iso, query: "` + input + `") {
                     id
-                    headwordDeva
                     headwordIso
                 }
             }
@@ -201,7 +200,7 @@ class DictCorrection extends Component {
 
                                 { this.state.isLoaded && this.state.suggestions && this.state.suggestions.length > 0 &&
                                     this.state.suggestions.map(s => 
-                                        <Option className="text-font" key={s.id}>{s.headwordIso + " - " + s.headwordDeva}</Option>
+                                        <Option className="text-font" key={s.id}>{s.headwordIso + " (" + s.id + ")"}</Option>
                                     )
                                 }
 
