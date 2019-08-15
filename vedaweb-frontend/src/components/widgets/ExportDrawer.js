@@ -18,7 +18,7 @@ class ExportDrawer extends Component {
         super(props);
         this.state = { format: exportOptions[0].id, isExportLoaded: true };
         this.export = this.export.bind(this);
-        console.log({layers: stateStore.ui.layers.filter(l => l.show)});
+        //console.log({layers: stateStore.ui.layers.filter(l => l.show)});
     }
 
 
