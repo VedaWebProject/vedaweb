@@ -82,7 +82,6 @@
 		{ "id": "translation_grassmann", "label": "Graßmann (DE)", "show": false },
 		{ "id": "translation_otto", "label": "Otto (DE)", "show": false },
 		
-		{ "id": "metricaldata_", "label": "Metrical Data", "show": true },
 		{ "id": "glossing_", "label": "Morphological Glossing", "show": true },
 		{ "id": "dictionaries_", "label": "Dictionaries", "show": true }
 	]
