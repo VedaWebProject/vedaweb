@@ -52,7 +52,7 @@ public class SystemController {
     		@PathVariable(name = "action") String action,
     		@RequestParam(name = "auth", required = false) String auth) {
 		
-		ObjectNode response = json.newNode();
+		ObjectNode response = json.newObjectNode();
 		
 		if (!auth(auth)) {
 			response.put("error", "authentication failed");
@@ -90,7 +90,7 @@ public class SystemController {
 		
 		boolean dry = dryRun != null;
 		int docCount = dataImportService.importXMLData(DataImportService.LOCAL_XML_DIR, dry);
-		ObjectNode response = json.newNode();
+		ObjectNode response = json.newObjectNode();
 		response.put("dryRun", dry);
 		response.put("importedDocsCount", docCount);
 		//if (!dry) response.put("indexActions", indexService.rebuildIndex());

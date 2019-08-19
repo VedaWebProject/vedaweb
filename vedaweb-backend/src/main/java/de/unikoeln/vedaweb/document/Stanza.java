@@ -38,8 +38,8 @@ public class Stanza implements Comparable<Stanza> {
 	@ApiModelProperty(notes = "Strata property of this stanza")
 	private String strata;
 	
-	@ApiModelProperty(notes = "Metrical data for this stanza based on Lubotsky (Zurich)")
-	private String[] metricalData;
+//	@ApiModelProperty(notes = "Metrical data for this stanza based on Lubotsky (Zurich)")
+//	private String[] metricalData;
 	
 	@ApiModelProperty(notes = "List of pada objects containing the grammar data for each pada's tokens")
 	private List<Pada> padas;
@@ -135,14 +135,14 @@ public class Stanza implements Comparable<Stanza> {
 //		return translations;
 //	}
 	
-	public String[] getMetricalData() {
-		return metricalData;
-	}
-
-
-	public void setMetricalData(String[] metricalData) {
-		this.metricalData = metricalData;
-	}
+//	public String[] getMetricalData() {
+//		return metricalData;
+//	}
+//
+//
+//	public void setMetricalData(String[] metricalData) {
+//		this.metricalData = metricalData;
+//	}
 
 
 	public List<StanzaVersion> getVersions() {

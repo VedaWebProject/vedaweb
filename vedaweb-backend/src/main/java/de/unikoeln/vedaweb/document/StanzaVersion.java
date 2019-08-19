@@ -17,6 +17,9 @@ public class StanzaVersion {
 	@ApiModelProperty(notes = "The lines of this stanza version")
 	private String[] form;
 	
+	@ApiModelProperty(notes = "The metrical data of the lines of this stanza version")
+	private String[] metricalData;
+	
 	@ApiModelProperty(notes = "Type of this version ('version' or 'translation')")
 	private String type;
 	
@@ -81,6 +84,14 @@ public class StanzaVersion {
 
 	public void setForm(String[] form) {
 		this.form = form;
+	}
+
+	public String[] getMetricalData() {
+		return metricalData;
+	}
+
+	public void setMetricalData(String[] metricalData) {
+		this.metricalData = metricalData;
 	}
 
 	public String getType() {

@@ -38,7 +38,7 @@ public class SearchController {
 			produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public String search(@RequestBody SearchData searchData) {
 		//System.out.println(mappingService.mapObjectToJson(searchData));
-		return mappingService.mapObjectToJson(
+		return mappingService.mapObjectToJsonString(
 				SearchHitsConverter.processSearchResponse(
 						search.search(searchData)));
     }
@@ -52,7 +52,7 @@ public class SearchController {
 			produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public String searchOcc(@RequestBody SearchData searchData) {
 		//System.out.println(mappingService.mapObjectToJson(searchData));
-		return mappingService.mapObjectToJson(
+		return mappingService.mapObjectToJsonString(
 				new GrammarSearchOccurrences(
 						SearchHitsConverter.processSearchResponse(
 								search.searchOcc(searchData))));

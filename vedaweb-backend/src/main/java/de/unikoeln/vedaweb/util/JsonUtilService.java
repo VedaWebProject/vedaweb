@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.springframework.stereotype.Service;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.databind.node.ArrayNode;
@@ -25,13 +26,16 @@ public class JsonUtilService {
 		mapper.configure(SerializationFeature.FAIL_ON_EMPTY_BEANS, false);
 	}
 	
-	public ObjectNode newNode() {
+	
+	public ObjectNode newObjectNode() {
 		return mapper.createObjectNode();
 	}
 	
-	public ArrayNode newArray() {
+	
+	public ArrayNode newArrayNode() {
 		return mapper.createArrayNode();
 	}
+	
 	
 	public ObjectNode parse(String jsonString) {
 		try {
@@ -39,21 +43,24 @@ public class JsonUtilService {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		return newNode();
+		return newObjectNode();
 	}
+	
 	
 	public ObjectMapper getMapper() {
 		return mapper;
 	}
 	
-	public String mapOptionalToJson(Optional<?> o){
+	
+	public String mapOptionalToJsonString(Optional<?> o){
 		if (!o.isPresent())
-			return mapObjectToJson(null);
+			return mapObjectToJsonString(null);
 		else
-			return mapObjectToJson(o.get());
+			return mapObjectToJsonString(o.get());
 	}
 	
-	public String mapObjectToJson(Object o){
+	
+	public String mapObjectToJsonString(Object o){
 		String json = "{}";
 		if (o == null){
 			throw new NotFoundException();
@@ -64,6 +71,19 @@ public class JsonUtilService {
 			e.printStackTrace();
 		}
 		return json;
+	}
+	
+	
+	public JsonNode mapOptionalToJsonNode(Optional<?> o){
+		if (!o.isPresent())
+			return newObjectNode();
+		else
+			return mapObjectToJsonNode(o.get());
+	}
+	
+	
+	public <T> JsonNode mapObjectToJsonNode(T obj){
+		return mapper.valueToTree(obj);
 	}
 
 }

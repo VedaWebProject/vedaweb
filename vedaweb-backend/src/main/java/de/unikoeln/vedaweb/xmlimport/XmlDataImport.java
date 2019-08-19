@@ -79,7 +79,6 @@ public class XmlDataImport {
 				StanzaVersion version;
 				String[] versionForm = null;
 				
-				
 				// Zurich ISO / zurich
 				temp = compiler.evaluate("*:lg[@*:source='zurich']", stanza);
 				if (temp.size() > 0) {
@@ -92,18 +91,22 @@ public class XmlDataImport {
 						"version",
 						true
 					);
+					version.setMetricalData(MetricalParser.parseMultiline(
+						String.join("\n", versionForm),
+						MetricalParser.S_LONG_LETTER,
+						MetricalParser.S_SHORT_LETTER));
 					stanzaObj.addVersion(version);
 				}
 				
 				
 				// metrical data generated from Lubotsky (Zurich)
 				// !!! MUST be executed right after Lubotsky (Zurich) !!!
-				if (versionForm != null)
-					stanzaObj.setMetricalData(
-						MetricalParser.parseMultiline(
-							String.join("\n", versionForm),
-							MetricalParser.S_LONG_LETTER,
-							MetricalParser.S_SHORT_LETTER));
+//				if (versionForm != null)
+//					stanzaObj.setMetricalData(
+//						MetricalParser.parseMultiline(
+//							String.join("\n", versionForm),
+//							MetricalParser.S_LONG_LETTER,
+//							MetricalParser.S_SHORT_LETTER));
 				
 				
 				// Samitha / gunkel_ryan
@@ -118,6 +121,10 @@ public class XmlDataImport {
 						"version",
 						true
 					);
+					version.setMetricalData(MetricalParser.parseMultiline(
+							String.join("\n", versionForm),
+							MetricalParser.S_LONG_LETTER,
+							MetricalParser.S_SHORT_LETTER));
 					stanzaObj.addVersion(version);
 				}
 				
@@ -134,6 +141,10 @@ public class XmlDataImport {
 						"version",
 						true
 					);
+					version.setMetricalData(MetricalParser.parseMultiline(
+							String.join("\n", versionForm),
+							MetricalParser.S_LONG_LETTER,
+							MetricalParser.S_SHORT_LETTER));
 					stanzaObj.addVersion(version);
 				}
 				
@@ -151,6 +162,10 @@ public class XmlDataImport {
 						"version",
 						true
 					);
+					version.setMetricalData(MetricalParser.parseMultiline(
+							String.join("\n", versionForm),
+							MetricalParser.S_LONG_LETTER,
+							MetricalParser.S_SHORT_LETTER));
 					stanzaObj.addVersion(version);
 				}
 				
@@ -166,6 +181,10 @@ public class XmlDataImport {
 						"version",
 						false
 					);
+					version.setMetricalData(MetricalParser.parseMultiline(
+							String.join("\n", versionForm),
+							MetricalParser.S_LONG_LETTER,
+							MetricalParser.S_SHORT_LETTER));
 					stanzaObj.addVersion(version);
 				}
 				
@@ -181,6 +200,10 @@ public class XmlDataImport {
 						"version",
 						false
 					);
+					version.setMetricalData(MetricalParser.parseMultiline(
+							String.join("\n", versionForm),
+							MetricalParser.S_LONG_LETTER,
+							MetricalParser.S_SHORT_LETTER));
 					stanzaObj.addVersion(version);
 				}
 				

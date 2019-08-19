@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RestController;
 import de.unikoeln.vedaweb.document.Stanza;
 import de.unikoeln.vedaweb.document.StanzaLocation;
 import de.unikoeln.vedaweb.document.StanzaRepository;
-import de.unikoeln.vedaweb.util.JsonUtilService;
 import de.unikoeln.vedaweb.util.StringUtils;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
@@ -25,36 +24,31 @@ public class DocumentController {
 	@Autowired
 	private StanzaRepository stanzaRepo;
 	
-	@Autowired
-	private JsonUtilService mappingService;
-	
 	
 	@ApiOperation(value = "Get a stanza by ID (e.g. 0100306 for 01.0031.061)",
 			response = Stanza.class)
 	@GetMapping(value = "/id/{id:.+}",
 			produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-    public String stanzaById(
+    public Stanza stanzaById(
     		@ApiParam(example = "0300201")
     		@PathVariable("id") String id) {
+		
+		Optional<Stanza> stanza = null;
 		
 		//id matches form of <hymnAbs, stanza>
 		if (id.matches("\\d+\\,\\d+")) {
 			String[] i = id.split("\\,");
-			Optional<Stanza> stanza = stanzaRepo.findByHymnAbsAndStanza(Integer.parseInt(i[0]), Integer.parseInt(i[1]));
-			return mappingService.mapOptionalToJson(stanza);
+			stanza = stanzaRepo.findByHymnAbsAndStanza(Integer.parseInt(i[0]), Integer.parseInt(i[1]));
+		} else {
+			StanzaLocation loc = new StanzaLocation(id);
+			
+			while (!(stanza = stanzaRepo.findByBookAndHymnAndStanza(
+					loc.getBook(), loc.getHymn(), loc.getStanza())).isPresent()) {
+				loc.setNextFallbackLocation();
+			}
 		}
 		
-		//else...
-		
-		StanzaLocation loc = new StanzaLocation(id);
-		Optional<Stanza> stanza;
-		
-		while (!(stanza = stanzaRepo.findByBookAndHymnAndStanza(
-				loc.getBook(), loc.getHymn(), loc.getStanza())).isPresent()) {
-			loc.setNextFallbackLocation();
-		}
-		
-		return mappingService.mapOptionalToJson(stanza);
+		return stanza != null && stanza.isPresent() ? stanza.get() : null;
     }
 	
 	
@@ -64,11 +58,12 @@ public class DocumentController {
 	@GetMapping(
 			value = "/index/{index}",
 			produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-    public String stanzaByLocation(
+    public Stanza stanzaByLocation(
     		@ApiParam(example = "123")
     		@PathVariable int index) {
-		return mappingService.mapOptionalToJson(
-				stanzaRepo.findByIndex( StringUtils.normalizeIndex(index, (int)stanzaRepo.count()) ));
+		
+		Optional<Stanza> stanza = stanzaRepo.findByIndex(StringUtils.normalizeIndex(index, (int)stanzaRepo.count()));
+		return stanza != null && stanza.isPresent() ? stanza.get() : null;
     }
 	
 }

@@ -28,12 +28,13 @@ class ContentView extends Component {
 
     constructor(props) {
         super(props)
-        this.state ={
+        this.state = {
             data: {},
             isLoaded: false,
             filtersVisible: false,
             exportVisible: false,
-            condensedView: false
+            condensedView: false,
+            showMetricalData: false
         }
     }
 
@@ -123,7 +124,7 @@ class ContentView extends Component {
 
 
     render() {
-        const { error, isLoaded, data, condensedView } = this.state;
+        const { error, isLoaded, data, condensedView, showMetricalData } = this.state;
 
         return (
             <Spin
@@ -212,6 +213,18 @@ class ContentView extends Component {
                                                         {stateStore.ui.isLayerVisible('translation_') && "Translations"}
                                                     </h1>
 
+                                                    { stateStore.ui.isLayerVisible('version_') && !condensedView &&
+                                                        <div
+                                                        className="font-small light-grey bottom-gap gap-left-big"
+                                                        onClick={() => this.setState({showMetricalData: !this.state.showMetricalData})}
+                                                        style={{cursor: "pointer", display: "inline-block"}}>
+                                                            <Icon
+                                                            type={showMetricalData ? "eye-invisible" : "eye"}
+                                                            className="gap-right"/>
+                                                            {showMetricalData ? "hide" : "show"} available metrical data
+                                                        </div>
+                                                    }
+
                                                     {stateStore.ui.layers.filter(l => l.id.startsWith('version_')
                                                         && l.id !== 'version_' && l.show).map(version => {
                                                             let v = data.versions.find(x => x.id === version.id);
@@ -230,16 +243,27 @@ class ContentView extends Component {
 
                                                                     <div
                                                                     className={(v.language === "deva" ? "deva-font" : "text-font")}
-                                                                    style={{display: condensedView ? "inline-block" : "block"}}>
+                                                                    style={{
+                                                                        display: condensedView ? "inline-block" : "block",
+                                                                        paddingLeft: condensedView ? 0 : "1rem"
+                                                                    }}>
                                                                         {v.form.map((line, i) => (
                                                                             <div
-                                                                            key={"trans_" + i}
+                                                                            key={"version_" + i}
                                                                             style={{display: condensedView ? "inline-block" : "block"}}>
                                                                                 {v.applyKeys && !condensedView ?
                                                                                     <span className="red gap-right">{String.fromCharCode(i + 97)} </span>
                                                                                     : ''
                                                                                 }
+
                                                                                 {line}&nbsp;
+
+                                                                                { showMetricalData && !condensedView && v.metricalData && 
+                                                                                    <span className="font-small gap-left-big light-grey main-font">
+                                                                                    {v.metricalData[i].replace(/L/ig,"—").replace(/S/ig,"◡").replace(/ /ig,"\u3000") + "\u3000" +
+                                                                                    "(" + v.metricalData[i].replace(/ /ig,"").length + ")"}
+                                                                                    </span>
+                                                                                }
                                                                             </div>
                                                                         ))}
                                                                     </div>
@@ -275,7 +299,10 @@ class ContentView extends Component {
 
                                                                     <div
                                                                     className="text-font"
-                                                                    style={{display: condensedView ? "inline-block" : "block"}}>
+                                                                    style={{
+                                                                        display: condensedView ? "inline-block" : "block",
+                                                                        paddingLeft: condensedView ? 0 : "1rem"
+                                                                    }}>
                                                                         {t.form.map((line, i) => (
                                                                             <div
                                                                             key={"trans_" + i}
@@ -337,6 +364,7 @@ class ContentView extends Component {
                                             **/}
 
                                             {/** METRICAL DATA **/}
+                                            {/** 
                                             {stateStore.ui.isLayerVisible('metricaldata_')
                                                 && data.metricalData &&
                                                 <div
@@ -359,6 +387,7 @@ class ContentView extends Component {
                                                     ))}
                                                 </div>
                                             }
+                                             **/}
 
                                             {/** GLOSSINGS **/}
                                             {stateStore.ui.isLayerVisible('glossing_') &&

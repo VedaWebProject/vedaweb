@@ -76,7 +76,7 @@ public class ElasticIndexService {
 
 	
 	public ObjectNode rebuildIndex(){
-		ObjectNode response = json.newNode();
+		ObjectNode response = json.newObjectNode();
 		//delete old index
 		response.put("deleteIndex", deleteIndex().findValue("response").asText());
 		//create new Index
@@ -89,7 +89,7 @@ public class ElasticIndexService {
 	
 	public ObjectNode indexDbDocuments(){
 		log.info("Creating and inserting new index documents");
-		ObjectNode jsonResponse = json.newNode();
+		ObjectNode jsonResponse = json.newObjectNode();
 		Iterator<Stanza> dbIter = stanzaRepo.findAll().iterator();
 		// create es bulk request
 		BulkRequest bulkRequest = new BulkRequest();
@@ -97,7 +97,7 @@ public class ElasticIndexService {
 		// process docs
 		while (dbIter.hasNext()) {
 			Stanza dbDoc = dbIter.next();
-			ObjectNode indexDoc = json.newNode();
+			ObjectNode indexDoc = json.newObjectNode();
 
 			indexDoc.put("id", dbDoc.getId());
 			indexDoc.put("index", dbDoc.getIndex());
@@ -146,7 +146,7 @@ public class ElasticIndexService {
 
 		for (Pada pada : doc.getPadas()) {
 			for (Token token : pada.getGrammarData()) {
-				ObjectNode indexToken = json.newNode();
+				ObjectNode indexToken = json.newObjectNode();
 				indexToken.put("index", token.getIndex());
 				indexToken.put("form", StringUtils.removeVowelAccents(token.getForm()));
 				indexToken.put("form_raw", StringUtils.normalizeNFC(token.getForm()));
@@ -158,11 +158,11 @@ public class ElasticIndexService {
 								StringUtils.cleanLemma(token.getLemma())));
 				
 				//grammar props
-				ObjectNode indexTokenGrammar = json.newNode();
+				ObjectNode indexTokenGrammar = json.newObjectNode();
 				for (String attr : token.getProps().keySet()) {
 					String values = token.getProp(attr);
 					if (values.split("\\/").length > 1) {
-						ArrayNode tagValues = json.newArray();
+						ArrayNode tagValues = json.newArrayNode();
 						for (String tv : values.split("\\/")) {
 							tagValues.add(tv);
 						}
@@ -182,7 +182,7 @@ public class ElasticIndexService {
 
 	public ObjectNode deleteIndex(){
 		log.info("Deleting old index");
-		ObjectNode jsonResponse = json.newNode();
+		ObjectNode jsonResponse = json.newObjectNode();
 		DeleteIndexRequest deleteRequest = new DeleteIndexRequest(indexName);
 		DeleteIndexResponse deleteResponse = null;
 		try {
@@ -203,7 +203,7 @@ public class ElasticIndexService {
 	
 	public ObjectNode createIndex(){
 		log.info("Creating new index from mapping definition");
-		ObjectNode jsonResponse = json.newNode();
+		ObjectNode jsonResponse = json.newObjectNode();
 		CreateIndexRequest createRequest = new CreateIndexRequest(indexName);
 		byte[] json = null;
 		
@@ -242,7 +242,7 @@ public class ElasticIndexService {
 		
 		if (response == null) {
 			log.error("Couldn't find index grammar mapping");
-			return json.newArray();
+			return json.newArrayNode();
 		}
 		
 		Iterator<String> iter = response.fieldNames();
@@ -256,7 +256,7 @@ public class ElasticIndexService {
 	
 	
 	public ArrayNode getUIBooksData() {
-		ArrayNode books = json.newArray();
+		ArrayNode books = json.newArrayNode();
 		int booksCount = (int) distinct("book");
 		
 		for (int i = 1; i <= booksCount; i++) {
@@ -424,10 +424,10 @@ public class ElasticIndexService {
 	
 	
 	private ArrayNode convertGrammarAggregationsToJSON(Map<String, List<String>> aggs) {
-		ArrayNode tagsArray = json.newArray();
+		ArrayNode tagsArray = json.newArrayNode();
 		
 		for (String grammarField : aggs.keySet()) {
-			ObjectNode tagData = json.newNode();
+			ObjectNode tagData = json.newObjectNode();
 			tagData.put("field", grammarField);
 			tagData.put("ui", grammarField.toLowerCase());
 			tagData.set("values", json.getMapper().valueToTree(aggs.get(grammarField)));
@@ -439,7 +439,7 @@ public class ElasticIndexService {
 	
 	
 	private ArrayNode concatForms(StanzaVersion version, boolean removeAccents) {
-		ArrayNode forms = json.newArray();
+		ArrayNode forms = json.newArrayNode();
 		for (String form : version.getForm()) {
 			//form = StringUtils.removeMetaChars(form);
 			forms.add(
@@ -465,7 +465,7 @@ public class ElasticIndexService {
 	private List<ObjectNode> buildVersionsList(Stanza doc) {
 		List<ObjectNode> versions = new ArrayList<ObjectNode>();
 		for (StanzaVersion v : doc.getVersions()) {
-			ObjectNode version = json.newNode();
+			ObjectNode version = json.newObjectNode();
 			StringBuilder form = new StringBuilder();
 			for (String line : v.getForm()) {
 				form.append(line + "\n");

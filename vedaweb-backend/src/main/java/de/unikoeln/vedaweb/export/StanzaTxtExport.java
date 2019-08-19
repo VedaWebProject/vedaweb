@@ -4,7 +4,6 @@ import de.unikoeln.vedaweb.document.Stanza;
 import de.unikoeln.vedaweb.document.StanzaVersion;
 import de.unikoeln.vedaweb.export.ExportLayers.ExportLayer;
 import de.unikoeln.vedaweb.util.LingConventions;
-import de.unikoeln.vedaweb.util.MetricalParser;
 
 public class StanzaTxtExport {
 	
@@ -37,16 +36,16 @@ public class StanzaTxtExport {
 				sb.append(GlossingsTxtExport.glossingsTxtNoMeta(stanza));
 			}
 			// METRICAL DATA
-			else if (layer.id.startsWith("metricaldata")) {
-				sb.append(layer.label);
-				sb.append(HEADING_CONTENT_DELIM);
-				for (String line : stanza.getMetricalData())
-					sb.append(
-							line.replaceAll(MetricalParser.S_SHORT_LETTER, MetricalParser.S_SHORT)
-								.replaceAll(MetricalParser.S_LONG_LETTER, MetricalParser.S_LONG)
-								+ "\n");
-				sb.deleteCharAt(sb.length()-1);
-			}
+//			else if (layer.id.startsWith("metricaldata")) {
+//				sb.append(layer.label);
+//				sb.append(HEADING_CONTENT_DELIM);
+//				for (String line : stanza.getMetricalData())
+//					sb.append(
+//							line.replaceAll(MetricalParser.S_SHORT_LETTER, MetricalParser.S_SHORT)
+//								.replaceAll(MetricalParser.S_LONG_LETTER, MetricalParser.S_LONG)
+//								+ "\n");
+//				sb.deleteCharAt(sb.length()-1);
+//			}
 			else {
 				continue;
 			}

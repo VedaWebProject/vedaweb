@@ -141,7 +141,7 @@ public class MetricalParser {
 	private static String cleanString(String in) {
 		return Normalizer.normalize(
 			Normalizer.normalize(in, Form.NFD)
-				.replaceAll("[\u0301\u0300\u0027\\-=\\_/\\\\]", ""),
+				.replaceAll("[\u0301\u0300\u0027\\-\\+\\=\\_/\\\\]", ""),
 			Form.NFC
 		);
 	}

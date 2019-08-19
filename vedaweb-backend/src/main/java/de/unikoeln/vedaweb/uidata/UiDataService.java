@@ -44,7 +44,7 @@ public class UiDataService {
 	
 	@PostConstruct
 	public ObjectNode init() {
-		ObjectNode response = json.newNode();
+		ObjectNode response = json.newObjectNode();
 		//force data import if db empty
 		if (stanzaRepo.count() == 0) {
 			log.warn("DB collection seems to be empty. Trying to import data from XML");
@@ -67,7 +67,7 @@ public class UiDataService {
 	}
 	
 	private String buildUiData() {
-		uiData = json.newNode();
+		uiData = json.newObjectNode();
 		
 		//load ui data template file
 		try {
