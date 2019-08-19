@@ -1,5 +1,6 @@
 /script-*
 /vedaweb-data/*.xml
+/vedaweb-data/*.tei
 
 # panic backups
 /backups
