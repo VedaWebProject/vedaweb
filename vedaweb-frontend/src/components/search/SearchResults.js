@@ -43,7 +43,6 @@ class SearchResults extends Component {
 
 
     componentDidMount(){
-        window.scrollTo(0, 0);
         this.handleNewQuery(this.props.match.params.querydata);
     }
 
@@ -86,6 +85,7 @@ class SearchResults extends Component {
             return;
         }
 
+        window.scrollTo(0, 0);
         this.loadData(stateStore.results.query);
     }
 
