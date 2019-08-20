@@ -44,11 +44,12 @@ class SearchView extends Component {
             
             //remove empty blocks
             query.blocks = query.blocks.filter(block => !this.isBlockEmpty(block));
-            
+            // eslint-disable-next-line
             for (let block of query.blocks){
                 block.term = SanscriptAccents.t(block.term, stateStore.settings.transliteration, "iso");
                 block.lemma = SanscriptAccents.t(block.lemma, stateStore.settings.transliteration, "iso");
                 //make fields direct props of block
+                // eslint-disable-next-line
                 for (let field of block.fields){
                     if (field.value !== undefined && field.value.length > 0)
                         block[field.name] = field.value;

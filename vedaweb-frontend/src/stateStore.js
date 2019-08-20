@@ -147,8 +147,10 @@ const stateStore = store({
         
             getUsedFieldNamesForBlock(blockId){
                 let usedFieldNames = [];
+                // eslint-disable-next-line
                 for (let block of stateStore.search.grammar.blocks){
                     if (block.id === blockId){
+                        // eslint-disable-next-line
                         for (let field of block.fields){
                             usedFieldNames.push(field.name);
                         }
@@ -159,6 +161,7 @@ const stateStore = store({
             },
         
             getValueOptionsForFieldName(fieldName){
+                // eslint-disable-next-line
                 for (let grammar of stateStore.ui.search.grammar.tags){
                     if (grammar.field === fieldName){
                         return grammar.values;
