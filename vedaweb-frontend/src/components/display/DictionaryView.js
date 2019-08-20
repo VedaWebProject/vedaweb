@@ -133,13 +133,15 @@ class DictionaryView extends Component {
                     out.push({
                         lemma: token.lemma,
                         lemmaRefs: token.lemmaRefs,
-                        tokens: [token.form]
+                        tokens: [token.form],
+                        tokenId: token.index
                     });
                     done.push(token.lemma);
                 } else {
                     let match = out.find(t => t.lemma === token.lemma);
                     if (match.tokens.indexOf(token.form) === -1){
                         match.tokens.push(token.form);
+                        match.tokenId = match.tokenId + "-" + token.index
                     }
                 }
             }
@@ -250,7 +252,7 @@ class DictionaryView extends Component {
                             </td>
                             <td>n/a</td>
                             <td>
-                                <DictCorrection lemma={token.lemma} />
+                                <DictCorrection lemma={token.lemma} stanzaId={this.props.stanzaId} tokenId={token.tokenId} />
                             </td>
                         </tr>))}
                     </tbody>

@@ -30,7 +30,7 @@ public class CorrectionsController {
 	
 	@PostMapping(value = "/lemma", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public List<Correction> getCorrections(@RequestBody JsonNode lemma) {
-		return correctionsRepo.findAllByLemma(lemma.get("lemma").textValue());
+		return correctionsRepo.findAllByCaseId(lemma.get("caseId").textValue());
     }
 
 }

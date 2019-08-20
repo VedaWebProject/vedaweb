@@ -7,7 +7,7 @@ import org.springframework.data.mongodb.repository.MongoRepository;
 
 public interface CorrectionsRepository extends MongoRepository<Correction, String>  {
 	
-	public List<Correction> findAllByLemma(String lemma);
+	public List<Correction> findAllByCaseId(String caseId);
 	public Optional<Correction> findByHeadwordIso(String headwordIso);
 	
 }

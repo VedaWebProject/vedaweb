@@ -6,6 +6,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Document(collection="dictCorrections")
 public class Correction {
 	
+	private String caseId;
 	private String lemma;
 	private String dictId;
 	private String headwordIso;
@@ -25,6 +26,14 @@ public class Correction {
 	
 	public void setDictId(String dictId) {
 		this.dictId = dictId;
+	}
+	
+	public String getCaseId() {
+		return caseId;
+	}
+	
+	public void setCaseId(String caseId) {
+		this.caseId = caseId;
 	}
 	
 	public String getHeadwordIso() {

@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Select, Modal, Button, Input } from 'antd';
+import { Select, Modal, Button, Input, Card } from 'antd';
 import axios from 'axios';
 
 const Option = Select.Option;
@@ -33,7 +33,7 @@ class DictCorrection extends Component {
     loadCorrections(){
         this.setState({ isLoaded: false });
 
-        axios.post(process.env.PUBLIC_URL + "/api/corrections/lemma", { lemma: this.props.lemma } )
+        axios.post(process.env.PUBLIC_URL + "/api/corrections/lemma", { caseId: this.props.stanzaId + "-" + this.props.tokenId } )
             .then((response) => {
                 this.setState({
                     isLoaded: true,
@@ -114,6 +114,7 @@ class DictCorrection extends Component {
 
     submit(){
         let correction = {
+            caseId: (this.props.stanzaId + "-" + this.props.tokenId),
             lemma: this.props.lemma,
             dictId: this.state.value.id,
             headwordIso: this.state.value.headwordIso,
@@ -168,14 +169,18 @@ class DictCorrection extends Component {
                                 <div style={{marginBottom: "1rem"}}>
                                     <h3>Previous corrections</h3>
                                     {this.state.corrections.map((c, i) =>
-                                        <div
-                                        style={{marginBottom: "1rem"}}
-                                        className="text-font"
+                                        <Card
+                                        size="small"
+                                        title={c.lemma + " → " + c.dictId}
+                                        className="main-font bottom-gap"
+                                        style={{backgroundColor: "#f5f5f5"}}
                                         key={"corr_" + i}>
-                                            <strong>headword: </strong>{c.headwordIso}<br/>
-                                            <strong>dict.id: </strong>{c.dictId}<br/>
-                                            <strong>comment: </strong>{c.comment}
-                                        </div>
+                                            <strong>lemma: </strong><span className="text-font">{c.lemma}</span><br/>
+                                            <strong>headword: </strong><span className="text-font">{c.headwordIso}</span><br/>
+                                            <strong>dict.id: </strong><span>{c.dictId}</span><br/>
+                                            <strong>case location: </strong><span>{c.caseId}</span><br/>
+                                            <strong>comment: </strong><span>{c.comment}</span>
+                                        </Card>
                                     )}
                                 </div>
                             }
