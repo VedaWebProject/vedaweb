@@ -33,7 +33,7 @@ class DictCorrection extends Component {
     loadCorrections(){
         this.setState({ isLoaded: false });
 
-        axios.post(process.env.PUBLIC_URL + "/api/corrections/lemma", { caseId: this.props.stanzaId + "-" + this.props.tokenId } )
+        axios.post(process.env.PUBLIC_URL + "/api/corrections/lemma", { caseId: this.props.stanzaId + "_" + this.props.tokenId } )
             .then((response) => {
                 this.setState({
                     isLoaded: true,
@@ -114,7 +114,7 @@ class DictCorrection extends Component {
 
     submit(){
         let correction = {
-            caseId: (this.props.stanzaId + "-" + this.props.tokenId),
+            caseId: (this.props.stanzaId + "_" + this.props.tokenId),
             lemma: this.props.lemma,
             dictId: this.state.value.id,
             headwordIso: this.state.value.headwordIso,

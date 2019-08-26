@@ -134,14 +134,14 @@ class DictionaryView extends Component {
                         lemma: token.lemma,
                         lemmaRefs: token.lemmaRefs,
                         tokens: [token.form],
-                        tokenId: token.index
+                        tokenId: pada.index + "/" + token.index
                     });
                     done.push(token.lemma);
                 } else {
                     let match = out.find(t => t.lemma === token.lemma);
                     if (match.tokens.indexOf(token.form) === -1){
                         match.tokens.push(token.form);
-                        match.tokenId = match.tokenId + "-" + token.index
+                        match.tokenId = match.tokenId + "-" + pada.index + "/" + token.index;
                     }
                 }
             }
