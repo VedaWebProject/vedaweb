@@ -174,6 +174,12 @@ const helpTexts = {
                     So, for example, <Text code>agnim -indra</Text> finds stanzas containing <strong>agnim</strong> and not containing <strong>indra</strong>,
                     while <Text code>agnim +indra</Text> finds stanzas that <i>might</i> contain <strong>agnim</strong> but definitely contain <strong>indra</strong>.
                 </p>
+                <h4>Fuzzy Search</h4>
+                <p>
+                    A search like <Text code>agnm~</Text> (with the appended <Text code>~</Text>) will perform a fuzzy search for <Text code>agnm</Text>. 
+                    This means that not only <Text code>agnm</Text> will be found, but also similar terms (Like <Text code>agnim</Text>, <Text code>agne</Text> or <Text code>agnā</Text>). 
+                    The measurement for similarity here is a <i>Damerau-Levenshtein distance</i> of <Text code>2</Text>.
+                </p>
             </div>
     },
     quickSearchRegex : {
