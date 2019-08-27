@@ -26,7 +26,7 @@ class SearchQuick extends Component {
     }
 
     handleSearch(input){
-        if (/[^~\d]\d+/.test(input)){
+        if (/^\d+/.test(input)){
             this.props.history.push("/view/id/" + input);
         } else {
             stateStore.results.resetQuery();
