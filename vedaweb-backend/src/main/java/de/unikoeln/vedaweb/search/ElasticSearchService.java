@@ -45,7 +45,7 @@ public class ElasticSearchService {
 		try {
 			return elastic.client().search(searchRequest);
 		} catch (Exception e) {
-			log.error("Malformed query in submitSearch() ?");
+			log.debug("Malformed query in submitSearch() ?");
 		}
 		return null;
 	}
