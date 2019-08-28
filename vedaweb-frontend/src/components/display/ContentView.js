@@ -185,7 +185,7 @@ class ContentView extends Component {
                                 data-tour-id="toggle-content">
                                     <Badge
                                     showZero
-                                    style={{backgroundColor:'#605a5a'}}
+                                    style={{backgroundColor:'#931111'}}
                                     offset={[15,-5]}
                                     count={stateStore.ui.layers.filter(l => l.id.endsWith('_') && l.show).length}>
                                         Toggle content
