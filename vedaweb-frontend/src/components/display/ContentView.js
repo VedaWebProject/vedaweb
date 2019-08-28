@@ -23,7 +23,6 @@ import ExportButton from "../widgets/ExportButton";
 
 
 
-
 class ContentView extends Component {
 
     constructor(props) {
@@ -34,7 +33,7 @@ class ContentView extends Component {
             filtersVisible: false,
             exportVisible: false,
             condensedView: false,
-            showMetricalData: false
+            showMetricalData: false,
         }
     }
 
@@ -124,6 +123,7 @@ class ContentView extends Component {
 
 
     render() {
+
         const { error, isLoaded, data, condensedView, showMetricalData } = this.state;
 
         return (
@@ -142,64 +142,71 @@ class ContentView extends Component {
                     {/** LOADED, NO ERROR **/}
                     { error === undefined &&
                         <div>
+
+                            {/** CONTENT NAVIGATOR **/}
+                            { data.book !== undefined &&
+                                <div className="v-middle" style={{padding:".8rem 0"}}>
+                                    <ContentLocation
+                                    key={'loc_' + data.id}
+                                    currIndex={data.index}
+                                    currId={data.id}
+                                    book={data.book}
+                                    hymn={data.hymn}
+                                    stanza={data.stanza}
+                                    hymnAbs={data.hymnAbs} />
+                                </div>
+                            }
+                            
+                            
                             <Row>
-                                <Col span={24}>
-                                    <div style={{padding:".8rem 0"}}>
-                                        { data.book !== undefined &&
-                                            <div className="v-middle">
-                                                <ContentLocation
-                                                key={'loc_' + data.id}
-                                                currIndex={data.index}
-                                                currId={data.id}
-                                                book={data.book}
-                                                hymn={data.hymn}
-                                                stanza={data.stanza}
-                                                hymnAbs={data.hymnAbs} />
-
-                                                {/** STANZA META 1 */}
-                                                <div className="gap-left-big" style={{display:"inline-block", whiteSpace:"nowrap", marginRight:"1rem"}}>
-                                                    {/** # / ADR / GROUP */}
-                                                    <span className="bold">Hymn #: </span>
-                                                    <span className="text-font">{data.hymnAbs}</span><br/>
-                                                    <span className="bold">Hymn addressee: </span>
-                                                    <span className="text-font">{data.hymnAddressee}</span><br/>
-                                                    <span className="bold">Hymn group: </span>
-                                                    <span className="text-font">{data.hymnGroup}</span><br/>
-                                                    {/** STRATA */}
-                                                    <span
-                                                    className="bold"
-                                                    title="Arnold, Edward Vernon. 'Sketch of the Historical Grammar of the Rig and Atharva Vedas'.
-                                                    Journal of the American Oriental Society 18 (1897): 203–352.">Strata:&nbsp;</span>
-                                                    {data.strata}
-                                                    <HelpButton inline style={{marginLeft:".5rem"}} type="metaStrata"/>
-                                                </div>
-
-                                                {/** STANZA META 2: PADA LABELS */}
-                                                <div className="gap-left-big" style={{display:"inline-block", whiteSpace:"nowrap"}}>
-                                                    <span
-                                                    title="provided by D. Gunkel and K. Ryan"
-                                                    className="bold gap-right">
-                                                        Pada Labels
-                                                    </span>
-                                                    <HelpButton inline type="metaLabels"/>
-                                                    {data.padas.map(pada => (
-                                                        <div key={pada.index}>
-                                                            <div style={{display:"inline-block", verticalAlign:"top"}} className="bold red gap-right">{pada.id}:</div>
-                                                            <div style={{display:"inline-block", verticalAlign:"top"}} className="text-font">{pada.label.split('').join(', ')}</div>
-                                                        </div>
-                                                    ))}
-                                                </div>
-                                                
-                                            </div>
-                                        }
-                                    </div>
-                                </Col>
-
                                 {/** CONTENT **/}
                                 <Col span={21}>
 
                                     { data.versions !== undefined &&
                                         <div>
+
+                                            {/** STANZA PROPERTIES **/}
+                                            {stateStore.ui.isLayerVisible('stanzaProperties_') &&
+                                                <div
+                                                className="glossing content-block card"
+                                                ref={this.scrollTo}>
+                                                    <h1>Stanza Properties</h1>
+
+                                                    {/** STANZA META 1 */}
+                                                    <div style={{display:"inline-block", whiteSpace:"nowrap", marginRight:"1rem"}}>
+                                                        {/** # / ADR / GROUP */}
+                                                        <span className="bold">Hymn #: </span>
+                                                        <span className="text-font">{data.hymnAbs}</span><br/>
+                                                        <span className="bold">Hymn addressee: </span>
+                                                        <span className="text-font">{data.hymnAddressee}</span><br/>
+                                                        <span className="bold">Hymn group: </span>
+                                                        <span className="text-font">{data.hymnGroup}</span><br/>
+                                                        {/** STRATA */}
+                                                        <span
+                                                        className="bold"
+                                                        title="Arnold, Edward Vernon. 'Sketch of the Historical Grammar of the Rig and Atharva Vedas'.
+                                                        Journal of the American Oriental Society 18 (1897): 203–352.">Strata:&nbsp;</span>
+                                                        {data.strata}
+                                                        <HelpButton inline style={{marginLeft:".5rem"}} type="metaStrata"/>
+                                                    </div>
+
+                                                    {/** STANZA META 2: PADA LABELS */}
+                                                    <div className="gap-left-big" style={{display:"inline-block", whiteSpace:"nowrap"}}>
+                                                        <span
+                                                        title="provided by D. Gunkel and K. Ryan"
+                                                        className="bold gap-right">
+                                                            Pada Labels
+                                                        </span>
+                                                        <HelpButton inline type="metaLabels"/>
+                                                        {data.padas.map(pada => (
+                                                            <div key={pada.index}>
+                                                                <div style={{display:"inline-block", verticalAlign:"top"}} className="bold red gap-right">{pada.id}:</div>
+                                                                <div style={{display:"inline-block", verticalAlign:"top"}} className="text-font">{pada.label.split('').join(', ')}</div>
+                                                            </div>
+                                                        ))}
+                                                    </div>
+                                                </div>
+                                            }
 
                                             {/** TEXT VERSIONS & TRANSLATIONS **/}
                                             {(stateStore.ui.isLayerVisible('version_') || stateStore.ui.isLayerVisible('translation_')) &&
@@ -470,73 +477,6 @@ class ContentView extends Component {
                                                     stanzaId={data.id}/>
                                                 </div>
                                             }
-
-                                            {/**
-                                            {stateStore.ui.isLayerVisible('metaInfo_') &&
-                                                <div
-                                                className="glossing content-block card"
-                                                ref={this.scrollTo}>
-                                                    <h1>Stanza Meta</h1>
-
-                                                    <table style={{width:'auto'}}>
-                                                        <tbody>
-                                                        <tr>
-                                                            <td><HelpButton inline float align="right" type="metaAdrGroup"/></td>
-                                                            <td>
-                                                                <span className="bold gap-right">Hymn Addressee:</span>
-                                                            </td>
-                                                            <td className="text-font">
-                                                                {data.hymnAddressee}
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td><HelpButton inline float align="right" type="metaAdrGroup"/></td>
-                                                            <td>
-                                                                <span className="bold gap-right">Hymn Group:</span>
-                                                            </td>
-                                                            <td className="text-font">
-                                                                {data.hymnGroup}
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td><HelpButton inline float align="right" type="metaStrata"/></td>
-                                                            <td>
-                                                                <span
-                                                                className="bold gap-right"
-                                                                title="Arnold, Edward Vernon. 'Sketch of the Historical Grammar of the Rig and Atharva Vedas'.
-                                                                Journal of the American Oriental Society 18 (1897): 203–352.">
-                                                                    Strata (Arnold):
-                                                                </span>
-                                                            </td>
-                                                            <td className="text-font">
-                                                                {this.resolveAbbrevationToHTML(data.strata, "strata")}
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td><HelpButton inline float align="right" type="metaLabels"/></td>
-                                                            <td>
-                                                                <span
-                                                                title="provided by D. Gunkel and K. Ryan"
-                                                                className="bold gap-right">
-                                                                    Pada Labels
-                                                                </span>
-                                                            </td>
-                                                            <td>
-                                                                {data.padas.map(pada => (
-                                                                    <div key={pada.index}>
-                                                                        <div style={{display:"inline-block", verticalAlign:"top"}} className="bold red gap-right">{pada.id}:</div>
-                                                                        <div style={{display:"inline-block", verticalAlign:"top"}} className="text-font">
-                                                                            {this.resolveAbbrevationToHTML(pada.label, "label")}
-                                                                        </div>
-                                                                    </div>
-                                                                ))}
-                                                            </td>
-                                                        </tr>
-                                                        </tbody>
-                                                    </table>
-                                                </div>
-                                            }
-                                            */}
 
                                         </div>
                                     }
