@@ -8,10 +8,11 @@ class ContentViewFilterSwitch extends Component {
     render() {
 
         const switchStyle = {
-            fontSize: this.props.size === 'small' ? '16px' : '20px',
-            paddingTop: this.props.size === 'small' ? '0.2rem' : '0.5rem',
-            paddingBottom: this.props.size === 'small' ? '0.2rem' : '0.5rem',
-            paddingLeft: this.props.size === 'small' ? '1.05rem' : '0',
+            fontSize: this.props.size === 'small' ? '16px' : '22px',
+            fontVariant: this.props.size === 'small' ? 'initial' : 'small-caps',
+            paddingBottom: this.props.size === 'small' ? '0.2rem' : '0.3rem',
+            paddingTop: this.props.size === 'small' ? '0' : '0.3rem',
+            paddingLeft: this.props.size === 'small' ? '1rem' : '0',
             filter:'opacity(' + (this.props.disabled ? '0.7' : '1') + ')',
             whiteSpace: 'nowrap'
         };
