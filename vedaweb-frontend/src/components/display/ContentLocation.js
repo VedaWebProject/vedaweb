@@ -74,9 +74,8 @@ class ContentLocation extends Component {
 
         const selectStyle = {
             fontSize: '26px',
-            width: '90px',
+            minWidth: '90px',
             color: '#931111',
-            textAlign: 'center'
         }
 
         return (
@@ -90,6 +89,7 @@ class ContentLocation extends Component {
 
                     <Select
                     style={selectStyle}
+                    size="large"
                     showSearch
                     value={book}
                     onSelect={(v) => this.handleSelect(v, 1, 1)} >
@@ -104,6 +104,7 @@ class ContentLocation extends Component {
                     .
                     <Select
                     style={selectStyle}
+                    size="large"
                     showSearch
                     value={hymn}
                     onSelect={(v) => this.handleSelect(this.props.book, v, 1)} >
@@ -118,6 +119,7 @@ class ContentLocation extends Component {
                     .
                     <Select
                     style={selectStyle}
+                    size="large"
                     showSearch
                     value={stanza}
                     onSelect={(v) => this.handleSelect(this.props.book, this.props.hymn, v)} >
