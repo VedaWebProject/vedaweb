@@ -278,12 +278,14 @@ class ContentView extends Component {
                                             className="content-plain content-block card"
                                             ref={this.scrollTo}>
 
+                                                {/** DYNAMIC HEADING **/}
                                                 <h1 className="inline-block">
                                                     {stateStore.ui.isLayerVisible('version_') && "Text Versions"}
                                                     {stateStore.ui.isLayerVisible('version_') && stateStore.ui.isLayerVisible('translation_') && " & "}
                                                     {stateStore.ui.isLayerVisible('translation_') && "Translations"}
                                                 </h1>
 
+                                                {/** TOGGLE METRICAL DATA **/}
                                                 { stateStore.ui.isLayerVisible('version_') && !condensedView &&
                                                     <div
                                                     className="font-small light-grey bottom-gap gap-left-big"
@@ -296,6 +298,7 @@ class ContentView extends Component {
                                                     </div>
                                                 }
 
+                                                {/** TEXT VERSIONS **/}
                                                 {stateStore.ui.layers.filter(l => l.id.startsWith('version_')
                                                     && l.id !== 'version_' && l.show).map(version => {
                                                         let v = data.versions.find(x => x.id === version.id);
@@ -347,6 +350,7 @@ class ContentView extends Component {
                                                             </div>
                                                 })}
 
+                                                {/** TRANSLATIONS **/}
                                                 {stateStore.ui.layers.filter(l => l.id.startsWith('translation_')
                                                     && l.id !== 'translation_'
                                                     && stateStore.ui.isLayerVisible(l.id)).map(l => {
@@ -356,7 +360,7 @@ class ContentView extends Component {
                                                             key={"t_" + t.source}
                                                             className="translation"
                                                             ref={this.scrollTo}
-                                                            style={{display: condensedView ? "inline-block" : "block"}}>
+                                                            style={{display: "block"}}>
 
                                                                 <span
                                                                 style={{display: condensedView ? "none" : "inline"}}>
@@ -370,14 +374,11 @@ class ContentView extends Component {
 
                                                                 <div
                                                                 className="text-font"
-                                                                style={{
-                                                                    display: condensedView ? "inline-block" : "block",
-                                                                    paddingLeft: condensedView ? 0 : "1rem"
-                                                                }}>
+                                                                style={{ paddingLeft: condensedView ? 0 : "1rem" }}>
                                                                     {t.form.map((line, i) => (
                                                                         <div
                                                                         key={"trans_" + i}
-                                                                        style={{display: condensedView ? "inline-block" : "block"}}>
+                                                                        style={{display: condensedView ? "inline" : "block"}}>
                                                                             {line}&nbsp;
                                                                         </div>
                                                                     ))}
