@@ -242,9 +242,9 @@ class ContentView extends Component {
                                                     <span className="bold">Hymn #: </span>
                                                     <span className="text-font">{data.hymnAbs}</span><br/>
                                                     <span className="bold">Hymn addressee: </span>
-                                                    <span className="text-font">{data.hymnAddressee}</span><br/>
+                                                    <span className="text-font">{data.hymnAddressee || ""}</span><br/>
                                                     <span className="bold">Hymn group: </span>
-                                                    <span className="text-font">{data.hymnGroup}</span><br/>
+                                                    <span className="text-font">{data.hymnGroup || ""}</span><br/>
                                                     {/** STRATA */}
                                                     <span
                                                     className="bold"
@@ -265,7 +265,7 @@ class ContentView extends Component {
                                                     {data.padas.map(pada => (
                                                         <div key={pada.index}>
                                                             <div style={{display:"inline-block", verticalAlign:"top"}} className="bold red gap-right">{pada.id}:</div>
-                                                            <div style={{display:"inline-block", verticalAlign:"top"}} className="text-font">{pada.label.split('').join(', ')}</div>
+                                                            <div style={{display:"inline-block", verticalAlign:"top"}} className="text-font">{pada.label && pada.label.split('').join(', ')}</div>
                                                         </div>
                                                     ))}
                                                 </div>
