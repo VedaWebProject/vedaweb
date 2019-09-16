@@ -367,9 +367,9 @@ const helpTexts = {
             <div>
                 <p>
                     Arnold, Edward Vernon.
-                    'Sketch of the Historical Grammar of the Rig and Atharva Vedas'. 
-                    Journal of the American Oriental Society 18 (1897): 203–352.
-                    <a href="https://www.jstor.org/stable/592303" target="_blank" rel="noopener noreferrer"> https://www.jstor.org/stable/592303</a>
+                    Vedic Metre in Its Historical Development.
+                    Cambridge: Cambridge University Press, 1905. Appendix IV (pp.269ff.).
+                    <a href="http://archive.org/details/vedicmetreinitsh00arnouoft" target="_blank" rel="noopener noreferrer"> http://archive.org/details/vedicmetreinitsh00arnouoft</a>
                 </p>
                 <table style={{width: 'auto'}}><tbody>
                     <tr><td className="bold">A</td><td>Archaic</td></tr>
