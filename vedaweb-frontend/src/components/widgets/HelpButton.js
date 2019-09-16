@@ -346,19 +346,32 @@ const helpTexts = {
                     <tr><td className="bold">V</td><td>Vālakhilya</td></tr>
                     <tr><td className="bold">M</td><td>genre M</td></tr>
                     <tr><td className="bold">4</td><td>12 = 8+4</td></tr>
-                    <tr><td className="bold">5</td><td>pentad (decasyllabic), including Arnold’s “pure” and “mixed”; see Prolegomena 95–8 and VM 238–40.</td></tr>
-                    <tr><td className="bold">B</td><td>bhārgavī; see VM 240–1.</td></tr>
+                    <tr><td className="bold">5</td><td>pentad (decasyllabic), including Arnold’s “pure” and “mixed”; see Oldenberg (1888) 95–8 and Arnold (1905) 238–40.</td></tr>
+                    <tr><td className="bold">B</td><td>bhārgavī; see Arnold (1905) 240–1.</td></tr>
                     <tr><td className="bold">h</td><td>11 = 4+7, ending HLX|| — a type of hyposyllabic jagatī.</td></tr>
-                    <tr><td className="bold">G</td><td>gautamī; see VM 240–1</td></tr>
+                    <tr><td className="bold">G</td><td>gautamī; see Arnold (1905) 240–1</td></tr>
                     <tr><td className="bold">O</td><td>Oldenberg's gāyatrī-corpus, cf. Oldenberg (1888: 9f.).</td></tr>
-                    <tr><td className="bold">T</td><td>Trochaic gāyatrī; see Prolegomena 25 and Vedic Metre (VM) 165.</td></tr>
-                    <tr><td className="bold">U</td><td>uneven lyric; see VM 154, 244 (Appendix III).</td></tr>
+                    <tr><td className="bold">T</td><td>Trochaic gāyatrī; see Oldenberg (1888) 25 and Vedic Metre (Arnold, 1905) 165.</td></tr>
+                    <tr><td className="bold">U</td><td>uneven lyric; see Arnold (1905) 154, 244 (Appendix III).</td></tr>
                     <tr><td className="bold">4b</td><td>11 = 8+3</td></tr>
-                    <tr><td className="bold">v</td><td>virāṭsthānā; see Prolegomena 86–95 and VM 240–1, 246.</td></tr>
+                    <tr><td className="bold">v</td><td>virāṭsthānā; see Oldenberg (1888) 86–95 and Arnold (1905) 240–1, 246.</td></tr>
                     <tr><td className="bold">P</td><td>popular</td></tr>
                     <tr><td className="bold">E1</td><td>epic anuṣṭubh (525)</td></tr>
                     <tr><td className="bold">E3b</td><td>epic anuṣṭubh (380)</td></tr>
                 </tbody></table>
+
+                <p>
+                    Arnold, Edward Vernon.
+                    Vedic Metre in Its Historical Development.
+                    Cambridge: Cambridge University Press, 1905.
+                    <a href="http://archive.org/details/vedicmetreinitsh00arnouoft" target="_blank" rel="noopener noreferrer"> http://archive.org/details/vedicmetreinitsh00arnouoft</a>
+                </p>
+                <p>
+                    Oldenberg, Hermann.
+                    Die Hymnen Des Ṛigveda, 1: Metrische Und Textgeschichtliche Prolegomena. Die Hymnen Des Ṛigveda.
+                    Berlin: Hertz, 1888.
+                    <a href="https://archive.org/details/OldenbergRigvedaV11888/page/n7" target="_blank" rel="noopener noreferrer"> https://archive.org/details/OldenbergRigvedaV11888/page/n7</a>
+                </p>
             </div>
     },
     metaStrata : {
