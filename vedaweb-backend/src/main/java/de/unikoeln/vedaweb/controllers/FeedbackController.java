@@ -1,6 +1,5 @@
 package de.unikoeln.vedaweb.controllers;
 
-import org.springframework.http.MediaType;
 
 //@RestController
 //@RequestMapping("api")

@@ -7,6 +7,9 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import de.unikoeln.vedaweb.search.grammar.GrammarSearchData;
+import de.unikoeln.vedaweb.search.quick.QuickSearchData;
+
 @Service
 public class ElasticSearchService {
 	
@@ -16,19 +19,23 @@ public class ElasticSearchService {
 	private ElasticService elastic;
 	
 	
-	public SearchResponse search(SearchData searchData){
-		switch (searchData.getMode()){
-		case "quick":
-			return submitSearch(SearchRequestBuilder.buildQuickQuery(searchData));
-		case "grammar":
-			return submitSearch(SearchRequestBuilder.buildGrammarQuery(searchData));
-		default:
+	public SearchResponse search(AbstractSearchData searchData){
+		if (searchData instanceof QuickSearchData) {
+			return submitSearch(SearchRequestBuilder.buildQuickQuery((QuickSearchData)searchData));
+		} else if (searchData instanceof GrammarSearchData) {
+			return submitSearch(SearchRequestBuilder.buildGrammarQuery((GrammarSearchData)searchData));
+		} else {
 			return null;
 		}
 	}
 	
 	
-	public SearchResponse searchOcc(SearchData searchData){
+	public SearchResponse searchQuick(QuickSearchData searchData){
+		return submitSearch(SearchRequestBuilder.buildQuickQuery(searchData));
+	}
+	
+	
+	public SearchResponse searchOcc(GrammarSearchData searchData){
 		return submitSearch(SearchRequestBuilder.buildOccurrencesQuery(searchData));
 	}
 	
@@ -41,7 +48,6 @@ public class ElasticSearchService {
 	
 	
 	private SearchResponse submitSearch(SearchRequest searchRequest){
-		//System.out.println(searchRequest.source().toString());
 		try {
 			return elastic.client().search(searchRequest);
 		} catch (Exception e) {

@@ -20,6 +20,8 @@ import org.elasticsearch.search.fetch.subphase.FetchSourceContext;
 import org.elasticsearch.search.fetch.subphase.highlight.HighlightBuilder;
 import org.elasticsearch.search.sort.SortOrder;
 
+import de.unikoeln.vedaweb.search.grammar.GrammarSearchData;
+import de.unikoeln.vedaweb.search.quick.QuickSearchData;
 import de.unikoeln.vedaweb.util.StringUtils;
 
 
@@ -34,7 +36,7 @@ public class SearchRequestBuilder {
 //	private static final String[] HIGHLIGHT_GRAMMAR = {"tokens.form*", "tokens.lemma*", "tokens.grammar.*"};
 	
 	
-	public static SearchRequest buildQuickQuery(SearchData searchData) {
+	public static SearchRequest buildQuickQuery(QuickSearchData searchData) {
 		String searchTerm = StringUtils.normalizeNFC(
 				searchData.isAccents() ? searchData.getInput()
 						: StringUtils.removeVowelAccents(searchData.getInput()));
@@ -68,7 +70,7 @@ public class SearchRequestBuilder {
 	}
 	
 	
-	public static SearchRequest buildGrammarQuery(SearchData searchData){
+	public static SearchRequest buildGrammarQuery(GrammarSearchData searchData){
 		//root bool query
 		BoolQueryBuilder bool = QueryBuilders.boolQuery();
 		
@@ -91,7 +93,7 @@ public class SearchRequestBuilder {
 	}
 	
 	
-	private static BoolQueryBuilder getSearchMetaQuery(SearchData searchData) {
+	private static BoolQueryBuilder getSearchMetaQuery(AbstractSearchData searchData) {
 		BoolQueryBuilder metasQuery = QueryBuilders.boolQuery();
 		for (String meta : searchData.getMeta().keySet()) {
 			if (searchData.getMeta().get(meta).length == 0) continue;
@@ -106,7 +108,7 @@ public class SearchRequestBuilder {
 	}
 	
 	
-	private static void addGrammarBlockQueries(BoolQueryBuilder rootQuery, SearchData searchData){
+	private static void addGrammarBlockQueries(BoolQueryBuilder rootQuery, GrammarSearchData searchData){
 		//iterate search blocks
 		for (Map<String, Object> block : searchData.getBlocks()){
 			//construct bool query for each block
@@ -172,7 +174,7 @@ public class SearchRequestBuilder {
 	}
 	
 	
-	public static SearchRequest buildOccurrencesQuery(SearchData searchData) {
+	public static SearchRequest buildOccurrencesQuery(GrammarSearchData searchData) {
 		SearchRequest req = buildGrammarQuery(searchData);
 		req.source(req.source().size(19999).from(0)); //get ALL results always from 0
 		return req;
@@ -193,7 +195,7 @@ public class SearchRequestBuilder {
 	}
 	
 	
-	private static BoolQueryBuilder getSearchScopesQuery(SearchData searchData) {
+	private static BoolQueryBuilder getSearchScopesQuery(AbstractSearchData searchData) {
 		BoolQueryBuilder scopesQuery = QueryBuilders.boolQuery();
 		for (SearchScope scope : searchData.getScopes()) {
 			BoolQueryBuilder scopeQuery = QueryBuilders.boolQuery();
@@ -252,7 +254,7 @@ public class SearchRequestBuilder {
 	}
 	
 	
-	private static SearchSourceBuilder getCommonSearchSource(SearchData searchData) {
+	private static SearchSourceBuilder getCommonSearchSource(AbstractSearchData searchData) {
 		SearchSourceBuilder source = new SearchSourceBuilder()
 				.from(searchData.getFrom() >= 0 ? searchData.getFrom() : 0)
 				.size(searchData.getSize() >= 0 ? searchData.getSize() : 0);

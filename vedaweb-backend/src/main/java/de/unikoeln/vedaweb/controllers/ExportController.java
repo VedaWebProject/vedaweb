@@ -20,8 +20,8 @@ import de.unikoeln.vedaweb.export.GlossingsHtmlExport;
 import de.unikoeln.vedaweb.export.GlossingsTxtExport;
 import de.unikoeln.vedaweb.export.SearchResultsCsvExport;
 import de.unikoeln.vedaweb.export.StanzaTxtExport;
+import de.unikoeln.vedaweb.search.AbstractSearchData;
 import de.unikoeln.vedaweb.search.ElasticSearchService;
-import de.unikoeln.vedaweb.search.SearchData;
 import de.unikoeln.vedaweb.search.SearchHitsConverter;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
@@ -46,7 +46,7 @@ public class ExportController {
 			value = "/search",
 			consumes = MediaType.APPLICATION_JSON_VALUE,
 			produces = "text/plain;charset=UTF-8")
-    public String exportSearchCSV(@RequestBody SearchData searchData) {
+    public String exportSearchCSV(@RequestBody AbstractSearchData searchData) {
 		
 		searchData.setSize((int)stanzaRepo.count());	//get ALL results
 		searchData.setFrom(0);	//export from result 0

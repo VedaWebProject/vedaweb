@@ -1,18 +1,12 @@
 package de.unikoeln.vedaweb.util;
 
 import java.io.IOException;
-import java.util.Optional;
-
 import org.springframework.stereotype.Service;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
-
-import de.unikoeln.vedaweb.exceptions.NotFoundException;
 
 
 @Service
@@ -51,39 +45,4 @@ public class JsonUtilService {
 		return mapper;
 	}
 	
-	
-	public String mapOptionalToJsonString(Optional<?> o){
-		if (!o.isPresent())
-			return mapObjectToJsonString(null);
-		else
-			return mapObjectToJsonString(o.get());
-	}
-	
-	
-	public String mapObjectToJsonString(Object o){
-		String json = "{}";
-		if (o == null){
-			throw new NotFoundException();
-		}
-		try {
-			json = mapper.writeValueAsString(o);
-		} catch (JsonProcessingException e) {
-			e.printStackTrace();
-		}
-		return json;
-	}
-	
-	
-	public JsonNode mapOptionalToJsonNode(Optional<?> o){
-		if (!o.isPresent())
-			return newObjectNode();
-		else
-			return mapObjectToJsonNode(o.get());
-	}
-	
-	
-	public <T> JsonNode mapObjectToJsonNode(T obj){
-		return mapper.valueToTree(obj);
-	}
-
 }

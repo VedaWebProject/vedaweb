@@ -9,10 +9,11 @@ import org.springframework.web.bind.annotation.RestController;
 
 import de.unikoeln.vedaweb.search.ElasticSearchService;
 import de.unikoeln.vedaweb.search.GrammarSearchOccurrences;
-import de.unikoeln.vedaweb.search.SearchData;
 import de.unikoeln.vedaweb.search.SearchHits;
 import de.unikoeln.vedaweb.search.SearchHitsConverter;
-import de.unikoeln.vedaweb.util.JsonUtilService;
+import de.unikoeln.vedaweb.search.grammar.GrammarSearchData;
+import de.unikoeln.vedaweb.search.metrical.MetricalSearchData;
+import de.unikoeln.vedaweb.search.quick.QuickSearchData;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 
@@ -26,21 +27,40 @@ public class SearchController {
 	@Autowired
 	private ElasticSearchService search;
 	
-	@Autowired
-	private JsonUtilService mappingService;
+	
+	@ApiOperation(
+			value = "Quick search API endpoint",
+			response = SearchHits.class)
+	@PostMapping(
+			value = "/quick",
+			produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    public SearchHits searchQuick(@RequestBody QuickSearchData searchData) {
+		return SearchHitsConverter
+				.processSearchResponse(search.search(searchData));
+    }
 	
 	
 	@ApiOperation(
-			value = "Search for stanzas",
+			value = "Grammar search API endpoint",
 			response = SearchHits.class)
 	@PostMapping(
-			value = "",
+			value = "/grammar",
 			produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-    public String search(@RequestBody SearchData searchData) {
-		//System.out.println(mappingService.mapObjectToJson(searchData));
-		return mappingService.mapObjectToJsonString(
-				SearchHitsConverter.processSearchResponse(
-						search.search(searchData)));
+    public SearchHits searchGrammar(@RequestBody GrammarSearchData searchData) {
+		return SearchHitsConverter
+				.processSearchResponse(search.search(searchData));
+    }
+	
+	
+	@ApiOperation(
+			value = "Metrical search API endpoint",
+			response = SearchHits.class)
+	@PostMapping(
+			value = "/metrical",
+			produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    public SearchHits searchMetrical(@RequestBody MetricalSearchData searchData) {
+		return SearchHitsConverter
+				.processSearchResponse(search.search(searchData));
     }
 	
 	
@@ -50,12 +70,10 @@ public class SearchController {
 	@PostMapping(
 			value = "/occ",
 			produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-    public String searchOcc(@RequestBody SearchData searchData) {
-		//System.out.println(mappingService.mapObjectToJson(searchData));
-		return mappingService.mapObjectToJsonString(
-				new GrammarSearchOccurrences(
+    public GrammarSearchOccurrences searchOcc(@RequestBody GrammarSearchData searchData) {
+		return new GrammarSearchOccurrences(
 						SearchHitsConverter.processSearchResponse(
-								search.searchOcc(searchData))));
+								search.searchOcc(searchData)));
     }
 	
 }
