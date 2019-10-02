@@ -155,7 +155,7 @@ class ContentView extends Component {
                             style={{
                                 display: 'inline-block',
                                 padding: '1.2rem',
-                                background: this.state.controlsAffixed ? '#fff' : 'transparent',
+                                background: this.state.controlsAffixed ? '#f8f8f8' : 'transparent',
                                 border: this.state.controlsAffixed ? '1px solid #b4b1ae' : 'none',
                                 borderTop: 'none',
                                 borderRadius: '3px'
