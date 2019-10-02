@@ -450,16 +450,33 @@ class HelpButton extends Component {
             display: this.props.inline ? "inline" : "block"
         }, this.props.style);
 
+        const iconStyle = Object.assign({
+            verticalAlign: "middle"
+        }, this.props.iconStyle || {});
+
+
         return (
             
             <span style={containerStyle}>
-                <Icon
-                type="question-circle"
-                theme="outlined"
-                className="help-button-icon"
-                onClick={this.showModal}
-                style={this.props.iconStyle || {}}
-                title={helpTexts[this.props.type] !== undefined ? "Show help: \"" + helpTexts[this.props.type].title + "\"" : undefined} />
+
+                <div className="help-button-container" onClick={this.showModal}>
+
+                    { this.props.label && (!this.props.labelPosition || this.props.labelPosition === "left") &&
+                        <span className="help-button-label">{this.props.label}</span>
+                    }
+
+                    <Icon
+                    type="question-circle"
+                    theme="outlined"
+                    className="help-button-icon"
+                    style={iconStyle}
+                    title={helpTexts[this.props.type] !== undefined ? "Show help: \"" + helpTexts[this.props.type].title + "\"" : undefined} />
+
+                    { this.props.label && this.props.labelPosition === "right" &&
+                        <span className="help-button-label">{this.props.label}</span>
+                    }
+
+                </div>
                 
                 <Modal
                 title={modalHeader}
