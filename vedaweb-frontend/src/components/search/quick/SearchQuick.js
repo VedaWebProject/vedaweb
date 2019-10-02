@@ -29,7 +29,6 @@ class SearchQuick extends Component {
         if (/^\d+/.test(input)){
             this.props.history.push("/view/id/" + input);
         } else {
-            stateStore.results.resetQuery();
             let query = stateStore.results.query;
             query.mode = "quick";
             query.input = stateStore.search.quick.field.startsWith('version_')

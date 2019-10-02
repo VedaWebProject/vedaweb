@@ -2,13 +2,12 @@ import React, { Component } from "react";
 import { Row, Col, Button, Icon, Tabs, Collapse, Checkbox } from 'antd';
 
 import SearchGrammar from "./grammar/SearchGrammar";
+import SearchMetrical from "./metrical/SearchMetrical";
 import SearchScopeContainer from "./settings/SearchScopeContainer";
 import SearchTransliteration from "./settings/SearchTransliteration";
 import SearchScopeIndicator from "./settings/SearchScopeIndicator";
 import SearchMetaFilterList from "./settings/SearchMetaFilterList";
 import HelpButton from "../widgets/HelpButton";
-
-import SanscriptAccents from '../utils/SanscriptAccents';
 
 import './SearchView.css';
 
@@ -31,34 +30,12 @@ class SearchView extends Component {
     }
 
     handleSubmit(e){
-
-        stateStore.results.resetQuery();
-        let query = stateStore.results.query;
+        let query = stateStore.search[stateStore.search.meta.mode].getQuery();
+        console.log(query)
         query.mode = stateStore.search.meta.mode;
         query.scopes = stateStore.search.meta.scopes;
         query.meta = stateStore.search.meta.meta;
         query.accents = stateStore.settings.accents;
-        
-        if (stateStore.search.meta.mode === "grammar"){
-            query["blocks"] = JSON.parse(JSON.stringify(stateStore.search.grammar.blocks));
-            
-            //remove empty blocks
-            query.blocks = query.blocks.filter(block => !this.isBlockEmpty(block));
-            // eslint-disable-next-line
-            for (let block of query.blocks){
-                block.term = SanscriptAccents.t(block.term, stateStore.settings.transliteration, "iso");
-                block.lemma = SanscriptAccents.t(block.lemma, stateStore.settings.transliteration, "iso");
-                //make fields direct props of block
-                // eslint-disable-next-line
-                for (let field of block.fields){
-                    if (field.value !== undefined && field.value.length > 0)
-                        block[field.name] = field.value;
-                }
-                //cleanup
-                delete block.fields;
-                delete block.id;
-            }
-        }
 
         query.scopes = query.scopes.filter(scope => (
             (scope.fromBook + scope.toBook + scope.fromHymn + scope.toHymn) > 0
@@ -67,15 +44,10 @@ class SearchView extends Component {
         this.props.history.push("/results/" + Base64.encodeURI(JSON.stringify(query)));
     }
 
-    isBlockEmpty(block){
-        return (block.term === undefined || block.term.length === 0)
-            && (block.lemma === undefined || block.lemma.length === 0)
-            && block.fields.filter(field => field.value.length > 0).length === 0;
-    }
-
     handleReset(e){
         stateStore.search.meta.reset();
         stateStore.search.grammar.reset();
+        stateStore.search.metrical.reset();
     }
 
 
@@ -164,6 +136,9 @@ class SearchView extends Component {
                         className="bottom-gap">
                             <TabPane tab="Grammar Search" key="grammar">
                                 <SearchGrammar />
+                            </TabPane>
+                            <TabPane tab="Metrical Search" key="metrical">
+                                <SearchMetrical />
                             </TabPane>
                         </Tabs>
 

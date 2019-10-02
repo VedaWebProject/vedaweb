@@ -1,5 +1,6 @@
 import { store } from 'react-easy-state';
 import ls from 'local-storage';
+import SanscriptAccents from './components/utils/SanscriptAccents';
 
 const stateStore = store({
 
@@ -12,6 +13,8 @@ const stateStore = store({
         transliteration: "hk",
         accents: false,
         acceptedPrivacyHint: false,
+        condensedView: false,
+        showMetricalData: false
     },
 
     //// SEARCH RESULTS ////
@@ -19,16 +22,7 @@ const stateStore = store({
     results: {
         resultsData: {},
         query: {},
-        queryEncoded: '',
-        
-        resetQuery(){
-            stateStore.results.query = {
-                sortBy: null,
-                sortOrder: null,
-                size: 10,
-                from: 0
-            };
-        }
+        queryEncoded: ''
     },
 
     //// SEARCH ////
@@ -41,13 +35,75 @@ const stateStore = store({
             store: "search.quick",
             input: "",
             field: "version_",
-            regex: false
+            regex: false,
+
+            getQuery(){
+                return Object.assign({
+                    input: stateStore.search.quick.input,
+                    field: stateStore.search.quick.field,
+                    regex: stateStore.search.quick.regex
+                }, stateStore.search.defaultQuery);
+            }
+        },
+
+        //// SEARCH: METRICAL SEARCH ////
+
+        metrical: {
+            store: "search.metrical",
+            input: "",
+            field: "version_vannootenholland",
+
+            setInput(input){
+                stateStore.search.metrical.input = input.replace(/[^LSls *?"]/g, "").toUpperCase();
+            },
+
+            reset(){
+                stateStore.search.metrical.input = "";
+                stateStore.search.metrical.field = "version_vannootenholland";
+            },
+
+            getQuery(){
+                return Object.assign({
+                    input: stateStore.search.metrical.input,
+                    field: stateStore.search.metrical.field
+                }, stateStore.search.defaultQuery);
+            }
         },
 
         //// SEARCH: GRAMMAR SEARCH ////
 
         grammar: {
             blocks: [],
+
+            getQuery(){
+                let queryBlocks = JSON.parse(JSON.stringify(stateStore.search.grammar.blocks));
+                //remove empty blocks
+                queryBlocks = queryBlocks.filter(block => !stateStore.search.grammar.isBlockEmpty(block));
+                // eslint-disable-next-line
+                for (let block of queryBlocks){
+                    block.term = SanscriptAccents.t(block.term, stateStore.settings.transliteration, "iso");
+                    block.lemma = SanscriptAccents.t(block.lemma, stateStore.settings.transliteration, "iso");
+                    //make fields direct props of block
+                    // eslint-disable-next-line
+                    for (let field of block.fields){
+                        if (field.value !== undefined && field.value.length > 0)
+                            block[field.name] = field.value;
+                    }
+                    //cleanup
+                    delete block.fields;
+                    delete block.id;
+                }
+
+                return Object.assign({
+                    blocks: queryBlocks
+                }, stateStore.search.defaultQuery);
+            },
+
+            isBlockEmpty(block){
+                return (!block.term || block.term.length === 0)
+                    && (!block.lemma || block.lemma.length === 0)
+                    && block.fields.filter(field => field.value.length > 0).length === 0;
+            },
 
             addBlock(){
                 let blockId = 'block_' + Date.now()
@@ -175,6 +231,15 @@ const stateStore = store({
                 stateStore.search.grammar.addBlock();
             }
             
+        },
+
+        //// SEARCH: DEFAULT COMMON QUERY VALUES ////
+
+        defaultQuery: {
+            sortBy: null,
+            sortOrder: null,
+            size: 10,
+            from: 0
         },
 
         //// SEARCH: META (FILTERS, SCOPES, ...) ////

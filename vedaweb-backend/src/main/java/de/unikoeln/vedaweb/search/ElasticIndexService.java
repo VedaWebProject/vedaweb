@@ -41,6 +41,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Service;
 
+import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 
@@ -366,7 +367,10 @@ public class ElasticIndexService {
 	private ObjectNode urlRequest(String method, String url, String jsonQuery) {
 		ObjectNode response = urlRequest(method, url);
 		if (response == null) return null;
-		return (ObjectNode) response.at(jsonQuery);
+		JsonNode responseData = response.at(jsonQuery);
+		return (responseData instanceof ObjectNode)
+				? (ObjectNode)responseData
+				: response.objectNode();
 	}
 	
 	
@@ -438,9 +442,9 @@ public class ElasticIndexService {
 	}
 	
 	
-	private ArrayNode concatForms(StanzaVersion version, boolean removeAccents) {
+	private ArrayNode concatLines(String[] lines, boolean removeAccents) {
 		ArrayNode forms = json.newArrayNode();
-		for (String form : version.getForm()) {
+		for (String form : lines) {
 			//form = StringUtils.removeMetaChars(form);
 			forms.add(
 				removeAccents
@@ -466,14 +470,18 @@ public class ElasticIndexService {
 		List<ObjectNode> versions = new ArrayList<ObjectNode>();
 		for (StanzaVersion v : doc.getVersions()) {
 			ObjectNode version = json.newObjectNode();
-			StringBuilder form = new StringBuilder();
-			for (String line : v.getForm()) {
-				form.append(line + "\n");
-			}
+//			StringBuilder form = new StringBuilder();
+//			for (String line : v.getForm()) form.append(line + "\n");
 			version.put("id", v.getId());
-			version.set("form", concatForms(v, true));
-			version.set("form_raw", concatForms(v, false));
-			version.put("source", v.getSource());
+			//form without accents
+			version.set("form", concatLines(v.getForm(), true)); 
+			//raw form (with accents)
+			version.set("form_raw", concatLines(v.getForm(), false)); 
+			//metrical data (for versions that have it)
+			if (v.getMetricalData() != null)
+				version.set("metrical", concatLines(v.getMetricalData(), false)); 
+			//source (author)
+			version.put("source", v.getSource()); 
 			versions.add(version);
 		}
 		return versions;

@@ -8,13 +8,19 @@
 		"analysis": {
 			"analyzer": {
 				"default": {
-				  "tokenizer":  "whitespace",
+				  "tokenizer":  "no_letter_split",
 		          "filter": ["lowercase"]
 				},
 		        "custom_translation": {
-		          "tokenizer":  "whitespace",
+		          "tokenizer":  "no_letter_split",
 		          "filter": ["lowercase", "german_normalization"]
 		       	}
+		    },
+		    "tokenizer": {
+		    	"no_letter_split": {
+					"type": "simple_pattern_split",
+					"pattern": "[ ,.!?\\-_/+:;'\"]+"
+		        }
 		    }
 		}
 	},
@@ -36,6 +42,7 @@
 						"id": {"type": "keyword"},
 						"form": {"type": "text", "analyzer": "custom_translation", "similarity": "boolean" },
 						"form_raw": {"type": "text", "analyzer": "custom_translation", "similarity": "boolean" },
+						"metrical": {"type": "text", "analyzer": "custom_translation", "similarity": "boolean" },
 						"source": {"type": "keyword"}
 					}
 		        },

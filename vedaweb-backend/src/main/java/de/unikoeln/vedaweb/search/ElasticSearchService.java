@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import de.unikoeln.vedaweb.search.grammar.GrammarSearchData;
+import de.unikoeln.vedaweb.search.metrical.MetricalSearchData;
 import de.unikoeln.vedaweb.search.quick.QuickSearchData;
 
 @Service
@@ -24,14 +25,11 @@ public class ElasticSearchService {
 			return submitSearch(SearchRequestBuilder.buildQuickQuery((QuickSearchData)searchData));
 		} else if (searchData instanceof GrammarSearchData) {
 			return submitSearch(SearchRequestBuilder.buildGrammarQuery((GrammarSearchData)searchData));
+		} else if (searchData instanceof MetricalSearchData) {
+			return submitSearch(SearchRequestBuilder.buildMetricalQuery((MetricalSearchData)searchData));
 		} else {
 			return null;
 		}
-	}
-	
-	
-	public SearchResponse searchQuick(QuickSearchData searchData){
-		return submitSearch(SearchRequestBuilder.buildQuickQuery(searchData));
 	}
 	
 	

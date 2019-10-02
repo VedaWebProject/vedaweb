@@ -32,8 +32,6 @@ class ContentView extends Component {
             isLoaded: false,
             filtersVisible: false,
             exportVisible: false,
-            condensedView: false,
-            showMetricalData: false,
             controlsAffixed: false,
         }
     }
@@ -125,7 +123,8 @@ class ContentView extends Component {
 
     render() {
 
-        const { error, isLoaded, data, condensedView, showMetricalData } = this.state;
+        const { error, isLoaded, data } = this.state;
+        const { condensedView, showMetricalData } = stateStore.settings;
 
         return (
             <Spin
@@ -198,7 +197,7 @@ class ContentView extends Component {
                                 icon={condensedView ? "colum-height" : "vertical-align-middle"}
                                 size="large"
                                 title="Toggle condensed reading view"
-                                onClick={() => this.setState({condensedView: !condensedView})}
+                                onClick={() => stateStore.settings.condensedView = !stateStore.settings.condensedView}
                                 style={{marginLeft: '1rem'}}
                                 data-tour-id="toggle-condensed view">
                                     {condensedView ? "Full size view" : "Condensed view"}
@@ -289,7 +288,7 @@ class ContentView extends Component {
                                                 { stateStore.ui.isLayerVisible('version_') && !condensedView &&
                                                     <div
                                                     className="font-small light-grey bottom-gap gap-left-big"
-                                                    onClick={() => this.setState({showMetricalData: !this.state.showMetricalData})}
+                                                    onClick={() => stateStore.settings.showMetricalData = !stateStore.settings.showMetricalData}
                                                     style={{cursor: "pointer", display: "inline-block"}}>
                                                         <Icon
                                                         type={showMetricalData ? "eye-invisible" : "eye"}

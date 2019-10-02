@@ -32,7 +32,7 @@ public class SearchHitsConverter {
 		targetHits.setTook(response.getTook().getMillis());
 		targetHits.setMaxScore(response.getHits().getMaxScore());
 		
-		//TODO process hits
+		//process hits
 		response.getHits().forEach(esHit -> {
 			SearchHit hit = new SearchHit();
 			Map<String, Object> source = esHit.getSourceAsMap();

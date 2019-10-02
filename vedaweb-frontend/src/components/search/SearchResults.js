@@ -104,10 +104,10 @@ class SearchResults extends Component {
         };
 
         //enable view for searched field automatically
-        if (queryJSON.mode === "quick")
-            stateStore.ui.toggleLayer(queryJSON.field, true);
-        else if (queryJSON.mode === "grammar")
+        if (queryJSON.mode === "grammar")
             stateStore.ui.toggleLayer("glossing_", true);
+        else
+            stateStore.ui.toggleLayer(queryJSON.field, true);
             
         this.setState({
             isLoaded: false,
@@ -117,16 +117,6 @@ class SearchResults extends Component {
 
         //set page title
         document.title = "VedaWeb | Search Results for '" + queryDisplay.query + "'";
-
-        //pagination and request size
-        //queryJSON.from = ((stateStore.results.page - 1) * stateStore.results.size);
-        //queryJSON.size = stateStore.results.size;
-
-        //sorting
-        //queryJSON.sortBy = stateStore.results.sortBy;
-        //queryJSON.sortOrder = stateStore.results.sortOrder;
-
-        //console.log(queryJSON);
 
         //request search api data
         axios.post(process.env.PUBLIC_URL + "/api/search/" + queryJSON.mode, queryJSON)
@@ -279,8 +269,8 @@ class SearchResults extends Component {
                             { this.state.queryDisplay !== undefined &&
                                 <h1>
                                     Search Results for
-                                    <span className="text-font grey"> "{this.state.queryDisplay.query}" </span>
-                                    in<span className="text-font grey"> "{this.state.queryDisplay.field}"</span>
+                                    <span className="text-font grey"> {this.state.queryDisplay.query} </span>
+                                    in<span className="text-font grey"> {this.state.queryDisplay.field}</span>
 
                                     {/** EXPORT AND OCCURRENCES FUNCTIONS **/}
 

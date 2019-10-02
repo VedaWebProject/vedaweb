@@ -21,6 +21,7 @@ import org.elasticsearch.search.fetch.subphase.highlight.HighlightBuilder;
 import org.elasticsearch.search.sort.SortOrder;
 
 import de.unikoeln.vedaweb.search.grammar.GrammarSearchData;
+import de.unikoeln.vedaweb.search.metrical.MetricalSearchData;
 import de.unikoeln.vedaweb.search.quick.QuickSearchData;
 import de.unikoeln.vedaweb.util.StringUtils;
 
@@ -67,6 +68,42 @@ public class SearchRequestBuilder {
 			.fetchSource(FETCH_SOURCE_CONTEXT); //set _source fields
 		
 		return getCommonSearchRequest().source(source);
+	}
+	
+	
+	public static SearchRequest buildMetricalQuery(MetricalSearchData searchData) {
+		String targetVersionId = searchData.getField().endsWith("_") ? searchData.getField() + "*" : searchData.getField();
+
+		//root bool query
+		BoolQueryBuilder bool = QueryBuilders.boolQuery();
+		
+		//add actual metrical search query
+		NestedQueryBuilder metricalQuery = QueryBuilders.nestedQuery(
+				"versions",
+				QueryBuilders.boolQuery()
+					.filter(QueryBuilders.queryStringQuery(targetVersionId).field("versions.id"))
+					.must(QueryBuilders.queryStringQuery(searchData.getInput().replaceAll("\\s", "\\ ")).field("versions.metrical")),
+				ScoreMode.Total
+			).innerHit(
+				new InnerHitBuilder()
+					.setSize(10)
+					.setHighlightBuilder(getHighlighting(HIGHLIGHT_SMART)));
+		
+		bool.must(metricalQuery);
+		
+		//add search scope filters
+		if (searchData.getScopes().size() > 0)
+			bool.filter(getSearchScopesQuery(searchData));
+		
+		//add search meta filters
+		if (searchData.getMeta().size() > 0)
+			bool.filter(getSearchMetaQuery(searchData));
+		
+		return getCommonSearchRequest().source(
+			getCommonSearchSource(searchData)
+				.query(bool)
+				.fetchSource(FETCH_SOURCE_CONTEXT)
+		);
 	}
 	
 	
@@ -268,6 +305,6 @@ public class SearchRequestBuilder {
 			);
 		}
 	}
-	
-	
+
+
 }

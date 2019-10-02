@@ -78,7 +78,7 @@ public class UiDataService {
 		}
 		
 		//get grammar tags data from index and add to uiData JSONObject
-		((ObjectNode)uiData.at("/search/grammar"))
+		((ObjectNode) uiData.at("/search/grammar"))
 			.set("tags", indexService.getUIGrammarData());
 		
 		//get hymn count data for every book from index and add to uiData JSONObject

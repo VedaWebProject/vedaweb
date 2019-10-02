@@ -1,0 +1,22 @@
+
+.search-block-list-controls {
+    border-left: 6px solid #b4b1ae;
+    border-radius: 4px;
+    padding-top: .8rem;
+    padding-bottom: .8rem;
+}
+
+.search-block-add {
+    padding: .2rem;
+    background-color: #b4b1ae;
+    border-left: none;
+    color: #fff;
+    font-weight: bold;
+    border-radius: 0px 3px 3px 0px;
+    transition: .2s;
+    cursor: pointer;
+}
+
+.search-block-add:hover {
+    background-color: #5a7;
+}

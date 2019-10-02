@@ -1,21 +1,22 @@
 .ant-tabs-tab {
-    font-size: 16px;
+    font-size: 18px;
     border-radius: 0px;
     border-top-left-radius: 4px !important;
     border-top-right-radius: 4px !important;
     border: 1px solid #b4b1ae !important;
-    border-bottom: 0px solid transparent !important;
+    background-color: #f8f8f8 !important;
     z-index: 99;
     margin-bottom: -2px;
+}
+
+.ant-tabs-tab-active {
+    background-color: #fff !important;
+    border-bottom: 0px solid transparent !important;
 }
 
 .ant-tabs-bar {
     margin-bottom: 0px;
     border: none;
-}
-
-.ant-tabs-tab .anticon {
-    margin-right: 0px !important;
 }
 
 .search-container {
@@ -24,8 +25,4 @@
     background-color: #fff;
     border-radius: 2px;
     border: 1px solid #b4b1ae;
-}
-
-#search-view .ant-tabs-tab {
-    font-size: 18px;
 }

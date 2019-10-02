@@ -44,10 +44,38 @@ const helpTexts = {
                 </p>
                 <p>
                     It's also possible to use <strong>wildcards</strong> (just like in the <i>Quick search</i> at the top of the page),
-                    i.e. searching for <Text code>agn*</Text> would match all word forms or lemmas starting with <i>agn</i>.
+                    e.g. searching for <Text code>agn*</Text> would match all word forms or lemmas starting with <i>agn</i>.
                 </p>
                 <p>
                     To add more than one word form or lemma to find in a stanza, click on the <Text code>+</Text> button below.
+                </p>
+            </div>
+    },
+    metricalSearch : {
+        title: "Metrical Search",
+        content:
+            <div>
+                <p>
+                    With this search mode, you can search for metrical patterns.
+                </p>
+                <p>
+                    <h4>Usage</h4>
+                    There is metrical data associated with some text versions, of which you can choose the one you want to search in using the dropdown menu.<br/>
+                    The metrical data is composed of markers for short and long syllables.
+                    They are displayed in a stanza's data as <Text code>—</Text> for a long and <Text code>◡</Text> for a short syllable.
+                </p>
+                <p>
+                    To make searching in this data easier, you have to use <Text code>L</Text> for a long and <Text code>S</Text> for a short syllable.
+                    You can also search for multiple "words" in any order, or even in a fixed order by using a quoted "phrase search" (e.g. <Text code>"LSS SL"</Text>).
+                </p>
+                <p>
+                    <h4>Wildcards</h4>
+                    It's also possible to use <strong>wildcards</strong> (just like in the <i>Quick search</i> at the top of the page),
+                    e.g. searching for <Text code>LLS*</Text> would match all words starting with this metrical pattern.
+                    Likewise, <Text code>LLS?</Text> would find words with four syllables, where the last one can be long <i>or</i> short.
+                </p>
+                <p>
+                    <strong>Please be aware that you <u>cannot use wildcards in a phrase search</u>!</strong>
                 </p>
             </div>
     },
@@ -162,6 +190,11 @@ const helpTexts = {
                     Searching for <Text code>agni*</Text> will find <Text code>agnim</Text>, <Text code>agniḥ</Text>, <Text code>agnināgniḥ</Text>, and so on - so the Asterisk (<Text code>*</Text>)
                     works as a simple placeholder. You can use this in the beginning (<Text code>*dāḥ</Text>), the end (<Text code>agni*</Text>)
                     or both (<Text code>*dak*</Text>).
+                </p>
+                <h4>Phrase search</h4>
+                <p>
+                    You can search for multiple words in a specific order by quoting them as a phrase, e.g. <Text code>"a hundred jars of wine"</Text><br/>
+                    <strong>Please be aware that you <u>cannot use wildcards in a phrase search</u>!</strong>
                 </p>
                 <h4>Logical operators</h4>
                 <p>

@@ -39,7 +39,11 @@ class SearchGrammar extends Component {
 
         return (
             <div className="search-container">
-                <HelpButton type="grammarSearch" />
+
+                <HelpButton
+                type="grammarSearch"
+                label="How does this work?" />
+
                 <div className="search-block-list top-gap">
 
                     {blocks.map((block, i) => (
