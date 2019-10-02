@@ -31,7 +31,6 @@ class SearchView extends Component {
 
     handleSubmit(e){
         let query = stateStore.search[stateStore.search.meta.mode].getQuery();
-        console.log(query)
         query.mode = stateStore.search.meta.mode;
         query.scopes = stateStore.search.meta.scopes;
         query.meta = stateStore.search.meta.meta;

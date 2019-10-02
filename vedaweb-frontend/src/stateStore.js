@@ -39,7 +39,9 @@ const stateStore = store({
 
             getQuery(){
                 return Object.assign({
-                    input: stateStore.search.quick.input,
+                    input: stateStore.search.quick.field.startsWith('version_')
+                        ? SanscriptAccents.t(stateStore.search.quick.input, stateStore.settings.transliteration, "iso")
+                        : stateStore.search.quick.input,
                     field: stateStore.search.quick.field,
                     regex: stateStore.search.quick.regex
                 }, stateStore.search.defaultQuery);

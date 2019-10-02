@@ -55,16 +55,15 @@ class SearchResults extends Component {
 
     handleTableChange(pagination, filters, sorter) {
         this.setState({ isLoaded: false });
-
+        //results window
         stateStore.results.query.from = ((pagination.current - 1) * pagination.pageSize);
         stateStore.results.query.page = pagination.current;
         stateStore.results.query.size = pagination.pageSize;
-
+        //sorting
         stateStore.results.query.sortBy = sorter.field ? sorter.field : null;
         stateStore.results.query.sortOrder = sorter.order ? sorter.order : null;
-        
+        //run search
         this.props.history.push("/results/" + Base64.encodeURI(JSON.stringify(stateStore.results.query)));
-        //this.loadData(stateStore.results.query);
     }
 
 
@@ -108,7 +107,8 @@ class SearchResults extends Component {
             stateStore.ui.toggleLayer("glossing_", true);
         else
             stateStore.ui.toggleLayer(queryJSON.field, true);
-            
+        
+        //update component state for search process
         this.setState({
             isLoaded: false,
             error: undefined,
@@ -116,14 +116,14 @@ class SearchResults extends Component {
         });
 
         //set page title
-        document.title = "VedaWeb | Search Results for '" + queryDisplay.query + "'";
+        document.title = "VedaWeb | Search Results for " + queryDisplay.query;
 
         //request search api data
         axios.post(process.env.PUBLIC_URL + "/api/search/" + queryJSON.mode, queryJSON)
             .then((response) => {
                 //console.log(JSON.stringify(response.data));
                 stateStore.results.resultsData = response.data;
-                
+
                 this.setState({
                     isLoaded: true,
                     tableData: response.data.hits === undefined ? {} :
