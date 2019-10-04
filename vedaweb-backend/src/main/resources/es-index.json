@@ -40,10 +40,25 @@
 					"type": "nested",
 					"properties": {
 						"id": {"type": "keyword"},
-						"form": {"type": "text", "analyzer": "custom_translation", "similarity": "boolean" },
-						"form_raw": {"type": "text", "analyzer": "custom_translation", "similarity": "boolean" },
-						"metrical": {"type": "text", "analyzer": "custom_translation", "similarity": "boolean" },
-						"source": {"type": "keyword"}
+						"source": {"type": "keyword"},
+						"form": {
+							"type": "text",
+							"analyzer": "custom_translation",
+							"similarity": "boolean",
+							"fields": { "keyword": { "type": "keyword" } }
+						},
+						"form_raw": {
+							"type": "text",
+							"analyzer": "custom_translation",
+							"similarity": "boolean",
+							"fields": { "keyword": { "type": "keyword" } }
+						},
+						"metrical": {
+							"type": "text",
+							"analyzer": "custom_translation",
+							"similarity": "boolean",
+							"fields": { "keyword": { "type": "keyword" } }
+						}
 					}
 		        },
 				"tokens": {
