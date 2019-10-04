@@ -8,10 +8,6 @@ import io.swagger.annotations.ApiModelProperty;
 
 public class MetricalSearchData extends AbstractSearchData {
 	
-	@JsonProperty("regex")
-	@ApiModelProperty(notes = "Parse RegEx? (default: false)")
-	private boolean regex;
-	
 	@JsonProperty("input")
 	@ApiModelProperty(notes = "Search input field value")
 	private String input;
@@ -20,16 +16,6 @@ public class MetricalSearchData extends AbstractSearchData {
 	@ApiModelProperty(notes = "Text version field to search in",
 		example = "'version_' for all versions, 'translation_' for all translations")
 	private String field;
-	
-	
-	public boolean isRegex() {
-		return regex;
-	}
-
-
-	public void setRegex(boolean regex) {
-		this.regex = regex;
-	}
 
 
 	public String getInput() {
