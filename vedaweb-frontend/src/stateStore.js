@@ -55,10 +55,6 @@ const stateStore = store({
             input: "",
             field: "version_vannootenholland",
 
-            setInput(input){
-                stateStore.search.metrical.input = input.replace(/[^LSls *?"]/g, "").toUpperCase();
-            },
-
             reset(){
                 stateStore.search.metrical.input = "";
                 stateStore.search.metrical.field = "version_vannootenholland";
