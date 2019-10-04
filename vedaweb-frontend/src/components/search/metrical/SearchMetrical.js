@@ -57,7 +57,7 @@ class SearchMetrical extends Component {
 
                     <Input
                     value={stateStore.search.metrical.input}
-                    onChange={e => stateStore.search.metrical.setInput(e.target.value)}
+                    onChange={e => stateStore.search.metrical.input = e.target.value.replace(/[^LSls *?"]/g, "").toUpperCase()}
                     addonBefore={selectBefore}
                     title="Type 'L' for long and 'S' for short syllables, e.g. LLS LL SLSL"
                     size="large"
