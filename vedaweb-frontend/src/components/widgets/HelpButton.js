@@ -224,13 +224,33 @@ const helpTexts = {
                 <p>
                     <strong><Icon type="exclamation-circle"/> ATTENTION:</strong>
                     <ul>
-                        <li>RegEx are matched against single terms <strong>only</strong> (not a whole line or stanza!)</li>    
+                        <li>RegEx are matched against <strong>a whole line of text</strong> of the selected text version(s).</li>    
                         <li>
                             RegEx are always anchored by default. There is no reason to
                             use <Text code>^</Text> or <Text code>$</Text> to match the 
-                            beginning or end of a term, because your RegEx <i>always must match the whole term</i>!
-                        </li>    
+                            beginning or end of a term, because your RegEx <i>always must match the whole line</i>!
+                        </li>
                     </ul>
+                </p>
+                <h4>Example</h4>
+                <p class="text-font">
+                    sómasya mā tavásaṁ vákṣy agne<br/>
+                    váhniṁ cakartha vidáthe yájadhyai<br/>
+                    devā́m̐ áchā dī́dyad yuñjé ádriṁ<br/>
+                    śamāyé agne tanvàṁ juṣasva
+                </p>
+                <p>
+                    Here, a RegEx-enabled search for <Text code>.*mā.*agne</Text> would match the first line,
+                    because <Text code>agne</Text> is at the end of this line.
+                    The <Text code>.*</Text> before <Text code>mā</Text> is necessary, because <Text code>mā</Text>
+                    is not the beginning of this line.<br/>
+                    Also, <Text code>sómasya.*juṣasva</Text> would <strong>not</strong> match this text,
+                    because the RegEx-search applies to single lines, not all lines together.
+                </p>
+                <p>
+                    <strong>
+                        You get an overview of the supported RegEx operators <a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/regexp-syntax.html#regexp-standard-operators" target="_blank" rel="noopener noreferrer">here</a>.
+                    </strong>
                 </p>
             </div>
     },
@@ -490,7 +510,7 @@ class HelpButton extends Component {
 
         return (
             
-            <span style={containerStyle}>
+            <div style={containerStyle}>
 
                 <div className="help-button-container" onClick={this.showModal}>
 
@@ -522,7 +542,7 @@ class HelpButton extends Component {
                 okText="OK">
                     {helpTexts[this.props.type] ? helpTexts[this.props.type].content : ""}
                 </Modal>
-            </span>
+            </div>
         );
 
     }

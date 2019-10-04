@@ -47,7 +47,7 @@ public class SearchRequestBuilder {
 		//QueryString query or Regex qery?
 		QueryBuilder query;
 		if (searchData.isRegex()) {
-			query = QueryBuilders.regexpQuery(searchField, searchTerm);
+			query = QueryBuilders.regexpQuery(searchField + ".keyword", searchTerm);
 		} else {
 			query = QueryBuilders.queryStringQuery(searchTerm).field(searchField);
 		}
