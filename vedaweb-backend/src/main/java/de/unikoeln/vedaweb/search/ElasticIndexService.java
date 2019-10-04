@@ -442,18 +442,31 @@ public class ElasticIndexService {
 	}
 	
 	
-	private ArrayNode concatLines(String[] lines, boolean removeAccents) {
-		ArrayNode forms = json.newArrayNode();
-		for (String form : lines) {
-			//form = StringUtils.removeMetaChars(form);
-			forms.add(
+	private ArrayNode transformVersionLines(String[] lines, boolean removeAccents) {
+		ArrayNode linesNode = json.newArrayNode();
+		for (String line : lines) {
+			linesNode.add(
 				removeAccents
-					? StringUtils.removeVowelAccents(form)
-					: form
+					? StringUtils.removeVowelAccents(line)
+					: line
 			);
 		}
-		return forms;
+		return linesNode;
 	}
+	
+	//// THIS MAY BE SUPERIOR TO "transformVersionLines"
+//	private String concatVersionLines(String[] lines, boolean removeAccents) {
+//		StringBuilder sb = new StringBuilder();
+//		for (String line : lines) {
+//			sb.append(
+//				removeAccents
+//					? StringUtils.removeVowelAccents(line.trim())
+//					: line.trim()
+//			);
+//			sb.append(" ");
+//		}
+//		return sb.substring(0, sb.length() - 1);
+//	}
 	
 	
 //	private String concatTokenLemmata(Stanza doc) {
@@ -474,12 +487,12 @@ public class ElasticIndexService {
 //			for (String line : v.getForm()) form.append(line + "\n");
 			version.put("id", v.getId());
 			//form without accents
-			version.set("form", concatLines(v.getForm(), true)); 
+			version.set("form", transformVersionLines(v.getForm(), true)); 
 			//raw form (with accents)
-			version.set("form_raw", concatLines(v.getForm(), false)); 
+			version.set("form_raw", transformVersionLines(v.getForm(), false)); 
 			//metrical data (for versions that have it)
 			if (v.getMetricalData() != null)
-				version.set("metrical", concatLines(v.getMetricalData(), false)); 
+				version.set("metrical", transformVersionLines(v.getMetricalData(), false)); 
 			//source (author)
 			version.put("source", v.getSource()); 
 			versions.add(version);
