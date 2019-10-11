@@ -193,10 +193,10 @@ class ContentView extends Component {
 
                                 {/** TOOLS BUTTON: TOGGLE CONDENSED VIEW */}
                                 <Button
-                                type="default"
+                                type={condensedView ? "primary" : "default"}
                                 icon={condensedView ? "colum-height" : "vertical-align-middle"}
                                 size="large"
-                                title="Toggle condensed reading view"
+                                title={condensedView ? "Switch to full size view with all details" : "Switch to condensed reading view"}
                                 onClick={() => stateStore.settings.condensedView = !stateStore.settings.condensedView}
                                 style={{marginLeft: '1rem'}}
                                 data-tour-id="toggle-condensed view">
@@ -306,8 +306,8 @@ class ContentView extends Component {
                                                             key={"v_" + v.id}
                                                             ref={this.scrollTo}
                                                             style={{
-                                                                marginBottom: condensedView ? "0" : "1rem",
-                                                                fontSize: condensedView ? "85%" : "100%",
+                                                                marginBottom: condensedView ? ".5rem" : "1rem",
+                                                                fontSize: condensedView ? "90%" : "100%",
                                                             }}>
 
                                                                 <span
@@ -374,8 +374,8 @@ class ContentView extends Component {
                                                             key={"t_" + t.source}
                                                             ref={this.scrollTo}
                                                             style={{
-                                                                marginBottom: condensedView ? "0" : "1rem",
-                                                                fontSize: condensedView ? "85%" : "100%"
+                                                                marginBottom: condensedView ? ".5rem" : "1rem",
+                                                                fontSize: condensedView ? "90%" : "100%"
                                                             }}>
 
                                                                 <span
@@ -520,7 +520,7 @@ class ContentView extends Component {
                                                     key={"p_" + pada.index}
                                                     style={{
                                                         display: condensedView ? "inline-block" : "block",
-                                                        fontSize: condensedView ? "85%" : "100%"
+                                                        fontSize: condensedView ? "90%" : "100%"
                                                     }}>
 
                                                         <span
