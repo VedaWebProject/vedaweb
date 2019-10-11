@@ -130,12 +130,18 @@ class DictionaryView extends Component {
             for (let j = 0; j < pada.grammarData.length; j++) {
                 const token = pada.grammarData[j];
                 if (done.indexOf(token.lemma) === -1){
-                    out.push({
-                        lemma: token.lemma,
-                        lemmaRefs: token.lemmaRefs,
-                        tokens: [token.form],
-                        tokenId: pada.index + "/" + token.index
-                    });
+                    //filter for valid lemma ref IDs
+                    let lrefs = token.lemmaRefs.filter(lref => lref.startsWith("lemma_"));
+                    //add dict data object
+                    if (lrefs.length > 0){
+                        out.push({
+                            lemma: token.lemma,
+                            lemmaRefs: token.lemmaRefs,
+                            tokens: [token.form],
+                            tokenId: pada.index + "/" + token.index
+                        });
+                    }
+                    //mark lemma as done
                     done.push(token.lemma);
                 } else {
                     let match = out.find(t => t.lemma === token.lemma);
