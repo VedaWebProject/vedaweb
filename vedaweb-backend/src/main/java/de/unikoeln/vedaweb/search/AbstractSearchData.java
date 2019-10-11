@@ -39,6 +39,13 @@ public abstract class AbstractSearchData {
 	private Map<String, String[]> meta;
 	
 	
+	/*
+	 * This will have to be refactored for a generic
+	 * version of the platform!
+	 */
+	private String indexName = "vedaweb";
+	
+	
 	public AbstractSearchData(){
 		sortBy = "_score";
 		sortOrder = "descend";
@@ -110,6 +117,11 @@ public abstract class AbstractSearchData {
 
 	public void setMeta(Map<String, String[]> meta) {
 		this.meta = meta;
+	}
+	
+	
+	public String getIndexName() {
+		return indexName;
 	}
 
 }

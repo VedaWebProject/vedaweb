@@ -8,8 +8,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import de.unikoeln.vedaweb.search.grammar.GrammarSearchData;
+import de.unikoeln.vedaweb.search.grammar.GrammarSearchRequestBuilder;
 import de.unikoeln.vedaweb.search.metrical.MetricalSearchData;
+import de.unikoeln.vedaweb.search.metrical.MetricalSearchRequestBuilder;
 import de.unikoeln.vedaweb.search.quick.QuickSearchData;
+import de.unikoeln.vedaweb.search.quick.QuickSearchRequestBuilder;
 
 @Service
 public class ElasticSearchService {
@@ -22,11 +25,17 @@ public class ElasticSearchService {
 	
 	public SearchResponse search(AbstractSearchData searchData){
 		if (searchData instanceof QuickSearchData) {
-			return submitSearch(SearchRequestBuilder.buildQuickQuery((QuickSearchData)searchData));
+			return submitSearch(
+					QuickSearchRequestBuilder.buildSearchRequest(
+							(QuickSearchData)searchData));
 		} else if (searchData instanceof GrammarSearchData) {
-			return submitSearch(SearchRequestBuilder.buildGrammarQuery((GrammarSearchData)searchData));
+			return submitSearch(
+					GrammarSearchRequestBuilder.buildSearchRequest(
+							(GrammarSearchData)searchData));
 		} else if (searchData instanceof MetricalSearchData) {
-			return submitSearch(SearchRequestBuilder.buildMetricalQuery((MetricalSearchData)searchData));
+			return submitSearch(
+					MetricalSearchRequestBuilder.buildSearchRequest(
+							(MetricalSearchData)searchData));
 		} else {
 			return null;
 		}
@@ -34,12 +43,14 @@ public class ElasticSearchService {
 	
 	
 	public SearchResponse searchOcc(GrammarSearchData searchData){
-		return submitSearch(SearchRequestBuilder.buildOccurrencesQuery(searchData));
+		return submitSearch(
+				GrammarSearchRequestBuilder
+					.buildGrammarOccurrencesRequest(searchData));
 	}
 	
 	
 	public String aggregateGrammarField(String field){
-		SearchRequest searchRequest = SearchRequestBuilder.buildAggregationFor(field);
+		SearchRequest searchRequest = GrammarAggregationsBuilder.buildGrammarAggregationsRequest(field, "vedaweb");
 		SearchResponse searchResponse = submitSearch(searchRequest);
 		return searchResponse.toString();
 	}
