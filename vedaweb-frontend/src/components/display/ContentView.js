@@ -304,8 +304,11 @@ class ContentView extends Component {
                                                         return v === undefined ? "" :
                                                             <div
                                                             key={"v_" + v.id}
-                                                            className="translation"
-                                                            ref={this.scrollTo}>
+                                                            ref={this.scrollTo}
+                                                            style={{
+                                                                marginBottom: condensedView ? "0" : "1rem",
+                                                                fontSize: condensedView ? "85%" : "100%",
+                                                            }}>
 
                                                                 <span
                                                                 className="bold gap-right"
@@ -316,14 +319,26 @@ class ContentView extends Component {
 
                                                                 <div
                                                                 className={(v.language === "deva" ? "deva-font" : "text-font")}
+                                                                title={version.label}
                                                                 style={{
                                                                     display: condensedView ? "inline-block" : "block",
                                                                     paddingLeft: condensedView ? 0 : "1rem"
                                                                 }}>
+
+                                                                    {/* <HelpButton
+                                                                    inline
+                                                                    iconStyle={{marginRight: ".5rem"}}
+                                                                    type={v.id}
+                                                                    title={version.label}
+                                                                    hidden={!condensedView} /> */}
+
                                                                     {v.form.map((line, i) => (
                                                                         <div
                                                                         key={"version_" + i}
-                                                                        style={{display: condensedView ? "inline-block" : "block"}}>
+                                                                        style={{
+                                                                            display: condensedView ? "inline" : "block"
+                                                                        }}>
+
                                                                             {v.applyKeys && !condensedView ?
                                                                                 <span className="red gap-right">{String.fromCharCode(i + 97)} </span>
                                                                                 : ''
@@ -341,11 +356,11 @@ class ContentView extends Component {
                                                                     ))}
                                                                 </div>
 
-                                                                <div
+                                                                {/* <div
                                                                 className="gap-left font-small text-font-i light-grey"
                                                                 style={{display: condensedView ? "block" : "none"}}>
                                                                     &mdash;&nbsp;{version.label}
-                                                                </div>
+                                                                </div> */}
                                                             </div>
                                                 })}
 
@@ -357,23 +372,33 @@ class ContentView extends Component {
                                                         return t === undefined ? "" :
                                                             <div
                                                             key={"t_" + t.source}
-                                                            className="translation"
                                                             ref={this.scrollTo}
-                                                            style={{display: "block"}}>
+                                                            style={{
+                                                                marginBottom: condensedView ? "0" : "1rem",
+                                                                fontSize: condensedView ? "85%" : "100%"
+                                                            }}>
 
                                                                 <span
                                                                 style={{display: condensedView ? "none" : "inline"}}>
-                                                                    <span className="bold">{t.source}</span>
-                                                                    ({t.language})
+                                                                    <span className="bold">{t.source}</span> ({t.language})
                                                                     <HelpButton inline iconStyle={{marginLeft: ".5rem"}} type={t.id}/>
                                                                 </span>
 
-                                                                {/* <span className="bold">{t.source} </span>({t.language})
-                                                                <HelpButton inline type={l.id} style={{marginLeft:'.5rem'}}/> */}
-
                                                                 <div
                                                                 className="text-font"
-                                                                style={{ paddingLeft: condensedView ? 0 : "1rem" }}>
+                                                                title={t.source +  "(" + t.language + ")"}
+                                                                style={{
+                                                                    display: condensedView ? "inline-block" : "block",
+                                                                    paddingLeft: condensedView ? 0 : "1rem"
+                                                                }}>
+
+                                                                    {/* <HelpButton
+                                                                    inline
+                                                                    iconStyle={{marginRight: ".5rem"}}
+                                                                    type={t.id}
+                                                                    title={t.source +  "(" + t.language + ")"}
+                                                                    hidden={!condensedView} /> */}
+
                                                                     {t.form.map((line, i) => (
                                                                         <div
                                                                         key={"trans_" + i}
@@ -381,13 +406,14 @@ class ContentView extends Component {
                                                                             {line}&nbsp;
                                                                         </div>
                                                                     ))}
+
                                                                 </div>
 
-                                                                <div
+                                                                {/* <div
                                                                 className="gap-left font-small text-font-i light-grey"
                                                                 style={{display: condensedView ? "block" : "none"}}>
                                                                     &mdash;&nbsp;{t.source} ({t.language})
-                                                                </div>
+                                                                </div> */}
                                                             </div>
                                                 })}
                                             </div>
@@ -492,7 +518,10 @@ class ContentView extends Component {
                                                     <div
                                                     className="glossing-line"
                                                     key={"p_" + pada.index}
-                                                    style={{display: condensedView ? "inline-block" : "block"}}>
+                                                    style={{
+                                                        display: condensedView ? "inline-block" : "block",
+                                                        fontSize: condensedView ? "85%" : "100%"
+                                                    }}>
 
                                                         <span
                                                         key={"p_gloss_line" + pada.index}

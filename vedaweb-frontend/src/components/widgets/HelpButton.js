@@ -486,6 +486,8 @@ class HelpButton extends Component {
 
     render() {
 
+        if (this.props.hidden) return null;
+
         const modalHeader = !helpTexts.hasOwnProperty(this.props.type) ? "" :
             <div className="secondary-font red bold">
                 <img
@@ -523,7 +525,7 @@ class HelpButton extends Component {
                     theme="outlined"
                     className="help-button-icon"
                     style={iconStyle}
-                    title={helpTexts[this.props.type] !== undefined ? "Show help: \"" + helpTexts[this.props.type].title + "\"" : undefined} />
+                    title={this.props.title || (helpTexts[this.props.type] ? "Show help: \"" + helpTexts[this.props.type].title + "\"" : "")} />
 
                     { this.props.label && this.props.labelPosition === "right" &&
                         <span className="help-button-label">{this.props.label}</span>
