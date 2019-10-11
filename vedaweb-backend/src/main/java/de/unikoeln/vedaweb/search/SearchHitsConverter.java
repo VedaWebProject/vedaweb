@@ -78,9 +78,12 @@ public class SearchHitsConverter {
 									continue;
 								}
 							} else {
+								String highlightContent = (innerHit.getSourceAsMap().get("form_raw") instanceof String)
+									? (String)innerHit.getSourceAsMap().get("form_raw")
+									: String.join(" / ", (List<String>)innerHit.getSourceAsMap().get("form_raw"));
 								hit.addHighlight(
 									innerHit.getSourceAsMap().get("source").toString(),
-									String.join(" / ", (List<String>)innerHit.getSourceAsMap().get("form_raw"))
+									highlightContent
 								);
 							}
 						}
