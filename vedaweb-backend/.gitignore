@@ -2,7 +2,7 @@ target/
 src/main/resources/static/
 src/main/resources/templates/
 !.mvn/wrapper/maven-wrapper.jar
-
+*.log
 
 ### STS ###
 .apt_generated
