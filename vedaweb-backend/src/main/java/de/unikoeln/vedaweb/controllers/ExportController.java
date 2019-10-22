@@ -30,6 +30,28 @@ import io.swagger.annotations.ApiParam;
 @RequestMapping("api/export")
 public class ExportController {
 	
+	private static final String STANZA_TEI_TEMPLATE = "<?xml version='1.0' encoding='UTF-8'?>\n" + 
+			"<TEI xmlns=\"http://www.tei-c.org/ns/1.0\">\n" + 
+			"<teiHeader>\n" + 
+			"    <fileDesc>\n" + 
+			"        <titleStmt>\n" + 
+			"            <title>Rigveda - ##DocId##</title>\n" + 
+			"        </titleStmt>\n" + 
+			"        <publicationStmt>\n" + 
+			"            <p>Rigveda - VedaWeb Edition</p>\n" + 
+			"        </publicationStmt>\n" + 
+			"        <sourceDesc>\n" + 
+			"            <p></p>\n" + 
+			"        </sourceDesc>\n" + 
+			"    </fileDesc>\n" + 
+			"</teiHeader>\n" + 
+			"<text>\n" + 
+			"	<body>\n" + 
+			"		##DocData##\n" + 
+			"	</body>\n" + 
+			"</text>\n" + 
+			"</TEI>";
+	
 	@Autowired
 	private ElasticSearchService search;
 	
@@ -67,9 +89,14 @@ public class ExportController {
     public String exportDocXml(
     		@ApiParam(example = "0300201")
     		@PathVariable("docId") String docId) {
-		
+
 		Optional<StanzaXml> xml = stanzaXmlRepo.findById(docId);
-		return xml.isPresent() ? xml.get().getXml() : "";
+		String idPattern = "(\\d{2})(\\d{3})(\\d{2})";
+		return xml.isPresent()
+			? STANZA_TEI_TEMPLATE
+				.replace("##DocId##", docId.replaceFirst(idPattern, "$1.$2.$3"))
+				.replace("##DocData##", xml.get().getXml()) 
+			: "";
     }
 	
 
