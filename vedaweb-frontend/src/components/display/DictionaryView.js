@@ -131,12 +131,12 @@ class DictionaryView extends Component {
                 const token = pada.grammarData[j];
                 if (done.indexOf(token.lemma) === -1){
                     //filter for valid lemma ref IDs
-                    let lrefs = token.lemmaRefs.filter(lref => lref.startsWith("lemma_"));
+                    let lrefs = token.lemmaRefs;
                     //add dict data object
                     if (lrefs.length > 0){
                         out.push({
                             lemma: token.lemma,
-                            lemmaRefs: token.lemmaRefs,
+                            lemmaRefs: token.lemmaRefs.filter(lref => lref.startsWith("lemma_")),
                             tokens: [token.form],
                             tokenId: pada.index + "/" + token.index
                         });
@@ -239,16 +239,16 @@ class DictionaryView extends Component {
                                 <span>({token.tokens.map((t, i ) => t + (i < token.tokens.length - 1 ? ", " : ""))})</span>
                             </td>
                             <td className="expanding text-font">
-                                {token.dict !== undefined && token.dict[0].graTxt}
+                                {token.dict && token.dict[0] && token.dict[0].graTxt}
                             </td>
                             <td className="non-expanding">
-                                {token.lemmaRefs !== undefined && token.lemmaRefs !== null && token.lemmaRefs.map((ref, i) => {
+                                {token.lemmaRefs && token.lemmaRefs.map((ref, i) => {
                                     let entry = token.dict === undefined ? undefined
                                         : token.dict.find(d => d.graRef === ref);
                                     return  <Button
                                             disabled={!isLoaded || error !== undefined}
                                             className="dict-link gap-right"
-                                            onClick={() => {this.openDict(entry);}}
+                                            onClick={() => this.openDict(entry)}
                                             title={"Show full entry for \"" + token.lemma + "\": #" + (i+1)}
                                             key={"lemma_" + i}>
                                                 <Icon type="book"/>
