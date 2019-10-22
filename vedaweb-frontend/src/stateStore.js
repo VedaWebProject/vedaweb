@@ -257,7 +257,8 @@ const stateStore = store({
             meta: {
                 hymnAddressee: [],
                 hymnGroup: [],
-                strata: []
+                strata: [],
+                stanzyType: []
             },
 
             hasMetas(){

@@ -38,6 +38,9 @@ public class Stanza implements Comparable<Stanza> {
 	@ApiModelProperty(notes = "Strata property of this stanza")
 	private String strata;
 	
+	@ApiModelProperty(notes = "Stanza type (via metrical analysis)")
+	private String stanzaType;
+	
 //	@ApiModelProperty(notes = "Metrical data for this stanza based on Lubotsky (Zurich)")
 //	private String[] metricalData;
 	
@@ -125,6 +128,14 @@ public class Stanza implements Comparable<Stanza> {
 
 	public void setStrata(String strata) {
 		this.strata = strata;
+	}
+	
+	public String getStanzaType() {
+		return stanzaType;
+	}
+
+	public void setStanzaType(String stanzaType) {
+		this.stanzaType = stanzaType;
 	}
 
 //	public List<StanzaVersion> getTranslations(){

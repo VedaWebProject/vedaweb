@@ -149,7 +149,6 @@ public class XmlDataImport {
 				}
 				
 				
-				
 				// Van Nooten & Holland / vnh
 				temp = compiler.evaluate("*:lg[@*:source='vnh']", stanza);
 				if (temp.size() > 0) {
@@ -168,6 +167,7 @@ public class XmlDataImport {
 							MetricalParser.S_SHORT_LETTER));
 					stanzaObj.addVersion(version);
 				}
+				
 				
 				// Aufrecht / aufrecht
 				temp = compiler.evaluate("*:lg[@*:source='aufrecht']", stanza);
@@ -312,6 +312,24 @@ public class XmlDataImport {
 					stanzaObj.addVersion(version);
 				}
 				
+				//// Stanza Type (via metrical data on vn&h) ////
+				for (StanzaVersion v : stanzaObj.getVersions()) {
+					if (v.getSource().contains("ooten")) {
+						String syllables = "";
+						for (String line : v.getMetricalData()) {
+							syllables += line.replaceAll("\\s", "").length() + " ";
+						}
+						switch (syllables.trim()) {
+						case "11 11 11 11": stanzaObj.setStanzaType("Triṣṭubh"); break;
+						case "8 8 8": stanzaObj.setStanzaType("Gāyatrī"); break;
+						case "12 12 12 12": stanzaObj.setStanzaType("Jagatī"); break;
+						case "8 8 8 8": stanzaObj.setStanzaType("Aṇuṣṭubh"); break;
+						default: break;
+						}
+						break;
+					}
+				}
+
 				//add stanza object to stanzas list
 				stanzasList.add(stanzaObj);
 			}

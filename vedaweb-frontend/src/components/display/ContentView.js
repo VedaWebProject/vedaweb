@@ -244,6 +244,8 @@ class ContentView extends Component {
                                                     <span className="text-font">{data.hymnAddressee || ""}</span><br/>
                                                     <span className="bold">Hymn group: </span>
                                                     <span className="text-font">{data.hymnGroup || ""}</span><br/>
+                                                    <span className="bold">Stanza Type: </span>
+                                                    <span className="text-font">{data.stanzaType || ""}</span><br/>
                                                     {/** STRATA */}
                                                     <span
                                                     className="bold"

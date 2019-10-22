@@ -162,23 +162,30 @@ class SearchView extends Component {
                                     <HelpButton align="left" type="searchMetaFilters" />
                                     <SearchMetaFilterList
                                     label="Hymn Addressees"
-                                    placeholder="all Addressees"
+                                    placeholder="All Addressees"
                                     items={stateStore.ui.meta.hymnAddressee}
                                     selected={stateStore.search.meta.meta.hymnAddressee}
                                     handleChange={v => {stateStore.search.meta.meta.hymnAddressee = v}}/>
                                     <SearchMetaFilterList
                                     label="Hymn Groups"
-                                    placeholder="all Groups"
+                                    placeholder="All Groups"
                                     items={stateStore.ui.meta.hymnGroup}
                                     selected={stateStore.search.meta.meta.hymnGroup}
                                     handleChange={v => {stateStore.search.meta.meta.hymnGroup = v}}/>
                                     <SearchMetaFilterList
                                     label="Stanza Strata"
-                                    placeholder="all Strata"
+                                    placeholder="All Strata"
                                     items={stateStore.ui.meta.strata}
                                     itemLabels={stateStore.ui.abbreviations.strata}
                                     selected={stateStore.search.meta.meta.strata}
                                     handleChange={v => {stateStore.search.meta.meta.strata = v}}/>
+                                    <SearchMetaFilterList
+                                    label="Stanza Type"
+                                    placeholder="All Stanza Types"
+                                    items={stateStore.ui.meta.stanzaType}
+                                    itemLabels={stateStore.ui.abbreviations.stanzaType}
+                                    selected={stateStore.search.meta.meta.stanzaType}
+                                    handleChange={v => {stateStore.search.meta.meta.stanzaType = v}}/>
                                 </Panel>
                             </Collapse>
                         </div>

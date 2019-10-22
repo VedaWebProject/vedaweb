@@ -39,12 +39,22 @@ public class UiDataService {
 	@Value("classpath:ui-data.json")
 	private Resource uiDataTemplate;
 	
+	@Value("${vw.headless}")
+	private Boolean noUiData;
+	
 	private ObjectNode uiData;
 	
 	
 	@PostConstruct
 	public ObjectNode init() {
 		ObjectNode response = json.newObjectNode();
+		
+		if (noUiData) {
+			log.info("Running without client ui data creation (set via properties file).");
+			response.put("error", "ui data usage turned off via properties file!");
+			return response;
+		}
+		
 		//force data import if db empty
 		if (stanzaRepo.count() == 0) {
 			log.warn("DB collection seems to be empty. Trying to import data from XML");
@@ -100,6 +110,10 @@ public class UiDataService {
 		//get strata data from index and add to uiData JSONObject
 		((ObjectNode)uiData.at("/meta"))
 			.set("strata", indexService.getStanzasMetaData("strata"));
+		
+		//get stanza type (metrical) data from index and add to uiData JSONObject
+		((ObjectNode)uiData.at("/meta"))
+			.set("stanzaType", indexService.getStanzasMetaData("stanzaType"));
 		
 		//load arbitrary HTML snippets
 		try {

@@ -59,6 +59,13 @@
 			"P": "popular",
 			"E1": "epic anuṣṭubh (525)",
 			"E3b": "epic anuṣṭubh (380)"
+		},
+		
+		"stanzaType" : {
+			"Triṣṭubh": "4 x 11 syllables",
+			"Gāyatrī": "3 x 8 syllables",
+			"Jagatī": "4 x 12 syllables",
+			"Aṇuṣṭubh": "4 x 8 syllables"
 		}
 	},
 	

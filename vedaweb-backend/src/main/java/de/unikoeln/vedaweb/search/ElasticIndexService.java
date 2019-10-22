@@ -109,6 +109,7 @@ public class ElasticIndexService {
 			indexDoc.put("hymnGroup", dbDoc.getHymnGroup());
 			indexDoc.put("hymnAbs", dbDoc.getHymnAbs());
 			indexDoc.put("strata", dbDoc.getStrata());
+			indexDoc.put("stanzaType", dbDoc.getStanzaType());
 			indexDoc.set("versions", json.getMapper().valueToTree(buildVersionsList(dbDoc)));
 //				indexDoc.put("lemmata", StringUtils.removeVowelAccents(concatTokenLemmata(dbDoc)));
 //				indexDoc.put("lemmata_raw", StringUtils.normalizeNFC(concatTokenLemmata(dbDoc)));
