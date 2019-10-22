@@ -78,12 +78,12 @@ class NavBar extends Component {
                         </Menu.Item>
 
                         <Menu.Item
-                        key="betafeedback">
-                            <NavLink to={"/betafeedback"}
-                            title="Information on this beta version of VedaWeb"
+                        key="about">
+                            <NavLink to={"/about"}
+                            title="Information about VedaWeb"
                             className="content-center"
                             activeClassName="selected">
-                                <Icon type="experiment"/><br/>Beta<br/>Feedback
+                                <Icon type="bulb"/><br/>About<br/>VedaWeb
                             </NavLink>
                         </Menu.Item>
 

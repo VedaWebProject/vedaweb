@@ -17,7 +17,7 @@ import axios from 'axios';
 import stateStore from "../../stateStore";
 import DictionaryView from "./DictionaryView";
 import HelpButton from "../widgets/HelpButton";
-import BetaInfoContent from "../static/BetaInfoContent";
+import AboutContent from "../static/AboutContent";
 import ExportDrawer from "../widgets/ExportDrawer";
 import ExportButton from "../widgets/ExportButton";
 
@@ -622,7 +622,7 @@ class ContentView extends Component {
                 onCancel={() => stateStore.settings.firstVisit = false}
                 onOk={() => stateStore.settings.firstVisit = false}
                 footer={null}>
-                    <BetaInfoContent/>
+                    <AboutContent/>
                 </Modal>
 
             </Spin>

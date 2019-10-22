@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 import { Row, Col } from 'antd';
-import BetaInfoContent from "./BetaInfoContent";
+import AboutContent from "./AboutContent";
 
 
-class BetaInfo extends Component {
+class About extends Component {
 
     componentDidMount() {
         window.scrollTo(0, 0);
@@ -21,7 +21,7 @@ class BetaInfo extends Component {
 
                 <Col xl={14} lg={18} md={20} sm={24}>
                     <div className="card">
-                        <BetaInfoContent/>
+                        <AboutContent/>
                     </div>
                 </Col>
 
@@ -31,4 +31,4 @@ class BetaInfo extends Component {
     }
 }
 
-export default BetaInfo;
+export default About;
