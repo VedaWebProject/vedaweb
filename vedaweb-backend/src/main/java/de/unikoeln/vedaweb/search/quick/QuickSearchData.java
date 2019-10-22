@@ -1,11 +1,12 @@
 package de.unikoeln.vedaweb.search.quick;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import de.unikoeln.vedaweb.search.CommonSearchData;
 import io.swagger.annotations.ApiModelProperty;
 
-
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class QuickSearchData extends CommonSearchData {
 	
 	@JsonProperty("regex")

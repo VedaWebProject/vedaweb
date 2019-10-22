@@ -3,12 +3,14 @@ package de.unikoeln.vedaweb.search.grammar;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import de.unikoeln.vedaweb.search.CommonSearchData;
 import io.swagger.annotations.ApiModelProperty;
 
-
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class GrammarSearchData extends CommonSearchData {
 	
 	@JsonProperty("blocks")
