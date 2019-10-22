@@ -23,7 +23,7 @@ public class ElasticSearchService {
 	private ElasticService elastic;
 	
 	
-	public SearchResponse search(AbstractSearchData searchData){
+	public SearchResponse search(CommonSearchData searchData){
 		if (searchData instanceof QuickSearchData) {
 			return submitSearch(
 					QuickSearchRequestBuilder.buildSearchRequest(

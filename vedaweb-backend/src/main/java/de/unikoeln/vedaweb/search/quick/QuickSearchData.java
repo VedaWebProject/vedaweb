@@ -2,11 +2,11 @@ package de.unikoeln.vedaweb.search.quick;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import de.unikoeln.vedaweb.search.AbstractSearchData;
+import de.unikoeln.vedaweb.search.CommonSearchData;
 import io.swagger.annotations.ApiModelProperty;
 
 
-public class QuickSearchData extends AbstractSearchData {
+public class QuickSearchData extends CommonSearchData {
 	
 	@JsonProperty("regex")
 	@ApiModelProperty(notes = "Parse RegEx? (default: false)")

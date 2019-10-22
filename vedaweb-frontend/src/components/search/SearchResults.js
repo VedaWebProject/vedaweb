@@ -279,7 +279,7 @@ class SearchResults extends Component {
                                     text="Export as CSV"
                                     title="Export results as CSV file"
                                     reqMethod="post"
-                                    reqUrl={process.env.PUBLIC_URL + "/api/export/search"}
+                                    reqUrl={process.env.PUBLIC_URL + "/api/export/search/" + stateStore.results.query.mode}
                                     reqData={stateStore.results.query}
                                     fileName={"VedaWeb-search-results.csv"}
                                     style={{marginLeft:"1rem", float:"right"}} />

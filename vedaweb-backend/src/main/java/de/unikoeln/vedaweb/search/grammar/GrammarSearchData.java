@@ -5,11 +5,11 @@ import java.util.List;
 import java.util.Map;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import de.unikoeln.vedaweb.search.AbstractSearchData;
+import de.unikoeln.vedaweb.search.CommonSearchData;
 import io.swagger.annotations.ApiModelProperty;
 
 
-public class GrammarSearchData extends AbstractSearchData {
+public class GrammarSearchData extends CommonSearchData {
 	
 	@JsonProperty("blocks")
 	@ApiModelProperty(notes = "List of search blocks")

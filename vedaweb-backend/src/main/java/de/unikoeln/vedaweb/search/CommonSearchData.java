@@ -3,11 +3,13 @@ package de.unikoeln.vedaweb.search;
 import java.util.List;
 import java.util.Map;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import io.swagger.annotations.ApiModelProperty;
 
-public abstract class AbstractSearchData {
+@JsonIgnoreProperties(ignoreUnknown = true)
+public class CommonSearchData {
 	
 	@JsonProperty("accents")
 	@ApiModelProperty(notes = "Is this search accent-sensitive? (default: false)")
@@ -46,7 +48,7 @@ public abstract class AbstractSearchData {
 	private String indexName = "vedaweb";
 	
 	
-	public AbstractSearchData(){
+	public CommonSearchData(){
 		sortBy = "_score";
 		sortOrder = "descend";
 	}

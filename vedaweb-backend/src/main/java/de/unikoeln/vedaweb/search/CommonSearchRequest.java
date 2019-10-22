@@ -25,7 +25,7 @@ public class CommonSearchRequest {
 	}
 	
 	
-	public static final SearchSourceBuilder getSearchSourceBuilder(AbstractSearchData searchData) {
+	public static final SearchSourceBuilder getSearchSourceBuilder(CommonSearchData searchData) {
 		SearchSourceBuilder source = new SearchSourceBuilder()
 				.from(searchData.getFrom() >= 0 ? searchData.getFrom() : 0)
 				.size(searchData.getSize() >= 0 ? searchData.getSize() : 0);
@@ -55,7 +55,7 @@ public class CommonSearchRequest {
 	}
 	
 	
-	public static final BoolQueryBuilder getSearchScopesQuery(AbstractSearchData searchData) {
+	public static final BoolQueryBuilder getSearchScopesQuery(CommonSearchData searchData) {
 		BoolQueryBuilder scopesQuery = QueryBuilders.boolQuery();
 		for (SearchScope scope : searchData.getScopes()) {
 			BoolQueryBuilder scopeQuery = QueryBuilders.boolQuery();
@@ -84,7 +84,7 @@ public class CommonSearchRequest {
 	}
 	
 	
-	public static final BoolQueryBuilder getSearchMetaQuery(AbstractSearchData searchData) {
+	public static final BoolQueryBuilder getSearchMetaQuery(CommonSearchData searchData) {
 		BoolQueryBuilder metasQuery = QueryBuilders.boolQuery();
 		for (String meta : searchData.getMeta().keySet()) {
 			if (searchData.getMeta().get(meta).length == 0) continue;

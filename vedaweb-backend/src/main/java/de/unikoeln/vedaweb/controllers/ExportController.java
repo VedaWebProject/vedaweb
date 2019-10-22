@@ -2,6 +2,8 @@ package de.unikoeln.vedaweb.controllers;
 
 import java.util.Optional;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -10,6 +12,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.fasterxml.jackson.databind.JsonNode;
 
 import de.unikoeln.vedaweb.document.Stanza;
 import de.unikoeln.vedaweb.document.StanzaRepository;
@@ -20,15 +24,21 @@ import de.unikoeln.vedaweb.export.GlossingsHtmlExport;
 import de.unikoeln.vedaweb.export.GlossingsTxtExport;
 import de.unikoeln.vedaweb.export.SearchResultsCsvExport;
 import de.unikoeln.vedaweb.export.StanzaTxtExport;
-import de.unikoeln.vedaweb.search.AbstractSearchData;
+import de.unikoeln.vedaweb.search.CommonSearchData;
 import de.unikoeln.vedaweb.search.ElasticSearchService;
 import de.unikoeln.vedaweb.search.SearchHitsConverter;
+import de.unikoeln.vedaweb.search.grammar.GrammarSearchData;
+import de.unikoeln.vedaweb.search.metrical.MetricalSearchData;
+import de.unikoeln.vedaweb.search.quick.QuickSearchData;
+import de.unikoeln.vedaweb.util.JsonUtilService;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 
 @RestController
 @RequestMapping("api/export")
 public class ExportController {
+	
+	private final Logger log = LoggerFactory.getLogger(this.getClass());
 	
 	private static final String STANZA_TEI_TEMPLATE = "<?xml version='1.0' encoding='UTF-8'?>\n" + 
 			"<TEI xmlns=\"http://www.tei-c.org/ns/1.0\">\n" + 
@@ -61,20 +71,50 @@ public class ExportController {
 	@Autowired
 	private StanzaRepository stanzaRepo;
 	
+	@Autowired
+	private JsonUtilService json;
+	
 	
 	@ApiOperation(
 			value = "Export results of the given search as CSV")
 	@PostMapping(
-			value = "/search",
+			value = "/search/{mode}",
 			consumes = MediaType.APPLICATION_JSON_VALUE,
 			produces = "text/plain;charset=UTF-8")
-    public String exportSearchCSV(@RequestBody AbstractSearchData searchData) {
+    public String exportSearchCSV(
+    		@PathVariable("mode") String mode,
+    		@RequestBody JsonNode searchData) {
 		
-		searchData.setSize((int)stanzaRepo.count());	//get ALL results
-		searchData.setFrom(0);	//export from result 0
+		CommonSearchData data = null;
+		
+		try {
+			switch(mode) {
+			case "quick":
+				data = json.getMapper()
+					.treeToValue(searchData, QuickSearchData.class);
+				break;
+			case "grammar":
+				data = json.getMapper()
+					.treeToValue(searchData, GrammarSearchData.class);
+				break;
+			case "metrical":
+				data = json.getMapper()
+					.treeToValue(searchData, MetricalSearchData.class);
+				break;
+			default: break;
+			}
+		} catch (Exception e) {
+			log.error("Cannot handle export request of mode: " + mode + " (" +
+					e.getMessage() != null ? e.getMessage().replace("\n", " ") : "" + ")");
+		}
+		
+		if (data == null) return "";
+		
+		data.setSize((int)stanzaRepo.count());	//get ALL results
+		data.setFrom(0);	//export from result 0
 		return SearchResultsCsvExport.searchHitsAsCsv(
 				SearchHitsConverter.processSearchResponse(
-						search.search(searchData)));
+						search.search(data)));
     }
 	
 	

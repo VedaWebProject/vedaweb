@@ -2,11 +2,11 @@ package de.unikoeln.vedaweb.search.metrical;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import de.unikoeln.vedaweb.search.AbstractSearchData;
+import de.unikoeln.vedaweb.search.CommonSearchData;
 import io.swagger.annotations.ApiModelProperty;
 
 
-public class MetricalSearchData extends AbstractSearchData {
+public class MetricalSearchData extends CommonSearchData {
 	
 	@JsonProperty("input")
 	@ApiModelProperty(notes = "Search input field value")
