@@ -10,6 +10,7 @@ import logoTCSL from "../../img/logo_tcsl.png";
 import logoASW from "../../img/logo_ifl_asw.jpg";
 import logoHVS from "../../img/logo_ifl_hvs.jpg";
 
+import logoVGSP from "../../img/logo_vgsp.png";
 import logoDFG from "../../img/logo_dfg.png";
 import logoDCH from "../../img/logo_dch.jpg";
 import logoIDH from "../../img/logo_idh.png";
@@ -85,6 +86,17 @@ class Footer extends Component {
                         rel="noopener noreferrer">
                             <img src={logoDCH} alt="DCH"/><br/>
                             Data Center<br/>for the Humanities,<br/>Universität zu Köln
+                        </a>
+                    </Col>
+
+                    <Col span={3} className="footer-box">
+                        <a href="https://www.phil.uni-wuerzburg.de/vgsp/startseite/"
+                        title="Vergleichende Sprachwissenschaft, Universität Würzburg"
+                        className="bw"
+                        target="_blank"
+                        rel="noopener noreferrer">
+                            <img src={logoVGSP} alt="VGSP Uni Würzburg"/><br/>
+                            Vergleichende<br/>Sprachwissenschaft,<br/>Universität Würzburg
                         </a>
                     </Col>
 
