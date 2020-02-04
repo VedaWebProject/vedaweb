@@ -72,7 +72,8 @@ public class StringUtils {
 	public static String cleanLemma(String in) {
 		return in
 			.replaceAll("\\u221A", "") // √ square root symbol
-			.replaceAll("\\-$", "")
+			.replaceAll("-(\\s?\\d\\.?)?\\s*$", "") // suffixes like "- 2." and some variations
+			//.replaceAll("\\-$", "")
 			;
 	}
 	

@@ -106,12 +106,14 @@ class ContentView extends Component {
     }
 
     cleanLemmaString(lemma){
-        if (typeof lemma === 'string' || lemma instanceof String){
-            lemma = lemma.replace(/\s?\d/g,'');
-            if (lemma.startsWith('\u221A') && lemma.charAt(lemma.length - 1) === '-'){
-                lemma = lemma.substr(0, lemma.length - 1);
-            }
-        }
+        // if (typeof lemma === 'string' || lemma instanceof String){
+        //     lemma = lemma.replace(/\s?\d/g,'');
+        //     if (lemma.startsWith('\u221A') && lemma.charAt(lemma.length - 1) === '-'){
+        //         lemma = lemma.substr(0, lemma.length - 1);
+        //     }
+        // }
+        let sup = ['⁰','¹','²','³','⁴','⁵','⁶','⁷','⁸','⁹'];
+        lemma = lemma.replace(/\d$/, (m) => { return sup[m] });
         return lemma.trim();
     }
 
