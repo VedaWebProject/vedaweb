@@ -5,13 +5,14 @@ import axios from 'axios';
 import "./DictionaryView.css";
 import DictCorrection from "../widgets/DictCorrection";
 
-const alphabet = ["a", "ā", "i", "ī", "u", "ū", "r̥", "r̥̄", "l̥", "l̥̄", "ē", "e", "ai", "ō", "o", "au", "k", "kh", "g", "gh", "ṅ", "c", "ch", "j", "jh", "ñ", "ṭ", "ṭh", "ḍ", "ḍh", "ṇ", "t", "th", "d", "dh", "n", "p", "ph", "b", "bh", "m", "y", "r", "l", "v", "ś", "ṣ", "s", "h", "ḻ", "kṣ", "jñ"];
+import isoCompare from "../utils/isoCompare";
+
 const parser = new DOMParser();
 
 class DictionaryView extends Component {
 
     constructor(props) {
-        super(props)
+        super(props);
         this.state = {
             isLoaded: false,
             modalVisible: false,
@@ -19,12 +20,13 @@ class DictionaryView extends Component {
             dictData: [],
             error: undefined,
             correctionVisible: false
-        }
+        };
         this.setDictContentRef = this.setDictContentRef.bind(this);
     }
 
     componentDidMount(){
-        let lemmaData = this.sort(this.transform(this.props.data));
+        let lemmaData = this.transform(this.props.data)
+            .sort((a, b) => isoCompare(a.lemma, b.lemma));
         
         this.setState({
             dictData: lemmaData
@@ -153,49 +155,6 @@ class DictionaryView extends Component {
             }
         }
         return out;
-    }
-
-    sort(tokenObjs){
-        let temp = Array(alphabet.length + 1);
-        let unsorted = temp.length;
-    
-        for (let i = 0; i < tokenObjs.length; i++) {
-            const token = tokenObjs[i];
-            let found = false;
-            for (let j = 0; j < alphabet.length; j++) {
-                const prefix = alphabet[j];
-                if (this.cleanLemma(token.lemma).startsWith(prefix)){
-                    if (temp[j] !== undefined){
-                        temp[j].push(token);
-                    } else {
-                        temp[j] = [token];
-                    }
-                    found = true;
-                    break;
-                }
-            }
-            if (!found){
-                if (temp[unsorted] !== undefined){
-                    temp[unsorted].push(token);
-                } else {
-                    temp[unsorted] = [token];
-                }
-            }
-        }
-        
-        let out = [];
-        for (let i = 0; i < temp.length; i++) {
-            if (temp[i] !== undefined){
-                for (let j = 0; j < temp[i].length; j++) {
-                    out.push(temp[i][j]);
-                }
-            }
-        }
-        return out;
-    }
-
-    cleanLemma(string){
-        return string.normalize('NFD').replace(/[\u0300\u0301\u221a]/g, '').normalize('NFC');
     }
 
     openDict(modalData){
