@@ -12,7 +12,9 @@ const maxLetterLen = Math.max(...(alphabet.map(e => e.length)));
 function cleanIsoString(s){
   return s
     .normalize("NFD")
+    .replace(/s\u0301/g, "s###")
     .replace(/[\u0300\u0301\u221A\s\-.]/g, "")
+    .replace(/s###/g, "s\u0301")
     .normalize("NFC")
     .split("")
     .filter(letter => alphabet.indexOf(letter) >= 0)
@@ -35,6 +37,8 @@ function isoCompare(a, b){
     //remove excess characters
     a = cleanIsoString(a);
     b = cleanIsoString(b);
+
+    console.log(a + "    " + b);
 
     //declare vars for current letters
     let letterA;
