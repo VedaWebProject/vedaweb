@@ -113,7 +113,7 @@ class ContentView extends Component {
         //     }
         // }
         let sup = ['⁰','¹','²','³','⁴','⁵','⁶','⁷','⁸','⁹'];
-        lemma = lemma.replace(/\d$/, (m) => { return sup[m] });
+        lemma = lemma.replace(/\s?\d$/, (m) => { return sup[m.replace(/\s/, "")] });
         return lemma.trim();
     }
 

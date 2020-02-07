@@ -40,8 +40,8 @@ const helpTexts = {
                     <h4>Usage</h4>
                     Define a word form or lemma (optional) and select a property (like <Text code>case</Text>, <Text code>number</Text>, <Text code>person</Text>, etc.)
                     and the value you are looking for (optional). You may add more properties to your search term by clicking the <Text code>+</Text> button to the right.<br/>
-                    Lemmas must be searched without meta characters, so to find  <Text code>√dā- ¹</Text> or  <Text code>√dā- ²</Text> you just have to search for <Text code>dā</Text>.
-                    {/** Lemmas are spelt with a final hyphen, e.g. <Text code>agni-</Text>, <Text code>duh-</Text>, etc. */}
+                    Lemmas must be searched without meta characters, so you just have to search for <Text code>īḍ īḷ</Text> to find <Text code>√īḍ- ~ √īḷ-</Text> or for <Text code>dā 1</Text> to find <Text code>√dā-¹</Text>.
+                    Please note that if you want to find e.g. both <Text code>√dā-¹</Text> and <Text code>√dā-²</Text> (so the number doesn't matter), suffix the lemma with a wildcard symbol: <Text code>dā*</Text>!
                 </p>
                 <p>
                     It's also possible to use <strong>wildcards</strong> (just like in the <i>Quick search</i> at the top of the page),
