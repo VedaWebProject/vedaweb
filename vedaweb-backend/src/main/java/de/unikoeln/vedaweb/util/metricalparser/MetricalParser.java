@@ -1,4 +1,4 @@
-package de.unikoeln.vedaweb.util;
+package de.unikoeln.vedaweb.util.metricalparser;
 
 import java.text.Normalizer;
 import java.text.Normalizer.Form;
@@ -24,24 +24,18 @@ public class MetricalParser {
 	private static final String SPC_MARK = "_";
 	private static final String SPC_MARK_OPT = SPC_MARK + "?";
 	
-	//matching and marking consonants
-	private static final String C = "(?!(a|i|u|r̥|l̥|\\s|" + S_SHORT + "|" + S_LONG + ")).";
-	private static final String C_DOUBLE = "(ph|th|kh|bh|dh|gh|jh)";
-	private static final String C_MARK = "#";
-	
 	//matching vowels
 	private static final String VL = "(ā|ī|ū|o|e|ai|au)";
 	private static final String VK = "[aiur̥l̥]";
-	
-	
-//	/*
-//	 * just for dev testing
-//	 */
-//	public static void main(String[] args) {
-//		String test = "yahvā́ iva prá vayā́m ujjíhānāḥ";
-//		System.out.println(parse(test));
-//	}
-	
+
+	//meta chars
+	private static final String METAS = "[ ̥]";
+
+	//matching and marking consonants
+	private static final String C = "(?!(a|i|u|r̥|l̥|\\s|" + METAS + "|" + S_SHORT + "|" + S_LONG + ")).";
+	private static final String C_DOUBLE = "(ph|th|kh|bh|dh|gh|jh)";
+	private static final String C_MARK = "#";
+
 
 	/**
 	 * Parses an ISO-15919-transliterated Sanskrit string
@@ -85,7 +79,8 @@ public class MetricalParser {
 			.replaceAll("[^" + S_LONG + S_SHORT + SPC_MARK + "]", "") 
 			
 			// replace whitespace marks by actual whitespaces
-			.replaceAll(SPC_MARK + "+", " "); 
+			.replaceAll(SPC_MARK + "+", " ")
+			; 
 	}
 	
 	/**
@@ -141,7 +136,7 @@ public class MetricalParser {
 	private static String cleanString(String in) {
 		return Normalizer.normalize(
 			Normalizer.normalize(in, Form.NFD)
-				.replaceAll("[\u0301\u0300\u0027\\-\\+\\=\\_/\\\\]", ""),
+				.replaceAll("[\u0301\u0300\u0027\\-+=_/\\\\]", ""),
 			Form.NFC
 		);
 	}

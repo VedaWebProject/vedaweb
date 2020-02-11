@@ -12,7 +12,7 @@ import de.unikoeln.vedaweb.document.StanzaVersion;
 import de.unikoeln.vedaweb.document.StanzaXml;
 import de.unikoeln.vedaweb.document.StanzaXmlRepository;
 import de.unikoeln.vedaweb.document.Token;
-import de.unikoeln.vedaweb.util.MetricalParser;
+import de.unikoeln.vedaweb.util.metricalparser.MetricalParser;
 import net.sf.saxon.s9api.Processor;
 import net.sf.saxon.s9api.QName;
 import net.sf.saxon.s9api.SaxonApiException;
