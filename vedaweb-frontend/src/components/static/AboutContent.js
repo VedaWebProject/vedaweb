@@ -59,6 +59,12 @@ class AboutContent extends Component {
                     <li>Additional grammar properties (CVB, DES, PREC) integrated into Grammar Search (2019/06/06)</li>
                     <li>Separate search fields for form and lemma in Grammar Search (2019/06/06)</li>
                     <li>Increased number of possible grammar properties in Grammar Search (2019/06/06)</li>
+                    <li>Re-designed navigational controls layout (2019/08/28)</li>
+                    <li>Made metrical data searchable in Advanced Search (2019/10/02)</li>
+                    <li>Improved Quick Search: RegEx now match a whole stanza (2019/10/11)</li>
+                    <li>Improved Condensed reading view (2019/10/11)</li>
+                    <li>Fixed ISO-15919 lemma sorting in dictionary view (2020/02/07)</li>
+                    <li>Fixed bugs in ISO-15919 metrical data parsing algorithm (2020/02/11)</li>
                     <li>...</li>
                 </ul>
                 
