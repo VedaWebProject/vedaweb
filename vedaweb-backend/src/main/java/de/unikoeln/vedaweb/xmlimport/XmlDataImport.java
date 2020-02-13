@@ -93,8 +93,8 @@ public class XmlDataImport {
 					);
 					version.setMetricalData(MetricalParser.parseMultiline(
 						String.join("\n", versionForm),
-						MetricalParser.S_LONG_LETTER,
-						MetricalParser.S_SHORT_LETTER));
+						MetricalParser.LONG_LETTER,
+						MetricalParser.SHORT_LETTER));
 					stanzaObj.addVersion(version);
 				}
 				
@@ -123,8 +123,8 @@ public class XmlDataImport {
 					);
 					version.setMetricalData(MetricalParser.parseMultiline(
 							String.join("\n", versionForm),
-							MetricalParser.S_LONG_LETTER,
-							MetricalParser.S_SHORT_LETTER));
+							MetricalParser.LONG_LETTER,
+							MetricalParser.SHORT_LETTER));
 					stanzaObj.addVersion(version);
 				}
 				
@@ -143,8 +143,8 @@ public class XmlDataImport {
 					);
 					version.setMetricalData(MetricalParser.parseMultiline(
 							String.join("\n", versionForm),
-							MetricalParser.S_LONG_LETTER,
-							MetricalParser.S_SHORT_LETTER));
+							MetricalParser.LONG_LETTER,
+							MetricalParser.SHORT_LETTER));
 					stanzaObj.addVersion(version);
 				}
 				
@@ -163,8 +163,8 @@ public class XmlDataImport {
 					);
 					version.setMetricalData(MetricalParser.parseMultiline(
 							String.join("\n", versionForm),
-							MetricalParser.S_LONG_LETTER,
-							MetricalParser.S_SHORT_LETTER));
+							MetricalParser.LONG_LETTER,
+							MetricalParser.SHORT_LETTER));
 					stanzaObj.addVersion(version);
 				}
 				
@@ -183,8 +183,8 @@ public class XmlDataImport {
 					);
 					version.setMetricalData(MetricalParser.parseMultiline(
 							String.join("\n", versionForm),
-							MetricalParser.S_LONG_LETTER,
-							MetricalParser.S_SHORT_LETTER));
+							MetricalParser.LONG_LETTER,
+							MetricalParser.SHORT_LETTER));
 					stanzaObj.addVersion(version);
 				}
 				
@@ -202,8 +202,8 @@ public class XmlDataImport {
 					);
 					version.setMetricalData(MetricalParser.parseMultiline(
 							String.join("\n", versionForm),
-							MetricalParser.S_LONG_LETTER,
-							MetricalParser.S_SHORT_LETTER));
+							MetricalParser.LONG_LETTER,
+							MetricalParser.SHORT_LETTER));
 					stanzaObj.addVersion(version);
 				}
 				

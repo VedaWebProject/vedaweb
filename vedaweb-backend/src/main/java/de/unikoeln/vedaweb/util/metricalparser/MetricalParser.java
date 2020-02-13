@@ -12,27 +12,27 @@ import java.text.Normalizer.Form;
 public class MetricalParser {
 	
 	//default long/short marks
-	public static final String S_LONG = "—";
-	public static final String S_SHORT = "◡";
+	public static final String LONG = "—";
+	public static final String SHORT = "◡";
 	
 	//letter-based long/short marks
-	public static final String S_LONG_LETTER = "L";
-	public static final String S_SHORT_LETTER = "S";
+	public static final String LONG_LETTER = "L";
+	public static final String SHORT_LETTER = "S";
 	
 	//whitespace supplements
 	private static final String SPC = "\\s+";
 	private static final String SPC_MARK = "_";
-	private static final String SPC_MARK_OPT = SPC_MARK + "?";
+	private static final String SPC_OPT_MARK = SPC_MARK + "?";
 	
 	//matching vowels
 	private static final String VL = "(ā|ī|ū|o|e|ai|au)";
-	private static final String VK = "(a|i|u|r̥|l̥)";
+	private static final String VS = "(a|i|u|r̥|l̥)";
 
 	//meta chars
 	private static final String METAS = "[ ̥]";
 
 	//matching and marking consonants
-	private static final String C = "(?!(a|i|u|r̥|l̥|\\s|" + METAS + "|" + S_SHORT + "|" + S_LONG + ")).";
+	private static final String C_SINGLE = "(?!(a|i|u|r̥|l̥|\\s|" + METAS + "|" + SHORT + "|" + LONG + ")).";
 	private static final String C_DOUBLE = "(ph|th|kh|bh|dh|gh|jh)";
 	private static final String C_MARK = "#";
 
@@ -49,37 +49,37 @@ public class MetricalParser {
 			cleanString(iso)
 			
 			// mark long vowels as LONG
-			.replaceAll(VL, S_LONG)
+			.replaceAll(VL, LONG)
 			
 			// mark consonants with double char notation
 			.replaceAll(C_DOUBLE, C_MARK) 
 			
 			// mark remaining consonants
-			.replaceAll(C, C_MARK) 
+			.replaceAll(C_SINGLE, C_MARK) 
 			
 			// mark whitespaces
 			.replaceAll(SPC, SPC_MARK) 
 			
 			// mark short vowels followed by any another vowel as SHORT
-			.replaceAll(VK + "(?=" + VK + "|" + VL + ")", S_SHORT) 
+			.replaceAll(VS + "(?=" + VS + "|" + VL + ")", SHORT) 
 			
 			// mark short vowels at line end as SHORT
-			.replaceAll(VK + "$", S_SHORT) 
+			.replaceAll(VS + "$", SHORT) 
 			
 			// mark short vowels at word end followed by vowel as SHORT
-			.replaceAll(VK + "(?=" + SPC_MARK + "[^" + C_MARK + "]" + ")", S_SHORT)
+			.replaceAll(VS + "(?=" + SPC_MARK + "[^" + C_MARK + "]" + ")", SHORT)
 			
 			// mark short vowels in last syllable of line as LONG
-			.replaceAll(VK + C_MARK + "+$", S_LONG) 
+			.replaceAll(VS + C_MARK + "+$", LONG) 
 			
 			// mark short vowels followed by two consonants as LONG
-			.replaceAll(VK + "(?=" + SPC_MARK_OPT + C_MARK + SPC_MARK_OPT + C_MARK + ")", S_LONG) 
+			.replaceAll(VS + "(?=" + SPC_OPT_MARK + C_MARK + SPC_OPT_MARK + C_MARK + ")", LONG) 
 			
 			// mark short vowels followed by one consonant as SHORT
-			.replaceAll(VK + "(?=" + SPC_MARK_OPT + C_MARK + ")(?!=" + SPC_MARK_OPT + C_MARK + ")", S_SHORT) 
+			.replaceAll(VS + "(?=" + SPC_OPT_MARK + C_MARK + ")(?!=" + SPC_OPT_MARK + C_MARK + ")", SHORT) 
 			
 			// remove all but metrical and and whitespace marks
-			.replaceAll("[^" + S_LONG + S_SHORT + SPC_MARK + "]", "") 
+			.replaceAll("[^" + LONG + SHORT + SPC_MARK + "]", "") 
 			
 			// replace whitespace marks by actual whitespaces
 			.replaceAll(SPC_MARK + "+", " ")
@@ -96,8 +96,8 @@ public class MetricalParser {
 	 */
 	public static String parse(String iso, String longMark, String shortMark) {
 		return parse(iso)
-			.replaceAll(S_LONG, longMark)
-			.replaceAll(S_SHORT, shortMark);
+			.replaceAll(LONG, longMark)
+			.replaceAll(SHORT, shortMark);
 	}
 	
 	/**
