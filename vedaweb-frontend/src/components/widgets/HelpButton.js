@@ -225,11 +225,11 @@ const helpTexts = {
                 <p>
                     <strong><Icon type="exclamation-circle"/> ATTENTION:</strong>
                     <ul>
-                        <li>RegEx are matched against <strong>a whole line of text</strong> of the selected text version(s).</li>    
+                        <li>RegEx are matched against <strong>a whole stanza</strong> of the selected text version(s).</li>    
                         <li>
                             RegEx are always anchored by default. There is no reason to
                             use <Text code>^</Text> or <Text code>$</Text> to match the 
-                            beginning or end of a term, because your RegEx <i>always must match the whole line</i>!
+                            beginning or end of the matching string, because your RegEx <i>always must match the whole stanza</i>!
                         </li>
                     </ul>
                 </p>
@@ -241,12 +241,12 @@ const helpTexts = {
                     śamāyé agne tanvàṁ juṣasva
                 </p>
                 <p>
-                    Here, a RegEx-enabled search for <Text code>.*mā.*agne</Text> would match the first line,
-                    because <Text code>agne</Text> is at the end of this line.
+                    Here, a RegEx-enabled search for <Text code>.*mā.*asva</Text> would match this stanza,
+                    because <Text code>asva</Text> is at the end of this line.
                     The <Text code>.*</Text> before <Text code>mā</Text> is necessary, because <Text code>mā</Text>
-                    is not the beginning of this line.<br/>
-                    Also, <Text code>sómasya.*juṣasva</Text> would <strong>not</strong> match this text,
-                    because the RegEx-search applies to single lines, not all lines together.
+                    is not the beginning of this stanza.<br/>
+                    Also, <Text code>sómasya.*juṣasva</Text> would match this stanza,
+                    because, again, the RegEx-search applies to all lines of a stanza by default.
                 </p>
                 <p>
                     <strong>
