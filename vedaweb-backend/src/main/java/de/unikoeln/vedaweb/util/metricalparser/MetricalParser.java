@@ -26,7 +26,7 @@ public class MetricalParser {
 	
 	//matching vowels
 	private static final String VL = "(ā|ī|ū|o|e|ai|au)";
-	private static final String VK = "[aiur̥l̥]";
+	private static final String VK = "(a|i|u|r̥|l̥)";
 
 	//meta chars
 	private static final String METAS = "[ ̥]";
@@ -59,6 +59,9 @@ public class MetricalParser {
 			
 			// mark whitespaces
 			.replaceAll(SPC, SPC_MARK) 
+			
+			// mark short vowels followed by any another vowel as SHORT
+			.replaceAll(VK + "(?=" + VK + "|" + VL + ")", S_SHORT) 
 			
 			// mark short vowels at line end as SHORT
 			.replaceAll(VK + "$", S_SHORT) 
