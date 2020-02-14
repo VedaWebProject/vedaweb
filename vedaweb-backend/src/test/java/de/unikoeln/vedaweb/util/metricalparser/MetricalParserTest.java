@@ -34,5 +34,15 @@ public class MetricalParserTest {
 //				"] (should be [" + expected + "])");
 		assertEquals(expected, actual);
 	}
+	
+	@Test
+	public void testParsing4() {
+		String input = "ví ā́śāḥ párvatānaam";
+		String expected = "◡ —— —◡—◡—";
+		String actual = MetricalParser.parse(input, "—", "◡");
+//		System.out.println("[" + input + "] -> [" + actual + 
+//				"] (should be [" + expected + "])");
+		assertEquals(expected, actual);
+	}
 
 }
