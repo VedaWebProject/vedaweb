@@ -258,13 +258,14 @@ const stateStore = store({
                 hymnAddressee: [],
                 hymnGroup: [],
                 strata: [],
-                stanzyType: []
+                stanzaType: []
             },
 
             hasMetas(){
                 return stateStore.search.meta.meta.hymnAddressee.length > 0
                 || stateStore.search.meta.meta.hymnGroup.length > 0
                 || stateStore.search.meta.meta.strata.length > 0
+                || stateStore.search.meta.meta.stanzaType.length > 0
             },
 
             hasScopes(){

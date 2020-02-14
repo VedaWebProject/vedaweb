@@ -73,9 +73,12 @@ class SearchView extends Component {
             <div>
                 Meta Filters: 
                 {stateStore.search.meta.hasMetas() ?
-                    <span className="red"> Adressee ({stateStore.search.meta.meta.hymnAddressee.length}),
+                    <span className="red">
+                        {" "}
+                        Adressee ({stateStore.search.meta.meta.hymnAddressee.length}),
                         Group ({stateStore.search.meta.meta.hymnGroup.length}),
-                        Strata ({stateStore.search.meta.meta.strata.length})
+                        Strata ({stateStore.search.meta.meta.strata.length}),
+                        Type ({stateStore.search.meta.meta.stanzaType.length})
                     </span>
                     : <span className="red"> none</span>
                 }
