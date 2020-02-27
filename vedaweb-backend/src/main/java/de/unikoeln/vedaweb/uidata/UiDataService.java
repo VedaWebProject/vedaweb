@@ -1,6 +1,9 @@
 package de.unikoeln.vedaweb.uidata;
 
+import java.io.File;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
 
 import javax.annotation.PostConstruct;
 
@@ -11,11 +14,12 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Service;
 
+import com.fasterxml.jackson.databind.node.JsonNodeFactory;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 
 import de.unikoeln.vedaweb.document.StanzaRepository;
 import de.unikoeln.vedaweb.search.ElasticIndexService;
-import de.unikoeln.vedaweb.util.HtmlSnippetsLoader;
+import de.unikoeln.vedaweb.util.FsResourcesService;
 import de.unikoeln.vedaweb.util.IOUtils;
 import de.unikoeln.vedaweb.util.JsonUtilService;
 import de.unikoeln.vedaweb.xmlimport.DataImportService;
@@ -34,12 +38,15 @@ public class UiDataService {
 	@Autowired
 	private DataImportService importService;
 	
+	@Autowired
+	private FsResourcesService fsResources;
+	
 	@Autowired JsonUtilService json;
 	
 	@Value("classpath:ui-data.json")
 	private Resource uiDataTemplate;
 	
-	@Value("${vw.headless}")
+	@Value("${vedaweb.headless}")
 	private Boolean noUiData;
 	
 	private ObjectNode uiData;
@@ -72,9 +79,11 @@ public class UiDataService {
 		return response;
 	}
 
+	
 	public ObjectNode getUiDataJSON() {
 		return uiData;
 	}
+	
 	
 	private String buildUiData() {
 		uiData = json.newObjectNode();
@@ -118,13 +127,28 @@ public class UiDataService {
 		//load arbitrary HTML snippets
 		try {
 			((ObjectNode)uiData)
-				.set("snippets", HtmlSnippetsLoader.loadHtmlSnippets());
+				.set("snippets", loadHtmlSnippets());
 		} catch (IOException e) {
 			log.error("Cannot load HTML snippets: " + e.getMessage().replaceAll("\n", ""));
 		}
 		
 		log.info("Successfully initialized frontend UI data object");
 		return "[UiDataService] Successfully initialized frontend UI data object";
+	}
+	
+	
+	private ObjectNode loadHtmlSnippets() throws IOException {
+		ObjectNode snippets = JsonNodeFactory.instance.objectNode();
+		
+		for (File f : fsResources.getResourcesFiles("snippets")) {
+			StringBuilder sb = new StringBuilder();
+			for (String line : Files.readAllLines(f.toPath(), StandardCharsets.UTF_8)) {
+				sb.append(line + "\n");
+			}
+			snippets.put(f.getName().replaceFirst("\\.[^\\.]+$", ""), sb.toString());
+		}
+		
+		return snippets;
 	}
 	
 

@@ -28,7 +28,7 @@ import springfox.documentation.annotations.ApiIgnore;
 @ApiIgnore
 public class SystemController {
 	
-	@Value("${vw.system.auth}")
+	@Value("${vedaweb.system.auth}")
 	private String auth;
 	
 	@Autowired
