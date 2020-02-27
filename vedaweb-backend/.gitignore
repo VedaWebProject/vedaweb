@@ -16,7 +16,8 @@ src/main/resources/templates/
 ### IMPORT DATA ###
 tei/
 
-### HTML SNIPPETS TO KEEP OUT OF REPO ###
-snippets/
+### RESOURCES TO KEEP OUT OF REPO ###
+res/data/
+res/snippets/
 
 /.apt_generated_tests/
