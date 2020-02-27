@@ -1,4 +1,4 @@
-package de.unikoeln.vedaweb.xmlimport;
+package de.unikoeln.vedaweb.dataimport;
 
 import java.util.HashMap;
 import java.util.Map;

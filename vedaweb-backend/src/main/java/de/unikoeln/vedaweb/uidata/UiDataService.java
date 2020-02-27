@@ -17,12 +17,12 @@ import org.springframework.stereotype.Service;
 import com.fasterxml.jackson.databind.node.JsonNodeFactory;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 
+import de.unikoeln.vedaweb.dataimport.DataImportService;
 import de.unikoeln.vedaweb.document.StanzaRepository;
 import de.unikoeln.vedaweb.search.ElasticIndexService;
 import de.unikoeln.vedaweb.util.FsResourcesService;
 import de.unikoeln.vedaweb.util.IOUtils;
 import de.unikoeln.vedaweb.util.JsonUtilService;
-import de.unikoeln.vedaweb.xmlimport.DataImportService;
 
 @Service
 public class UiDataService {

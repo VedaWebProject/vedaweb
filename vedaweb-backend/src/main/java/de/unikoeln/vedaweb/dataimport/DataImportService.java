@@ -1,4 +1,4 @@
-package de.unikoeln.vedaweb.xmlimport;
+package de.unikoeln.vedaweb.dataimport;
 import java.io.File;
 import java.io.FilenameFilter;
 import java.io.IOException;
@@ -33,12 +33,12 @@ public class DataImportService {
 	
 
 	/*
-	 * main method for testing import routine in dry run mode
+	 * DEV: main method for testing import routine in dry run mode
 	 */
-	public static void main(String[] args) throws SaxonApiException, IOException {
-		DataImportService trans = new DataImportService();
-		trans.importXMLData(LOCAL_XML_DIR, true);
-	}
+//	public static void main(String[] args) throws SaxonApiException, IOException {
+//		DataImportService trans = new DataImportService();
+//		trans.importXMLData(LOCAL_XML_DIR, true);
+//	}
 	
 	
 	public int importXMLData(String xmlDirPath, boolean dryRun){
