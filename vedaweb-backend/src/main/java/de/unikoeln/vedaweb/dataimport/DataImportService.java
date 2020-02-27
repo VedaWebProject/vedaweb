@@ -1,7 +1,5 @@
 package de.unikoeln.vedaweb.dataimport;
 import java.io.File;
-import java.io.FilenameFilter;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -15,6 +13,7 @@ import org.springframework.stereotype.Service;
 import de.unikoeln.vedaweb.document.Stanza;
 import de.unikoeln.vedaweb.document.StanzaRepository;
 import de.unikoeln.vedaweb.document.StanzaXmlRepository;
+import de.unikoeln.vedaweb.util.FsResourcesService;
 import de.unikoeln.vedaweb.util.Timer;
 import net.sf.saxon.s9api.SaxonApiException;
 
@@ -22,7 +21,7 @@ import net.sf.saxon.s9api.SaxonApiException;
 public class DataImportService {
 	
 	private final Logger log = LoggerFactory.getLogger(this.getClass());
-	public static final String LOCAL_XML_DIR = "tei";
+	public static final String TEI_RESOURCES_DIR = "tei";
 	
 	
 	@Autowired
@@ -30,6 +29,9 @@ public class DataImportService {
 	
 	@Autowired
 	private StanzaXmlRepository stanzaXmlRepo;
+	
+	@Autowired
+	private FsResourcesService fsResources;
 	
 
 	/*
@@ -41,29 +43,30 @@ public class DataImportService {
 //	}
 	
 	
-	public int importXMLData(String xmlDirPath, boolean dryRun){
+	public int importXMLData(boolean dryRun){
 		List<Stanza> stanzas = new ArrayList<Stanza>();
 		
 		//check import directory path
-		log.info((dryRun ? "(DRY RUN) " : "") + "Looking for XML files to import");
-		File dir = new File(xmlDirPath);
-		if (!dir.exists()) {
-			log.error((dryRun ? "(DRY RUN) " : "") + "\"" + xmlDirPath + "\" could not be found.");
-			return -1;
-		} else if (!dir.isDirectory()) {
-			log.error((dryRun ? "(DRY RUN) " : "") + "\"" + xmlDirPath + "\" is not a directory.");
-			return -1;
-		}
+		log.info(
+			(dryRun ? "(DRY RUN) " : "")
+			+ "Looking for XML files to import"
+		);
 		
-		//collect input files
-		File[] files = dir.listFiles(getFileFilter());
+		//collect input files (.xml and .tei)
+		File[] files = fsResources.getResourcesFiles(TEI_RESOURCES_DIR);
+		files = fsResources.filterForFileNameSuffixes(files, ".xml", ".tei");
 		Arrays.sort(files);
 		
 		//init timer
 		Timer timer = new Timer();
 		
 		//import raw stanza xml data for export
-		log.info((dryRun ? "(DRY RUN) " : "") + "Starting raw XML data import from XML files");
+		
+		log.info(
+			(dryRun ? "(DRY RUN) " : "")
+			+ "Starting raw XML data import from XML files"
+		);
+		
 		if (!dryRun) stanzaXmlRepo.deleteAll();
 		for (File xmlFile : files) {
 			timer.start();
@@ -74,12 +77,21 @@ public class DataImportService {
 				e.printStackTrace();
 				return -1;
 			}
-			log.info((dryRun ? "(DRY RUN) " : "") + "Finished reading raw data from \"" 
-					+ xmlFile.getName() + "\" in " + timer.stop("s", true) + " seconds");
+			log.info(
+				(dryRun ? "(DRY RUN) " : "")
+				+ "Finished reading " 
+				+ xmlFile.getAbsolutePath() 
+				+ " in " + timer.stop("s", true) + " seconds"
+			);
 		}
 		
 		//start importing stanza object data
-		log.info((dryRun ? "(DRY RUN) " : "") + "Starting data import from XML");
+		
+		log.info(
+			(dryRun ? "(DRY RUN) " : "")
+			+ "Starting data import from XML"
+		);
+		
 		for (File xmlFile : files) {
 			timer.start();
 			try {
@@ -89,12 +101,21 @@ public class DataImportService {
 				e.printStackTrace();
 				return -1;
 			}
-			log.info((dryRun ? "(DRY RUN) " : "") + "Finished processing \"" 
-					+ xmlFile.getName() + "\" in " + timer.stop("s", true) + " seconds");
+			log.info(
+				(dryRun ? "(DRY RUN) " : "")
+				+ "Finished processing " 
+				+ xmlFile.getName() 
+				+ " in " + timer.stop("s", true) + " seconds"
+			);
 		}
 		
 		//sort and apply indices
-		log.info((dryRun ? "(DRY RUN) " : "") + "Sorting documents, applying global indices");
+		
+		log.info(
+			(dryRun ? "(DRY RUN) " : "")
+			+ "Sorting documents, applying global indices"
+		);
+		
 		Collections.sort(stanzas);
 		for (int i = 0; i < stanzas.size(); i++) {
 			stanzas.get(i).setIndex(i);
@@ -123,14 +144,5 @@ public class DataImportService {
 		return stanzas.size();
 	}
 	
-	
-	private FilenameFilter getFileFilter() {
-		return new FilenameFilter() {
-		    public boolean accept(File dir, String name) {
-		        return name.toLowerCase().endsWith(".xml")
-		        		|| name.toLowerCase().endsWith(".tei");
-		    }
-		};
-	}
 	
 }

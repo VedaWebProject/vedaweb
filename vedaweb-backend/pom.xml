@@ -155,7 +155,7 @@
 							<goal>copy-resources</goal>
 						</goals>
 						<configuration>
-							<outputDirectory>${basedir}/tei</outputDirectory>
+							<outputDirectory>${basedir}/res/tei</outputDirectory>
 							<resources>
 								<resource>
 									<directory>../vedaweb-data</directory>

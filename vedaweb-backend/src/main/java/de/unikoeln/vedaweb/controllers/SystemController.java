@@ -89,7 +89,7 @@ public class SystemController {
 			return "{error:'authentication failed'}";
 		
 		boolean dry = dryRun != null;
-		int docCount = dataImportService.importXMLData(DataImportService.LOCAL_XML_DIR, dry);
+		int docCount = dataImportService.importXMLData(dry);
 		ObjectNode response = json.newObjectNode();
 		response.put("dryRun", dry);
 		response.put("importedDocsCount", docCount);

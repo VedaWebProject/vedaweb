@@ -2,6 +2,8 @@ package de.unikoeln.vedaweb.util;
 
 import java.io.File;
 import java.io.FileFilter;
+import java.util.ArrayList;
+import java.util.Arrays;
 
 import javax.annotation.PostConstruct;
 
@@ -80,6 +82,15 @@ public class FsResourcesService {
 	}
 	
 	
+	public File[] filterForFileNameSuffixes(File[] files, String... fileNameSuffixes) {
+		FileFilter filter = new FileNameSuffixFilter(fileNameSuffixes);
+		return new ArrayList<File>(Arrays.asList(files))
+			.stream()
+			.filter(f -> filter.accept(f))
+			.toArray(File[]::new);
+	}
+	
+	
 	/*
 	 * FileFilter that checks if a File object
 	 * represents an existing, readable file
@@ -102,5 +113,30 @@ public class FsResourcesService {
 			return f.exists() && f.isDirectory() && f.canRead();
 		}
 	}
+	
+	
+	/*
+	 * FilenameFilter that checks if a File object
+	 * represents a path ending with one of the specified suffixes
+	 */
+	private class FileNameSuffixFilter implements FileFilter {
+		
+		private String[] suffixes;
+		
+		public FileNameSuffixFilter (String... suffixes) {
+			this.suffixes = suffixes;
+		}
+		
+		@Override
+	    public boolean accept(File f) {
+	    	for (String suffix : suffixes) {
+	    		if (f.getName().toLowerCase().endsWith(suffix.toLowerCase())) {
+	    			return true;
+	    		}
+	    	}
+	        return false;
+	    }
+	}
+
 
 }

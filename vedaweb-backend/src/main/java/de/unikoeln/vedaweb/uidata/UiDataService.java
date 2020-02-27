@@ -65,7 +65,7 @@ public class UiDataService {
 		//force data import if db empty
 		if (stanzaRepo.count() == 0) {
 			log.warn("DB collection seems to be empty. Trying to import data from XML");
-			response.put("importedXmlData", importService.importXMLData(DataImportService.LOCAL_XML_DIR, false));
+			response.put("importedXmlData", importService.importXMLData(false));
 		}
 		//force index creation if index doesn't exist
 		if (!indexService.indexExists()) {
