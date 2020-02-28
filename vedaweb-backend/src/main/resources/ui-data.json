@@ -73,6 +73,7 @@
 	
 	"layers": [
 		{ "id": "stanzaProperties_", "label": "Stanza Properties", "show": true },
+		
 		{ "id": "version_", "label": "All Text Versions", "show": true },
 		{ "id": "version_lubotskyzurich", "label": "Lubotsky (Zurich)", "show": true },
 		{ "id": "version_devanagari", "label": "Devanagari (Eichler)", "show": true },
