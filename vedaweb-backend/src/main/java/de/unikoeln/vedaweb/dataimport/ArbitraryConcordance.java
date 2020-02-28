@@ -69,9 +69,18 @@ public class ArbitraryConcordance {
 		mappings.put(
 			key,
 			preProcess
-				? referenceTemplate.replaceAll(PLACEHOLDER_QUOTED, reference)
+				? applyTemplate(reference)
 				: reference
 		);
+	}
+	
+	/*
+	 * Apply reference template (if any)
+	 */
+	private String applyTemplate(String reference) {
+		return referenceTemplate != null 
+				? referenceTemplate.replaceAll(PLACEHOLDER_QUOTED, reference) 
+				: reference;
 	}
 	
 	/**
@@ -109,7 +118,7 @@ public class ArbitraryConcordance {
 		}
 		return preProcess || referenceTemplate == null
 			? mappings.get(key)
-			: referenceTemplate.replaceAll(PLACEHOLDER_QUOTED, mappings.get(key));
+			: applyTemplate(mappings.get(key));
 	}
 	
 	/**
@@ -155,6 +164,43 @@ public class ArbitraryConcordance {
 	 */
 	public void clearMappings() {
 		mappings.clear();
+	}
+	
+	/**
+	 * A naive but robust routine that imports/adds mapping data from 
+	 * a CSV structure. Only the first two columns of the CSV structure 
+	 * will be used. Any invalid parts of the data (single lines missing 
+	 * cells etc.) will be ignored selectively to process and 
+	 * import as much valid data as possible. In general this routine tries
+	 * to remain silent if anything is wrong with the given data and just
+	 * processes the valid parts, so make sure to feed 
+	 * it with healthy arguments.
+	 * @param csvData The CSV data in plain text form
+	 * @param hasHeader If present, first line of CSV data will be ignored
+	 * @param delimiter Delimiter char of CSV structure
+	 * @param quote Quote char of CSV structure
+	 */
+	public void addFromCsv (
+			final String csvData, 
+			final boolean hasHeader,
+			final String delimiter, 
+			final String quote) {
+		
+		//check for presence of csv data
+		if (csvData == null) return;
+		
+		String[] lines = csvData.split("\n"); //split into lines
+		if (lines.length < (hasHeader ? 2 : 1)) return; //abort if no lines
+		
+		//process lines
+		for (int l = (hasHeader ? 1 : 0); l < lines.length; l++) {
+			String[] cells = lines[l].split(delimiter); //split into values/cells
+			if (cells.length < 2) continue;
+			String key = cells[0].replaceAll(Pattern.quote(quote), "").trim();
+			String ref = cells[1].replaceAll(Pattern.quote(quote), "").trim();
+			if (key.length() + ref.length() < 2) continue;
+			addMapping(key, ref);
+		}
 	}
 
 }

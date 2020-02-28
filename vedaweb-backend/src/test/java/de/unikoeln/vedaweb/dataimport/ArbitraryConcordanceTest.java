@@ -1,4 +1,4 @@
-package de.unikoeln.vedaweb.xmlimport;
+package de.unikoeln.vedaweb.dataimport;
 
 import static org.junit.Assert.assertEquals;
 
@@ -30,7 +30,9 @@ public class ArbitraryConcordanceTest {
 	
 	@Test
 	public void testTargetTemplateProcessing() {
-		ArbitraryConcordance ac = new ArbitraryConcordance("https://www.domain.tld/id/" + ArbitraryConcordance.PLACEHOLDER);
+		ArbitraryConcordance ac = new ArbitraryConcordance(
+				"https://www.domain.tld/id/" + 
+				ArbitraryConcordance.PLACEHOLDER);
 		ac.addMapping("from", "to");
 		ac.setKeyDelimiter(".");
 		assertEquals("https://www.domain.tld/id/to", ac.get("from"));
