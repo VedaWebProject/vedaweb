@@ -82,6 +82,13 @@ public class FsResourcesService {
 	}
 	
 	
+	/**
+	 * Filters an array of File objects to only contain those objects with paths
+	 * ending with one of the given suffixes.
+	 * @param files
+	 * @param fileNameSuffixes
+	 * @return The filtered File[]
+	 */
 	public File[] filterForFileNameSuffixes(File[] files, String... fileNameSuffixes) {
 		FileFilter filter = new FileNameSuffixFilter(fileNameSuffixes);
 		return new ArrayList<File>(Arrays.asList(files))
