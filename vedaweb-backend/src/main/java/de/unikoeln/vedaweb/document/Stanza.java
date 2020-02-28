@@ -1,7 +1,10 @@
 package de.unikoeln.vedaweb.document;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -41,6 +44,9 @@ public class Stanza implements Comparable<Stanza> {
 	@ApiModelProperty(notes = "Stanza type (via metrical analysis)")
 	private String stanzaType;
 	
+	@ApiModelProperty(notes = "Relevant references (URLs) to external resources")
+	private Map<String, List<String>> references;
+	
 //	@ApiModelProperty(notes = "Metrical data for this stanza based on Lubotsky (Zurich)")
 //	private String[] metricalData;
 	
@@ -54,6 +60,7 @@ public class Stanza implements Comparable<Stanza> {
 	public Stanza(){
 		versions = new ArrayList<StanzaVersion>();
 		padas = new ArrayList<Pada>();
+		references = new HashMap<String, List<String>>();
 	}
 	
 
@@ -156,6 +163,23 @@ public class Stanza implements Comparable<Stanza> {
 //	}
 
 
+	public Map<String, List<String>> getReferences() {
+		return references;
+	}
+
+	public void setReferences(Map<String, List<String>> references) {
+		this.references = references;
+	}
+	
+	public void addReference (String key, String reference) {
+		if (key != null && reference != null) {
+			if (this.references.get(key) == null) {
+				this.references.put(key, new ArrayList<String>());
+			}
+			this.references.get(key).add(reference);
+		}
+	}
+
 	public List<StanzaVersion> getVersions() {
 		return versions;
 	}
@@ -175,10 +199,15 @@ public class Stanza implements Comparable<Stanza> {
 	public void addPada(Pada pada) {
 		padas.add(pada);
 	}
+	
+	public String getLocation() {
+		return String.format("%1$02d.%2$03d.%3$02d",
+				getBook(), getHymn(), getStanza());
+	}
 
 	@Override
 	public String toString() {
-		return index + ";" + id + ";" + book + "." + hymn + "." + stanza + ":\t" +
+		return index + ";" + id + ";" + getLocation() + ":\t" +
 				"(" + hymnAddressee + " / " + hymnGroup + ")\t" + versions;
 	}
 

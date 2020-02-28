@@ -1,7 +1,10 @@
 package de.unikoeln.vedaweb.util;
 
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileFilter;
+import java.io.IOException;
+import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -72,13 +75,40 @@ public class FsResourcesService {
 	 * an empty File[] if the path is invalid.
 	 * @return File[] Array containing the requested File objects
 	 */
-	public File[] getResourcesFiles(String path) {
-		File subDir = new File(resDir.getAbsolutePath() + File.separator + path);
-		if (!checkDir.accept(subDir)) {
-			log.warn("Invalid path (not a directory!): " + subDir.getAbsolutePath());
+	public File[] getResourcesFiles(String resourceDirectoryPath) {
+		File subDir = getResource(resourceDirectoryPath, true);
+		if (subDir == null) {
+			log.warn("Not an existing directory: " + resourceDirectoryPath);
 			return new File[0];
 		}
 		return subDir.listFiles(checkFile);
+	}
+	
+	
+	/**
+	 * Returns a single resource file located at 
+	 * the given sub-path in the static file system resources directory, or
+	 * null if the path is invalid.
+	 * @return the requested File object or null
+	 */
+	public File getResourcesFile(String path) {
+		File f = getResource(path, false);
+		if (f == null) log.warn("Not an existing file: " + path);
+		return f;
+	}
+	
+	
+	/*
+	 * Check and return a given resource file or directory
+	 */
+	private File getResource(String path, boolean isDirectory) {
+		File f = new File(resDir.getAbsolutePath() + File.separator + path);
+		if ((!isDirectory && !checkFile.accept(f)) 
+				|| (isDirectory && !checkDir.accept(f))) {
+			log.warn("Invalid path to resource: " + f.getAbsolutePath());
+			return null;
+		}
+		return f;
 	}
 	
 	
@@ -143,6 +173,45 @@ public class FsResourcesService {
 	    	}
 	        return false;
 	    }
+	}
+	
+	
+	/**
+	 * Reads all the textual contents of the 
+	 * given files into an array of String objects
+	 * @param resourcesFiles
+	 * @return
+	 */
+	public String[] readResourceFiles(File[] resourcesFiles) {
+		String[] contents = new String[resourcesFiles.length];
+		for (int i = 0; i < resourcesFiles.length; i++)
+			contents[i] = readResourceFile(resourcesFiles[i]);
+		return contents;
+	}
+	
+	
+	/**
+	 * Reads the textual content of the given 
+	 * file and returns it as a String object
+	 * @param resourcesFile
+	 * @return
+	 */
+	public String readResourceFile(File resourcesFile) {
+		if (!checkFile.accept(resourcesFile)) {
+			log.error("Not an existing, readable file: " + resourcesFile.getAbsolutePath());
+			return "";
+		}
+		StringBuilder sb = new StringBuilder();
+		try (BufferedReader br = Files.newBufferedReader(resourcesFile.toPath())){
+			String line;
+			while ((line = br.readLine()) != null) {
+				sb.append(line);
+				sb.append("\n");
+			}
+		} catch (IOException e) {
+			log.error("Could not read resource file: " + resourcesFile.getAbsolutePath());
+		}
+		return sb.toString();
 	}
 
 

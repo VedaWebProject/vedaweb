@@ -22,8 +22,14 @@ import net.sf.saxon.s9api.XdmItem;
 import net.sf.saxon.s9api.XdmNode;
 import net.sf.saxon.s9api.XdmValue;
 
+/**
+ * Parsing very big and complex XML structures is an ugly process. This is why
+ * it gets banned to it's own exile class.
+ * 
+ * @author bkis
+ *
+ */
 public class XmlDataImport {
-	
 	
 	public static void collectStanzasFromXML(
 			File xmlFile,

@@ -85,7 +85,7 @@ public class DataImportService {
 			);
 		}
 		
-		//start importing stanza object data
+		//start importing stanza object data from xml
 		
 		log.info(
 			(dryRun ? "(DRY RUN) " : "")
@@ -121,11 +121,57 @@ public class DataImportService {
 			stanzas.get(i).setIndex(i);
 		}
 		
+		
 		//log read stanzas count
 		if (stanzas.size() > 0)
 			log.info((dryRun ? "(DRY RUN) " : "") + "Read " + stanzas.size() + " stanzas from XML");
 		else
 			log.warn((dryRun ? "(DRY RUN) " : "") + "Zero (in numbers: 0) stanzas read from XML!");
+		
+		
+		//// process and add concordance data for Oldenberg 1 and 2
+		log.info(
+			(dryRun ? "(DRY RUN) " : "")
+			+ "Importing references to Oldenberg ..."
+		);
+		timer.start();
+		//create mapping for Oldenberg 1
+		ArbitraryConcordance oldenberg1 = new ArbitraryConcordance(
+				"https://digi.ub.uni-heidelberg.de/diglit/oldenberg1909bd1/" 
+						+ ArbitraryConcordance.PLACEHOLDER);
+		oldenberg1.setKeyDelimiter(".");
+		oldenberg1.setReferenceDelimiter("\\s?,\\s?");
+		oldenberg1.addFromCsv(
+				fsResources.readResourceFile(fsResources.getResourcesFile(
+						"data/references/Oldenberg/Oldenberg_Band_1.csv")),
+				false, ";", "\"");
+		//create mapping for Oldenberg 2
+		ArbitraryConcordance oldenberg2 = new ArbitraryConcordance(
+				"https://digi.ub.uni-heidelberg.de/diglit/oldenberg1909bd2/" 
+						+ ArbitraryConcordance.PLACEHOLDER);
+		oldenberg2.setKeyDelimiter(".");
+		oldenberg2.setReferenceDelimiter("\\s?,\\s?");
+		oldenberg2.addFromCsv(
+				fsResources.readResourceFile(fsResources.getResourcesFile(
+						"data/references/Oldenberg/Oldenberg_Band_2.csv")),
+				false, ";", "\"");
+		//add to stanza data
+		for (Stanza s : stanzas) {
+			String[] o1 = oldenberg1.get(s.getLocation());
+			String[] o2 = oldenberg2.get(s.getLocation());
+			if (o1 != null)
+				for (String r : o1)
+					s.addReference("Oldenberg", r);
+			if (o2 != null)
+				for (String r : o2)
+					s.addReference("Oldenberg", r);
+		}
+		log.info(
+			(dryRun ? "(DRY RUN) " : "")
+			+ "Imported Oldenberg references in "
+			+ timer.stop("s", true)
+			+ " seconds."
+		);
 		
 		//dry run?
 		if (dryRun) return stanzas.size();

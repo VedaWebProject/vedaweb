@@ -17,70 +17,50 @@ public class ArbitraryConcordance {
 	
 	private String referenceTemplate;
 	private String keyDelimiter;
-	private HashMap<String, String> mappings;
-	private boolean preProcess;
+	private String referenceDelimiter;
+	private HashMap<String, String[]> mappings;
+	
 	
 	/**
-	 * Creates an instance using the given reference template with
-	 * pre-processing set as defined. If pre-processing is enabled, added mappings
-	 * will be pre-processed in place, which results in slower processing now 
-	 * and higher memory use for the concordance but saves some processing 
-	 * time when requesting a mapping.
-	 * @param referenceTemplate
-	 * @param preProcess
-	 */
-	public ArbitraryConcordance(String referenceTemplate, boolean preProcess) {
-		super();
-		this.setReferenceTemplate(referenceTemplate);
-		this.mappings = new HashMap<String, String>();
-		this.preProcess = preProcess && this.referenceTemplate != null;
-	}
-	
-	/**
-	 * Creates an instance using the given reference template with
-	 * pre-processing turned on by default. This means that added mappings
-	 * will be pre-processed in place, which results in slower processing now 
-	 * and higher memory use for the concordance but saves some processing 
-	 * time when requesting a mapping.
+	 * Creates an instance using the given reference template.
 	 * @param referenceTemplate
 	 */
 	public ArbitraryConcordance(String referenceTemplate) {
-		this(referenceTemplate, true);
+		super();
+		this.setReferenceTemplate(referenceTemplate);
+		this.mappings = new HashMap<String, String[]>();
 	}
 	
 	/**
-	 * Creates an instance without a reference template
-	 * (and, implicitly, pre-processing turned off).
+	 * Creates an instance without a reference template.
 	 */
 	public ArbitraryConcordance() {
 		this(null);
 	}
 	
 	/**
-	 * Adds a single concordance mapping. If there is a reference template set
-	 * and pre-processing is enabled, the reference will be pre-processed during
-	 * this method call, which results slower processing now and higher memory 
-	 * use for the concordance but saves some processing time when requesting 
-	 * a mapping.
+	 * Adds a single concordance mapping.
 	 * @param key
 	 * @param reference
 	 */
 	public void addMapping(String key, String reference) {
-		mappings.put(
-			key,
-			preProcess
-				? applyTemplate(reference)
-				: reference
-		);
+		String[] ref = referenceDelimiter != null
+			? reference.split(referenceDelimiter)
+			: new String[]{reference};
+		mappings.put(key, ref);
 	}
 	
 	/*
 	 * Apply reference template (if any)
 	 */
-	private String applyTemplate(String reference) {
-		return referenceTemplate != null 
-				? referenceTemplate.replaceAll(PLACEHOLDER_QUOTED, reference) 
-				: reference;
+	private String[] applyTemplate(String[] refs) {
+		if (referenceTemplate != null) {
+			refs = refs.clone();
+			for (int i = 0; i < refs.length; i++) {
+				refs[i] = referenceTemplate.replaceAll(PLACEHOLDER_QUOTED, refs[i]);
+			}
+		}
+		return refs;
 	}
 	
 	/**
@@ -88,14 +68,8 @@ public class ArbitraryConcordance {
 	 * the algorithm of the add() method.
 	 * @param mappings
 	 */
-	public void addMappings(Map<String, String> mappings) {
-		if (!preProcess) {
-			this.mappings.putAll(mappings);
-		} else {
-			for (String key : mappings.keySet()) {
-				addMapping(key, mappings.get(key));
-			}
-		}
+	public void addMappings(Map<String, String[]> mappings) {
+		this.mappings.putAll(mappings);
 	}
 	
 	/**
@@ -105,7 +79,7 @@ public class ArbitraryConcordance {
 	 * @param key
 	 * @return
 	 */
-	public String get(String key) {
+	public String[] get(String key) {
 		if (keyDelimiter == null && !mappings.containsKey(key)) {
 			return null;
 		}
@@ -116,9 +90,7 @@ public class ArbitraryConcordance {
 				return null;
 			}
 		}
-		return preProcess || referenceTemplate == null
-			? mappings.get(key)
-			: applyTemplate(mappings.get(key));
+		return applyTemplate(mappings.get(key));
 	}
 	
 	/**
@@ -148,6 +120,7 @@ public class ArbitraryConcordance {
 		return keyDelimiter;
 	}
 	
+	
 	/**
 	 * Sets the key delimiter to use. This can be used if the key is formed
 	 * from parts of a hierarchical structure, e.g. "12-54-3-8", where a mapping
@@ -158,6 +131,30 @@ public class ArbitraryConcordance {
 	public void setKeyDelimiter(String keyDelimiter) {
 		this.keyDelimiter = keyDelimiter;
 	}
+	
+	
+	/**
+	 * Returns the set reference delimiter (if any, null otherwise).
+	 * @return
+	 */
+	public String getReferenceDelimiter() {
+		return referenceDelimiter;
+	}
+	
+	
+	/**
+	 * Sets the reference delimiter to use. This can be used if the reference
+	 * might be made of multiple separated values.
+	 * @param keyDelimiter
+	 */
+	public void setReferenceDelimiter(String referenceDelimiter) {
+		if (mappings.size() > 0) {
+			throw new IllegalStateException("A reference delimiter must be set "
+					+ "before any mappings are added!");
+		}
+		this.referenceDelimiter = referenceDelimiter;
+	}
+	
 	
 	/**
 	 * Clears all saved mappings
@@ -201,6 +198,11 @@ public class ArbitraryConcordance {
 			if (key.length() + ref.length() < 2) continue;
 			addMapping(key, ref);
 		}
+	}
+	
+	
+	public int mappingsCount() {
+		return mappings.size();
 	}
 
 }

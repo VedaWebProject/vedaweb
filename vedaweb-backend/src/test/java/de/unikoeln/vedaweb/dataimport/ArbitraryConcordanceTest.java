@@ -1,6 +1,6 @@
 package de.unikoeln.vedaweb.dataimport;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertArrayEquals;
 
 import org.junit.Test;
 
@@ -12,15 +12,24 @@ public class ArbitraryConcordanceTest {
 	public void testSimpleMapping() {
 		ArbitraryConcordance ac = new ArbitraryConcordance();
 		ac.addMapping("from", "to");
-		assertEquals("to", ac.get("from"));
+		assertArrayEquals(new String[]{"to"}, ac.get("from"));
 	}
 
 	@Test
 	public void testSourceDelimiterTrimming() {
 		ArbitraryConcordance ac = new ArbitraryConcordance();
-		ac.addMapping("from", "to");
+		ac.addMapping("01.001", "yeah");
 		ac.setKeyDelimiter(".");
-		assertEquals("to", ac.get("from.one.to"));
+		assertArrayEquals(new String[]{"yeah"}, ac.get("01.001.04"));
+	}
+	
+	@Test
+	public void testReferenceDelimiterSplitting() {
+		ArbitraryConcordance ac = new ArbitraryConcordance();
+		ac.setKeyDelimiter(".");
+		ac.setReferenceDelimiter(",");
+		ac.addMapping("from.one", "to,and,fro");
+		assertArrayEquals(new String[]{"to", "and", "fro"}, ac.get("from.one.two.three"));
 	}
 	
 	@Test(expected = IllegalArgumentException.class)
@@ -35,7 +44,7 @@ public class ArbitraryConcordanceTest {
 				ArbitraryConcordance.PLACEHOLDER);
 		ac.addMapping("from", "to");
 		ac.setKeyDelimiter(".");
-		assertEquals("https://www.domain.tld/id/to", ac.get("from"));
+		assertArrayEquals(new String[]{"https://www.domain.tld/id/to"}, ac.get("from"));
 	}
 
 }
