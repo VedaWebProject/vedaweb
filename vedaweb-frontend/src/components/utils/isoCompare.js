@@ -38,8 +38,6 @@ function isoCompare(a, b){
     a = cleanIsoString(a);
     b = cleanIsoString(b);
 
-    console.log(a + "    " + b);
-
     //declare vars for current letters
     let letterA;
     let letterB;
