@@ -10,6 +10,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import de.unikoeln.vedaweb.document.ExternalResource;
 import de.unikoeln.vedaweb.document.Stanza;
 import de.unikoeln.vedaweb.document.StanzaRepository;
 import de.unikoeln.vedaweb.document.StanzaXmlRepository;
@@ -136,35 +137,39 @@ public class DataImportService {
 		);
 		timer.start();
 		//create mapping for Oldenberg 1
-		ArbitraryConcordance oldenberg1 = new ArbitraryConcordance(
+		ArbitraryConcordance oldenberg1909 = new ArbitraryConcordance(
 				"https://digi.ub.uni-heidelberg.de/diglit/oldenberg1909bd1/" 
 						+ ArbitraryConcordance.PLACEHOLDER);
-		oldenberg1.setKeyDelimiter(".");
-		oldenberg1.setReferenceDelimiter("\\s?,\\s?");
-		oldenberg1.addFromCsv(
+		oldenberg1909.setKeyDelimiter(".");
+		oldenberg1909.setReferenceDelimiter("\\s?,\\s?");
+		oldenberg1909.addFromCsv(
 				fsResources.readResourceFile(fsResources.getResourcesFile(
 						"data/references/Oldenberg/Oldenberg_Band_1.csv")),
 				false, ";", "\"");
 		//create mapping for Oldenberg 2
-		ArbitraryConcordance oldenberg2 = new ArbitraryConcordance(
+		ArbitraryConcordance oldenberg1912 = new ArbitraryConcordance(
 				"https://digi.ub.uni-heidelberg.de/diglit/oldenberg1909bd2/" 
 						+ ArbitraryConcordance.PLACEHOLDER);
-		oldenberg2.setKeyDelimiter(".");
-		oldenberg2.setReferenceDelimiter("\\s?,\\s?");
-		oldenberg2.addFromCsv(
+		oldenberg1912.setKeyDelimiter(".");
+		oldenberg1912.setReferenceDelimiter("\\s?,\\s?");
+		oldenberg1912.addFromCsv(
 				fsResources.readResourceFile(fsResources.getResourcesFile(
 						"data/references/Oldenberg/Oldenberg_Band_2.csv")),
 				false, ";", "\"");
 		//add to stanza data
 		for (Stanza s : stanzas) {
-			String[] o1 = oldenberg1.get(s.getLocation());
-			String[] o2 = oldenberg2.get(s.getLocation());
-			if (o1 != null)
-				for (String r : o1)
-					s.addReference("Oldenberg", r);
-			if (o2 != null)
-				for (String r : o2)
-					s.addReference("Oldenberg", r);
+			String[] o1909 = oldenberg1909.get(s.getLocation());
+			String[] o1912 = oldenberg1912.get(s.getLocation());
+			if (o1909 != null) {
+				ExternalResource ext = new ExternalResource("Oldenberg (1909)");
+				for (String r : o1909) ext.addReference(r);
+				s.addExternalResource(ext);
+			}
+			if (o1912 != null) {
+				ExternalResource ext = new ExternalResource("Oldenberg (1912)");
+				for (String r : o1912) ext.addReference(r);
+				s.addExternalResource(ext);
+			}
 		}
 		log.info(
 			(dryRun ? "(DRY RUN) " : "")

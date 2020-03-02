@@ -575,6 +575,33 @@ class ContentView extends Component {
                                             </div>
                                         }
 
+                                        {/** EXTERNAL RESOURCES **/}
+                                        {stateStore.ui.isLayerVisible('external_') &&
+                                            <div
+                                            className="glossing content-block card"
+                                            ref={this.scrollTo}>
+                                                <h1>External Resources</h1>
+                                                { !data.externalResources && 
+                                                    <i>There are no references to external resources for this document.</i>
+                                                }
+                                                { data.externalResources && data.externalResources.map((ext, i) => (
+                                                    <div key={i + '_' + ext.label}>
+                                                        <strong>{ext.label}:</strong>
+                                                        {ext.references.map((ref, i) => (
+                                                            <a
+                                                            key={i + '_ref'}
+                                                            href={ref}
+                                                            target="_blank"
+                                                            rel="noopener noreferrer"
+                                                            style={{marginLeft:".5rem"}}>
+                                                                <Button icon="link"> {i+1}</Button>
+                                                            </a>
+                                                        ))}
+                                                    </div>
+                                                ))}
+                                            </div>
+                                        }
+
                                     </div>
                                 }
                             </Col>
