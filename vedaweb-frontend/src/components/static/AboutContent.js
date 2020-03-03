@@ -47,25 +47,25 @@ class AboutContent extends Component {
 
                 <h2><Icon type="issues-close"/> Recent Changes</h2>
                 <ul>
-                    <li>Added stanza types meta data based on metrical parse (2019/10/22)</li>
-                    <li>Added this manual feature changelog (2019/10/22)</li>
-                    <li>Improved RegEx functionality in Quick Search (2019/10/04)</li>
-                    <li>Metrical data is now searchable via Metrical Search (2019/10/02)</li>
-                    <li>Improved content navigation and data toggling controls (2019/08/28)</li>
-                    <li>Display metrical parsing for different text versions (2019/08/19)</li>
-                    <li>Open API documentation via SwaggerUI (2019/06/08)</li>
-                    <li>Export functionality for search results (2019/06/08)</li>
-                    <li>Improved condensed reading view (2019/06/06)</li>
-                    <li>Additional grammar properties (CVB, DES, PREC) integrated into Grammar Search (2019/06/06)</li>
-                    <li>Separate search fields for form and lemma in Grammar Search (2019/06/06)</li>
-                    <li>Increased number of possible grammar properties in Grammar Search (2019/06/06)</li>
-                    <li>Re-designed navigational controls layout (2019/08/28)</li>
-                    <li>Made metrical data searchable in Advanced Search (2019/10/02)</li>
-                    <li>Improved Quick Search: RegEx now match a whole stanza (2019/10/11)</li>
-                    <li>Improved Condensed reading view (2019/10/11)</li>
-                    <li>Fixed ISO-15919 lemma sorting in dictionary view (2020/02/07)</li>
+                    <li>Added logic and view for references to external resources, POC with Oldenberg (2020/03/02)</li>
                     <li>Fixed bugs in ISO-15919 metrical data parsing algorithm (2020/02/11)</li>
-                    <li>...</li>
+                    <li>Fixed ISO-15919 lemma sorting in dictionary view (2020/02/07)</li>
+                    <li>Improved Condensed reading view (2019/10/11)</li>
+                    <li>Improved Quick Search: RegEx now match a whole stanza (2019/10/11)</li>
+                    <li>Made metrical data searchable in Advanced Search (2019/10/02)</li>
+                    <li>Re-designed navigational controls layout (2019/08/28)</li>
+                    <li>Increased number of possible grammar properties in Grammar Search (2019/06/06)</li>
+                    <li>Separate search fields for form and lemma in Grammar Search (2019/06/06)</li>
+                    <li>Additional grammar properties (CVB, DES, PREC) integrated into Grammar Search (2019/06/06)</li>
+                    <li>Improved condensed reading view (2019/06/06)</li>
+                    <li>Export functionality for search results (2019/06/08)</li>
+                    <li>Open API documentation via SwaggerUI (2019/06/08)</li>
+                    <li>Display metrical parsing for different text versions (2019/08/19)</li>
+                    <li>Improved content navigation and data toggling controls (2019/08/28)</li>
+                    <li>Metrical data is now searchable via Metrical Search (2019/10/02)</li>
+                    <li>Improved RegEx functionality in Quick Search (2019/10/04)</li>
+                    <li>Added this manual feature changelog (2019/10/22)</li>
+                    <li>Added stanza types meta data based on metrical parse (2019/10/22)</li>
                 </ul>
                 
             </div>
