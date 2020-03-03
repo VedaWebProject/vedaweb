@@ -157,16 +157,21 @@ public class DataImportService {
 						"data/references/Oldenberg/Oldenberg_Band_2.csv")),
 				false, ";", "\"");
 		//add to stanza data
+		String o1desc = "Oldenberg, Hermann. 1909. Ṛgveda: textkritische und exegetische Noten (1): Erstes bis sechstes Buch. Berlin";
+		String o2desc = "Oldenberg, Hermann. 1912. Ṛgveda: textkritische und exegetische Noten (2): Siebentes bis zehntes Buch. Berlin";
 		for (Stanza s : stanzas) {
 			String[] o1909 = oldenberg1909.get(s.getLocation());
 			String[] o1912 = oldenberg1912.get(s.getLocation());
 			if (o1909 != null) {
 				ExternalResource ext = new ExternalResource("Oldenberg (1909)");
+				ext.setDescription(o1desc);
+				//Ṛgveda: textkritische und exegetische Noten (2): Siebentes bis zehntes Buch
 				for (String r : o1909) ext.addReference(r);
 				s.addExternalResource(ext);
 			}
 			if (o1912 != null) {
 				ExternalResource ext = new ExternalResource("Oldenberg (1912)");
+				ext.setDescription(o2desc);
 				for (String r : o1912) ext.addReference(r);
 				s.addExternalResource(ext);
 			}

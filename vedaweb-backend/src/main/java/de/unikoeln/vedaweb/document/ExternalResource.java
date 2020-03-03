@@ -10,6 +10,9 @@ public class ExternalResource {
 	@ApiModelProperty(notes = "Describing label for this set of references")
 	private String label;
 	
+	@ApiModelProperty(notes = "Detailed description for this set of references")
+	private String description;
+	
 	@ApiModelProperty(notes = "A list of one or more references")
 	private List<String> references;
 	
@@ -34,6 +37,14 @@ public class ExternalResource {
 
 	public void setLabel(String label) {
 		this.label = label;
+	}
+	
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
 	}
 
 	public List<String> getReferences() {

@@ -585,7 +585,9 @@ class ContentView extends Component {
                                                     <i>There are no references to external resources for this document.</i>
                                                 }
                                                 { data.externalResources && data.externalResources.map((ext, i) => (
-                                                    <div key={i + '_' + ext.label}>
+                                                    <div
+                                                    key={i + '_' + ext.label}
+                                                    style={{overflow:"hidden", whiteSpace:"nowrap", textOverflow:"ellipsis"}}>
                                                         <strong>{ext.label}:</strong>
                                                         {ext.references.map((ref, i) => (
                                                             <a
@@ -594,9 +596,16 @@ class ContentView extends Component {
                                                             target="_blank"
                                                             rel="noopener noreferrer"
                                                             style={{marginLeft:".5rem"}}>
-                                                                <Button icon="link"> {i+1}</Button>
+                                                                <Button icon="link"> #{i+1}</Button>
                                                             </a>
                                                         ))}
+                                                        {ext.description &&
+                                                            <span
+                                                            className="translucent"
+                                                            style={{marginLeft:".5rem"}}>
+                                                                {ext.description}
+                                                            </span>
+                                                        }
                                                     </div>
                                                 ))}
                                             </div>
