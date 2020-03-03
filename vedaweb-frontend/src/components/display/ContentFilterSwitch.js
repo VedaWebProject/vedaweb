@@ -12,7 +12,9 @@ class ContentViewFilterSwitch extends Component {
             fontVariant: this.props.size === 'small' ? 'initial' : 'small-caps',
             paddingBottom: this.props.size === 'small' ? '0.2rem' : '0.3rem',
             paddingTop: this.props.size === 'small' ? '0' : '0.3rem',
-            paddingLeft: this.props.size === 'small' ? '1rem' : '0',
+            paddingLeft: this.props.size === 'small' ? '.75rem' : '0',
+            marginLeft: this.props.size === 'small' ? '.25rem' : '0',
+            borderLeft: this.props.size === 'small' ? '1px solid #ddd' : 'none',
             filter:'opacity(' + (this.props.disabled ? '0.7' : '1') + ')',
             whiteSpace: 'nowrap'
         };
