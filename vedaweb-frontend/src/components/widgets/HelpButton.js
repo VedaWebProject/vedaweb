@@ -507,7 +507,8 @@ class HelpButton extends Component {
         }, this.props.style);
 
         const iconStyle = Object.assign({
-            verticalAlign: "middle"
+            verticalAlign: "middle",
+            fontSize: "90%"
         }, this.props.iconStyle || {});
 
 

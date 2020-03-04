@@ -105,7 +105,7 @@ class SearchView extends Component {
                             <Row className="bottom-gap">
                                 <Col span={8}>
                                     Input transliteration:
-                                    <HelpButton inline type="transliteration" style={{marginLeft: '1rem'}} />
+                                    <HelpButton inline type="transliteration" style={{marginLeft: '.5rem'}} />
                                 </Col>
                                 <Col span={16}>
                                     <SearchTransliteration/>
@@ -114,7 +114,7 @@ class SearchView extends Component {
                             <Row className="bottom-gap">
                                 <Col span={8}>
                                     Accent-sensitive search:
-                                    <HelpButton inline type="accentSensitive" style={{marginLeft: '1rem'}} />
+                                    <HelpButton inline type="accentSensitive" style={{marginLeft: '.5rem'}} />
                                 </Col>
                                 <Col span={16}>
                                     <Checkbox

@@ -4,7 +4,7 @@ header {
     display: flex;
     flex-flow: row;
     flex-wrap: nowrap;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
     
     /* for box shadow to display in front of following dom element */
@@ -12,8 +12,7 @@ header {
     z-index: 9;
     
     background-color: #fff;
-    padding: .5rem;
-    padding-left: 2rem;
+    padding: 1.2rem 2rem;
 
     border-bottom: 1px solid #b4b1ae;
 }
@@ -28,16 +27,8 @@ header {
 
 #header-logo {
     height: 56px;
-    margin: .8rem;
-    margin-left: 0px;
     image-rendering: -webkit-optimize-contrast;
     image-rendering: crisp-edges;
-}
-
-nav {
-    flex-basis: content;
-    min-width: 440px;
-    text-align: right;
 }
 
 .ant-menu-item,

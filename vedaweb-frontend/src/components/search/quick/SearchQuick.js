@@ -5,12 +5,12 @@ import stateStore from "../../../stateStore";
 import { view } from 'react-easy-state';
 
 import TransliterationPreview from "../../widgets/TransliterationPreview";
+import SearchTransliteration from "../settings/SearchTransliteration";
 import HelpButton from "../../widgets/HelpButton";
 
 import { withRouter } from 'react-router-dom';
 import { Base64 } from 'js-base64';
 
-import "./SearchQuick.css";
 import OSK from "../../widgets/OSK";
 
 
@@ -38,42 +38,6 @@ class SearchQuick extends Component {
 
     render() {
 
-        const selectBefore = (
-            <Select
-            defaultValue="version_"
-            value={stateStore.search.quick.field}
-            onSelect={(value, option) => stateStore.search.quick.field = value}
-            style={{ width: '180px' }}
-            className="secondary-font">
-                <OptGroup label="Text Versions">
-                    {/* text versions */}
-                    {stateStore.ui.layers
-                    .filter(l => l.id.startsWith('version_') && l.id !== 'version_devanagari')
-                    .map(v => (
-                        <Option
-                        key={'quick_field_' + v.id}
-                        value={v.id}
-                        className="secondary-font">
-                            {v.label}
-                        </Option>
-                    ))}
-                </OptGroup>
-                <OptGroup label="Translations">
-                    {/* translations */}
-                    {stateStore.ui.layers
-                    .filter(l => l.id.startsWith('translation_'))
-                    .map(v => (
-                        <Option
-                        key={'quick_field_' + v.id}
-                        value={v.id}
-                        className="secondary-font">
-                            {v.label}
-                        </Option>
-                    ))}
-                </OptGroup>
-            </Select>
-        );
-
         const transliteration = (
             stateStore.search.quick.field.startsWith('version_')
             && stateStore.settings.transliteration !== "iso"
@@ -85,59 +49,132 @@ class SearchQuick extends Component {
 
         const helpAfter = <div data-tour-id="help-buttons"><HelpButton inline type="quickSearch" /></div>;
 
+        const flexContainerStyle = {display: 'flex', width: "100%", margin: '.3rem 0'};
+        const flexItemLabelStyle = {minWidth: "180px", maxWidth: "180px", whiteSpace: "nowrap"};
+        const flexItemControlStyle = {flexGrow: "1", whiteSpace: "nowrap", overflow:"hidden", textOverflow:"ellipsis"};
+
         return (
 
-            <div className="v-middle">
-                <Tooltip
-                title={transliteration}
-                trigger="focus"
-                placement="top"
-                overlayClassName="transliteration-tooltip"
-                style={{display: 'inline'}}>
+            <div
+            style={{
+                width: '512px',
+                maxWidth: '512px'
+            }}>
 
-                    <Search
-                    value={stateStore.search.quick.input}
-                    onChange={e => stateStore.search.quick.input = e.target.value}
-                    onSearch={this.handleSearch}
-                    addonBefore={selectBefore}
-                    addonAfter={helpAfter}
-                    size="large"
-                    prefix={<OSK value={stateStore.search.quick.input} updateInput={v => stateStore.search.quick.input = v}/>}
-                    style={{maxWidth: '420px'}}
-                    placeholder={
-                        (stateStore.search.quick.field.startsWith('version_')
-                        ? stateStore.settings.transliteration.toUpperCase() + " or stanza no."
-                        : "Translation or stanza no.")
-                    } />
-                </Tooltip>
+                <div style={flexContainerStyle}>
+                    <Tooltip
+                    title={transliteration}
+                    trigger="focus"
+                    placement="top"
+                    overlayClassName="transliteration-tooltip">
 
-                <div style={{display:"inline-block", textAlign:"left"}}>
-                    <Checkbox
-                    onChange={e => stateStore.settings.accents = e.target.checked}
-                    checked={stateStore.settings.accents}
-                    style={{marginLeft:'1rem'}}>
+                        <Search
+                        value={stateStore.search.quick.input}
+                        onChange={e => stateStore.search.quick.input = e.target.value}
+                        onSearch={this.handleSearch}
+                        //addonBefore={selectBefore}
+                        addonAfter={helpAfter}
+                        size="large"
+                        prefix={<OSK value={stateStore.search.quick.input} updateInput={v => stateStore.search.quick.input = v}/>}
+                        placeholder={
+                            (stateStore.search.quick.field.startsWith('version_')
+                            ? stateStore.settings.transliteration.toUpperCase() + " or stanza no."
+                            : "Translation or stanza no.")
+                        } />
+
+                    </Tooltip>
+                </div>
+
+                <div style={flexContainerStyle}>
+                    <div style={flexItemLabelStyle}>
+                        Search in
+                    </div>
+                    <div style={flexItemControlStyle}>
+                        <Select
+                        defaultValue="version_"
+                        value={stateStore.search.quick.field}
+                        onSelect={(value, option) => stateStore.search.quick.field = value}
+                        dropdownMatchSelectWidth={false}
+                        style={{ width: '100%', maxWidth: '100%' }}
+                        size="small"
+                        className="secondary-font">
+                            <OptGroup label="Text Versions">
+                                {/* text versions */}
+                                {stateStore.ui.layers
+                                .filter(l => l.id.startsWith('version_') && l.id !== 'version_devanagari')
+                                .map(v => (
+                                    <Option
+                                    key={'quick_field_' + v.id}
+                                    value={v.id}
+                                    className="secondary-font">
+                                        {v.label}
+                                    </Option>
+                                ))}
+                            </OptGroup>
+                            <OptGroup label="Translations">
+                                {/* translations */}
+                                {stateStore.ui.layers
+                                .filter(l => l.id.startsWith('translation_'))
+                                .map(v => (
+                                    <Option
+                                    key={'quick_field_' + v.id}
+                                    value={v.id}
+                                    className="secondary-font">
+                                        {v.label}
+                                    </Option>
+                                ))}
+                            </OptGroup>
+                        </Select>
+                    </div>
+                </div>
+
+                <div style={flexContainerStyle}>
+                    <div style={flexItemLabelStyle}>
+                        Input method
+                        <HelpButton
+                        inline
+                        type="transliteration"
+                        style={{marginLeft: '.5rem'}} />
+                    </div>
+                    <div style={flexItemControlStyle}>
+                        <SearchTransliteration
+                        size="small"
+                        style={{ width: "100%", maxWidth: '100%' }} />
+                    </div>
+                </div>
+            
+                <div style={flexContainerStyle}>
+                    <div style={flexItemLabelStyle}>
                         Accent-sensitive
-                    </Checkbox>
-                    <HelpButton
-                    type="accentSensitive"
-                    inline
-                    iconStyle={{fontSize:"90%"}}
-                    style={{paddingLeft:"0"}} />
-                    <br/>
-                    <Checkbox
-                    onChange={e => stateStore.search.quick.regex = e.target.checked}
-                    checked={stateStore.search.quick.regex}
-                    style={{marginLeft:'1rem'}}>
+                        <HelpButton
+                        type="accentSensitive"
+                        inline
+                        style={{marginLeft: '.5rem'}} />
+                    </div>
+                    <div style={flexItemControlStyle}>
+                        <Checkbox
+                        onChange={e => stateStore.settings.accents = e.target.checked}
+                        checked={stateStore.settings.accents}/>
+                    </div>
+                </div>
+
+                <div style={flexContainerStyle}>
+                    <div style={flexItemLabelStyle}>
                         RegEx
-                    </Checkbox>
-                    <HelpButton
-                    type="quickSearchRegex"
-                    inline
-                    iconStyle={{fontSize:"90%"}}
-                    style={{paddingLeft:"0"}} />
+                        <HelpButton
+                        type="quickSearchRegex"
+                        inline
+                        style={{marginLeft: '.5rem'}} />
+                    </div>
+                    <div style={flexItemControlStyle}>
+                        <Checkbox
+                        onChange={e => stateStore.search.quick.regex = e.target.checked}
+                        checked={stateStore.search.quick.regex} />
+                    </div>
                 </div>
 
             </div>
+
         );
 
     }
