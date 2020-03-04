@@ -97,7 +97,7 @@ class SearchView extends Component {
                     <div className="card">
                         <h1>Advanced Search</h1>
 
-                        <div data-tour-id="search-settings">
+                        <div data-tour-id="advanced-search-settings">
                             <h3 className="top-gap-big">
                                 <Icon type="setting" className="gap-right"/>
                                 General search settings

@@ -118,6 +118,7 @@ class NavBar extends Component {
                 }} >
 
                     <div style={{width: "100%", display: "flex", justifyContent:"flex-end", alignItems:"center"}}>
+
                         <Icon
                         type="search"
                         className="gap-right"
@@ -137,11 +138,15 @@ class NavBar extends Component {
                     </div>
 
                     <div style={{width: "100%", display: "flex", justifyContent:"flex-end", alignItems:"center", marginTop: "1rem"}}>
+
                         <Icon
                         type="setting"
                         className="gap-right"
                         style={{color:"#b4b1ae"}}/>
-                        <div style={{
+
+                        <div
+                        data-tour-id="general-search-settings"
+                        style={{
                             paddingLeft: '2rem',
                             borderLeft: "1px solid #b4b1ae",
                             borderRadius: "8px",

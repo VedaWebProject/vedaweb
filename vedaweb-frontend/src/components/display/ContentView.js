@@ -201,7 +201,7 @@ class ContentView extends Component {
                                 title={condensedView ? "Switch to full size view with all details" : "Switch to condensed reading view"}
                                 onClick={() => stateStore.settings.condensedView = !stateStore.settings.condensedView}
                                 style={{marginLeft: '1rem'}}
-                                data-tour-id="toggle-condensed view">
+                                data-tour-id="toggle-condensed-view">
                                     {condensedView ? "Full size view" : "Condensed view"}
                                 </Button>
 
