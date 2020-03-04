@@ -99,8 +99,8 @@ class SearchView extends Component {
 
                         <div data-tour-id="search-settings">
                             <h3 className="top-gap-big">
-                                <Icon type="tool" className="gap-right"/>
-                                General settings (applies to all searches)
+                                <Icon type="setting" className="gap-right"/>
+                                General search settings
                             </h3>
                             <Row className="bottom-gap">
                                 <Col span={8}>
@@ -126,7 +126,7 @@ class SearchView extends Component {
                             </Row>
                         </div>
 
-                        <h3 className="top-gap-big"><Icon type="search" className="gap-right"/>What are you searching for?</h3>
+                        <h3 className="top-gap-big"><Icon type="search" className="gap-right"/>Advanced Search Modes</h3>
 
                         <Tabs
                         data-tour-id="search-modes"

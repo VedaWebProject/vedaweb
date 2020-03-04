@@ -6,6 +6,8 @@ import SearchQuick from "../search/quick/SearchQuick";
 import logo from "../../img/logo.svg";
 import "./NavBar.css";
 
+import SearchSettings from "../search/settings/SearchSettings";
+
 import stateStore from "../../stateStore";
 
 import { view } from 'react-easy-state';
@@ -112,14 +114,48 @@ class NavBar extends Component {
                 <div
                 style={{
                     flexBasis:'content',
-                    marginLeft: '2rem',
-                    paddingLeft: '2rem',
-                    borderLeft: "2px solid #eee"
-                }}
-                data-tour-id="quick-search">
-                    <SearchQuick /> 
-                </div>
+                    marginLeft: '2rem'
+                }} >
 
+                    <div style={{width: "100%", display: "flex", justifyContent:"flex-end", alignItems:"center"}}>
+                        <Icon
+                        type="search"
+                        className="gap-right"
+                        style={{color:"#b4b1ae"}}/>
+
+                        <div
+                        data-tour-id="quick-search"
+                        style={{
+                            paddingLeft: '2rem',
+                            borderLeft: "1px solid #b4b1ae",
+                            borderRadius: "8px",
+                            minWidth: '512px',
+                            maxWidth: '512px'
+                        }}>
+                            <SearchQuick /> 
+                        </div>
+                    </div>
+
+                    <div style={{width: "100%", display: "flex", justifyContent:"flex-end", alignItems:"center", marginTop: "1rem"}}>
+                        <Icon
+                        type="setting"
+                        className="gap-right"
+                        style={{color:"#b4b1ae"}}/>
+                        <div style={{
+                            paddingLeft: '2rem',
+                            borderLeft: "1px solid #b4b1ae",
+                            borderRadius: "8px",
+                            minWidth: '512px',
+                            maxWidth: '512px'
+                        }}>
+
+                            <SearchSettings/>
+                        
+                        </div>
+                    </div>
+
+                </div>
+                    
             </header>
             
         );

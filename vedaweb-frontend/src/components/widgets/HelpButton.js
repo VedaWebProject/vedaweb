@@ -180,11 +180,6 @@ const helpTexts = {
                     But your search input can also be transliterated from several other standards to ISO-15919.
                     The <strong>default setting is Harvard-Kyoto (HK)</strong>, but you can change this in the <strong>Advanced Search Settings</strong>.
                 </p>
-                <h4>Accent-sensitive search</h4>
-                <p>
-                    If you use accent-sensitive search, you will only find stanzas matching your exact use of accented vowels,
-                    whereas if you disable accent-sensitive search, accents will be ignored, <i>even if you use them</i>.
-                </p>
                 <h4>Wildcards</h4>
                 <p>
                     It is possible to search for words starting or ending with a certain substring.

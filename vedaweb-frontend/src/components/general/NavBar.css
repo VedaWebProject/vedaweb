@@ -4,7 +4,7 @@ header {
     display: flex;
     flex-flow: row;
     flex-wrap: nowrap;
-    justify-content: flex-start;
+    justify-content: space-between;
     align-items: center;
     
     /* for box shadow to display in front of following dom element */
@@ -60,7 +60,7 @@ header {
 
 .ant-menu-submenu-popup .ant-menu-vertical {
     border-radius: 3px;
-    border: 1px solid #ccb;
+    border: 1px solid #b4b1ae;
 
     -webkit-box-shadow: 0px 0px 4px 0px rgba(0,0,0,0.1);
 	-moz-box-shadow: 0px 0px 4px 0px rgba(0,0,0,0.1);

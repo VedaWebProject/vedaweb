@@ -5,7 +5,6 @@ import stateStore from "../../../stateStore";
 import { view } from 'react-easy-state';
 
 import TransliterationPreview from "../../widgets/TransliterationPreview";
-import SearchTransliteration from "../settings/SearchTransliteration";
 import HelpButton from "../../widgets/HelpButton";
 
 import { withRouter } from 'react-router-dom';
@@ -55,12 +54,7 @@ class SearchQuick extends Component {
 
         return (
 
-            <div
-            style={{
-                width: '512px',
-                maxWidth: '512px'
-            }}>
-
+            <div>
                 <div style={flexContainerStyle}>
                     <Tooltip
                     title={transliteration}
@@ -74,12 +68,15 @@ class SearchQuick extends Component {
                         onSearch={this.handleSearch}
                         //addonBefore={selectBefore}
                         addonAfter={helpAfter}
-                        size="large"
+                        size="default"
                         prefix={<OSK value={stateStore.search.quick.input} updateInput={v => stateStore.search.quick.input = v}/>}
                         placeholder={
+                            "Quick search " +
                             (stateStore.search.quick.field.startsWith('version_')
-                            ? stateStore.settings.transliteration.toUpperCase() + " or stanza no."
-                            : "Translation or stanza no.")
+                                ? "(" + stateStore.settings.transliteration.toUpperCase() + ")"
+                                : ""
+                            ) +
+                            " in \"" + stateStore.ui.layers.find(l => l.id === stateStore.search.quick.field).label + "\""
                         } />
 
                     </Tooltip>
@@ -130,36 +127,6 @@ class SearchQuick extends Component {
 
                 <div style={flexContainerStyle}>
                     <div style={flexItemLabelStyle}>
-                        Input method
-                        <HelpButton
-                        inline
-                        type="transliteration"
-                        style={{marginLeft: '.5rem'}} />
-                    </div>
-                    <div style={flexItemControlStyle}>
-                        <SearchTransliteration
-                        size="small"
-                        style={{ width: "100%", maxWidth: '100%' }} />
-                    </div>
-                </div>
-            
-                <div style={flexContainerStyle}>
-                    <div style={flexItemLabelStyle}>
-                        Accent-sensitive
-                        <HelpButton
-                        type="accentSensitive"
-                        inline
-                        style={{marginLeft: '.5rem'}} />
-                    </div>
-                    <div style={flexItemControlStyle}>
-                        <Checkbox
-                        onChange={e => stateStore.settings.accents = e.target.checked}
-                        checked={stateStore.settings.accents}/>
-                    </div>
-                </div>
-
-                <div style={flexContainerStyle}>
-                    <div style={flexItemLabelStyle}>
                         RegEx
                         <HelpButton
                         type="quickSearchRegex"
@@ -172,7 +139,6 @@ class SearchQuick extends Component {
                         checked={stateStore.search.quick.regex} />
                     </div>
                 </div>
-
             </div>
 
         );
