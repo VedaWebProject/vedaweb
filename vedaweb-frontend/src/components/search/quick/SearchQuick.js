@@ -66,7 +66,7 @@ class SearchQuick extends Component {
                         value={stateStore.search.quick.input}
                         onChange={e => stateStore.search.quick.input = e.target.value}
                         onSearch={this.handleSearch}
-                        //addonBefore={selectBefore}
+                        style={{marginBottom:".25rem"}}
                         addonAfter={helpAfter}
                         size="default"
                         prefix={<OSK value={stateStore.search.quick.input} updateInput={v => stateStore.search.quick.input = v}/>}
