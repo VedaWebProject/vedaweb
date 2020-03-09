@@ -134,9 +134,16 @@ class Footer extends Component {
                     </Col>
 
                     <Col span={3} className="footer-box">
-                        <a href="http://sanskrit-lexicon.uni-koeln.de/csl" target="_blank" rel="noopener noreferrer">
+                        <a href="https://api.c-salt.uni-koeln.de/" target="_blank" rel="noopener noreferrer">
+                            <img className="bottom-gap" src={logoCSALTAPI} alt="" /><br/>
+                            C-SALT APIs<br/>for Dictionaries
+                        </a>
+                    </Col>
+
+                    <Col span={3} className="footer-box">
+                        <a href="https://github.com/cceh/c-salt_dicts_schema" target="_blank" rel="noopener noreferrer">
                             <img className="bottom-gap" src={logoTCSL} alt="" /><br/>
-                            TEI Cologne Sanskrit<br/>Lexicon
+                            C-SALT Sanskrit<br/>Dictionaries
                         </a>
                     </Col>
 
@@ -147,12 +154,6 @@ class Footer extends Component {
                         </a>
                     </Col>
 
-                    <Col span={3} className="footer-box">
-                        <a href="https://api.c-salt.uni-koeln.de/" target="_blank" rel="noopener noreferrer">
-                            <img className="bottom-gap" src={logoCSALTAPI} alt="" /><br/>
-                            C-SALT APIs<br/>for Dictionaries
-                        </a>
-                    </Col>
                 </Row>
 
                 <Row className="top-gap">
