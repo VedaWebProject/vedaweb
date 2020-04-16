@@ -4,8 +4,6 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.xml.transform.stream.StreamSource;
-
 import de.unikoeln.vedaweb.document.Pada;
 import de.unikoeln.vedaweb.document.Stanza;
 import de.unikoeln.vedaweb.document.StanzaVersion;
@@ -39,7 +37,7 @@ public class XmlDataImport {
 		
 		//xml parsing prep
 		Processor processor = new Processor(false);
-		XdmNode xmlDoc = processor.newDocumentBuilder().build(new StreamSource(xmlFile));
+		XdmNode xmlDoc = processor.newDocumentBuilder().build(xmlFile);
 		XPathCompiler compiler = processor.newXPathCompiler();
 		//compiler.declareNamespace("xml", "http://www.tei-c.org/ns/1.0");
 		
@@ -447,7 +445,7 @@ public class XmlDataImport {
 		
 		//xml parsing prep
 		Processor processor = new Processor(false);
-		XdmNode xmlDoc = processor.newDocumentBuilder().build(new StreamSource(xmlFile));
+		XdmNode xmlDoc = processor.newDocumentBuilder().build(xmlFile);
 		XPathCompiler compiler = processor.newXPathCompiler();
 		
 		//iterate: stanzas

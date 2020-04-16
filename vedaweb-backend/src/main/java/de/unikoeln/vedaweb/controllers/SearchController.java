@@ -21,7 +21,7 @@ import io.swagger.annotations.ApiOperation;
 
 @RestController
 @RequestMapping("api/search")
-@Api(consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
+@Api(consumes = MediaType.APPLICATION_JSON_VALUE)
 public class SearchController {
 	
 	@Autowired
@@ -33,7 +33,7 @@ public class SearchController {
 			response = SearchHits.class)
 	@PostMapping(
 			value = "/quick",
-			produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+			produces = MediaType.APPLICATION_JSON_VALUE)
     public SearchHits searchQuick(@RequestBody QuickSearchData searchData) {
 		return SearchHitsConverter
 				.processSearchResponse(search.search(searchData));
@@ -45,7 +45,7 @@ public class SearchController {
 			response = SearchHits.class)
 	@PostMapping(
 			value = "/grammar",
-			produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+			produces = MediaType.APPLICATION_JSON_VALUE)
     public SearchHits searchGrammar(@RequestBody GrammarSearchData searchData) {
 		return SearchHitsConverter
 				.processSearchResponse(search.search(searchData));
@@ -57,7 +57,7 @@ public class SearchController {
 			response = SearchHits.class)
 	@PostMapping(
 			value = "/metrical",
-			produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+			produces = MediaType.APPLICATION_JSON_VALUE)
     public SearchHits searchMetrical(@RequestBody MetricalSearchData searchData) {
 		return SearchHitsConverter
 				.processSearchResponse(search.search(searchData));
@@ -69,7 +69,7 @@ public class SearchController {
 			response = GrammarSearchOccurrences.class)
 	@PostMapping(
 			value = "/occ",
-			produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+			produces = MediaType.APPLICATION_JSON_VALUE)
     public GrammarSearchOccurrences searchOcc(@RequestBody GrammarSearchData searchData) {
 		return new GrammarSearchOccurrences(
 						SearchHitsConverter.processSearchResponse(

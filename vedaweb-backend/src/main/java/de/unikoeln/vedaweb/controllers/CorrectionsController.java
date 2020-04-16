@@ -23,12 +23,12 @@ public class CorrectionsController {
 	@Autowired
 	CorrectionsRepository correctionsRepo;
 	
-	@PostMapping(value = "/save", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	@PostMapping(value = "/save", produces = MediaType.APPLICATION_JSON_VALUE)
     public String exportSearchCSV(@RequestBody Correction correction) {
 		return correctionsRepo.save(correction).toString();
     }
 	
-	@PostMapping(value = "/lemma", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	@PostMapping(value = "/lemma", produces = MediaType.APPLICATION_JSON_VALUE)
     public List<Correction> getCorrections(@RequestBody JsonNode lemma) {
 		return correctionsRepo.findAllByCaseId(lemma.get("caseId").textValue());
     }

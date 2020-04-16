@@ -4,8 +4,6 @@ import static org.junit.Assert.assertArrayEquals;
 
 import org.junit.Test;
 
-import de.unikoeln.vedaweb.dataimport.ArbitraryConcordance;
-
 public class ArbitraryConcordanceTest {
 	
 	@Test

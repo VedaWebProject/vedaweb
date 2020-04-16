@@ -47,7 +47,7 @@ public class SystemController {
 	private ClientErrorRepository clientErrorRepo;
 	
 	
-	@GetMapping(value = {"/index/{action}"}, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	@GetMapping(value = {"/index/{action}"}, produces = MediaType.APPLICATION_JSON_VALUE)
     public String stanzaById(
     		@PathVariable(name = "action") String action,
     		@RequestParam(name = "auth", required = false) String auth) {
@@ -80,7 +80,7 @@ public class SystemController {
     }
 	
 	
-	@GetMapping(value = {"/import/{dryRun}", "/import"}, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	@GetMapping(value = {"/import/{dryRun}", "/import"}, produces = MediaType.APPLICATION_JSON_VALUE)
     public String importData(
     		@PathVariable(name = "dryRun", required = false) String dryRun,
     		@RequestParam(name = "auth", required = false) String auth) {
@@ -98,7 +98,7 @@ public class SystemController {
     }
 	
 	
-	@GetMapping(value = {"/uidata/refresh"}, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	@GetMapping(value = {"/uidata/refresh"}, produces = MediaType.APPLICATION_JSON_VALUE)
     public String importData(
     		@RequestParam(name = "auth", required = false) String auth) {
 		
@@ -109,7 +109,7 @@ public class SystemController {
     }
 	
 	
-	@PostMapping(value = {"/error"}, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	@PostMapping(value = {"/error"}, produces = MediaType.APPLICATION_JSON_VALUE)
     public ClientError reportClientError(@RequestBody ClientError errorData) {
 		return clientErrorRepo.insert(errorData);
     }

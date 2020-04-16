@@ -28,7 +28,7 @@ public class DocumentController {
 	@ApiOperation(value = "Get a stanza by ID (e.g. 0100306 for 01.0031.061)",
 			response = Stanza.class)
 	@GetMapping(value = "/id/{id:.+}",
-			produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+			produces = MediaType.APPLICATION_JSON_VALUE)
     public Stanza stanzaById(
     		@ApiParam(example = "0300201")
     		@PathVariable("id") String id) {
@@ -57,7 +57,7 @@ public class DocumentController {
 			response = Stanza.class)
 	@GetMapping(
 			value = "/index/{index}",
-			produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+			produces = MediaType.APPLICATION_JSON_VALUE)
     public Stanza stanzaByLocation(
     		@ApiParam(example = "123")
     		@PathVariable int index) {
