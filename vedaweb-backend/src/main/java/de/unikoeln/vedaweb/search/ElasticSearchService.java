@@ -2,6 +2,7 @@ package de.unikoeln.vedaweb.search;
 
 import org.elasticsearch.action.search.SearchRequest;
 import org.elasticsearch.action.search.SearchResponse;
+import org.elasticsearch.client.RequestOptions;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -58,7 +59,7 @@ public class ElasticSearchService {
 	
 	private SearchResponse submitSearch(SearchRequest searchRequest){
 		try {
-			return elastic.client().search(searchRequest);
+			return elastic.client().search(searchRequest, RequestOptions.DEFAULT);
 		} catch (Exception e) {
 			log.debug("Malformed query in submitSearch() ?");
 		}

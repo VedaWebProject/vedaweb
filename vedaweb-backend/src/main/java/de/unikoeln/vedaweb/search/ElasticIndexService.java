@@ -1,6 +1,7 @@
 package de.unikoeln.vedaweb.search;
 
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -10,16 +11,18 @@ import java.util.Map;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.util.EntityUtils;
-import org.elasticsearch.action.admin.indices.create.CreateIndexRequest;
-import org.elasticsearch.action.admin.indices.create.CreateIndexResponse;
 import org.elasticsearch.action.admin.indices.delete.DeleteIndexRequest;
-import org.elasticsearch.action.admin.indices.delete.DeleteIndexResponse;
 import org.elasticsearch.action.bulk.BulkRequest;
 import org.elasticsearch.action.bulk.BulkResponse;
 import org.elasticsearch.action.index.IndexRequest;
 import org.elasticsearch.action.search.SearchRequest;
 import org.elasticsearch.action.search.SearchResponse;
+import org.elasticsearch.action.support.master.AcknowledgedResponse;
+import org.elasticsearch.client.Request;
+import org.elasticsearch.client.RequestOptions;
 import org.elasticsearch.client.Response;
+import org.elasticsearch.client.indices.CreateIndexRequest;
+import org.elasticsearch.client.indices.CreateIndexResponse;
 import org.elasticsearch.common.xcontent.XContentType;
 import org.elasticsearch.index.query.BoolQueryBuilder;
 import org.elasticsearch.index.query.MatchQueryBuilder;
@@ -31,8 +34,8 @@ import org.elasticsearch.search.aggregations.bucket.nested.NestedAggregationBuil
 import org.elasticsearch.search.aggregations.bucket.terms.Terms;
 import org.elasticsearch.search.aggregations.bucket.terms.Terms.Bucket;
 import org.elasticsearch.search.aggregations.bucket.terms.TermsAggregationBuilder;
-import org.elasticsearch.search.aggregations.metrics.cardinality.Cardinality;
-import org.elasticsearch.search.aggregations.metrics.cardinality.CardinalityAggregationBuilder;
+import org.elasticsearch.search.aggregations.metrics.Cardinality;
+import org.elasticsearch.search.aggregations.metrics.CardinalityAggregationBuilder;
 import org.elasticsearch.search.builder.SearchSourceBuilder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -116,7 +119,7 @@ public class ElasticIndexService {
 			indexDoc.set("tokens", json.getMapper().valueToTree(buildTokensList(dbDoc)));
 			
 			// create index request
-			IndexRequest request = new IndexRequest("vedaweb", "doc", dbDoc.getId());
+			IndexRequest request = new IndexRequest("vedaweb");
 
 			// add request source
 			request.source(indexDoc.toString(), XContentType.JSON);
@@ -128,7 +131,7 @@ public class ElasticIndexService {
 		// send bulk request
 		BulkResponse bulkResponse = null;
 		try {
-			bulkResponse = elastic.client().bulk(bulkRequest);
+			bulkResponse = elastic.client().bulk(bulkRequest, RequestOptions.DEFAULT);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -186,9 +189,9 @@ public class ElasticIndexService {
 		log.info("Deleting old index");
 		ObjectNode jsonResponse = json.newObjectNode();
 		DeleteIndexRequest deleteRequest = new DeleteIndexRequest(indexName);
-		DeleteIndexResponse deleteResponse = null;
+		AcknowledgedResponse deleteResponse = null;
 		try {
-			deleteResponse = elastic.client().indices().delete(deleteRequest);
+			deleteResponse = elastic.client().indices().delete(deleteRequest, RequestOptions.DEFAULT);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -215,11 +218,11 @@ public class ElasticIndexService {
 			e1.printStackTrace();
 		}
 		
-		createRequest.source(json, XContentType.JSON);
+		createRequest.source(new String(json, StandardCharsets.UTF_8), XContentType.JSON);
 		CreateIndexResponse createResponse = null;
 		
 		try {
-			createResponse = elastic.client().indices().create(createRequest);
+			createResponse = elastic.client().indices().create(createRequest, RequestOptions.DEFAULT);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -239,7 +242,7 @@ public class ElasticIndexService {
 		
 		ObjectNode response = urlRequest(
 				"get",
-				"vedaweb/_mapping/doc/field/tokens.grammar.*",
+				"vedaweb/_mapping/field/tokens.grammar.*",
 				"/vedaweb/mappings/doc");
 		
 		if (response == null) {
@@ -271,9 +274,9 @@ public class ElasticIndexService {
 			SearchSourceBuilder searchSourceBuilder = 
 					new SearchSourceBuilder().query(match).aggregation(agg);
 			//create request
-			SearchRequest req = new SearchRequest("vedaweb").types("doc").source(searchSourceBuilder);
+			SearchRequest req = new SearchRequest("vedaweb").source(searchSourceBuilder);
 			try {
-				SearchResponse response = elastic.client().search(req);
+				SearchResponse response = elastic.client().search(req, RequestOptions.DEFAULT);
 				books.add(((Cardinality)response.getAggregations().get("hymns")).getValue());
 			} catch (IOException e) {
 				e.printStackTrace();
@@ -299,9 +302,9 @@ public class ElasticIndexService {
 		SearchSourceBuilder searchSourceBuilder = 
 				new SearchSourceBuilder().aggregation(agg);
 		//create request
-		SearchRequest req = new SearchRequest("vedaweb").types("doc").source(searchSourceBuilder);
+		SearchRequest req = new SearchRequest("vedaweb").source(searchSourceBuilder);
 		try {
-			SearchResponse response = elastic.client().search(req);
+			SearchResponse response = elastic.client().search(req, RequestOptions.DEFAULT);
 			for (Bucket b : ((Terms)response.getAggregations().get("metaAgg")).getBuckets()) {
 				addressees.add(b.getKeyAsString());
 			}
@@ -316,7 +319,7 @@ public class ElasticIndexService {
 	public boolean indexExists() {
 		Response response = null;
 		try {
-			response = elastic.client().getLowLevelClient().performRequest("HEAD", "/" + indexName);
+			response = elastic.client().getLowLevelClient().performRequest(new Request("HEAD", "/" + indexName));
 		} catch (IOException e) {
 			log.error("Could not check if index exists. Request failed.");
 			e.printStackTrace();
@@ -336,12 +339,10 @@ public class ElasticIndexService {
 		SearchSourceBuilder searchSourceBuilder = 
 				new SearchSourceBuilder().query(bool).size(0);
 		//create request
-		SearchRequest req = new SearchRequest("vedaweb")
-				.types("doc")
-				.source(searchSourceBuilder);
+		SearchRequest req = new SearchRequest("vedaweb").source(searchSourceBuilder);
 		try {
-			SearchResponse response = elastic.client().search(req);
-			return (int) response.getHits().totalHits;
+			SearchResponse response = elastic.client().search(req, RequestOptions.DEFAULT);
+			return (int) response.getHits().getTotalHits().value;
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -355,7 +356,7 @@ public class ElasticIndexService {
 			HttpEntity http =
 					elastic.client()
 					.getLowLevelClient()
-					.performRequest(method, url)
+					.performRequest(new Request(method, url))
 					.getEntity();
 			response = json.parse(EntityUtils.toString(http));
 		} catch (IOException e) {
@@ -380,9 +381,9 @@ public class ElasticIndexService {
 		CardinalityAggregationBuilder agg = AggregationBuilders.cardinality("agg");
 		agg.field(field);
 		SearchSourceBuilder searchSourceBuilder = new SearchSourceBuilder().aggregation(agg);
-		SearchRequest req = new SearchRequest("vedaweb").types("doc").source(searchSourceBuilder);
+		SearchRequest req = new SearchRequest("vedaweb").source(searchSourceBuilder);
 		try {
-			SearchResponse response = elastic.client().search(req);
+			SearchResponse response = elastic.client().search(req, RequestOptions.DEFAULT);
 			count = ((Cardinality)response.getAggregations().get("agg")).getValue();
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -395,7 +396,6 @@ public class ElasticIndexService {
 		Map<String, List<String>> grammarAggregations = new HashMap<>();
 		
 		SearchRequest req = new SearchRequest("vedaweb"); 
-		req.types("doc");
 		SearchSourceBuilder searchSourceBuilder = new SearchSourceBuilder(); 
 		
 		NestedAggregationBuilder tokens = AggregationBuilders.nested("tokens", "tokens");
@@ -410,7 +410,7 @@ public class ElasticIndexService {
 		req.source(searchSourceBuilder);
 		
 		try {
-			SearchResponse response = elastic.client().search(req);
+			SearchResponse response = elastic.client().search(req, RequestOptions.DEFAULT);
 			Nested nested = response.getAggregations().get("tokens");
 			for (Aggregation agg : nested.getAggregations()) {
 				Terms terms = (Terms) agg;

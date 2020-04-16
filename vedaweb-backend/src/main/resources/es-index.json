@@ -25,64 +25,60 @@
 		}
 	},
 	"mappings": {
-		"doc": {
-			"properties": {
-				"id":				{ "type": "keyword" },
-				"index":			{ "type": "short" },
-				"book": 			{ "type": "short" },
-				"hymn": 			{ "type": "short" },
-				"stanza":			{ "type": "short" },
-				"hymnAbs":			{ "type": "short" },
-				"hymnAddressee":	{ "type": "keyword" },
-				"hymnGroup":		{ "type": "keyword" },
-				"strata":			{ "type": "keyword" },
-				"stanzaType":		{ "type": "keyword" },
-				"versions": {
-					"type": "nested",
-					"properties": {
-						"id": {"type": "keyword"},
-						"source": {"type": "keyword"},
-						"form": {
-							"type": "text",
-							"analyzer": "custom_translation",
-							"similarity": "boolean",
-							"fields": { "keyword": { "type": "keyword" } }
-						},
-						"form_raw": {
-							"type": "text",
-							"analyzer": "custom_translation",
-							"similarity": "boolean",
-							"fields": { "keyword": { "type": "keyword" } }
-						},
-						"metrical": {
-							"type": "text",
-							"analyzer": "custom_translation",
-							"similarity": "boolean",
-							"fields": { "keyword": { "type": "keyword" } }
-						}
-					}
-		        },
-				"tokens": {
-					"type": "nested",
-					"properties": {
-						"index":		{ "type": "short" },
-						"form":			{ "type": "keyword" },
-						"form_raw":		{ "type": "keyword" },
-						"lemma":		{ "type": "keyword" },
-						"lemma_raw":	{ "type": "keyword" }
+		"properties": {
+			"id":				{ "type": "keyword" },
+			"index":			{ "type": "short" },
+			"book": 			{ "type": "short" },
+			"hymn": 			{ "type": "short" },
+			"stanza":			{ "type": "short" },
+			"hymnAbs":			{ "type": "short" },
+			"hymnAddressee":	{ "type": "keyword" },
+			"hymnGroup":		{ "type": "keyword" },
+			"strata":			{ "type": "keyword" },
+			"stanzaType":		{ "type": "keyword" },
+			"versions": {
+				"type": "nested",
+				"properties": {
+					"id": {"type": "keyword"},
+					"source": {"type": "keyword"},
+					"form": {
+						"type": "text",
+						"analyzer": "custom_translation",
+						"similarity": "boolean",
+						"fields": { "keyword": { "type": "keyword" } }
+					},
+					"form_raw": {
+						"type": "text",
+						"analyzer": "custom_translation",
+						"similarity": "boolean",
+						"fields": { "keyword": { "type": "keyword" } }
+					},
+					"metrical": {
+						"type": "text",
+						"analyzer": "custom_translation",
+						"similarity": "boolean",
+						"fields": { "keyword": { "type": "keyword" } }
 					}
 				}
-			},
-			"dynamic_templates": [
-				{
-				  	"morph_glossings": {
-				  		"path_match":   "tokens.grammar.*",
-					    "mapping": {
-							"type": "keyword"
-					    }
-				  	}
+	        },
+			"tokens": {
+				"type": "nested",
+				"properties": {
+					"index":		{ "type": "short" },
+					"form":			{ "type": "keyword" },
+					"form_raw":		{ "type": "keyword" },
+					"lemma":		{ "type": "keyword" },
+					"lemma_raw":	{ "type": "keyword" }
 				}
-			]
-		}
+			}
+		},
+		"dynamic_templates": [
+			{
+			  	"morph_glossings": {
+			  		"path_match": "tokens.grammar.*",
+				    "mapping": { "type": "keyword" }
+			  	}
+			}
+		]
 	}
 }

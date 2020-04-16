@@ -28,7 +28,7 @@ public class SearchHitsConverter {
 		}
 			
 		
-		targetHits.setTotal(response.getHits().getTotalHits());
+		targetHits.setTotal(response.getHits().getTotalHits().value);
 		targetHits.setTook(response.getTook().getMillis());
 		targetHits.setMaxScore(response.getHits().getMaxScore());
 		
