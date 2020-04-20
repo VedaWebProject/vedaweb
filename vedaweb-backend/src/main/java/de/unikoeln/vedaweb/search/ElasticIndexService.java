@@ -243,7 +243,7 @@ public class ElasticIndexService {
 		ObjectNode response = urlRequest(
 				"get",
 				"vedaweb/_mapping/field/tokens.grammar.*",
-				"/vedaweb/mappings/doc");
+				"/vedaweb/mappings");
 		
 		if (response == null) {
 			log.error("Couldn't find index grammar mapping");
