@@ -27,9 +27,10 @@ class AboutContent extends Component {
                     <li>Additional search modes</li>
                     <li>...</li>
                 </ul>
-                <p>
+
+                <div>
                     Look out for the <HelpButton type="start" inline/> buttons to get explanations of the different features.
-                </p>
+                </div><br/>
 
                 <h2><Icon type="message"/> Feedback</h2>
                 <p>
