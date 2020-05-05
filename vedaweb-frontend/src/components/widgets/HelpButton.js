@@ -332,6 +332,10 @@ const helpTexts = {
                 <p>
                     Griffith, Ralph Thomas Hotchkin. 1890. The Hymns of the Rigveda. E.J. Lazarus.
                 </p>
+                <b>Coverage of this translation:</b><br/>
+                <p style={{columnCount: 3}}>
+                    complete.
+                </p>
             </div>
     },
     translation_renou : {
@@ -340,6 +344,26 @@ const helpTexts = {
             <div>
                 <p>
                     Renou, Louis. (1955-1964) Études védiques et pāṇinéennes (several vols). Paris: Boccard.
+                </p>
+                <b>Coverage of this translation:</b><br/>
+                <p style={{columnCount: 3}}>
+                    1.1-1.2 <br/> 1.4-1.9 <br/> 1.10-1.14 <br/> 1.16-1.21 <br/> 1.24-1.27 <br/> 1.29-1.33 <br/>
+                    1.36-1.45 <br/> 1.48-1.104 <br/> 1.106-1.111 <br/> 1.113-115 <br/> 1.121-1.124 <br/> 1.127-156
+                    <br/> 1.159-161 <br/> 1.165-178 <br/> 1.185-186 <br/> 1.188-1.190 <br/> 2.1-2.3 <br/> 2.6-2.9
+                    <br/> 2.10-2.29 <br/> 2.31 <br/> 2.33-2.35 <br/> 2.38 <br/> 2.40 <br/> 2.41 <br/> 2.51 <br/>
+                    3.1-3.9 <br/> 3,10.-3.57 <br/> 3.59-3.61 <br/> 4.1-4.15 <br/> 4.28 <br/> 4.33-4.42 <br/>
+                    4.46-4.56 <br/> 5.1-5.28 <br/> 5.41-44 <br/> 5.46-5.72 <br/> 5.79-5.87 <br/> 6.1-6.16 <br/>
+                    6.48-6.61 <br/> 6.64-6-71 <br/> 6.73 <br/> 6.74 <br/> 7.1-7.17 <br/> 7.34-7.49 <br/> 7.51-7.54
+                    <br/> 7.56-7.66 <br/> 7.75-7.97 <br/> 7.99-7.102 <br/> 8.7 <br/> 8.11 <br/> 8.18-8.20 <br/>
+                    8.23 <br/> 8.25 <br/> 8.27-8.30 <br/> 8.38-8.44 <br/> 8.47-8.48 <br/> 8.59 <br/> 8.60 <br/>
+                    8.67 <br/> 8.71 <br/> 8.72 <br/> 8.74 <br/> 8.75 <br/> 8.79 <br/> 8.83 <br/> 8.84 <br/>
+                    8.94 <br/> 8.102 <br/> 8.103 <br/> 9.68-9.114 <br/> 10.1-10.9 <br/> 10.11 <br/> 10.12
+                    <br/> 10.16 <br/> 10.20 <br/> 10.21 <br/> 10.25 <br/> 10.26 <br/> 10.30 <br/> 10.35-10.37
+                    <br/> 10.45 <br/> 10.46 <br/> 10.51-10.53 <br/> 10.63-10.69 <br/> 10.75 <br/> 10.77-10.84
+                    <br/> 10.87 <br/> 10.88 <br/> 10.91-10.93 <br/> 10.100 <br/> 10.110 <br/> 10.115 <br/> 10.118
+                    <br/> 10.119 <br/> 10.122 <br/> 10.124 <br/> 10.127 <br/> 10.132 <br/> 10.139 <br/> 10.140
+                    <br/> 10.142 <br/> 10.149 <br/> 10.150 <br/> 10.156 <br/> 10.158 <br/> 10.168 <br/> 10.170
+                    <br/> 10.176 <br/> 10.182 <br/> 10.185-10.189   
                 </p>
             </div>
     },
@@ -350,6 +374,10 @@ const helpTexts = {
                 <p>
                     Geldner, Karl Friedrich. 1951. Der Rig-Veda (aus d. Sanskrit ins Dt. übers. u. mit e. laufenden Kommentar versehen).  Cambridge, Mass.: Harvard University Press.
                 </p>
+                <b>Coverage of this translation:</b><br/>
+                <p style={{columnCount: 3}}>
+                    complete.
+                </p>
             </div>
     },
     translation_grassmann : {
@@ -358,6 +386,10 @@ const helpTexts = {
             <div>
                 <p>
                     Graßmann, Hermann. 1876, 1877. Rig-Veda (Vol 1 and 2). Leipzig.
+                </p>
+                <b>Coverage of this translation:</b><br/>
+                <p style={{columnCount: 3}}>
+                    complete.
                 </p>
             </div>
     },
@@ -368,6 +400,11 @@ const helpTexts = {
                 <p>
                     Otto, Rudolf. 1948. Varuna-Hymnen des Rig-Veda. Bonn: Ludwig Röhrscheid Verlag.
                 </p>
+                <b>Coverage of this translation:</b><br/>
+                <p style={{columnCount: 3}}>
+                    1.024.07-15 <br/> 05.064 <br/> 05.066 <br/> 05.085 <br/> 07.062 <br/>
+                    07.086-07.088 <br/> 08.041 <br/> 10.063 <br/> 10.082.02, 04
+                </p>
             </div>
     },
     translation_macdonell : {
@@ -376,6 +413,14 @@ const helpTexts = {
             <div>
                 <p>
                     MacDonell, Arthur A. 1922. Hymns from the Rigveda. Selected and Metrically Translated. London: Oxford University Press.
+                </p>
+                <b>Coverage of this translation:</b><br/>
+                <p style={{columnCount: 3}}>
+                    01.001 <br/> 01.032 <br/> 01.042 <br/> 01.050 <br/> 01.092 <br/> 01.113 <br/> 01.115 <br/> 01.143 <br/>
+                    01.154 <br/> 01.185 <br/> 02.012 <br/> 02.027 <br/> 02.033 <br/> 02.035 <br/> 03.059 <br/> 04.050 <br/>
+                    05.083 <br/> 05.084 <br/> 06.006 <br/> 06.071 <br/> 07.049 <br/> 07.061 <br/> 07.083 <br/> 07.088 <br/>
+                    07.103 <br/> 08.007 <br/> 08.048 <br/> 08.071 <br/> 09.112 <br/> 10.014 <br/> 10.018 <br/> 10.034 <br/>
+                    10.071 <br/> 10.085 <br/> 10.108 <br/> 10.117 <br/> 10.127 <br/> 10.129 <br/> 10.146 <br/> 10.168
                 </p>
             </div>
     },
