@@ -65,7 +65,7 @@ vedaweb-frontend/.vscode
 # scripts
 script-*
 # import data (legacy?)
-vedaweb-data/*.xml
-vedaweb-data/*.tei
+vedaweb-data/**/*.xml
+vedaweb-data/**/*.tei
 # panic backups
 backups/
