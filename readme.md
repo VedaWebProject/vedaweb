@@ -1,25 +1,9 @@
 # VedaWeb <!-- omit in toc -->
 
-**This project is currently in a proof-of-concept phase. It is not yet documented and many parts are still implemented in a quick and dirty way. In the future there will be a lot of refactoring and documentation to be done.**
-
 *This is the code repository for the VedaWeb application, which is being developed as part of the [VedaWeb project](https://vedaweb.uni-koeln.de/).*
 
 This DFG-funded project provides a web-based, open-access platform in order to facilitate linguistic research on old indic texts. The text corpus is made available in a digitally accessible as well as morphologically and metrically annotated form, searchable for lexicographic and corpus-linguistic criteria. VedaWeb is part of the Cologne South Asian Languages and Texts (C-SALT).
 The pilot text is the Rigveda, linked to the dictionaries available at Cologne Digital Sanskrit Dictionaries via the [C-SALT APIs for Sanskrit Dictionaries](https://cceh.github.io/c-salt_sanskrit_api/index.html). The morphological annotation of the Rig-Veda was carried out at the Universität Zürich (UZH) and made available for the project. 
-
-
-- [VedaWeb API](#vedaweb-api)
-  - [Important Notes](#important-notes)
-    - [State of Development](#state-of-development)
-    - [Description of the API](#description-of-the-api)
-  - [Documentation of existing API endpoints](#documentation-of-existing-api-endpoints)
-    - [Direct Document Access via Index Numbers](#direct-document-access-via-index-numbers)
-    - [Direct Document Access via Rigveda Stanza Locations](#direct-document-access-via-rigveda-stanza-locations)
-    - [Search API endpoints](#search-api-endpoints)
-      - [Quick Search](#quick-search)
-      - [Grammar Search](#grammar-search)
-    - [Data Export Endpoints](#data-export-endpoints)
-      - [TEI-XML of a single stanza](#tei-xml-of-a-single-stanza)
 
 
 # VedaWeb API
@@ -27,14 +11,15 @@ The pilot text is the Rigveda, linked to the dictionaries available at Cologne D
 ## Important Notes
 
 ### State of Development
-VedaWeb is still under development. It's currently in beta phase and will undergo numerous significant changes in the near future. Naturally, this also applies to the API endpoints documented below.
+VedaWeb is still under development. It's currently in proof-of-concept phase and will undergo numerous significant changes in the near future. Naturally, this also applies to the API endpoints.
 
 ### Description of the API
 The VedaWeb application exposes some API endpoints which are (at the time) limited to what the application itself needs to run. This might change in the future in that new, additional endpoints - which are actually *meant* to be used by other applications - will be added.
 
 
 ## Documentation of existing API endpoints
-> *May 2019* (!)
+> :speech_balloon: The short documentation below is from *May 2019* (!)
+> For more recent information, please see the dynamic documentation at [https://vedaweb.uni-koeln.de/rigveda/swagger-ui.html](https://vedaweb.uni-koeln.de/rigveda/swagger-ui.html)!
 
 ### Direct Document Access via Index Numbers
 The endpoints used for direct access to the documents managed by the application are accessible via simple `GET` requests of the following form:
