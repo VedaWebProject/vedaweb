@@ -18,7 +18,7 @@ The VedaWeb application exposes some API endpoints which are (at the time) limit
 
 
 ## Documentation of existing API endpoints
-> :speech_balloon: The short documentation below is from *May 2019* (!)
+> :warning: The short documentation below is from **May 2019**  
 > For more recent information, please see the dynamic documentation at [https://vedaweb.uni-koeln.de/rigveda/swagger-ui.html](https://vedaweb.uni-koeln.de/rigveda/swagger-ui.html)!
 
 ### Direct Document Access via Index Numbers
