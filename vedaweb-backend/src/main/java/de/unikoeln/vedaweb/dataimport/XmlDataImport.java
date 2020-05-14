@@ -239,7 +239,7 @@ public class XmlDataImport {
 					versionForm = concatTextContents(compiler.evaluate(".//*:l", versionNode));
 					version = new StanzaVersion(
 						"Geldner",
-						"de",
+						compiler.evaluate("@*:lang", versionNode).itemAt(0).getStringValue(),
 						versionForm,
 						"translation",
 						false
@@ -254,7 +254,7 @@ public class XmlDataImport {
 					versionForm = concatTextContents(compiler.evaluate(".//*:l", versionNode));
 					version = new StanzaVersion(
 						"Graßmann",
-						"de",
+						compiler.evaluate("@*:lang", versionNode).itemAt(0).getStringValue(),
 						versionForm,
 						"translation",
 						false
@@ -269,7 +269,7 @@ public class XmlDataImport {
 					versionForm = concatTextContents(compiler.evaluate(".//*:l", versionNode));
 					version = new StanzaVersion(
 						"Otto",
-						"de",
+						compiler.evaluate("@*:lang", versionNode).itemAt(0).getStringValue(),
 						versionForm,
 						"translation",
 						false
@@ -284,7 +284,7 @@ public class XmlDataImport {
 					versionForm = concatTextContents(compiler.evaluate(".//*:l", versionNode));
 					version = new StanzaVersion(
 						"Griffith",
-						"en",
+						compiler.evaluate("@*:lang", versionNode).itemAt(0).getStringValue(),
 						versionForm,
 						"translation",
 						false
@@ -299,7 +299,7 @@ public class XmlDataImport {
 					versionForm = concatTextContents(compiler.evaluate(".//*:l", versionNode));
 					version = new StanzaVersion(
 						"MacDonell",
-						"en",
+						compiler.evaluate("@*:lang", versionNode).itemAt(0).getStringValue(),
 						versionForm,
 						"translation",
 						false
@@ -314,7 +314,7 @@ public class XmlDataImport {
 					versionForm = concatTextContents(compiler.evaluate(".//*:l", versionNode));
 					version = new StanzaVersion(
 						"Renou",
-						"fr",
+						compiler.evaluate("@*:lang", versionNode).itemAt(0).getStringValue(),
 						versionForm,
 						"translation",
 						false

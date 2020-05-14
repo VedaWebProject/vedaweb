@@ -315,9 +315,9 @@ class ContentView extends Component {
                                                             }}>
 
                                                                 <span
-                                                                className="bold gap-right"
+                                                                className="gap-right"
                                                                 style={{display: condensedView ? "none" : "inline"}}>
-                                                                    {version.label}
+                                                                    <span className="bold">{version.label}</span> ({v.language})
                                                                     <HelpButton inline iconStyle={{marginLeft: ".5rem"}} type={v.id}/>
                                                                 </span>
 
@@ -384,7 +384,7 @@ class ContentView extends Component {
 
                                                                 <span
                                                                 style={{display: condensedView ? "none" : "inline"}}>
-                                                                    <span className="bold">{t.source}</span> ({t.language})
+                                                                    <span className="bold">{l.label}</span> ({t.language})
                                                                     <HelpButton inline iconStyle={{marginLeft: ".5rem"}} type={t.id}/>
                                                                 </span>
 
