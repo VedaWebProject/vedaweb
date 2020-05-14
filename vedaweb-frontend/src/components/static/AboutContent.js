@@ -48,6 +48,9 @@ class AboutContent extends Component {
 
                 <h2><Icon type="issues-close"/> Recent Changes</h2>
                 <ul>
+                    <li>Added translation: Elizarenkova, Tatʹjana. 1999. Rigveda : Ṛgvēdasaṃhitā. Moscow: Nauk. (2020/05/14)</li>
+                    <li>Added text version: Devanagari version provided by Mārcis Gasūns. (2020/05/14)</li>
+                    <li>Improved structure and positioning of global search settings (2020/03/04)</li>
                     <li>Added logic and view for references to external resources, POC with Oldenberg (2020/03/02)</li>
                     <li>Fixed bugs in ISO-15919 metrical data parsing algorithm (2020/02/11)</li>
                     <li>Fixed ISO-15919 lemma sorting in dictionary view (2020/02/07)</li>
