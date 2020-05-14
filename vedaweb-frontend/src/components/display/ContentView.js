@@ -407,6 +407,10 @@ class ContentView extends Component {
                                                                         <div
                                                                         key={"trans_" + i}
                                                                         style={{display: condensedView ? "inline" : "block"}}>
+                                                                            {t.applyKeys && !condensedView ?
+                                                                                <span className="red gap-right">{String.fromCharCode(i + 97)} </span>
+                                                                                : ''
+                                                                            }
                                                                             {line}&nbsp;
                                                                         </div>
                                                                     ))}
