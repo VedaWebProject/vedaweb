@@ -270,13 +270,23 @@ const helpTexts = {
                 </p>
             </div>
     },
-    version_devanagari : {
-        title: "Devanagari",
+    version_eichler : {
+        title: "Devanagari (Eichler)",
         content:
             <div>
                 <p>
                     Devanagari version based on the Samhita-text by Aufrecht and Van Nooten &amp; Holland, provided by Detlef Eichler.<br/>
                     <a href="http://www.detlef108.de/Rigveda.htm" target="_blank" rel="noopener noreferrer">http://www.detlef108.de/Rigveda.htm</a>
+                </p>
+            </div>
+    },
+    version_gasuns : {
+        title: "Devanagari (provided by Mārcis Gasūns)",
+        content:
+            <div>
+                <p>
+                    Devanagari version provided by Mārcis Gasūns.<br/>
+                    <a href="https://www.sanskrit-lexicon.uni-koeln.de/" target="_blank" rel="noopener noreferrer">https://www.sanskrit-lexicon.uni-koeln.de/</a>
                 </p>
             </div>
     },

@@ -208,7 +208,22 @@ public class XmlDataImport {
 					versionNode = temp.itemAt(0);
 					versionForm = concatTextContents(compiler.evaluate(".//*:l", versionNode));
 					version = new StanzaVersion(
-						"Devanagari",
+						"Eichler",
+						compiler.evaluate("@*:lang", versionNode).itemAt(0).getStringValue(),
+						versionForm,
+						"version",
+						false
+					);
+					stanzaObj.addVersion(version);
+				}
+				
+				// Devanagari / provided by Mārcis Gasūns
+				temp = compiler.evaluate("*:lg[@*:source='gasuns']", stanza);
+				if (temp.size() > 0) {
+					versionNode = temp.itemAt(0);
+					versionForm = concatTextContents(compiler.evaluate(".//*:l", versionNode));
+					version = new StanzaVersion(
+						"Gasuns",
 						compiler.evaluate("@*:lang", versionNode).itemAt(0).getStringValue(),
 						versionForm,
 						"version",
