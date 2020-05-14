@@ -44,10 +44,11 @@ public class XmlDataImport {
 		//iterate: hymns
 		XdmValue hymns = compiler.evaluate(".//*:div[@type='hymn']", xmlDoc);
 		for(XdmItem hymn : hymns){
+			//System.out.println("HYMN: " + compiler.evaluate("@n", hymn).itemAt(0).getStringValue());
 			//collect hymn data
-			String hymnAddressee = compiler.evaluate("*:div[@type='dedication']/*:div[@type='addressee']/*:p[@*:lang='en']/text()[1]", hymn)
+			String hymnAddressee = compiler.evaluate("*:div[@type='dedication']/*:div[@type='addressee']/*:p[@*:lang='eng']/text()[1]", hymn)
 					.itemAt(0).getStringValue();
-			String hymnGroup = compiler.evaluate("*:div[@type='dedication']/*:div[@type='group']/*:p[@*:lang='en']/text()[1]", hymn)
+			String hymnGroup = compiler.evaluate("*:div[@type='dedication']/*:div[@type='group']/*:p[@*:lang='eng']/text()[1]", hymn)
 					.itemAt(0).getStringValue();
 			int hymnAbs = Integer.parseInt(compiler.evaluate("@*:ana", hymn)
 					.itemAt(0).getStringValue());
@@ -312,6 +313,21 @@ public class XmlDataImport {
 						versionForm,
 						"translation",
 						false
+					);
+					stanzaObj.addVersion(version);
+				}
+				
+				// Translation (ru) / Elizarenkova
+				temp = compiler.evaluate("*:lg[@*:source='elizarenkova']", stanza);
+				if (temp.size() > 0) {
+					versionNode = temp.itemAt(0);
+					versionForm = concatTextContents(compiler.evaluate(".//*:l", versionNode));
+					version = new StanzaVersion(
+						"Elizarenkova",
+						compiler.evaluate("@*:lang", versionNode).itemAt(0).getStringValue(),
+						versionForm,
+						"translation",
+						true
 					);
 					stanzaObj.addVersion(version);
 				}

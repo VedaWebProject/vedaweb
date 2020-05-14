@@ -424,6 +424,19 @@ const helpTexts = {
                 </p>
             </div>
     },
+    translation_elizarenkova : {
+        title: "Elizarenkova",
+        content:
+            <div>
+                <p>
+                    Elizarenkova, Tatʹjana. 1999. Rigveda : Ṛgvēdasaṃhitā. Moscow: Nauk.
+                </p>
+                <b>Coverage of this translation:</b><br/>
+                <p style={{columnCount: 3}}>
+                    complete.
+                </p>
+            </div>
+    },
     metaLabels : {
         title: "Pada Labels",
         content:
