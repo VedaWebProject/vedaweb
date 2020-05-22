@@ -440,9 +440,13 @@ public class XmlDataImport {
 	
 	private static String[] extractLemmaRefs(XdmNode token) {
 		//sample for lemmaRef attribute value: "#lemma_id_1695 #lemma_iq_1681"
-		return token.getAttributeValue(new QName("source"))
-				.replaceAll("#", "")
-				.split("\\s+");
+		String refs = 
+				token.getAttributeValue(new QName("match")) + " "
+				+ token.getAttributeValue(new QName("correction"));
+				
+		return refs
+			.replaceAll("#", "")
+			.split("\\s+");
 	}
 	
 	
