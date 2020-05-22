@@ -4,6 +4,7 @@ import axios from 'axios';
 
 import "./DictionaryView.css";
 import DictCorrection from "../widgets/DictCorrection";
+import HelpButton from "../widgets/HelpButton";
 
 import isoCompare from "../utils/isoCompare";
 
@@ -185,7 +186,7 @@ class DictionaryView extends Component {
                             <th>Lemma</th>
                             <th>Full Forms</th>
                             <th>Preview (Graßmann)</th>
-                            <th>Entries (Graßmann)</th>
+                            <th>Entries (Graßmann) <HelpButton inline iconStyle={{marginLeft: ".3rem"}} type="dict_grassmann"/></th>
                             <th>Others</th>
                             <th>Correction</th>
                         </tr>

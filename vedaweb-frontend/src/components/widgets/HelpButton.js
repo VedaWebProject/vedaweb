@@ -524,6 +524,15 @@ const helpTexts = {
                     Geldner, Karl Friedrich. <i>Der Rig-Veda. Aus dem Sanskrit ins Deutsche übersetzt und mit einem laufenden Kommentar versehen von Karl Friedrich Geldner.</i> Cambridge (Mass.) [repr. 2003]: Harvard Univ. Pr., 1951.
                 </p>
             </div>
+    },
+    dict_grassmann : {
+        title: "Graßmann dictionary references",
+        content:
+            <div>
+                <p>
+                    Links to entries in Graßmann's dictionary have been generated automatically and may be erroneous in some cases. Corrections will constantly be added and updated.
+                </p>
+            </div>
     }
 };
 
