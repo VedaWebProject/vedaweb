@@ -297,6 +297,11 @@ const helpTexts = {
                 <p>
                     Nooten, Barend A. van &amp; Gary Holland (eds.). 1994. Rig Veda: a metrically restored text with an introduction and notes. Cambridge, Mass. [u.a.]: Harvard University Press.
                 </p>
+                <b>Coverage of this version:</b><br/>
+                <p>
+                    <Text code>01.001.01</Text> to <Text code>06.063.10</Text><br/>  
+                    <Text code>06.064.01</Text> to <Text code>10.191.03</Text>
+                </p>
             </div>
     },
     version_aufrecht : {
@@ -306,6 +311,14 @@ const helpTexts = {
                 <p>
                     Aufrecht, Theodor. 1955. Die Hymnen des Rigveda. Erster Teil. Mandala I-VI. Darmstadt: Wissenschaftliche Buchgesellschaft. UND Aufrecht, Theodor. 1955. Die Hymnen des Rigveda. Zweiter Teil. Mandala VII-X. Darmstadt: Wissenschaftliche Buchgesellschaft.
                 </p>
+                <b>Coverage of this version:</b><br/>
+                <p>
+                    <Text code>01.001.01</Text> to <Text code>01.064.15</Text><br/>  
+                    <Text code>01.071.01</Text> to <Text code>07.016.12</Text><br/>  
+                    <Text code>07.018.01</Text> to <Text code>07.032.02</Text><br/>  
+                    <Text code>07.032.04</Text> to <Text code>07.033.14</Text><br/>  
+                    <Text code>07.034.22</Text> to <Text code>10.191.03</Text>
+                </p>
             </div>
     },
     version_padapatha : {
@@ -314,6 +327,11 @@ const helpTexts = {
             <div>
                 <p>
                     (source info is yet to be provided)
+                </p>
+                <b>Coverage of this version:</b><br/>
+                <p>
+                    <Text code>01.001.01</Text> to <Text code>09.097.34</Text><br/>  
+                    <Text code>09.097.36</Text> to <Text code>10.191.03</Text>
                 </p>
             </div>
     },
@@ -343,8 +361,79 @@ const helpTexts = {
                     Griffith, Ralph Thomas Hotchkin. 1890. The Hymns of the Rigveda. E.J. Lazarus.
                 </p>
                 <b>Coverage of this translation:</b><br/>
-                <p style={{columnCount: 3}}>
-                    complete.
+                <p>
+                    <Text code>01.001.01</Text> to <Text code>01.011.08</Text><br/>  
+                    <Text code>01.012.02</Text> to <Text code>01.024.15</Text><br/>  
+                    <Text code>01.025.02</Text> to <Text code>01.037.15</Text><br/>  
+                    <Text code>01.038.02</Text> to <Text code>01.041.09</Text><br/>  
+                    <Text code>01.042.02</Text> to <Text code>01.043.09</Text><br/>  
+                    <Text code>01.044.02</Text> to <Text code>01.044.14</Text><br/>  
+                    <Text code>01.045.02</Text> to <Text code>01.052.15</Text><br/>  
+                    <Text code>01.053.02</Text> to <Text code>01.055.08</Text><br/>  
+                    <Text code>01.056.02</Text> to <Text code>01.056.06</Text><br/>  
+                    <Text code>01.057.02</Text> to <Text code>01.057.06</Text><br/>  
+                    <Text code>01.058.02</Text> to <Text code>01.059.07</Text><br/>  
+                    <Text code>01.060.02</Text> to <Text code>01.065.05</Text><br/>  
+                    <Text code>01.066.01</Text> to <Text code>01.066.05</Text><br/>  
+                    <Text code>01.067.01</Text> to <Text code>01.067.05</Text><br/>  
+                    <Text code>01.068.01</Text> to <Text code>01.068.05</Text><br/>  
+                    <Text code>01.069.01</Text> to <Text code>01.069.05</Text><br/>  
+                    <Text code>01.070.01</Text> to <Text code>01.070.06</Text><br/>  
+                    <Text code>01.071.01</Text> to <Text code>01.072.10</Text><br/>  
+                    <Text code>01.073.02</Text> to <Text code>01.091.17</Text><br/>  
+                    <Text code>01.091.19</Text> to <Text code>02.021.06</Text><br/>  
+                    <Text code>02.022.02</Text> to <Text code>02.028.11</Text><br/>  
+                    <Text code>02.029.02</Text> to <Text code>04.009.08</Text><br/>  
+                    <Text code>04.010.02</Text> to <Text code>04.032.24</Text><br/>  
+                    <Text code>04.033.02</Text> to <Text code>05.011.06</Text><br/>  
+                    <Text code>05.012.02</Text> to <Text code>05.044.13</Text><br/>  
+                    <Text code>05.044.15</Text> to <Text code>05.055.07</Text><br/>  
+                    <Text code>05.055.09</Text> to <Text code>06.027.08</Text><br/>  
+                    <Text code>06.028.02</Text> to <Text code>07.024.06</Text><br/>  
+                    <Text code>07.025.02</Text> to <Text code>08.026.03</Text><br/>  
+                    <Text code>08.026.05</Text> to <Text code>08.037.07</Text><br/>  
+                    <Text code>08.038.02</Text> to <Text code>08.060.15</Text><br/>  
+                    <Text code>08.061.01</Text> to <Text code>08.064.12</Text><br/>  
+                    <Text code>08.065.02</Text> to <Text code>08.066.11</Text><br/>  
+                    <Text code>08.067.01</Text> to <Text code>08.067.10</Text><br/>  
+                    <Text code>08.068.01</Text> to <Text code>08.068.09</Text><br/>  
+                    <Text code>08.069.01</Text> to <Text code>08.069.10</Text><br/>  
+                    <Text code>08.070.01</Text> to <Text code>08.070.09</Text><br/>  
+                    <Text code>08.071.01</Text> to <Text code>08.071.09</Text><br/>  
+                    <Text code>08.072.01</Text> to <Text code>08.072.09</Text><br/>  
+                    <Text code>08.073.01</Text> to <Text code>08.073.09</Text><br/>  
+                    <Text code>08.074.01</Text> to <Text code>08.074.09</Text><br/>  
+                    <Text code>08.075.01</Text> to <Text code>08.075.05</Text><br/>  
+                    <Text code>08.076.01</Text> to <Text code>08.076.06</Text><br/>  
+                    <Text code>08.077.01</Text> to <Text code>08.077.06</Text><br/>  
+                    <Text code>08.078.01</Text> to <Text code>08.078.07</Text><br/>  
+                    <Text code>08.079.01</Text> to <Text code>08.079.06</Text><br/>  
+                    <Text code>08.080.01</Text> to <Text code>08.080.07</Text><br/>  
+                    <Text code>08.081.01</Text> to <Text code>08.092.14</Text><br/>  
+                    <Text code>08.093.01</Text> to <Text code>08.093.10</Text><br/>  
+                    <Text code>08.094.01</Text> to <Text code>08.094.10</Text><br/>  
+                    <Text code>08.095.01</Text> to <Text code>08.096.10</Text><br/>  
+                    <Text code>08.097.01</Text> to <Text code>08.097.08</Text><br/>  
+                    <Text code>08.098.01</Text> to <Text code>08.098.08</Text><br/>  
+                    <Text code>08.099.01</Text> to <Text code>08.099.05</Text><br/>  
+                    <Text code>08.100.01</Text> to <Text code>08.100.05</Text><br/>  
+                    <Text code>08.101.01</Text> to <Text code>08.101.04</Text><br/>  
+                    <Text code>08.102.01</Text> to <Text code>08.102.03</Text><br/>  
+                    <Text code>08.103.01</Text> to <Text code>08.103.07</Text><br/>  
+                    <Text code>09.001.01</Text> to <Text code>09.007.08</Text><br/>  
+                    <Text code>09.008.01</Text> to <Text code>09.008.07</Text><br/>  
+                    <Text code>09.008.09</Text><br/>  
+                    <Text code>09.009.02</Text> to <Text code>09.084.05</Text><br/>  
+                    <Text code>09.085.02</Text> to <Text code>09.099.08</Text><br/>  
+                    <Text code>09.100.02</Text> to <Text code>09.106.14</Text><br/>  
+                    <Text code>09.107.02</Text> to <Text code>10.048.06</Text><br/>  
+                    <Text code>10.048.08</Text> to <Text code>10.061.04</Text><br/>  
+                    <Text code>10.061.10</Text> to <Text code>10.064.17</Text><br/>  
+                    <Text code>10.065.02</Text> to <Text code>10.086.15</Text><br/>  
+                    <Text code>10.086.18</Text> to <Text code>10.098.12</Text><br/>  
+                    <Text code>10.099.02</Text> to <Text code>10.132.04</Text><br/>  
+                    <Text code>10.132.06</Text> to <Text code>10.174.05</Text><br/>  
+                    <Text code>10.175.02</Text> to <Text code>10.191.03</Text>
                 </p>
             </div>
     },
@@ -356,24 +445,17 @@ const helpTexts = {
                     Renou, Louis. (1955-1964) Études védiques et pāṇinéennes (several vols). Paris: Boccard.
                 </p>
                 <b>Coverage of this translation:</b><br/>
-                <p style={{columnCount: 3}}>
-                    1.1-1.2 <br/> 1.4-1.9 <br/> 1.10-1.14 <br/> 1.16-1.21 <br/> 1.24-1.27 <br/> 1.29-1.33 <br/>
-                    1.36-1.45 <br/> 1.48-1.104 <br/> 1.106-1.111 <br/> 1.113-115 <br/> 1.121-1.124 <br/> 1.127-156
-                    <br/> 1.159-161 <br/> 1.165-178 <br/> 1.185-186 <br/> 1.188-1.190 <br/> 2.1-2.3 <br/> 2.6-2.9
-                    <br/> 2.10-2.29 <br/> 2.31 <br/> 2.33-2.35 <br/> 2.38 <br/> 2.40 <br/> 2.41 <br/> 2.51 <br/>
-                    3.1-3.9 <br/> 3,10.-3.57 <br/> 3.59-3.61 <br/> 4.1-4.15 <br/> 4.28 <br/> 4.33-4.42 <br/>
-                    4.46-4.56 <br/> 5.1-5.28 <br/> 5.41-44 <br/> 5.46-5.72 <br/> 5.79-5.87 <br/> 6.1-6.16 <br/>
-                    6.48-6.61 <br/> 6.64-6-71 <br/> 6.73 <br/> 6.74 <br/> 7.1-7.17 <br/> 7.34-7.49 <br/> 7.51-7.54
-                    <br/> 7.56-7.66 <br/> 7.75-7.97 <br/> 7.99-7.102 <br/> 8.7 <br/> 8.11 <br/> 8.18-8.20 <br/>
-                    8.23 <br/> 8.25 <br/> 8.27-8.30 <br/> 8.38-8.44 <br/> 8.47-8.48 <br/> 8.59 <br/> 8.60 <br/>
-                    8.67 <br/> 8.71 <br/> 8.72 <br/> 8.74 <br/> 8.75 <br/> 8.79 <br/> 8.83 <br/> 8.84 <br/>
-                    8.94 <br/> 8.102 <br/> 8.103 <br/> 9.68-9.114 <br/> 10.1-10.9 <br/> 10.11 <br/> 10.12
-                    <br/> 10.16 <br/> 10.20 <br/> 10.21 <br/> 10.25 <br/> 10.26 <br/> 10.30 <br/> 10.35-10.37
-                    <br/> 10.45 <br/> 10.46 <br/> 10.51-10.53 <br/> 10.63-10.69 <br/> 10.75 <br/> 10.77-10.84
-                    <br/> 10.87 <br/> 10.88 <br/> 10.91-10.93 <br/> 10.100 <br/> 10.110 <br/> 10.115 <br/> 10.118
-                    <br/> 10.119 <br/> 10.122 <br/> 10.124 <br/> 10.127 <br/> 10.132 <br/> 10.139 <br/> 10.140
-                    <br/> 10.142 <br/> 10.149 <br/> 10.150 <br/> 10.156 <br/> 10.158 <br/> 10.168 <br/> 10.170
-                    <br/> 10.176 <br/> 10.182 <br/> 10.185-10.189   
+                <p>
+                    <Text code>02.031.01</Text> to <Text code>02.031.07</Text><br/>  
+                    <Text code>03.054.01</Text> to <Text code>03.057.06</Text><br/>  
+                    <Text code>04.055.01</Text> to <Text code>04.055.10</Text><br/>  
+                    <Text code>05.041.01</Text> to <Text code>05.044.15</Text><br/>  
+                    <Text code>06.049.01</Text> to <Text code>06.052.04</Text><br/>  
+                    <Text code>06.052.06</Text> to <Text code>06.052.07</Text><br/>  
+                    <Text code>06.052.09</Text> to <Text code>06.052.17</Text><br/>  
+                    <Text code>07.034.01</Text> to <Text code>07.037.08</Text><br/>  
+                    <Text code>07.039.01</Text> to <Text code>07.040.07</Text><br/>  
+                    <Text code>07.042.01</Text> to <Text code>07.043.04</Text>    
                 </p>
             </div>
     },
@@ -385,8 +467,9 @@ const helpTexts = {
                     Geldner, Karl Friedrich. 1951. Der Rig-Veda (aus d. Sanskrit ins Dt. übers. u. mit e. laufenden Kommentar versehen).  Cambridge, Mass.: Harvard University Press.
                 </p>
                 <b>Coverage of this translation:</b><br/>
-                <p style={{columnCount: 3}}>
-                    complete.
+                <p>
+                    <Text code>01.001.01</Text> to <Text code>01.035.10</Text><br/>  
+                    <Text code>01.036.01</Text> to <Text code>10.191.03</Text>
                 </p>
             </div>
     },
@@ -398,8 +481,22 @@ const helpTexts = {
                     Graßmann, Hermann. 1876, 1877. Rig-Veda (Vol 1 and 2). Leipzig.
                 </p>
                 <b>Coverage of this translation:</b><br/>
-                <p style={{columnCount: 3}}>
-                    complete.
+                <p>
+                    <Text code>01.001.01</Text> to <Text code>03.005.10</Text><br/>  
+                    <Text code>03.006.01</Text> to <Text code>04.002.17</Text><br/>  
+                    <Text code>04.002.19</Text> to <Text code>05.041.19</Text><br/>  
+                    <Text code>05.042.01</Text> to <Text code>05.052.16</Text><br/>  
+                    <Text code>05.053.01</Text> to <Text code>05.055.09</Text><br/>  
+                    <Text code>05.056.01</Text> to <Text code>06.048.21</Text><br/>  
+                    <Text code>06.049.01</Text> to <Text code>07.083.08</Text><br/>  
+                    <Text code>07.084.01</Text> to <Text code>08.005.36</Text><br/>  
+                    <Text code>08.006.01</Text> to <Text code>08.012.33</Text><br/>  
+                    <Text code>08.013.10</Text> to <Text code>08.034.09</Text><br/>  
+                    <Text code>08.034.11</Text> to <Text code>08.067.06</Text><br/>  
+                    <Text code>08.067.08</Text> to <Text code>10.164.01</Text><br/>  
+                    <Text code>10.165.02</Text> to <Text code>10.185.03</Text><br/>  
+                    <Text code>10.187.01</Text> to <Text code>10.187.03</Text><br/>  
+                    <Text code>10.188.01</Text> to <Text code>10.191.02</Text> 
                 </p>
             </div>
     },
@@ -411,9 +508,17 @@ const helpTexts = {
                     Otto, Rudolf. 1948. Varuna-Hymnen des Rig-Veda. Bonn: Ludwig Röhrscheid Verlag.
                 </p>
                 <b>Coverage of this translation:</b><br/>
-                <p style={{columnCount: 3}}>
-                    1.024.07-15 <br/> 05.064 <br/> 05.066 <br/> 05.085 <br/> 07.062 <br/>
-                    07.086-07.088 <br/> 08.041 <br/> 10.063 <br/> 10.082.02, 04
+                <p>
+                    <Text code>01.024.07</Text> to <Text code>01.024.15</Text><br/>  
+                    <Text code>05.064.01</Text> to <Text code>05.064.07</Text><br/>  
+                    <Text code>05.066.01</Text> to <Text code>05.066.02</Text><br/>  
+                    <Text code>05.066.04</Text> to <Text code>05.066.06</Text><br/>  
+                    <Text code>05.085.01</Text> to <Text code>05.085.07</Text><br/>  
+                    <Text code>07.062.01</Text> to <Text code>07.062.06</Text><br/>  
+                    <Text code>07.086.01</Text> to <Text code>07.088.07</Text><br/>  
+                    <Text code>08.041.01</Text> to <Text code>08.041.10</Text><br/>  
+                    <Text code>10.063.01</Text> to <Text code>10.063.07</Text><br/>  
+                    <Text code>10.082.02</Text> 
                 </p>
             </div>
     },
@@ -425,12 +530,59 @@ const helpTexts = {
                     MacDonell, Arthur A. 1922. Hymns from the Rigveda. Selected and Metrically Translated. London: Oxford University Press.
                 </p>
                 <b>Coverage of this translation:</b><br/>
-                <p style={{columnCount: 3}}>
-                    01.001 <br/> 01.032 <br/> 01.042 <br/> 01.050 <br/> 01.092 <br/> 01.113 <br/> 01.115 <br/> 01.143 <br/>
-                    01.154 <br/> 01.185 <br/> 02.012 <br/> 02.027 <br/> 02.033 <br/> 02.035 <br/> 03.059 <br/> 04.050 <br/>
-                    05.083 <br/> 05.084 <br/> 06.006 <br/> 06.071 <br/> 07.049 <br/> 07.061 <br/> 07.083 <br/> 07.088 <br/>
-                    07.103 <br/> 08.007 <br/> 08.048 <br/> 08.071 <br/> 09.112 <br/> 10.014 <br/> 10.018 <br/> 10.034 <br/>
-                    10.071 <br/> 10.085 <br/> 10.108 <br/> 10.117 <br/> 10.127 <br/> 10.129 <br/> 10.146 <br/> 10.168
+                <p>
+                    <Text code>01.001.01</Text> to <Text code>01.001.09</Text><br/>  
+                    <Text code>01.032.01</Text> to <Text code>01.032.15</Text><br/>  
+                    <Text code>01.042.01</Text> to <Text code>01.042.08</Text><br/>  
+                    <Text code>01.042.10</Text><br/>  
+                    <Text code>01.050.01</Text> to <Text code>01.050.05</Text><br/>  
+                    <Text code>01.050.07</Text> to <Text code>01.050.10</Text><br/>  
+                    <Text code>01.092.04</Text> to <Text code>01.092.15</Text><br/>  
+                    <Text code>01.113.01</Text> to <Text code>01.113.20</Text><br/>  
+                    <Text code>01.115.01</Text> to <Text code>01.115.06</Text><br/>  
+                    <Text code>01.143.01</Text> to <Text code>01.143.08</Text><br/>  
+                    <Text code>01.154.01</Text> to <Text code>01.154.06</Text><br/>  
+                    <Text code>01.185.01</Text> to <Text code>01.185.11</Text><br/>  
+                    <Text code>02.012.01</Text> to <Text code>02.012.15</Text><br/>  
+                    <Text code>02.027.01</Text> to <Text code>02.027.17</Text><br/>  
+                    <Text code>02.033.01</Text> to <Text code>02.033.15</Text><br/>  
+                    <Text code>02.035.01</Text> to <Text code>02.035.15</Text><br/>  
+                    <Text code>03.059.01</Text> to <Text code>03.059.09</Text><br/>  
+                    <Text code>04.050.01</Text> to <Text code>04.050.02</Text><br/>  
+                    <Text code>04.050.04</Text> to <Text code>04.050.11</Text><br/>  
+                    <Text code>05.083.01</Text> to <Text code>05.084.03</Text><br/>  
+                    <Text code>06.006.01</Text> to <Text code>06.006.07</Text><br/>  
+                    <Text code>06.071.01</Text> to <Text code>06.071.03</Text><br/>  
+                    <Text code>06.071.05</Text> to <Text code>06.071.06</Text><br/>  
+                    <Text code>07.049.01</Text> to <Text code>07.049.04</Text><br/>  
+                    <Text code>07.061.01</Text> to <Text code>07.061.07</Text><br/>  
+                    <Text code>07.083.01</Text> to <Text code>07.083.10</Text><br/>  
+                    <Text code>07.088.01</Text> to <Text code>07.088.07</Text><br/>  
+                    <Text code>07.103.01</Text> to <Text code>07.103.10</Text><br/>  
+                    <Text code>08.007.01</Text> to <Text code>08.007.28</Text><br/>  
+                    <Text code>08.007.30</Text> to <Text code>08.007.36</Text><br/>  
+                    <Text code>08.048.01</Text> to <Text code>08.048.15</Text><br/>  
+                    <Text code>08.071.01</Text> to <Text code>08.071.06</Text><br/>  
+                    <Text code>09.112.01</Text> to <Text code>09.112.03</Text><br/>  
+                    <Text code>10.014.01</Text> to <Text code>10.014.02</Text><br/>  
+                    <Text code>10.014.04</Text> to <Text code>10.014.15</Text><br/>  
+                    <Text code>10.018.01</Text> to <Text code>10.018.13</Text><br/>  
+                    <Text code>10.034.01</Text> to <Text code>10.034.14</Text><br/>  
+                    <Text code>10.071.01</Text> to <Text code>10.071.11</Text><br/>  
+                    <Text code>10.085.18</Text> to <Text code>10.085.19</Text><br/>  
+                    <Text code>10.085.26</Text> to <Text code>10.085.27</Text><br/>  
+                    <Text code>10.085.31</Text> to <Text code>10.085.32</Text><br/>  
+                    <Text code>10.085.36</Text><br/>  
+                    <Text code>10.085.38</Text><br/>  
+                    <Text code>10.085.42</Text><br/>  
+                    <Text code>10.085.44</Text><br/>  
+                    <Text code>10.085.47</Text><br/>  
+                    <Text code>10.108.01</Text> to <Text code>10.108.11</Text><br/>  
+                    <Text code>10.117.01</Text> to <Text code>10.117.09</Text><br/>  
+                    <Text code>10.127.01</Text> to <Text code>10.127.08</Text><br/>  
+                    <Text code>10.129.01</Text> to <Text code>10.129.07</Text><br/>  
+                    <Text code>10.146.01</Text> to <Text code>10.146.06</Text><br/>  
+                    <Text code>10.168.01</Text> to <Text code>10.168.03</Text>
                 </p>
             </div>
     },
@@ -442,7 +594,7 @@ const helpTexts = {
                     Elizarenkova, Tatʹjana. 1999. Rigveda : Ṛgvēdasaṃhitā. Moscow: Nauk.
                 </p>
                 <b>Coverage of this translation:</b><br/>
-                <p style={{columnCount: 3}}>
+                <p>
                     complete.
                 </p>
             </div>
