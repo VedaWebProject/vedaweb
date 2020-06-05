@@ -28,7 +28,8 @@ public class CommonSearchRequest {
 	public static final SearchSourceBuilder getSearchSourceBuilder(CommonSearchData searchData) {
 		SearchSourceBuilder source = new SearchSourceBuilder()
 				.from(searchData.getFrom() >= 0 ? searchData.getFrom() : 0)
-				.size(searchData.getSize() >= 0 ? searchData.getSize() : 0);
+				.size(searchData.getSize() >= 0 ? searchData.getSize() : 0)
+				.trackTotalHitsUpTo(20000);
 		
 		if (searchData.getSortBy() == null) {
 			return source;
