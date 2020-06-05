@@ -95,7 +95,7 @@ class SearchResults extends Component {
         let queryDisplay = {
             query: queryJSON.mode === "grammar"
                 ? "[" + queryJSON.blocks.map(b =>
-                    Object.keys(b).filter(k => k !== 'distance' && k !== 'lemma' && b[k] !== undefined && b[k] !== '')
+                    Object.keys(b).filter(k => k !== 'distance' && b[k] !== undefined && b[k] !== '')
                         .map(k => k + ': ' + b[k]).join(', ')).join('] & [') + "]"
                 : queryJSON.input,
             field:  queryJSON.mode === "grammar" ? "grammar data"
