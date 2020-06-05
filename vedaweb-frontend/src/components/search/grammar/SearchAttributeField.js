@@ -60,6 +60,13 @@ class SearchAttributeField extends Component {
                         this.props.parentBlockId, this.props.id, "value", value)}
                     disabled = {this.props.fieldName.length === 0}
                     style={{ width: '100%' }} >
+
+                        <Option
+                        key="value_any"
+                        value="*">
+                            any (but is present)
+                        </Option>
+
                         {this.props.fieldName.length > 0 &&
                             valueOptions.map(value => (
                                 <Option
@@ -68,6 +75,7 @@ class SearchAttributeField extends Component {
                                     {value}
                                 </Option>
                         ))}
+
                     </Select>
                 </Col>
 

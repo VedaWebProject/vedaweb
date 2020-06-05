@@ -86,8 +86,13 @@ public class GrammarSearchRequestBuilder {
 					//add this query to bool query
 					bool.must(QueryBuilders.queryStringQuery(termOrLemma).field(field));
 				} else {
-					//...otherwise, add a simple term query
-					bool.must(QueryBuilders.termQuery("tokens.grammar." + key, block.get(key)));
+					//...otherwise, this is a grammar property query
+					// with either a specific value or "*" for any value
+					if (block.get(key).equals("*")) {
+						bool.must(QueryBuilders.existsQuery("tokens.grammar." + key));
+					} else {
+						bool.must(QueryBuilders.termQuery("tokens.grammar." + key, block.get(key)));
+					}
 				}
 			}
 			
