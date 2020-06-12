@@ -48,6 +48,10 @@ class AboutContent extends Component {
 
                 <h2><Icon type="issues-close"/> Recent Changes</h2>
                 <ul>
+                    <li>References to Ludwig's comments (work in progress) (2020/06/??)</li>
+                    <li>New generic grammar attribute vaule in Grammar Search: "any" (2020/06/05)</li>
+                    <li>Precise translation/version coverage data in help texts (2020/06/03)</li>
+                    <li>Integrated possible corrections to Graßmann's dictionary entries (2020/05/23)</li>
                     <li>Added translation: Elizarenkova, Tatʹjana. 1999. Rigveda : Ṛgvēdasaṃhitā. Moscow: Nauk. (2020/05/14)</li>
                     <li>Added text version: Devanagari version provided by Mārcis Gasūns. (2020/05/14)</li>
                     <li>Improved structure and positioning of global search settings (2020/03/04)</li>
