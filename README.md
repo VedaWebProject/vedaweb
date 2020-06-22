@@ -5,23 +5,30 @@
 This DFG-funded project provides a web-based, open-access platform in order to facilitate linguistic research on old indic texts. The text corpus is made available in a digitally accessible as well as morphologically and metrically annotated form, searchable for lexicographic and corpus-linguistic criteria. VedaWeb is part of the Cologne South Asian Languages and Texts (C-SALT).
 The pilot text is the Rigveda, linked to the dictionaries available at Cologne Digital Sanskrit Dictionaries via the [C-SALT APIs for Sanskrit Dictionaries](https://cceh.github.io/c-salt_sanskrit_api/index.html). The morphological annotation of the Rig-Veda was carried out at the Universität Zürich (UZH) and made available for the project. 
 
+![VedaWeb Application Screenshot](doc/assets/screenshot.png)  
 
-# VedaWeb API
 
-## Important Notes
+## Application Architecture
 
-### State of Development
+![VedaWeb Application Architecture](doc/assets/architecture.png)
+
+
+## API
+
+### Important Notes
+
+#### State of Development
 VedaWeb is still under development. It's currently in proof-of-concept phase and will undergo numerous significant changes in the near future. Naturally, this also applies to the API endpoints.
 
-### Description of the API
+#### Description of the API
 The VedaWeb application exposes some API endpoints which are (at the time) limited to what the application itself needs to run. This might change in the future in that new, additional endpoints - which are actually *meant* to be used by other applications - will be added.
 
 
-## Documentation of existing API endpoints
+### Documentation of existing API endpoints
 > :warning: The short documentation below is from **May 2019**  
 > For more recent information, please see the dynamic documentation at [https://vedaweb.uni-koeln.de/rigveda/swagger-ui.html](https://vedaweb.uni-koeln.de/rigveda/swagger-ui.html)!
 
-### Direct Document Access via Index Numbers
+#### Direct Document Access via Index Numbers
 The endpoints used for direct access to the documents managed by the application are accessible via simple `GET` requests of the following form:
 
 ```
@@ -34,7 +41,7 @@ There are currently 10522 documents (or *stanzas* in this case), with indices fr
 
 The working range limit of this mechanism is `10551 * 2` for both positive and negative index numbers.
 
-### Direct Document Access via Rigveda Stanza Locations
+#### Direct Document Access via Rigveda Stanza Locations
 Alternatively, documents (*stanzas*) can be requested directly via stanza location numbers. The corresponding endpoint (again, for `GET` requests) looks like this:
 
 ```
@@ -55,7 +62,7 @@ Allowed forms of location numbers are:
 ```
 ... for book no. `1`, hymn no. `1`, stanza no. `1` - all separated by a `.` (standard notation) or **any non-digit delimiter that doesn't interfere with the URI scheme**.
 
-### Search API endpoints
+#### Search API endpoints
 The search API endpoints can be accessed via `POST` requests to the following endpoint:
 
 ```
@@ -64,7 +71,7 @@ vedaweb.uni-koeln.de/rigveda/api/search
 
 Each request has to contain query data in JSON format. At the moment, there are two search modes that can be used, each requiring some special query properties (in addition to a handful of common ones):
 
-#### Quick Search
+##### Quick Search
 The *quick search* is - as the name implies - a quick way to search certain full text data in a variety of ways. The flexibility of this search mode lies within the possibility to use some powerful search input syntax features like *wildcard searches*. Those features will be discussed below.
 
 The general set of query properties for the *quick search* looks like this:
@@ -134,9 +141,9 @@ The following is a sample request body for the *grammar search*. Please see the 
 }
 ```
 
-### Data Export Endpoints
+#### Data Export Endpoints
 
-#### TEI-XML of a single stanza
+##### TEI-XML of a single stanza
 The following API endpoint returns the complete TEI-XML of a stanza (currently without a valid header, so this is **not** a valid TEI-encoded document but just the XML node of the stanza itself!):
 
 ```
