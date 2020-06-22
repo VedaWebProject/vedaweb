@@ -243,6 +243,10 @@ const helpTexts = {
                     Also, <Text code>sómasya.*juṣasva</Text> would match this stanza,
                     because, again, the RegEx-search applies to all lines of a stanza by default.
                 </p>
+                <h4>Another Example</h4>
+                <p>
+                    To search for words ending with `ṣv`, directly followed by the word `ā`, you could search for a Regular Expression `.*ṣv ā .*`.
+                </p>
                 <p>
                     <strong>
                         You get an overview of the supported RegEx operators <a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/regexp-syntax.html#regexp-standard-operators" target="_blank" rel="noopener noreferrer">here</a>.
