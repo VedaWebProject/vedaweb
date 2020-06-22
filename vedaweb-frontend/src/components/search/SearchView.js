@@ -41,6 +41,7 @@ class SearchView extends Component {
         ));
         
         this.props.history.push("/results/" + Base64.encodeURI(JSON.stringify(query)));
+        e.preventDefault();
     }
 
     handleReset(e){
@@ -126,94 +127,99 @@ class SearchView extends Component {
                             </Row>
                         </div>
 
-                        <h3 className="top-gap-big"><Icon type="search" className="gap-right"/>Advanced Search Modes</h3>
+                        <form onSubmit={this.handleSubmit}>
 
-                        <Tabs
-                        data-tour-id="search-modes"
-                        onChange={(key) => stateStore.search.meta.mode = key}
-                        activeKey={stateStore.search.meta.mode}
-                        type="card"
-                        id="search-mode-selector"
-                        tabBarGutter={8}
-                        className="bottom-gap">
-                            <TabPane tab="Grammar Search" key="grammar">
-                                <SearchGrammar />
-                            </TabPane>
-                            <TabPane tab="Metrical Search" key="metrical">
-                                <SearchMetrical />
-                            </TabPane>
-                        </Tabs>
+                            <h3 className="top-gap-big"><Icon type="search" className="gap-right"/>Advanced Search Modes</h3>
 
-                        <h3 className="top-gap"><Icon type="filter" className="gap-right"/>Additional search filters</h3>
+                            <Tabs
+                            data-tour-id="search-modes"
+                            onChange={(key) => stateStore.search.meta.mode = key}
+                            activeKey={stateStore.search.meta.mode}
+                            type="card"
+                            id="search-mode-selector"
+                            tabBarGutter={8}
+                            className="bottom-gap">
+                                <TabPane tab="Grammar Search" key="grammar">
+                                    <SearchGrammar />
+                                </TabPane>
+                                <TabPane tab="Metrical Search" key="metrical">
+                                    <SearchMetrical />
+                                </TabPane>
+                            </Tabs>
 
-                        <div data-tour-id="search-filters">
-                            <Collapse
-                            bordered={false}>
-                                <Panel
-                                header={searchScopePanelHeader}
-                                key="scope"
-                                style={customPanelStyle}
-                                forceRender={true}>
-                                    <HelpButton align="left" type="searchScope" />
-                                    <SearchScopeContainer/>
-                                </Panel>
+                            <h3 className="top-gap"><Icon type="filter" className="gap-right"/>Additional search filters</h3>
 
-                                <Panel
-                                header={customMetaFilterPanelHeader}
-                                key="metafilters"
-                                style={customPanelStyle} >
-                                    <HelpButton align="left" type="searchMetaFilters" />
-                                    <SearchMetaFilterList
-                                    label="Hymn Addressees"
-                                    placeholder="All Addressees"
-                                    items={stateStore.ui.meta.hymnAddressee}
-                                    selected={stateStore.search.meta.meta.hymnAddressee}
-                                    handleChange={v => {stateStore.search.meta.meta.hymnAddressee = v}}/>
-                                    <SearchMetaFilterList
-                                    label="Hymn Groups"
-                                    placeholder="All Groups"
-                                    items={stateStore.ui.meta.hymnGroup}
-                                    selected={stateStore.search.meta.meta.hymnGroup}
-                                    handleChange={v => {stateStore.search.meta.meta.hymnGroup = v}}/>
-                                    <SearchMetaFilterList
-                                    label="Stanza Strata"
-                                    placeholder="All Strata"
-                                    items={stateStore.ui.meta.strata}
-                                    itemLabels={stateStore.ui.abbreviations.strata}
-                                    selected={stateStore.search.meta.meta.strata}
-                                    handleChange={v => {stateStore.search.meta.meta.strata = v}}/>
-                                    <SearchMetaFilterList
-                                    label="Stanza Type"
-                                    placeholder="All Stanza Types"
-                                    items={stateStore.ui.meta.stanzaType}
-                                    itemLabels={stateStore.ui.abbreviations.stanzaType}
-                                    selected={stateStore.search.meta.meta.stanzaType}
-                                    handleChange={v => {stateStore.search.meta.meta.stanzaType = v}}/>
-                                </Panel>
-                            </Collapse>
-                        </div>
+                            <div data-tour-id="search-filters">
+                                <Collapse
+                                bordered={false}>
+                                    <Panel
+                                    header={searchScopePanelHeader}
+                                    key="scope"
+                                    style={customPanelStyle}
+                                    forceRender={true}>
+                                        <HelpButton align="left" type="searchScope" />
+                                        <SearchScopeContainer/>
+                                    </Panel>
 
-                        <Row>
-                            <Col span={24} className="content-right">
-                                <Button
-                                icon="delete"
-                                size="large"
-                                className={"secondary-font"}
-                                htmlType="reset"
-                                onClick={this.handleReset}>
-                                    Reset
-                                </Button>
+                                    <Panel
+                                    header={customMetaFilterPanelHeader}
+                                    key="metafilters"
+                                    style={customPanelStyle} >
+                                        <HelpButton align="left" type="searchMetaFilters" />
+                                        <SearchMetaFilterList
+                                        label="Hymn Addressees"
+                                        placeholder="All Addressees"
+                                        items={stateStore.ui.meta.hymnAddressee}
+                                        selected={stateStore.search.meta.meta.hymnAddressee}
+                                        handleChange={v => {stateStore.search.meta.meta.hymnAddressee = v}}/>
+                                        <SearchMetaFilterList
+                                        label="Hymn Groups"
+                                        placeholder="All Groups"
+                                        items={stateStore.ui.meta.hymnGroup}
+                                        selected={stateStore.search.meta.meta.hymnGroup}
+                                        handleChange={v => {stateStore.search.meta.meta.hymnGroup = v}}/>
+                                        <SearchMetaFilterList
+                                        label="Stanza Strata"
+                                        placeholder="All Strata"
+                                        items={stateStore.ui.meta.strata}
+                                        itemLabels={stateStore.ui.abbreviations.strata}
+                                        selected={stateStore.search.meta.meta.strata}
+                                        handleChange={v => {stateStore.search.meta.meta.strata = v}}/>
+                                        <SearchMetaFilterList
+                                        label="Stanza Type"
+                                        placeholder="All Stanza Types"
+                                        items={stateStore.ui.meta.stanzaType}
+                                        itemLabels={stateStore.ui.abbreviations.stanzaType}
+                                        selected={stateStore.search.meta.meta.stanzaType}
+                                        handleChange={v => {stateStore.search.meta.meta.stanzaType = v}}/>
+                                    </Panel>
+                                </Collapse>
+                            </div>
 
-                                <Button
-                                type="primary"
-                                icon="search"
-                                size="large"
-                                className={"secondary-font gap-left-big"}
-                                onClick={this.handleSubmit}>
-                                    Search
-                                </Button>
-                            </Col>
-                        </Row>
+                            <Row>
+                                <Col span={24} className="content-right">
+                                    <Button
+                                    icon="delete"
+                                    size="large"
+                                    className={"secondary-font"}
+                                    htmlType="reset"
+                                    onClick={this.handleReset}>
+                                        Reset
+                                    </Button>
+
+                                    <Button
+                                    type="primary"
+                                    icon="search"
+                                    size="large"
+                                    htmlType="submit"
+                                    className={"secondary-font gap-left-big"}
+                                    onClick={this.handleSubmit}>
+                                        Search
+                                    </Button>
+                                </Col>
+                            </Row>
+
+                        </form>
                     
                     </div>
                 </Col>
