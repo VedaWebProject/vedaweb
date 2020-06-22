@@ -245,7 +245,8 @@ const helpTexts = {
                 </p>
                 <h4>Another Example</h4>
                 <p>
-                    To search for words ending with `ṣv`, directly followed by the word `ā`, you could search for a Regular Expression `.*ṣv ā .*`.
+                    To search for words ending with <Text code>ṣv</Text>, directly followed by the word <Text code>ā</Text>, 
+                    you could search for a Regular Expression <Text code>.*ṣv ā .*</Text>.
                 </p>
                 <p>
                     <strong>
