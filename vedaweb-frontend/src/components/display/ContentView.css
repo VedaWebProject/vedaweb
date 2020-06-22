@@ -9,7 +9,7 @@
 
 .pada-line {
     font-size: 24px;
-    color: #931111;
+    color: var(--primary-color);
     padding-right: 1.5rem;
 }
 

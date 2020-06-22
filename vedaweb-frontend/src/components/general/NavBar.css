@@ -14,14 +14,14 @@ header {
     background-color: #fff;
     padding: 1.2rem 2rem;
 
-    border-bottom: 1px solid #b4b1ae;
+    border-bottom: 1px solid var(--border-gray);
 }
 
 .header-app-title {
     display: inline-block;
     font-size: 18px;
     line-height: 18px;
-    color: #931111;
+    color: var(--primary-color);
     padding-right: 2rem;
 }
 
@@ -55,12 +55,12 @@ header {
 .ant-menu-horizontal > .ant-menu-item-selected,
 .ant-menu-horizontal > .ant-menu-submenu-selected{
     border-bottom: 2px solid rgba(0,0,0,0.0);
-    color: #931111;
+    color: var(--primary-color);
 }
 
 .ant-menu-submenu-popup .ant-menu-vertical {
     border-radius: 3px;
-    border: 1px solid #b4b1ae;
+    border: 1px solid var(--border-gray);
 
     -webkit-box-shadow: 0px 0px 4px 0px rgba(0,0,0,0.1);
 	-moz-box-shadow: 0px 0px 4px 0px rgba(0,0,0,0.1);

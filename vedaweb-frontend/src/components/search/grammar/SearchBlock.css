@@ -6,13 +6,13 @@
     border-radius: 2px;
     border-top-left-radius: 4px;
     border-bottom-left-radius: 4px;
-    border: 1px solid #b4b1ae;
-    border-left: 6px solid #b4b1ae;
+    border: 1px solid var(--border-gray);
+    border-left: 6px solid var(--border-gray);
 }
 
 .search-block-tab {
     padding: .2rem;
-    background-color: #b4b1ae;
+    background-color: var(--border-gray);
     color: #fff;
     font-weight: bold;
     border-radius: 0px 3px 3px 0px;

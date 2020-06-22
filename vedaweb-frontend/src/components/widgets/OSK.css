@@ -8,7 +8,7 @@
 .osk-key {
     min-width: 40px;
     background-color: #fff;
-    border: 1px solid #b4b1ae;
+    border: 1px solid var(--border-gray);
     border-radius: 3px;
     margin: .2rem;
     padding: .5rem;

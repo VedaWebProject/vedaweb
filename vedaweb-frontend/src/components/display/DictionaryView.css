@@ -31,7 +31,7 @@ table.teaser .non-expanding {
 }
 
 .dict-tei-render > sense > ref {
-    color: #931111;
+    color: var(--primary-color);
     cursor: pointer;
 }
 

@@ -1,5 +1,5 @@
 .location {
-    color: #931111;
+    color: var(--primary-color);
     font-size: 20px;
 }
 
@@ -10,10 +10,10 @@
 }
 
 .location-controls a:hover{
-    color: #931111;
+    color: var(--primary-color);
 }
 
 .location-display {
     font-size: 26px;
-    color: #931111;
+    color: var(--primary-color);
 }
