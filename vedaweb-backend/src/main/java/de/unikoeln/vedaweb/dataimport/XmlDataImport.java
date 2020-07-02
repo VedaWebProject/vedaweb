@@ -10,7 +10,7 @@ import de.unikoeln.vedaweb.document.StanzaVersion;
 import de.unikoeln.vedaweb.document.StanzaXml;
 import de.unikoeln.vedaweb.document.StanzaXmlRepository;
 import de.unikoeln.vedaweb.document.Token;
-import de.unikoeln.vedaweb.util.metricalparser.MetricalParser;
+import de.unikoeln.vedaweb.util.metricalparser.MetricalAnalysis;
 import net.sf.saxon.s9api.Processor;
 import net.sf.saxon.s9api.QName;
 import net.sf.saxon.s9api.SaxonApiException;
@@ -96,10 +96,10 @@ public class XmlDataImport {
 						"version",
 						true
 					);
-					version.setMetricalData(MetricalParser.parseMultiline(
+					version.setMetricalData(MetricalAnalysis.parseMultiline(
 						String.join("\n", versionForm),
-						MetricalParser.LONG_LETTER,
-						MetricalParser.SHORT_LETTER));
+						MetricalAnalysis.LONG_LETTER,
+						MetricalAnalysis.SHORT_LETTER));
 					stanzaObj.addVersion(version);
 				}
 				
@@ -116,10 +116,10 @@ public class XmlDataImport {
 						"version",
 						true
 					);
-					version.setMetricalData(MetricalParser.parseMultiline(
+					version.setMetricalData(MetricalAnalysis.parseMultiline(
 							String.join("\n", versionForm),
-							MetricalParser.LONG_LETTER,
-							MetricalParser.SHORT_LETTER));
+							MetricalAnalysis.LONG_LETTER,
+							MetricalAnalysis.SHORT_LETTER));
 					stanzaObj.addVersion(version);
 				}
 				
@@ -136,10 +136,10 @@ public class XmlDataImport {
 						"version",
 						true
 					);
-					version.setMetricalData(MetricalParser.parseMultiline(
+					version.setMetricalData(MetricalAnalysis.parseMultiline(
 							String.join("\n", versionForm),
-							MetricalParser.LONG_LETTER,
-							MetricalParser.SHORT_LETTER));
+							MetricalAnalysis.LONG_LETTER,
+							MetricalAnalysis.SHORT_LETTER));
 					stanzaObj.addVersion(version);
 				}
 				
@@ -156,10 +156,10 @@ public class XmlDataImport {
 						"version",
 						true
 					);
-					version.setMetricalData(MetricalParser.parseMultiline(
+					version.setMetricalData(MetricalAnalysis.parseMultiline(
 							String.join("\n", versionForm),
-							MetricalParser.LONG_LETTER,
-							MetricalParser.SHORT_LETTER));
+							MetricalAnalysis.LONG_LETTER,
+							MetricalAnalysis.SHORT_LETTER));
 					stanzaObj.addVersion(version);
 				}
 				
@@ -176,10 +176,10 @@ public class XmlDataImport {
 						"version",
 						false
 					);
-					version.setMetricalData(MetricalParser.parseMultiline(
+					version.setMetricalData(MetricalAnalysis.parseMultiline(
 							String.join("\n", versionForm),
-							MetricalParser.LONG_LETTER,
-							MetricalParser.SHORT_LETTER));
+							MetricalAnalysis.LONG_LETTER,
+							MetricalAnalysis.SHORT_LETTER));
 					stanzaObj.addVersion(version);
 				}
 				
@@ -195,10 +195,10 @@ public class XmlDataImport {
 						"version",
 						false
 					);
-					version.setMetricalData(MetricalParser.parseMultiline(
+					version.setMetricalData(MetricalAnalysis.parseMultiline(
 							String.join("\n", versionForm),
-							MetricalParser.LONG_LETTER,
-							MetricalParser.SHORT_LETTER));
+							MetricalAnalysis.LONG_LETTER,
+							MetricalAnalysis.SHORT_LETTER));
 					stanzaObj.addVersion(version);
 				}
 				
