@@ -19,6 +19,7 @@ public class ArbitraryConcordance {
 	private String keyDelimiter;
 	private String referenceDelimiter;
 	private HashMap<String, String[]> mappings;
+	private String description;
 	
 	
 	/**
@@ -156,6 +157,16 @@ public class ArbitraryConcordance {
 	}
 	
 	
+	public String getDescription() {
+		return description;
+	}
+
+	
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+
 	/**
 	 * Clears all saved mappings
 	 */
@@ -201,8 +212,47 @@ public class ArbitraryConcordance {
 	}
 	
 	
+	public void addFromCsv (Csv csv) {
+		
+		//check for presence of csv data
+		if (csv.csvData == null) return;
+		
+		String[] lines = csv.csvData.split("\n"); //split into lines
+		if (lines.length < (csv.hasHeader ? 2 : 1)) return; //abort if no lines
+		
+		//process lines
+		for (int l = (csv.hasHeader ? 1 : 0); l < lines.length; l++) {
+			String[] cells = lines[l].split(csv.delimiter); //split into values/cells
+			if (cells.length < 2) continue;
+			String key = cells[0].replaceAll(Pattern.quote(csv.quote), "").trim();
+			String ref = cells[1].replaceAll(Pattern.quote(csv.quote), "").trim();
+			if (key.length() + ref.length() < 2) continue;
+			addMapping(key, ref);
+		}
+	}
+	
+	
 	public int mappingsCount() {
 		return mappings.size();
+	}
+	
+	
+	public static class Csv {
+		final String csvData; 
+		final boolean hasHeader;
+		final String delimiter; 
+		final String quote;
+		
+		public Csv(
+				final String csvData, 
+				final boolean hasHeader,
+				final String delimiter, 
+				final String quote) {
+			this.csvData = csvData;
+			this.hasHeader = hasHeader;
+			this.delimiter = delimiter;
+			this.quote = quote;
+		}
 	}
 
 }

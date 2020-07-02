@@ -135,7 +135,7 @@ public class FsResourcesService {
 	private class IsFileAndExistsFileFilter implements FileFilter {
 		@Override
 		public boolean accept(File f) {
-			return f.exists() && f.isFile() && f.canRead();
+			return f != null && f.exists() && f.isFile() && f.canRead();
 		}
 	}
 	
@@ -147,7 +147,7 @@ public class FsResourcesService {
 	private class IsDirectoryAndExistsFileFilter implements FileFilter {
 		@Override
 		public boolean accept(File f) {
-			return f.exists() && f.isDirectory() && f.canRead();
+			return f != null && f.exists() && f.isDirectory() && f.canRead();
 		}
 	}
 	

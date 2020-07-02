@@ -591,21 +591,30 @@ class ContentView extends Component {
                                                 { data.externalResources && data.externalResources.map((ext, i) => (
                                                     <div
                                                     key={i + '_' + ext.label}
-                                                    style={{overflow:"hidden", whiteSpace:"nowrap", textOverflow:"ellipsis"}}>
-                                                        <strong>{ext.label}:</strong>
+                                                    style={{overflow:"hidden", whiteSpace:"nowrap", textOverflow:"ellipsis", marginBottom: ".5rem"}}>
+
+                                                        <div style={{
+                                                            display: "inline-block",
+                                                            fontWeight: "bold",
+                                                            minWidth: "200px"
+                                                        }}>
+                                                            {ext.label}:
+                                                        </div>
+
                                                         {ext.references.map((ref, i) => (
                                                             <a
                                                             key={i + '_ref'}
                                                             href={ref}
                                                             target="_blank"
                                                             rel="noopener noreferrer"
-                                                            style={{marginLeft:".5rem"}}>
+                                                            style={{marginLeft: ".5rem"}}>
                                                                 <Button icon="link"> #{i+1}</Button>
                                                             </a>
                                                         ))}
                                                         {ext.description &&
                                                             <span
                                                             className="translucent"
+                                                            title={ext.description}
                                                             style={{marginLeft:".5rem"}}>
                                                                 {ext.description}
                                                             </span>

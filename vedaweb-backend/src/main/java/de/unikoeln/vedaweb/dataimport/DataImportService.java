@@ -130,58 +130,115 @@ public class DataImportService {
 			log.warn((dryRun ? "(DRY RUN) " : "") + "Zero (in numbers: 0) stanzas read from XML!");
 		
 		
+		////
 		//// process and add concordance data for Oldenberg 1 and 2
+		////
+		
 		log.info(
 			(dryRun ? "(DRY RUN) " : "")
 			+ "Importing references to Oldenberg ..."
 		);
 		timer.start();
+		
 		//create mapping for Oldenberg 1
-		ArbitraryConcordance oldenberg1909 = new ArbitraryConcordance(
-				"https://digi.ub.uni-heidelberg.de/diglit/oldenberg1909bd1/" 
-						+ ArbitraryConcordance.PLACEHOLDER);
-		oldenberg1909.setKeyDelimiter(".");
-		oldenberg1909.setReferenceDelimiter("\\s?,\\s?");
-		oldenberg1909.addFromCsv(
+		ArbitraryConcordance.Csv csv = new ArbitraryConcordance.Csv(
 				fsResources.readResourceFile(fsResources.getResourcesFile(
 						"data/references/Oldenberg/Oldenberg_Band_1.csv")),
 				false, ";", "\"");
+		addArbitratyConcordance(
+				stanzas,
+				"https://digi.ub.uni-heidelberg.de/diglit/oldenberg1909bd1/" 
+							+ ArbitraryConcordance.PLACEHOLDER,
+						".",
+						"\\s?,\\s?",
+						"Oldenberg (1909)",
+						"Oldenberg, Hermann. 1909. Ṛgveda: "
+							+ "textkritische und exegetische Noten (1): "
+							+ "Erstes bis sechstes Buch. Berlin",
+						csv);
+		
 		//create mapping for Oldenberg 2
-		ArbitraryConcordance oldenberg1912 = new ArbitraryConcordance(
-				"https://digi.ub.uni-heidelberg.de/diglit/oldenberg1909bd2/" 
-						+ ArbitraryConcordance.PLACEHOLDER);
-		oldenberg1912.setKeyDelimiter(".");
-		oldenberg1912.setReferenceDelimiter("\\s?,\\s?");
-		oldenberg1912.addFromCsv(
+		csv = new ArbitraryConcordance.Csv(
 				fsResources.readResourceFile(fsResources.getResourcesFile(
 						"data/references/Oldenberg/Oldenberg_Band_2.csv")),
 				false, ";", "\"");
-		//add to stanza data
-		String o1desc = "Oldenberg, Hermann. 1909. Ṛgveda: textkritische und exegetische Noten (1): Erstes bis sechstes Buch. Berlin";
-		String o2desc = "Oldenberg, Hermann. 1912. Ṛgveda: textkritische und exegetische Noten (2): Siebentes bis zehntes Buch. Berlin";
-		for (Stanza s : stanzas) {
-			String[] o1909 = oldenberg1909.get(s.getLocation());
-			String[] o1912 = oldenberg1912.get(s.getLocation());
-			if (o1909 != null) {
-				ExternalResource ext = new ExternalResource("Oldenberg (1909)");
-				ext.setDescription(o1desc);
-				//Ṛgveda: textkritische und exegetische Noten (2): Siebentes bis zehntes Buch
-				for (String r : o1909) ext.addReference(r);
-				s.addExternalResource(ext);
-			}
-			if (o1912 != null) {
-				ExternalResource ext = new ExternalResource("Oldenberg (1912)");
-				ext.setDescription(o2desc);
-				for (String r : o1912) ext.addReference(r);
-				s.addExternalResource(ext);
-			}
-		}
+		addArbitratyConcordance(
+				stanzas,
+				"https://digi.ub.uni-heidelberg.de/diglit/oldenberg1909bd2/" 
+							+ ArbitraryConcordance.PLACEHOLDER,
+						".",
+						"\\s?,\\s?",
+						"Oldenberg (1909)",
+						"Oldenberg, Hermann. 1912. Ṛgveda: "
+							+ "textkritische und exegetische Noten (2): "
+							+ "Siebentes bis zehntes Buch. Berlin",
+						csv);
+		
 		log.info(
 			(dryRun ? "(DRY RUN) " : "")
 			+ "Imported Oldenberg references in "
 			+ timer.stop("s", true)
 			+ " seconds."
 		);
+		
+		
+		
+		////
+		//// process and add concordance data for Ludwig 1
+		////
+		
+		log.info(
+			(dryRun ? "(DRY RUN) " : "")
+			+ "Importing references to Ludwig ..."
+		);
+		timer.start();
+		
+		//create mapping for Ludwig 1
+		csv = new ArbitraryConcordance.Csv(
+				fsResources.readResourceFile(fsResources.getResourcesFile(
+						"data/references/Ludwig/Ludwig_Band_1.csv")),
+				false, ";", "\"");
+		addArbitratyConcordance(
+				stanzas,
+				"https://archive.org/details/rigvedaoderdiehe04ludw/page/" 
+						+ ArbitraryConcordance.PLACEHOLDER + "/mode/1up",
+				".",
+				"\\s?,\\s?",
+				"Ludwig (1881)",
+				"Ludwig, Alfred. 1881. Der Rigveda oder die heiligen Hymnen "
+						+ "der Brâhmana. Zum ersten Male vollständig ins "
+						+ "Deutsche übersetzt mit Commentar und Einleitung "
+						+ "von Alfred Ludwig. Vierter Band (des Commentars "
+						+ "erster Teil). Prag: Tempsky.",
+				csv);
+		
+		//create mapping for Ludwig 2
+		csv = new ArbitraryConcordance.Csv(
+				fsResources.readResourceFile(fsResources.getResourcesFile(
+						"data/references/Ludwig/Ludwig_Band_2.csv")),
+				false, ";", "\"");
+		addArbitratyConcordance(
+				stanzas,
+				"https://archive.org/details/rigvedaoderdiehe05ludw/page/" 
+						+ ArbitraryConcordance.PLACEHOLDER + "/mode/1up",
+				".",
+				"\\s?,\\s?",
+				"Ludwig (1883)",
+				"Ludwig, Alfred. 1883. Der Rigveda oder die heiligen Hymnen "
+						+ "der Brâhmana. Zum ersten Male vollständig ins "
+						+ "Deutsche übersetzt mit Commentar und Einleitung "
+						+ "von Alfred Ludwig. Fünfter Band (des Commentars "
+						+ "zweiter Teil). Prag: Tempsky.",
+				csv);
+		
+		log.info(
+			(dryRun ? "(DRY RUN) " : "")
+			+ "Imported Ludwig references in "
+			+ timer.stop("s", true)
+			+ " seconds."
+		);
+		
+		
 		
 		//dry run?
 		if (dryRun) return stanzas.size();
@@ -198,6 +255,33 @@ public class DataImportService {
 		
 		log.info("Data import finished.");
 		return stanzas.size();
+	}
+	
+	
+	private void addArbitratyConcordance(
+			List<Stanza> stanzas,
+			String referenceTemplate,
+			String keyDelimiter,
+			String referenceDelimiter,
+			String title,
+			String description,
+			ArbitraryConcordance.Csv csv) {
+		
+		ArbitraryConcordance concordance = new ArbitraryConcordance(referenceTemplate);
+		concordance.setKeyDelimiter(keyDelimiter);
+		concordance.setReferenceDelimiter(referenceDelimiter);
+		concordance.addFromCsv(csv);
+		concordance.setDescription(description);
+		
+		for (Stanza s : stanzas) {
+			String[] refs = concordance.get(s.getLocation());
+			if (refs != null) {
+				ExternalResource ext = new ExternalResource(title);
+				ext.setDescription(description);
+				for (String r : refs) ext.addReference(r);
+				s.addExternalResource(ext);
+			}
+		}
 	}
 	
 	
