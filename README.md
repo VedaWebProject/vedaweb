@@ -15,6 +15,9 @@ The pilot text is the Rigveda, linked to the dictionaries available at Cologne D
 
 ## API
 
+> :warning: The short documentation below is from **May 2019**  
+> For more recent information, please see the dynamic documentation at [https://vedaweb.uni-koeln.de/rigveda/swagger-ui.html](https://vedaweb.uni-koeln.de/rigveda/swagger-ui.html)!
+
 ### Important Notes
 
 #### State of Development
@@ -25,8 +28,6 @@ The VedaWeb application exposes some API endpoints which are (at the time) limit
 
 
 ### Documentation of existing API endpoints
-> :warning: The short documentation below is from **May 2019**  
-> For more recent information, please see the dynamic documentation at [https://vedaweb.uni-koeln.de/rigveda/swagger-ui.html](https://vedaweb.uni-koeln.de/rigveda/swagger-ui.html)!
 
 #### Direct Document Access via Index Numbers
 The endpoints used for direct access to the documents managed by the application are accessible via simple `GET` requests of the following form:
