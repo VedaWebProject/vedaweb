@@ -25,7 +25,7 @@ import de.unikoeln.vedaweb.export.GlossingsTxtExport;
 import de.unikoeln.vedaweb.export.SearchResultsCsvExport;
 import de.unikoeln.vedaweb.export.StanzaTxtExport;
 import de.unikoeln.vedaweb.search.CommonSearchData;
-import de.unikoeln.vedaweb.search.ElasticSearchService;
+import de.unikoeln.vedaweb.search.SearchService;
 import de.unikoeln.vedaweb.search.SearchHitsConverter;
 import de.unikoeln.vedaweb.search.grammar.GrammarSearchData;
 import de.unikoeln.vedaweb.search.metrical.MetricalSearchData;
@@ -63,7 +63,7 @@ public class ExportController {
 			"</TEI>";
 	
 	@Autowired
-	private ElasticSearchService search;
+	private SearchService search;
 	
 	@Autowired
 	private StanzaXmlRepository stanzaXmlRepo;

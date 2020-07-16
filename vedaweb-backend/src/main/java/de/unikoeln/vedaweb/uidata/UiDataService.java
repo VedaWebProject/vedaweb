@@ -19,7 +19,7 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
 
 import de.unikoeln.vedaweb.dataimport.DataImportService;
 import de.unikoeln.vedaweb.document.StanzaRepository;
-import de.unikoeln.vedaweb.search.ElasticIndexService;
+import de.unikoeln.vedaweb.search.IndexService;
 import de.unikoeln.vedaweb.util.FsResourcesService;
 import de.unikoeln.vedaweb.util.IOUtils;
 import de.unikoeln.vedaweb.util.JsonUtilService;
@@ -30,7 +30,7 @@ public class UiDataService {
 	private final Logger log = LoggerFactory.getLogger(this.getClass());
 	
 	@Autowired
-	private ElasticIndexService indexService;
+	private IndexService indexService;
 	
 	@Autowired
 	private StanzaRepository stanzaRepo;

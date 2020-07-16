@@ -8,6 +8,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import de.unikoeln.vedaweb.search.grammar.GrammarAggregationsBuilder;
 import de.unikoeln.vedaweb.search.grammar.GrammarSearchData;
 import de.unikoeln.vedaweb.search.grammar.GrammarSearchRequestBuilder;
 import de.unikoeln.vedaweb.search.metrical.MetricalSearchData;
@@ -16,7 +17,7 @@ import de.unikoeln.vedaweb.search.quick.QuickSearchData;
 import de.unikoeln.vedaweb.search.quick.QuickSearchRequestBuilder;
 
 @Service
-public class ElasticSearchService {
+public class SearchService {
 	
 	private final Logger log = LoggerFactory.getLogger(this.getClass());
 

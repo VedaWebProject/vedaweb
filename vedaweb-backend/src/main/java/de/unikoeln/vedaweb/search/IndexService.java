@@ -59,7 +59,7 @@ import de.unikoeln.vedaweb.util.StringUtils;
 
 
 @Service
-public class ElasticIndexService {
+public class IndexService {
 	
 	private final Logger log = LoggerFactory.getLogger(this.getClass());
 	

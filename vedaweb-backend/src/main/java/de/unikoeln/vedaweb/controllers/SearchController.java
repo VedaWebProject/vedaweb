@@ -7,11 +7,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import de.unikoeln.vedaweb.search.ElasticSearchService;
-import de.unikoeln.vedaweb.search.GrammarSearchOccurrences;
+import de.unikoeln.vedaweb.search.SearchService;
 import de.unikoeln.vedaweb.search.SearchHits;
 import de.unikoeln.vedaweb.search.SearchHitsConverter;
 import de.unikoeln.vedaweb.search.grammar.GrammarSearchData;
+import de.unikoeln.vedaweb.search.grammar.GrammarSearchOccurrences;
 import de.unikoeln.vedaweb.search.metrical.MetricalSearchData;
 import de.unikoeln.vedaweb.search.quick.QuickSearchData;
 import io.swagger.annotations.Api;
@@ -25,7 +25,7 @@ import io.swagger.annotations.ApiOperation;
 public class SearchController {
 	
 	@Autowired
-	private ElasticSearchService search;
+	private SearchService search;
 	
 	
 	@ApiOperation(

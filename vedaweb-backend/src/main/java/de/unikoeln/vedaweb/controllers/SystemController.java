@@ -16,7 +16,7 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
 import de.unikoeln.vedaweb.dataimport.DataImportService;
 import de.unikoeln.vedaweb.logging.ClientError;
 import de.unikoeln.vedaweb.logging.ClientErrorRepository;
-import de.unikoeln.vedaweb.search.ElasticIndexService;
+import de.unikoeln.vedaweb.search.IndexService;
 import de.unikoeln.vedaweb.uidata.UiDataService;
 import de.unikoeln.vedaweb.util.JsonUtilService;
 import springfox.documentation.annotations.ApiIgnore;
@@ -35,7 +35,7 @@ public class SystemController {
 	private DataImportService dataImportService;
 	
 	@Autowired
-	private ElasticIndexService indexService;
+	private IndexService indexService;
 	
 	@Autowired
 	private UiDataService uiDataService;

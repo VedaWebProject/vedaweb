@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.fasterxml.jackson.databind.node.ObjectNode;
 
-import de.unikoeln.vedaweb.search.ElasticIndexService;
+import de.unikoeln.vedaweb.search.IndexService;
 import de.unikoeln.vedaweb.uidata.UiDataService;
 import de.unikoeln.vedaweb.util.JsonUtilService;
 import springfox.documentation.annotations.ApiIgnore;
@@ -24,7 +24,7 @@ public class UiDataController {
 	private UiDataService uiDataService;
 	
 	@Autowired
-	private ElasticIndexService indexService;
+	private IndexService indexService;
 	
 	@Autowired
 	private JsonUtilService json;

@@ -1,4 +1,4 @@
-package de.unikoeln.vedaweb.search;
+package de.unikoeln.vedaweb.search.grammar;
 
 import org.elasticsearch.action.search.SearchRequest;
 import org.elasticsearch.index.query.MatchAllQueryBuilder;
@@ -7,6 +7,8 @@ import org.elasticsearch.search.aggregations.AggregationBuilders;
 import org.elasticsearch.search.aggregations.bucket.nested.NestedAggregationBuilder;
 import org.elasticsearch.search.aggregations.bucket.terms.TermsAggregationBuilder;
 import org.elasticsearch.search.builder.SearchSourceBuilder;
+
+import de.unikoeln.vedaweb.search.CommonSearchRequest;
 
 public class GrammarAggregationsBuilder {
 	

@@ -1,6 +1,9 @@
-package de.unikoeln.vedaweb.search;
+package de.unikoeln.vedaweb.search.grammar;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+
+import de.unikoeln.vedaweb.search.SearchHit;
+import de.unikoeln.vedaweb.search.SearchHits;
 
 public class GrammarSearchOccurrences {
 	
