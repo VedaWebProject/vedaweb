@@ -192,9 +192,25 @@ public class MetricalAnalysis {
 	 */
 	public static String[] annotateMultiline(String iso) {
 		String[] lines = iso.split("\n");
-		for (int i = 0; i < lines.length; i++)
-			lines[i] = annotate(lines[i]);
-		return lines;
+		return annotateMultiline(lines);
+	}
+	
+	/**
+	 * Annotates the words in a multiline ISO-15919-transliterated Sanskrit string
+	 * with their respective metrical positions in-line, per line. The tokenization
+	 * of the string is done by simply splitting at whitespaces, specifically
+	 * using the regular expression <code>\\s+</code>
+	 * <br><br>
+	 * Example input: <code>agním īḷe puróhitaṁ</code><br>
+	 * Example output: <code>1_agním 3_īḷe 5_puróhitaṁ</code>
+	 * 
+	 * @param iso The input multiline ISO-15919-transliterated Sanskrit string
+	 * @return A string array containing the annotated lines
+	 */
+	public static String[] annotateMultiline(String[] iso) {
+		for (int i = 0; i < iso.length; i++)
+			iso[i] = annotate(iso[i]);
+		return iso;
 	}
 	
 	
