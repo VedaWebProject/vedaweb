@@ -1,7 +1,9 @@
-package de.unikoeln.vedaweb.util.metricalparser;
+package de.unikoeln.vedaweb.analysis.meter;
 
 import static org.junit.Assert.*;
 import org.junit.Test;
+
+import de.unikoeln.vedaweb.analysis.meter.MetricalAnalysis;
 
 
 public class MetricalParserTest {

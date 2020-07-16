@@ -4,13 +4,13 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
+import de.unikoeln.vedaweb.analysis.meter.MetricalAnalysis;
 import de.unikoeln.vedaweb.document.Pada;
 import de.unikoeln.vedaweb.document.Stanza;
 import de.unikoeln.vedaweb.document.StanzaVersion;
 import de.unikoeln.vedaweb.document.StanzaXml;
 import de.unikoeln.vedaweb.document.StanzaXmlRepository;
 import de.unikoeln.vedaweb.document.Token;
-import de.unikoeln.vedaweb.util.metricalparser.MetricalAnalysis;
 import net.sf.saxon.s9api.Processor;
 import net.sf.saxon.s9api.QName;
 import net.sf.saxon.s9api.SaxonApiException;

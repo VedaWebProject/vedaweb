@@ -1,4 +1,4 @@
-package de.unikoeln.vedaweb.util.metricalparser;
+package de.unikoeln.vedaweb.analysis.meter;
 
 import java.text.Normalizer;
 import java.text.Normalizer.Form;
