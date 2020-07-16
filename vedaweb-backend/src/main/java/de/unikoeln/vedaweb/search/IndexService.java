@@ -48,6 +48,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 
+import de.unikoeln.vedaweb.analysis.meter.MetricalAnalysis;
 import de.unikoeln.vedaweb.document.Pada;
 import de.unikoeln.vedaweb.document.Stanza;
 import de.unikoeln.vedaweb.document.StanzaRepository;
@@ -117,6 +118,10 @@ public class IndexService {
 //				indexDoc.put("lemmata", StringUtils.removeVowelAccents(concatTokenLemmata(dbDoc)));
 //				indexDoc.put("lemmata_raw", StringUtils.normalizeNFC(concatTokenLemmata(dbDoc)));
 			indexDoc.set("tokens", json.getMapper().valueToTree(buildTokensList(dbDoc)));
+			
+			// add metrical positions annotation
+			indexDoc.set("metricalPositions", json.getMapper().valueToTree(
+					generateMetricalAnnotations(dbDoc).split("\\s+")));
 			
 			// create index request
 			IndexRequest request = new IndexRequest("vedaweb");
@@ -499,6 +504,17 @@ public class IndexService {
 			versions.add(version);
 		}
 		return versions;
+	}
+	
+	
+	private String generateMetricalAnnotations(Stanza doc) {
+		int indexVNH = doc.getVersions().indexOf(
+				StanzaVersion.getDummy("version_vannootenholland"));
+		if (indexVNH == -1) return "";
+		String[] form = doc.getVersions().get(indexVNH).getForm();
+		for (int i = 0; i < form.length; i++)
+			form[i] = StringUtils.removeVowelAccents(form[i]);
+		return String.join(" ", MetricalAnalysis.annotateMultiline(form));
 	}
 	
 }
