@@ -5,8 +5,10 @@ import java.text.Normalizer.Form;
 
 
 /**
- * Parses an ISO-15919-transliterated Sanskrit string
- * into a metrical notation with long/short syllable markers.
+ * 
+ * This utility class performs metrical analysis operations on
+ * ISO-15919-transliterated Sanskrit strings.
+ * 
  * @author bkis 
  *
  */
@@ -94,6 +96,9 @@ public class MetricalAnalysis {
 	/**
 	 * Parses an ISO-15919-transliterated Sanskrit string
 	 * into a metrical notation with custom long/short syllable markers.
+	 * If a syllable marker string has a length longer than 1, it will
+	 * be trimmed to the first character.
+	 * 
 	 * @param iso The ISO-15919 string
 	 * @param longMark Custom mark for long syllables
 	 * @param shortMark Custom mark for short syllables
@@ -110,6 +115,7 @@ public class MetricalAnalysis {
 	 * into a metrical notation with long/short syllable markers.
 	 * Multiline strings will be parsed line by line
 	 * and returned in an array of lines.
+	 * 
 	 * @param iso The ISO-15919 string
 	 * @return The metre data
 	 */
@@ -125,6 +131,7 @@ public class MetricalAnalysis {
 	 * into a metrical notation with custom long/short syllable markers.
 	 * Multiline strings will be parsed line by line
 	 * and returned in an array of lines.
+	 * 
 	 * @param iso The ISO-15919 string
 	 * @param longMark Custom mark for long syllables
 	 * @param shortMark Custom mark for short syllables
@@ -141,41 +148,55 @@ public class MetricalAnalysis {
 		return lines;
 	}
 	
-	
-	public static Result analyze(String iso) {
-		return new Result(iso, LONG, SHORT);
-	}
-	
-	
-	public static Result analyze(
-			String iso,
-			String longMark,
-			String shortMark) {
+	/**
+	 * Annotates the words in an ISO-15919-transliterated Sanskrit string
+	 * with their respective metrical positions in-line. The tokenization
+	 * of the string is done by simply splitting at whitespaces, specifically
+	 * using the regular expression <code>\\s+</code>
+	 * <br><br>
+	 * Example input: <code>agním īḷe puróhitaṁ</code><br>
+	 * Example output: <code>1_agním 3_īḷe 5_puróhitaṁ</code>
+	 * 
+	 * @param iso The input ISO-15919-transliterated Sanskrit string
+	 * @return The annotated input string
+	 */
+	public static String annotate(String iso) {
+		String[] isoSplit = iso.split(SPC);
+		String[] metricalDataSplit = parse(iso).split(SPC);
+		int[] positions = new int[metricalDataSplit.length];
 		
-		return new Result(iso, longMark, shortMark);
-	}
-	
-	
-	public static Result[] analyzeMultiline(String iso) {
-		String[] lines = iso.split("\n");
-		Result[] results = new Result[lines.length];
-		for (int i = 0; i < lines.length; i++)
-			results[i] = analyze(lines[i]);
-		return results;
-	}
-	
-	
-	public static Result[] analyzeMultiline(
-			String iso,
-			String longMark,
-			String shortMark) {
+		//compute positions
+		for (int i = 0; i < positions.length; i++) {
+			if (i == 0) {
+				positions[i] = 1;
+			} else {
+				positions[i] = positions[i-1] + metricalDataSplit[i-1].length();
+			}
+			isoSplit[i] = positions[i] + "_" + isoSplit[i];
+		}
 		
-		String[] lines = iso.split("\n");
-		Result[] results = new Result[lines.length];
-		for (int i = 0; i < lines.length; i++)
-			results[i] = analyze(lines[i], longMark, shortMark);
-		return results;
+		return String.join(" ", isoSplit);
 	}
+	
+	/**
+	 * Annotates the words in a multiline ISO-15919-transliterated Sanskrit string
+	 * with their respective metrical positions in-line, per line. The tokenization
+	 * of the string is done by simply splitting at whitespaces, specifically
+	 * using the regular expression <code>\\s+</code>
+	 * <br><br>
+	 * Example input: <code>agním īḷe puróhitaṁ</code><br>
+	 * Example output: <code>1_agním 3_īḷe 5_puróhitaṁ</code>
+	 * 
+	 * @param iso The input multiline ISO-15919-transliterated Sanskrit string
+	 * @return A string array containing the annotated lines
+	 */
+	public static String[] annotateMultiline(String iso) {
+		String[] lines = iso.split("\n");
+		for (int i = 0; i < lines.length; i++)
+			lines[i] = annotate(lines[i]);
+		return lines;
+	}
+	
 	
 	/*
 	 * Cleans a string from accents (´ and `) and
@@ -190,78 +211,4 @@ public class MetricalAnalysis {
 	}
 	
 	
-	public static class Result {
-		
-		private String iso;
-		private String[] isoSplit;
-		private String metricalData;
-		private String[] metricalDataSplit;
-		private int[] positions;
-		
-		private Result(
-				final String iso,
-				final String longMark,
-				final String shortMark) {
-			this.iso = iso;
-			this.isoSplit = this.iso.split(SPC);
-			this.metricalData = parse(iso, longMark, shortMark);
-			this.metricalDataSplit = this.metricalData.split(SPC);
-			
-			//compute positions
-			this.positions = new int[metricalDataSplit.length];
-			for (int i = 0; i < positions.length; i++) {
-				if (i == 0) {
-					positions[i] = 1;
-					continue;
-				}
-				positions[i] = positions[i-1] + metricalDataSplit[i-1].length();
-			}
-		}
-		
-		public String getInputIso() {
-			return iso;
-		}
-		
-		public String[] getInputIsoSplit() {
-			return isoSplit;
-		}
-		
-		public String getMetricalData() {
-			return metricalData;
-		}
-		
-		public String[] getMetricalDataSplit() {
-			return metricalDataSplit;
-		}
-		
-		public int[] getMetricalPositions() {
-			return positions;
-		}
-		
-		public int getMetricalPosition(int termIndex) {
-			if (termIndex < 0 || termIndex >= metricalDataSplit.length) {
-				return -1;
-			} else {
-				return positions[termIndex];
-			}
-		}
-		
-		public int getMetricalPosition(String isoTerm) {
-			int pos = -1;
-			for (int i = 0; i < isoSplit.length; i++) {
-				if (isoSplit[i].equals(isoTerm)) {
-					pos = i;
-					break;
-				}
-			}
-			if (pos < 0) {
-				return -1;
-			} else {
-				return positions[pos];
-			}
-		}
-		
-	}
-
-
 }
