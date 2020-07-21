@@ -33,8 +33,12 @@ class SearchMetrical extends Component {
                 <OptGroup label="Text Versions">
                     {/* text versions (with metrical data) */}
                     {stateStore.ui.layers
-                    .filter(l => l.id.startsWith('version_') && l.id !== 'version_devanagari' && l.id !== 'version_')
-                    .map(v => (
+                    .filter(
+                        l => l.id.startsWith('version_')
+                        && l.id !== 'version_eichler'
+                        && l.id !== 'version_gasuns'
+                        && l.id !== 'version_'
+                    ).map(v => (
                         <Option
                         key={'metrical_field_' + v.id}
                         value={v.id}
