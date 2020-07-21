@@ -28,7 +28,8 @@ class SearchMetrical extends Component {
             defaultValue="version_vannootenholland"
             value={stateStore.search.metrical.field}
             onSelect={(value, option) => stateStore.search.metrical.field = value}
-            style={{ width: '180px' }}
+            style={{ width: '220px' }}
+            dropdownMatchSelectWidth={false}
             className="secondary-font">
                 <OptGroup label="Text Versions">
                     {/* text versions (with metrical data) */}

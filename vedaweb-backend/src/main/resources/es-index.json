@@ -37,6 +37,7 @@
 			"strata":			{ "type": "keyword" },
 			"stanzaType":		{ "type": "keyword" },
 			"metricalPositions":{ "type": "keyword" },
+			"metricalPositions_raw":{ "type": "keyword" },
 			"versions": {
 				"type": "nested",
 				"properties": {

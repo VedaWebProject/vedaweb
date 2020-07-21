@@ -120,8 +120,12 @@ public class IndexService {
 			indexDoc.set("tokens", json.getMapper().valueToTree(buildTokensList(dbDoc)));
 			
 			// add metrical positions annotation
+			String metricalAnnotations = generateMetricalAnnotations(dbDoc);
 			indexDoc.set("metricalPositions", json.getMapper().valueToTree(
-					generateMetricalAnnotations(dbDoc).split("\\s+")));
+					StringUtils.removeVowelAccents(
+							metricalAnnotations).split("\\s+")));
+			indexDoc.set("metricalPositions_raw", json.getMapper().valueToTree(
+					metricalAnnotations.split("\\s+")));
 			
 			// create index request
 			IndexRequest request = new IndexRequest("vedaweb");
@@ -512,8 +516,6 @@ public class IndexService {
 				StanzaVersion.getDummy("version_vannootenholland"));
 		if (indexVNH == -1) return "";
 		String[] form = doc.getVersions().get(indexVNH).getForm();
-		for (int i = 0; i < form.length; i++)
-			form[i] = StringUtils.removeVowelAccents(form[i]);
 		return String.join(" ", MetricalAnalysis.annotateMultiline(form));
 	}
 	

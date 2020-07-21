@@ -3,7 +3,9 @@ package de.unikoeln.vedaweb.search.metricalposition;
 import org.elasticsearch.action.search.SearchRequest;
 import org.elasticsearch.index.query.BoolQueryBuilder;
 import org.elasticsearch.index.query.QueryBuilders;
+
 import de.unikoeln.vedaweb.search.CommonSearchRequest;
+import de.unikoeln.vedaweb.util.StringUtils;
 
 public class MetricalPositionSearchRequestBuilder {
 	
@@ -13,9 +15,12 @@ public class MetricalPositionSearchRequestBuilder {
 		BoolQueryBuilder bool = QueryBuilders.boolQuery();
 		
 		//add actual metrical search query
-		bool.must(
-			QueryBuilders.termQuery("metricalPositions",
-					searchData.getPosition() + "_" + searchData.getInput()));
+		String field = "metricalPositions" + (searchData.isAccents() ? "_raw" : "");
+		String input = searchData.getPosition() + "_" + (searchData.isAccents()
+						? searchData.getInput()
+						: StringUtils.removeVowelAccents(searchData.getInput()));
+		System.out.println(field + ": " + input);
+		bool.must(QueryBuilders.termQuery(field, input));
 		
 		//add search scope filters
 		if (searchData.getScopes().size() > 0)

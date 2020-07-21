@@ -37,7 +37,7 @@ class SearchMetricalPosition extends Component {
             defaultValue={1}
             value={stateStore.search.metricalPosition.position}
             onSelect={(value, option) => stateStore.search.metricalPosition.position = value}
-            style={{ width: '180px' }}
+            style={{ width: '220px' }}
             className="secondary-font">
                 {[...Array(10).keys()].map(i => 
                     <Option
