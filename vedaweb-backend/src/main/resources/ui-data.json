@@ -76,8 +76,8 @@
 		
 		{ "id": "version_", "label": "All Text Versions", "show": true },
 		{ "id": "version_lubotskyzurich", "label": "Lubotsky, Zurich", "show": true },
-		{ "id": "version_eichler", "label": "Version provided by D. Eichler", "show": true },
-		{ "id": "version_gasuns", "label": "Version provided by  M. Gasūns", "show": true },
+		{ "id": "version_eichler", "label": "Devanagari (D. Eichler)", "show": true },
+		{ "id": "version_gasuns", "label": "Devanagari (M. Gasūns)", "show": true },
 		{ "id": "version_vannootenholland", "label": "Van Nooten & Holland", "show": false },
 		{ "id": "version_aufrecht", "label": "Aufrecht", "show": false },
 		{ "id": "version_padapatha", "label": "Padapatha", "show": false },
