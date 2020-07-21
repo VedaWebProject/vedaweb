@@ -3,6 +3,7 @@ import { Row, Col, Button, Icon, Tabs, Collapse, Checkbox } from 'antd';
 
 import SearchGrammar from "./grammar/SearchGrammar";
 import SearchMetrical from "./metrical/SearchMetrical";
+import SearchMetricalPosition from "./metricalPosition/SearchMetricalPosition";
 import SearchScopeContainer from "./settings/SearchScopeContainer";
 import SearchTransliteration from "./settings/SearchTransliteration";
 import SearchScopeIndicator from "./settings/SearchScopeIndicator";
@@ -139,11 +140,14 @@ class SearchView extends Component {
                             id="search-mode-selector"
                             tabBarGutter={8}
                             className="bottom-gap">
-                                <TabPane tab="Grammar Search" key="grammar">
+                                <TabPane tab="Grammar" key="grammar">
                                     <SearchGrammar />
                                 </TabPane>
-                                <TabPane tab="Metrical Search" key="metrical">
+                                <TabPane tab="Metrical Pattern" key="metrical">
                                     <SearchMetrical />
+                                </TabPane>
+                                <TabPane tab="Metrical Position" key="metricalPosition">
+                                    <SearchMetricalPosition />
                                 </TabPane>
                             </Tabs>
 

@@ -38,8 +38,9 @@ public class QuickSearchData extends CommonSearchData {
 	}
 
 
-	public void setInput(String input) {
+	public QuickSearchData setInput(String input) {
 		this.input = input.trim();
+		return this;
 	}
 	
 	
@@ -48,8 +49,9 @@ public class QuickSearchData extends CommonSearchData {
 	}
 
 
-	public void setField(String field) {
+	public QuickSearchData setField(String field) {
 		this.field = field;
+		return this;
 	}
 
 

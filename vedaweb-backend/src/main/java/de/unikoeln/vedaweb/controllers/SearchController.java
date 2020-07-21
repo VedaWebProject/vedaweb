@@ -13,6 +13,7 @@ import de.unikoeln.vedaweb.search.SearchHitsConverter;
 import de.unikoeln.vedaweb.search.grammar.GrammarSearchData;
 import de.unikoeln.vedaweb.search.grammar.GrammarSearchOccurrences;
 import de.unikoeln.vedaweb.search.metrical.MetricalSearchData;
+import de.unikoeln.vedaweb.search.metricalposition.MetricalPositionSearchData;
 import de.unikoeln.vedaweb.search.quick.QuickSearchData;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -59,6 +60,18 @@ public class SearchController {
 			value = "/metrical",
 			produces = MediaType.APPLICATION_JSON_VALUE)
     public SearchHits searchMetrical(@RequestBody MetricalSearchData searchData) {
+		return SearchHitsConverter
+				.processSearchResponse(search.search(searchData));
+    }
+	
+	
+	@ApiOperation(
+			value = "Metrical position search API endpoint",
+			response = SearchHits.class)
+	@PostMapping(
+			value = "/metricalPosition",
+			produces = MediaType.APPLICATION_JSON_VALUE)
+    public SearchHits searchMetricalPosition(@RequestBody MetricalPositionSearchData searchData) {
 		return SearchHitsConverter
 				.processSearchResponse(search.search(searchData));
     }

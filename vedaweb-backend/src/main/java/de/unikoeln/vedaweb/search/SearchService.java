@@ -13,6 +13,8 @@ import de.unikoeln.vedaweb.search.grammar.GrammarSearchData;
 import de.unikoeln.vedaweb.search.grammar.GrammarSearchRequestBuilder;
 import de.unikoeln.vedaweb.search.metrical.MetricalSearchData;
 import de.unikoeln.vedaweb.search.metrical.MetricalSearchRequestBuilder;
+import de.unikoeln.vedaweb.search.metricalposition.MetricalPositionSearchData;
+import de.unikoeln.vedaweb.search.metricalposition.MetricalPositionSearchRequestBuilder;
 import de.unikoeln.vedaweb.search.quick.QuickSearchData;
 import de.unikoeln.vedaweb.search.quick.QuickSearchRequestBuilder;
 
@@ -38,6 +40,10 @@ public class SearchService {
 			return submitSearch(
 					MetricalSearchRequestBuilder.buildSearchRequest(
 							(MetricalSearchData)searchData));
+		} else if (searchData instanceof MetricalPositionSearchData) {
+			return submitSearch(
+					MetricalPositionSearchRequestBuilder.buildSearchRequest(
+							(MetricalPositionSearchData)searchData));
 		} else {
 			return null;
 		}

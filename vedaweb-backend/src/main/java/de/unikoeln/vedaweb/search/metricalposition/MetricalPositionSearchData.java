@@ -1,4 +1,4 @@
-package de.unikoeln.vedaweb.search.metrical;
+package de.unikoeln.vedaweb.search.metricalposition;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -7,16 +7,15 @@ import de.unikoeln.vedaweb.search.CommonSearchData;
 import io.swagger.annotations.ApiModelProperty;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class MetricalSearchData extends CommonSearchData {
+public class MetricalPositionSearchData extends CommonSearchData {
 	
 	@JsonProperty("input")
 	@ApiModelProperty(notes = "Search input field value")
 	private String input;
 	
-	@JsonProperty("field")
-	@ApiModelProperty(notes = "Text version field to search in",
-		example = "'version_' for all versions, 'translation_' for all translations")
-	private String field;
+	@JsonProperty("position")
+	@ApiModelProperty(notes = "Metrical position field value")
+	private String position;
 
 
 	public String getInput() {
@@ -28,20 +27,20 @@ public class MetricalSearchData extends CommonSearchData {
 		this.input = input.trim();
 	}
 	
-	
-	public String getField() {
-		return field;
+
+	public String getPosition() {
+		return position;
 	}
 
 
-	public void setField(String field) {
-		this.field = field;
+	public void setPosition(String position) {
+		this.position = position;
 	}
 
 
 	@Override
 	public String toString() {
-		return "Metrical Search:" + (input != null ? " input:" + input : "");
+		return "Metrical Position Search:" + (input != null ? " input:" + input : "");
 	}
 	
 }
