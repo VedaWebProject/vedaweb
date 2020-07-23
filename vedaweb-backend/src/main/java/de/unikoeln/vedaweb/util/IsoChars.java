@@ -8,7 +8,8 @@ import java.util.Map;
 public class IsoChars {
 	
 	public static final List<String> ISO_VOWELS = Arrays.asList(new String[]
-		{"au", "ai", "a", "ā", "i", "ī", "u", "ū", "r̥", "r̥̄", "l̥", "l̥̄", "ē", "e", "ō", "o"}
+		{"au", "ai", "a", "ā", "i", "ī", "u", "ū", "r̥",
+				"r̥̄", "l̥", "l̥̄", "ē", "e", "ō", "o"}
 	);
 	
 	public static final List<String> ISO_OTHERS = Arrays.asList(new String[]
@@ -16,7 +17,9 @@ public class IsoChars {
 	);
 	
 	public static final List<String> ISO_CONSONANTS = Arrays.asList(new String[]
-		{"k", "kh", "g", "gh", "ṅ", "c", "ch", "j", "jh", "ñ", "ṭ", "ṭh", "ḍ", "ḍh", "ṇ", "t", "th", "d", "dh", "n", "p", "ph", "b", "bh", "m", "y", "r", "l", "v", "ś", "ṣ", "s", "h", "ḻ", "kṣ", "jñ"}
+		{"k", "kh", "g", "gh", "ṅ", "c", "ch", "j", "jh", "ñ", "ṭ", "ṭh", "ḍ",
+				"ḍh", "ṇ", "t", "th", "d", "dh", "n", "p", "ph", "b", "bh", "m",
+				"y", "r", "l", "v", "ś", "ṣ", "s", "h", "ḻ", "kṣ", "jñ"}
 	);
 	
 	public static final List<String> ISO_SYMBOLS = Arrays.asList(new String[]
