@@ -14,12 +14,14 @@ public class MetricalPositionSearchRequestBuilder {
 		//root bool query
 		BoolQueryBuilder bool = QueryBuilders.boolQuery();
 		
-		//add actual metrical search query
+		//prepare query data
 		String field = "metricalPositions" + (searchData.isAccents() ? "_raw" : "");
 		String input = searchData.getPosition() + "_" + (searchData.isAccents()
 						? searchData.getInput()
 						: StringUtils.removeVowelAccents(searchData.getInput()));
-		System.out.println(field + ": " + input);
+		input = StringUtils.normalizeNFC(input); // normalize NFC
+		
+		//add query
 		bool.must(QueryBuilders.termQuery(field, input));
 		
 		//add search scope filters
