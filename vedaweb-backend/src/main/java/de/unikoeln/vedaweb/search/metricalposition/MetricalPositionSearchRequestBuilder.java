@@ -16,13 +16,14 @@ public class MetricalPositionSearchRequestBuilder {
 		
 		//prepare query data
 		String field = "metricalPositions" + (searchData.isAccents() ? "_raw" : "");
-		String input = searchData.getPosition() + "_" + (searchData.isAccents()
-						? searchData.getInput()
-						: StringUtils.removeVowelAccents(searchData.getInput()));
+		String input = searchData.getInput().trim().split(" ", 2)[0];
+		input = searchData.getPosition() + (searchData.isAccents()
+						? input : StringUtils.removeVowelAccents(input));
+		System.out.println(field + ": " + input);
 		input = StringUtils.normalizeNFC(input); // normalize NFC
 		
 		//add query
-		bool.must(QueryBuilders.termQuery(field, input));
+		bool.must(QueryBuilders.queryStringQuery(input).field(field));
 		
 		//add search scope filters
 		if (searchData.getScopes().size() > 0)

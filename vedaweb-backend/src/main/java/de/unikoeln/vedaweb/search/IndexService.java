@@ -120,12 +120,12 @@ public class IndexService {
 			indexDoc.set("tokens", json.getMapper().valueToTree(buildTokensList(dbDoc)));
 			
 			// add metrical positions annotation
-			String metricalAnnotations = generateMetricalAnnotations(dbDoc);
+			String metricalAnnotations = generateMetricalAnnotations(dbDoc).replaceAll("\\_", "");
 			indexDoc.set("metricalPositions", json.getMapper().valueToTree(
 					StringUtils.removeVowelAccents(
-							metricalAnnotations).split("\\s+")));
+							metricalAnnotations)));
 			indexDoc.set("metricalPositions_raw", json.getMapper().valueToTree(
-					metricalAnnotations.split("\\s+")));
+					metricalAnnotations));
 			
 			// create index request
 			IndexRequest request = new IndexRequest("vedaweb");
