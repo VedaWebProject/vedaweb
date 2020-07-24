@@ -65,7 +65,8 @@ class SearchMetricalPosition extends Component {
 
                 <HelpButton
                 type="metricalPositionSearch"
-                label="How does this work?" />
+                label="Search for a single term in a certain metrical position (based on Van Nooten & Holland). Click here for more help!"
+                inline/>
 
                 <div className="top-gap">
 

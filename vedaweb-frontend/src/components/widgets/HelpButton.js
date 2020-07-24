@@ -80,6 +80,28 @@ const helpTexts = {
                 </p>
             </div>
     },
+    metricalPositionSearch : {
+        title: "Metrical Position Search",
+        content:
+            <div>
+                <p>
+                    With this search mode, you can search for terms in certain metrical positions of the containing Pada (verse).
+                    The underlying metrical analysis is based on the text version by Van Nooten & Holland.
+                    Because of that, the terms entered in the input field must
+                    match the terms in the stanzas of this text version to be found.
+                </p>
+                <p>
+                    Please note that this search mode will only search for single terms - not for multiple terms or phrases!
+                </p>
+                <h4>Wildcards</h4>
+                <p>
+                    It is possible to search for words starting or ending with a certain substring.
+                    Searching for <Text code>agni*</Text> will find <Text code>agnim</Text>, <Text code>agniḥ</Text>, <Text code>agnināgniḥ</Text>, and so on - so the Asterisk (<Text code>*</Text>)
+                    works as a simple placeholder. You can use this in the beginning (<Text code>*dāḥ</Text>), the end (<Text code>agni*</Text>)
+                    or both (<Text code>*dak*</Text>).
+                </p>
+            </div>
+    },
     searchScope : {
         title: "Search Range Filter",
         content:
