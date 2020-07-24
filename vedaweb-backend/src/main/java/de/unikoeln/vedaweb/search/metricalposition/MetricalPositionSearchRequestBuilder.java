@@ -19,7 +19,6 @@ public class MetricalPositionSearchRequestBuilder {
 		String input = searchData.getInput().trim().split(" ", 2)[0];
 		input = searchData.getPosition() + (searchData.isAccents()
 						? input : StringUtils.removeVowelAccents(input));
-		System.out.println(field + ": " + input);
 		input = StringUtils.normalizeNFC(input); // normalize NFC
 		
 		//add query
