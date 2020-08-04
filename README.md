@@ -1,7 +1,8 @@
 # VedaWeb <!-- omit in toc -->
 
-[![LGTM](https://img.shields.io/lgtm/alerts/github/DH-Cologne/vedaweb.svg?label=LGTM&logo=LGTM&style=flat-square)](https://lgtm.com/projects/g/DH-Cologne/vedaweb/alerts)&nbsp;
-[![](https://img.shields.io/github/repo-size/DH-Cologne/vedaweb.svg?label=Repo%20size&style=flat-square)](https://github.com/DH-Cologne/vedaweb)&nbsp;
+[![Total alerts](https://img.shields.io/lgtm/alerts/g/DH-Cologne/vedaweb.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/DH-Cologne/vedaweb/alerts/)&nbsp;
+[![Language grade: JavaScript](https://img.shields.io/lgtm/grade/javascript/g/DH-Cologne/vedaweb.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/DH-Cologne/vedaweb/context:javascript)&nbsp;
+[![](https://img.shields.io/github/repo-size/DH-Cologne/vedaweb.svg?label=Repo%20size)](https://github.com/DH-Cologne/vedaweb)&nbsp;
 
 **This is the code repository for the VedaWeb application, which is being developed as part of the [VedaWeb project](https://vedaweb.uni-koeln.de/).**
 
