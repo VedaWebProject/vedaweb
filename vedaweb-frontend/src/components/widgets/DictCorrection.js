@@ -13,7 +13,6 @@ class DictCorrection extends Component {
 
         this.state = {
             isLoaded: true,
-            error: null ,
             suggestions: [],
             input: "",
             value: null,
@@ -37,14 +36,12 @@ class DictCorrection extends Component {
             .then((response) => {
                 this.setState({
                     isLoaded: true,
-                    error: null,
                     corrections: response.data
                 });
             })
             .catch((error) => {
                 this.setState({
                     isLoaded: true,
-                    error: error,
                     corrections: []
                 });
                 alert("There was an error retrieving previous corrections.");
@@ -75,14 +72,12 @@ class DictCorrection extends Component {
             .then((response) => {
                 this.setState({
                     isLoaded: true,
-                    error: null,
                     suggestions: response.data.data.entries
                 });
             })
             .catch((error) => {
                 this.setState({
                     isLoaded: true,
-                    error: error,
                     suggestions: []
                 });
                 alert("There was an error generating suggestions data.");
@@ -125,7 +120,6 @@ class DictCorrection extends Component {
             .then((response) => {
                 this.setState({
                     isLoaded: true,
-                    error: null ,
                     suggestions: [],
                     input: "",
                     value: null,
@@ -136,7 +130,6 @@ class DictCorrection extends Component {
             .catch((error) => {
                 this.setState({
                     isLoaded: true,
-                    error: null ,
                     suggestions: [],
                     input: "",
                     value: null,
@@ -149,26 +142,28 @@ class DictCorrection extends Component {
 
 
     render() {
+
+        const { isLoaded, suggestions, input, value, visible, comment, corrections } = this.state;
         
         return (
             <div style={{display:"inline-block"}}>
                 <Button icon="api" onClick={() => this.setState({visible: true})}/>
-                { this.state.visible &&
+                { visible &&
                     <Modal
                     title={<div>Correct dict. relation for: <strong className="text-font">{this.props.lemma}</strong></div>}
                     centered
                     destroyOnClose={true}
-                    visible={this.state.visible}
+                    visible={visible}
                     onOk={this.submit}
                     onCancel={() => this.setState({visible: false})}
                     onClose={() => this.setState({visible: false})}
                     okText="Save Correction">
 
                             {/** PREVIOUS CORRECTIONS */}
-                            { this.state.corrections && this.state.corrections.length > 0 &&
+                            { corrections && corrections.length > 0 &&
                                 <div style={{marginBottom: "1rem"}}>
                                     <h3>Previous corrections</h3>
-                                    {this.state.corrections.map((c, i) =>
+                                    {corrections.map((c, i) =>
                                         <Card
                                         size="small"
                                         title={c.lemma + " → " + c.dictId}
@@ -198,13 +193,13 @@ class DictCorrection extends Component {
                             style={{width: "100%", marginBottom: "1rem"}}
                             filterOption={false}
                             notFoundContent={null}
-                            value={this.state.input}
+                            value={input}
                             onSearch={this.onChange}
                             onSelect={this.onSelect}
-                            loading={!this.state.isLoaded} >
+                            loading={!isLoaded} >
 
-                                { this.state.isLoaded && this.state.suggestions && this.state.suggestions.length > 0 &&
-                                    this.state.suggestions.map(s => 
+                                { isLoaded && suggestions && suggestions.length > 0 &&
+                                    suggestions.map(s => 
                                         <Option className="text-font" key={s.id}>{s.headwordIso + " (" + s.id + ")"}</Option>
                                     )
                                 }
@@ -212,18 +207,18 @@ class DictCorrection extends Component {
                             </Select>
                             
                             {/** SELECTED DICT ENTRY */}
-                            { this.state.value &&
+                            { value &&
                                 <div className="text-font">
-                                    <strong>headword: </strong>{this.state.value.headwordIso}<br/>
-                                    <strong>headword Deva: </strong>{this.state.value.headwordDeva}<br/>
-                                    <strong>id: </strong>{this.state.value.id}<br/>
+                                    <strong>headword: </strong>{value.headwordIso}<br/>
+                                    <strong>headword Deva: </strong>{value.headwordDeva}<br/>
+                                    <strong>id: </strong>{value.id}<br/>
                                 </div>
                             }
 
                             {/** COMMENT */}
                             <TextArea
                             placeholder="Comment (optional)"
-                            value={this.state.comment}
+                            value={comment}
                             onChange={e => this.setState({comment: e.target.value})}
                             rows={4}
                             style={{marginTop: "1rem"}} />

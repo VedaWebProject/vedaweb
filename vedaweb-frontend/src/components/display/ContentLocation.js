@@ -67,7 +67,7 @@ class ContentLocation extends Component {
         const {book, hymn, stanza} = this.props;
         const bookCount = stateStore.ui.search.meta.scopes.length;
         const hymnCount = stateStore.ui.search.meta.scopes[book-1];
-        const stanzaCount = this.state.stanzaCount;
+        const {stanzaCount, isLoaded, error} = this.state;
 
         //const { hymnAbs } = this.props;
         //const hymnAbsValues = stateStore.ui.search.meta.hymnAbs;
@@ -123,13 +123,15 @@ class ContentLocation extends Component {
                     showSearch
                     value={stanza}
                     onSelect={(v) => this.handleSelect(this.props.book, this.props.hymn, v)} >
-                        {Array(stanzaCount).fill(0).map((n, i) => (
-                            <Option
-                            key={'stanza_' + i+1}
-                            value={i+1}>
-                                {('0' + (i+1)).slice(-2)}
-                            </Option>
-                        ))}
+                        {isLoaded && !error &&
+                            Array(stanzaCount).fill(0).map((n, i) => (
+                                <Option
+                                key={'stanza_' + i+1}
+                                value={i+1}>
+                                    {('0' + (i+1)).slice(-2)}
+                                </Option>
+                            ))
+                        }
                     </Select>
                     
                     <Link

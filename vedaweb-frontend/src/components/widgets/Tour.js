@@ -53,19 +53,19 @@ class Tour extends Component {
     }
 
     nextTarget(){
-        this.setState({
-            step: (this.state.step + 1),
+        this.setState(prevState => ({
+            step: prevState.step + 1,
             target: null,
             pos: null
-        })
+        }))
     }
 
     prevTarget(){
-        this.setState({
-            step: (this.state.step - 1),
+        this.setState(prevState => ({
+            step: prevState.step - 1,
             target: null,
             pos: null
-        })
+        }))
     }
 
     isFixed(el){
@@ -92,16 +92,15 @@ class Tour extends Component {
                 target.fixed = comp.isFixed(element);
                 comp.setState({
                     target: target || null,
-                    pos: element ? element.getBoundingClientRect() : null,
-                    targetElement: element
+                    pos: element ? element.getBoundingClientRect() : null
                 });
             } else if (lookupDuration >= config.targetLookupTimeout){
                 clearInterval(lookup);
-                comp.setState({
+                comp.setState(prevState => ({
                     target: null,
                     pos: null,
-                    step: comp.state.step + 1
-                });
+                    step: prevState.step + 1
+                }));
             }
         }, config.targetLookupInterval);
     }

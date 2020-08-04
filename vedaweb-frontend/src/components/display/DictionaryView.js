@@ -19,8 +19,7 @@ class DictionaryView extends Component {
             modalVisible: false,
             modalData: undefined,
             dictData: [],
-            error: undefined,
-            correctionVisible: false
+            error: undefined
         };
         this.setDictContentRef = this.setDictContentRef.bind(this);
     }
@@ -206,7 +205,7 @@ class DictionaryView extends Component {
                                     let entry = token.dict === undefined ? undefined
                                         : token.dict.find(d => d.graRef === ref);
                                     return  <Button
-                                            disabled={!isLoaded || error !== undefined}
+                                            disabled={!isLoaded || error}
                                             className="dict-link gap-right"
                                             onClick={() => this.openDict(entry)}
                                             title={"Show full entry for \"" + token.lemma + "\": #" + (i+1)}
@@ -224,7 +223,7 @@ class DictionaryView extends Component {
                     </tbody>
                 </table>
 
-                {isLoaded && modalVisible && modalData !== undefined && error === undefined &&
+                {isLoaded && modalVisible && modalData && !error &&
                     <Modal
                     title={<div><span className="bold">Grassmann: </span><span className="text-font">{modalData.graLemma}</span></div>}
                     centered
@@ -248,7 +247,7 @@ class DictionaryView extends Component {
                 }
 
 
-                {isLoaded && error !== undefined &&
+                {isLoaded && error &&
                     <span className="red secondary-font">
                         <Icon type="meh"/> There was an error loading the dictionary data. Please try again later.
                     </span>
