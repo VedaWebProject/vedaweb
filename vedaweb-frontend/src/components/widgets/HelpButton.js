@@ -618,7 +618,7 @@ const helpTexts = {
         content:
             <div>
                 <p>
-                    Max Müller. Vedic Hymns. (Sacred Books of the East Vol. 32. Part 1)
+                Müller, Max. 1891. Vedic Hymns. Part 1. Hymns to the Maruts, Rudra, Vâyu and Vâta. Sacred Books of the East. Vol. 32. Oxford: Clarendon Press.
                 </p>
             </div>
     },
@@ -627,7 +627,7 @@ const helpTexts = {
         content:
             <div>
                 <p>
-                Oldenberg, Hermann (1897): Vedic Hymns. Part 2. Hymns to Agni (Mandalas I-V). Oxford: Oxford University Press (Sacred books of the East, 46).
+                    Oldenberg, Hermann (1897): Vedic Hymns. Part 2. Hymns to Agni (Mandalas I-V). Oxford: Oxford University Press (Sacred books of the East, 46).
                 </p>
             </div>
     },
