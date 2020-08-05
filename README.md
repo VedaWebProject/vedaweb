@@ -1,8 +1,14 @@
 # VedaWeb <!-- omit in toc -->
 
-[![Total alerts](https://img.shields.io/lgtm/alerts/g/DH-Cologne/vedaweb.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/DH-Cologne/vedaweb/alerts/)&nbsp;
-[![Language grade: JavaScript](https://img.shields.io/lgtm/grade/javascript/g/DH-Cologne/vedaweb.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/DH-Cologne/vedaweb/context:javascript)&nbsp;
-[![](https://img.shields.io/github/repo-size/DH-Cologne/vedaweb.svg?label=Repo%20size)](https://github.com/DH-Cologne/vedaweb)&nbsp;
+[![Total alerts](https://img.shields.io/lgtm/alerts/g/DH-Cologne/vedaweb.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/DH-Cologne/vedaweb/alerts/)
+&nbsp;
+[![Language grade: JavaScript](https://img.shields.io/lgtm/grade/javascript/g/DH-Cologne/vedaweb.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/DH-Cologne/vedaweb/context:javascript)
+&nbsp;
+[![](https://img.shields.io/github/repo-size/DH-Cologne/vedaweb.svg?label=Repo%20size)](https://github.com/DH-Cologne/vedaweb)
+&nbsp;
+[![Website vedaweb.uni-koeln.de](https://img.shields.io/website-up-down-green-red/http/vedaweb.uni-koeln.de.svg)](http://vedaweb.uni-koeln.de/)
+&nbsp;
+[![GitHub tag](https://img.shields.io/github/tag/DH-Cologne/vedaweb.svg)](https://GitHub.com/DH-Cologne/vedaweb/tags/)
 
 **This is the code repository for the VedaWeb application, which is being developed as part of the [VedaWeb project](https://vedaweb.uni-koeln.de/).**
 
