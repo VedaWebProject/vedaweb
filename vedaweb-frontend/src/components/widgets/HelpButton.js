@@ -613,6 +613,15 @@ const helpTexts = {
                 </p>
             </div>
     },
+    translation_mueller : {
+        title: "Müller",
+        content:
+            <div>
+                <p>
+                    Max Müller. Vedic Hymns. (Sacred Books of the East Vol. 32. Part 1)
+                </p>
+            </div>
+    },
     translation_elizarenkova : {
         title: "Elizarenkova",
         content:

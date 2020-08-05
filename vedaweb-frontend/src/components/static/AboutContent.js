@@ -48,6 +48,8 @@ class AboutContent extends Component {
 
                 <h2><Icon type="issues-close"/> Recent Changes</h2>
                 <ul>
+                    <li>Added English translation by Müller (2020/08/05)</li>
+                    <li>New grammar search value for 'non-finite': 'PPP' (2020/07/20)</li>
                     <li>References to Scans of Ludwig's comments (2020/07/02)</li>
                     <li>New generic grammar attribute vaule in Grammar Search: "any" (2020/06/05)</li>
                     <li>Precise translation/version coverage data in help texts (2020/06/03)</li>

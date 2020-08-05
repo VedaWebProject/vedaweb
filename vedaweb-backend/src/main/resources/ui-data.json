@@ -87,6 +87,7 @@
 		{ "id": "translation_", "label": "All Translations", "show": true },
 		{ "id": "translation_griffith", "label": "Griffith", "show": true },
 		{ "id": "translation_macdonell", "label": "MacDonell", "show": false },
+		{ "id": "translation_mueller", "label": "Müller", "show": false },
 		{ "id": "translation_renou", "label": "Renou", "show": true },
 		{ "id": "translation_geldner", "label": "Geldner", "show": true },
 		{ "id": "translation_grassmann", "label": "Graßmann", "show": false },
