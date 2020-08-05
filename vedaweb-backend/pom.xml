@@ -154,7 +154,7 @@
 						</configuration>
 					</execution>
 					
-					<!-- COPY RESOURCES: IMPORT DATA (only needed for dev!) -->
+					<!-- COPY RESOURCES: IMPORT DATA (only needed for dev!)
 					<execution>
 						<id>copy-data</id>
 						<phase>validate</phase>
@@ -170,6 +170,7 @@
 							</resources>
 						</configuration>
 					</execution>
+					-->
 					
 				</executions>
 			</plugin>
