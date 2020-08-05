@@ -322,6 +322,21 @@ public class XmlDataImport {
 					stanzaObj.addVersion(version);
 				}
 				
+				// Translation (en) / oldenberg
+				temp = compiler.evaluate("*:lg[@*:source='oldenberg']", stanza);
+				if (temp.size() > 0) {
+					versionNode = temp.itemAt(0);
+					versionForm = concatTextContents(compiler.evaluate(".//*:l", versionNode));
+					version = new StanzaVersion(
+						"Oldenberg",
+						compiler.evaluate("@*:lang", versionNode).itemAt(0).getStringValue(),
+						versionForm,
+						"translation",
+						false
+					);
+					stanzaObj.addVersion(version);
+				}
+				
 				// Translation (fr) / renou
 				temp = compiler.evaluate("*:lg[@*:source='renou']", stanza);
 				if (temp.size() > 0) {
