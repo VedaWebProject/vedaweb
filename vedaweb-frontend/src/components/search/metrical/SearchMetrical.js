@@ -53,11 +53,12 @@ class SearchMetrical extends Component {
 
         return (
             <div className="search-container">
+
+                Search for metrical patterns in all available ISO-15919 text versions. 
                 
                 <HelpButton
                 type="metricalSearch"
-                label="Search for metrical patterns in all available ISO-15919 text versions. Click here for more help!"
-                inline/>
+                label="Click here for more guidance!" />
 
                 <div className="top-gap">
 
