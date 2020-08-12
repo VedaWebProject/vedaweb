@@ -121,11 +121,9 @@ public class IndexService {
 			
 			// add metrical positions annotation
 			String metricalAnnotations = generateMetricalAnnotations(dbDoc).replaceAll("\\_", "");
-			indexDoc.set("metricalPositions", json.getMapper().valueToTree(
-					StringUtils.removeVowelAccents(
-							metricalAnnotations)));
-			indexDoc.set("metricalPositions_raw", json.getMapper().valueToTree(
-					metricalAnnotations));
+			indexDoc.put("metricalPositions",
+					StringUtils.removeVowelAccents(metricalAnnotations));
+			indexDoc.put("metricalPositions_raw", metricalAnnotations);
 			
 			// create index request
 			IndexRequest request = new IndexRequest("vedaweb");
