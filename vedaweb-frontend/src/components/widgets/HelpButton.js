@@ -87,18 +87,19 @@ const helpTexts = {
                 <p>
                     With this search mode, you can search for terms in certain metrical positions of the containing Pada (verse).
                     The underlying metrical analysis is based on the text version by Van Nooten & Holland.
-                    Because of that, the terms entered in the input field must
-                    match the terms in the stanzas of this text version to be found.
+                    Because of that, the terms entered in the input field must match the terms in the stanzas of this text version.
                 </p>
                 <p>
-                    Please note that this search mode will only search for single terms - not for multiple terms or phrases!
+                    The minimal syntax for this search mode is simple: Just prepend a digit representing the desired metrical
+                    position to the term (e.g. <Text code>3víṣṇur</Text>). You can also search for multiple terms in the same pada at once.
+                    To do so, simply add more terms separated by a blank space to your search (e.g. <Text code>3víṣṇur 5urugāyó</Text>).The search will only
+                    find stanzas with padas that contain <b>all of the given terms</b> in the given positions.
                 </p>
-                <h4>Wildcards</h4>
+                <h4>Prefix search via wildcards</h4>
                 <p>
-                    It is possible to search for words starting or ending with a certain substring.
+                    It is possible to search for words starting with a certain substring (so, prefixes only!).
                     Searching for <Text code>agni*</Text> will find <Text code>agnim</Text>, <Text code>agniḥ</Text>, <Text code>agnināgniḥ</Text>, and so on - so the Asterisk (<Text code>*</Text>)
-                    works as a simple placeholder. You can use this in the beginning (<Text code>*dāḥ</Text>), the end (<Text code>agni*</Text>)
-                    or both (<Text code>*dak*</Text>).
+                    works as a simple placeholder. You can only use this at the end of a term!
                 </p>
             </div>
     },

@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Input, Select, Tooltip } from 'antd';
+import { Input, Tooltip } from 'antd';
 
 import { view } from 'react-easy-state';
 import stateStore from "../../../stateStore";
@@ -8,9 +8,7 @@ import HelpButton from "../../widgets/HelpButton";
 import TransliterationPreview from "../../widgets/TransliterationPreview";
 import OSK from "../../widgets/OSK";
 
-import './SearchMetricalPosition.css'
-
-const { Option } = Select;
+import './SearchMetricalPosition.css';
 
 
 
@@ -32,41 +30,15 @@ class SearchMetricalPosition extends Component {
             transliteration={stateStore.settings.transliteration}/>
         );
 
-        const selectBefore = (
-            <Select
-            defaultValue={1}
-            value={stateStore.search.metricalPosition.position}
-            onSelect={(value, option) => stateStore.search.metricalPosition.position = value}
-            style={{ width: '220px' }}
-            className="secondary-font">
-                {[...Array(10).keys()].map(i => 
-                    <Option
-                    key={'metrical_position_' + (i + 1)}
-                    value={(i + 1)}>
-                        {/* This will be good ... */}
-                        {
-                            (i + 1)
-                            + (i === 0
-                                ? "st"
-                                : (i === 1
-                                    ? "nd"
-                                    : (i === 2
-                                        ? "rd"
-                                        : "th")))
-                            + " position"
-                        }
-                    </Option>
-                )}
-            </Select>
-        );
-
         return (
             <div className="search-container">
 
+                Search for terms in certain metrical positions (based on Van Nooten & Holland)<br/>
+                by prepending a digit representing the metrical position to the respective term.
+
                 <HelpButton
                 type="metricalPositionSearch"
-                label="Search for a single term in a certain metrical position (based on Van Nooten & Holland). Click here for more help!"
-                inline/>
+                label="Click here for more guidance!" />
 
                 <div className="top-gap">
 
@@ -79,11 +51,9 @@ class SearchMetricalPosition extends Component {
                         <Input
                         value={stateStore.search.metricalPosition.input}
                         onChange={e => stateStore.search.metricalPosition.input = e.target.value}
-                        addonBefore={selectBefore}
-                        title=""
                         prefix={<OSK value={stateStore.search.metricalPosition.input} updateInput={v => stateStore.search.metricalPosition.input = v}/>}
                         size="large"
-                        placeholder="agnim" />
+                        placeholder="Example input: 4devám 6r̥tvíjam" />
 
                     </Tooltip>
 

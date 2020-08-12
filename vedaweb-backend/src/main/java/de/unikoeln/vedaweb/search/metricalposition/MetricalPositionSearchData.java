@@ -13,10 +13,6 @@ public class MetricalPositionSearchData extends CommonSearchData {
 	@ApiModelProperty(notes = "Search input field value")
 	private String input;
 	
-	@JsonProperty("position")
-	@ApiModelProperty(notes = "Metrical position field value")
-	private String position;
-
 
 	public String getInput() {
 		return input;
@@ -27,16 +23,6 @@ public class MetricalPositionSearchData extends CommonSearchData {
 		this.input = input.trim();
 	}
 	
-
-	public String getPosition() {
-		return position;
-	}
-
-
-	public void setPosition(String position) {
-		this.position = position;
-	}
-
 
 	@Override
 	public String toString() {

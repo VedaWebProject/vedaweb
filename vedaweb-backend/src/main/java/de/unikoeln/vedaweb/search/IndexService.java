@@ -3,6 +3,7 @@ package de.unikoeln.vedaweb.search;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -119,11 +120,16 @@ public class IndexService {
 //				indexDoc.put("lemmata_raw", StringUtils.normalizeNFC(concatTokenLemmata(dbDoc)));
 			indexDoc.set("tokens", json.getMapper().valueToTree(buildTokensList(dbDoc)));
 			
-			// add metrical positions annotation
-			String metricalAnnotations = generateMetricalAnnotations(dbDoc).replaceAll("\\_", "");
-			indexDoc.put("metricalPositions",
-					StringUtils.removeVowelAccents(metricalAnnotations));
-			indexDoc.put("metricalPositions_raw", metricalAnnotations);
+			// add metrical positions annotations
+			ArrayNode mPosArray = json.newArrayNode();
+			String[] metricalAnnotations = generateMetricalAnnotations(dbDoc);
+			for (String ma : metricalAnnotations) {
+				ObjectNode node = json.newObjectNode();
+				node.put("form", StringUtils.removeVowelAccents(ma)); // remove accents
+				node.put("form_raw", ma); // keep accents
+				mPosArray.add(node);
+			}
+			indexDoc.set("metricalPositions", mPosArray);
 			
 			// create index request
 			IndexRequest request = new IndexRequest("vedaweb");
@@ -509,12 +515,15 @@ public class IndexService {
 	}
 	
 	
-	private String generateMetricalAnnotations(Stanza doc) {
+	private String[] generateMetricalAnnotations(Stanza doc) {
 		int indexVNH = doc.getVersions().indexOf(
 				StanzaVersion.getDummy("version_vannootenholland"));
-		if (indexVNH == -1) return "";
+		if (indexVNH == -1) return new String[0];
 		String[] form = doc.getVersions().get(indexVNH).getForm();
-		return String.join(" ", MetricalAnalysis.annotateMultiline(form));
+		
+		// remove "_" from all elements and return string array
+		return Arrays.stream(MetricalAnalysis.annotateMultiline(form))
+			.map(a -> a.replaceAll("(?<=\\b\\d+)\\_", "")).toArray(String[]::new);
 	}
 	
 }

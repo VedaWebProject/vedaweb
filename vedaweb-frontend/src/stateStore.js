@@ -74,17 +74,14 @@ const stateStore = store({
             store: "search.metricalPosition",
             input: "",
             field: "version_vannootenholland",
-            position: 1,
 
             reset(){
                 stateStore.search.metricalPosition.input = "";
-                stateStore.search.metricalPosition.position = 1;
             },
 
             getQuery(){
                 return Object.assign({
                     input: SanscriptAccents.t(stateStore.search.metricalPosition.input, stateStore.settings.transliteration, "iso"),
-                    position: stateStore.search.metricalPosition.position,
                     field: "version_vannootenholland"
                 }, stateStore.search.defaultQuery);
             }
