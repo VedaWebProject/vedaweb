@@ -281,10 +281,10 @@ const stateStore = store({
             },
 
             hasMetas(){
-                return stateStore.search.meta.meta.hymnAddressee.length > 0
-                || stateStore.search.meta.meta.hymnGroup.length > 0
-                || stateStore.search.meta.meta.strata.length > 0
-                || stateStore.search.meta.meta.stanzaType.length > 0
+                return stateStore.search.meta.meta.hymnAddressee?.length
+                || stateStore.search.meta.meta.hymnGroup?.length
+                || stateStore.search.meta.meta.strata?.length
+                || stateStore.search.meta.meta.stanzaType?.length
             },
 
             hasScopes(){
@@ -414,7 +414,8 @@ const stateStore = store({
                 stateStore.search.meta.meta = {
                     hymnAddressee: [],
                     hymnGroup: [],
-                    strata: []
+                    strata: [],
+                    stanzaType: []
                 };
             }
         }

@@ -49,6 +49,7 @@ class SearchView extends Component {
         stateStore.search.meta.reset();
         stateStore.search.grammar.reset();
         stateStore.search.metrical.reset();
+        stateStore.search.metricalPosition.reset();
     }
 
 
