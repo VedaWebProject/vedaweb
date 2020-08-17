@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import { Icon, Menu } from 'antd';
 
 import SearchQuick from "../search/quick/SearchQuick";
-//import logo from "./img/logo_beta.png";
 import logo from "../../img/logo.svg";
 import "./NavBar.css";
 
@@ -39,11 +38,6 @@ class NavBar extends Component {
                             </a>
                         </div>
                         
-                        {/* <div className="header-app-title">
-                            <span className="bold">VedaWeb</span>
-                            <span className="bold grey" style={{fontSize: '12px'}}> beta</span><br/>
-                            Rigveda online
-                        </div> */}
                         <nav style={{
                             flexBasis: "content",
                             textAlign: "left",

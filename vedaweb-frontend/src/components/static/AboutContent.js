@@ -11,25 +11,14 @@ class AboutContent extends Component {
             
             <div>
                 <h1><Icon type="bulb"/> About VedaWeb</h1>
-                <p>
-                    Here you find information on the state of development and recent changes.
-                </p>
 
-                <h2><Icon type="experiment"/> The Beta</h2>
                 <p>
-                    This is a <strong>beta version</strong> for testing some of our planned concepts and getting feedback from potential users.<br/>
-                    There are numerous things yet to be implemented, some of which are:
+                    Here you find information on the state of development and recent changes.<br/>
+                    To get help on the different features, look out for the <HelpButton type="start" inline/> buttons throughout the page.
                 </p>
-                <ul>
-                    <li>Metric analysis (search and display) <Icon type="check"/></li>
-                    <li>Data export <Icon type="check"/></li>
-                    <li>Additional translations (Renou etc.) <Icon type="check"/></li>
-                    <li>Additional search modes</li>
-                    <li>...</li>
-                </ul>
 
                 <div>
-                    Look out for the <HelpButton type="start" inline/> buttons to get explanations of the different features.
+                    
                 </div><br/>
 
                 <h2><Icon type="message"/> Feedback</h2>
@@ -38,12 +27,12 @@ class AboutContent extends Component {
                     <br/><br/>
                     <Button
                     type="primary"
-                    href={"mailto:veda-web@uni-koeln.de?subject=VedaWeb beta feedback"}
+                    href={"mailto:veda-web@uni-koeln.de?subject=VedaWeb feedback"}
                     className="secondary-font">
                         <Icon type="mail" /> veda-web@uni-koeln.de
                     </Button>
                     <br/><br/>
-                    Thank you for testing the <span className="secondary-font red bold">VedaWeb</span> beta!
+                    Thank you for using <span className="secondary-font red bold">VedaWeb</span>!
                 </p>
 
                 <h2><Icon type="issues-close"/> Recent Changes</h2>

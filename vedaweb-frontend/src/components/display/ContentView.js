@@ -664,7 +664,7 @@ class ContentView extends Component {
 
                 </div>
 
-                {/** BETA INFO MODAL */}
+                {/** VW PLATFORM INFO MODAL */}
                 <Modal
                 visible={stateStore.settings.firstVisit}
                 title={null}
