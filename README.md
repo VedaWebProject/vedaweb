@@ -1,10 +1,10 @@
 # VedaWeb <!-- omit in toc -->
 
-[![Total alerts](https://img.shields.io/lgtm/alerts/g/DH-Cologne/vedaweb.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/DH-Cologne/vedaweb/alerts/)
+[![Total alerts](https://img.shields.io/lgtm/alerts/g/VedaWebPlatform/vedaweb.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/VedaWebPlatform/vedaweb/alerts/)
 &nbsp;
-[![Language grade: JavaScript](https://img.shields.io/lgtm/grade/javascript/g/DH-Cologne/vedaweb.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/DH-Cologne/vedaweb/context:javascript)
+[![Language grade: JavaScript](https://img.shields.io/lgtm/grade/javascript/g/VedaWebPlatform/vedaweb.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/VedaWebPlatform/vedaweb/context:javascript)
 &nbsp;
-[![](https://img.shields.io/github/repo-size/DH-Cologne/vedaweb.svg?label=Repo%20size)](https://github.com/DH-Cologne/vedaweb)
+[![](https://img.shields.io/github/repo-size/VedaWebPlatform/vedaweb.svg?label=Repo%20size)](https://github.com/VedaWebPlatform/vedaweb)
 &nbsp;
 [![Website vedaweb.uni-koeln.de](https://img.shields.io/website-up-down-green-red/http/vedaweb.uni-koeln.de.svg)](http://vedaweb.uni-koeln.de/)
 
