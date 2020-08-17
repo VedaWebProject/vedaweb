@@ -283,11 +283,11 @@ const stateStore = store({
             hasMetas(){
                 return (stateStore.search.meta.meta.hymnAddressee
                     && stateStore.search.meta.meta.hymnAddressee.length)
-                || (stateStore.search.meta.meta.hymnGroup.length
+                || (stateStore.search.meta.meta.hymnGroup
                     && stateStore.search.meta.meta.hymnGroup.length)
-                || (stateStore.search.meta.meta.strata.length
+                || (stateStore.search.meta.meta.strata
                     && stateStore.search.meta.meta.strata.length)
-                || (stateStore.search.meta.meta.stanzaType.length
+                || (stateStore.search.meta.meta.stanzaType
                     && stateStore.search.meta.meta.stanzaType.length)
             },
 
