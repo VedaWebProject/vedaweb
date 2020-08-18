@@ -5,6 +5,7 @@ import NavBar from './general/NavBar';
 import SearchView from './search/SearchView';
 import ContentView from './display/ContentView';
 import About from './static/About';
+import Help from './help/Help';
 import NotFound from './errors/NotFound';
 import ErrorBoundary from './errors/ErrorBoundary';
 import Footer from './general/Footer';
@@ -12,7 +13,7 @@ import System from './utils/System';
 import SiteNotice from './static/SiteNotice';
 import PrivacyPolicy from './static/PrivacyPolicy';
 
-import GuidedTour from './widgets/GuidedTour';
+import GuidedTour from './help/GuidedTour';
 
 import "./App.css";
 
@@ -150,6 +151,7 @@ class App extends Component {
                                 <Route path="/sitenotice" component={SiteNotice} />
                                 <Route path="/privacypolicy" component={PrivacyPolicy} />
                                 <Route path="/about" component={About} />
+                                <Route path="/help" component={Help} />
                                 <Route path="/home" component={ContentView} />
                                 <Route path="/" exact={true} component={ContentView} />
                                 <Route component={NotFound} />

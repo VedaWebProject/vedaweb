@@ -16,7 +16,7 @@ import scrollToComponent from 'react-scroll-to-component';
 import axios from 'axios';
 import stateStore from "../../stateStore";
 import DictionaryView from "./DictionaryView";
-import HelpButton from "../widgets/HelpButton";
+import HelpButton from "../help/HelpButton";
 import AboutContent from "../static/AboutContent";
 import ExportDrawer from "../widgets/ExportDrawer";
 import ExportButton from "../widgets/ExportButton";

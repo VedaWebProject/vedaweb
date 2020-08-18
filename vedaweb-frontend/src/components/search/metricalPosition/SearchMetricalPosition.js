@@ -4,7 +4,7 @@ import { Input, Tooltip } from 'antd';
 import { view } from 'react-easy-state';
 import stateStore from "../../../stateStore";
 
-import HelpButton from "../../widgets/HelpButton";
+import HelpButton from "../../help/HelpButton";
 import TransliterationPreview from "../../widgets/TransliterationPreview";
 import OSK from "../../widgets/OSK";
 

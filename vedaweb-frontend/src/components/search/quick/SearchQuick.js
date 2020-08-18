@@ -5,7 +5,7 @@ import stateStore from "../../../stateStore";
 import { view } from 'react-easy-state';
 
 import TransliterationPreview from "../../widgets/TransliterationPreview";
-import HelpButton from "../../widgets/HelpButton";
+import HelpButton from "../../help/HelpButton";
 
 import { withRouter } from 'react-router-dom';
 import { Base64 } from 'js-base64';

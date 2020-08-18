@@ -24,15 +24,18 @@ h2 {
 
 h3 {
     color: var(--primary-color);
-    margin-bottom: 1rem;
+    margin: 1rem 0;
     font-size: 20px;
 }
 
 h4 {
     color: rgba(0, 0, 0, 0.65);
-    font-weight: bold;
     font-size: 20px;
     margin-bottom: .2rem;
+}
+
+ul {
+    list-style-type: circle;
 }
 
 .main-font {

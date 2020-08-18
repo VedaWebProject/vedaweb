@@ -65,7 +65,7 @@ class NavBar extends Component {
                                 data-tour-id="nav-search"
                                 key="search">
                                     <NavLink to={"/search"}
-                                    title="Grammar search and more..."
+                                    title="Grammar search, metrical pattern/position search ..."
                                     className="content-center"
                                     activeClassName="selected">
                                         <Icon type="zoom-in"/><br/>Advanced<br/>Search
@@ -90,15 +90,16 @@ class NavBar extends Component {
                                     <Icon type="notification"/><br/>Guided<br/>Tour
                                 </Menu.Item>
 
-                                {/* <Menu.Item key="about">
-                                    <a href="https://vedaweb.uni-koeln.de"
-                                    title="Open the VedaWeb project website"
+                                <Menu.Item
+                                data-tour-id="nav-help"
+                                key="help">
+                                    <NavLink to={"/help"}
+                                    title="Help and instructions"
                                     className="content-center"
-                                    target="_blank"
-                                    rel="noopener noreferrer">
-                                        <Icon type="info-circle"/><br/>About<br/>VedaWeb
-                                    </a>
-                                </Menu.Item> */}
+                                    activeClassName="selected">
+                                        <Icon type="question-circle"/><br/>Help &amp;<br/>Instructions
+                                    </NavLink>
+                                </Menu.Item>
 
                             </Menu>
                         </nav>

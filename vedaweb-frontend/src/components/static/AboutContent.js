@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Icon, Button } from 'antd';
-import HelpButton from "../widgets/HelpButton";
+import HelpButton from "../help/HelpButton";
 
 
 class AboutContent extends Component {
@@ -37,6 +37,7 @@ class AboutContent extends Component {
 
                 <h2><Icon type="issues-close"/> Recent Changes</h2>
                 <ul>
+                    <li>New "Help &amp; Instructions" section (2020/08/18)</li>
                     <li>Added English translation by Müller (2020/08/05)</li>
                     <li>Added English translation by Oldenberg (2020/08/05)</li>
                     <li>New advanced search mode "Metrical Position" (2020/07/24)</li>

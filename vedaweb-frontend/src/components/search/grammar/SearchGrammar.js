@@ -5,7 +5,7 @@ import { view } from 'react-easy-state';
 import stateStore from "../../../stateStore";
 
 import SearchBlock from "./SearchBlock";
-import HelpButton from "../../widgets/HelpButton";
+import HelpButton from "../../help/HelpButton";
 
 import './SearchGrammar.css'
 

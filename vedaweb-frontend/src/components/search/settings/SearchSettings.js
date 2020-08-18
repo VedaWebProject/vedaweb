@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Checkbox } from 'antd';
 
-import HelpButton from "../../widgets/HelpButton";
+import HelpButton from "../../help/HelpButton";
 import SearchTransliteration from "./SearchTransliteration";
 
 import stateStore from "../../../stateStore";

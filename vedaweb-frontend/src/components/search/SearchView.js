@@ -8,7 +8,7 @@ import SearchScopeContainer from "./settings/SearchScopeContainer";
 import SearchTransliteration from "./settings/SearchTransliteration";
 import SearchScopeIndicator from "./settings/SearchScopeIndicator";
 import SearchMetaFilterList from "./settings/SearchMetaFilterList";
-import HelpButton from "../widgets/HelpButton";
+import HelpButton from "../help/HelpButton";
 
 import './SearchView.css';
 

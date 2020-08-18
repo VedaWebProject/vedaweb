@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { withRouter } from 'react-router-dom';
 
 import { Icon } from 'antd';
-import Tour from './Tour';
+import Tour from '../help/Tour';
 
 
 class GuidedTour extends Component {
@@ -101,6 +101,13 @@ class GuidedTour extends Component {
                 id: "help-buttons",
                 title: "The help buttons",
                 text: "Don't forget to use the little help buttons you can find everywhere. They provide detailed information on all aspects of VedaWeb!",
+                icon: <Icon type="question-o"/>,
+                execBefore: () => this.props.history.replace("/view/index/0")
+            },
+            {
+                id: "nav-help",
+                title: "Help & Instructions",
+                text: "If you'd rather read all the help buttons' texts at once to get an overview of the apps features, the section \"Help & Instructions\" might, well, help and instruct you.",
                 icon: <Icon type="question-o"/>,
                 execBefore: () => this.props.history.replace("/view/index/0")
             },
