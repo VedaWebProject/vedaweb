@@ -21,6 +21,8 @@ import { Link } from 'react-router-dom';
 import "./Footer.css";
 import stateStore from "../../stateStore";
 import HtmlSnippet from "../utils/HtmlSnippet";
+import HelpButton from "../help/HelpButton";
+
 
 class Footer extends Component {
 
@@ -174,6 +176,7 @@ class Footer extends Component {
 
                 <Row>
                     <Col span={24} className="content-center">
+
                         <Button
                         href={process.env.PUBLIC_URL + "/"}
                         onClick={() => {
@@ -183,6 +186,9 @@ class Footer extends Component {
                         }}>
                             <Icon type="delete"/> Delete locally stored settings
                         </Button>
+
+                        <HelpButton type="clearLocalStorage" inline style={{marginLeft: "1rem"}}/>
+
                     </Col>
                 </Row>
 
