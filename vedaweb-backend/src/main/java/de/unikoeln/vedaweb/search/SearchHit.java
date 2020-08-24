@@ -61,7 +61,11 @@ public class SearchHit implements Comparable<SearchHit>{
 	}
 	
 	public void addHighlight(String label, String highlight) {
-		this.highlight.put(label, highlight);
+		this.highlight.put(
+				label,
+				this.highlight.containsKey(label)
+					? this.highlight.get(label) + " / " + highlight
+					: highlight);
 	}
 	
 	@JsonProperty("hymnAddressee")

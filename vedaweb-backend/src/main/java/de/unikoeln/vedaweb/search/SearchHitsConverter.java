@@ -100,6 +100,18 @@ public class SearchHitsConverter {
 								continue;
 							}
 						}
+					} else if (innerHitKey.startsWith("metricalPositions")) {
+						// metrical positions
+						org.elasticsearch.search.SearchHits hits = innerHits.get(innerHitKey);
+						for (org.elasticsearch.search.SearchHit innerHit : hits) {
+							String highlightContent = (innerHit.getSourceAsMap().get("form_raw") instanceof String)
+									? (String)innerHit.getSourceAsMap().get("form_raw")
+									: String.join(" / ", (List<String>)innerHit.getSourceAsMap().get("form_raw"));
+								hit.addHighlight(
+									"VN&H",
+									highlightContent
+								);
+						}
 					}
 				}
 			}

@@ -3,6 +3,8 @@ package de.unikoeln.vedaweb.search.metricalposition;
 import org.apache.lucene.search.join.ScoreMode;
 import org.elasticsearch.action.search.SearchRequest;
 import org.elasticsearch.index.query.BoolQueryBuilder;
+import org.elasticsearch.index.query.InnerHitBuilder;
+import org.elasticsearch.index.query.NestedQueryBuilder;
 import org.elasticsearch.index.query.Operator;
 import org.elasticsearch.index.query.QueryBuilders;
 import org.elasticsearch.index.query.SimpleQueryStringBuilder;
@@ -12,6 +14,8 @@ import de.unikoeln.vedaweb.search.CommonSearchRequest;
 import de.unikoeln.vedaweb.util.StringUtils;
 
 public class MetricalPositionSearchRequestBuilder {
+	
+	private static final String[] HIGHLIGHT = {"metricalPositions.form_raw"};
 	
 
 	public static SearchRequest buildSearchRequest(MetricalPositionSearchData searchData) {
@@ -33,14 +37,22 @@ public class MetricalPositionSearchRequestBuilder {
 			.flags(SimpleQueryStringFlag.PREFIX)
 			.analyzeWildcard(true);
 		
-		//add query
-		bool.must(QueryBuilders.nestedQuery("metricalPositions", q, ScoreMode.Avg));
+		//nested query
+		NestedQueryBuilder nestedQuery = QueryBuilders
+			.nestedQuery("metricalPositions", q, ScoreMode.Total)
+			.innerHit(new InnerHitBuilder()
+				.setSize(10)
+				.setHighlightBuilder(
+						CommonSearchRequest.getHighlightBuilder(HIGHLIGHT)));
 		
-		//add search scope filters
+		//add query to boolean query
+		bool.must(nestedQuery);
+		
+		//add search scope filters to boolean query
 		if (searchData.getScopes().size() > 0)
 			bool.filter(CommonSearchRequest.getSearchScopesQuery(searchData));
 		
-		//add search meta filters
+		//add search meta filters to boolean query
 		if (searchData.getMeta().size() > 0)
 			bool.filter(CommonSearchRequest.getSearchMetaQuery(searchData));
 		
