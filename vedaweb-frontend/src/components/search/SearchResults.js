@@ -155,7 +155,7 @@ class SearchResults extends Component {
     createHighlightHTML(hit) {
         let html = "";
 
-        if (hit.highlight !== undefined && Object.keys(hit.highlight).length > 0){
+        if (hit.highlight && Object.keys(hit.highlight).length > 0){
             Object.keys(hit.highlight).forEach(highlightField => {
                 html +=
                     "<span class='red text-font bold'>" +

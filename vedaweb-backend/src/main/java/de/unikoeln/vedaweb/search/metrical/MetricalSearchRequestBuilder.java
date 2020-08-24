@@ -15,24 +15,31 @@ public class MetricalSearchRequestBuilder {
 	
 
 	public static SearchRequest buildSearchRequest(MetricalSearchData searchData) {
-		String targetVersionId = searchData.getField().endsWith("_") ? searchData.getField() + "*" : searchData.getField();
+		String targetVersionId = searchData.getField()
+				+ (searchData.getField().endsWith("_") ? "*" : "");
 
 		//root bool query
 		BoolQueryBuilder bool = QueryBuilders.boolQuery();
 		
+		//actual query
+		BoolQueryBuilder query = QueryBuilders
+			.boolQuery()
+			.filter(QueryBuilders
+					.queryStringQuery(targetVersionId).field("versions.id"))
+			.must(QueryBuilders
+					.queryStringQuery(searchData.getInput()
+							.replaceAll("\\s", "\\ "))
+					.field("versions.metrical"));
+		
 		//add actual metrical search query
-		NestedQueryBuilder metricalQuery = QueryBuilders.nestedQuery(
-				"versions",
-				QueryBuilders.boolQuery()
-					.filter(QueryBuilders.queryStringQuery(targetVersionId).field("versions.id"))
-					.must(QueryBuilders.queryStringQuery(searchData.getInput().replaceAll("\\s", "\\ ")).field("versions.metrical")),
-				ScoreMode.Total
+		NestedQueryBuilder nestedQuery = QueryBuilders
+				.nestedQuery("versions", query,	ScoreMode.Avg
 			).innerHit(
 				new InnerHitBuilder()
 					.setSize(10)
 					.setHighlightBuilder(CommonSearchRequest.getHighlightBuilder(HIGHLIGHT)));
 		
-		bool.must(metricalQuery);
+		bool.must(nestedQuery);
 		
 		//add search scope filters
 		if (searchData.getScopes().size() > 0)
