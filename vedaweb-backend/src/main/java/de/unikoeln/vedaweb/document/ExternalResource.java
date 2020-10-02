@@ -5,6 +5,12 @@ import java.util.List;
 
 import io.swagger.annotations.ApiModelProperty;
 
+/**
+ * POJO describing an external resource relevant for a document
+ * 
+ * @author bkis
+ *
+ */
 public class ExternalResource {
 	
 	@ApiModelProperty(notes = "Describing label for this set of references")

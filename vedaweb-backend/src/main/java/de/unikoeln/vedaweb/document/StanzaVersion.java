@@ -3,6 +3,12 @@ package de.unikoeln.vedaweb.document;
 import de.unikoeln.vedaweb.util.StringUtils;
 import io.swagger.annotations.ApiModelProperty;
 
+/**
+ * POJO representing stanza text versions and translations
+ * 
+ * @author bkis
+ *
+ */
 public class StanzaVersion {
 	
 	@ApiModelProperty(notes = "ID of this stanza version")

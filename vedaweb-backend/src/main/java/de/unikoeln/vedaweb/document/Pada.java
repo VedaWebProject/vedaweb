@@ -5,6 +5,12 @@ import java.util.List;
 
 import io.swagger.annotations.ApiModelProperty;
 
+/**
+ * Pada POJO
+ * 
+ * @author bkis
+ *
+ */
 public class Pada {
 	
 	@ApiModelProperty(notes = "ID of this pada")

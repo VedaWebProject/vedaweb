@@ -14,7 +14,12 @@ import de.unikoeln.vedaweb.util.JsonUtilService;
 import springfox.documentation.annotations.ApiIgnore;
 
 
-
+/**
+ * Controller handling UI data requests
+ * 
+ * @author bkis
+ *
+ */
 @RestController
 @RequestMapping("api")
 @ApiIgnore
@@ -29,11 +34,21 @@ public class UiDataController {
 	@Autowired
 	private JsonUtilService json;
 	
+	/**
+	 * Returns application UI data
+	 * @return
+	 */
 	@RequestMapping(value = "/uidata", produces = MediaType.APPLICATION_JSON_VALUE)
     public String getUiDataJSON() {
 		return uiDataService.getUiDataJSON().toString();
     }
 
+	/**
+	 * Returns number of stanzas in given hymn
+	 * @param book
+	 * @param hymn
+	 * @return
+	 */
 	@RequestMapping(value = "/uidata/count/stanzas/{book}/{hymn}", produces = MediaType.APPLICATION_JSON_VALUE)
     public String getStanzaCountJSON(@PathVariable("book") int book, @PathVariable("hymn") int hymn) {
 		ObjectNode response = json.newObjectNode();

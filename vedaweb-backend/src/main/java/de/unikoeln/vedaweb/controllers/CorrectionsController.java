@@ -15,6 +15,13 @@ import de.unikoeln.vedaweb.dictcorrection.Correction;
 import de.unikoeln.vedaweb.dictcorrection.CorrectionsRepository;
 import springfox.documentation.annotations.ApiIgnore;
 
+
+/**
+ * Controller for handling dictionary mapping corrections
+ * 
+ * @author bkis
+ * 
+ */
 @RestController
 @RequestMapping("api/corrections")
 @ApiIgnore
@@ -23,11 +30,21 @@ public class CorrectionsController {
 	@Autowired
 	CorrectionsRepository correctionsRepo;
 	
+	/**
+	 * Saves passed Correction object
+	 * @param correction
+	 * @return
+	 */
 	@PostMapping(value = "/save", produces = MediaType.APPLICATION_JSON_VALUE)
-    public String exportSearchCSV(@RequestBody Correction correction) {
+    public String saveCorrections(@RequestBody Correction correction) {
 		return correctionsRepo.save(correction).toString();
     }
 	
+	/**
+	 * Returns a list of corrections for the given lemma
+	 * @param lemma
+	 * @return
+	 */
 	@PostMapping(value = "/lemma", produces = MediaType.APPLICATION_JSON_VALUE)
     public List<Correction> getCorrections(@RequestBody JsonNode lemma) {
 		return correctionsRepo.findAllByCaseId(lemma.get("caseId").textValue());

@@ -53,6 +53,10 @@ public class WebMvcConfig extends WebMvcConfigurationSupport {
     }
     
     
+    /*
+     * Resource resolver for serving client app from the
+     * "static" directory within the project
+     */
     private class PushStateResourceResolver implements ResourceResolver {
 		private Resource index = new ClassPathResource("/static/index.html");
 		private List<String> handledExtensions = Arrays.asList("html", "htm", "js", "map", "json", "csv", "css", "png", "svg",

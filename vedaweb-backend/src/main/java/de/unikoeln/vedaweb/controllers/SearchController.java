@@ -19,7 +19,12 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 
 
-
+/**
+ * Controller for handling search requests
+ * 
+ * @author bkis
+ *
+ */
 @RestController
 @RequestMapping("api/search")
 @Api(consumes = MediaType.APPLICATION_JSON_VALUE)
@@ -29,6 +34,11 @@ public class SearchController {
 	private SearchService search;
 	
 	
+	/**
+	 * Quick search endpoint
+	 * @param searchData
+	 * @return
+	 */
 	@ApiOperation(
 			value = "Quick search API endpoint",
 			response = SearchHits.class)
@@ -40,7 +50,11 @@ public class SearchController {
 				.processSearchResponse(search.search(searchData));
     }
 	
-	
+	/**
+	 * Advanced: Grammar search endpoint
+	 * @param searchData
+	 * @return
+	 */
 	@ApiOperation(
 			value = "Grammar search API endpoint",
 			response = SearchHits.class)
@@ -52,9 +66,13 @@ public class SearchController {
 				.processSearchResponse(search.search(searchData));
     }
 	
-	
+	/**
+	 * Advanced: Metrical pattern search endpoint
+	 * @param searchData
+	 * @return
+	 */
 	@ApiOperation(
-			value = "Metrical search API endpoint",
+			value = "Metrical pattern search API endpoint",
 			response = SearchHits.class)
 	@PostMapping(
 			value = "/metrical",
@@ -64,7 +82,11 @@ public class SearchController {
 				.processSearchResponse(search.search(searchData));
     }
 	
-	
+	/**
+	 * Advanced: Metrical position search endpoint
+	 * @param searchData
+	 * @return
+	 */
 	@ApiOperation(
 			value = "Metrical position search API endpoint",
 			response = SearchHits.class)
@@ -76,7 +98,11 @@ public class SearchController {
 				.processSearchResponse(search.search(searchData));
     }
 	
-	
+	/**
+	 * Advanced: Grammar search occ count
+	 * @param searchData
+	 * @return
+	 */
 	@ApiOperation(
 			value = "Get the total occurrences count of a single block grammar search query",
 			response = GrammarSearchOccurrences.class)

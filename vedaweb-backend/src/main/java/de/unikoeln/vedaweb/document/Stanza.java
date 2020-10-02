@@ -7,6 +7,12 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 import io.swagger.annotations.ApiModelProperty;
 
+/**
+ * Stanza POJO
+ * 
+ * @author bkis
+ *
+ */
 @Document(collection="stanzas")
 public class Stanza implements Comparable<Stanza> {
 	
@@ -193,6 +199,11 @@ public class Stanza implements Comparable<Stanza> {
 		padas.add(pada);
 	}
 	
+	/**
+	 * Returns the location notation of this stanza
+	 * in the form "01.001.01"
+	 * @return
+	 */
 	public String getLocation() {
 		return String.format("%1$02d.%2$03d.%3$02d",
 				getBook(), getHymn(), getStanza());

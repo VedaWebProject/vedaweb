@@ -22,7 +22,12 @@ import de.unikoeln.vedaweb.util.JsonUtilService;
 import springfox.documentation.annotations.ApiIgnore;
 
 
-
+/**
+ * Controller for handling system maintenance actions
+ * 
+ * @author bkis
+ *
+ */
 @RestController
 @RequestMapping("system")
 @ApiIgnore
@@ -46,7 +51,13 @@ public class SystemController {
 	@Autowired
 	private ClientErrorRepository clientErrorRepo;
 	
-	
+	/**
+	 * Index actions
+	 * 
+	 * @param action
+	 * @param auth
+	 * @return
+	 */
 	@GetMapping(value = {"/index/{action}"}, produces = MediaType.APPLICATION_JSON_VALUE)
     public String stanzaById(
     		@PathVariable(name = "action") String action,
@@ -79,7 +90,13 @@ public class SystemController {
 		return response.toString();
     }
 	
-	
+	/**
+	 * Data import
+	 * 
+	 * @param dryRun
+	 * @param auth
+	 * @return
+	 */
 	@GetMapping(value = {"/import/{dryRun}", "/import"}, produces = MediaType.APPLICATION_JSON_VALUE)
     public String importData(
     		@PathVariable(name = "dryRun", required = false) String dryRun,
@@ -97,7 +114,12 @@ public class SystemController {
 		return response.toString();
     }
 	
-	
+	/**
+	 * Refresh UI data
+	 * 
+	 * @param auth
+	 * @return
+	 */
 	@GetMapping(value = {"/uidata/refresh"}, produces = MediaType.APPLICATION_JSON_VALUE)
     public String importData(
     		@RequestParam(name = "auth", required = false) String auth) {
@@ -108,13 +130,23 @@ public class SystemController {
 		return uiDataService.init().toString();
     }
 	
-	
+	/**
+	 * Receives client error data
+	 * 
+	 * @param errorData
+	 * @return
+	 */
 	@PostMapping(value = {"/error"}, produces = MediaType.APPLICATION_JSON_VALUE)
     public ClientError reportClientError(@RequestBody ClientError errorData) {
 		return clientErrorRepo.insert(errorData);
     }
 	
-	
+	/**
+	 * Checks auth phrase (yes, this is very primitive)
+	 * 
+	 * @param auth
+	 * @return
+	 */
 	private boolean auth(String auth) {
 		return auth != null && auth.equals(this.auth);
 	}

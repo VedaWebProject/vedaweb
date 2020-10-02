@@ -1,5 +1,12 @@
 package de.unikoeln.vedaweb.document;
 
+/**
+ * Class representing a stanza location,
+ * offering some string formatting functionality
+ * 
+ * @author bkis
+ *
+ */
 public class StanzaLocation {
 	
 	private int book;
@@ -48,6 +55,12 @@ public class StanzaLocation {
 			book = 1;
 	}
 	
+	/**
+	 * Normalizes a given id string of arbitrary
+	 * form into the form of "0100101"
+	 * @param id
+	 * @return
+	 */
 	public static String normalizeId(String id){
 		if (id.matches("\\d{7}")) {
 			return id;
@@ -61,6 +74,11 @@ public class StanzaLocation {
 		return id;
 	}
 	
+	/**
+	 * Constructs an id string
+	 * @param input
+	 * @return
+	 */
 	public static String constructId(String input){
 		String[] digits = input.split("\\D+");
 		if (digits.length != 3) return null;

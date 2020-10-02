@@ -17,6 +17,12 @@ import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 
 
+/**
+ * Controller for handling requests for documents (stanzas)
+ * 
+ * @author bkis
+ *
+ */
 @RestController
 @RequestMapping("api/document")
 public class DocumentController {
@@ -38,12 +44,16 @@ public class DocumentController {
 		//id matches form of <hymnAbs, stanza>
 		if (id.matches("\\d+\\,\\d+")) {
 			String[] i = id.split("\\,");
-			stanza = stanzaRepo.findByHymnAbsAndStanza(Integer.parseInt(i[0]), Integer.parseInt(i[1]));
+			stanza = stanzaRepo.findByHymnAbsAndStanza(
+					Integer.parseInt(i[0]),
+					Integer.parseInt(i[1]));
 		} else {
 			StanzaLocation loc = new StanzaLocation(id);
 			
 			while (!(stanza = stanzaRepo.findByBookAndHymnAndStanza(
-					loc.getBook(), loc.getHymn(), loc.getStanza())).isPresent()) {
+					loc.getBook(),
+					loc.getHymn(),
+					loc.getStanza())).isPresent()) {
 				loc.setNextFallbackLocation();
 			}
 		}
@@ -53,7 +63,8 @@ public class DocumentController {
 	
 	
 	@ApiOperation(
-			value = "Get a stanza by index (e.g. 0 for first stanza, 1 for second stanza and so on)",
+			value = "Get a stanza by index (e.g. 0 for first stanza, "
+					+ "1 for second stanza and so on)",
 			response = Stanza.class)
 	@GetMapping(
 			value = "/index/{index}",
@@ -62,7 +73,8 @@ public class DocumentController {
     		@ApiParam(example = "123")
     		@PathVariable int index) {
 		
-		Optional<Stanza> stanza = stanzaRepo.findByIndex(StringUtils.normalizeIndex(index, (int)stanzaRepo.count()));
+		Optional<Stanza> stanza = stanzaRepo.findByIndex(
+				StringUtils.normalizeIndex(index, (int)stanzaRepo.count()));
 		return stanza != null && stanza.isPresent() ? stanza.get() : null;
     }
 	

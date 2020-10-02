@@ -5,6 +5,12 @@ import java.util.Optional;
 
 import org.springframework.data.mongodb.repository.MongoRepository;
 
+/**
+ * DB repository interface for dictionary corrections
+ * 
+ * @author bkis
+ *
+ */
 public interface CorrectionsRepository extends MongoRepository<Correction, String>  {
 	
 	public List<Correction> findAllByCaseId(String caseId);

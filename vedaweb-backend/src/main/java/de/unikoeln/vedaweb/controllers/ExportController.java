@@ -40,7 +40,8 @@ public class ExportController {
 	
 	private final Logger log = LoggerFactory.getLogger(this.getClass());
 	
-	private static final String STANZA_TEI_TEMPLATE = "<?xml version='1.0' encoding='UTF-8'?>\n" + 
+	private static final String STANZA_TEI_TEMPLATE =
+			"<?xml version='1.0' encoding='UTF-8'?>\n" + 
 			"<TEI xmlns=\"http://www.tei-c.org/ns/1.0\">\n" + 
 			"<teiHeader>\n" + 
 			"    <fileDesc>\n" + 
@@ -75,6 +76,12 @@ public class ExportController {
 	private JsonUtilService json;
 	
 	
+	/**
+	 * Export search results as CSV
+	 * @param mode
+	 * @param searchData
+	 * @return
+	 */
 	@ApiOperation(
 			value = "Export results of the given search as CSV")
 	@PostMapping(
@@ -104,8 +111,10 @@ public class ExportController {
 			default: break;
 			}
 		} catch (Exception e) {
-			log.error("Cannot handle export request of mode: " + mode + " (" +
-					e.getMessage() != null ? e.getMessage().replace("\n", " ") : "" + ")");
+			log.error("Cannot handle export request of mode: " + mode + " ("
+					+ e.getMessage() != null
+						? e.getMessage().replace("\n", " ")
+						: "" + ")");
 		}
 		
 		if (data == null) return "";
@@ -118,10 +127,16 @@ public class ExportController {
     }
 	
 	
+	/**
+	 * Export full source XML of a certain document
+	 * @param docId
+	 * @return
+	 */
 	@ApiOperation(
 			httpMethod = "POST",
-			value = "Export a specific stanza as TEI XML (this is a POST endpoint, "
-					+ "because layer selection via request body will be implemented in the future)")
+			value = "Export a specific stanza as TEI XML (this is a POST "
+					+ "endpoint, because layer selection via request body "
+					+ "will be implemented in the future)")
 	@PostMapping(
 			value = "/doc/{docId}/xml",
 			//consumes = MediaType.APPLICATION_JSON_VALUE,
@@ -140,6 +155,12 @@ public class ExportController {
     }
 	
 
+	/**
+	 * Export a specific stanza's data as plain text
+	 * @param docId
+	 * @param exportLayers
+	 * @return
+	 */
 	@ApiOperation(
 			value = "Export a specific stanza's data as plain text")
 	@PostMapping(
@@ -159,9 +180,14 @@ public class ExportController {
 	
 	
 	
-
+	/**
+	 * Export glossings of a document as tabbed plain text
+	 * @param docId
+	 * @return
+	 */
 	@ApiOperation(
-			value = "Export a specific stanza's morphological glossing as plain text")
+			value = "Export a specific stanza's morphological"
+					+ " glossing as plain text")
 	@GetMapping(
 			value = "/glossings/{docId}/txt",
 			produces = "text/plain;charset=UTF-8")
@@ -170,12 +196,20 @@ public class ExportController {
     		@PathVariable("docId") String docId) {
 		
 		Optional<Stanza> stanza = stanzaRepo.findById(docId);
-		return stanza.isPresent() ? GlossingsTxtExport.glossingsTxt(stanza.get()) : "";
+		return stanza.isPresent()
+				? GlossingsTxtExport.glossingsTxt(stanza.get())
+				: "";
     }
 	
 
+	/**
+	 * Export glossings of a document as HTML table source
+	 * @param docId
+	 * @return
+	 */
 	@ApiOperation(
-			value = "Export a specific stanza's morphological glossing as HTML table")
+			value = "Export a specific stanza's morphological"
+					+ " glossing as HTML table")
 	@GetMapping(
 			value = "/glossings/{docId}/html",
 			produces = "text/plain;charset=UTF-8")
@@ -184,7 +218,9 @@ public class ExportController {
     		@PathVariable("docId") String docId) {
 		
 		Optional<Stanza> stanza = stanzaRepo.findById(docId);
-		return stanza.isPresent() ? GlossingsHtmlExport.glossingsHtml(stanza.get()) : "";
+		return stanza.isPresent()
+				? GlossingsHtmlExport.glossingsHtml(stanza.get())
+				: "";
     }
 	
 	

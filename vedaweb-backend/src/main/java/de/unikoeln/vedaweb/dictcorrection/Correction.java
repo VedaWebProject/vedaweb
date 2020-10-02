@@ -2,7 +2,12 @@ package de.unikoeln.vedaweb.dictcorrection;
 
 import org.springframework.data.mongodb.core.mapping.Document;
 
-
+/**
+ * Dictionary correction POJO
+ * 
+ * @author bkis
+ *
+ */
 @Document(collection="dictCorrections")
 public class Correction {
 	

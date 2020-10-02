@@ -12,7 +12,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 public class VedawebApplication {
 	
 	public static void main(String[] args) {
-		VedaWebBanner.printBanner();
+		VedaWebBanner.printBanner(); // print cli banner 
 		SpringApplication.run(VedawebApplication.class, args);
 	}
 	
