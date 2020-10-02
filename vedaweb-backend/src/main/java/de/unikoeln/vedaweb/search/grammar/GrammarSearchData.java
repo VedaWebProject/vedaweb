@@ -10,6 +10,12 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import de.unikoeln.vedaweb.search.CommonSearchData;
 import io.swagger.annotations.ApiModelProperty;
 
+/**
+ * POJO that represents the data of a grammar search request
+ * 
+ * @author bkis
+ *
+ */
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class GrammarSearchData extends CommonSearchData {
 	

@@ -3,6 +3,12 @@ package de.unikoeln.vedaweb.document;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+/**
+ * POJO to represent the XML source of a stanza document
+ * 
+ * @author bkis
+ *
+ */
 @Document(collection="stanzasXml")
 public class StanzaXml implements Comparable<StanzaXml> {
 	

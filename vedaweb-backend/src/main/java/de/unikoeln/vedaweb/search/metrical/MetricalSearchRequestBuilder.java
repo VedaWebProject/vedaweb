@@ -9,6 +9,12 @@ import org.elasticsearch.index.query.QueryBuilders;
 
 import de.unikoeln.vedaweb.search.CommonSearchRequest;
 
+/**
+ * Utility class that constructs a request for a metrical pattern search
+ * 
+ * @author bkis
+ *
+ */
 public class MetricalSearchRequestBuilder {
 	
 	private static final String[] HIGHLIGHT = {"versions.form*"};

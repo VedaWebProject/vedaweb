@@ -11,6 +11,12 @@ import org.elasticsearch.index.query.QueryBuilders;
 import de.unikoeln.vedaweb.search.CommonSearchRequest;
 import de.unikoeln.vedaweb.util.StringUtils;
 
+/**
+ * Utility class that constructs a request for a grammar search
+ * 
+ * @author bkis
+ *
+ */
 public class GrammarSearchRequestBuilder {
 
 	

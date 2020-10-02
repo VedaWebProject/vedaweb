@@ -10,7 +10,13 @@ import org.elasticsearch.search.builder.SearchSourceBuilder;
 
 import de.unikoeln.vedaweb.search.CommonSearchRequest;
 
-public class GrammarAggregationsBuilder {
+/**
+ * Utility class that build a grammar aggregations request
+ * 
+ * @author bkis
+ *
+ */
+public class GrammarAggregationsRequestBuilder {
 	
 	public static SearchRequest buildGrammarAggregationsRequest(String grammarField, String indexName){
 		

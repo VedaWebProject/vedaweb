@@ -8,7 +8,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import de.unikoeln.vedaweb.search.grammar.GrammarAggregationsBuilder;
 import de.unikoeln.vedaweb.search.grammar.GrammarSearchData;
 import de.unikoeln.vedaweb.search.grammar.GrammarSearchRequestBuilder;
 import de.unikoeln.vedaweb.search.metrical.MetricalSearchData;
@@ -18,6 +17,12 @@ import de.unikoeln.vedaweb.search.metricalposition.MetricalPositionSearchRequest
 import de.unikoeln.vedaweb.search.quick.QuickSearchData;
 import de.unikoeln.vedaweb.search.quick.QuickSearchRequestBuilder;
 
+/**
+ * Service that handles searches via Elastisearch
+ * 
+ * @author bkis
+ *
+ */
 @Service
 public class SearchService {
 	
@@ -26,7 +31,11 @@ public class SearchService {
 	@Autowired
 	private ElasticService elastic;
 	
-	
+	/**
+	 * Performs a search using the given SearchData
+	 * @param searchData
+	 * @return Search Response
+	 */
 	public SearchResponse search(CommonSearchData searchData){
 		if (searchData instanceof QuickSearchData) {
 			return submitSearch(
@@ -49,21 +58,36 @@ public class SearchService {
 		}
 	}
 	
-	
+	/**
+	 * Provides occurrences count for a given grammar search request
+	 * 
+	 * @param searchData
+	 * @return SearchResponse
+	 */
 	public SearchResponse searchOcc(GrammarSearchData searchData){
 		return submitSearch(
 				GrammarSearchRequestBuilder
 					.buildGrammarOccurrencesRequest(searchData));
 	}
 	
+//	/**
+//	 * Returns aggregations for a given grammar attribute field
+//	 * 
+//	 * @param field
+//	 * @return 
+//	 */
+//	public SearchResponse aggregateGrammarField(String field){
+//		SearchRequest searchRequest = GrammarAggregationsBuilder.buildGrammarAggregationsRequest(field, "vedaweb");
+//		SearchResponse searchResponse = submitSearch(searchRequest);
+//		return searchResponse;
+//	}
 	
-	public String aggregateGrammarField(String field){
-		SearchRequest searchRequest = GrammarAggregationsBuilder.buildGrammarAggregationsRequest(field, "vedaweb");
-		SearchResponse searchResponse = submitSearch(searchRequest);
-		return searchResponse.toString();
-	}
-	
-	
+	/**
+	 * Submits the given search request to the ES client
+	 * 
+	 * @param searchRequest
+	 * @return
+	 */
 	private SearchResponse submitSearch(SearchRequest searchRequest){
 		try {
 			return elastic.client().search(searchRequest, RequestOptions.DEFAULT);

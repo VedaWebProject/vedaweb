@@ -5,6 +5,12 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * Class to hold ISO-15919 character classes
+ * 
+ * @author bkiss
+ *
+ */
 public class IsoChars {
 	
 	public static final List<String> ISO_VOWELS = Arrays.asList(new String[]

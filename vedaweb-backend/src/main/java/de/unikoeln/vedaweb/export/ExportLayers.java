@@ -6,11 +6,18 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import io.swagger.annotations.ApiModelProperty;
 
+/**
+ * Superfluous, really.
+ * 
+ * @author bkis
+ *
+ */
 public class ExportLayers {
 	@ApiModelProperty(
 		notes = "List of data layer objects to include into export",
 		required = true,
-		example = "[{\"id\":\"translation_geldner\",\"label\":\"Geldner (DE)\"}, {\"id\":\"...\",\"label\":\"...\"}]")
+		example = "[{\"id\":\"translation_geldner\",\"label\":\"Geldner "
+				+ "(DE)\"}, {\"id\":\"...\",\"label\":\"...\"}]")
 	@JsonProperty("layers")
 	List<ExportLayer> layers;
 	

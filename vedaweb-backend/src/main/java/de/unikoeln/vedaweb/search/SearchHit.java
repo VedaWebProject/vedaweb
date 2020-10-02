@@ -7,6 +7,13 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import io.swagger.annotations.ApiModelProperty;
 
+/**
+ * POJO to represent a search hit (as used by this application,
+ * not by Elasticsearch)
+ * 
+ * @author bkis
+ *
+ */
 public class SearchHit implements Comparable<SearchHit>{
 	
 	@ApiModelProperty(notes = "Score of this search result")

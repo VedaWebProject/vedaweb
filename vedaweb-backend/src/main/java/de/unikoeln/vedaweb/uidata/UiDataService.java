@@ -24,6 +24,12 @@ import de.unikoeln.vedaweb.util.FsResourcesService;
 import de.unikoeln.vedaweb.util.IOUtils;
 import de.unikoeln.vedaweb.util.JsonUtilService;
 
+/**
+ * Service class that generates and provides client UI data
+ * 
+ * @author bkis
+ *
+ */
 @Service
 public class UiDataService {
 	

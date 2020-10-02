@@ -9,6 +9,13 @@ import org.elasticsearch.common.text.Text;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+/**
+ * This quite ugly utility class converts Elasticsearch's search hits
+ * to a more accessible intermediate form used by the client app
+ * 
+ * @author bkis
+ *
+ */
 public class SearchHitsConverter {
 	
 	private static final Logger log = LoggerFactory.getLogger(SearchHitsConverter.class);

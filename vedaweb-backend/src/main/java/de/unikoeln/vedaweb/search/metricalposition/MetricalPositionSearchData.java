@@ -6,6 +6,12 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import de.unikoeln.vedaweb.search.CommonSearchData;
 import io.swagger.annotations.ApiModelProperty;
 
+/**
+ * POJO that represents the data of a metrical position search request
+ * 
+ * @author bkis
+ *
+ */
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class MetricalPositionSearchData extends CommonSearchData {
 	

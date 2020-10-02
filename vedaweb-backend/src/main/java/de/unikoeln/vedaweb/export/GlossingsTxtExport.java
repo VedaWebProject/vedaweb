@@ -5,12 +5,21 @@ import de.unikoeln.vedaweb.document.Stanza;
 import de.unikoeln.vedaweb.document.Token;
 import de.unikoeln.vedaweb.util.LingConventions;
 
+/**
+ * Utility class for constructing plain text
+ * glossings export data
+ * 
+ * @author bkis
+ *
+ */
 public class GlossingsTxtExport {
 	
 	
 	public static String glossingsTxt(Stanza stanza) {
-		return glossingsTxtNoMeta(stanza) + "\n\n(" + 
-				LingConventions.getSourceNotation(stanza) + ")";
+		return glossingsTxtNoMeta(stanza)
+				+ "\n\n("
+				+ LingConventions.getSourceNotation(stanza)
+				+ ")";
 	}
 	
 	

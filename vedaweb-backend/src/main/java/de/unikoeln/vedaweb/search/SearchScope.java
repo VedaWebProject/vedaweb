@@ -5,6 +5,12 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import io.swagger.annotations.ApiModelProperty;
 
+/**
+ * POJO that represents a search scope definition
+ * 
+ * @author bkis
+ *
+ */
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class SearchScope {
 	

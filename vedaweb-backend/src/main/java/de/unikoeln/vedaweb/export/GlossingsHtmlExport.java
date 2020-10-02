@@ -5,6 +5,13 @@ import de.unikoeln.vedaweb.document.Stanza;
 import de.unikoeln.vedaweb.document.Token;
 import de.unikoeln.vedaweb.util.LingConventions;
 
+/**
+ * Utility class to (naively) construct export
+ * HTML for stanza glossings. Not pretty.
+ * 
+ * @author bkis
+ *
+ */
 public class GlossingsHtmlExport {
 
 	private static final String HTML_DOC_TEMPLATE =

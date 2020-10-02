@@ -8,6 +8,13 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import io.swagger.annotations.ApiModelProperty;
 
+/**
+ * 
+ * POJO representing a token of the glossings data
+ * 
+ * @author bkis
+ *
+ */
 public class Token {
 	
 	@ApiModelProperty(notes = "Index value of this token (relative to pada)")

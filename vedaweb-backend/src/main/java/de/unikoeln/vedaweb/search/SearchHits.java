@@ -6,6 +6,12 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import io.swagger.annotations.ApiModelProperty;
 
+/**
+ * POJO to represent a list of search hits
+ * 
+ * @author bkis
+ *
+ */
 public class SearchHits {
 	
 	@JsonProperty("hits")

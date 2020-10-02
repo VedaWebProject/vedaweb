@@ -10,6 +10,13 @@ import org.elasticsearch.search.fetch.subphase.FetchSourceContext;
 import org.elasticsearch.search.fetch.subphase.highlight.HighlightBuilder;
 import org.elasticsearch.search.sort.SortOrder;
 
+/**
+ * Utility class to provide common search request elements
+ * such as search scope query etc...
+ * 
+ * @author bkis
+ *
+ */
 public class CommonSearchRequest {
 	
 	private static final FetchSourceContext FETCH_SOURCE_CONTEXT =

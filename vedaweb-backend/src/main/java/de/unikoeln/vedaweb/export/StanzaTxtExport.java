@@ -5,6 +5,12 @@ import de.unikoeln.vedaweb.document.StanzaVersion;
 import de.unikoeln.vedaweb.export.ExportLayers.ExportLayer;
 import de.unikoeln.vedaweb.util.LingConventions;
 
+/**
+ * Utility class for the stanza plain text export
+ * 
+ * @author bkis
+ *
+ */
 public class StanzaTxtExport {
 	
 	private static final String NEXT_BLOCK_DELIM = "\n\n\n";

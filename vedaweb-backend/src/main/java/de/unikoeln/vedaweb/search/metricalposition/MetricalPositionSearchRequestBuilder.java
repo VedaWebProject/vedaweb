@@ -13,6 +13,12 @@ import org.elasticsearch.index.query.SimpleQueryStringFlag;
 import de.unikoeln.vedaweb.search.CommonSearchRequest;
 import de.unikoeln.vedaweb.util.StringUtils;
 
+/**
+ * Utility class that constructs a request for a metrical position search
+ * 
+ * @author bkis
+ *
+ */
 public class MetricalPositionSearchRequestBuilder {
 	
 	private static final String[] HIGHLIGHT = {"metricalPositions.form_raw"};

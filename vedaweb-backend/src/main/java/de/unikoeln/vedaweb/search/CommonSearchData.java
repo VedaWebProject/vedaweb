@@ -8,8 +8,15 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import io.swagger.annotations.ApiModelProperty;
 
+/**
+ * Abstract POJO to hold common search request data
+ * (is extended in specific search request data classes)
+ * 
+ * @author bkis
+ *
+ */
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class CommonSearchData {
+public abstract class CommonSearchData {
 	
 	@JsonProperty("accents")
 	@ApiModelProperty(notes = "Is this search accent-sensitive? (default: false)")

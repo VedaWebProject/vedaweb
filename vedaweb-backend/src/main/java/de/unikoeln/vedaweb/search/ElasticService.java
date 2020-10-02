@@ -12,6 +12,13 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Service;
 
+/**
+ * Uber-service that handles the lifecycle of and 
+ * provides access to the Elasticsearch client
+ * 
+ * @author bkis
+ *
+ */
 @Service
 @PropertySource(value = "classpath:application.properties")
 public class ElasticService {

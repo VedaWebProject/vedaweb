@@ -10,6 +10,12 @@ import org.elasticsearch.search.builder.SearchSourceBuilder;
 import de.unikoeln.vedaweb.search.CommonSearchRequest;
 import de.unikoeln.vedaweb.util.StringUtils;
 
+/**
+ * Utility class that constructs a request for a quick search
+ * 
+ * @author bkis
+ *
+ */
 public class QuickSearchRequestBuilder {
 	
 	private static final String[] HIGHLIGHT = {"versions.form*"};

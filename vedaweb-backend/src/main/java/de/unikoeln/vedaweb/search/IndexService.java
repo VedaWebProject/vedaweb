@@ -59,7 +59,12 @@ import de.unikoeln.vedaweb.util.IOUtils;
 import de.unikoeln.vedaweb.util.JsonUtilService;
 import de.unikoeln.vedaweb.util.StringUtils;
 
-
+/**
+ * Service for managing the search index
+ * 
+ * @author bkis
+ *
+ */
 @Service
 public class IndexService {
 	

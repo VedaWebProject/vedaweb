@@ -8,7 +8,12 @@ import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 
-
+/**
+ * Service class for abstracting some common JSON related things
+ * 
+ * @author bkis
+ *
+ */
 @Service
 public class JsonUtilService {
 	

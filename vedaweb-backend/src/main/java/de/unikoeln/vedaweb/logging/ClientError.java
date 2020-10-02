@@ -7,6 +7,12 @@ import java.util.Map;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+/**
+ * POJO to represent client side error
+ * 
+ * @author bkis
+ *
+ */
 @Document(collection="clientErrors")
 public class ClientError {
 	@Id

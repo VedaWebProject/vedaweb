@@ -3,6 +3,12 @@ package de.unikoeln.vedaweb.export;
 import de.unikoeln.vedaweb.search.SearchHit;
 import de.unikoeln.vedaweb.search.SearchHits;
 
+/**
+ * Utility class for the search results CSV export
+ * 
+ * @author bkis
+ *
+ */
 public class SearchResultsCsvExport {
 	
 	private static final String DLMT = ";";

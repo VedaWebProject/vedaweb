@@ -3,6 +3,12 @@ package de.unikoeln.vedaweb.util;
 import java.text.Normalizer;
 import java.text.Normalizer.Form;
 
+/**
+ * Utility class for project specific string operations
+ * 
+ * @author bkis
+ *
+ */
 public class StringUtils {
 	
 //	private static final String REGEX_VOWEL_W_ACCENT =

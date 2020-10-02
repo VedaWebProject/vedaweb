@@ -6,8 +6,13 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
 
-public class IOUtils {
-	
+/**
+ * Utility interface for arbitrary IO helper methods
+ * 
+ * @author bkis
+ *
+ */
+public interface IOUtils {
 	
 	public static byte[] convertStreamToByteArray(InputStream stream) throws IOException {
 	    return convertStreamToString(stream).getBytes();
@@ -25,7 +30,5 @@ public class IOUtils {
 	    stream.close();
 	    return sb.toString();
 	}
-	
-	
 	
 }
