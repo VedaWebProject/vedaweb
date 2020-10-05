@@ -15,9 +15,7 @@ vedaweb-backend/target/
 vedaweb-backend/src/main/resources/static/
 vedaweb-backend/src/main/resources/templates/
 # filesystem resources
-vedaweb-backend/res/data/
-vedaweb-backend/res/snippets/
-vedaweb-backend/res/tei/
+vedaweb-backend/res/*
 # misc
 !vedaweb-backend/.mvn/wrapper/maven-wrapper.jar
 vedaweb-backend/*.log
