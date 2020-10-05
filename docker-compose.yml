@@ -1,0 +1,20 @@
+version: "3.8"
+
+services:
+
+  mongodb:
+    image: mvertes/alpine-mongo:latest
+
+  elastic:
+    image: blacktop/elasticsearch:latest
+
+  app:
+    build: .
+    restart: on-failure
+    ports:
+      - "8081:8080"
+    volumes:
+      - ./vedaweb-backend/res:/opt/vedaweb/res
+    depends_on:
+      - mongodb
+      - elastic
