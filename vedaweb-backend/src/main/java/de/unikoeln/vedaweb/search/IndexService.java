@@ -21,9 +21,9 @@ import org.elasticsearch.action.search.SearchResponse;
 import org.elasticsearch.action.support.master.AcknowledgedResponse;
 import org.elasticsearch.client.Request;
 import org.elasticsearch.client.RequestOptions;
-import org.elasticsearch.client.Response;
 import org.elasticsearch.client.indices.CreateIndexRequest;
 import org.elasticsearch.client.indices.CreateIndexResponse;
+import org.elasticsearch.client.indices.GetIndexRequest;
 import org.elasticsearch.common.xcontent.XContentType;
 import org.elasticsearch.index.query.BoolQueryBuilder;
 import org.elasticsearch.index.query.MatchQueryBuilder;
@@ -335,14 +335,26 @@ public class IndexService {
 	
 	
 	public boolean indexExists() {
-		Response response = null;
-		try {
-			response = elastic.client().getLowLevelClient().performRequest(new Request("HEAD", "/" + indexName));
-		} catch (IOException e) {
-			log.error("Could not check if index exists. Request failed.");
-			e.printStackTrace();
+		GetIndexRequest request = new GetIndexRequest(indexName);
+		boolean exists = false;
+		
+		for (int i = 1; i <= 20; i++) {
+			try {
+				exists = elastic
+					.client()
+					.indices()
+					.exists(request, RequestOptions.DEFAULT);
+				break;
+			} catch (IOException e) {
+				log.warn("Try " + i + "/10: Could not check if index exists."
+						+ " Request failed.");
+			}
+			try {
+				Thread.sleep(3000);
+			} catch (InterruptedException e) {}
 		}
-        return response != null && response.getStatusLine().getStatusCode() != 404;
+		
+        return exists;
 	}
 	
 
