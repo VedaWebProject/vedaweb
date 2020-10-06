@@ -22,7 +22,9 @@ import net.sf.saxon.s9api.SaxonApiException;
 public class DataImportService {
 	
 	private final Logger log = LoggerFactory.getLogger(this.getClass());
+	
 	public static final String TEI_RESOURCES_DIR = "tei";
+	public static final String REFERENCES_RESOURCES_DIR = "references";
 	
 	
 	@Autowired
@@ -143,7 +145,8 @@ public class DataImportService {
 		//create mapping for Oldenberg 1
 		ArbitraryConcordance.Csv csv = new ArbitraryConcordance.Csv(
 				fsResources.readResourceFile(fsResources.getResourcesFile(
-						"data/references/Oldenberg/Oldenberg_Band_1.csv")),
+						REFERENCES_RESOURCES_DIR
+						+ "/Oldenberg/Oldenberg_Band_1.csv")),
 				false, ";", "\"");
 		addArbitratyConcordance(
 				stanzas,
@@ -160,7 +163,8 @@ public class DataImportService {
 		//create mapping for Oldenberg 2
 		csv = new ArbitraryConcordance.Csv(
 				fsResources.readResourceFile(fsResources.getResourcesFile(
-						"data/references/Oldenberg/Oldenberg_Band_2.csv")),
+						REFERENCES_RESOURCES_DIR
+						+ "/Oldenberg/Oldenberg_Band_2.csv")),
 				false, ";", "\"");
 		addArbitratyConcordance(
 				stanzas,
@@ -196,7 +200,8 @@ public class DataImportService {
 		//create mapping for Ludwig 1
 		csv = new ArbitraryConcordance.Csv(
 				fsResources.readResourceFile(fsResources.getResourcesFile(
-						"data/references/Ludwig/Ludwig_Band_1.csv")),
+						REFERENCES_RESOURCES_DIR
+						+ "/Ludwig/Ludwig_Band_1.csv")),
 				false, ";", "\"");
 		addArbitratyConcordance(
 				stanzas,
@@ -215,7 +220,8 @@ public class DataImportService {
 		//create mapping for Ludwig 2
 		csv = new ArbitraryConcordance.Csv(
 				fsResources.readResourceFile(fsResources.getResourcesFile(
-						"data/references/Ludwig/Ludwig_Band_2.csv")),
+						REFERENCES_RESOURCES_DIR
+						+ "/Ludwig/Ludwig_Band_2.csv")),
 				false, ";", "\"");
 		addArbitratyConcordance(
 				stanzas,
