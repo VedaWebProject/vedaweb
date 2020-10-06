@@ -14,7 +14,7 @@ vedaweb-backend/target/
 # classpath resources
 vedaweb-backend/src/main/resources/static/
 vedaweb-backend/src/main/resources/templates/
-# filesystem resources
+# filesystem resources: import data and static snippets
 vedaweb-backend/res/*
 # misc
 !vedaweb-backend/.mvn/wrapper/maven-wrapper.jar
