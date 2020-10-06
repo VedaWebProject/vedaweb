@@ -35,6 +35,8 @@ public class UiDataService {
 	
 	private final Logger log = LoggerFactory.getLogger(this.getClass());
 	
+	public static final String SNIPPETS_RESOURCES_DIR = "snippets";
+	
 	@Autowired
 	private IndexService indexService;
 	
@@ -146,12 +148,12 @@ public class UiDataService {
 	private ObjectNode loadHtmlSnippets() throws IOException {
 		ObjectNode snippets = JsonNodeFactory.instance.objectNode();
 		
-		for (File f : fsResources.getResourcesFiles("snippets")) {
+		for (File f : fsResources.getResourcesFiles(SNIPPETS_RESOURCES_DIR)) {
 			StringBuilder sb = new StringBuilder();
 			for (String line : Files.readAllLines(f.toPath(), StandardCharsets.UTF_8)) {
 				sb.append(line + "\n");
 			}
-			snippets.put(f.getName().replaceFirst("\\.[^\\.]+$", ""), sb.toString());
+			snippets.put(f.getName().replaceFirst("\\.[^\\.]*$", ""), sb.toString());
 		}
 		
 		return snippets;

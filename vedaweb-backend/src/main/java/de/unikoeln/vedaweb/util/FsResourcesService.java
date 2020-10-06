@@ -93,7 +93,7 @@ public class FsResourcesService {
 	 */
 	public File getResourcesFile(String path) {
 		File f = getResource(path, false);
-		if (f == null) log.warn("Not an existing file: " + path);
+		if (f == null) log.warn("File does not exist: " + path);
 		return f;
 	}
 	
