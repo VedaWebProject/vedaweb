@@ -5,17 +5,17 @@ services:
   # MongoDB database service
   mongodb:
     image: mvertes/alpine-mongo:latest
-    restart: on-failure # make this container restart on failure
+    #restart: on-failure # make this container restart on failure
 
   # Elasticsearch search server service
   elastic:
     image: blacktop/elasticsearch:latest
-    restart: on-failure # make this container restart on failure
+    #restart: on-failure # make this container restart on failure
 
   # the actual VedaWeb application
   app:
     build: .
-    restart: on-failure # make this container restart on failure
+    #restart: on-failure # make this container restart on failure
     ports:
       - "8081:8080" # the application will be served via HTTP on host port 8081
     volumes:
