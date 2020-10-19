@@ -10,7 +10,7 @@ class HtmlSnippet extends Component {
     }
 
     createMarkup(snippetId) {
-        return {__html: stateStore.ui.snippets[snippetId]};
+        return {__html: stateStore.ui.snippets[snippetId] || ""};
     }
 
     render() {
