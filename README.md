@@ -21,6 +21,13 @@ The pilot text is the Rigveda, linked to the dictionaries available at Cologne D
 ![VedaWeb Application Architecture](doc/assets/architecture.png)
 
 
+## Docker
+
+If you want to try to run the application locally or on a server, you may use the provided Dockerfile (if you already have Elasticsearch and MongoDB services running) or the docker-compose file (to start containers for the services, too).
+
+Use `docker-compose up --build --no-cache` for building and starting the needed containers in a preconfigured way. The `--no-cache` flag ensures that current application data will be downloaded during build time. If you don't want that, just omit this flag.
+
+
 ## API
 
 > :warning: The short documentation below is from **May 2019**  

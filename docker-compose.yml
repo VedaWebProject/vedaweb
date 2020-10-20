@@ -14,8 +14,7 @@ services:
 
   # the actual VedaWeb application
   app:
-    build:
-      context: .
+    build: .
     #restart: on-failure # make this container restart on failure
     ports:
       - "8081:8080" # the application will be served via HTTP on host port 8081
