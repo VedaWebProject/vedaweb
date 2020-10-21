@@ -1,7 +1,48 @@
-# base image
+#### intermediate for building frontend
+
+# pick base image
+FROM node:12.19.0-alpine3.12 as build-frontend
+
+# copy frontend source project
+COPY vedaweb-frontend /opt/vedaweb-frontend
+
+# set workdir
+WORKDIR /opt/vedaweb-frontend
+
+# build frontend
+RUN npm install --silent &> /dev/null \
+&&  npm run build --quiet
+
+
+
+#### intermediate for building backend (and full app)
+
+# pick base image
+FROM maven:3.6.3-adoptopenjdk-11 as build-backend
+
+# create project dir
+RUN mkdir -p /opt/vedaweb
+
+# set wirk dir
+WORKDIR /opt/vedaweb
+
+# copy frontend build
+COPY --from=build-frontend /opt/vedaweb-frontend vedaweb-frontend
+
+# copy backend source project
+COPY vedaweb-backend vedaweb-backend
+
+# build backend and full app into fat jar
+RUN cd vedaweb-backend && mvn clean install --quiet -DskipTests
+
+
+
+#### image to actually run the application from
+
+# pick base image
 FROM adoptopenjdk/openjdk11:jre-11.0.8_10-alpine
 
-# env
+# set encoding and locales
 ENV LANG='en_US.UTF-8' LANGUAGE='en_US:en' LC_ALL='en_US.UTF-8'
 
 # install additional packages (nothing atm)
@@ -10,8 +51,10 @@ ENV LANG='en_US.UTF-8' LANGUAGE='en_US:en' LC_ALL='en_US.UTF-8'
 # set working directory
 WORKDIR /opt/vedaweb
 
-# copy files to image
-COPY vedaweb-backend/target/vedaweb-0.1.0-SNAPSHOT.jar vedaweb.jar
+# copy build app to image
+COPY --from=build-backend /opt/vedaweb/vedaweb-backend/target/vedaweb-0.1.0-SNAPSHOT.jar vedaweb.jar
+
+# copy configs etc. to image
 COPY vedaweb-backend/src/main/resources/application.properties application.properties
 COPY vedaweb-backend/res/snippets res/snippets
 
