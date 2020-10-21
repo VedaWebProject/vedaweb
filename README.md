@@ -27,6 +27,8 @@ If you want to try to run the application locally or on a server, you may use th
 
 Use `docker-compose up --build --no-cache` for building and starting the needed containers in a preconfigured way. The `--no-cache` flag ensures that current application data will be downloaded during build time. If you don't want that, just omit this flag.
 
+The application will be served on port `8081` in case of using docker-compose.
+
 
 ## API
 
