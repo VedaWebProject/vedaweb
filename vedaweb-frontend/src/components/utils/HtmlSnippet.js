@@ -15,7 +15,7 @@ class HtmlSnippet extends Component {
 
     render() {
         return (
-                <div dangerouslySetInnerHTML={this.createMarkup(this.props.id)}></div>
+            <div dangerouslySetInnerHTML={this.createMarkup(this.props.id)}></div>
         );
     }
 }

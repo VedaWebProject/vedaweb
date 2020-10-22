@@ -16,7 +16,8 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Document(collection="clientErrors")
 public class ClientError {
 	@Id
-	public String id = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss:SSS"));
+	public String id = LocalDateTime.now()
+			.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss:SSS"));
 	public Map<String, Object> info;
 	public Map<String, Object> error;
 }
