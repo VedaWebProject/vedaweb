@@ -5,9 +5,6 @@
 #   THE PROJECT DIRECTORY (PARENT OF THIS ONE) !!!!
 #
 
-test -f "docker-compose.yml" || \
-    echo "ERROR: THIS SCRIPT EXPECTS THE WORKING DIRECTORY TO BE THE PROJECT DIRECTORY!"
-
 # create temporary directory
 mkdir /tmp/vedaweb/
 
