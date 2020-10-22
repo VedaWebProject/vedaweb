@@ -15,7 +15,7 @@ vedaweb-backend/target/
 vedaweb-backend/src/main/resources/static/
 vedaweb-backend/src/main/resources/templates/
 # filesystem resources: import data and static snippets
-vedaweb-backend/res/*
+resources/*
 # misc
 !vedaweb-backend/.mvn/wrapper/maven-wrapper.jar
 vedaweb-backend/*.log
