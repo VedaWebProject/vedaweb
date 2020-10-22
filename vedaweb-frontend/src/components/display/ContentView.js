@@ -142,86 +142,89 @@ class ContentView extends Component {
                         <ErrorMessage/>
                     }
 
-                    <Affix
-                    offsetTop={0}
-                    onChange={(affixed) => this.setState({controlsAffixed: affixed})}>
-
-                        <div
-                        className="content-center"
-                        style={{
-                            position: 'relative',
-                            top: this.state.controlsAffixed ? -2 : 0
-                        }}>
+                    {/** LOADED, NO ERROR **/}
+                    { error === undefined &&
+                        <Affix
+                        offsetTop={0}
+                        onChange={(affixed) => this.setState({controlsAffixed: affixed})}>
 
                             <div
-                            className={"v-middle" + (this.state.controlsAffixed ? " box-shadow" : "")}
+                            className="content-center"
                             style={{
-                                display: "inline-block",
-                                padding: "1.2rem",
-                                background: "transparent",
-                                backgroundImage: "url('" + bg + "')",
-                                border: this.state.controlsAffixed ? "1px solid #b4b1ae" : "none",
-                                borderTop: "none",
-                                borderRadius: "3px"
+                                position: 'relative',
+                                top: this.state.controlsAffixed ? -2 : 0
                             }}>
 
-                                {/** CONTENT NAVIGATOR **/}
-                                { data.book !== undefined &&
-                                    <ContentLocation
-                                    key={"loc_" + data.id}
-                                    currIndex={data.index}
-                                    currId={data.id}
-                                    book={data.book}
-                                    hymn={data.hymn}
-                                    stanza={data.stanza}
-                                    hymnAbs={data.hymnAbs} />
-                                }
-                                
-                                {/** TOOLS BUTTON: TOGGLE CONTENT */}
-                                <Button
-                                type="default"
-                                icon="eye"
-                                size="large"
-                                title="Show view selectors"
-                                onClick={() => this.setState({filtersVisible: true})}
-                                style={{marginLeft: '2.4rem'}}
-                                data-tour-id="toggle-content">
-                                    <Badge
-                                    showZero
-                                    style={{backgroundColor:'#931111'}}
-                                    offset={[15,-5]}
-                                    count={stateStore.ui.layers.filter(l => l.id.endsWith('_') && l.show).length}>
-                                        Toggle content
-                                    </Badge>
-                                </Button>
+                                <div
+                                className={"v-middle" + (this.state.controlsAffixed ? " box-shadow" : "")}
+                                style={{
+                                    display: "inline-block",
+                                    padding: "1.2rem",
+                                    background: "transparent",
+                                    backgroundImage: "url('" + bg + "')",
+                                    border: this.state.controlsAffixed ? "1px solid #b4b1ae" : "none",
+                                    borderTop: "none",
+                                    borderRadius: "3px"
+                                }}>
 
-                                {/** TOOLS BUTTON: TOGGLE CONDENSED VIEW */}
-                                <Button
-                                type={condensedView ? "primary" : "default"}
-                                icon={condensedView ? "colum-height" : "vertical-align-middle"}
-                                size="large"
-                                title={condensedView ? "Switch to full size view with all details" : "Switch to condensed reading view"}
-                                onClick={() => stateStore.settings.condensedView = !stateStore.settings.condensedView}
-                                style={{marginLeft: '1rem'}}
-                                data-tour-id="toggle-condensed-view">
-                                    {condensedView ? "Full size view" : "Condensed view"}
-                                </Button>
+                                    {/** CONTENT NAVIGATOR **/}
+                                    { data.book !== undefined &&
+                                        <ContentLocation
+                                        key={"loc_" + data.id}
+                                        currIndex={data.index}
+                                        currId={data.id}
+                                        book={data.book}
+                                        hymn={data.hymn}
+                                        stanza={data.stanza}
+                                        hymnAbs={data.hymnAbs} />
+                                    }
+                                    
+                                    {/** TOOLS BUTTON: TOGGLE CONTENT */}
+                                    <Button
+                                    type="default"
+                                    icon="eye"
+                                    size="large"
+                                    title="Show view selectors"
+                                    onClick={() => this.setState({filtersVisible: true})}
+                                    style={{marginLeft: '2.4rem'}}
+                                    data-tour-id="toggle-content">
+                                        <Badge
+                                        showZero
+                                        style={{backgroundColor:'#931111'}}
+                                        offset={[15,-5]}
+                                        count={stateStore.ui.layers.filter(l => l.id.endsWith('_') && l.show).length}>
+                                            Toggle content
+                                        </Badge>
+                                    </Button>
 
-                                {/** TOOLS BUTTON: EXPORT */}
-                                <Button
-                                type="default"
-                                icon="export"
-                                size="large"
-                                title="Show export options"
-                                onClick={() => this.setState({exportVisible: true})}
-                                style={{marginLeft: '1rem'}}
-                                data-tour-id="toggle-export">
-                                    Export
-                                </Button>
+                                    {/** TOOLS BUTTON: TOGGLE CONDENSED VIEW */}
+                                    <Button
+                                    type={condensedView ? "primary" : "default"}
+                                    icon={condensedView ? "colum-height" : "vertical-align-middle"}
+                                    size="large"
+                                    title={condensedView ? "Switch to full size view with all details" : "Switch to condensed reading view"}
+                                    onClick={() => stateStore.settings.condensedView = !stateStore.settings.condensedView}
+                                    style={{marginLeft: '1rem'}}
+                                    data-tour-id="toggle-condensed-view">
+                                        {condensedView ? "Full size view" : "Condensed view"}
+                                    </Button>
 
+                                    {/** TOOLS BUTTON: EXPORT */}
+                                    <Button
+                                    type="default"
+                                    icon="export"
+                                    size="large"
+                                    title="Show export options"
+                                    onClick={() => this.setState({exportVisible: true})}
+                                    style={{marginLeft: '1rem'}}
+                                    data-tour-id="toggle-export">
+                                        Export
+                                    </Button>
+
+                                </div>
                             </div>
-                        </div>
-                    </Affix>
+                        </Affix>
+                    }
 
                     {/** LOADED, NO ERROR **/}
                     { error === undefined &&
