@@ -21,6 +21,7 @@ import AboutContent from "../static/AboutContent";
 import ExportDrawer from "../widgets/ExportDrawer";
 import ExportButton from "../widgets/ExportButton";
 
+import bg from "../../img/bg.png";
 
 
 class ContentView extends Component {
@@ -155,18 +156,19 @@ class ContentView extends Component {
                             <div
                             className={"v-middle" + (this.state.controlsAffixed ? " box-shadow" : "")}
                             style={{
-                                display: 'inline-block',
-                                padding: '1.2rem',
-                                background: this.state.controlsAffixed ? '#f8f8f8' : 'transparent',
-                                border: this.state.controlsAffixed ? '1px solid #b4b1ae' : 'none',
-                                borderTop: 'none',
-                                borderRadius: '3px'
+                                display: "inline-block",
+                                padding: "1.2rem",
+                                background: "transparent",
+                                backgroundImage: "url('" + bg + "')",
+                                border: this.state.controlsAffixed ? "1px solid #b4b1ae" : "none",
+                                borderTop: "none",
+                                borderRadius: "3px"
                             }}>
 
                                 {/** CONTENT NAVIGATOR **/}
                                 { data.book !== undefined &&
                                     <ContentLocation
-                                    key={'loc_' + data.id}
+                                    key={"loc_" + data.id}
                                     currIndex={data.index}
                                     currId={data.id}
                                     book={data.book}
