@@ -1,0 +1,6 @@
+# ignore this, please ...
+
+/doc
+/.git
+/vedaweb-backend/target
+/vedaweb-frontend/build
