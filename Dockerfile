@@ -1,7 +1,7 @@
 #### intermediate for building frontend
 
 # pick base image
-FROM node:12.19.0-alpine3.12 as build-frontend
+FROM node:12.19.0-alpine3.12 as frontend-build-env
 
 # copy frontend source project
 COPY vedaweb-frontend /opt/vedaweb-frontend
@@ -11,14 +11,14 @@ WORKDIR /opt/vedaweb-frontend
 
 # build frontend
 RUN npm install --silent &> /dev/null \
-&&  npm run build --quiet
+ && npm run build --silent &> /dev/null
 
 
 
-#### intermediate for building backend (and full app)
+#### intermediate for building backend (and full app via fat jar)
 
 # pick base image
-FROM maven:3.6.3-adoptopenjdk-11 as build-backend
+FROM maven:3.6.3-adoptopenjdk-11 as backend-build-env
 
 # create project dir
 RUN mkdir -p /opt/vedaweb
@@ -27,20 +27,22 @@ RUN mkdir -p /opt/vedaweb
 WORKDIR /opt/vedaweb
 
 # copy frontend build
-COPY --from=build-frontend /opt/vedaweb-frontend vedaweb-frontend
+COPY --from=frontend-build-env /opt/vedaweb-frontend/build vedaweb-frontend/build
 
 # copy backend source project
 COPY vedaweb-backend vedaweb-backend
 
 # build backend and full app into fat jar
-RUN cd vedaweb-backend && mvn clean install --quiet -DskipTests
+RUN cd vedaweb-backend \
+ && mvn clean install -DskipTests --quiet &> /dev/null \
+ && ls -lah /opt/vedaweb/vedaweb-backend/target
 
 
 
-#### image to actually run the application from
+#### image to run the application from
 
 # pick base image
-FROM adoptopenjdk/openjdk11:jre-11.0.8_10-alpine
+FROM adoptopenjdk/openjdk11:jre-11.0.8_10-alpine as production-env
 
 # set encoding and locales
 ENV LANG='en_US.UTF-8' LANGUAGE='en_US:en' LC_ALL='en_US.UTF-8'
@@ -51,23 +53,16 @@ ENV LANG='en_US.UTF-8' LANGUAGE='en_US:en' LC_ALL='en_US.UTF-8'
 # set working directory
 WORKDIR /opt/vedaweb
 
-# copy build app to image
-COPY --from=build-backend /opt/vedaweb/vedaweb-backend/target/vedaweb-0.1.0-SNAPSHOT.jar vedaweb.jar
+# copy app build to image
+COPY --from=backend-build-env /opt/vedaweb/vedaweb-backend/target/vedaweb.jar vedaweb.jar
 
-# copy configs etc. to image
+# copy needed configs, scripts etc. to image
 COPY vedaweb-backend/src/main/resources/application.properties application.properties
-COPY vedaweb-backend/res/snippets res/snippets
+COPY resources/snippets resources/snippets
+COPY scripts scripts
 
-# download application import data into "res" directory
-RUN mkdir /tmp/vedaweb/ \
-&&  wget -q -O /tmp/vedaweb/tei.tar.gz https://github.com/cceh/c-salt_vedaweb_tei/archive/master.tar.gz \
-&&  mkdir -p res/tei \
-&&  tar -xf /tmp/vedaweb/tei.tar.gz -C res/tei --strip 1 \
-&&  rm /tmp/vedaweb/tei.tar.gz \
-&&  wget -q -O /tmp/vedaweb/references.tar.gz https://github.com/VedaWebPlatform/vedaweb-data-external/archive/master.tar.gz \
-&&  mkdir -p res/references \
-&&  tar -xf /tmp/vedaweb/references.tar.gz -C res/references --strip 1 \
-&&  rm /tmp/vedaweb/references.tar.gz
+# download updated application import data into "resources" directory
+RUN scripts/update-data.sh
 
 # hint to expose port 8080
 EXPOSE 8080
