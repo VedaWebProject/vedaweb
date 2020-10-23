@@ -55,7 +55,9 @@ public class XmlDataImport {
 		
 			//iterate: stanzas
 			XdmValue stanzas = compiler.evaluate("*:div[@type='stanza']", hymn);
+			
 			for(XdmItem stanza : stanzas){
+				
 				String[] stanzaLocationData = compiler.evaluate("@*:n", stanza).itemAt(0).getStringValue().split("\\.");
 				
 				//stanza obj data
@@ -68,6 +70,19 @@ public class XmlDataImport {
 				stanzaObj.setHymnAddressee(hymnAddressee);
 				stanzaObj.setHymnGroup(hymnGroup);
 				stanzaObj.setStrata(compiler.evaluate("*:lg[@*:source='gunkel_ryan']/*:lg/*:fs/*:f[@*:name='strata']/text()", stanza).itemAt(0).getStringValue());
+				
+				// Citations from Gunkel
+				XdmValue citations = compiler.evaluate("*:fs[@*:type='stanza_properties']/*:f", stanza);
+				for(XdmItem citation : citations) {
+					String cit = ((XdmNode)citation)
+							.getAttributeValue(new QName("name"));
+					String code = compiler.evaluate("*:symbol/@*:value", citation)
+							.itemAt(0).getStringValue();
+					stanzaObj.addCitation(
+							cit.substring(0, 1).toUpperCase() + cit.substring(1)
+							+ " (" + code + ")"
+					);
+				}
 				
 				//zurich morph glossing and pada labels (by gunkel/ryan)
 				//iterate: padas

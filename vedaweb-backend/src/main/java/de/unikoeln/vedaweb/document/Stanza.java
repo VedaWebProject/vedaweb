@@ -44,6 +44,10 @@ public class Stanza implements Comparable<Stanza> {
 	@ApiModelProperty(notes = "Strata property of this stanza")
 	private String strata;
 	
+	// TODO
+	@ApiModelProperty(notes = "List of citations (???)")
+	private List<String> citations;
+	
 	@ApiModelProperty(notes = "Stanza type (via metrical analysis)")
 	private String stanzaType;
 	
@@ -137,6 +141,20 @@ public class Stanza implements Comparable<Stanza> {
 
 	public void setStrata(String strata) {
 		this.strata = strata;
+	}
+	
+	public List<String> getCitations() {
+		return citations;
+	}
+
+	public void setCitations(List<String> citations) {
+		this.citations = citations;
+	}
+
+	public void addCitation(String citation) {
+		if (citations == null)
+			citations = new ArrayList<String>();
+		citations.add(citation);
 	}
 	
 	public String getStanzaType() {
