@@ -15,7 +15,7 @@ RUN npm install --silent &> /dev/null \
 
 
 
-#### intermediate for building backend (and full app via fat jar)
+#### intermediate for building backend (and full app)
 
 # pick base image
 FROM maven:3.6.3-adoptopenjdk-11 as backend-build-env
@@ -34,21 +34,20 @@ COPY vedaweb-backend vedaweb-backend
 
 # build backend and full app into fat jar
 RUN cd vedaweb-backend \
- && mvn clean install -DskipTests --quiet &> /dev/null \
- && ls -lah /opt/vedaweb/vedaweb-backend/target
+ && mvn clean install -DskipTests --quiet &> /dev/null
 
 
 
 #### image to run the application from
 
 # pick base image
-FROM adoptopenjdk/openjdk11:jre-11.0.8_10-alpine as production-env
+FROM adoptopenjdk/openjdk11:jre-11.0.8_10-alpine
 
 # set encoding and locales
 ENV LANG='en_US.UTF-8' LANGUAGE='en_US:en' LC_ALL='en_US.UTF-8'
 
-# install additional packages (nothing atm)
-# RUN apk add ...
+# create app dir
+RUN mkdir -p /opt/vedaweb
 
 # set working directory
 WORKDIR /opt/vedaweb
