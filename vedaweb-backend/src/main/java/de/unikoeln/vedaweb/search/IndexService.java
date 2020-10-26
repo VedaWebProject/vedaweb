@@ -120,6 +120,7 @@ public class IndexService {
 			indexDoc.put("hymnAbs", dbDoc.getHymnAbs());
 			indexDoc.put("strata", dbDoc.getStrata());
 			indexDoc.put("stanzaType", dbDoc.getStanzaType());
+			indexDoc.set("lateAdditions", json.getMapper().valueToTree(dbDoc.getLateAdditions()));
 			indexDoc.set("versions", json.getMapper().valueToTree(buildVersionsList(dbDoc)));
 //				indexDoc.put("lemmata", StringUtils.removeVowelAccents(concatTokenLemmata(dbDoc)));
 //				indexDoc.put("lemmata_raw", StringUtils.normalizeNFC(concatTokenLemmata(dbDoc)));
@@ -311,7 +312,7 @@ public class IndexService {
 	
 	
 	public ArrayNode getStanzasMetaData(String field) {
-		List<String> addressees = new ArrayList<String>();
+		List<String> values = new ArrayList<String>();
 		
 		//aggregation for distinct hymn addressee values
 		TermsAggregationBuilder agg = 
@@ -324,13 +325,13 @@ public class IndexService {
 		try {
 			SearchResponse response = elastic.client().search(req, RequestOptions.DEFAULT);
 			for (Bucket b : ((Terms)response.getAggregations().get("metaAgg")).getBuckets()) {
-				addressees.add(b.getKeyAsString());
+				values.add(b.getKeyAsString());
 			}
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		Collections.sort(addressees);
-		return json.getMapper().valueToTree(addressees);
+		Collections.sort(values);
+		return json.getMapper().valueToTree(values);
 	}
 	
 	

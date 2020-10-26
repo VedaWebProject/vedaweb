@@ -36,6 +36,7 @@
 			"hymnGroup":		{ "type": "keyword" },
 			"strata":			{ "type": "keyword" },
 			"stanzaType":		{ "type": "keyword" },
+			"lateAdditions":	{ "type": "keyword" },
 			"metricalPositions":{
 				"type": "nested",
 				"properties": {

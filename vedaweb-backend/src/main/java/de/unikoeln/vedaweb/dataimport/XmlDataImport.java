@@ -78,7 +78,7 @@ public class XmlDataImport {
 							.getAttributeValue(new QName("name"));
 					String code = compiler.evaluate("*:symbol/@*:value", addition)
 							.itemAt(0).getStringValue();
-					stanzaObj.addAddition(
+					stanzaObj.addLateAddition(
 							a.substring(0, 1).toUpperCase() 
 							+ a.substring(1).toLowerCase()
 							+ " (" + code + ")"

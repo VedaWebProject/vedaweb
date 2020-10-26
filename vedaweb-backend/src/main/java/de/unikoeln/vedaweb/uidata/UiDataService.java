@@ -132,6 +132,10 @@ public class UiDataService {
 		((ObjectNode)uiData.at("/meta"))
 			.set("stanzaType", indexService.getStanzasMetaData("stanzaType"));
 		
+		//get late additions data from index and add to uiData JSONObject
+		((ObjectNode)uiData.at("/meta"))
+			.set("lateAdditions", indexService.getStanzasMetaData("lateAdditions"));
+		
 		//load arbitrary HTML snippets
 		try {
 			((ObjectNode)uiData)

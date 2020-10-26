@@ -277,18 +277,26 @@ const stateStore = store({
                 hymnAddressee: [],
                 hymnGroup: [],
                 strata: [],
-                stanzaType: []
+                stanzaType: [],
+                lateAdditions: []
             },
 
             hasMetas(){
-                return (stateStore.search.meta.meta.hymnAddressee
-                    && stateStore.search.meta.meta.hymnAddressee.length)
-                || (stateStore.search.meta.meta.hymnGroup
-                    && stateStore.search.meta.meta.hymnGroup.length)
-                || (stateStore.search.meta.meta.strata
-                    && stateStore.search.meta.meta.strata.length)
-                || (stateStore.search.meta.meta.stanzaType
-                    && stateStore.search.meta.meta.stanzaType.length)
+                let metas = 0;
+                Object.keys(stateStore.search.meta.meta)
+                    .filter(k => stateStore.search.meta.meta.hasOwnProperty(k))
+                    .forEach(k => {metas += stateStore.search.meta.meta[k].length});
+                return metas > 0;
+                // return (stateStore.search.meta.meta.hymnAddressee
+                //     && stateStore.search.meta.meta.hymnAddressee.length)
+                // || (stateStore.search.meta.meta.hymnGroup
+                //     && stateStore.search.meta.meta.hymnGroup.length)
+                // || (stateStore.search.meta.meta.strata
+                //     && stateStore.search.meta.meta.strata.length)
+                // || (stateStore.search.meta.meta.stanzaType
+                //     && stateStore.search.meta.meta.stanzaType.length)
+                // || (stateStore.search.meta.meta.lateAdditions
+                //     && stateStore.search.meta.meta.lateAdditions.length)
             },
 
             hasScopes(){
@@ -419,7 +427,8 @@ const stateStore = store({
                     hymnAddressee: [],
                     hymnGroup: [],
                     strata: [],
-                    stanzaType: []
+                    stanzaType: [],
+                    lateAdditions: []
                 };
             }
         }

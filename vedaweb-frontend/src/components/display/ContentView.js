@@ -289,7 +289,7 @@ class ContentView extends Component {
                                                     </div>
 
                                                     {/** STANZA META 3: LATE ADDITION */}
-                                                    {data.additions &&
+                                                    {data.lateAdditions &&
                                                         <div
                                                         className="gap-left-big"
                                                         style={{ whiteSpace:"nowrap" }}>
@@ -299,7 +299,7 @@ class ContentView extends Component {
                                                                 Late additions according to
                                                             </span>
                                                             <HelpButton inline type="lateAdditions"/>
-                                                            {data.additions.map((a, i) => (
+                                                            {data.lateAdditions.map((a, i) => (
                                                                 <div key={"addition_" + i}>
                                                                     {a}
                                                                 </div>
