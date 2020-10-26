@@ -772,8 +772,8 @@ const helpTexts = {
                 <p>
                     The data on presumed late additions to the RV are based on the following works.
                     The abbrevations are case sensitive: Lowercase is used to indicate that the author was unsure,
-                    e.g. “O” = Oldenberg thought it was certainly an Anhang vs. “o” = Oldenberg thought it may/might be an Anhang.
-                    In his “Sketch,” Arnold distinguishes between two phases of Anhänge, C1 and C2.
+                    e.g. “O” = Oldenberg thought it was certainly an Addition vs. “o” = Oldenberg thought it may/might be an Addition.
+                    In his “Sketch,” Arnold distinguishes between two phases of Additions, C1 and C2.
                 </p>
 
                 <h4>C1/C2</h4>
