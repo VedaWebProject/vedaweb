@@ -242,40 +242,71 @@ class ContentView extends Component {
                                             ref={this.scrollTo}>
                                                 <h1>Stanza Properties</h1>
 
-                                                {/** STANZA META 1 */}
-                                                <div style={{display:"inline-block", whiteSpace:"nowrap", marginRight:"1rem"}}>
-                                                    {/** # / ADR / GROUP */}
-                                                    <span className="bold">Hymn #: </span>
-                                                    <span className="text-font">{data.hymnAbs}</span><br/>
-                                                    <span className="bold">Hymn addressee: </span>
-                                                    <span className="text-font">{data.hymnAddressee || ""}</span><br/>
-                                                    <span className="bold">Hymn group: </span>
-                                                    <span className="text-font">{data.hymnGroup || ""}</span><br/>
-                                                    <span className="bold">Stanza Type: </span>
-                                                    <span className="text-font">{data.stanzaType || ""}</span><br/>
-                                                    {/** STRATA */}
-                                                    <span
-                                                    className="bold"
-                                                    title="Arnold, Edward Vernon. 'Sketch of the Historical Grammar of the Rig and Atharva Vedas'.
-                                                    Journal of the American Oriental Society 18 (1897): 203–352.">Strata:&nbsp;</span>
-                                                    {data.strata}
-                                                    <HelpButton inline style={{marginLeft:".5rem"}} type="metaStrata"/>
-                                                </div>
+                                                <div style={{
+                                                    display: "flex",
+                                                    justifyContent: "flex-start",
+                                                    alignItems: "stretch",
+                                                }}>
 
-                                                {/** STANZA META 2: PADA LABELS */}
-                                                <div className="gap-left-big" style={{display:"inline-block", whiteSpace:"nowrap"}}>
-                                                    <span
-                                                    title="provided by D. Gunkel and K. Ryan"
-                                                    className="bold gap-right">
-                                                        Pada Labels
-                                                    </span>
-                                                    <HelpButton inline type="metaLabels"/>
-                                                    {data.padas.map(pada => (
-                                                        <div key={pada.index}>
-                                                            <div style={{display:"inline-block", verticalAlign:"top"}} className="bold red gap-right">{pada.id}:</div>
-                                                            <div style={{display:"inline-block", verticalAlign:"top"}} className="text-font">{pada.label && pada.label.split('').join(', ')}</div>
+                                                    {/** STANZA META 1 */}
+                                                    <div
+                                                    className="gap-right-big"
+                                                    style={{ whiteSpace:"nowrap" }}>
+                                                        {/** # / ADR / GROUP */}
+                                                        <span className="bold">Hymn #: </span>
+                                                        <span className="text-font">{data.hymnAbs}</span><br/>
+                                                        <span className="bold">Hymn addressee: </span>
+                                                        <span className="text-font">{data.hymnAddressee || ""}</span><br/>
+                                                        <span className="bold">Hymn group: </span>
+                                                        <span className="text-font">{data.hymnGroup || ""}</span><br/>
+                                                        <span className="bold">Stanza Type: </span>
+                                                        <span className="text-font">{data.stanzaType || ""}</span><br/>
+                                                        {/** STRATA */}
+                                                        <span
+                                                        className="bold"
+                                                        title="Arnold, Edward Vernon. 'Sketch of the Historical Grammar of the Rig and Atharva Vedas'.
+                                                        Journal of the American Oriental Society 18 (1897): 203–352.">Strata:&nbsp;</span>
+                                                        {data.strata}
+                                                        <HelpButton inline style={{marginLeft:".5rem"}} type="metaStrata"/>
+                                                    </div>
+
+                                                    {/** STANZA META 2: PADA LABELS */}
+                                                    <div
+                                                    className="gap-left-big gap-right-big"
+                                                    style={{ whiteSpace:"nowrap" }}>
+                                                        <span
+                                                        title="provided by D. Gunkel and K. Ryan"
+                                                        className="bold gap-right">
+                                                            Pada Labels
+                                                        </span>
+                                                        <HelpButton inline type="metaLabels"/>
+                                                        {data.padas.map(pada => (
+                                                            <div key={pada.index}>
+                                                                <div style={{display:"inline-block", verticalAlign:"top"}} className="bold red gap-right">{pada.id}:</div>
+                                                                <div style={{display:"inline-block", verticalAlign:"top"}} className="text-font">{pada.label && pada.label.split('').join(', ')}</div>
+                                                            </div>
+                                                        ))}
+                                                    </div>
+
+                                                    {/** STANZA META 3: LATE ADDITION */}
+                                                    {data.additions &&
+                                                        <div
+                                                        className="gap-left-big"
+                                                        style={{ whiteSpace:"nowrap" }}>
+                                                            <span
+                                                            title="provided by D. Gunkel"
+                                                            className="bold gap-right">
+                                                                Late additions according to
+                                                            </span>
+                                                            <HelpButton inline type="lateAdditions"/>
+                                                            {data.additions.map((a, i) => (
+                                                                <div key={"addition_" + i}>
+                                                                    {a}
+                                                                </div>
+                                                            ))}
                                                         </div>
-                                                    ))}
+                                                    }
+
                                                 </div>
                                             </div>
                                         }
