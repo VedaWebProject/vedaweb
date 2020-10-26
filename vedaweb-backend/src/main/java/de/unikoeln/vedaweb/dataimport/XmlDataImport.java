@@ -52,15 +52,15 @@ public class XmlDataImport {
 					.itemAt(0).getStringValue();
 			int hymnAbs = Integer.parseInt(compiler.evaluate("@*:ana", hymn)
 					.itemAt(0).getStringValue());
-		
-			//iterate: stanzas
+
+			// iterate: stanzas
 			XdmValue stanzas = compiler.evaluate("*:div[@type='stanza']", hymn);
 			
 			for(XdmItem stanza : stanzas){
 				
 				String[] stanzaLocationData = compiler.evaluate("@*:n", stanza).itemAt(0).getStringValue().split("\\.");
 				
-				//stanza obj data
+				// stanza obj data
 				Stanza stanzaObj = new Stanza();
 				stanzaObj.setBook(Integer.parseInt(stanzaLocationData[0]));
 				stanzaObj.setHymn(Integer.parseInt(stanzaLocationData[1]));
@@ -71,24 +71,25 @@ public class XmlDataImport {
 				stanzaObj.setHymnGroup(hymnGroup);
 				stanzaObj.setStrata(compiler.evaluate("*:lg[@*:source='gunkel_ryan']/*:lg/*:fs/*:f[@*:name='strata']/text()", stanza).itemAt(0).getStringValue());
 				
-				// Citations from Gunkel
-				XdmValue citations = compiler.evaluate("*:fs[@*:type='stanza_properties']/*:f", stanza);
-				for(XdmItem citation : citations) {
-					String cit = ((XdmNode)citation)
+				// Late additions from Gunkel
+				XdmValue additions = compiler.evaluate("*:fs[@*:type='stanza_properties']/*:f", stanza);
+				for(XdmItem addition : additions) {
+					String a = ((XdmNode)addition)
 							.getAttributeValue(new QName("name"));
-					String code = compiler.evaluate("*:symbol/@*:value", citation)
+					String code = compiler.evaluate("*:symbol/@*:value", addition)
 							.itemAt(0).getStringValue();
-					stanzaObj.addCitation(
-							cit.substring(0, 1).toUpperCase() + cit.substring(1)
+					stanzaObj.addAddition(
+							a.substring(0, 1).toUpperCase() 
+							+ a.substring(1).toLowerCase()
 							+ " (" + code + ")"
 					);
 				}
 				
-				//zurich morph glossing and pada labels (by gunkel/ryan)
-				//iterate: padas
+				// zurich morph glossing and pada labels (by gunkel/ryan)
+				// iterate: padas
 				XdmValue padaForms = compiler.evaluate("*:lg[@*:source='zurich']/*:l[@*:n]", stanza);
 				
-				//generate and add pada objects
+				// generate and add pada objects
 				stanzaObj.setPadas(generatePadaObjects(stanza, padaForms, compiler));
 				
 				
