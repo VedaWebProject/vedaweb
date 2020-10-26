@@ -33,20 +33,30 @@ const helpTexts = {
         content:
             <div>
                 <p>
-                    Using the grammar search, you can find stanzas containing lemmas or word forms with certain grammatical properties.
+                    Using the grammar search, you can find stanzas containing lemmas or word forms with certain
+                    grammatical properties.
                     The underlying data for this search are the morphological glossings (and other annotations),
-                    composed at the University of Zurich on the basis of the Rigveda version by Lubotsky (see "Morphological Glossing" view in the stanza data).<br/>
-                    <strong>Please note: </strong>This means that this feature searches a different data set (single tokens, lemmas, grammar annotations) than the quick search in the header of the page (full-text search)!
+                    composed at the University of Zurich on the basis of the Rigveda version by Lubotsky
+                    (see "Morphological Glossing" view in the stanza data).<br/>
+                    <strong>Please note: </strong>This means that this feature searches a different data set
+                    (single tokens, lemmas, grammar annotations) than the quick search in the header of the page
+                    (full-text search)!
                 </p>
                 <h4>Usage</h4>
                 <p>
-                    Define a word form or lemma (optional) and select a property (like <Text code>case</Text>, <Text code>number</Text>, <Text code>person</Text>, etc.)
-                    and the value you are looking for (optional). You may add more properties to your search term by clicking the <Text code>+</Text> button to the right.<br/>
-                    Lemmas must be searched without meta characters, so you just have to search for <Text code>īḍ īḷ</Text> to find <Text code>√īḍ- ~ √īḷ-</Text> or for <Text code>dā 1</Text> to find <Text code>√dā-¹</Text>.
-                    Please note that if you want to find e.g. both <Text code>√dā-¹</Text> and <Text code>√dā-²</Text> (so the number doesn't matter), suffix the lemma with a wildcard symbol: <Text code>dā*</Text>!
+                    Define a word form or lemma (optional) and select a property (like <Text code>case</Text>,
+                    <Text code>number</Text>, <Text code>person</Text>, etc.)
+                    and the value you are looking for (optional). You may add more properties to your search term
+                    by clicking the <Text code>+</Text> button to the right.<br/>
+                    Lemmas must be searched without meta characters, so you just have to search for
+                    <Text code>īḍ īḷ</Text> to find <Text code>√īḍ- ~ √īḷ-</Text> or for <Text code>dā 1</Text>
+                    to find <Text code>√dā-¹</Text>.
+                    Please note that if you want to find e.g. both <Text code>√dā-¹</Text> and <Text code>√dā-²</Text>
+                    (so the number doesn't matter), suffix the lemma with a wildcard symbol: <Text code>dā*</Text>!
                 </p>
                 <p>
-                    It's also possible to use <strong>wildcards</strong> (just like in the <i>Quick search</i> at the top of the page),
+                    It's also possible to use <strong>wildcards</strong> (just like in the <i>Quick search</i> at
+                    the top of the page),
                     e.g. searching for <Text code>agn*</Text> would match all word forms or lemmas starting with <i>agn</i>.
                 </p>
                 <p>
@@ -64,19 +74,25 @@ const helpTexts = {
                 </p>
                 <h4>Usage</h4>
                 <p>
-                    There is metrical data associated with some text versions, of which you can choose the one you want to search in using the dropdown menu.<br/>
+                    There is metrical data associated with some text versions, of which you can choose the one you want
+                    to search in using the dropdown menu.<br/>
                     The metrical data is composed of markers for short and long syllables.
-                    They are displayed in a stanza's data as <Text code>—</Text> for a long and <Text code>◡</Text> for a short syllable.
+                    They are displayed in a stanza's data as <Text code>—</Text> for a long and <Text code>◡</Text>
+                    for a short syllable.
                 </p>
                 <p>
-                    To make searching in this data easier, you have to use <Text code>L</Text> for a long and <Text code>S</Text> for a short syllable.
-                    You can also search for multiple "words" in any order, or even in a fixed order by using a quoted "phrase search" (e.g. <Text code>"LSS SL"</Text>).
+                    To make searching in this data easier, you have to use <Text code>L</Text> for a long and
+                    <Text code>S</Text> for a short syllable.
+                    You can also search for multiple "words" in any order, or even in a fixed order by using a
+                    quoted "phrase search" (e.g. <Text code>"LSS SL"</Text>).
                 </p>
                 <h4>Wildcards</h4>
                 <p>
-                    It's also possible to use <strong>wildcards</strong> (just like in the <i>Quick search</i> at the top of the page),
+                    It's also possible to use <strong>wildcards</strong> (just like in the <i>Quick search</i>
+                    at the top of the page),
                     e.g. searching for <Text code>LLS*</Text> would match all words starting with this metrical pattern.
-                    Likewise, <Text code>LLS?</Text> would find words with four syllables, where the last one can be long <i>or</i> short.
+                    Likewise, <Text code>LLS?</Text> would find words with four syllables, where the last one can
+                    be long <i>or</i> short.
                 </p>
                 <p>
                     <strong>Please be aware that you <u>cannot use wildcards in a phrase search</u>!</strong>
@@ -285,7 +301,8 @@ const helpTexts = {
                 </p>
                 <p>
                     <strong>
-                        You get an overview of the supported RegEx operators <a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/regexp-syntax.html#regexp-standard-operators" target="_blank" rel="noopener noreferrer">here</a>.
+                        You get an overview of the supported RegEx operators
+                        <a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/regexp-syntax.html#regexp-standard-operators" target="_blank" rel="noopener noreferrer">here</a>.
                     </strong>
                 </p>
             </div>
@@ -318,8 +335,11 @@ const helpTexts = {
         content:
             <div>
                 <p>
-                    Devanagari version based on the Samhita-text by Aufrecht and Van Nooten &amp; Holland, provided by Detlef Eichler.<br/>
-                    <a href="http://www.detlef108.de/Rigveda.htm" target="_blank" rel="noopener noreferrer">http://www.detlef108.de/Rigveda.htm</a>
+                    Devanagari version based on the Samhita-text by Aufrecht and Van Nooten &amp; Holland, 
+                    provided by Detlef Eichler.<br/>
+                    <a href="http://www.detlef108.de/Rigveda.htm" target="_blank" rel="noopener noreferrer">
+                        http://www.detlef108.de/Rigveda.htm
+                    </a>
                 </p>
             </div>
     },
@@ -330,7 +350,9 @@ const helpTexts = {
             <div>
                 <p>
                     Devanagari version provided by Mārcis Gasūns.<br/>
-                    <a href="https://www.sanskrit-lexicon.uni-koeln.de/" target="_blank" rel="noopener noreferrer">https://www.sanskrit-lexicon.uni-koeln.de/</a>
+                    <a href="https://www.sanskrit-lexicon.uni-koeln.de/" target="_blank" rel="noopener noreferrer">
+                        https://www.sanskrit-lexicon.uni-koeln.de/
+                    </a>
                 </p>
             </div>
     },
@@ -340,7 +362,8 @@ const helpTexts = {
         content:
             <div>
                 <p>
-                    Nooten, Barend A. van &amp; Gary Holland (eds.). 1994. Rig Veda: a metrically restored text with an introduction and notes. Cambridge, Mass. [u.a.]: Harvard University Press.
+                    Nooten, Barend A. van &amp; Gary Holland (eds.). 1994. Rig Veda: a metrically restored
+                    text with an introduction and notes. Cambridge, Mass. [u.a.]: Harvard University Press.
                 </p>
                 <b>Coverage of this version:</b><br/>
                 <p>
@@ -355,7 +378,9 @@ const helpTexts = {
         content:
             <div>
                 <p>
-                    Aufrecht, Theodor. 1955. Die Hymnen des Rigveda. Erster Teil. Mandala I-VI. Darmstadt: Wissenschaftliche Buchgesellschaft. UND Aufrecht, Theodor. 1955. Die Hymnen des Rigveda. Zweiter Teil. Mandala VII-X. Darmstadt: Wissenschaftliche Buchgesellschaft.
+                    Aufrecht, Theodor. 1955. Die Hymnen des Rigveda. Erster Teil. Mandala I-VI. Darmstadt:
+                    Wissenschaftliche Buchgesellschaft. UND Aufrecht, Theodor. 1955. Die Hymnen des Rigveda.
+                    Zweiter Teil. Mandala VII-X. Darmstadt: Wissenschaftliche Buchgesellschaft.
                 </p>
                 <b>Coverage of this version:</b><br/>
                 <p>
@@ -398,7 +423,8 @@ const helpTexts = {
         content:
             <div>
                 <p>
-                    Lubotsky, Alexander. 1997. A Rgvedic word concordance. (2 Vols.) New Haven, Conn.: American Oriental Society.
+                    Lubotsky, Alexander. 1997. A Rgvedic word concordance. (2 Vols.) New Haven, Conn.:
+                    American Oriental Society.
                 </p>
             </div>
     },
@@ -520,7 +546,8 @@ const helpTexts = {
         content:
             <div>
                 <p>
-                    Geldner, Karl Friedrich. 1951. Der Rig-Veda (aus d. Sanskrit ins Dt. übers. u. mit e. laufenden Kommentar versehen).  Cambridge, Mass.: Harvard University Press.
+                    Geldner, Karl Friedrich. 1951. Der Rig-Veda (aus d. Sanskrit ins Dt. übers. u. mit e.
+                    laufenden Kommentar versehen).  Cambridge, Mass.: Harvard University Press.
                 </p>
                 <b>Coverage of this translation:</b><br/>
                 <p>
@@ -590,7 +617,8 @@ const helpTexts = {
         content:
             <div>
                 <p>
-                    MacDonell, Arthur A. 1922. Hymns from the Rigveda. Selected and Metrically Translated. London: Oxford University Press.
+                    MacDonell, Arthur A. 1922. Hymns from the Rigveda. Selected and Metrically Translated.
+                    London: Oxford University Press.
                 </p>
                 <details>
                     <summary>Show coverage of this translation</summary>
@@ -657,7 +685,8 @@ const helpTexts = {
         content:
             <div>
                 <p>
-                    Müller, Max. 1891. Vedic Hymns. Part 1. Hymns to the Maruts, Rudra, Vâyu and Vâta. Sacred Books of the East. Vol. 32. Oxford: Clarendon Press.
+                    Müller, Max. 1891. Vedic Hymns. Part 1. Hymns to the Maruts, Rudra, Vâyu and Vâta.
+                    Sacred Books of the East. Vol. 32. Oxford: Clarendon Press.
                 </p>
             </div>
     },
@@ -667,7 +696,8 @@ const helpTexts = {
         content:
             <div>
                 <p>
-                    Oldenberg, Hermann (1897): Vedic Hymns. Part 2. Hymns to Agni (Mandalas I-V). Oxford: Oxford University Press (Sacred books of the East, 46).
+                    Oldenberg, Hermann (1897): Vedic Hymns. Part 2. Hymns to Agni (Mandalas I-V). Oxford:
+                    Oxford University Press (Sacred books of the East, 46).
                 </p>
             </div>
     },
@@ -740,47 +770,49 @@ const helpTexts = {
         content:
             <div>
                 <p>
-                    The data on presumed late additions to the RV are based on the following works:
+                    The data on presumed late additions to the RV are based on the following works.
+                    The abbrevations are case sensitive: Lowercase is used to indicate that the author was unsure,
+                    e.g. “O” = Oldenberg thought it was certainly an Anhang vs. “o” = Oldenberg thought it may/might be an Anhang.
+                    In his “Sketch,” Arnold distinguishes between two phases of Anhänge, C1 and C2.
                 </p>
 
                 <h4>C1/C2</h4>
                 <p>
-                    Arnold, E. Vernon. 1897. “Sketch of the Historical Grammar of the Rig and Atharva Vedas”. Journal of the American Oriental Society 18: 203–353.
+                    Arnold, E. Vernon. 1897. “Sketch of the Historical Grammar of the Rig and Atharva Vedas”.
+                    Journal of the American Oriental Society 18: 203–353.
                 </p>
 
                 <h4>G</h4>
                 <p>
-                    Grassmann, Hermann. 1876–7. Rig-veda. Übersetzt und mit kritischen erläuternden Anmerkungen versehen. Leipzig: Brockhaus.
+                    Grassmann, Hermann. 1876–7. Rig-veda. Übersetzt und mit kritischen erläuternden Anmerkungen versehen.
+                    Leipzig: Brockhaus.
                 </p>
                 
                 <h4>O/o</h4>
                 <p>
-                    Oldenberg, Hermann. 1888. Die Hymnen des Ṛigveda. Metrische und textgeschichtliche Prolegomena. Berlin: Hertz.
+                    Oldenberg, Hermann. 1888. Die Hymnen des Ṛigveda. Metrische und textgeschichtliche Prolegomena.
+                    Berlin: Hertz.
                 </p>
                 <p>
-                    Oldenberg, Hermann. 1909. R̥gveda: Textkritische und exegetische Noten. Erstes bis sechstes Buch. Abhandlungen der kgl. Gesellschaft der Wissenschaften zu Göttingen, Philologisch-historische Klasse, vol. XI.5. Berlin: Weidmann.
+                    Oldenberg, Hermann. 1909. R̥gveda: Textkritische und exegetische Noten. Erstes bis sechstes Buch.
+                    Abhandlungen der kgl. Gesellschaft der Wissenschaften zu Göttingen, Philologisch-historische Klasse, vol. XI.5. Berlin: Weidmann.
                 </p>
                 <p>
-                    Oldenberg, Hermann. 1912. R̥gveda: Textkritische und exegetische Noten. Siebentes bis zehntes Buch. Abhandlungen der kgl. Gesellschaft der Wissenschaften zu Göttingen, Philologischhistorische Klasse, vol. XIII.3. Berlin: Weidmann.
+                    Oldenberg, Hermann. 1912. R̥gveda: Textkritische und exegetische Noten. Siebentes bis zehntes Buch.
+                    Abhandlungen der kgl. Gesellschaft der Wissenschaften zu Göttingen, Philologischhistorische Klasse,
+                    vol. XIII.3. Berlin: Weidmann.
                 </p>
                 
                 <h4>Z/z</h4>
                 <p>
-                    Witzel, Michael. 1995. “R̥gvedic History: Poets, Chieftains and Polities.” In The Indo-Aryans of Ancient South Asia, ed. George Erdosy, 307–52. Berlin: de Gruyter.
+                    Witzel, Michael. 1995. “R̥gvedic History: Poets, Chieftains and Polities.” In The Indo-Aryans of
+                    Ancient South Asia, ed. George Erdosy, 307–52. Berlin: de Gruyter.
                 </p>
                 
                 <h4>W/w</h4>
                 <p>
-                    Wüst, Walther. 1928. Stilgeschichte und Chronologie des Ṛgveda. Abhandlungen für die Kunde des Morgenlandes, vol. XVII.4. Leipzig: Deutsche Morgenländische Gesellschaft.
-                </p>
-                
-                <hr/>
-                
-                <p>
-                    The abbrevations are case sensitive: Lowercase is used to indicate that the author was unsure, e.g. “O” = Oldenberg thought it was certainly an Anhang vs. “o” = Oldenberg thought it may/might be an Anhang.
-                </p>
-                <p>
-                    In his “Sketch,” Arnold distinguishes between two phases of Anhänge, C1 and C2.
+                    Wüst, Walther. 1928. Stilgeschichte und Chronologie des Ṛgveda. Abhandlungen für die Kunde des
+                    Morgenlandes, vol. XVII.4. Leipzig: Deutsche Morgenländische Gesellschaft.
                 </p>
             </div>
     },
@@ -818,7 +850,9 @@ const helpTexts = {
         content:
             <div>
                 <p>
-                    Geldner, Karl Friedrich. <i>Der Rig-Veda. Aus dem Sanskrit ins Deutsche übersetzt und mit einem laufenden Kommentar versehen von Karl Friedrich Geldner.</i> Cambridge (Mass.) [repr. 2003]: Harvard Univ. Pr., 1951.
+                    Geldner, Karl Friedrich. <i>Der Rig-Veda. Aus dem Sanskrit ins Deutsche übersetzt und mit einem laufenden
+                        Kommentar versehen von Karl Friedrich Geldner.</i> Cambridge (Mass.) [repr. 2003]: Harvard Univ.
+                        Pr., 1951.
                 </p>
             </div>
     },
@@ -828,7 +862,8 @@ const helpTexts = {
         content:
             <div>
                 <p>
-                    Links to entries in Graßmann's dictionary have been generated automatically and may be erroneous in some cases. Corrections will constantly be added and updated.
+                    Links to entries in Graßmann's dictionary have been generated automatically and may be erroneous in
+                    some cases. Corrections will constantly be added and updated.
                 </p>
             </div>
     },
@@ -852,8 +887,8 @@ const helpTexts = {
                     Deleting this settings data is a way to revoke your agreement to save this kind of data in your browser
                     and to be part of our usage statistics. Also, if we make a breaking change to our application, it is
                     possible that visiting the new version of the website with old settings data might cause an error. So if you
-                    expercience any errors, you can always try to delete your old settings. This has been reported to work in the past,
-                    so maybe it will help you, too.
+                    expercience any errors, you can always try to delete your old settings. This has been reported to work in
+                    the past, so maybe it will help you, too.
                 </p>
             </div>
     }
