@@ -10,7 +10,8 @@ COPY vedaweb-frontend /opt/vedaweb-frontend
 WORKDIR /opt/vedaweb-frontend
 
 # build frontend
-RUN npm install --silent &> /dev/null \
+RUN rm -r build \
+ && npm install --silent &> /dev/null \
  && npm run build --silent &> /dev/null
 
 
@@ -34,6 +35,7 @@ COPY vedaweb-backend vedaweb-backend
 
 # build backend and full app into fat jar
 RUN cd vedaweb-backend \
+ && rm -r target \
  && mvn clean install -DskipTests --quiet &> /dev/null
 
 
