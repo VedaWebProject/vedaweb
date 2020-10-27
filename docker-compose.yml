@@ -14,14 +14,14 @@ services:
 
   # MongoDB database service
   mongodb:
-    image: mvertes/alpine-mongo:latest
+    image: mvertes/alpine-mongo:4.0.6-1
     volumes:
       - mongodb_data:/data/db
     #restart: on-failure # make this container restart on failure
 
   # Elasticsearch search server service
   elastic:
-    image: blacktop/elasticsearch:latest
+    image: blacktop/elasticsearch:7.9.2
     volumes:
       - elastic_data:/usr/share/elasticsearch/data
     #restart: on-failure # make this container restart on failure
