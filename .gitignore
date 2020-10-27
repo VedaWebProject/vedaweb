@@ -40,7 +40,7 @@ vedaweb-frontend/.pnp
 vedaweb-frontend/.pnp.js
 # testing
 vedaweb-frontend/coverage
-# build stuff
+# builds
 vedaweb-frontend/build
 # misc
 vedaweb-frontend/.DS_Store
@@ -52,6 +52,7 @@ vedaweb-frontend/.env.production.local
 vedaweb-frontend/npm-debug.log*
 vedaweb-frontend/yarn-debug.log*
 vedaweb-frontend/yarn-error.log*
+
 # IDE config
 vedaweb-frontend/.vscode
 
@@ -64,3 +65,4 @@ vedaweb-frontend/.vscode
 script-*
 # panic backups
 backups/
+log/
