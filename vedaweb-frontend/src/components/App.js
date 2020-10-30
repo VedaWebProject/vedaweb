@@ -30,11 +30,16 @@ import "./utils/polyfills";
 import PrivacyHint from "./widgets/PrivacyHint";
 import usageStats from "./utils/usageStats";
 
+import { unregister } from '../registerServiceWorker';
+
 
 class App extends Component {
 
     constructor(props){
         super(props);
+
+        //unregister service worker
+        unregister(); 
 
         this.state = {
             isLoaded: false,
