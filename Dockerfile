@@ -36,8 +36,7 @@ COPY vedaweb-backend vedaweb-backend
 # build backend and full app into fat jar
 RUN cd vedaweb-backend \
  && rm -r target \
- && mvn clean install -DskipTests --quiet &> /dev/null
-
+ && mvn clean install -DskipTests --quiet
 
 
 #### image to run the application from
