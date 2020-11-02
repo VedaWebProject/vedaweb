@@ -82,7 +82,7 @@ class SearchView extends Component {
                         Group ({stateStore.search.meta.meta.hymnGroup.length}),
                         Strata ({stateStore.search.meta.meta.strata.length}),
                         Type ({stateStore.search.meta.meta.stanzaType.length}),
-                        Additions ({stateStore.search.meta.meta.lateAdditions.length})
+                        Addition ({stateStore.search.meta.meta.lateAdditions.length})
                     </span>
                     : <span className="red"> none</span>
                 }
@@ -173,14 +173,14 @@ class SearchView extends Component {
                                     style={customPanelStyle} >
                                         <HelpButton align="left" type="searchMetaFilters" />
                                         <SearchMetaFilterList
-                                        label="Hymn Addressees"
-                                        placeholder="Any Addressees"
+                                        label="Hymn Addressee"
+                                        placeholder="Any Addressee"
                                         items={stateStore.ui.meta.hymnAddressee}
                                         selected={stateStore.search.meta.meta.hymnAddressee}
                                         handleChange={v => {stateStore.search.meta.meta.hymnAddressee = v}}/>
                                         <SearchMetaFilterList
-                                        label="Hymn Groups"
-                                        placeholder="Any Groups"
+                                        label="Hymn Group"
+                                        placeholder="Any Group"
                                         items={stateStore.ui.meta.hymnGroup}
                                         selected={stateStore.search.meta.meta.hymnGroup}
                                         handleChange={v => {stateStore.search.meta.meta.hymnGroup = v}}/>
@@ -193,14 +193,14 @@ class SearchView extends Component {
                                         handleChange={v => {stateStore.search.meta.meta.strata = v}}/>
                                         <SearchMetaFilterList
                                         label="Stanza Type"
-                                        placeholder="Any Stanza Types"
+                                        placeholder="Any Stanza Type"
                                         items={stateStore.ui.meta.stanzaType}
                                         itemLabels={stateStore.ui.abbreviations.stanzaType}
                                         selected={stateStore.search.meta.meta.stanzaType}
                                         handleChange={v => {stateStore.search.meta.meta.stanzaType = v}}/>
                                         <SearchMetaFilterList
-                                        label="Late Additions"
-                                        placeholder="Any Additions"
+                                        label="Late Addition"
+                                        placeholder="Not specified"
                                         items={stateStore.ui.meta.lateAdditions}
                                         selected={stateStore.search.meta.meta.lateAdditions}
                                         handleChange={v => {stateStore.search.meta.meta.lateAdditions = v}}/>

@@ -296,7 +296,7 @@ class ContentView extends Component {
                                                             <span
                                                             title="provided by D. Gunkel"
                                                             className="bold gap-right">
-                                                                Late additions according to
+                                                                Late addition according to
                                                             </span>
                                                             <HelpButton inline type="lateAdditions"/>
                                                             {data.lateAdditions.map((a, i) => (
