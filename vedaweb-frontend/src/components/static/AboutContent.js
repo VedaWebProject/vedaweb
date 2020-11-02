@@ -10,7 +10,7 @@ class AboutContent extends Component {
         return (
             
             <div>
-                <h1><Icon type="bulb"/> About VedaWeb</h1>
+                <h1><Icon type="bulb"/>About VedaWeb</h1>
 
                 <p>
                     Here you find information on the state of development and recent changes.<br/>
@@ -21,7 +21,7 @@ class AboutContent extends Component {
                     
                 </div><br/>
 
-                <h2><Icon type="message"/> Feedback</h2>
+                <h2><Icon type="message"/>Feedback</h2>
                 <p>
                     Feel free to send us your <strong>feedback on functionality, usability and data correctness:</strong>
                     <br/><br/>
@@ -35,8 +35,9 @@ class AboutContent extends Component {
                     Thank you for using <span className="secondary-font red bold">VedaWeb</span>!
                 </p>
 
-                <h2><Icon type="issues-close"/> Recent Changes</h2>
+                <h2><Icon type="issues-close"/>Recently added features (excluding technical improvements and fixes)</h2>
                 <ul>
+                    <li>Display and filter by markings of possible late additions (2020/10/30)</li>
                     <li>New "Help &amp; Instructions" section (2020/08/18)</li>
                     <li>Added English translation by Müller (2020/08/05)</li>
                     <li>Added English translation by Oldenberg (2020/08/05)</li>
