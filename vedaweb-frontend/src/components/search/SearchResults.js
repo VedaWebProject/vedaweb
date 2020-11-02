@@ -16,6 +16,8 @@ import stateStore from "../../stateStore";
 
 import ExportButton from "../widgets/ExportButton";
 import RelevanceMeter from "./RelevanceMeter";
+import queryRepresentation from "./queryRepresentation";
+
 
 const fieldDisplayMapping = {
     "form": "Stanza text",
@@ -92,15 +94,7 @@ class SearchResults extends Component {
     loadData(queryJSON) {
 
         //construct "Search Results for ..." data
-        let queryDisplay = {
-            query: queryJSON.mode === "grammar"
-                ? "[" + queryJSON.blocks.map(b =>
-                    Object.keys(b).filter(k => k !== 'distance' && b[k] !== undefined && b[k] !== '')
-                        .map(k => k + ': ' + b[k]).join(', ')).join('] & [') + "]"
-                : queryJSON.input,
-            field:  queryJSON.mode === "grammar" ? "grammar data"
-                : stateStore.ui.layers.find(l => l.id === queryJSON.field).label
-        };
+        let queryDisplay = queryRepresentation(queryJSON, stateStore.ui);
 
         //enable view for searched field automatically
         if (queryJSON.mode === "grammar")
@@ -116,7 +110,7 @@ class SearchResults extends Component {
         });
 
         //set page title
-        document.title = "VedaWeb | Search Results for " + queryDisplay.query;
+        document.title = "VedaWeb | Search Results for " + queryDisplay;
 
         //request search api data
         axios.post(process.env.PUBLIC_URL + "/api/search/" + queryJSON.mode, queryJSON)
@@ -267,34 +261,45 @@ class SearchResults extends Component {
                             {/** SEARCH RESULTS HEADING **/}
 
                             { this.state.queryDisplay !== undefined &&
-                                <h1>
-                                    Search Results for
-                                    <span className="text-font grey"> {this.state.queryDisplay.query} </span>
-                                    in<span className="text-font grey"> {this.state.queryDisplay.field}</span>
+                                <>
+                                    <h1>
+                                        Search Results
 
-                                    {/** EXPORT AND OCCURRENCES FUNCTIONS **/}
+                                        {/** EXPORT AND OCCURRENCES FUNCTIONS **/}
 
-                                    <ExportButton
-                                    buttonType="secondary"
-                                    text="Export as CSV"
-                                    title="Export results as CSV file"
-                                    reqMethod="post"
-                                    reqUrl={process.env.PUBLIC_URL + "/api/export/search/" + stateStore.results.query.mode}
-                                    reqData={stateStore.results.query}
-                                    fileName={"VedaWeb-search-results.csv"}
-                                    style={{marginLeft:"1rem", float:"right"}} />
+                                        <ExportButton
+                                        buttonType="secondary"
+                                        text="Export as CSV"
+                                        title="Export results as CSV file"
+                                        reqMethod="post"
+                                        reqUrl={process.env.PUBLIC_URL + "/api/export/search/" + stateStore.results.query.mode}
+                                        reqData={stateStore.results.query}
+                                        fileName={"VedaWeb-search-results.csv"}
+                                        style={{marginLeft:"1rem", float:"right"}} />
 
-                                    {this.occCountAvailable() &&
-                                        <Button
-                                        type="secondary"
-                                        icon={!this.state.isOccCountLoaded ? "loading" : !this.state.occCount ? "bar-chart" : null}
-                                        children={this.state.occCount ? (this.state.occCount + " total occurrences") : "Total occurrences"}
-                                        disabled={this.state.isOccCountLoaded && this.state.occCount}
-                                        onClick={this.occCount}
-                                        title="Request occurrences info for this search"
-                                        style={{marginLeft:"1rem", float:"right"}}/>
-                                    }
-                                </h1>
+                                        {this.occCountAvailable() &&
+                                            <Button
+                                            type="secondary"
+                                            icon={!this.state.isOccCountLoaded ? "loading" : !this.state.occCount ? "bar-chart" : null}
+                                            children={this.state.occCount ? (this.state.occCount + " total occurrences") : "Total occurrences"}
+                                            disabled={this.state.isOccCountLoaded && this.state.occCount}
+                                            onClick={this.occCount}
+                                            title="Request occurrences info for this search"
+                                            style={{marginLeft:"1rem", float:"right"}}/>
+                                        }
+                                    </h1>
+                                    <div
+                                    className="text-font light-grey font-small"
+                                    style={{
+                                        display:"inline-block",
+                                        padding: "0 .5rem",
+                                        backgroundColor:"#eee",
+                                        borderRadius: "4px",
+                                        fontFamily: "monospace"
+                                    }}>
+                                        {this.state.queryDisplay}
+                                    </div>
+                                </>
                             }
 
 
