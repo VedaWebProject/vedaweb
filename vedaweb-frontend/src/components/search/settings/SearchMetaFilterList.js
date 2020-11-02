@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Row, Col, Select } from 'antd';
+import HelpButton from "../../help/HelpButton";
 
 import './SearchTransliteration.css';
 
@@ -14,7 +15,12 @@ class SearchMetaFilterList extends Component {
 
             this.props.items !== undefined &&
             <Row>
-                <Col span={6} style={{paddingTop: '.5rem'}}>{this.props.label + ": "}</Col>
+                <Col span={6} style={{paddingTop: '.5rem'}}>
+                    {this.props.label + ": "}
+                    {this.props.helpButtonId &&
+                        <HelpButton type={this.props.helpButtonId} inline/>
+                    }
+                </Col>
                 <Col span={18}>
                     <Select
                     mode="multiple"

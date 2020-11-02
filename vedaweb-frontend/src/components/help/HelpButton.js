@@ -10,7 +10,8 @@ class HelpButton extends Component {
 
     state = { visible: false }
 
-    showModal = () => {
+    showModal = (e) => {
+        e.stopPropagation();
         if (helpTexts.hasOwnProperty(this.props.type)){
             this.setState({
                 visible: true,

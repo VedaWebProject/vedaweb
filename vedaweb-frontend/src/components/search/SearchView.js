@@ -75,6 +75,7 @@ class SearchView extends Component {
         const customMetaFilterPanelHeader =
             <div>
                 Meta Filters: 
+                <HelpButton align="right" type="searchMetaFilters" style={{margin:"0 .3rem"}} inline/> 
                 {stateStore.search.meta.hasMetas() ?
                     <span className="red">
                         {" "}
@@ -171,39 +172,43 @@ class SearchView extends Component {
                                     header={customMetaFilterPanelHeader}
                                     key="metafilters"
                                     style={customPanelStyle} >
-                                        <HelpButton align="left" type="searchMetaFilters" />
                                         <SearchMetaFilterList
                                         label="Hymn Addressee"
                                         placeholder="Any Addressee"
                                         items={stateStore.ui.meta.hymnAddressee}
                                         selected={stateStore.search.meta.meta.hymnAddressee}
-                                        handleChange={v => {stateStore.search.meta.meta.hymnAddressee = v}}/>
+                                        handleChange={v => {stateStore.search.meta.meta.hymnAddressee = v}}
+                                        helpButtonId="metaAdrGroup" />
                                         <SearchMetaFilterList
                                         label="Hymn Group"
                                         placeholder="Any Group"
                                         items={stateStore.ui.meta.hymnGroup}
                                         selected={stateStore.search.meta.meta.hymnGroup}
-                                        handleChange={v => {stateStore.search.meta.meta.hymnGroup = v}}/>
+                                        handleChange={v => {stateStore.search.meta.meta.hymnGroup = v}}
+                                        helpButtonId="metaAdrGroup" />
                                         <SearchMetaFilterList
                                         label="Stanza Strata"
                                         placeholder="Any Strata"
                                         items={stateStore.ui.meta.strata}
                                         itemLabels={stateStore.ui.abbreviations.strata}
                                         selected={stateStore.search.meta.meta.strata}
-                                        handleChange={v => {stateStore.search.meta.meta.strata = v}}/>
+                                        handleChange={v => {stateStore.search.meta.meta.strata = v}}
+                                        helpButtonId="metaStrata" />
                                         <SearchMetaFilterList
                                         label="Stanza Type"
                                         placeholder="Any Stanza Type"
                                         items={stateStore.ui.meta.stanzaType}
                                         itemLabels={stateStore.ui.abbreviations.stanzaType}
                                         selected={stateStore.search.meta.meta.stanzaType}
-                                        handleChange={v => {stateStore.search.meta.meta.stanzaType = v}}/>
+                                        handleChange={v => {stateStore.search.meta.meta.stanzaType = v}}
+                                        helpButtonId="metaStanzaType" />
                                         <SearchMetaFilterList
                                         label="Late Addition"
                                         placeholder="Not specified"
                                         items={stateStore.ui.meta.lateAdditions}
                                         selected={stateStore.search.meta.meta.lateAdditions}
-                                        handleChange={v => {stateStore.search.meta.meta.lateAdditions = v}}/>
+                                        handleChange={v => {stateStore.search.meta.meta.lateAdditions = v}}
+                                        helpButtonId="lateAdditions" />
                                     </Panel>
                                 </Collapse>
                             </div>

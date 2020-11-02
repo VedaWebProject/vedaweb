@@ -857,6 +857,16 @@ const helpTexts = {
             </div>
     },
 
+    metaStanzaType : {
+        title: "Metrical Stanza Type",
+        content:
+            <div>
+                <p>
+                    The metrical stanza type according to the stanzas syllable count and distribution
+                </p>
+            </div>
+    },
+
     dict_grassmann : {
         title: "Graßmann dictionary references",
         content:
