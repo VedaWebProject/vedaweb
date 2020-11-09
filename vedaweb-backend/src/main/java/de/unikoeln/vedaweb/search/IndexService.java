@@ -336,23 +336,26 @@ public class IndexService {
 	
 	
 	public boolean indexExists() {
+		log.info("Looking for Elasticsearch index");
 		GetIndexRequest request = new GetIndexRequest(indexName);
 		boolean exists = false;
+		int tries = 10;
 		
-		for (int i = 1; i <= 20; i++) {
+		while (tries > 0) {
 			try {
 				exists = elastic
 					.client()
 					.indices()
 					.exists(request, RequestOptions.DEFAULT);
-				break;
+				tries = 1;
 			} catch (IOException e) {
-				log.warn("Try " + i + "/10: Could not check if index exists."
+				log.warn("Try " + (10 - tries) + "/10: Could not check if index exists."
 						+ " Request failed.");
 			}
 			try {
 				Thread.sleep(3000);
 			} catch (InterruptedException e) {}
+			tries--;
 		}
 		
         return exists;
