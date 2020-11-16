@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-	
+
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>de.unikoeln.vedaweb</groupId>
@@ -70,20 +71,16 @@
 			<groupId>net.sourceforge.nekohtml</groupId>
 			<artifactId>nekohtml</artifactId>
 		</dependency>
-	
+
 		<dependency>
 			<groupId>org.elasticsearch</groupId>
 			<artifactId>elasticsearch</artifactId>
-			<version>7.6.2</version><!--$NO-MVN-MAN-VER$-->
+			<version>7.6.2</version><!--$NO-MVN-MAN-VER$ -->
 		</dependency>
-		
-		<!--
-		<dependency>
-			<groupId>org.elasticsearch.client</groupId>
-			<artifactId>elasticsearch-rest-client</artifactId>
-		</dependency>
-		-->
-		
+
+		<!-- <dependency> <groupId>org.elasticsearch.client</groupId> <artifactId>elasticsearch-rest-client</artifactId> 
+			</dependency> -->
+
 		<dependency>
 			<groupId>org.elasticsearch.client</groupId>
 			<artifactId>elasticsearch-rest-high-level-client</artifactId>
@@ -95,13 +92,13 @@
 			<artifactId>json</artifactId>
 			<version>20171018</version>
 		</dependency>
-		
+
 		<dependency>
-		    <groupId>net.sf.saxon</groupId>
-		    <artifactId>Saxon-HE</artifactId>
-		    <version>9.8.0-8</version>
+			<groupId>net.sf.saxon</groupId>
+			<artifactId>Saxon-HE</artifactId>
+			<version>9.8.0-8</version>
 		</dependency>
-	
+
 		<dependency>
 			<groupId>io.springfox</groupId>
 			<artifactId>springfox-swagger2</artifactId>
@@ -113,36 +110,42 @@
 			<artifactId>springfox-swagger-ui</artifactId>
 			<version>2.9.2</version>
 		</dependency>
-		
+
+		<dependency>
+			<groupId>com.atlassian.commonmark</groupId>
+			<artifactId>commonmark</artifactId>
+			<version>0.15.2</version>
+		</dependency>
+
 	</dependencies>
 
 
 	<build>
-	
+
 		<finalName>${project.name}</finalName>
 
 		<plugins>
-		
+
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
-		
+
 			<plugin>
-			    <artifactId>maven-clean-plugin</artifactId>
-			    <configuration>
-			        <filesets>
-			            <fileset>
-			                <directory>${basedir}/src/main/resources/static</directory>
-			            </fileset>
-			        </filesets>
-			    </configuration>
+				<artifactId>maven-clean-plugin</artifactId>
+				<configuration>
+					<filesets>
+						<fileset>
+							<directory>${basedir}/src/main/resources/static</directory>
+						</fileset>
+					</filesets>
+				</configuration>
 			</plugin>
-			
+
 			<plugin>
 				<artifactId>maven-resources-plugin</artifactId>
 				<executions>
-					
+
 					<!-- COPY RESOURCES: CLIENT/FRONTEND APP -->
 					<execution>
 						<id>copy-client-app</id>
