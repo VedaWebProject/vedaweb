@@ -44,7 +44,7 @@ class App extends Component {
         this.state = {
             isLoaded: false,
             error: undefined
-        }
+        };
 
         //configure iso scheme for sanscript.js
         let iso = JSON.parse(JSON.stringify(Sanscript.schemes.iast));
