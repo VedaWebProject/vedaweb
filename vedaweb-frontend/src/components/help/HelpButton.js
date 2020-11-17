@@ -1,9 +1,12 @@
 import React, { Component } from "react";
 import { Icon, Modal } from 'antd';
-import helpIcon from "../../img/help.png";
-import helpTexts from "./HelpTexts";
+//import helpIcon from "../../img/help.png";
+import Html from "../utils/Html";
+
 import "./HelpButton.css";
 
+import stateStore from "../../stateStore";
+import { view } from 'react-easy-state';
 
 
 class HelpButton extends Component {
@@ -12,7 +15,7 @@ class HelpButton extends Component {
 
     showModal = (e) => {
         e.stopPropagation();
-        if (helpTexts.hasOwnProperty(this.props.type)){
+        if (stateStore.ui.help.hasOwnProperty(this.props.type)){
             this.setState({
                 visible: true,
             });
@@ -31,16 +34,16 @@ class HelpButton extends Component {
 
         if (this.props.hidden) return null;
 
-        const modalHeader = !helpTexts.hasOwnProperty(this.props.type) ? "" :
-            <div className="secondary-font red bold">
-                <img
-                src={helpIcon}
-                alt=""
-                style={{height:"32px", paddingRight:"1rem"}}/>
-                <span className="font-big" style={{verticalAlign:"middle"}}>
-                    {helpTexts[this.props.type].title}
-                </span>
-            </div>;
+        // const modalHeader = !stateStore.ui.help.hasOwnProperty(this.props.type) ? "" :
+        //     <div className="secondary-font red bold">
+        //         <img
+        //         src={helpIcon}
+        //         alt=""
+        //         style={{height:"32px", paddingRight:"1rem"}}/>
+        //         {/* <span className="font-big" style={{verticalAlign:"middle"}}>
+        //             {stateStore.ui.help[this.props.type].title}
+        //         </span> */}
+        //     </div>;
 
         const containerStyle = Object.assign({
             textAlign: this.props.align ? this.props.align : "right",
@@ -69,7 +72,7 @@ class HelpButton extends Component {
                     theme="outlined"
                     className="help-button-icon"
                     style={iconStyle}
-                    title={this.props.title || (helpTexts[this.props.type] ? "Show help: \"" + helpTexts[this.props.type].title + "\"" : "")} />
+                    title={this.props.title || ""} />
 
                     { this.props.label && this.props.labelPosition === "right" &&
                         <span className="help-button-label">{this.props.label}</span>
@@ -78,7 +81,7 @@ class HelpButton extends Component {
                 </div>
                 
                 <Modal
-                title={modalHeader}
+                title={null}
                 centered
                 footer={null}
                 maskClosable={true}
@@ -86,7 +89,7 @@ class HelpButton extends Component {
                 onOk={this.hideModal}
                 onCancel={this.hideModal}
                 okText="OK">
-                    {helpTexts[this.props.type] ? helpTexts[this.props.type].content : ""}
+                    <Html html={stateStore.ui.help[this.props.type] || ""}/>
                 </Modal>
             </div>
         );
@@ -95,4 +98,4 @@ class HelpButton extends Component {
 
 }
 
-export default HelpButton;
+export default view(HelpButton);

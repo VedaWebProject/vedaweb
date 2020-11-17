@@ -23,6 +23,7 @@ import de.unikoeln.vedaweb.search.IndexService;
 import de.unikoeln.vedaweb.util.FsResourcesService;
 import de.unikoeln.vedaweb.util.IOUtils;
 import de.unikoeln.vedaweb.util.JsonUtilService;
+import de.unikoeln.vedaweb.util.MarkdownService;
 
 /**
  * Service class that generates and provides client UI data
@@ -36,6 +37,7 @@ public class UiDataService {
 	private final Logger log = LoggerFactory.getLogger(this.getClass());
 	
 	public static final String SNIPPETS_RESOURCES_DIR = "snippets";
+	public static final String HELPTEXTS_RESOURCES_DIR = "help";
 	
 	@Autowired
 	private IndexService indexService;
@@ -49,7 +51,11 @@ public class UiDataService {
 	@Autowired
 	private FsResourcesService fsResources;
 	
-	@Autowired JsonUtilService json;
+	@Autowired
+	private MarkdownService md;
+	
+	@Autowired
+	private JsonUtilService json;
 	
 	@Value("classpath:ui-data.json")
 	private Resource uiDataTemplate;
@@ -98,10 +104,12 @@ public class UiDataService {
 		
 		//load ui data template file
 		try {
-			uiData = json.parse(IOUtils.convertStreamToString(uiDataTemplate.getInputStream()));
+			uiData = json.parse(IOUtils.convertStreamToString(
+					uiDataTemplate.getInputStream()));
 		} catch (IOException e) {
 			log.error("UI data template JSON could not be loaded");
-			return "[ERROR] UI data template JSON could not be loaded. (UiDataService)";
+			return "[ERROR] UI data template JSON "
+					+ "could not be loaded. (UiDataService)";
 		}
 		
 		//get grammar tags data from index and add to uiData JSONObject
@@ -136,31 +144,65 @@ public class UiDataService {
 		((ObjectNode)uiData.at("/meta"))
 			.set("lateAdditions", indexService.getStanzasMetaData("lateAdditions"));
 		
+		//load help texts from markdown files
+		try {
+			((ObjectNode)uiData)
+				.set("help", loadHelpTexts());
+		} catch (IOException e) {
+			log.error("Cannot load help texts: " + 
+				e.getMessage().replaceAll("\n", ""));
+		}
+		
 		//load arbitrary HTML snippets
 		try {
 			((ObjectNode)uiData)
 				.set("snippets", loadHtmlSnippets());
 		} catch (IOException e) {
-			log.error("Cannot load HTML snippets: " + e.getMessage().replaceAll("\n", ""));
+			log.error("Cannot load HTML snippets: " + 
+					e.getMessage().replaceAll("\n", ""));
 		}
 		
-		log.info("Successfully initialized frontend UI data object");
-		return "[UiDataService] Successfully initialized frontend UI data object";
+		log.info("Successfully initialized frontend UI data");
+		return "[UiDataService] Successfully "
+				+ "initialized frontend UI data";
 	}
 	
 	
 	private ObjectNode loadHtmlSnippets() throws IOException {
 		ObjectNode snippets = JsonNodeFactory.instance.objectNode();
+		StringBuilder sb;
 		
 		for (File f : fsResources.getResourcesFiles(SNIPPETS_RESOURCES_DIR)) {
-			StringBuilder sb = new StringBuilder();
-			for (String line : Files.readAllLines(f.toPath(), StandardCharsets.UTF_8)) {
+			sb = new StringBuilder();
+			for (String line : Files.readAllLines(f.toPath(),
+					StandardCharsets.UTF_8)) {
 				sb.append(line + "\n");
 			}
-			snippets.put(f.getName().replaceFirst("\\.[^\\.]*$", ""), sb.toString());
+			snippets.put(
+					f.getName().replaceFirst("\\.[^\\.]*$", ""),
+					sb.toString());
 		}
 		
 		return snippets;
+	}
+	
+	
+	private ObjectNode loadHelpTexts() throws IOException {
+		ObjectNode helpTexts = JsonNodeFactory.instance.objectNode();
+		StringBuilder sb;
+		
+		for (File f : fsResources.getResourcesFiles(HELPTEXTS_RESOURCES_DIR)) {
+			sb = new StringBuilder();
+			for (String line : Files.readAllLines(f.toPath(),
+					StandardCharsets.UTF_8)) {
+				sb.append(line + "\n");
+			}
+			helpTexts.put(
+					f.getName().replaceFirst("\\.[^\\.]*$", ""),
+					md.parse(sb.toString()));
+		}
+		
+		return helpTexts;
 	}
 	
 

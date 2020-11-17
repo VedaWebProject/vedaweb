@@ -254,5 +254,24 @@ hr {
     color: var(--primary-color);
 }
 
+code, pre {
+    padding: .1rem .3rem;
+    line-height: 1.5;
+    background-color: rgba(27, 35, 35, 0.05);
+    border-radius: 3px;
+    font-family: monospace;
+    font-size: .9rem;
+}
+
+pre {
+    display: inline-block;
+    padding: .3rem;
+}
+
+pre > code {
+    padding: 0;
+    background-color: transparent;
+}
+
 /* CSS DEBUGGING */
 /* div { border: 1px solid blue; } */

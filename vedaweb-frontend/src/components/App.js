@@ -46,6 +46,9 @@ class App extends Component {
             error: undefined
         };
 
+        //load ui data
+        this.loadUiData();
+
         //configure iso scheme for sanscript.js
         let iso = JSON.parse(JSON.stringify(Sanscript.schemes.iast));
         iso.vowels = 'a ā i ī u ū r̥ r̥̄ l̥ l̥̄ ē e ai ō o au'.split(' ');
@@ -55,9 +58,6 @@ class App extends Component {
 
         //set global default spinner indicator
         Spin.setDefaultIndicator(<Icon type="loading" spin style={{ fontSize: 38 }}/>);
-
-        //load ui data
-        this.loadUiData();
     }
 
     componentCleanup(){
@@ -93,23 +93,20 @@ class App extends Component {
     loadUiData(){
         axios.get(process.env.PUBLIC_URL + "/api/uidata")
         .then((response) => {
-            stateStore.ui.search = response.data.search;
-            stateStore.ui.meta = response.data.meta;
-            stateStore.ui.abbreviations = response.data.abbreviations;
-            stateStore.ui.layers = response.data.layers;
-            stateStore.ui.snippets = response.data.snippets;
-            //stateStore.search.meta.scopeDataRaw = stateStore.ui.search.meta.scopes;
-            //stateStore.settings.transliteration = stateStore.ui.search.meta.transliterations[0].id;
-            this.setState({
-                isLoaded: true,
-                error: undefined
-            });
+            // assign all received ui data to state store ui prop
+            Object.assign(stateStore.ui, response.data);
+            //stateStore.ui.meta = response.data.meta;
+            //stateStore.ui.abbreviations = response.data.abbreviations;
+            //stateStore.ui.layers = response.data.layers;
+            //stateStore.ui.snippets = response.data.snippets;
+            //stateStore.ui.help = response.data.help;
+            this.setState({ error: undefined });
         })
         .catch((error) => {
-            this.setState({
-                isLoaded: true,
-                error: error
-            });
+            this.setState({ error: error });
+        })
+        .finally(() => {
+            this.setState({ isLoaded: true });
         });
     }
 
@@ -118,7 +115,7 @@ class App extends Component {
 
         const { error, isLoaded } = this.state;
 
-        if (isLoaded && error !== undefined)
+        if (isLoaded && error)
             console.log(JSON.stringify(error));
 
         return (
@@ -126,7 +123,12 @@ class App extends Component {
                 <div id="app">
 
                     { !isLoaded &&
-                        <div style={{display:"flex", justifyContent:"center", alignItems:"center", height:"100vh", width:"100%"}}>
+                        <div style={{
+                        display:"flex",
+                        justifyContent:"center",
+                        alignItems:"center",
+                        height:"100vh",
+                        width:"100%" }}>
                             <Spin
                             size="large"
                             spinning={!isLoaded} />
@@ -134,7 +136,7 @@ class App extends Component {
                     }
 
                     {/* ERROR MESSAGE: FRONTEND UI DATA COULD NOT BE LOADED */}
-                    { isLoaded && error !== undefined &&
+                    { isLoaded && error &&
                         <div className="error-msg">
                             <Icon type="frown-o" className="gap-right"/>
                             There was an error loading the application data. 
@@ -142,7 +144,7 @@ class App extends Component {
                         </div>
                     }
 
-                    { isLoaded && error === undefined &&
+                    { isLoaded && !error &&
                         <ErrorBoundary>
 
                             <NavBar />

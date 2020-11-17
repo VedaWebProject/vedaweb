@@ -1,22 +1,34 @@
 import React, { Component } from "react";
-import { Icon, Row, Col } from 'antd';
+import { Input, Icon, Row, Col } from 'antd';
 import HelpButton from "../help/HelpButton";
-import helpTexts from "./HelpTexts";
+import Html from "../utils/Html";
 
-// filter and sort help texts by title
-const helpTextsKeys = Object.keys(helpTexts).filter(k => 
-        k !== "start"
-    ).sort((a, b) => {
-        if(helpTexts[a].title < helpTexts[b].title) { return -1; }
-        if(helpTexts[a].title > helpTexts[b].title) { return 1; }
-        return 0;
-    });
+import stateStore from "../../stateStore";
+import { view } from 'react-easy-state';
 
+const Search = Input.Search;
+
+const excludeHelpTexts = [
+    "start",
+];
 
 class Help extends Component {
 
+    constructor(props){
+        super(props);
+        this.state = { filter: "" };
+    }
+
     render() {
 
+        const helpKeys = Object.keys(stateStore.ui.help).filter(k => 
+            excludeHelpTexts.indexOf(k) < 0 &&
+                (!this.state.filter || stateStore.ui.help[k].includes(this.state.filter))
+        ).sort((a, b) => {
+            if(stateStore.ui.help[a].title < stateStore.ui.help[b].title) { return -1; }
+            if(stateStore.ui.help[a].title > stateStore.ui.help[b].title) { return 1; }
+            return 0;
+        });
 
         return (
 
@@ -32,7 +44,7 @@ class Help extends Component {
 
                         Throughout the page, you can find little help buttons like this one: <HelpButton type="start" inline/><br/>
                         These buttons provide help and instructions corresponding to the applications feature they are placed next to.
-                        This page you see here displays an <em>automated view</em> of all these collected texts <em>in alphabetical order</em> so they
+                        This page you see here displays an <em>automated view</em> of all these collected texts so they
                         can be read at once to give an overview over the functionality of the VedaWeb platform.<br/><br/>
 
                         <p>
@@ -40,25 +52,37 @@ class Help extends Component {
                             You can find a way to do so in the "About VedaWeb" section located in the main navigation at the top left.
                         </p>
 
-                        <ul>
+                        <Search
+                        value={this.state.filter}
+                        style={{marginTop: "2rem", marginBottom: "1rem", maxWidth: "280px"}}
+                        onChange={e => this.setState({filter: e.target.value})}
+                        size="default"
+                        placeholder="Filter help texts by..." />
+
+                        <br/>
+
+                        <span className="light-grey">Help texts matching the filter: { helpKeys.length }</span>
+
+                        {/* <ul>
                             {helpTextsKeys.map(h => 
-                                helpTexts.hasOwnProperty(h) &&
+                                stateStore.ui.help.hasOwnProperty(h) &&
                                     <li key={"toc_" + h}>
                                         <a href={"#help-" + h}>
-                                            {helpTexts[h].title}
+                                            {stateStore.ui.help[h].title}
                                         </a>
                                     </li>
                             )}
-                        </ul>
+                        </ul> */}
 
-                        <hr style={{margin:"2rem 0"}}/>
+                        
 
-                        {helpTextsKeys.map(h => 
-                            helpTexts.hasOwnProperty(h) &&
+                        {helpKeys.map(h => 
+                            <div key={h}>
+                                <hr style={{margin:"2rem 0"}}/>
                                 <div id={"help-" + h} key={"help_" + h}>
-                                    <h3>{helpTexts[h].title}</h3>
-                                    {helpTexts[h].content}
+                                    <Html html={stateStore.ui.help[h]} />
                                 </div>
+                            </div>
                         )}
 
                     </div>
@@ -70,4 +94,4 @@ class Help extends Component {
     }
 }
 
-export default Help;
+export default view(Help);
