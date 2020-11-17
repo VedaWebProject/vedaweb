@@ -110,11 +110,19 @@
 			<artifactId>springfox-swagger-ui</artifactId>
 			<version>2.9.2</version>
 		</dependency>
-
+		
+		<!-- CommonMark Java Markdown Parser -->
+		
 		<dependency>
 			<groupId>com.atlassian.commonmark</groupId>
 			<artifactId>commonmark</artifactId>
 			<version>0.15.2</version>
+		</dependency>
+		
+		<dependency>
+		    <groupId>com.atlassian.commonmark</groupId>
+		    <artifactId>commonmark-ext-gfm-tables</artifactId>
+		    <version>0.15.2</version>
 		</dependency>
 
 	</dependencies>
