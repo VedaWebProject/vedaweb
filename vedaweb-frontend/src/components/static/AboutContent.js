@@ -37,6 +37,7 @@ class AboutContent extends Component {
 
                 <h2><Icon type="issues-close"/>Recently added features (excluding technical improvements and fixes)</h2>
                 <ul>
+                    <li>Technical improvements & help text filter function (2020/11/17)</li>
                     <li>Display and filter by markings of possible late additions (2020/10/30)</li>
                     <li>New "Help &amp; Instructions" section (2020/08/18)</li>
                     <li>Added English translation by Müller (2020/08/05)</li>
