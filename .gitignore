@@ -4,22 +4,31 @@
 ####
 ####
 
-
 ####
 ####    vedaweb-backend
 ####
 
 # build stuff
 vedaweb-backend/target/
+
 # classpath resources
 vedaweb-backend/src/main/resources/static/
 vedaweb-backend/src/main/resources/templates/
-# filesystem resources: import data and static snippets
-resources/*
+
+# TEI import data (will be fetched from separate repo)
+resources/tei
+
+# external references data (will be fetched from separate repo)
+resources/references
+
+# incejtable HTML snippets
+resources/snippets
+
 # misc
 !vedaweb-backend/.mvn/wrapper/maven-wrapper.jar
 vedaweb-backend/*.log
 vedaweb-backend/.apt_generated_tests/
+
 # STS - Spring Tools Suite
 vedaweb-backend/.apt_generated
 vedaweb-backend/.classpath
@@ -38,16 +47,20 @@ vedaweb-backend/index/
 vedaweb-frontend/node_modules
 vedaweb-frontend/.pnp
 vedaweb-frontend/.pnp.js
+
 # testing
 vedaweb-frontend/coverage
+
 # builds
 vedaweb-frontend/build
+
 # misc
 vedaweb-frontend/.DS_Store
 vedaweb-frontend/.env.local
 vedaweb-frontend/.env.development.local
 vedaweb-frontend/.env.test.local
 vedaweb-frontend/.env.production.local
+
 # logs
 vedaweb-frontend/npm-debug.log*
 vedaweb-frontend/yarn-debug.log*
