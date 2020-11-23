@@ -236,17 +236,17 @@ public class MetricalAnalysis {
 	}
 	
 	
-	public static void main(String[] args) {
-		String a = parse("yé asyā ̀ ācáraṇeṣu dadhriré");
-		String b = parse("úṣo yé te ̀ prá yā́meṣu yuñjáte");
-		String c = parse("kadā́ vaso ̀ stotráṁ háryate ā́");
-		System.out.println("01.048.03c: " + a + " (" + 
-				a.replaceAll("\\s", "").length() + ")");
-		System.out.println("01.048.04a: " + b + " (" + 
-				b.replaceAll("\\s", "").length() + ")");
-		System.out.println("10.105.01a: " + c + " (" + 
-				c.replaceAll("\\s", "").length() + ")");
-	}
+//	public static void main(String[] args) {
+//		String a = parse("yé asyā ̀ ācáraṇeṣu dadhriré");
+//		String b = parse("úṣo yé te ̀ prá yā́meṣu yuñjáte");
+//		String c = parse("kadā́ vaso ̀ stotráṁ háryate ā́");
+//		System.out.println("01.048.03c: " + a + " (" + 
+//				a.replaceAll("\\s", "").length() + ")");
+//		System.out.println("01.048.04a: " + b + " (" + 
+//				b.replaceAll("\\s", "").length() + ")");
+//		System.out.println("10.105.01a: " + c + " (" + 
+//				c.replaceAll("\\s", "").length() + ")");
+//	}
 	
 	
 }
