@@ -17,10 +17,12 @@ public class MetricalAnalysis {
 	//default long/short marks
 	public static final String LONG = "—";
 	public static final String SHORT = "◡";
+	public static final String PAUSE = "·";
 	
 	//letter-based long/short marks
 	public static final String LONG_LETTER = "L";
 	public static final String SHORT_LETTER = "S";
+	public static final String PAUSE_LETTER = "P";
 	
 	//whitespace supplements
 	private static final String SPC = "\\s+";
@@ -36,9 +38,12 @@ public class MetricalAnalysis {
 
 	//matching and marking consonants
 	private static final String C_SINGLE = "(?!(a|i|u|r̥|l̥|\\s|" + METAS 
-			+ "|" + SHORT + "|" + LONG + ")).";
+			+ "|" + SHORT + "|" + LONG + "|" + PAUSE + ")).";
 	private static final String C_DOUBLE = "(ph|th|kh|bh|dh|gh|jh)";
 	private static final String C_MARK = "#";
+	
+	//matching metrical pause
+	private static final String P = "\u0300"; // space with gravis:  ̀
 
 
 	/**
@@ -51,6 +56,9 @@ public class MetricalAnalysis {
 		return
 			// clean string from unwanted chars and diacritics
 			cleanString(iso)
+			
+			// mark metrical pauses (space with gravis in VN&H) as PAUSE
+			.replaceAll(P, PAUSE)
 			
 			// mark long vowels as LONG
 			.replaceAll(VL, LONG)
@@ -71,7 +79,8 @@ public class MetricalAnalysis {
 			.replaceAll(VS + "$", SHORT) 
 			
 			// mark short vowels at word end followed by vowel as SHORT
-			.replaceAll(VS + "(?=" + SPC_MARK + "[^" + C_MARK + "]" + ")", SHORT)
+			.replaceAll(VS + "(?=" + SPC_MARK + 
+					"[^" + C_MARK + PAUSE + "]" + ")", SHORT)
 			
 			// mark short vowels in last syllable of line as LONG
 			.replaceAll(VS + C_MARK + "+$", LONG) 
@@ -82,10 +91,10 @@ public class MetricalAnalysis {
 			
 			// mark short vowels followed by one consonant as SHORT
 			.replaceAll(VS + "(?=" + SPC_OPT_MARK + C_MARK 
-					+ ")(?!=" + SPC_OPT_MARK + C_MARK + ")", SHORT) 
+					+ ")(?!=" + SPC_OPT_MARK + C_MARK + PAUSE + ")", SHORT) 
 			
 			// remove all but metrical and and whitespace marks
-			.replaceAll("[^" + LONG + SHORT + SPC_MARK + "]", "") 
+			.replaceAll("[^" + LONG + SHORT + PAUSE + SPC_MARK + "]", "") 
 			
 			// replace whitespace marks by actual whitespaces
 			.replaceAll(SPC_MARK + "+", " ")
@@ -215,15 +224,28 @@ public class MetricalAnalysis {
 	
 	
 	/*
-	 * Cleans a string from accents (´ and `) and
+	 * Cleans a string from acute accents (´) and
 	 * other symbols like -, =, /, \, _
 	 */
 	private static String cleanString(String in) {
 		return Normalizer.normalize(
 			Normalizer.normalize(in, Form.NFD)
-				.replaceAll("[\u0301\u0300\u0027\\-+=_/\\\\]", ""),
+				.replaceAll("[\u0301\u0027\\-+=_/\\\\]", ""),
 			Form.NFC
 		);
+	}
+	
+	
+	public static void main(String[] args) {
+		String a = parse("yé asyā ̀ ācáraṇeṣu dadhriré");
+		String b = parse("úṣo yé te ̀ prá yā́meṣu yuñjáte");
+		String c = parse("kadā́ vaso ̀ stotráṁ háryate ā́");
+		System.out.println("01.048.03c: " + a + " (" + 
+				a.replaceAll("\\s", "").length() + ")");
+		System.out.println("01.048.04a: " + b + " (" + 
+				b.replaceAll("\\s", "").length() + ")");
+		System.out.println("10.105.01a: " + c + " (" + 
+				c.replaceAll("\\s", "").length() + ")");
 	}
 	
 	
