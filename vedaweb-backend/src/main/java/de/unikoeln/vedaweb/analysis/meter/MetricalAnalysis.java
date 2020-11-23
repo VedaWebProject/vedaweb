@@ -14,36 +14,36 @@ import java.text.Normalizer.Form;
  */
 public class MetricalAnalysis {
 	
-	//default long/short marks
+	// default long/short marks
 	public static final String LONG = "—";
 	public static final String SHORT = "◡";
 	public static final String PAUSE = "·";
 	
-	//letter-based long/short marks
+	// letter-based long/short marks
 	public static final String LONG_LETTER = "L";
 	public static final String SHORT_LETTER = "S";
 	public static final String PAUSE_LETTER = "P";
 	
-	//whitespace supplements
+	// whitespace supplements
 	private static final String SPC = "\\s+";
 	private static final String SPC_MARK = "_";
 	private static final String SPC_OPT_MARK = SPC_MARK + "?";
 	
-	//matching vowels
+	// matching vowels
 	private static final String VL = "(ā|ī|ū|o|e|ai|au)";
 	private static final String VS = "(a|i|u|r̥|l̥)";
 
-	//meta chars
+	// meta chars
 	private static final String METAS = "[ ̥]";
 
-	//matching and marking consonants
+	// matching and marking consonants
 	private static final String C_SINGLE = "(?!(a|i|u|r̥|l̥|\\s|" + METAS 
 			+ "|" + SHORT + "|" + LONG + "|" + PAUSE + ")).";
 	private static final String C_DOUBLE = "(ph|th|kh|bh|dh|gh|jh)";
 	private static final String C_MARK = "#";
 	
-	//matching metrical pause
-	private static final String P = "\u0300"; // space with gravis:  ̀
+	// matching metrical pause
+	private static final String P = "\u0020\u0300"; // space with gravis:  ̀
 
 
 	/**
@@ -98,6 +98,9 @@ public class MetricalAnalysis {
 			
 			// replace whitespace marks by actual whitespaces
 			.replaceAll(SPC_MARK + "+", " ")
+			
+			// correctly pad pause markers
+			.replaceAll("\\s*" + PAUSE + "\\s*", " " + PAUSE + " ")
 			; 
 	}
 	
