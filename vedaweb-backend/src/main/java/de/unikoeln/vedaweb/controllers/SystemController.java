@@ -59,7 +59,7 @@ public class SystemController {
 	 * @return
 	 */
 	@GetMapping(value = {"/index/{action}"}, produces = MediaType.APPLICATION_JSON_VALUE)
-    public String stanzaById(
+    public String index(
     		@PathVariable(name = "action") String action,
     		@RequestParam(name = "auth", required = false) String auth) {
 		
@@ -121,7 +121,7 @@ public class SystemController {
 	 * @return
 	 */
 	@GetMapping(value = {"/uidata/refresh"}, produces = MediaType.APPLICATION_JSON_VALUE)
-    public String importData(
+    public String uiData(
     		@RequestParam(name = "auth", required = false) String auth) {
 		
 		if (!auth(auth))
