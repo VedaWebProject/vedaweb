@@ -102,8 +102,8 @@ public class IndexService {
 		log.info("Creating and inserting new index documents");
 		ObjectNode jsonResponse = json.newObjectNode();
 		Iterator<Stanza> dbIter = stanzaRepo.findAll().iterator();
-		// create es bulk request
-		BulkRequest bulkRequest = new BulkRequest();
+		// create es bulk request (1m timeout because 30s might be too short)
+		BulkRequest bulkRequest = new BulkRequest().timeout("1m");
 
 		// process docs
 		while (dbIter.hasNext()) {
