@@ -201,7 +201,7 @@ public class Stanza implements Comparable<Stanza> {
 	}
 	
 	public void addVersion(StanzaVersion version) {
-		versions.add(version);
+		if (version != null) versions.add(version);
 	}
 	
 	public List<Pada> getPadas() {

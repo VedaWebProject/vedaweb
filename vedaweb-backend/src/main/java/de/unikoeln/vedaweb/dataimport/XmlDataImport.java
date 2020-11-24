@@ -383,6 +383,17 @@ public class XmlDataImport {
 					stanzaObj.addVersion(version);
 				}
 				
+//				// DEV TEMP RU
+//				stanzaObj.addVersion(generateStanzaVersionObject(
+//						"Elizarenkova",
+//						"translation",
+//						true,
+//						"*:lg[@*:source='elizarenkova']",
+//						"@*:lang",
+//						".//*:l",
+//						compiler,
+//						stanza));
+				
 				//// Stanza Type (via metrical data on vn&h) ////
 				for (StanzaVersion v : stanzaObj.getVersions()) {
 					if (v.getSource().contains("ooten")) {
@@ -406,6 +417,32 @@ public class XmlDataImport {
 			}
 		}
 	}
+	
+	
+//	private static StanzaVersion generateStanzaVersionObject(
+//			String title,
+//			String versionType,
+//			boolean applyKeys,
+//			String xPathToVersionNode,
+//			String xPathToLanguageNode,
+//			String xPathToFormNode,
+//			XPathCompiler compiler,
+//			XdmItem stanzaNode) throws SaxonApiException {
+//		
+//		XdmValue temp = compiler.evaluate(xPathToVersionNode, stanzaNode);
+//		if (temp == null || temp.size() > 0) return null;
+//		XdmItem versionNode = temp.itemAt(0);
+//		String[] versionForm = concatTextContents(
+//				compiler.evaluate(xPathToFormNode, versionNode));
+//		StanzaVersion version = new StanzaVersion(
+//			title,
+//			compiler.evaluate(xPathToLanguageNode, versionNode).itemAt(0).getStringValue(),
+//			versionForm,
+//			versionType,
+//			applyKeys
+//		);
+//		return version;
+//	}
 	
 	
 	private static List<Pada> generatePadaObjects(
