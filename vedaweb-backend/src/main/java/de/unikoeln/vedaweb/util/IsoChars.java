@@ -8,7 +8,7 @@ import java.util.Map;
 /**
  * Class to hold ISO-15919 character classes
  * 
- * @author bkiss
+ * @author bkis
  *
  */
 public class IsoChars {
