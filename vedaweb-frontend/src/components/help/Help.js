@@ -26,9 +26,11 @@ class Help extends Component {
                 (!this.state.filter || 
                     stateStore.ui.help[k].toLowerCase().includes(this.state.filter.toLowerCase()))
         ).sort((a, b) => {
-            if(stateStore.ui.help[a].title < stateStore.ui.help[b].title) { return -1; }
-            if(stateStore.ui.help[a].title > stateStore.ui.help[b].title) { return 1; }
-            return 0;
+            // compare help text titles for sorting 😎
+            return ( (a, b) =>
+                a.substr(0, Math.min(20, a.length))
+                    .localeCompare(b.substr(0, Math.min(20, b.length)))
+            )(stateStore.ui.help[a], stateStore.ui.help[b]);
         });
 
         return (
