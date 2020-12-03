@@ -7,8 +7,7 @@
 [![Repo size](https://img.shields.io/github/repo-size/VedaWebPlatform/vedaweb.svg?label=Repo%20size)](https://github.com/VedaWebPlatform/vedaweb)
 &nbsp;
 [![Website vedaweb.uni-koeln.de](https://img.shields.io/website-up-down-green-red/http/vedaweb.uni-koeln.de.svg)](http://vedaweb.uni-koeln.de/)
-&nbsp;
-[![Vanilla JS (with plug-ins)](http://vanilla-js.com/assets/button.png)](http://vanilla-js.com/)
+
 
 **This is the code repository for the VedaWeb application, which is being developed as part of the [VedaWeb project](https://vedaweb.uni-koeln.de/).**
 
