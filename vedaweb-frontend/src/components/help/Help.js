@@ -23,7 +23,8 @@ class Help extends Component {
 
         const helpKeys = Object.keys(stateStore.ui.help).filter(k => 
             excludeHelpTexts.indexOf(k) < 0 &&
-                (!this.state.filter || stateStore.ui.help[k].includes(this.state.filter))
+                (!this.state.filter || 
+                    stateStore.ui.help[k].toLowerCase().includes(this.state.filter.toLowerCase()))
         ).sort((a, b) => {
             if(stateStore.ui.help[a].title < stateStore.ui.help[b].title) { return -1; }
             if(stateStore.ui.help[a].title > stateStore.ui.help[b].title) { return 1; }
