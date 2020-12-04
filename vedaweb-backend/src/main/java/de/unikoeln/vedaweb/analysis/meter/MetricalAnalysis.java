@@ -37,15 +37,15 @@ public class MetricalAnalysis {
 	private static final String METAS = "[ ̥]";
 
 	// matching and marking consonants
-	private static final String C_SINGLE = "(?!(a|i|u|r̥|l̥|\\s|" + METAS 
+	private static final String C_SINGLE = "(?!(a|i|u|r̥|l̥|\\s|" + METAS
 			+ "|" + SHORT + "|" + LONG + "|" + PAUSE + ")).";
 	private static final String C_DOUBLE = "(ph|th|kh|bh|dh|gh|jh)";
 	private static final String C_MARK = "#";
 	
 	// matching metrical pause
-	private static final String P = "\u0020\u0300"; // space with gravis:  ̀
+	private static final String P = "\\s\u0300"; // space followed by gravis:  ̀
 
-
+	
 	/**
 	 * Parses an ISO-15919-transliterated Sanskrit string
 	 * into a metrical notation with long/short syllable markers.
@@ -91,7 +91,10 @@ public class MetricalAnalysis {
 			
 			// mark short vowels followed by one consonant as SHORT
 			.replaceAll(VS + "(?=" + SPC_OPT_MARK + C_MARK 
-					+ ")(?!=" + SPC_OPT_MARK + C_MARK + PAUSE + ")", SHORT) 
+					+ ")(?!=" + SPC_OPT_MARK + C_MARK + PAUSE + ")", SHORT)
+			
+			// mark any remaining short vowels as SHORT
+			.replaceAll(VS, SHORT)
 			
 			// remove all but metrical and and whitespace marks
 			.replaceAll("[^" + LONG + SHORT + PAUSE + SPC_MARK + "]", "") 
@@ -233,23 +236,16 @@ public class MetricalAnalysis {
 	private static String cleanString(String in) {
 		return Normalizer.normalize(
 			Normalizer.normalize(in, Form.NFD)
-				.replaceAll("[\u0301\u0027\\-+=_/\\\\]", ""),
+				.replaceAll("[\u0301\u0027\\-+=_/\\\\]", "")
+				.replaceAll("([^\\s])\u0300", "$1"),
 			Form.NFC
 		);
 	}
 	
 	
-//	public static void main(String[] args) {
-//		String a = parse("yé asyā ̀ ācáraṇeṣu dadhriré");
-//		String b = parse("úṣo yé te ̀ prá yā́meṣu yuñjáte");
-//		String c = parse("kadā́ vaso ̀ stotráṁ háryate ā́");
-//		System.out.println("01.048.03c: " + a + " (" + 
-//				a.replaceAll("\\s", "").length() + ")");
-//		System.out.println("01.048.04a: " + b + " (" + 
-//				b.replaceAll("\\s", "").length() + ")");
-//		System.out.println("10.105.01a: " + c + " (" + 
-//				c.replaceAll("\\s", "").length() + ")");
-//	}
+	public static void main(String[] args) {
+		System.out.println(parse("tvā́ṁ hy àgne sádam ít samanyávo"));
+	}
 	
 	
 }
