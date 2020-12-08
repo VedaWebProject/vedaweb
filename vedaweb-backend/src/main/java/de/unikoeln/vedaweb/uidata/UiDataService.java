@@ -36,9 +36,6 @@ public class UiDataService {
 	
 	private final Logger log = LoggerFactory.getLogger(this.getClass());
 	
-	public static final String SNIPPETS_RESOURCES_DIR = "snippets";
-	public static final String HELPTEXTS_RESOURCES_DIR = "help";
-	
 	@Autowired
 	private IndexService indexService;
 	
@@ -147,7 +144,8 @@ public class UiDataService {
 		//load help texts from markdown files
 		try {
 			((ObjectNode)uiData)
-				.set("help", loadHelpTexts());
+				.set("help", loadMarkdownFilesAsHtmlSnippets(
+						FsResourcesService.HELPTEXTS_RESOURCES_DIR));
 		} catch (IOException e) {
 			log.error("Cannot load help texts: " + 
 				e.getMessage().replaceAll("\n", ""));
@@ -156,7 +154,8 @@ public class UiDataService {
 		//load arbitrary HTML snippets
 		try {
 			((ObjectNode)uiData)
-				.set("snippets", loadHtmlSnippets());
+				.set("snippets", loadMarkdownFilesAsHtmlSnippets(
+						FsResourcesService.SNIPPETS_RESOURCES_DIR));
 		} catch (IOException e) {
 			log.error("Cannot load HTML snippets: " + 
 					e.getMessage().replaceAll("\n", ""));
@@ -168,30 +167,12 @@ public class UiDataService {
 	}
 	
 	
-	private ObjectNode loadHtmlSnippets() throws IOException {
-		ObjectNode snippets = JsonNodeFactory.instance.objectNode();
-		StringBuilder sb;
-		
-		for (File f : fsResources.getResourcesFiles(SNIPPETS_RESOURCES_DIR)) {
-			sb = new StringBuilder();
-			for (String line : Files.readAllLines(f.toPath(),
-					StandardCharsets.UTF_8)) {
-				sb.append(line + "\n");
-			}
-			snippets.put(
-					f.getName().replaceFirst("\\.[^\\.]*$", ""),
-					sb.toString());
-		}
-		
-		return snippets;
-	}
-	
-	
-	private ObjectNode loadHelpTexts() throws IOException {
+	private ObjectNode loadMarkdownFilesAsHtmlSnippets(String resourceDirName)
+			throws IOException {
 		ObjectNode helpTexts = JsonNodeFactory.instance.objectNode();
 		StringBuilder sb;
 		
-		for (File f : fsResources.getResourcesFiles(HELPTEXTS_RESOURCES_DIR)) {
+		for (File f : fsResources.getResourcesFiles(resourceDirName, "(?i).*?\\.md")) {
 			sb = new StringBuilder();
 			for (String line : Files.readAllLines(f.toPath(),
 					StandardCharsets.UTF_8)) {

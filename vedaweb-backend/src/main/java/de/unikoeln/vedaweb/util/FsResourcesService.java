@@ -27,6 +27,9 @@ public class FsResourcesService {
 	
 	private final Logger log = LoggerFactory.getLogger(this.getClass());
 	
+	public static final String SNIPPETS_RESOURCES_DIR = "snippets";
+	public static final String HELPTEXTS_RESOURCES_DIR = "help";
+	
 	@Value("${vedaweb.fsresources}")
 	private String resDirPath;
 	
@@ -62,10 +65,21 @@ public class FsResourcesService {
 	/**
 	 * Returns all files (no directories) located at 
 	 * top-level in the static resources directory.
+	 * @param fileNamePattern Regex pattern to 
+	 * 		  match file names ({@code null} to match all files)
 	 * @return File[] Array containing the requested File objects
 	 */
-	public File[] getResourcesFiles() {
-		return resDir.listFiles(checkFile);
+	public File[] getResourcesFiles(String fileNamePattern) {
+		if (fileNamePattern == null) {
+			return resDir.listFiles(checkFile);
+		}
+		return resDir.listFiles(new FileFilter() {
+			@Override
+			public boolean accept(File pathname) {
+				return pathname.isFile() 
+						&& pathname.getName().matches(fileNamePattern);
+			}
+		});
 	}
 	
 	
@@ -73,15 +87,27 @@ public class FsResourcesService {
 	 * Returns all files (no directories) located at 
 	 * the given sub-path in the static resources directory, or
 	 * an empty File[] if the path is invalid.
+	 * @param resourceDirectoryPath Path to directory within resources directory
+	 * @param fileNamePattern Regex pattern to 
+	 * 		  match file names ({@code null} to match all files)
 	 * @return File[] Array containing the requested File objects
 	 */
-	public File[] getResourcesFiles(String resourceDirectoryPath) {
+	public File[] getResourcesFiles(String resourceDirectoryPath, String fileNamePattern) {
 		File subDir = getResource(resourceDirectoryPath, true);
 		if (subDir == null) {
 			log.warn("Not an existing directory: " + resourceDirectoryPath);
 			return new File[0];
 		}
-		return subDir.listFiles(checkFile);
+		if (fileNamePattern == null) {
+			return subDir.listFiles(checkFile);
+		}
+		return subDir.listFiles(new FileFilter() {
+			@Override
+			public boolean accept(File pathname) {
+				return pathname.isFile() 
+						&& pathname.getName().matches(fileNamePattern);
+			}
+		});
 	}
 	
 	
