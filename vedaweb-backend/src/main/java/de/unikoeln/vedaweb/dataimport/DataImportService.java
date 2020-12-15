@@ -56,8 +56,8 @@ public class DataImportService {
 		);
 		
 		//collect input files (.xml and .tei)
-		File[] files = fsResources.getResourcesFiles(TEI_RESOURCES_DIR);
-		files = fsResources.filterForFileNameSuffixes(files, ".xml", ".tei");
+		File[] files = fsResources.getResourcesFiles(
+				TEI_RESOURCES_DIR, "rv_book_\\d+\\.tei");
 		Arrays.sort(files);
 		
 		//init timer

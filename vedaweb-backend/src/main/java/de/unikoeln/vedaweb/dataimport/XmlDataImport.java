@@ -58,7 +58,12 @@ public class XmlDataImport {
 			
 			for(XdmItem stanza : stanzas){
 				
-				String[] stanzaLocationData = compiler.evaluate("@*:n", stanza).itemAt(0).getStringValue().split("\\.");
+				String[] stanzaLocationData = compiler.evaluate("@*:id", stanza)
+						.itemAt(0)
+						.getStringValue()
+						.replaceAll("\\D", " ")
+						.trim()
+						.split("\\s+");
 				
 				// stanza obj data
 				Stanza stanzaObj = new Stanza();
@@ -69,7 +74,7 @@ public class XmlDataImport {
 				stanzaObj.setId(stanzaLocationData[0] + stanzaLocationData[1] + stanzaLocationData[2]);
 				stanzaObj.setHymnAddressee(hymnAddressee);
 				stanzaObj.setHymnGroup(hymnGroup);
-				stanzaObj.setStrata(compiler.evaluate("*:lg[@*:source='gunkel_ryan']/*:lg/*:fs/*:f[@*:name='strata']/text()", stanza).itemAt(0).getStringValue());
+				stanzaObj.setStrata(compiler.evaluate("*:lg[@*:type='strata']/*:l/*:fs/*:f[@*:name='strata']/text()", stanza).itemAt(0).getStringValue());
 				
 				// Late additions from Gunkel
 				XdmValue additions = compiler.evaluate("*:fs[@*:type='stanza_properties']/*:f", stanza);
@@ -87,10 +92,10 @@ public class XmlDataImport {
 				
 				// zurich morph glossing and pada labels (by gunkel/ryan)
 				// iterate: padas
-				XdmValue padaForms = compiler.evaluate("*:lg[@*:source='zurich']/*:l[@*:n]", stanza);
+				XdmValue padaTokensNodes = compiler.evaluate("*:lg[@*:source='zurich']/*:l[ends-with(@*:id, '_tokens')]", stanza);
 				
 				// generate and add pada objects
-				stanzaObj.setPadas(generatePadaObjects(stanza, padaForms, compiler));
+				stanzaObj.setPadas(generatePadaObjects(stanza, padaTokensNodes, compiler));
 				
 				
 				//// stanza versions (text versions & translations) ////
@@ -104,7 +109,7 @@ public class XmlDataImport {
 				temp = compiler.evaluate("*:lg[@*:source='zurich']", stanza);
 				if (temp.size() > 0) {
 					versionNode = temp.itemAt(0);
-					versionForm = concatTextContents(compiler.evaluate(".//*:l[@*:n]", versionNode));
+					versionForm = concatTextContents(compiler.evaluate(".//*:l[not(ends-with(@*:id, '_tokens'))]", versionNode));
 					version = new StanzaVersion(
 						"Lubotsky (Zurich)",
 						compiler.evaluate("@*:lang", versionNode).itemAt(0).getStringValue(),
@@ -121,30 +126,30 @@ public class XmlDataImport {
 				
 				
 				// Samitha / gunkel_ryan
-				temp = compiler.evaluate("*:lg[@*:source='gunkel_ryan']", stanza);
-				if (temp.size() > 0) {
-					versionNode = temp.itemAt(0);
-					versionForm = concatTextContents(compiler.evaluate(".//*:l[@*:ana='samhita']", versionNode));
-					version = new StanzaVersion(
-						"Gunkel & Ryan",
-						compiler.evaluate("@*:lang", versionNode).itemAt(0).getStringValue(),
-						versionForm,
-						"version",
-						true
-					);
-					version.setMetricalData(MetricalAnalysis.parseMultiline(
-							String.join("\n", versionForm),
-							MetricalAnalysis.LONG_LETTER,
-							MetricalAnalysis.SHORT_LETTER));
-					stanzaObj.addVersion(version);
-				}
+//				temp = compiler.evaluate("*:lg[@*:source='gunkel_ryan']", stanza);
+//				if (temp.size() > 0) {
+//					versionNode = temp.itemAt(0);
+//					versionForm = concatTextContents(compiler.evaluate(".//*:l[@*:ana='samhita']", versionNode));
+//					version = new StanzaVersion(
+//						"Gunkel & Ryan",
+//						compiler.evaluate("@*:lang", versionNode).itemAt(0).getStringValue(),
+//						versionForm,
+//						"version",
+//						true
+//					);
+//					version.setMetricalData(MetricalAnalysis.parseMultiline(
+//							String.join("\n", versionForm),
+//							MetricalAnalysis.LONG_LETTER,
+//							MetricalAnalysis.SHORT_LETTER));
+//					stanzaObj.addVersion(version);
+//				}
 				
 				
-				// SASA PATHA / lubotsky
-				temp = compiler.evaluate("*:lg[@*:source='gunkel_ryan']", stanza);
+				// Lubotsky / SASA PATHA
+				temp = compiler.evaluate("*:lg[@*:source='lubotsky']", stanza);
 				if (temp.size() > 0) {
 					versionNode = temp.itemAt(0);
-					versionForm = concatTextContents(compiler.evaluate(".//*:l[@*:ana='sasa_patha']", versionNode));
+					versionForm = concatTextContents(compiler.evaluate(".//*:l", versionNode));
 					version = new StanzaVersion(
 						"Lubotsky",
 						compiler.evaluate("@*:lang", versionNode).itemAt(0).getStringValue(),
@@ -219,7 +224,7 @@ public class XmlDataImport {
 				}
 				
 				// Devanagari / detlef eichler
-				temp = compiler.evaluate("*:lg[@*:source='detlef']", stanza);
+				temp = compiler.evaluate("*:lg[@*:source='eichler']", stanza);
 				if (temp.size() > 0) {
 					versionNode = temp.itemAt(0);
 					versionForm = concatTextContents(compiler.evaluate(".//*:l", versionNode));
@@ -234,19 +239,19 @@ public class XmlDataImport {
 				}
 				
 				// Devanagari / provided by Mārcis Gasūns
-				temp = compiler.evaluate("*:lg[@*:source='gasuns']", stanza);
-				if (temp.size() > 0) {
-					versionNode = temp.itemAt(0);
-					versionForm = concatTextContents(compiler.evaluate(".//*:l", versionNode));
-					version = new StanzaVersion(
-						"Gasuns",
-						compiler.evaluate("@*:lang", versionNode).itemAt(0).getStringValue(),
-						versionForm,
-						"version",
-						false
-					);
-					stanzaObj.addVersion(version);
-				}
+//				temp = compiler.evaluate("*:lg[@*:source='gasuns']", stanza);
+//				if (temp.size() > 0) {
+//					versionNode = temp.itemAt(0);
+//					versionForm = concatTextContents(compiler.evaluate(".//*:l", versionNode));
+//					version = new StanzaVersion(
+//						"Gasuns",
+//						compiler.evaluate("@*:lang", versionNode).itemAt(0).getStringValue(),
+//						versionForm,
+//						"version",
+//						false
+//					);
+//					stanzaObj.addVersion(version);
+//				}
 				
 				// Translation (de) / geldner
 				temp = compiler.evaluate("*:lg[@*:source='geldner']", stanza);
@@ -447,29 +452,27 @@ public class XmlDataImport {
 	
 	private static List<Pada> generatePadaObjects(
 			XdmItem stanza,
-			XdmValue padaForms,
+			XdmValue padaTokensNodes,
 			XPathCompiler compiler)
 					throws IndexOutOfBoundsException, SaxonApiUncheckedException, SaxonApiException{
 		
 		List<Pada> padas = new ArrayList<Pada>();
 		int padaIndex = 0;
 		
-		for (XdmItem padaForm : padaForms){
+		for (XdmItem padaTokensNode : padaTokensNodes){
 			Pada padaObj = new Pada(); //new pada object
-			String padaId = compiler.evaluate("@*:n", padaForm).itemAt(0).getStringValue();
-			String tokensXmlId = compiler.evaluate("@*:id", padaForm).itemAt(0).getStringValue().replaceFirst("_zur$", "_zur_tokens");
-			XdmValue padaTokens = compiler.evaluate("*:lg[@*:source='zurich']/*:l[@*:id='" + tokensXmlId + "']/*:fs", stanza);
+			String tokensNodeId = compiler.evaluate("@*:id", padaTokensNode).itemAt(0).getStringValue();
+			XdmValue padaTokens = compiler.evaluate("*:fs", padaTokensNode);
 			int tokensTotal = padaTokens.size();
 			int tokenIndex = 0;
 			
 			//index, id
 			padaObj.setIndex(padaIndex++); //pada index
-			padaObj.setId(padaId.charAt(padaId.length() - 1) + ""); //pada id (in stanza context, single letter)
+			padaObj.setId(tokensNodeId.replaceFirst("^.*?(\\w)_tokens$", "$1")); //pada id (in stanza context, single letter)
+//			padaObj.setId(padaFormId.charAt(padaFormId.length() - 1) + ""); //pada id (in stanza context, single letter)
 			
 			//pada label (by gunkel/ryan)
-			String labelXmlId = compiler.evaluate("@*:id", padaTokens.itemAt(0))
-					.itemAt(0).getStringValue().replaceFirst("_\\d\\d_zur$", "_gunkel_ryan");
-			XdmValue labelNode = compiler.evaluate("*:lg[@*:source='gunkel_ryan']/*:lg[@*:id='" + labelXmlId + "']/*:fs/*:f[@*:name='label']/text()", stanza);
+			XdmValue labelNode = compiler.evaluate("*:lg[@*:type='strata']/*:l/*:fs/*:f[@*:name='label']/text()", stanza);
 			if (labelNode.size() > 0) padaObj.setLabel(labelNode.itemAt(0).getStringValue());
 			
 			//tokens
@@ -559,7 +562,12 @@ public class XmlDataImport {
 		//iterate: stanzas
 		XdmValue stanzas = compiler.evaluate(".//*:div[@type='stanza']", xmlDoc);
 		for(XdmItem stanza : stanzas){
-			String[] stanzaLocationData = compiler.evaluate("@*:n", stanza).itemAt(0).getStringValue().split("\\.");
+			String[] stanzaLocationData = compiler.evaluate("@*:id", stanza)
+					.itemAt(0)
+					.getStringValue()
+					.replaceAll("\\D", " ")
+					.trim()
+					.split("\\s+");
 			if (!dryRun) {
 				stanzaXmlRepo.insert(new StanzaXml(
 					stanzaLocationData[0] + stanzaLocationData[1] + stanzaLocationData[2],

@@ -145,8 +145,8 @@ public class FsResourcesService {
 	 * @param fileNameSuffixes
 	 * @return The filtered File[]
 	 */
-	public File[] filterForFileNameSuffixes(File[] files, String... fileNameSuffixes) {
-		FileFilter filter = new FileNameSuffixFilter(fileNameSuffixes);
+	public File[] filterForFileNamePatterns(File[] files, String... fileNamePatterns) {
+		FileFilter filter = new FileNamePatternFilter(fileNamePatterns);
 		return new ArrayList<File>(Arrays.asList(files))
 			.stream()
 			.filter(f -> filter.accept(f))
@@ -182,18 +182,18 @@ public class FsResourcesService {
 	 * FilenameFilter that checks if a File object
 	 * represents a path ending with one of the specified suffixes
 	 */
-	private class FileNameSuffixFilter implements FileFilter {
+	private class FileNamePatternFilter implements FileFilter {
 		
-		private String[] suffixes;
+		private String[] patterns;
 		
-		public FileNameSuffixFilter (String... suffixes) {
-			this.suffixes = suffixes;
+		public FileNamePatternFilter (String... patterns) {
+			this.patterns = patterns;
 		}
 		
 		@Override
 	    public boolean accept(File f) {
-	    	for (String suffix : suffixes) {
-	    		if (f.getName().toLowerCase().endsWith(suffix.toLowerCase())) {
+	    	for (String pattern : patterns) {
+	    		if (f.getName().matches(pattern)) {
 	    			return true;
 	    		}
 	    	}
