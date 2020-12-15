@@ -168,8 +168,8 @@ class Footer extends Component {
                     </Col>
                 </Row>
 
-                <Row>
-                    <Col span={24} className="content-center">
+                <Row type="flex" align="center" style={{marginBottom:"1rem"}}>
+                    <Col span={12} className="content-center">
                         <HtmlSnippet id="footerCredits"/>
                     </Col>
                 </Row>
