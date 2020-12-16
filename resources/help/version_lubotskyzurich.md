@@ -1,3 +1,3 @@
-# Accent-sensitive search
+# Lubotsky (Zurich)
 
-If you use accent-sensitive search, you will only find stanzas matching your exact use of accented vowels, whereas if you disable accent-sensitive search, accents will be ignored, _even if you use them_.
+A version of the Rigveda text based on Lubotsky's concordance, used as the reference text for the annotations added at the University of Zurich
