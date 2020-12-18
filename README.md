@@ -30,22 +30,20 @@ Use `docker-compose up --build --no-cache` for building and starting the needed 
 
 The application will be served on port `8081` in case of using docker-compose.
 
+## State of Development
+The VedaWeb Application is a product of the [VedaWeb research project](https://vedaweb.uni-koeln.de). It's current state covers the planned concepts of the first project phase. The platform is planned to be developed further into a collaborative research platform.
+
 
 ## API
 
-> :warning: The short documentation below is from **May 2019**  
-> For more recent information, please see the dynamic documentation at [https://vedaweb.uni-koeln.de/rigveda/swagger-ui.html](https://vedaweb.uni-koeln.de/rigveda/swagger-ui.html)!
-
-### Important Notes
-
-#### State of Development
-VedaWeb is still under development. It's currently in proof-of-concept phase and will undergo numerous significant changes in the near future. Naturally, this also applies to the API endpoints.
-
-#### Description of the API
-The VedaWeb application exposes some API endpoints which are (at the time) limited to what the application itself needs to run. This might change in the future in that new, additional endpoints - which are actually *meant* to be used by other applications - will be added.
+### Some words in advance
+The VedaWeb application exposes some API endpoints which are (at the time) limited to what the application itself needs to run. This might change in the future in that new, additional endpoints - which are actually *meant* to be used by other applications - might be added.
 
 
 ### Documentation of existing API endpoints
+
+> :warning: The short documentation below is from **May 2019**  
+> For more recent information, please see the dynamic documentation at [https://vedaweb.uni-koeln.de/rigveda/swagger-ui.html](https://vedaweb.uni-koeln.de/rigveda/swagger-ui.html)!
 
 #### Direct Document Access via Index Numbers
 The endpoints used for direct access to the documents managed by the application are accessible via simple `GET` requests of the following form:
