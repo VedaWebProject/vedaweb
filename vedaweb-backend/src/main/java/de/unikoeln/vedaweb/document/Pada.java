@@ -1,6 +1,8 @@
 package de.unikoeln.vedaweb.document;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import io.swagger.annotations.ApiModelProperty;
@@ -64,6 +66,15 @@ public class Pada {
 
 	public void addGrammarData(Token token) {
 		grammarData.add(token);
+	}
+	
+	public void sortGrammarData() {
+		Collections.sort(grammarData, new Comparator<Token>() {
+			@Override
+			public int compare(Token o1, Token o2) {
+				return o1.getIndex() - o2.getIndex();
+			}
+		});
 	}
 
 }

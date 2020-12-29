@@ -464,7 +464,6 @@ public class XmlDataImport {
 			String tokensNodeId = compiler.evaluate("@*:id", padaTokensNode).itemAt(0).getStringValue();
 			XdmValue padaTokens = compiler.evaluate("*:fs", padaTokensNode);
 			int tokensTotal = padaTokens.size();
-			int tokenIndex = 0;
 			
 			//index, id
 			padaObj.setIndex(padaIndex++); //pada index
@@ -478,6 +477,10 @@ public class XmlDataImport {
 			//tokens
 			for (XdmItem token : padaTokens){
 				Token tokenObj = new Token();
+				// e.g. get "02" from "xml:id='b02_h001_01_zur_a_02'"
+				int tokenIndex = Integer.parseInt(
+						compiler.evaluate("@*:id", token).itemAt(0)
+						.getStringValue().replaceFirst("^.*?_(\\d+)$", "$1"));
 				XdmValue graLemmaNode = compiler.evaluate("*:f[@*:name='gra_lemma']/*:string", token);
 				XdmValue graGrammNode = compiler.evaluate("*:f[@*:name='gra_gramm']/*:symbol/@*:value", token);
 				XdmValue formNode = compiler.evaluate("*:f[@*:name='surface']/*:string", token).itemAt(0);
@@ -513,11 +516,12 @@ public class XmlDataImport {
 					tokenObj.addProp("position", "intermediate");
 
 				//index
-				tokenObj.setIndex(tokenIndex++);
+				tokenObj.setIndex(tokenIndex);
 				
 				//add to tokens
 				padaObj.addGrammarData(tokenObj);
 			}
+			padaObj.sortGrammarData();
 			padas.add(padaObj);
 		}
 		return padas;
