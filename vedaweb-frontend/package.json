@@ -7,7 +7,7 @@
   "dependencies": {
     "@craco/craco": "^5.7.0",
     "antd": "^3.26.18",
-    "axios": "^0.19.2",
+    "axios": "^0.21.1",
     "browserizr": "^3.2.5",
     "craco-antd": "^1.19.0",
     "js-base64": "^2.6.4",
