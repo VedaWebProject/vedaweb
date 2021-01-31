@@ -135,7 +135,7 @@ class DictionaryView extends Component {
                     //filter for valid lemma ref IDs
                     let lrefs = token.lemmaRefs;
                     //add dict data object
-                    if (lrefs.length > 0){
+                    if (lrefs && lrefs.length > 0){
                         out.push({
                             lemma: token.lemma,
                             lemmaRefs: token.lemmaRefs.filter(lref => lref.startsWith("lemma_")),
