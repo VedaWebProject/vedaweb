@@ -158,7 +158,8 @@ class SearchView extends Component {
 
                             <div data-tour-id="search-filters">
                                 <Collapse
-                                bordered={false}>
+                                bordered={false}
+                                style={{backgroundColor: "transparent"}}>
                                     <Panel
                                     header={searchScopePanelHeader}
                                     key="scope"
