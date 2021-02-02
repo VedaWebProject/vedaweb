@@ -168,7 +168,7 @@ class Footer extends Component {
                     </Col>
                 </Row>
 
-                <Row type="flex" align="center" style={{marginBottom:"1rem"}}>
+                <Row type="flex" align="middle" justify="center" style={{marginBottom:"1rem"}}>
                     <Col span={12} className="content-center">
                         <HtmlSnippet id="footerCredits"/>
                     </Col>
