@@ -59,9 +59,9 @@ class HelpButton extends Component {
 
         return (
             
-            <div style={containerStyle}>
+            <span style={containerStyle}>
 
-                <div className="help-button-container" onClick={this.showModal}>
+                <span className="help-button-container" onClick={this.showModal}>
 
                     { this.props.label && (!this.props.labelPosition || this.props.labelPosition === "left") &&
                         <span className="help-button-label">{this.props.label}</span>
@@ -78,7 +78,7 @@ class HelpButton extends Component {
                         <span className="help-button-label">{this.props.label}</span>
                     }
 
-                </div>
+                </span>
                 
                 <Modal
                 title={null}
@@ -91,7 +91,7 @@ class HelpButton extends Component {
                 okText="OK">
                     <Html html={stateStore.ui.help[this.props.type] || ""}/>
                 </Modal>
-            </div>
+            </span>
         );
 
     }

@@ -17,9 +17,7 @@ class AboutContent extends Component {
                     To get help on the different features, look out for the <HelpButton type="start" inline/> buttons throughout the page.
                 </p>
 
-                <div>
-                    
-                </div><br/>
+                <br/>
 
                 <h2><Icon type="message"/>Feedback</h2>
                 <p>
