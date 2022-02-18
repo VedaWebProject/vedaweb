@@ -187,7 +187,7 @@ class DictionaryView extends Component {
                             <th>Preview (Graßmann)</th>
                             <th>Entries (Graßmann) <HelpButton inline iconStyle={{marginLeft: ".3rem"}} type="dict_grassmann"/></th>
                             <th>Others</th>
-                            <th>Correction</th>
+                            { /** <th>Correction</th> */}
                         </tr>
                     </thead>
                     <tbody>
@@ -216,9 +216,11 @@ class DictionaryView extends Component {
                                 })}
                             </td>
                             <td>n/a</td>
+                            { /**
                             <td>
                                 <DictCorrection lemma={token.lemma} stanzaId={this.props.stanzaId} tokenId={token.tokenId} />
                             </td>
+                             */}
                         </tr>))}
                     </tbody>
                 </table>
