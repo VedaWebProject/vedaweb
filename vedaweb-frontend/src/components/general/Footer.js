@@ -11,6 +11,7 @@ import logoASW from "../../img/logo_ifl_asw.jpg";
 import logoHVS from "../../img/logo_ifl_hvs.jpg";
 
 import logoVGSP from "../../img/logo_vgsp.png";
+import logoHPCL from "../../img/logo_hpcl.png";
 import logoDFG from "../../img/logo_dfg.png";
 import logoDCH from "../../img/logo_dch.jpg";
 import logoIDH from "../../img/logo_idh.png";
@@ -36,6 +37,7 @@ class Footer extends Component {
                 justify="space-around"
                 align="top">
 
+                    {/**
                     <Col span={3} className="footer-box">
                         <a href="http://ifl.phil-fak.uni-koeln.de/asw2.html"
                         title="Allgemeine Sprachwissenschaft (IfL), Universität zu Köln"
@@ -57,6 +59,7 @@ class Footer extends Component {
                             Historisch-Vergleichende<br/>Sprachwissenschaft (IfL),<br/>Universität zu Köln
                         </a>
                     </Col>
+                     */}
 
                     <Col span={3} className="footer-box">
                         <a href="http://dh.uni-koeln.de/"
@@ -99,6 +102,17 @@ class Footer extends Component {
                         rel="noopener noreferrer">
                             <img src={logoVGSP} alt="VGSP Uni Würzburg"/><br/>
                             Vergleichende<br/>Sprachwissenschaft,<br/>Universität Würzburg
+                        </a>
+                    </Col>
+
+                    <Col span={3} className="footer-box">
+                        <a href="http://www.hpcl.uni-freiburg.de"
+                        title="Hermann Paul Centrum für Linguistik, Universität Freiburg"
+                        className="bw"
+                        target="_blank"
+                        rel="noopener noreferrer">
+                            <img src={logoHPCL} alt="HPCL Uni Freiburg"/><br/>
+                            Hermann-Paul-<br/>Centrum für Linguistik,<br/>Universität Freiburg
                         </a>
                     </Col>
 
