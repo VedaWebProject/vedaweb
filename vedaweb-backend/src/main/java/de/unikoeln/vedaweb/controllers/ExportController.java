@@ -42,6 +42,7 @@ public class ExportController {
 	
 	private static final String STANZA_TEI_TEMPLATE =
 			"<?xml version='1.0' encoding='UTF-8'?>\n" + 
+			"<?xml-model href=\"https://raw.githubusercontent.com/cceh/c-salt_vedaweb_tei/master/vedaweb.rng\" type=\"application/xml\" schematypens=\"http://relaxng.org/ns/structure/1.0\"?>\n" + 
 			"<TEI xmlns=\"http://www.tei-c.org/ns/1.0\">\n" + 
 			"<teiHeader>\n" + 
 			"    <fileDesc>\n" + 
