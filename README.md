@@ -161,7 +161,7 @@ The following is a sample request body for the *grammar search*. Please see the 
 #### Data Export Endpoints
 
 ##### TEI-XML of a single stanza
-The following API endpoint returns the complete TEI-XML of a stanza (currently without a valid header, so this is **not** a valid TEI-encoded document but just the XML node of the stanza itself!):
+The following API endpoint returns the complete TEI-XML of a stanza:
 
 ```
 vedaweb.uni-koeln.de/rigveda/api/export/doc/{docId}/xml
