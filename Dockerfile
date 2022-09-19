@@ -10,8 +10,7 @@ COPY vedaweb-frontend /opt/vedaweb-frontend
 WORKDIR /opt/vedaweb-frontend
 
 # build frontend
-RUN rm -r build \
- && npm install --silent &> /dev/null \
+RUN npm install --silent &> /dev/null \
  && npm run build --silent &> /dev/null
 
 
@@ -35,7 +34,6 @@ COPY vedaweb-backend vedaweb-backend
 
 # build backend and full app into fat jar
 RUN cd vedaweb-backend \
- && rm -r target \
  && mvn clean install -DskipTests --quiet
 
 
@@ -59,6 +57,8 @@ COPY --from=backend-build-env /opt/vedaweb/vedaweb-backend/target/vedaweb.jar ve
 # copy needed configs, scripts etc. to image
 COPY vedaweb-backend/src/main/resources/application.properties application.properties
 COPY resources/snippets resources/snippets
+COPY resources/help resources/help
+COPY resources/references resources/references
 COPY scripts scripts
 
 # download updated application import data into "resources" directory
