@@ -24,11 +24,15 @@ The pilot text is the Rigveda, linked to the dictionaries available at Cologne D
 
 ## Docker
 
-If you want to try to run the application locally or on a server, you may use the provided Dockerfile (if you already have Elasticsearch and MongoDB services running) or the docker-compose file (to start containers for the services, too).
+If you want to try to run the application locally or on a server, you may use the provided Dockerfile (if you already have Elasticsearch and MongoDB services running) or the docker-compose file (to start containers for the services, too), see below.
 
-Use `docker-compose up --build --no-cache` for building and starting the needed containers in a preconfigured way. The `--no-cache` flag ensures that current application data will be downloaded during build time. If you don't want that, just omit this flag.
+### Docker compose
 
-The application will be served on port `8081` in case of using docker-compose.
+1. Create the two Docker volumes needed:  
+   `docker volume create vedaweb_data_mongodb`  
+   `docker volume create vedaweb_data_elastic`
+2. Run `docker compose up --build` for building and starting the needed containers in a preconfigured way. Use the `-d` flag to run detached containers.
+3. The application will be served from `127.0.0.1:8081` (you can change the port in `.env`).
 
 ## State of Development
 The VedaWeb Application is a product of the [VedaWeb research project](https://vedaweb.uni-koeln.de). It's current state covers the planned concepts of the first project phase. The platform is planned to be developed further into a collaborative research platform.
