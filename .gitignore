@@ -19,7 +19,8 @@ vedaweb-backend/src/main/resources/templates/
 resources/tei
 
 # external references data (will be fetched from separate repo)
-resources/references
+resources/references/*
+!resources/references/README.md
 
 # incejtable HTML snippets
 resources/snippets/*
