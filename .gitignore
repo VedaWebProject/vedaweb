@@ -22,7 +22,8 @@ resources/tei
 resources/references
 
 # incejtable HTML snippets
-resources/snippets
+resources/snippets/*
+!resources/snippets/README.md
 
 # misc
 !vedaweb-backend/.mvn/wrapper/maven-wrapper.jar
