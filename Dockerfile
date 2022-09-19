@@ -45,11 +45,19 @@ FROM adoptopenjdk/openjdk11:jre-11.0.8_10-alpine
 # set encoding and locales
 ENV LANG='en_US.UTF-8' LANGUAGE='en_US:en' LC_ALL='en_US.UTF-8'
 
+# ensure www-data user exists
+RUN set -x \
+  && addgroup -g 82 -S www-data \
+  && adduser -u 82 -D -S -G www-data www-data
+
 # create app dir
-RUN mkdir -p /opt/vedaweb
+RUN mkdir -p /opt/vedaweb && chown 82:82 /opt/vedaweb
 
 # set working directory
 WORKDIR /opt/vedaweb
+
+# use www-data as user from here on
+USER www-data
 
 # copy app build to image
 COPY --from=backend-build-env /opt/vedaweb/vedaweb-backend/target/vedaweb.jar vedaweb.jar
