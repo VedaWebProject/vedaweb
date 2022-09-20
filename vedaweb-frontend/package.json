@@ -2,7 +2,7 @@
   "name": "vedaweb-frontend",
   "version": "0.1.0",
   "private": true,
-  "proxy": "http://localhost:8080",
+  "proxy": "http://localhost:8081",
   "homepage": "/rigveda/",
   "dependencies": {
     "@craco/craco": "^5.9.0",
