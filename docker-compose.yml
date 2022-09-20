@@ -29,6 +29,8 @@ services:
   # the actual VedaWeb application, built based on Dockerfile
   app:
     build: .
+    volumes:
+      - ./resources:/vedaweb/resources
     restart: always
     ports:
       - "127.0.0.1:${VW_WEBAPP_HOST_PORT}:8080" # the application will be served via the host port set in .env

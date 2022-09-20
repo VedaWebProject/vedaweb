@@ -4,10 +4,10 @@
 FROM node:12.19.0-alpine3.12 as frontend-build-env
 
 # copy frontend source project
-COPY vedaweb-frontend /opt/vedaweb-frontend
+COPY vedaweb-frontend /vedaweb-frontend
 
 # set workdir
-WORKDIR /opt/vedaweb-frontend
+WORKDIR /vedaweb-frontend
 
 # build frontend
 RUN npm install --silent &> /dev/null \
@@ -21,13 +21,13 @@ RUN npm install --silent &> /dev/null \
 FROM maven:3.6.3-adoptopenjdk-11 as backend-build-env
 
 # create project dir
-RUN mkdir -p /opt/vedaweb
+RUN mkdir -p /vedaweb
 
 # set wirk dir
-WORKDIR /opt/vedaweb
+WORKDIR /vedaweb
 
 # copy frontend build
-COPY --from=frontend-build-env /opt/vedaweb-frontend/build vedaweb-frontend/build
+COPY --from=frontend-build-env /vedaweb-frontend/build vedaweb-frontend/build
 
 # copy backend source project
 COPY vedaweb-backend vedaweb-backend
@@ -51,45 +51,25 @@ RUN set -x \
   && adduser -u 82 -D -S -G www-data www-data
 
 # create app dir
-RUN mkdir -p /opt/vedaweb && chown 82:82 /opt/vedaweb
+RUN mkdir -p /vedaweb/resources && chown -R 82:82 /vedaweb
 
 # set working directory
-WORKDIR /opt/vedaweb
-
-# download updated application import data into "resources" directory
-COPY scripts scripts
-RUN scripts/update-data.sh
+WORKDIR /vedaweb
 
 # use www-data as user from here on
 USER www-data
 
-# copy app build to image
-COPY --from=backend-build-env /opt/vedaweb/vedaweb-backend/target/vedaweb.jar vedaweb.jar
+# copy app build
+COPY --from=backend-build-env /vedaweb/vedaweb-backend/target/vedaweb.jar vedaweb.jar
 
-# copy needed configs, scripts etc. to image
-COPY vedaweb-backend/src/main/resources/application.properties application.properties
-COPY resources/snippets resources/snippets
-COPY resources/help resources/help
-COPY resources/references resources/references
+# define resources data volume
+VOLUME /vedaweb/resources
 
 # hint to expose port 8080
 EXPOSE 8080
 
 # app entrypoint
-ENTRYPOINT [ \
-    "java", \
-    "-Dserver.port=8080", \
-    "-Dserver.servlet.context-path=/rigveda", \
-    "-Dspring.data.mongodb.host=mongodb", \
-    "-Dspring.data.mongodb.port=27017", \
-    "-Dspring.data.mongodb.database=vedaweb", \
-    "-Des.host=elastic", \
-    "-Des.port=9200", \
-    "-Des.protocol=http", \
-    "-Des.index.name=vedaweb", \
-    "-jar", \
-    "/opt/vedaweb/vedaweb.jar" \
-]
+ENTRYPOINT [ "java", "-jar", "/vedaweb/vedaweb.jar", "--spring.config.location=file:///vedaweb/resources/application.properties" ]
 
 # optional arguments
 #CMD [""] # no optional arguments ATM
