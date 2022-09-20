@@ -15,9 +15,6 @@ vedaweb-backend/target/
 vedaweb-backend/src/main/resources/static/
 vedaweb-backend/src/main/resources/templates/
 
-# TEI import data (will be fetched from separate repo)
-resources/tei
-
 # external references data (will be fetched from separate repo)
 resources/references/*
 !resources/references/README.md
@@ -25,6 +22,10 @@ resources/references/*
 # incejtable HTML snippets
 resources/snippets/*
 !resources/snippets/README.md
+
+# import tei data
+resources/tei/*
+!resources/tei/README.md
 
 # misc
 !vedaweb-backend/.mvn/wrapper/maven-wrapper.jar
