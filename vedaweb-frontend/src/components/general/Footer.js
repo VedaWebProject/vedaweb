@@ -7,9 +7,6 @@ import logoCSALTAPI from "../../img/logo_csalt_api.png";
 import logoCSL from "../../img/logo_csl.png";
 import logoTCSL from "../../img/logo_tcsl.png";
 
-import logoASW from "../../img/logo_ifl_asw.jpg";
-import logoHVS from "../../img/logo_ifl_hvs.jpg";
-
 import logoVGSP from "../../img/logo_vgsp.png";
 import logoHPCL from "../../img/logo_hpcl.png";
 import logoDFG from "../../img/logo_dfg.png";

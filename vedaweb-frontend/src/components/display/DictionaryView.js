@@ -3,7 +3,7 @@ import { Icon, Modal, Button } from 'antd';
 import axios from 'axios';
 
 import "./DictionaryView.css";
-import DictCorrection from "../widgets/DictCorrection";
+//import DictCorrection from "../widgets/DictCorrection";
 import HelpButton from "../help/HelpButton";
 
 import isoCompare from "../utils/isoCompare";
