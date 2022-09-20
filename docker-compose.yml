@@ -17,19 +17,19 @@ services:
     image: mvertes/alpine-mongo:4.0.6-1
     volumes:
       - mongodb_data:/data/db
-    #restart: on-failure # make this container restart on failure
+    restart: always
 
   # Elasticsearch search server service
   elastic:
     image: blacktop/elasticsearch:7.9.2
     volumes:
       - elastic_data:/usr/share/elasticsearch/data
-    #restart: on-failure # make this container restart on failure
+    restart: always
 
   # the actual VedaWeb application, built based on Dockerfile
   app:
     build: .
-    #restart: on-failure # make this container restart on failure
+    restart: always
     ports:
       - "127.0.0.1:${VW_WEBAPP_HOST_PORT}:8080" # the application will be served via the host port set in .env
     depends_on:
