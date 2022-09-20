@@ -47,7 +47,7 @@ The VedaWeb application exposes some API endpoints which are (at the time) limit
 ### Documentation of existing API endpoints
 
 > :warning: The short documentation below is not complete, but explains the concepts of the exposed endpoints.  
-> For a complete overview of the endpoints, please see the dynamic documentation at [https://vedaweb.uni-koeln.de/rigveda/swagger-ui.html](https://vedaweb.uni-koeln.de/rigveda/swagger-ui.html)
+> For a complete overview of the endpoints, please see the OpenAPI schema at [vedaweb.uni-koeln.de/rigveda/openapi](https://vedaweb.uni-koeln.de/rigveda/openapi)
 
 #### Direct Document Access via Index Numbers
 The endpoints used for direct access to the documents managed by the application are accessible via simple `GET` requests of the following form:
