@@ -1,7 +1,7 @@
 package de.unikoeln.vedaweb.document;
 
 import de.unikoeln.vedaweb.util.StringUtils;
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 
 /**
  * POJO representing stanza text versions and translations
@@ -11,25 +11,25 @@ import io.swagger.annotations.ApiModelProperty;
  */
 public class StanzaVersion {
 	
-	@ApiModelProperty(notes = "ID of this stanza version")
+	@Schema(description = "ID of this stanza version")
 	private String id;
 	
-	@ApiModelProperty(notes = "Source (author)")
+	@Schema(description = "Source (author)")
 	private String source;
 	
-	@ApiModelProperty(notes = "Language / transliteration standard")
+	@Schema(description = "Language / transliteration standard")
 	private String language;
 	
-	@ApiModelProperty(notes = "The lines of this stanza version")
+	@Schema(description = "The lines of this stanza version")
 	private String[] form;
 	
-	@ApiModelProperty(notes = "The metrical data of the lines of this stanza version")
+	@Schema(description = "The metrical data of the lines of this stanza version")
 	private String[] metricalData;
 	
-	@ApiModelProperty(notes = "Type of this version ('version' or 'translation')")
+	@Schema(description = "Type of this version ('version' or 'translation')")
 	private String type;
 	
-	@ApiModelProperty(notes = "True if this version has one pada per line")
+	@Schema(description = "True if this version has one pada per line")
 	private boolean applyKeys;
 
 	

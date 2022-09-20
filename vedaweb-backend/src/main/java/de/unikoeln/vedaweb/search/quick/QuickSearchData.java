@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import de.unikoeln.vedaweb.search.CommonSearchData;
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 
 /**
  * POJO that represents the data of a quick search request
@@ -16,15 +16,15 @@ import io.swagger.annotations.ApiModelProperty;
 public class QuickSearchData extends CommonSearchData {
 	
 	@JsonProperty("regex")
-	@ApiModelProperty(notes = "Parse RegEx? (default: false)")
+	@Schema(description = "Parse RegEx? (default: false)")
 	private boolean regex;
 	
 	@JsonProperty("input")
-	@ApiModelProperty(notes = "Search input field value")
+	@Schema(description = "Search input field value")
 	private String input;
 	
 	@JsonProperty("field")
-	@ApiModelProperty(notes = "Text version field to search in",
+	@Schema(description = "Text version field to search in",
 		example = "'version_' for all versions, 'translation_' for all translations")
 	private String field;
 	

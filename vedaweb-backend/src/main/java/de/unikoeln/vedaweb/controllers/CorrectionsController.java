@@ -13,7 +13,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 
 import de.unikoeln.vedaweb.dictcorrection.Correction;
 import de.unikoeln.vedaweb.dictcorrection.CorrectionsRepository;
-import springfox.documentation.annotations.ApiIgnore;
+import io.swagger.v3.oas.annotations.Hidden;
 
 
 /**
@@ -24,7 +24,7 @@ import springfox.documentation.annotations.ApiIgnore;
  */
 @RestController
 @RequestMapping("api/corrections")
-@ApiIgnore
+@Hidden
 public class CorrectionsController {
 	
 	@Autowired

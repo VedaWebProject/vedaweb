@@ -4,7 +4,8 @@ import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
+
 
 /**
  * Superfluous, really.
@@ -13,8 +14,8 @@ import io.swagger.annotations.ApiModelProperty;
  *
  */
 public class ExportLayers {
-	@ApiModelProperty(
-		notes = "List of data layer objects to include into export",
+	@Schema(
+		description = "List of data layer objects to include into export",
 		required = true,
 		example = "[{\"id\":\"translation_geldner\",\"label\":\"Geldner "
 				+ "(DE)\"}, {\"id\":\"...\",\"label\":\"...\"}]")
@@ -22,10 +23,10 @@ public class ExportLayers {
 	List<ExportLayer> layers;
 	
 	public static class ExportLayer {
-		@ApiModelProperty(notes = "ID of this layer", required = true)
+		@Schema(description = "ID of this layer", required = true)
 		@JsonProperty("id")
 		String id;
-		@ApiModelProperty(notes = "Label string of this layer", required = true)
+		@Schema(description = "Label string of this layer", required = true)
 		@JsonProperty("label")
 		String label;
 	}

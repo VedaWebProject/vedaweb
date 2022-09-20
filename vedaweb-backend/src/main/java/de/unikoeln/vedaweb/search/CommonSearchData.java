@@ -6,7 +6,8 @@ import java.util.Map;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
+
 
 /**
  * Abstract POJO to hold common search request data
@@ -19,32 +20,32 @@ import io.swagger.annotations.ApiModelProperty;
 public abstract class CommonSearchData {
 	
 	@JsonProperty("accents")
-	@ApiModelProperty(notes = "Is this search accent-sensitive? (default: false)")
+	@Schema(description = "Is this search accent-sensitive? (default: false)")
 	private boolean accents;
 	
 	@JsonProperty("from")
-	@ApiModelProperty(notes = "Search result pagination: Offset of results window")
+	@Schema(description = "Search result pagination: Offset of results window")
 	private int from;
 	
 	@JsonProperty("size")
-	@ApiModelProperty(notes = "Search result pagination: Size of results window")
+	@Schema(description = "Search result pagination: Size of results window")
 	private int size;
 	
 	@JsonProperty("sortBy")
-	@ApiModelProperty(notes = "Search result sorting: Property to sort by",
+	@Schema(description = "Search result sorting: Property to sort by",
 		example = "'_doc' for location, '_score' for relevance, 'hymnAddressee', 'hymnGroup', 'strata'")
 	private String sortBy;
 	
 	@JsonProperty("sortOrder")
-	@ApiModelProperty(notes = "Search result sorting", example = "'ascend' or 'descend'")
+	@Schema(description = "Search result sorting", example = "'ascend' or 'descend'")
 	private String sortOrder;
 	
 	@JsonProperty("scopes")
-	@ApiModelProperty(notes = "List of search scopes to limit search to")
+	@Schema(description = "List of search scopes to limit search to")
 	private List<SearchScope> scopes;
 	
 	@JsonProperty("meta")
-	@ApiModelProperty(notes = "List of meta properties to filter for")
+	@Schema(description = "List of meta properties to filter for")
 	private Map<String, String[]> meta;
 	
 	

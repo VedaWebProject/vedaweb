@@ -13,8 +13,8 @@ import de.unikoeln.vedaweb.document.Stanza;
 import de.unikoeln.vedaweb.document.StanzaLocation;
 import de.unikoeln.vedaweb.document.StanzaRepository;
 import de.unikoeln.vedaweb.util.StringUtils;
-import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.ApiParam;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
 
 
 /**
@@ -31,12 +31,11 @@ public class DocumentController {
 	private StanzaRepository stanzaRepo;
 	
 	
-	@ApiOperation(value = "Get a stanza by ID (e.g. 0100306 for 01.0031.061)",
-			response = Stanza.class)
+	@Operation(summary = "Get a stanza by ID (e.g. 0100306 for 01.0031.061)")
 	@GetMapping(value = "/id/{id:.+}",
 			produces = MediaType.APPLICATION_JSON_VALUE)
     public Stanza stanzaById(
-    		@ApiParam(example = "0300201")
+    		@Parameter(example = "0300201")
     		@PathVariable("id") String id) {
 		
 		Optional<Stanza> stanza = null;
@@ -62,15 +61,14 @@ public class DocumentController {
     }
 	
 	
-	@ApiOperation(
-			value = "Get a stanza by index (e.g. 0 for first stanza, "
-					+ "1 for second stanza and so on)",
-			response = Stanza.class)
+	@Operation(
+			summary = "Get a stanza by index (e.g. 0 for first stanza, "
+					+ "1 for second stanza and so on)")
 	@GetMapping(
 			value = "/index/{index}",
 			produces = MediaType.APPLICATION_JSON_VALUE)
     public Stanza stanzaByLocation(
-    		@ApiParam(example = "123")
+    		@Parameter(example = "123")
     		@PathVariable int index) {
 		
 		Optional<Stanza> stanza = stanzaRepo.findByIndex(

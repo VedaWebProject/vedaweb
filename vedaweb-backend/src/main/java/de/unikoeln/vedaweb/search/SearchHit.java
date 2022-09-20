@@ -5,7 +5,8 @@ import java.util.Map;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
+
 
 /**
  * POJO to represent a search hit (as used by this application,
@@ -16,25 +17,25 @@ import io.swagger.annotations.ApiModelProperty;
  */
 public class SearchHit implements Comparable<SearchHit>{
 	
-	@ApiModelProperty(notes = "Score of this search result")
+	@Schema(description = "Score of this search result")
 	private float score;
 
-	@ApiModelProperty(notes = "ID of the represented document (stanza)")
+	@Schema(description = "ID of the represented document (stanza)")
 	private String docId;
 	
-	@ApiModelProperty(notes = "Highlightings of this search result")
+	@Schema(description = "Highlightings of this search result")
 	private Map<String, String> highlight;
 
-	@ApiModelProperty(notes = "Hymn addressee value of the represented stanza doc")
+	@Schema(description = "Hymn addressee value of the represented stanza doc")
 	private String hymnAddressee;
 	
-	@ApiModelProperty(notes = "Hymn group value of the represented stanza doc")
+	@Schema(description = "Hymn group value of the represented stanza doc")
 	private String hymnGroup;
 	
-	@ApiModelProperty(notes = "Strata value of the represented stanza doc")
+	@Schema(description = "Strata value of the represented stanza doc")
 	private String stanzaStrata;
 	
-	@ApiModelProperty(notes = "Internal index document source of this index document")
+	@Schema(description = "Internal index document source of this index document")
 	private Map<String, Object> source;
 	
 	public SearchHit() {

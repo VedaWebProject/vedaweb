@@ -15,8 +15,7 @@ import de.unikoeln.vedaweb.search.grammar.GrammarSearchOccurrences;
 import de.unikoeln.vedaweb.search.metrical.MetricalSearchData;
 import de.unikoeln.vedaweb.search.metricalposition.MetricalPositionSearchData;
 import de.unikoeln.vedaweb.search.quick.QuickSearchData;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
+import io.swagger.v3.oas.annotations.Operation;
 
 
 /**
@@ -27,7 +26,6 @@ import io.swagger.annotations.ApiOperation;
  */
 @RestController
 @RequestMapping("api/search")
-@Api(consumes = MediaType.APPLICATION_JSON_VALUE)
 public class SearchController {
 	
 	@Autowired
@@ -39,9 +37,7 @@ public class SearchController {
 	 * @param searchData
 	 * @return
 	 */
-	@ApiOperation(
-			value = "Quick search API endpoint",
-			response = SearchHits.class)
+	@Operation(summary = "Quick search API endpoint")
 	@PostMapping(
 			value = "/quick",
 			produces = MediaType.APPLICATION_JSON_VALUE)
@@ -55,9 +51,7 @@ public class SearchController {
 	 * @param searchData
 	 * @return
 	 */
-	@ApiOperation(
-			value = "Grammar search API endpoint",
-			response = SearchHits.class)
+	@Operation(summary = "Grammar search API endpoint")
 	@PostMapping(
 			value = "/grammar",
 			produces = MediaType.APPLICATION_JSON_VALUE)
@@ -71,9 +65,7 @@ public class SearchController {
 	 * @param searchData
 	 * @return
 	 */
-	@ApiOperation(
-			value = "Metrical pattern search API endpoint",
-			response = SearchHits.class)
+	@Operation(summary = "Metrical pattern search API endpoint")
 	@PostMapping(
 			value = "/metrical",
 			produces = MediaType.APPLICATION_JSON_VALUE)
@@ -87,9 +79,7 @@ public class SearchController {
 	 * @param searchData
 	 * @return
 	 */
-	@ApiOperation(
-			value = "Metrical position search API endpoint",
-			response = SearchHits.class)
+	@Operation(summary = "Metrical position search API endpoint")
 	@PostMapping(
 			value = "/metricalPosition",
 			produces = MediaType.APPLICATION_JSON_VALUE)
@@ -103,9 +93,7 @@ public class SearchController {
 	 * @param searchData
 	 * @return
 	 */
-	@ApiOperation(
-			value = "Get the total occurrences count of a single block grammar search query",
-			response = GrammarSearchOccurrences.class)
+	@Operation(summary = "Get the total occurrences count of a single block grammar search query")
 	@PostMapping(
 			value = "/occ",
 			produces = MediaType.APPLICATION_JSON_VALUE)

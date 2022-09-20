@@ -3,7 +3,8 @@ package de.unikoeln.vedaweb.search;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
+
 
 /**
  * POJO that represents a search scope definition
@@ -15,19 +16,19 @@ import io.swagger.annotations.ApiModelProperty;
 public class SearchScope {
 	
 	@JsonProperty("fromBook")
-	@ApiModelProperty(notes = "Scope starting from book")
+	@Schema(description = "Scope starting from book")
 	private int fromBook;
 	
 	@JsonProperty("fromHymn")
-	@ApiModelProperty(notes = "Scope starting from hymn")
+	@Schema(description = "Scope starting from hymn")
 	private int fromHymn;
 	
 	@JsonProperty("toBook")
-	@ApiModelProperty(notes = "Scope ending at book")
+	@Schema(description = "Scope ending at book")
 	private int toBook;
 	
 	@JsonProperty("toHymn")
-	@ApiModelProperty(notes = "Scope ending at hymn")
+	@Schema(description = "Scope ending at hymn")
 	private int toHymn;
 	
 	

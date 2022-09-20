@@ -5,7 +5,8 @@ import java.util.List;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
+
 
 /**
  * Stanza POJO
@@ -17,49 +18,49 @@ import io.swagger.annotations.ApiModelProperty;
 public class Stanza implements Comparable<Stanza> {
 	
 	@Id
-	@ApiModelProperty(notes = "Auto-generated ID based on stanza location (e.g. 0200304 for 02.003.04)")
+	@Schema(description = "Auto-generated ID based on stanza location (e.g. 0200304 for 02.003.04)")
 	private String id;
 	
-	@ApiModelProperty(notes = "Internal index number of this stanza")
+	@Schema(description = "Internal index number of this stanza")
 	private int index;
 	
-	@ApiModelProperty(notes = "Rigveda book number")
+	@Schema(description = "Rigveda book number")
 	private int book;
 	
-	@ApiModelProperty(notes = "Rigveda hymn number (relative to book)")
+	@Schema(description = "Rigveda hymn number (relative to book)")
 	private int hymn;
 	
-	@ApiModelProperty(notes = "Rigveda stanza number (relative to hymn)")
+	@Schema(description = "Rigveda stanza number (relative to hymn)")
 	private int stanza;
 	
-	@ApiModelProperty(notes = "Rigveda hymn number (absolute)")
+	@Schema(description = "Rigveda hymn number (absolute)")
 	private int hymnAbs;
 	
-	@ApiModelProperty(notes = "Addressee of the hymn containing this stanza")
+	@Schema(description = "Addressee of the hymn containing this stanza")
 	private String hymnAddressee;
 	
-	@ApiModelProperty(notes = "Hymn group the hymn containing this stanza belongs to")
+	@Schema(description = "Hymn group the hymn containing this stanza belongs to")
 	private String hymnGroup;
 	
-	@ApiModelProperty(notes = "Strata property of this stanza")
+	@Schema(description = "Strata property of this stanza")
 	private String strata;
 	
-	@ApiModelProperty(notes = "List of late additions")
+	@Schema(description = "List of late additions")
 	private List<String> lateAdditions;
 	
-	@ApiModelProperty(notes = "Stanza type (via metrical analysis)")
+	@Schema(description = "Stanza type (via metrical analysis)")
 	private String stanzaType;
 	
-	@ApiModelProperty(notes = "References to relevant external resources")
+	@Schema(description = "References to relevant external resources")
 	private List<ExternalResource> externalResources;
 	
-//	@ApiModelProperty(notes = "Metrical data for this stanza based on Lubotsky (Zurich)")
+//	@Schema(description = "Metrical data for this stanza based on Lubotsky (Zurich)")
 //	private String[] metricalData;
 	
-	@ApiModelProperty(notes = "List of pada objects containing the grammar data for each pada's tokens")
+	@Schema(description = "List of pada objects containing the grammar data for each pada's tokens")
 	private List<Pada> padas;
 	
-	@ApiModelProperty(notes = "List of versions of this stanza (text versions and translations)")
+	@Schema(description = "List of versions of this stanza (text versions and translations)")
 	private List<StanzaVersion> versions;
 	
 	

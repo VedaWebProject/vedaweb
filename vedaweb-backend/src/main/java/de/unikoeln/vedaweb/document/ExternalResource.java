@@ -3,7 +3,8 @@ package de.unikoeln.vedaweb.document;
 import java.util.ArrayList;
 import java.util.List;
 
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
+
 
 /**
  * POJO describing an external resource relevant for a document
@@ -13,13 +14,13 @@ import io.swagger.annotations.ApiModelProperty;
  */
 public class ExternalResource {
 	
-	@ApiModelProperty(notes = "Describing label for this set of references")
+	@Schema(description = "Describing label for this set of references")
 	private String label;
 	
-	@ApiModelProperty(notes = "Detailed description for this set of references")
+	@Schema(description = "Detailed description for this set of references")
 	private String description;
 	
-	@ApiModelProperty(notes = "A list of one or more references")
+	@Schema(description = "A list of one or more references")
 	private List<String> references;
 	
 	public ExternalResource() {

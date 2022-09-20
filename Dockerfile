@@ -56,6 +56,10 @@ RUN mkdir -p /opt/vedaweb && chown 82:82 /opt/vedaweb
 # set working directory
 WORKDIR /opt/vedaweb
 
+# download updated application import data into "resources" directory
+COPY scripts scripts
+RUN scripts/update-data.sh
+
 # use www-data as user from here on
 USER www-data
 
@@ -67,10 +71,6 @@ COPY vedaweb-backend/src/main/resources/application.properties application.prope
 COPY resources/snippets resources/snippets
 COPY resources/help resources/help
 COPY resources/references resources/references
-COPY scripts scripts
-
-# download updated application import data into "resources" directory
-RUN scripts/update-data.sh
 
 # hint to expose port 8080
 EXPOSE 8080

@@ -5,7 +5,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 
 /**
  * Pada POJO
@@ -15,16 +15,16 @@ import io.swagger.annotations.ApiModelProperty;
  */
 public class Pada {
 	
-	@ApiModelProperty(notes = "ID of this pada")
+	@Schema(description = "ID of this pada")
 	private String id;
 	
-	@ApiModelProperty(notes = "Pada label prop")
+	@Schema(description = "Pada label prop")
 	private String label;
 	
-	@ApiModelProperty(notes = "Index value of this pada (relative to stanza)")
+	@Schema(description = "Index value of this pada (relative to stanza)")
 	private int index;
 	
-	@ApiModelProperty(notes = "List of tokens of this pada")
+	@Schema(description = "List of tokens of this pada")
 	private List<Token> grammarData;
 	
 	

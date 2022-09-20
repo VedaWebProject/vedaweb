@@ -5,6 +5,7 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.boot.autoconfigure.web.servlet.error.AbstractErrorController;
+import org.springframework.boot.web.error.ErrorAttributeOptions;
 import org.springframework.boot.web.servlet.error.ErrorAttributes;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
@@ -22,12 +23,8 @@ public class CustomErrorController extends AbstractErrorController {
 	@RequestMapping(value = "/error", produces = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
 	public Map<String, Object> handleError(HttpServletRequest request) {
-		Map<String, Object> errorAttributes = super.getErrorAttributes(request, false);
+		Map<String, Object> errorAttributes = super.getErrorAttributes(request, ErrorAttributeOptions.defaults());
 		return errorAttributes;
 	}
-
-	@Override
-	public String getErrorPath() {
-		return "/error";
-	}
+	
 }

@@ -8,7 +8,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import de.unikoeln.vedaweb.search.CommonSearchData;
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 
 /**
  * POJO that represents the data of a grammar search request
@@ -20,7 +20,7 @@ import io.swagger.annotations.ApiModelProperty;
 public class GrammarSearchData extends CommonSearchData {
 	
 	@JsonProperty("blocks")
-	@ApiModelProperty(notes = "List of search blocks")
+	@Schema(description = "List of search blocks")
 	private List<Map<String, Object>> blocks;
 	
 	

@@ -1,8 +1,9 @@
 package de.unikoeln.vedaweb.dataimport;
 
-import static org.junit.Assert.assertArrayEquals;
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 
 import org.junit.Test;
+
 
 public class ArbitraryConcordanceTest {
 	
@@ -28,11 +29,6 @@ public class ArbitraryConcordanceTest {
 		ac.setReferenceDelimiter(",");
 		ac.addMapping("from.one", "to,and,fro");
 		assertArrayEquals(new String[]{"to", "and", "fro"}, ac.get("from.one.two.three"));
-	}
-	
-	@Test(expected = IllegalArgumentException.class)
-	public void testTargetTemplateMustContainPlaceholder() {
-		new ArbitraryConcordance("https://www.domain.tld/id/");
 	}
 	
 	@Test

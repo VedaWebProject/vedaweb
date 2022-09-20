@@ -31,8 +31,9 @@ import de.unikoeln.vedaweb.search.grammar.GrammarSearchData;
 import de.unikoeln.vedaweb.search.metrical.MetricalSearchData;
 import de.unikoeln.vedaweb.search.quick.QuickSearchData;
 import de.unikoeln.vedaweb.util.JsonUtilService;
-import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.ApiParam;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+
 
 @RestController
 @RequestMapping("api/export")
@@ -83,8 +84,7 @@ public class ExportController {
 	 * @param searchData
 	 * @return
 	 */
-	@ApiOperation(
-			value = "Export results of the given search as CSV")
+	@Operation(summary = "Export results of the given search as CSV")
 	@PostMapping(
 			value = "/search/{mode}",
 			consumes = MediaType.APPLICATION_JSON_VALUE,
@@ -133,9 +133,9 @@ public class ExportController {
 	 * @param docId
 	 * @return
 	 */
-	@ApiOperation(
-			httpMethod = "POST",
-			value = "Export a specific stanza as TEI XML (this is a POST "
+	@Operation(
+			method = "POST",
+			summary = "Export a specific stanza as TEI XML (this is a POST "
 					+ "endpoint, because layer selection via request body "
 					+ "will be implemented in the future)")
 	@PostMapping(
@@ -143,7 +143,7 @@ public class ExportController {
 			//consumes = MediaType.APPLICATION_JSON_VALUE,
 			produces = "text/xml;charset=UTF-8")
     public String exportDocXml(
-    		@ApiParam(example = "0300201")
+    		@Parameter(example = "0300201")
     		@PathVariable("docId") String docId) {
 
 		Optional<StanzaXml> xml = stanzaXmlRepo.findById(docId);
@@ -162,14 +162,14 @@ public class ExportController {
 	 * @param exportLayers
 	 * @return
 	 */
-	@ApiOperation(
-			value = "Export a specific stanza's data as plain text")
+	@Operation(
+			summary = "Export a specific stanza's data as plain text")
 	@PostMapping(
 			value = "/doc/{docId}/txt",
 			consumes = MediaType.APPLICATION_JSON_VALUE,
 			produces = "text/plain;charset=UTF-8")
     public String exportDocTxt(
-    		@ApiParam(example = "0300201")
+    		@Parameter(example = "0300201")
     		@PathVariable("docId") String docId,
     		@RequestBody ExportLayers exportLayers) {
 		
@@ -186,14 +186,14 @@ public class ExportController {
 	 * @param docId
 	 * @return
 	 */
-	@ApiOperation(
-			value = "Export a specific stanza's morphological"
+	@Operation(
+			summary = "Export a specific stanza's morphological"
 					+ " glossing as plain text")
 	@GetMapping(
 			value = "/glossings/{docId}/txt",
 			produces = "text/plain;charset=UTF-8")
     public String exportGlossingsTxt(
-    		@ApiParam(example = "0300201")
+    		@Parameter(example = "0300201")
     		@PathVariable("docId") String docId) {
 		
 		Optional<Stanza> stanza = stanzaRepo.findById(docId);
@@ -208,14 +208,14 @@ public class ExportController {
 	 * @param docId
 	 * @return
 	 */
-	@ApiOperation(
-			value = "Export a specific stanza's morphological"
+	@Operation(
+			summary = "Export a specific stanza's morphological"
 					+ " glossing as HTML table")
 	@GetMapping(
 			value = "/glossings/{docId}/html",
 			produces = "text/plain;charset=UTF-8")
     public String exportGlossingsHtml(
-    		@ApiParam(example = "0300201")
+    		@Parameter(example = "0300201")
     		@PathVariable("docId") String docId) {
 		
 		Optional<Stanza> stanza = stanzaRepo.findById(docId);

@@ -11,7 +11,7 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
 import de.unikoeln.vedaweb.search.IndexService;
 import de.unikoeln.vedaweb.uidata.UiDataService;
 import de.unikoeln.vedaweb.util.JsonUtilService;
-import springfox.documentation.annotations.ApiIgnore;
+import io.swagger.v3.oas.annotations.Hidden;
 
 
 /**
@@ -22,7 +22,7 @@ import springfox.documentation.annotations.ApiIgnore;
  */
 @RestController
 @RequestMapping("api")
-@ApiIgnore
+@Hidden
 public class UiDataController {
 	
 	@Autowired
