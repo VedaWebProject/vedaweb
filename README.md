@@ -28,9 +28,7 @@ If you want to try to run the application locally or on a server, you may use th
 
 ### Docker compose
 
-1. Create the two Docker volumes needed:  
-   `docker volume create vedaweb_data_mongodb`  
-   `docker volume create vedaweb_data_elastic`
+1. Download the latest `.tei` files from the [cceh/c-salt_vedaweb_tei](https://github.com/cceh/c-salt_vedaweb_tei/archive/master.tar.gz) repository into `resources/tei` and the external references data from [here](https://github.com/VedaWebPlatform/vedaweb-data-external/archive/master.tar.gz) into `resources/references`. You may use the bash script at `scripts/update-data.sh` to achieve all that automatically by calling `./scripts/update-data.sh resources/` from the projects root directory.
 2. Run `docker compose up --build` for building and starting the needed containers in a preconfigured way. Use the `-d` flag to run detached containers.
 3. The application will be served from `127.0.0.1:8081` (you can change the port in `.env`).
 

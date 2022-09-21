@@ -3,11 +3,9 @@ version: "3.8"
 volumes:
 
   mongodb_data:
-    external: true
     name: ${VW_VOLUME_MONGODB_ID}
 
   elastic_data:
-    external: true
     name: ${VW_VOLUME_ELASTIC_ID}
 
 services:
