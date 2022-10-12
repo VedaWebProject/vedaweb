@@ -28,7 +28,6 @@ import axios from 'axios';
 
 import "./utils/polyfills";
 import PrivacyHint from "./widgets/PrivacyHint";
-import usageStats from "./utils/usageStats";
 
 import { unregister } from '../registerServiceWorker';
 
@@ -39,7 +38,7 @@ class App extends Component {
         super(props);
 
         //unregister service worker
-        unregister(); 
+        unregister();
 
         this.state = {
             isLoaded: false,
@@ -61,7 +60,7 @@ class App extends Component {
     }
 
     componentCleanup(){
-        //save settings from state store (if accepted privacy hint)
+        //save settings from state store
         stateStore.save(stateStore);
     }
 
@@ -70,15 +69,8 @@ class App extends Component {
         stateStore.load(stateStore);
         //add listener to call cleanup before site closes
         window.addEventListener('beforeunload', this.componentCleanup);
-        
-        //exec usage stats once (if accepted privacy hint)
-        usageStats.load(stateStore.settings.acceptedPrivacyHint);
-        //add listener for location changes to track consecutive calls
-        this.props.history.listen((location, action) => {
-            usageStats.track(stateStore.settings.acceptedPrivacyHint, location);
-        });
     }
-  
+
     componentWillUnmount() {
         //exec cleanup
         this.componentCleanup();
@@ -110,7 +102,7 @@ class App extends Component {
         });
     }
 
-    
+
     render() {
 
         const { error, isLoaded } = this.state;
@@ -119,7 +111,7 @@ class App extends Component {
             console.log(JSON.stringify(error));
 
         return (
-                
+
                 <div id="app">
 
                     { !isLoaded &&
@@ -139,7 +131,7 @@ class App extends Component {
                     { isLoaded && error &&
                         <div className="error-msg">
                             <Icon type="frown-o" className="gap-right"/>
-                            There was an error loading the application data. 
+                            There was an error loading the application data.
                             This could be due to a temporary server problem.
                         </div>
                     }

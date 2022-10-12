@@ -6,4 +6,4 @@ If you want to delete this locally stored data, you can easily do so by clicking
 
 ## Why would I want to delete these settings?
 
-Deleting this settings data is a way to revoke your agreement to save this kind of data in your browser and to be part of our usage statistics. Also, if we make a breaking change to our application, it is possible that visiting the new version of the website with old settings data might cause an error. So if you expercience any errors, you can always try to delete your old settings. This has been reported to work in the past, so maybe it will help you, too.
+If we make a breaking change to our application, it is possible that visiting the new version of the website with old settings data might cause an error. So if you expercience any errors, you can always try to delete your old settings. This has been reported to work in the past, so maybe it will help you, too.

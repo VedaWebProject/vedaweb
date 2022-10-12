@@ -12,7 +12,6 @@ const stateStore = store({
         tour: false,
         transliteration: "hk",
         accents: false,
-        acceptedPrivacyHint: false,
         condensedView: false,
         showMetricalData: false
     },
@@ -134,12 +133,12 @@ const stateStore = store({
                 });
                 stateStore.search.grammar.addFieldToBlock(blockId);
             },
-        
+
             removeBlock(blockId){
                 stateStore.search.grammar.blocks = stateStore.search.grammar.blocks.filter(block => block.id !== blockId);
                 stateStore.search.grammar.blocks[0].distance = 0;
             },
-        
+
             addFieldToBlock(blockId){
                 for (let i = 0; i < stateStore.search.grammar.blocks.length; i++){
                     if (stateStore.search.grammar.blocks[i].id === blockId){
@@ -152,7 +151,7 @@ const stateStore = store({
                     }
                 }
             },
-        
+
             removeFieldFromBlock(blockId, fieldId){
                 for (let i = 0; i < stateStore.search.grammar.blocks.length; i++){
                     if (stateStore.search.grammar.blocks[i].id === blockId){
@@ -162,7 +161,7 @@ const stateStore = store({
                     }
                 }
             },
-        
+
             updateField(blockId, fieldId, fieldProp, value){
                 for (let i = 0; i < stateStore.search.grammar.blocks.length; i++){
                     if (stateStore.search.grammar.blocks[i].id === blockId){
@@ -181,7 +180,7 @@ const stateStore = store({
                     }
                 }
             },
-        
+
             setTerm(blockId, term){
                 for (let i = 0; i < stateStore.search.grammar.blocks.length; i++){
                     if (stateStore.search.grammar.blocks[i].id === blockId){
@@ -190,7 +189,7 @@ const stateStore = store({
                     }
                 }
             },
-        
+
             setLemma(blockId, lemma){
                 for (let i = 0; i < stateStore.search.grammar.blocks.length; i++){
                     if (stateStore.search.grammar.blocks[i].id === blockId){
@@ -199,7 +198,7 @@ const stateStore = store({
                     }
                 }
             },
-        
+
             setRequired(blockId, required){
                 for (let i = 0; i < stateStore.search.grammar.blocks.length; i++){
                     if (stateStore.search.grammar.blocks[i].id === blockId){
@@ -208,7 +207,7 @@ const stateStore = store({
                     }
                 }
             },
-        
+
             updateDistance(blockId, distance){
                 for (let i = 0; i < stateStore.search.grammar.blocks.length; i++){
                     if (stateStore.search.grammar.blocks[i].id === blockId){
@@ -217,7 +216,7 @@ const stateStore = store({
                     }
                 }
             },
-        
+
             getUsedFieldNamesForBlock(blockId){
                 let usedFieldNames = [];
                 // eslint-disable-next-line
@@ -232,7 +231,7 @@ const stateStore = store({
                 }
                 return usedFieldNames;
             },
-        
+
             getValueOptionsForFieldName(fieldName){
                 // eslint-disable-next-line
                 for (let grammar of stateStore.ui.search.grammar.tags){
@@ -242,12 +241,12 @@ const stateStore = store({
                 }
                 return [];
             },
-        
+
             reset(){
                 stateStore.search.grammar.blocks = [];
                 stateStore.search.grammar.addBlock();
             }
-            
+
         },
 
         //// SEARCH: DEFAULT COMMON QUERY VALUES ////
@@ -467,7 +466,6 @@ const stateStore = store({
     //// SAVE/LOAD TO/FROM LOCAL STORAGE ////
 
     save(obj){
-        if (!stateStore.settings.acceptedPrivacyHint) return;
         for (var key in obj) {
             if (!obj.hasOwnProperty(key) || obj[key] === null || typeof obj[key] !== "object"){
                 continue;

@@ -192,7 +192,6 @@ class Footer extends Component {
                         href={process.env.PUBLIC_URL + "/"}
                         onClick={() => {
                             stateStore.clearStorage();
-                            stateStore.settings.acceptedPrivacyHint = false;
                             alert("Local storage cleared!\n\nThe page will now reload with reset settings.");
                         }}>
                             <Icon type="delete"/> Delete locally stored settings
