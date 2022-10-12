@@ -27,7 +27,6 @@ import Sanscript from 'sanscript';
 import axios from 'axios';
 
 import "./utils/polyfills";
-import PrivacyHint from "./widgets/PrivacyHint";
 
 import { unregister } from '../registerServiceWorker';
 
@@ -166,8 +165,6 @@ class App extends Component {
                     <GuidedTour
                     enabled={stateStore.settings.tour}
                     onCloseTour={() => stateStore.settings.tour = false}/>
-
-                    <PrivacyHint />
 
                 </div>
 
