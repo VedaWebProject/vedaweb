@@ -8,7 +8,7 @@ class AboutContent extends Component {
     render() {
 
         return (
-            
+
             <div>
                 <h1><Icon type="bulb"/>About VedaWeb</h1>
 
@@ -35,6 +35,7 @@ class AboutContent extends Component {
 
                 <h2><Icon type="issues-close"/>Recently added features (excluding technical improvements and fixes)</h2>
                 <ul>
+                    <li>New references to scans of Delbrück's (1888) comments (2023/04)</li>
                     <li>Technical improvements & help text filter function (2020/11/17)</li>
                     <li>Display and filter by markings of possible late additions (2020/10/30)</li>
                     <li>New "Help &amp; Instructions" section (2020/08/18)</li>
@@ -70,7 +71,7 @@ class AboutContent extends Component {
                     <li>Added this manual feature changelog (2019/10/22)</li>
                     <li>Added stanza types meta data based on metrical parse (2019/10/22)</li>
                 </ul>
-                
+
             </div>
 
         );
