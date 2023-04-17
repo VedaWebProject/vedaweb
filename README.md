@@ -1,9 +1,5 @@
 # VedaWeb <!-- omit in toc -->
 
-[![Total alerts](https://img.shields.io/lgtm/alerts/g/VedaWebPlatform/vedaweb.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/VedaWebPlatform/vedaweb/alerts/)
-&nbsp;
-[![Language grade: JavaScript](https://img.shields.io/lgtm/grade/javascript/g/VedaWebPlatform/vedaweb.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/VedaWebPlatform/vedaweb/context:javascript)
-&nbsp;
 [![Repo size](https://img.shields.io/github/repo-size/VedaWebPlatform/vedaweb.svg?label=Repo%20size)](https://github.com/VedaWebPlatform/vedaweb)
 &nbsp;
 [![Website vedaweb.uni-koeln.de](https://img.shields.io/website-up-down-green-red/http/vedaweb.uni-koeln.de.svg)](http://vedaweb.uni-koeln.de/)
@@ -12,9 +8,9 @@
 **This is the code repository for the VedaWeb application, which is being developed as part of the [VedaWeb project](https://vedaweb.uni-koeln.de/).**
 
 This DFG-funded project provides a web-based, open-access platform in order to facilitate linguistic research on old indic texts. The text corpus is made available in a digitally accessible as well as morphologically and metrically annotated form, searchable for lexicographic and corpus-linguistic criteria. VedaWeb is part of the Cologne South Asian Languages and Texts (C-SALT).
-The pilot text is the Rigveda, linked to the dictionaries available at Cologne Digital Sanskrit Dictionaries via the [C-SALT APIs for Sanskrit Dictionaries](https://cceh.github.io/c-salt_sanskrit_api/index.html). The morphological annotation of the Rig-Veda was carried out at the Universität Zürich (UZH) and made available for the project. 
+The pilot text is the Rigveda, linked to the dictionaries available at Cologne Digital Sanskrit Dictionaries via the [C-SALT APIs for Sanskrit Dictionaries](https://cceh.github.io/c-salt_sanskrit_api/index.html). The morphological annotation of the Rig-Veda was carried out at the Universität Zürich (UZH) and made available for the project.
 
-![VedaWeb Application Screenshot](doc/assets/screenshot.png)  
+![VedaWeb Application Screenshot](doc/assets/screenshot.png)
 
 
 ## Application Architecture
@@ -44,7 +40,7 @@ The VedaWeb application exposes some API endpoints which are (at the time) limit
 
 ### Documentation of existing API endpoints
 
-> :warning: The short documentation below is not complete, but explains the concepts of the exposed endpoints.  
+> :warning: The short documentation below is not complete, but explains the concepts of the exposed endpoints.
 > For a complete overview of the endpoints, please see the OpenAPI schema at [vedaweb.uni-koeln.de/rigveda/openapi](https://vedaweb.uni-koeln.de/rigveda/openapi)
 
 #### Direct Document Access via Index Numbers
@@ -106,7 +102,7 @@ The general set of query properties for the *quick search* looks like this:
 }
 ```
 
-"**field**" specifies the data field to search in. The *quick search* is capable of search VedaWeb's full-text fields, which are text versions and translations. If you only specify `version_` or `translation_`, the search will apply to **all** text versions or translations, respectively.  
+"**field**" specifies the data field to search in. The *quick search* is capable of search VedaWeb's full-text fields, which are text versions and translations. If you only specify `version_` or `translation_`, the search will apply to **all** text versions or translations, respectively.
 To search a certain version or translation, just append the respective name of the text (at the moment, this is the author's name in lowercase letters without any whitespaces or symbols), e.g. `version_lubotsky` or `translation_geldner`.
 
 "**input**" is the data that is typed by the user when using the quick search tool in the application. It's possible to just search for a single word, multiple words or to make use of special syntax features like wildcard searches (e.g. `ag*` for the prefix `ag`), or logical operators (e.g. `tree AND house` or `tree OR house`). More details on this will follow in a more complete, official documentation when the application reaches a more mature state. Until then, you will find all the information you need in the help texts on the website.
