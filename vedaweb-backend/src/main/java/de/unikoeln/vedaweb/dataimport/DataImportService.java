@@ -188,7 +188,7 @@ public class DataImportService {
 		
 		
 		////
-		//// process and add concordance data for Ludwig 1
+		//// process and add concordance data for Ludwig 1 and 2
 		////
 		
 		log.info(
@@ -244,6 +244,31 @@ public class DataImportService {
 			+ " seconds."
 		);
 		
+		////
+		//// process and add concordance data for Delbrueck
+		////
+		
+		log.info(
+			(dryRun ? "(DRY RUN) " : "")
+			+ "Importing references to Delbrueck ..."
+		);
+		timer.start();
+		
+		//create mapping for Delbrueck
+		csv = new ArbitraryConcordance.Csv(
+				fsResources.readResourceFile(fsResources.getResourcesFile(
+						REFERENCES_RESOURCES_DIR
+						+ "/Delbrueck/Delbrueck_1888.csv")),
+				false, ";", "\"");
+		addArbitratyConcordance(
+				stanzas,
+				"https://archive.org/details/syntaktischefor03windgoog/page/" 
+						+ ArbitraryConcordance.PLACEHOLDER + "/mode/1up",
+				".",
+				"\\s?,\\s?",
+				"Delbrueck (1888)",
+				"Delbrück, Berthold. 1888. Altindische Syntax (Syntaktische Studien V). Halle: Verlag der Buchhandlung des Waisenhauses.",
+				csv);
 		
 		
 		//dry run?
