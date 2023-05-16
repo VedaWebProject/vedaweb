@@ -10,7 +10,7 @@ class AboutContent extends Component {
         return (
 
             <div>
-                <h1><Icon type="bulb"/>About VedaWeb</h1>
+                <h1><Icon type="bulb"/> About VedaWeb</h1>
 
                 <p>
                     Here you find information on the state of development and recent changes.<br/>
@@ -19,7 +19,7 @@ class AboutContent extends Component {
 
                 <br/>
 
-                <h2><Icon type="message"/>Feedback</h2>
+                <h2><Icon type="message"/> Feedback</h2>
                 <p>
                     Feel free to send us your <strong>feedback on functionality, usability and data correctness:</strong>
                     <br/><br/>
@@ -33,9 +33,21 @@ class AboutContent extends Component {
                     Thank you for using <span className="secondary-font red bold">VedaWeb</span>!
                 </p>
 
-                <h2><Icon type="issues-close"/>Recently added features (excluding technical improvements and fixes)</h2>
+                <h2><Icon type="hourglass"/> Upcoming features</h2>
                 <ul>
-                    <li>New references to scans of Delbrück's (1888) comments (2023/04)</li>
+                    <li>Corrected and extended morphological annotations in book 01-10</li>
+                    <li>Revised French translation by Renou</li>
+                    <li>Revised Russian translation by Elizarenkova</li>
+                    <li>Revised English translation by Griffith</li>
+                    <li>Revised German translations by Grassmann and Geldner</li>
+                    <li>Revised references to Grassmann's dictionary</li>
+                    <li>Annotation and grammar search values for local particles, absolutiva, infinitives, participles, intensives, causatives, comparatives and superlatives</li>
+                    <li>Annotation of present stem classes</li>
+                </ul>
+
+                <h2><Icon type="issues-close"/> Previously added features (excluding technical improvements and fixes)</h2>
+                <ul>
+                    <li>New references to scans of Delbrück's <i>Altindische Syntax</i> (1888) comments (2023/04/17)</li>
                     <li>Technical improvements & help text filter function (2020/11/17)</li>
                     <li>Display and filter by markings of possible late additions (2020/10/30)</li>
                     <li>New "Help &amp; Instructions" section (2020/08/18)</li>
