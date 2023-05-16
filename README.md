@@ -4,8 +4,10 @@
 &nbsp;
 [![Website vedaweb.uni-koeln.de](https://img.shields.io/website-up-down-green-red/http/vedaweb.uni-koeln.de.svg)](http://vedaweb.uni-koeln.de/)
 
+This is the code repository for the _VedaWeb_ platform, which has been developed as part of the [VedaWeb project](https://vedaweb.uni-koeln.de/).
 
-**This is the code repository for the VedaWeb application, which is being developed as part of the [VedaWeb project](https://vedaweb.uni-koeln.de/).**
+> 💡  We are now in our second project phase ([VedaWeb 2.0](https://vedaweb.uni-koeln.de)), curating and refining many additional datasets related not only to the Rigveda but also other Vedic texts. The results will be published on a new, collaborative platform that enables users to publish their own research data or even propose corrections to existing datasets.
+> For this, we're currently building a new software from scratch: [**Tekst**](https://github.com/VedaWebProject/Tekst)! The upcoming _VedaWeb_ platform will be based on _Tekst_, which can also be used by other corpus or edition projects for creating open collaborative text research platforms.
 
 This DFG-funded project provides a web-based, open-access platform in order to facilitate linguistic research on old indic texts. The text corpus is made available in a digitally accessible as well as morphologically and metrically annotated form, searchable for lexicographic and corpus-linguistic criteria. VedaWeb is part of the Cologne South Asian Languages and Texts (C-SALT).
 The pilot text is the Rigveda, linked to the dictionaries available at Cologne Digital Sanskrit Dictionaries via the [C-SALT APIs for Sanskrit Dictionaries](https://cceh.github.io/c-salt_sanskrit_api/index.html). The morphological annotation of the Rig-Veda was carried out at the Universität Zürich (UZH) and made available for the project.
