@@ -11,7 +11,7 @@ import logoVGSP from "../../img/logo_vgsp.png";
 import logoHPCL from "../../img/logo_hpcl.png";
 import logoDFG from "../../img/logo_dfg.png";
 import logoDCH from "../../img/logo_dch.jpg";
-import logoIDH from "../../img/logo_idh.png";
+import logoBUW from "../../img/logo_dh_buw.png";
 import logoCCEH from "../../img/logo_cceh.png";
 
 import { Link } from 'react-router-dom';
@@ -59,17 +59,6 @@ class Footer extends Component {
                      */}
 
                     <Col span={3} className="footer-box">
-                        <a href="http://dh.uni-koeln.de/"
-                        title="Institut für Digital Humanities, Universität zu Köln"
-                        className="bw"
-                        target="_blank"
-                        rel="noopener noreferrer">
-                            <img src={logoIDH} alt="IDH"/><br/>
-                            Institut für<br/>Digital Humanities,<br/>Universität zu Köln
-                        </a>
-                    </Col>
-
-                    <Col span={3} className="footer-box">
                         <a href="http://cceh.uni-koeln.de/"
                         title="Cologne Center for eHumanities, Universität zu Köln"
                         className="bw"
@@ -88,6 +77,17 @@ class Footer extends Component {
                         rel="noopener noreferrer">
                             <img src={logoDCH} alt="DCH"/><br/>
                             Data Center<br/>for the Humanities,<br/>Universität zu Köln
+                        </a>
+                    </Col>
+
+                    <Col span={3} className="footer-box">
+                        <a href="https://www.geschichte.uni-wuppertal.de/de/lehrgebiete/digital-humanities/"
+                        title="Digital Humanities, Bergische Universität Wuppertal"
+                        className="bw"
+                        target="_blank"
+                        rel="noopener noreferrer">
+                            <img src={logoBUW} alt="BUW"/><br/>
+                            Digital Humanities,<br/>Bergische Universität<br/>Wuppertal
                         </a>
                     </Col>
 
