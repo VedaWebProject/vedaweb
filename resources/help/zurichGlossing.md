@@ -1,7 +1,15 @@
 # Morphological Glossings from Zurich
 
-The morphological annotation was carried out at the University of Zurich.  
-It follows the Leipzig Glossing Rules. The abbreviations used are listed below:
+The morphological annotation was originally carried out at the University of Zurich.
+Corrections and additions were implemented by the Vedaweb team / at the University of Cologne.
+
+## Citation
+
+Casaretto, Antje, Jakob Halfmann, Natalie Korobzow, Daniel Kölligan & Uta Reinöhl. 2023. The morphologically glossed Rigveda - The Zurich annotation corpus revised and extended. Hosted by VedaWeb - Online Research Platform for Old Indic Texts. University of Cologne. https://vedaweb.uni-koeln.de, accessed `<date of access>`.
+
+## Abbreviations
+
+The annotations follow the Leipzig Glossing Rules. The abbreviations used are listed below:
 
 <details>
 <summary>Show list of morphological glossings</summary>

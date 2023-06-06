@@ -20,8 +20,8 @@ resources/references/*
 !resources/references/README.md
 
 # incejtable HTML snippets
-resources/snippets/*
-!resources/snippets/README.md
+# resources/snippets/*
+# !resources/snippets/README.md
 
 # import tei data
 resources/tei/*
