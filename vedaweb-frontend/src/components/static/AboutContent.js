@@ -35,18 +35,23 @@ class AboutContent extends Component {
 
                 <h2><Icon type="hourglass"/> Upcoming features</h2>
                 <ul>
-                    <li>Corrected and extended morphological annotations in book 01-10</li>
-                    <li>Revised French translation by Renou</li>
-                    <li>Revised Russian translation by Elizarenkova</li>
-                    <li>Revised English translation by Griffith</li>
-                    <li>Revised German translations by Grassmann and Geldner</li>
-                    <li>Revised references to Grassmann's dictionary</li>
-                    <li>Annotation and grammar search values for local particles, absolutiva, infinitives, participles, intensives, causatives, comparatives and superlatives</li>
+                    <li>Corrected and extended morphological annotations in book 08-10</li>
                     <li>Annotation of present stem classes</li>
                 </ul>
 
-                <h2><Icon type="issues-close"/> Previously added features (excluding technical improvements and fixes)</h2>
+                <h2><Icon type="issues-close"/> Recently added features (excluding technical improvements and fixes)</h2>
                 <ul>
+                    <li>Corrected and extended morphological annotations in book 1 to book 7 (2023/06/23)</li>
+                    <li>Grammar search values for participles including -ta and -na, local particles, intensives, causatives, -si imperatives, comparatives and superlatives (PTCP, PTCP-ta, PTCP-na, LP, INT, CAUS, IMP-si, CMP, SUP) (2023/06/23)</li>
+                    <li>Revised English translation by Griffith (2023/06/23)</li>
+                    <li>Revised French translation by Renou (2023/06/23)</li>
+                    <li>Revised German translations by Grassmann and Geldner (2023/06/23)</li>
+                    <li>Revised Russian translation by Elizarenkova (2023/06/23)</li>
+                    <li>Revised text version by Aufrecht (2023/06/23)</li>
+                    <li>Revised references to Grassmann’s dictionary for frequent lemmata (with frequency of 10 times or more in Rigveda) (2023/06/23)</li>
+                    <li>Updated overview of stanza coverage of versions and translations (2023/06/23)</li>
+                    <li>Updated <a href="https://github.com/VedaWebProject/vedaweb-data" target="_blank">data repository containing all the textual data (csv and xml-TEI) employed in VedaWeb</a> (2023/06/23)</li>
+                    <li>Updated <a href="https://github.com/VedaWebProject/tei-transformations" target="_blank">code repository containing the source code for the TEI transformations</a> (2023/06/23)</li>
                     <li>New references to scans of Delbrück's <i>Altindische Syntax</i> (1888) comments (2023/04/17)</li>
                     <li>Technical improvements & help text filter function (2020/11/17)</li>
                     <li>Display and filter by markings of possible late additions (2020/10/30)</li>
