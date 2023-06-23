@@ -2,7 +2,9 @@
 
 (source info is yet to be provided)
 
-**Coverage of this version:**  
 
-`01.001.01` to `09.097.34`  
-`09.097.36` to `10.191.03`
+## Stanza coverage of this version:
+99.99 % (10551 stanzas)
+
+No transliteration available for stanza:
+ - `09.097.35`
