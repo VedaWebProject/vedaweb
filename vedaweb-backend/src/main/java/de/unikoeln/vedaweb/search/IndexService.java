@@ -61,31 +61,31 @@ import de.unikoeln.vedaweb.util.StringUtils;
 
 /**
  * Service for managing the search index
- * 
+ *
  * @author bkis
  *
  */
 @Service
 public class IndexService {
-	
+
 	private final Logger log = LoggerFactory.getLogger(this.getClass());
-	
+
 	@Autowired
 	private StanzaRepository stanzaRepo;
-	
+
 	@Autowired
 	private ElasticService elastic;
-	
+
 	@Autowired
 	private JsonUtilService json;
-	
+
 	@Value("${es.index.name}")
 	private String indexName;
-	
+
 	@Value("classpath:es-index.json")
 	private Resource indexDef;
 
-	
+
 	public ObjectNode rebuildIndex(){
 		ObjectNode response = json.newObjectNode();
 		//delete old index
@@ -96,14 +96,14 @@ public class IndexService {
 		response.put("fillIndex", indexDbDocuments().findValue("response").asText());
 		return response;
 	}
-	
-	
+
+
 	public ObjectNode indexDbDocuments(){
 		log.info("Creating and inserting new index documents");
 		ObjectNode jsonResponse = json.newObjectNode();
 		Iterator<Stanza> dbIter = stanzaRepo.findAll().iterator();
-		// create es bulk request (1m timeout because 30s might be too short)
-		BulkRequest bulkRequest = new BulkRequest().timeout("1m");
+		// create es bulk request (5m timeout because 30s might be too short)
+		BulkRequest bulkRequest = new BulkRequest().timeout("5m");
 
 		// process docs
 		while (dbIter.hasNext()) {
@@ -125,7 +125,7 @@ public class IndexService {
 //				indexDoc.put("lemmata", StringUtils.removeVowelAccents(concatTokenLemmata(dbDoc)));
 //				indexDoc.put("lemmata_raw", StringUtils.normalizeNFC(concatTokenLemmata(dbDoc)));
 			indexDoc.set("tokens", json.getMapper().valueToTree(buildTokensList(dbDoc)));
-			
+
 			// add metrical positions annotations
 			ArrayNode mPosArray = json.newArrayNode();
 			String[] metricalAnnotations = generateMetricalAnnotations(dbDoc);
@@ -136,7 +136,7 @@ public class IndexService {
 				mPosArray.add(node);
 			}
 			indexDoc.set("metricalPositions", mPosArray);
-			
+
 			// create index request
 			IndexRequest request = new IndexRequest("vedaweb");
 
@@ -154,7 +154,7 @@ public class IndexService {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		
+
 		//create response object
 		jsonResponse.put("response",
 				bulkResponse != null && !bulkResponse.hasFailures()
@@ -163,7 +163,7 @@ public class IndexService {
 
 		return jsonResponse;
 	}
-	
+
 
 	private List<ObjectNode> buildTokensList(Stanza doc) {
 		List<ObjectNode> tokens = new ArrayList<ObjectNode>();
@@ -180,7 +180,7 @@ public class IndexService {
 				indexToken.put("lemma_raw",
 						StringUtils.normalizeNFC(
 								StringUtils.cleanLemma(token.getLemma())));
-				
+
 				//grammar props
 				ObjectNode indexTokenGrammar = json.newObjectNode();
 				for (String attr : token.getProps().keySet()) {
@@ -202,7 +202,7 @@ public class IndexService {
 
 		return tokens;
 	}
-	
+
 
 	public ObjectNode deleteIndex(){
 		log.info("Deleting old index");
@@ -214,7 +214,7 @@ public class IndexService {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		
+
 		//create response object
 		jsonResponse.put("response",
 				deleteResponse != null && deleteResponse.isAcknowledged()
@@ -223,29 +223,29 @@ public class IndexService {
 
 		return jsonResponse;
 	}
-	
-	
+
+
 	public ObjectNode createIndex(){
 		log.info("Creating new index from mapping definition");
 		ObjectNode jsonResponse = json.newObjectNode();
 		CreateIndexRequest createRequest = new CreateIndexRequest(indexName);
 		byte[] json = null;
-		
+
 		try {
 			json = IOUtils.convertStreamToByteArray(indexDef.getInputStream());
 		} catch (IOException e1) {
 			e1.printStackTrace();
 		}
-		
+
 		createRequest.source(new String(json, StandardCharsets.UTF_8), XContentType.JSON);
 		CreateIndexResponse createResponse = null;
-		
+
 		try {
 			createResponse = elastic.client().indices().create(createRequest, RequestOptions.DEFAULT);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		
+
 		//create response object
 		jsonResponse.put("response",
 				createResponse != null && createResponse.isAcknowledged()
@@ -254,43 +254,43 @@ public class IndexService {
 
 		return jsonResponse;
 	}
-	
-	
+
+
 	public ArrayNode getUIGrammarData() {
 		List<String> grammarFields = new ArrayList<>();
-		
+
 		ObjectNode response = urlRequest(
 				"get",
 				"vedaweb/_mapping/field/tokens.grammar.*",
 				"/vedaweb/mappings");
-		
+
 		if (response == null) {
 			log.error("Couldn't find index grammar mapping");
 			return json.newArrayNode();
 		}
-		
+
 		Iterator<String> iter = response.fieldNames();
 		while (iter.hasNext()) {
 			grammarFields.add(iter.next().replaceAll("^(\\w+\\.)+", ""));
 		}
-		
+
 		Collections.sort(grammarFields);
 		return convertGrammarAggregationsToJSON(collectGrammarFieldAggregations(grammarFields));
 	}
-	
-	
+
+
 	public ArrayNode getUIBooksData() {
 		ArrayNode books = json.newArrayNode();
 		int booksCount = (int) distinct("book");
-		
+
 		for (int i = 1; i <= booksCount; i++) {
 			//match current book
 			MatchQueryBuilder match = QueryBuilders.matchQuery("book", i);
 			//aggregation for distinct hymn number values
-			CardinalityAggregationBuilder agg = 
+			CardinalityAggregationBuilder agg =
 					AggregationBuilders.cardinality("hymns").field("hymn");
 			//compose request source
-			SearchSourceBuilder searchSourceBuilder = 
+			SearchSourceBuilder searchSourceBuilder =
 					new SearchSourceBuilder().query(match).aggregation(agg);
 			//create request
 			SearchRequest req = new SearchRequest("vedaweb").source(searchSourceBuilder);
@@ -303,22 +303,22 @@ public class IndexService {
 		}
 		return books;
 	}
-	
-	
+
+
 	public int[] getHymnAbsValues() {
 		//TODO
 		return new int[]{1,2,3,4,5,6,7,8};
 	}
-	
-	
+
+
 	public ArrayNode getStanzasMetaData(String field) {
 		List<String> values = new ArrayList<String>();
-		
+
 		//aggregation for distinct hymn addressee values
-		TermsAggregationBuilder agg = 
+		TermsAggregationBuilder agg =
 				AggregationBuilders.terms("metaAgg").field(field).size(1000);
 		//compose request source
-		SearchSourceBuilder searchSourceBuilder = 
+		SearchSourceBuilder searchSourceBuilder =
 				new SearchSourceBuilder().aggregation(agg);
 		//create request
 		SearchRequest req = new SearchRequest("vedaweb").source(searchSourceBuilder);
@@ -333,14 +333,14 @@ public class IndexService {
 		Collections.sort(values);
 		return json.getMapper().valueToTree(values);
 	}
-	
-	
+
+
 	public boolean indexExists() {
 		log.info("Looking for Elasticsearch index");
 		GetIndexRequest request = new GetIndexRequest(indexName);
 		boolean exists = false;
 		int tries = 10;
-		
+
 		while (tries > 0) {
 			try {
 				exists = elastic
@@ -357,10 +357,10 @@ public class IndexService {
 			} catch (InterruptedException e) {}
 			tries--;
 		}
-		
+
         return exists;
 	}
-	
+
 
 	public int countStanzas(int book, int hymn) {
 		MatchQueryBuilder matchBook = QueryBuilders.matchQuery("book", book);
@@ -368,9 +368,9 @@ public class IndexService {
 		BoolQueryBuilder bool = QueryBuilders.boolQuery();
 		bool.must(matchBook);
 		bool.must(matchHymn);
-		
+
 		//compose request source
-		SearchSourceBuilder searchSourceBuilder = 
+		SearchSourceBuilder searchSourceBuilder =
 				new SearchSourceBuilder().query(bool).size(0);
 		//create request
 		SearchRequest req = new SearchRequest("vedaweb").source(searchSourceBuilder);
@@ -382,8 +382,8 @@ public class IndexService {
 		}
 		return 0;
 	}
-	
-	
+
+
 	private ObjectNode urlRequest(String method, String url) {
 		ObjectNode response = null;
 		try {
@@ -398,8 +398,8 @@ public class IndexService {
 		}
 		return response;
 	}
-	
-	
+
+
 	private ObjectNode urlRequest(String method, String url, String jsonQuery) {
 		ObjectNode response = urlRequest(method, url);
 		if (response == null) return null;
@@ -408,8 +408,8 @@ public class IndexService {
 				? (ObjectNode)responseData
 				: response.objectNode();
 	}
-	
-	
+
+
 	private long distinct(String field) {
 		long count = 0;
 		CardinalityAggregationBuilder agg = AggregationBuilders.cardinality("agg");
@@ -424,25 +424,25 @@ public class IndexService {
 		}
 		return count;
 	}
-	
-	
+
+
 	private Map<String, List<String>> collectGrammarFieldAggregations(List<String> grammarFields) {
 		Map<String, List<String>> grammarAggregations = new HashMap<>();
-		
-		SearchRequest req = new SearchRequest("vedaweb"); 
-		SearchSourceBuilder searchSourceBuilder = new SearchSourceBuilder(); 
-		
+
+		SearchRequest req = new SearchRequest("vedaweb");
+		SearchSourceBuilder searchSourceBuilder = new SearchSourceBuilder();
+
 		NestedAggregationBuilder tokens = AggregationBuilders.nested("tokens", "tokens");
-		
+
 		for (String grammarField : grammarFields) {
 			tokens.subAggregation(
 					AggregationBuilders.terms(grammarField).field("tokens.grammar." + grammarField).size(1000)
 			);
 		}
-		
+
 		searchSourceBuilder.aggregation(tokens);
 		req.source(searchSourceBuilder);
-		
+
 		try {
 			SearchResponse response = elastic.client().search(req, RequestOptions.DEFAULT);
 			Nested nested = response.getAggregations().get("tokens");
@@ -457,14 +457,14 @@ public class IndexService {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		
+
 		return grammarAggregations;
 	}
-	
-	
+
+
 	private ArrayNode convertGrammarAggregationsToJSON(Map<String, List<String>> aggs) {
 		ArrayNode tagsArray = json.newArrayNode();
-		
+
 		for (String grammarField : aggs.keySet()) {
 			ObjectNode tagData = json.newObjectNode();
 			tagData.put("field", grammarField);
@@ -472,11 +472,11 @@ public class IndexService {
 			tagData.set("values", json.getMapper().valueToTree(aggs.get(grammarField)));
 			tagsArray.add(tagData);
 		}
-		
+
 		return tagsArray;
 	}
-	
-	
+
+
 	private ArrayNode transformVersionLines(String[] lines, boolean removeAccents) {
 		ArrayNode linesNode = json.newArrayNode();
 		for (String line : lines) {
@@ -488,7 +488,7 @@ public class IndexService {
 		}
 		return linesNode;
 	}
-	
+
 	//// THIS MAY BE SUPERIOR TO "transformVersionLines"
 	private String concatVersionLines(String[] lines, boolean removeAccents) {
 		StringBuilder sb = new StringBuilder();
@@ -502,8 +502,8 @@ public class IndexService {
 		}
 		return sb.substring(0, sb.length() - 1);
 	}
-	
-	
+
+
 //	private String concatTokenLemmata(Stanza doc) {
 //		StringBuilder sb = new StringBuilder();
 //		for (Token token : doc.getGrammarData()){
@@ -512,8 +512,8 @@ public class IndexService {
 //		}
 //		return sb.substring(0, sb.length() - 2).toString().trim();
 //	}
-	
-	
+
+
 	private List<ObjectNode> buildVersionsList(Stanza doc) {
 		List<ObjectNode> versions = new ArrayList<ObjectNode>();
 		for (StanzaVersion v : doc.getVersions()) {
@@ -522,29 +522,29 @@ public class IndexService {
 //			for (String line : v.getForm()) form.append(line + "\n");
 			version.put("id", v.getId());
 			//form without accents
-			version.put("form", concatVersionLines(v.getForm(), true)); 
+			version.put("form", concatVersionLines(v.getForm(), true));
 			//raw form (with accents)
-			version.put("form_raw", concatVersionLines(v.getForm(), false)); 
+			version.put("form_raw", concatVersionLines(v.getForm(), false));
 			//metrical data (for versions that have it)
 			if (v.getMetricalData() != null)
-				version.set("metrical", transformVersionLines(v.getMetricalData(), false)); 
+				version.set("metrical", transformVersionLines(v.getMetricalData(), false));
 			//source (author)
-			version.put("source", v.getSource()); 
+			version.put("source", v.getSource());
 			versions.add(version);
 		}
 		return versions;
 	}
-	
-	
+
+
 	private String[] generateMetricalAnnotations(Stanza doc) {
 		int indexVNH = doc.getVersions().indexOf(
 				StanzaVersion.getDummy("version_vannootenholland"));
 		if (indexVNH == -1) return new String[0];
 		String[] form = doc.getVersions().get(indexVNH).getForm();
-		
+
 		// remove "_" from all elements and return string array
 		return Arrays.stream(MetricalAnalysis.annotateMultiline(form))
 			.map(a -> a.replaceAll("(?<=\\b\\d+)\\_", "")).toArray(String[]::new);
 	}
-	
+
 }
