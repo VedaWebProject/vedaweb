@@ -17,6 +17,10 @@ class AboutContent extends Component {
                     To get help on the different features, look out for the <HelpButton type="start" inline/> buttons throughout the page.
                 </p>
 
+                <p>
+                    The public repository containing the data used for the VedaWeb platform can be found <a href="https://github.com/VedaWebProject/vedaweb-data" target="_blank">here</a>.
+                </p>
+
                 <br/>
 
                 <h2><Icon type="message"/> Feedback</h2>
@@ -39,19 +43,18 @@ class AboutContent extends Component {
                     <li>Annotation of present stem classes</li>
                 </ul>
 
-                <h2><Icon type="issues-close"/> Recently added features (excluding technical improvements and fixes)</h2>
+                <h2><Icon type="issues-close"/> Previously added features (excluding technical improvements and fixes)</h2>
                 <ul>
-                    <li>Corrected and extended morphological annotations in book 1 to book 7 (2023/06/23)</li>
-                    <li>Grammar search values for participles including -ta and -na, local particles, intensives, causatives, -si imperatives, comparatives and superlatives (PTCP, PTCP-ta, PTCP-na, LP, INT, CAUS, IMP-si, CMP, SUP) (2023/06/23)</li>
-                    <li>Revised English translation by Griffith (2023/06/23)</li>
-                    <li>Revised French translation by Renou (2023/06/23)</li>
-                    <li>Revised German translations by Grassmann and Geldner (2023/06/23)</li>
-                    <li>Revised Russian translation by Elizarenkova (2023/06/23)</li>
-                    <li>Revised text version by Aufrecht (2023/06/23)</li>
-                    <li>Revised references to Grassmann’s dictionary for frequent lemmata (with frequency of 10 times or more in Rigveda) (2023/06/23)</li>
-                    <li>Updated overview of stanza coverage of versions and translations (2023/06/23)</li>
-                    <li>Updated <a href="https://github.com/VedaWebProject/vedaweb-data" target="_blank">data repository containing all the textual data (csv and xml-TEI) employed in VedaWeb</a> (2023/06/23)</li>
-                    <li>Updated <a href="https://github.com/VedaWebProject/tei-transformations" target="_blank">code repository containing the source code for the TEI transformations</a> (2023/06/23)</li>
+                    <li>Corrected and extended morphological annotations in book 1 to book 7 (2023/07/07)</li>
+                    <li>Grammar search values for participles including -ta and -na, local particles, intensives, causatives, -si imperatives, comparatives and superlatives (PTCP, PTCP-ta, PTCP-na, LP, INT, CAUS, IMP-si, CMP, SUP) (2023/07/07)</li>
+                    <li>Revised English translation by Griffith (2023/07/07)</li>
+                    <li>Revised French translation by Renou (2023/07/07)</li>
+                    <li>Revised German translations by Grassmann and Geldner (2023/07/07)</li>
+                    <li>Revised Russian translation by Elizarenkova (2023/07/07)</li>
+                    <li>Revised references to Grassmann’s dictionary for frequent lemmata (with frequency of 10 times or more in Rigveda) (2023/07/07)</li>
+                    <li>Updated overview of stanza coverage of versions and translations (2023/07/07)</li>
+                    <li>Updated <a href="https://github.com/VedaWebProject/vedaweb-data" target="_blank">data repository containing all the textual data (csv and xml-TEI) employed in VedaWeb</a> (2023/07/07)</li>
+                    <li>Updated <a href="https://github.com/VedaWebProject/tei-transformations" target="_blank">code repository containing the source code for the TEI transformations</a> (2023/07/07)</li>
                     <li>New references to scans of Delbrück's <i>Altindische Syntax</i> (1888) comments (2023/04/17)</li>
                     <li>Technical improvements & help text filter function (2020/11/17)</li>
                     <li>Display and filter by markings of possible late additions (2020/10/30)</li>
