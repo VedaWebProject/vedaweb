@@ -27,7 +27,7 @@ class DictionaryView extends Component {
     componentDidMount(){
         let lemmaData = this.transform(this.props.data)
             .sort((a, b) => isoCompare(a.lemma, b.lemma));
-        
+
         this.setState({
             dictData: lemmaData
         });
@@ -61,9 +61,10 @@ class DictionaryView extends Component {
 
                 for (let i = 0; i < lemmaData.length; i++) {
                     let t = lemmaData[i];
+
                     t["dict"] = t.lemmaRefs.map(ref => {
-                        let entry = entries.find(e => e.id === ref);
-                        return !entry ? {} : this.parseEntry(entry, parser);
+                        let entry = entries.find(e => e.id === ref) || {};
+                        return this.parseEntry(entry, parser);
                     });
                     dictData.push(t);
                 }
@@ -175,9 +176,9 @@ class DictionaryView extends Component {
     render() {
 
         const {modalVisible, modalData, dictData, isLoaded, error} = this.state;
-        
+
         return (
-        
+
             <div>
                 <table className="teaser">
                     <thead>
@@ -204,15 +205,15 @@ class DictionaryView extends Component {
                                 {token.lemmaRefs && token.lemmaRefs.map((ref, i) => {
                                     let entry = token.dict === undefined ? undefined
                                         : token.dict.find(d => d.graRef === ref);
-                                    return  <Button
+                                    return  entry ? <Button
                                             disabled={!isLoaded || error}
                                             className="dict-link gap-right"
                                             onClick={() => this.openDict(entry)}
                                             title={"Show full entry for \"" + token.lemma + "\": #" + (i+1)}
                                             key={"lemma_" + i}>
                                                 <Icon type="book"/>
-                                                {"#" + (i+1)}
-                                            </Button>;
+                                                {entry.graLemma}
+                                            </Button> : null;
                                 })}
                             </td>
                             <td>n/a</td>
