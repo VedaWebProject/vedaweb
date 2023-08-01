@@ -63,8 +63,8 @@ class DictionaryView extends Component {
                     let t = lemmaData[i];
 
                     t["dict"] = t.lemmaRefs.map(ref => {
-                        let entry = entries.find(e => e.id === ref) || {};
-                        return this.parseEntry(entry, parser);
+                        let entry = entries.find(e => e.id === ref);
+                        return entry ? this.parseEntry(entry, parser) : undefined;
                     });
                     dictData.push(t);
                 }
@@ -199,12 +199,12 @@ class DictionaryView extends Component {
                                 <span>({token.tokens.map((t, i ) => t + (i < token.tokens.length - 1 ? ", " : ""))})</span>
                             </td>
                             <td className="expanding text-font">
-                                {token.dict && token.dict[0] && token.dict[0].graTxt}
+                                {token.dict && token.dict[0] && token.dict[0].graTxt || ""}
                             </td>
                             <td className="non-expanding">
                                 {token.lemmaRefs && token.lemmaRefs.map((ref, i) => {
-                                    let entry = token.dict === undefined ? undefined
-                                        : token.dict.find(d => d.graRef === ref);
+                                    const entry = !token.dict ? null
+                                        : token.dict.find(d => d && d.graRef === ref);
                                     return  entry ? <Button
                                             disabled={!isLoaded || error}
                                             className="dict-link gap-right"
