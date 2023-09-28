@@ -1,5 +1,7 @@
 # VedaWeb <!-- omit in toc -->
 
+[![DOI](https://zenodo.org/badge/183613368.svg)](https://zenodo.org/badge/latestdoi/183613368)
+&nbsp;
 [![Repo size](https://img.shields.io/github/repo-size/VedaWebPlatform/vedaweb.svg?label=Repo%20size)](https://github.com/VedaWebPlatform/vedaweb)
 &nbsp;
 [![Website vedaweb.uni-koeln.de](https://img.shields.io/website-up-down-green-red/http/vedaweb.uni-koeln.de.svg)](http://vedaweb.uni-koeln.de/)
