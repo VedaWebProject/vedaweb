@@ -4,6 +4,7 @@ import { Row, Col, Affix, Spin, Icon, Drawer, Badge, Modal, Button } from 'antd'
 import ContentLocation from "./ContentLocation";
 import ContentFilterSwitch from "./ContentFilterSwitch";
 import ErrorMessage from "../errors/ErrorMessage";
+import CiteAsButton from "../widgets/CiteAsButton";
 
 import "./ContentView.css";
 
@@ -178,7 +179,7 @@ class ContentView extends Component {
                                         stanza={data.stanza}
                                         hymnAbs={data.hymnAbs} />
                                     }
-                                    
+
                                     {/** TOOLS BUTTON: TOGGLE CONTENT */}
                                     <Button
                                     type="default"
@@ -220,6 +221,9 @@ class ContentView extends Component {
                                     data-tour-id="toggle-export">
                                         Export
                                     </Button>
+
+                                    {/** TOOLS BUTTON: CITE AS */}
+                                    <CiteAsButton />
 
                                 </div>
                             </div>
@@ -388,7 +392,7 @@ class ContentView extends Component {
 
                                                                             {line}&nbsp;
 
-                                                                            { showMetricalData && !condensedView && v.metricalData && 
+                                                                            { showMetricalData && !condensedView && v.metricalData &&
                                                                                 <span className="font-small gap-left-big light-grey main-font">
                                                                                 {v.metricalData[i].replace(/L/ig,"—").replace(/S/ig,"◡").replace(/ /ig,"\u3000") + "\u3000" +
                                                                                 "(" + v.metricalData[i].replace(/ /ig,"").length + ")"}
@@ -507,7 +511,7 @@ class ContentView extends Component {
                                         **/}
 
                                         {/** METRICAL DATA **/}
-                                        {/** 
+                                        {/**
                                         {stateStore.ui.isLayerVisible('metricaldata_')
                                             && data.metricalData &&
                                             <div
@@ -623,7 +627,7 @@ class ContentView extends Component {
                                             className="glossing content-block card"
                                             ref={this.scrollTo}>
                                                 <h1>External Resources</h1>
-                                                { !data.externalResources && 
+                                                { !data.externalResources &&
                                                     <i>There are no references to external resources for this document.</i>
                                                 }
                                                 { data.externalResources && data.externalResources.map((ext, i) => (
