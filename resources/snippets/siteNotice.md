@@ -4,7 +4,11 @@ applies to this project; with the specific additions stated below:
 
 ## Citation
 
-VedaWeb. Online Research Platform for Old Indic Texts. University of Cologne. https://vedaweb.uni-koeln.de, accessed `<date of access>`.
+Kölligan, Daniel, Claes Neuefeind, Uta Reinöhl, Patrick Sahle,
+Antje Casaretto, Anna Fischer, Börge Kiss, Natalie Korobzow,
+Jürgen Rolshoven, Jakob Halfmann, Francisco Mondaca. VedaWeb.
+Online Research Platform for Old Indic Texts.
+University of Cologne. https://vedaweb.uni-koeln.de, accessed `<date of access>`.
 
 ## Responsible for the content of this website
 
