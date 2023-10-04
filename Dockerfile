@@ -11,7 +11,7 @@ WORKDIR /vedaweb-frontend
 
 # build frontend
 RUN npm install --silent &> /dev/null \
- && npm run build --silent &> /dev/null
+ && npm run build
 
 
 
