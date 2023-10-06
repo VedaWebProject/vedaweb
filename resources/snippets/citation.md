@@ -11,7 +11,7 @@ Online Research Platform for Old Indic Texts.
 University of Cologne. https://vedaweb.uni-koeln.de, accessed `<date of access>`.
 
 ## Morphological Glossing
-Casaretto, Antje, Jakob Halfmann, Natalie Korobzow, Daniel Kölligan & Uta Reinöhl.
+Casaretto, Antje, Anna Fischer, Jakob Halfmann, Natalie Korobzow, Daniel Kölligan & Uta Reinöhl.
 The morphologically glossed Rigveda - The Zurich annotation
 corpus revised and extended. Hosted by VedaWeb - Online Research Platform for Old Indic Texts.
 University of Cologne. https://vedaweb.uni-koeln.de, accessed `<date of access>`.
