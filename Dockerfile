@@ -43,7 +43,7 @@ RUN cd vedaweb-backend \
 FROM adoptopenjdk/openjdk11:jre-11.0.8_10-alpine
 
 # set encoding and locales
-ENV LANG='en_US.UTF-8' LANGUAGE='en_US:en' LC_ALL='en_US.UTF-8'
+ENV LANG='en_US.UTF-8' LANGUAGE='en_US:en' LC_ALL='en_US.UTF-8' ELASTIC_CLIENT_APIVERSIONING=true
 
 # ensure www-data user exists
 RUN set -x \

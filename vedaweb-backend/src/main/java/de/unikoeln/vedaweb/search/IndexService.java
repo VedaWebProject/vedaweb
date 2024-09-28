@@ -24,7 +24,6 @@ import org.elasticsearch.client.RequestOptions;
 import org.elasticsearch.client.indices.CreateIndexRequest;
 import org.elasticsearch.client.indices.CreateIndexResponse;
 import org.elasticsearch.client.indices.GetIndexRequest;
-import org.elasticsearch.common.xcontent.XContentType;
 import org.elasticsearch.index.query.BoolQueryBuilder;
 import org.elasticsearch.index.query.MatchQueryBuilder;
 import org.elasticsearch.index.query.QueryBuilders;
@@ -38,6 +37,7 @@ import org.elasticsearch.search.aggregations.bucket.terms.TermsAggregationBuilde
 import org.elasticsearch.search.aggregations.metrics.Cardinality;
 import org.elasticsearch.search.aggregations.metrics.CardinalityAggregationBuilder;
 import org.elasticsearch.search.builder.SearchSourceBuilder;
+import org.elasticsearch.xcontent.XContentType;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
