@@ -68,6 +68,8 @@ import de.unikoeln.vedaweb.util.StringUtils;
 @Service
 public class IndexService {
 
+	public static String indexName = "vedaweb";
+
 	private final Logger log = LoggerFactory.getLogger(this.getClass());
 
 	@Autowired
@@ -79,12 +81,15 @@ public class IndexService {
 	@Autowired
 	private JsonUtilService json;
 
-	@Value("${es.index.name}")
-	private String indexName;
-
 	@Value("classpath:es-index.json")
 	private Resource indexDef;
 
+	@Autowired
+	public IndexService(@Value("${es.index.name}") String indexName) {
+		if (indexName != null && !indexName.isEmpty()) {
+			IndexService.indexName = indexName;
+		}
+	}
 
 	public ObjectNode rebuildIndex(){
 		ObjectNode response = json.newObjectNode();
@@ -138,7 +143,7 @@ public class IndexService {
 			indexDoc.set("metricalPositions", mPosArray);
 
 			// create index request
-			IndexRequest request = new IndexRequest("vedaweb");
+			IndexRequest request = new IndexRequest(indexName);
 
 			// add request source
 			request.source(indexDoc.toString(), XContentType.JSON);
@@ -261,8 +266,8 @@ public class IndexService {
 
 		ObjectNode response = urlRequest(
 				"get",
-				"vedaweb/_mapping/field/tokens.grammar.*",
-				"/vedaweb/mappings");
+				String.format("%s/_mapping/field/tokens.grammar.*", indexName),
+				String.format("/%s/mappings", indexName));
 
 		if (response == null) {
 			log.error("Couldn't find index grammar mapping");
@@ -293,7 +298,7 @@ public class IndexService {
 			SearchSourceBuilder searchSourceBuilder =
 					new SearchSourceBuilder().query(match).aggregation(agg);
 			//create request
-			SearchRequest req = new SearchRequest("vedaweb").source(searchSourceBuilder);
+			SearchRequest req = new SearchRequest(indexName).source(searchSourceBuilder);
 			try {
 				SearchResponse response = elastic.client().search(req, RequestOptions.DEFAULT);
 				books.add(((Cardinality)response.getAggregations().get("hymns")).getValue());
@@ -321,7 +326,7 @@ public class IndexService {
 		SearchSourceBuilder searchSourceBuilder =
 				new SearchSourceBuilder().aggregation(agg);
 		//create request
-		SearchRequest req = new SearchRequest("vedaweb").source(searchSourceBuilder);
+		SearchRequest req = new SearchRequest(indexName).source(searchSourceBuilder);
 		try {
 			SearchResponse response = elastic.client().search(req, RequestOptions.DEFAULT);
 			for (Bucket b : ((Terms)response.getAggregations().get("metaAgg")).getBuckets()) {
@@ -373,7 +378,7 @@ public class IndexService {
 		SearchSourceBuilder searchSourceBuilder =
 				new SearchSourceBuilder().query(bool).size(0);
 		//create request
-		SearchRequest req = new SearchRequest("vedaweb").source(searchSourceBuilder);
+		SearchRequest req = new SearchRequest(indexName).source(searchSourceBuilder);
 		try {
 			SearchResponse response = elastic.client().search(req, RequestOptions.DEFAULT);
 			return (int) response.getHits().getTotalHits().value;
@@ -415,7 +420,7 @@ public class IndexService {
 		CardinalityAggregationBuilder agg = AggregationBuilders.cardinality("agg");
 		agg.field(field);
 		SearchSourceBuilder searchSourceBuilder = new SearchSourceBuilder().aggregation(agg);
-		SearchRequest req = new SearchRequest("vedaweb").source(searchSourceBuilder);
+		SearchRequest req = new SearchRequest(indexName).source(searchSourceBuilder);
 		try {
 			SearchResponse response = elastic.client().search(req, RequestOptions.DEFAULT);
 			count = ((Cardinality)response.getAggregations().get("agg")).getValue();
@@ -429,7 +434,7 @@ public class IndexService {
 	private Map<String, List<String>> collectGrammarFieldAggregations(List<String> grammarFields) {
 		Map<String, List<String>> grammarAggregations = new HashMap<>();
 
-		SearchRequest req = new SearchRequest("vedaweb");
+		SearchRequest req = new SearchRequest(indexName);
 		SearchSourceBuilder searchSourceBuilder = new SearchSourceBuilder();
 
 		NestedAggregationBuilder tokens = AggregationBuilders.nested("tokens", "tokens");
