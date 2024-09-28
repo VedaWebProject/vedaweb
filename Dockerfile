@@ -3,6 +3,9 @@
 # pick base image
 FROM node:12.19.0-alpine3.12 as frontend-build-env
 
+# customize build-time context path
+ARG PUBLIC_URL
+
 # copy frontend source project
 COPY vedaweb-frontend /vedaweb-frontend
 
@@ -11,7 +14,7 @@ WORKDIR /vedaweb-frontend
 
 # build frontend
 RUN npm install --silent &> /dev/null \
- && npm run build
+ && ${PUBLIC_URL:+env PUBLIC_URL=$PUBLIC_URL} npm run build
 
 
 
