@@ -48,14 +48,6 @@ public abstract class CommonSearchData {
 	@Schema(description = "List of meta properties to filter for")
 	private Map<String, String[]> meta;
 	
-	
-	/*
-	 * This will have to be refactored for a generic
-	 * version of the platform!
-	 */
-	private String indexName = "vedaweb";
-	
-	
 	public CommonSearchData(){
 		sortBy = "_score";
 		sortOrder = "descend";
@@ -131,7 +123,7 @@ public abstract class CommonSearchData {
 	
 	
 	public String getIndexName() {
-		return indexName;
+		return IndexService.indexName;
 	}
 
 }
