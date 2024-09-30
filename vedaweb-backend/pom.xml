@@ -25,7 +25,7 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<java.version>11</java.version>
-		<elasticsearch.version>7.6.2</elasticsearch.version>
+		<elasticsearch.version>7.17.24</elasticsearch.version>
 	</properties>
 
 
@@ -79,7 +79,7 @@
 		<dependency>
 			<groupId>org.elasticsearch</groupId>
 			<artifactId>elasticsearch</artifactId>
-			<version>7.6.2</version><!--$NO-MVN-MAN-VER$ -->
+			<version>7.17.24</version><!--$NO-MVN-MAN-VER$ -->
 		</dependency>
 
 		<!-- <dependency> <groupId>org.elasticsearch.client</groupId> <artifactId>elasticsearch-rest-client</artifactId> 
