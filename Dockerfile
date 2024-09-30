@@ -3,6 +3,9 @@
 # pick base image
 FROM node:12.19.0-alpine3.12 as frontend-build-env
 
+# customize build-time context path
+ARG PUBLIC_URL=/rigveda/
+
 # copy frontend source project
 COPY vedaweb-frontend /vedaweb-frontend
 
