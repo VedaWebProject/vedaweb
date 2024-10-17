@@ -1,7 +1,7 @@
 #### intermediate for building frontend
 
 # pick base image
-FROM node:12.19.0-alpine3.12 as frontend-build-env
+FROM node:12.19.0-alpine3.12 AS frontend-build-env
 
 # customize build-time context path
 ARG PUBLIC_URL=/rigveda/
@@ -21,7 +21,7 @@ RUN npm install --silent &> /dev/null \
 #### intermediate for building backend (and full app)
 
 # pick base image
-FROM maven:3.6.3-adoptopenjdk-11 as backend-build-env
+FROM maven:3.6.3-adoptopenjdk-11 AS backend-build-env
 
 # create project dir
 RUN mkdir -p /vedaweb
