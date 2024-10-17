@@ -45,6 +45,9 @@ class AboutContent extends Component {
 
                 <h2><Icon type="issues-close"/> Previously added features (excluding technical improvements and fixes)</h2>
                 <ul>
+                    <li>Corrected and extended morphological annotations in book 08-10 (2024/10/17)</li>
+                    <li>Annotation of denominative and gerundive in book 1-10 (2024/10/17)</li>
+                    <li>Review of lemmatization and references to Grassmann dictionary in book 1-10 (2024/10/17)</li>
                     <li>Corrected and extended morphological annotations in book 1 to book 7 (2023/07/07)</li>
                     <li>Grammar search values for participles including -ta and -na, local particles, intensives, causatives, -si imperatives, comparatives and superlatives (PTCP, PTCP-ta, PTCP-na, LP, INT, CAUS, IMP-si, CMP, SUP) (2023/07/07)</li>
                     <li>Revised English translation by Griffith (2023/07/07)</li>
