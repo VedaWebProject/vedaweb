@@ -19,7 +19,7 @@ services:
 
   # Elasticsearch search server service
   elastic:
-    image: blacktop/elasticsearch:7.9.2
+    image: blacktop/elasticsearch:7.17
     volumes:
       - elastic_data:/usr/share/elasticsearch/data
     restart: always
