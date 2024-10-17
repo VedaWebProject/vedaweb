@@ -23,21 +23,29 @@ The annotations follow the Leipzig Glossing Rules. The abbreviations used are li
 | `ACC` | accusative |
 | `ACT` | active |
 | `AOR` | aorist |
+| `CAUS` | causative |
+| `CMP` | comparative |
 | `COND` | conditional |
 | `CVB` | converb |
 | `DAT` | dative |
+| `DEN` | denominative |
+| `DES` | desiderative |
 | `DU` | dual |
 | `F` | feminine |
 | `FUT` | future |
+| `GDV` | gerundive |
 | `GEN` | genitive |
 | `IMP` | imperative |
+| `IMP-si` | imperative si |
 | `IND` | indicative |
 | `INF` | infinitive |
-| `INJ` | injuctive |
+| `INJ` | injunctive |
 | `INS` | instrumental |
+| `INT` | intensive |
 | `IPRF` | imperfect |
 | `LOC` | locative |
-| `M` | mascuiline |
+| `LP` | local particle |
+| `M` | masculine |
 | `MED` | middle voice |
 | `N` | neuter |
 | `NOM` | nominative |
@@ -45,13 +53,15 @@ The annotations follow the Leipzig Glossing Rules. The abbreviations used are li
 | `PASS` | passive voice |
 | `PL` | plural |
 | `PLUPRF` | past perfect |
-| `PPP` | na participle perfective passive |
-| `PPP` | ta participle perfective passive |
+| `PREC` | precative |
 | `PRF` | perfect |
 | `PRS` | present |
 | `PTCP` | participle |
+| `PTCP-na` | na participle perfective passive |
+| `PTCP-ta` | ta participle perfective passive |
 | `SBJV` | subjunctive |
 | `SG` | singular |
+| `SUP` | superlative |
 | `VOC` | vocative |
 
 </details>
