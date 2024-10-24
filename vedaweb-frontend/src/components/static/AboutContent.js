@@ -39,7 +39,6 @@ class AboutContent extends Component {
 
                 <h2><Icon type="hourglass"/> Upcoming features</h2>
                 <ul>
-                    <li>Corrected and extended morphological annotations in book 08-10</li>
                     <li>Annotation of present stem classes</li>
                 </ul>
 
